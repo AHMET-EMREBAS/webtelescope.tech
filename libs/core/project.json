@@ -15,8 +15,7 @@
         "tsConfig": "libs/core/tsconfig.lib.json",
         "assets": [
           "libs/core/*.md"
-        ],
-        "external": "all"
+        ]
       }
     },
     "publish": {
