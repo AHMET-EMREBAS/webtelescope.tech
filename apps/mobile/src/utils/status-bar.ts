@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Application, Color, Device, isIOS } from '@nativescript/core';
 
 export function setStatusBarColor(color: 'light' | 'dark', tintColor?: string /* android only */) {

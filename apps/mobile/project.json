@@ -41,14 +41,18 @@
     "android": {
       "executor": "@nativescript/nx:build",
       "options": {
-        "platform": "android"
+        "platform": "android",
+        "keyStorePath": "/apps/mobile/keystore/keystore.jks",
+        "keyStorePassword": "passpass",
+        "keyStoreAlias": "mobile",
+        "keyStoreAliasPassword": "passpass"
       },
       "configurations": {
         "build": {
           "copyTo": "./dist/build.apk"
         },
         "prod": {
-          "combineWithConfig": "build:prod"
+          "combineWithConfig": "build:prod",
         }
       }
     },

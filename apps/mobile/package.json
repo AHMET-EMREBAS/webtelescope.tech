@@ -4,7 +4,9 @@
   "license": "MIT",
   "version": "0.0.0",
   "scripts": {
-    "postinstall": "node ./tools/postinstall.js"
+    "postinstall": "node ./tools/postinstall.js",
+    "keystore": "keytool -genkey -v -keystore keystore/keystore.jks -keyalg RSA -alias mobile",
+    "build": "npx nx run mobile:build:prod --platform=android --release --key-store-path keystore/keystore.jks --key-store-password pass100 --key-store-alias mobile --key-store-alias-password passpass"
   },
   "dependencies": {
     "@angular/animations": "~16.2.0",
@@ -26,7 +28,8 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~16.2.0",
     "@angular/compiler-cli": "~16.2.0",
-    "@nativescript/android": "8.6.2",
+    "@nativescript/android": "^8.6.2",
+    "@nativescript/ios": "^8.6.3",
     "@nativescript/types": "~8.6.0",
     "@nativescript/webpack": "~5.0.18",
     "@ngtools/webpack": "~16.2.0",
