@@ -1,7 +1,17 @@
 {
-  "name": "@webtelescope.tech/source",
+  "name": "@webtelescopetech/source",
   "version": "0.0.0",
   "license": "MIT",
+  "description": "Official Website and Applications of webtelescope.tech",
+  "homepage": "https://webtelescope.tech",
+  "repository": {
+    "url": "https://github.com/AHMET-EMREBAS/webtelescope.tech"
+  },
+  "author": {
+    "name": "A. Emrebas",
+    "email": "info@webtelescope.tech",
+    "url": "https://webtelescope.tech"
+  },
   "scripts": {},
   "private": true,
   "dependencies": {},
