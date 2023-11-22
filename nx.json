@@ -66,5 +66,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "desktop"
+  "defaultProject": "client"
 }
