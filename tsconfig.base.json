@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@webtelescopetech/common": ["libs/common/src/index.ts"],
+      "@webtelescopetech/core": ["libs/core/src/index.ts"],
       "@webtelescopetech/material": ["libs/material/src/index.ts"],
       "@webtelescopetech/utils": ["libs/utils/src/index.ts"]
     }
