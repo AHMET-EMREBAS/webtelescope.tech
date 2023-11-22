@@ -1,3 +1,4 @@
+import { Expose, Type } from 'class-transformer';
 import { CombinePropertyDecorators } from './combine';
 import { PropertyOptions } from './property-options';
 import {
@@ -15,13 +16,30 @@ import {
   MaxLength,
   Min,
   Max,
+  IsArray,
+  ValidateNested,
+  IsNotEmpty,
+  IsOptional,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export function Property(options: PropertyOptions): PropertyDecorator {
-  const { type, isArray, format } = options;
+  const { type, isArray, format, objectType, required,  } = options;
 
-  const decorators: PropertyDecorator[] = [];
+  const decorators: PropertyDecorator[] = [Expose(), ApiProperty(options)];
+
   const each = !!isArray;
+
+  if (each) {
+    decorators.push(IsArray());
+  }
+
+  // Required or nullable property
+  if (required === true) {
+    decorators.push(IsNotEmpty({ each }));
+  } else {
+    decorators.push(IsOptional({ each }));
+  }
 
   // Type Validation
   if (type === 'string') {
@@ -36,6 +54,15 @@ export function Property(options: PropertyOptions): PropertyDecorator {
     decorators.push(IsDate({ each }));
   } else if (type === 'object') {
     decorators.push(IsObject({ each }));
+    decorators.push(ValidateNested({ each }));
+
+    if (!objectType) {
+      throw new Error(
+        'Property type is set object but objectType is not provided!'
+      );
+    } else {
+      decorators.push(Type(() => objectType));
+    }
   }
 
   // String Format Validation
