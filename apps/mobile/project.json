@@ -1,7 +1,7 @@
 {
-  "name": "nativescript-mobile",
+  "name": "mobile",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/nativescript-mobile/src",
+  "sourceRoot": "apps/mobile/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -62,8 +62,8 @@
       "executor": "@nx/eslint:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/nativescript-mobile/**/*.ts",
-          "apps/nativescript-mobile/src/**/*.html"
+          "apps/mobile/**/*.ts",
+          "apps/mobile/src/**/*.html"
         ]
       }
     }
