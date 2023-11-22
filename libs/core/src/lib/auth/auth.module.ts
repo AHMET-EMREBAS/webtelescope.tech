@@ -4,6 +4,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Permission, Role, User } from '../entities';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 export type AuthModuleOptions = {
   secret: string;
 };
@@ -13,7 +15,6 @@ export class AuthModule {
   static configure(options: AuthModuleOptions): DynamicModule {
     return {
       module: AuthModule,
-      controllers: [],
       imports: [
         EventEmitterModule,
         TypeOrmModule.forFeature([User, Role, Permission]),
@@ -24,6 +25,8 @@ export class AuthModule {
           },
         }),
       ],
+      controllers: [AuthController],
+      providers: [AuthService],
     };
   }
 }

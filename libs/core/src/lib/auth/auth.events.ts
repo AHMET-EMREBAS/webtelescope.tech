@@ -8,30 +8,30 @@ export enum AuthEvents {
   FORGOT_PASSWORD = 'auth.forgot-password',
 }
 
-export type SignupEventOptions = {
+export class SignupEventOptions {
   /**
-   * User email address
+   *
+   * @param email User email address
    */
-  email: string;
-};
+  constructor(public readonly email: string) {}
+}
 
-export type LoginEventOptions = {
+export class LoginEventOptions {
   /**
-   * User email address
+   *
+   * @param email User email address
    */
-  email: string;
-};
+  constructor(public readonly email: string) {}
+}
 
-export type ForgotPasswordEventOptions = {
+export class ForgotPasswordEventOptions {
   /**
-   * User email address
+   *
+   * @param email User email address
+   * @param code Temporary security code
    */
-  email: string;
-  /**
-   * Temporary security code to update password
-   */
-  securityCode: string;
-};
+  constructor(public readonly email: string, public readonly code: string) {}
+}
 
 /**
  * Implement this class based on your requirement.
@@ -53,3 +53,5 @@ export class AuthEventListener {
     console.log(options);
   }
 }
+
+
