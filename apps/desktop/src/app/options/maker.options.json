@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../../../node_modules/nx-electron/src/validation/maker.schema.json",
+  "asar": true,
+  "appId": "tech.webtelescope.desktop",
+  "copyright": "Copyright © 2024 WebTelescope.Tech",
+  "icon": "dist/apps/client/assets/icons/icon-512x512.png",
+  "compression": "maximum",
+  "nsis": {
+    "oneClick": false,
+    "createDesktopShortcut": true,
+    "allowToChangeInstallationDirectory": true
+  },
+  "extraMetadata": {
+    "name": "webtelescope",
+    "description": "WebTelescope Software Solutions",
+    "version": "1.0.1"
+  }
+}
