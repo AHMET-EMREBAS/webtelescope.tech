@@ -1,7 +1,7 @@
-import  { SetMetadata} from '@nestjs/common'
-import {} from '@webtelescopetech/common'
+import { SetMetadata } from '@nestjs/common';
 
-export function SetPermission(){ 
-
-    return SetMetadata()
+export function SetPermission(permission: string) {
+  return SetMetadata('PERMISSION', permission);
 }
+
+
