@@ -1,7 +1,7 @@
 import { BaseEntity } from './../entities';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { QueryDto } from '../dtos/query';
-import { NotFoundException, Type } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { IDDto } from '../dtos';
 
 export class QueryService<T extends BaseEntity> {
