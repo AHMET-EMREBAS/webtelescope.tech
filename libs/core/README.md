@@ -1,11 +1,7 @@
 # core
 
-This library was generated with [Nx](https://nx.dev).
+Includes Backend
 
-## Building
-
-Run `nx build core` to build the library.
-
-## Running unit tests
-
-Run `nx test core` to execute the unit tests via [Jest](https://jestjs.io).
+### Depends On
+    - @webtelescope/common
+    - @webtelescope/utils

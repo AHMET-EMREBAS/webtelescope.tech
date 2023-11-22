@@ -6,6 +6,6 @@ import { PERMISSION_METADATA_KEY } from '@webtelescopetech/common';
  * @param permission
  * @returns {MethodDecorator}
  */
-export function Permission(permission: string): MethodDecorator {
+export function RequiredPermission(permission: string): MethodDecorator {
   return SetMetadata(PERMISSION_METADATA_KEY, permission);
 }

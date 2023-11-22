@@ -4,10 +4,11 @@ import { ApiTags } from '@nestjs/swagger';
 
 export type ControllerOptions = {
   tags?: string[];
+  route?: string;
 };
 export function Controller(options?: ControllerOptions): ClassDecorator {
   return CombineClassDecorators(
     ApiTags(...(options?.tags || [])),
-    __Controller()
+    __Controller(options?.route || '')
   );
 }
