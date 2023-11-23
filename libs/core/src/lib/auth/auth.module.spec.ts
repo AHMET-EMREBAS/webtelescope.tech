@@ -2,11 +2,10 @@
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User, Role, Permission } from '../entities';
-import { JwtModule } from '@nestjs/jwt';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 import { INestApplication } from '@nestjs/common';
 import { AUTH_TOKEN_NAME } from '@webtelescopetech/common';
+import { AuthModule } from './auth.module';
+
 describe('AuthController', () => {
   let app: INestApplication;
   beforeAll(async () => {
@@ -19,22 +18,20 @@ describe('AuthController', () => {
           synchronize: true,
           dropSchema: true,
         }),
-        TypeOrmModule.forFeature([User, Role, Permission]),
-        EventEmitterModule,
-        JwtModule.register({
-          secret: 'secret',
-          signOptions: {
-            expiresIn: '30d',
-          },
-        }),
+        AuthModule.configure({ secret: 'secret' }),
       ],
     }).compile();
 
-    app = await moduleRef.createNestApplication().init();
+    app = await moduleRef.createNestApplication();
+    await app.init();
   });
 
-  it('/POST auth/signup', async () => {
-    return await request(app.getHttpServer())
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it('/POST auth/signup', () => {
+    return request(app.getHttpServer())
       .post('/auth/signup')
       .send({ username: 'username@gmail.com', password: 'Password1!' })
       .expect(201)
