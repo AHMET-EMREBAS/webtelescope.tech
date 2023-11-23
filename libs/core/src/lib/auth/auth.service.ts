@@ -26,6 +26,7 @@ import {
 } from './dto';
 import { compare } from '../bcrypt';
 import { SecurityCodeService } from './security-code.service';
+import { UserPayload } from './dto/user-payload';
 
 @Injectable()
 export class AuthService {
@@ -46,7 +47,7 @@ export class AuthService {
 
   private signToken(user: User) {
     const { id: sub, roles } = user;
-    const accessToken = this.jwt.sign({ sub, roles });
+    const accessToken = this.jwt.sign(new UserPayload(user));
     return accessToken;
   }
 
