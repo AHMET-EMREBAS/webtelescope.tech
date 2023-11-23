@@ -5,9 +5,7 @@
 
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-
 import { AppModule } from './app/app.module';
-
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AUTH_TOKEN_NAME } from '@webtelescopetech/common';
 
@@ -18,8 +16,8 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   const config = new DocumentBuilder()
-    .setTitle(`App Name`)
-    .setDescription('Api documentation')
+    .setTitle(`WebTelescope`)
+    .setDescription('Api Documentation')
     .setVersion('1.0')
     .addBearerAuth({ type: 'http' }, AUTH_TOKEN_NAME)
     .build();

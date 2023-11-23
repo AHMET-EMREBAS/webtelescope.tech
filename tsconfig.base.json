@@ -10,16 +10,17 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "@webtelescopetech/common": ["libs/common/src/index.ts"],
-      "@webtelescopetech/core": ["libs/core/src/index.ts"],
-      "@webtelescopetech/material": ["libs/material/src/index.ts"],
-      "@webtelescopetech/utils": ["libs/utils/src/index.ts"]
-    }
+    "paths": {}
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

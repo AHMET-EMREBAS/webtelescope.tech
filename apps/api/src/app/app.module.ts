@@ -2,16 +2,15 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from '@webtelescopetech/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+
 
 @Module({
   imports: [
     EventEmitterModule.forRoot({ delimiter: '.' }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-
       username: 'devdb',
       password: 'devdb',
       database: 'devdb',
@@ -19,7 +18,6 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       synchronize: true,
       dropSchema: true,
     }),
-    AuthModule.configure({ secret: 'secret' }),
   ],
   controllers: [AppController],
   providers: [AppService],
