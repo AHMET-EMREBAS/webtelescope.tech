@@ -1,7 +1,8 @@
 import { Dto, Property } from '../../decorators';
+import { BaseDto } from './base.dto';
 
 @Dto()
-export class LoginWithCodeDto {
+export class LoginWithCodeDto extends BaseDto<LoginWithCodeDto> {
   @Property({ type: 'string', format: 'email' })
   username!: string;
 

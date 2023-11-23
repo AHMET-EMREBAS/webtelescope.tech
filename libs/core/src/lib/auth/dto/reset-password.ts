@@ -1,9 +1,10 @@
 import { Transform } from 'class-transformer';
 import { Dto, Property } from '../../decorators';
 import { UnprocessableEntityException } from '@nestjs/common';
+import { BaseDto } from './base.dto';
 
 @Dto()
-export class ResetPasswordDto {
+export class ResetPasswordDto extends BaseDto<ResetPasswordDto> {
   @Property({ type: 'string', required: true, format: 'email' })
   username!: string;
 
