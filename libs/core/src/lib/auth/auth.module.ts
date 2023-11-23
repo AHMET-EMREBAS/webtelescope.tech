@@ -13,13 +13,14 @@ export type AuthModuleOptions = {
 @Module({})
 export class AuthModule {
   static configure(options: AuthModuleOptions): DynamicModule {
+    const { secret } = options;
     return {
       module: AuthModule,
       imports: [
         EventEmitterModule,
         TypeOrmModule.forFeature([User, Role, Permission]),
         JwtModule.register({
-          secret: options.secret,
+          secret: secret,
           signOptions: {
             expiresIn: '30d',
           },
