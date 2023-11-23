@@ -15,18 +15,17 @@ import {
   ForgotPasswordEventOptions,
   LoginEventOptions,
   ResetPasswordEventOptions,
-  SignupEventOptions,
 } from './auth.events';
 import {
   ForgotPasswordDto,
   LoginDto,
   LoginWithCodeDto,
   ResetPasswordDto,
-  SignupDto,
 } from './dto';
 import { compare } from '../bcrypt';
 import { SecurityCodeService } from './security-code.service';
 import { UserPayload } from './dto/user-payload';
+import { APP_PASSWORD, APP_USERNAME } from '@webtelescopetech/common';
 
 @Injectable()
 export class AuthService {
@@ -46,9 +45,23 @@ export class AuthService {
   }
 
   private signToken(user: User) {
-    const { id: sub, roles } = user;
-    const accessToken = this.jwt.sign(new UserPayload(user));
+    const payload = new UserPayload(user);
+    const accessToken = this.jwt.sign({ ...payload });
     return accessToken;
+  }
+
+  async rootLogin(options: LoginDto) {
+    const username = process.env[APP_USERNAME];
+    const password = process.env[APP_PASSWORD];
+
+    if (!username) throw new Error('APP_USERNAME is not found in environment!');
+    if (!password) throw new Error('APP_PASSWORD is not found in environment!');
+
+    if (username === options.username && password === options.password) {
+      return this.jwt.sign({ root: true });
+    }
+
+    throw new NotFoundException('User not found!');
   }
 
   async login(loginDto: LoginDto) {
@@ -66,35 +79,6 @@ export class AuthService {
       return token;
     }
     throw new UnauthorizedException('Password is wrong');
-  }
-
-  async signup(signupDto: SignupDto) {
-    const { username, password } = signupDto;
-
-    // Check user exist or not
-    const found = await this.userRepo.findOneBy({ username });
-
-    if (found) {
-      throw new UnprocessableEntityException('User already exist!');
-    }
-
-    // Else if user does not exist
-    try {
-      // Try to save the new user
-      const savedUser = await this.userRepo.save({ username, password });
-      // Emit signup event
-      this.eventEmitter.emit(
-        AuthEvents.SIGNUP,
-        new SignupEventOptions(username)
-      );
-
-      return this.signToken(savedUser);
-    } catch (err) {
-      // If could not save the user, then throw error
-      throw new UnprocessableEntityException(
-        'Something went wrong. Try again!'
-      );
-    }
   }
 
   /**

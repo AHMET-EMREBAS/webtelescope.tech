@@ -4,16 +4,23 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { AuthModule } from './auth.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { AUTH_TOKEN_NAME } from '@webtelescopetech/common';
+import {
+  APP_PASSWORD,
+  APP_USERNAME,
+  AUTH_TOKEN_NAME,
+} from '@webtelescopetech/common';
 
 import request = require('supertest');
 import { ForgotPasswordDto, LoginWithCodeDto } from './dto';
 
 describe('AuthModule', () => {
   let app: INestApplication;
-  let existingUser = { username: 'valid@valid.com', password: 'ValidPass1!' };
+  const existingUser = { username: 'valid@valid.com', password: 'ValidPass1!' };
 
   beforeAll(async () => {
+    process.env[APP_USERNAME] = existingUser.username;
+    process.env[APP_PASSWORD] = existingUser.password;
+
     const moduleRef = await Test.createTestingModule({
       imports: [
         EventEmitterModule.forRoot({ delimiter: '.' }),
@@ -29,18 +36,6 @@ describe('AuthModule', () => {
     }).compile();
 
     app = await moduleRef.createNestApplication().init();
-
-    await request(app.getHttpServer()).post('/auth/signup').send(existingUser);
-  });
-
-  it('/POST auth/signup', () => {
-    return request(app.getHttpServer())
-      .post('/auth/signup')
-      .send({ username: 'username@gmail.com', password: 'Password1!' })
-      .expect(201)
-      .expect((data: any) => {
-        expect(data.body[AUTH_TOKEN_NAME]).toBeDefined();
-      });
   });
 
   it('/POST auth/login', () => {

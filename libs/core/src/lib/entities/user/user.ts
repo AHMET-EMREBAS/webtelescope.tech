@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  PasswordColumn,
-  SubRelation,
-  SubsRelation,
-} from '../../decorators';
+import { Column, Entity, PasswordColumn, SubsRelation } from '../../decorators';
 import { BaseEntity } from '../base.entity';
 
 @Entity()
@@ -23,6 +17,12 @@ export class Role extends BaseEntity {
 }
 
 @Entity()
+export class Organization extends BaseEntity {
+  @Column({ type: 'varchar', required: true, unique: true })
+  name!: string;
+}
+
+@Entity()
 export class User extends BaseEntity {
   @Column({ type: 'varchar', required: true, unique: true })
   username!: string;
@@ -30,6 +30,6 @@ export class User extends BaseEntity {
   @PasswordColumn()
   password!: string;
 
-  @SubRelation(Role)
+  @SubsRelation(Role)
   roles!: Role[];
 }

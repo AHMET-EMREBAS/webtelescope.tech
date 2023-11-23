@@ -2,11 +2,11 @@ import { Body, Post, Res } from '@nestjs/common';
 import { Controller, ValidationPipe } from '../decorators';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login';
-import { SignupDto } from './dto/signup';
 import { ForgotPasswordDto, LoginWithCodeDto, ResetPasswordDto } from './dto';
 import { PublicResource } from './meta';
 import { Response } from 'express';
 import { AUTH_TOKEN_NAME } from '@webtelescopetech/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller({ tags: ['AuthController'], route: 'auth' })
 export class AuthController {
@@ -17,11 +17,13 @@ export class AuthController {
    * @param resetPasswordDto
    * @returns
    */
+  @ApiBearerAuth(AUTH_TOKEN_NAME)
   @Post('reset-password')
   resetPassword(@Body(ValidationPipe) resetPasswordDto: ResetPasswordDto) {
     return this.service.resetPassword(resetPasswordDto);
   }
 
+  @ApiBearerAuth(AUTH_TOKEN_NAME)
   @Post('logout')
   logout(@Res() res: Response) {
     res.cookie(AUTH_TOKEN_NAME, '');
@@ -32,17 +34,6 @@ export class AuthController {
   @Post('login')
   async login(@Body(ValidationPipe) options: LoginDto, @Res() res: Response) {
     const authToken = await this.service.login(options);
-    res.cookie(AUTH_TOKEN_NAME, authToken);
-    res.send({ [AUTH_TOKEN_NAME]: authToken });
-  }
-
-  @PublicResource()
-  @Post('signup')
-  async signup(
-    @Body(ValidationPipe) signupDto: SignupDto,
-    @Res() res: Response
-  ) {
-    const authToken = await this.service.signup(signupDto);
     res.cookie(AUTH_TOKEN_NAME, authToken);
     res.send({ [AUTH_TOKEN_NAME]: authToken });
   }
