@@ -5,7 +5,6 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { v4 } from 'uuid';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { User } from '../entities';
 import { Repository } from 'typeorm';
@@ -26,62 +25,54 @@ import {
   SignupDto,
 } from './dto';
 import { compare } from '../bcrypt';
+import { SecurityCodeService } from './security-code.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>,
     private readonly eventEmitter: EventEmitter2,
-    private readonly jwt: JwtService
+    private readonly jwt: JwtService,
+    private readonly ssoService: SecurityCodeService
   ) {}
 
-  findByUsername(username: string) {
-    return this.userRepo.findOneBy({ username });
+  private async findByUsernameOrThrow(username: string) {
+    const found = await this.userRepo.findOneBy({ username });
+
+    if (found) return found;
+
+    throw new NotFoundException('User not found!');
+  }
+
+  private signToken(user: User) {
+    const { id: sub, roles } = user;
+    const accessToken = this.jwt.sign({ sub, roles });
+    return accessToken;
   }
 
   async login(loginDto: LoginDto) {
     const { username, password } = loginDto;
+    const found = await this.findByUsernameOrThrow(username);
 
-    // Found user by username
-    const found = await this.findByUsername(username);
+    const { password: hashedPassword } = found;
 
-    // If user found
-    if (found) {
-      const hashedPassword = found?.password;
+    // If password match
+    if (compare(password, hashedPassword)) {
+      // Then create token
+      const token = this.signToken(found);
 
-      // If password match
-      if (compare(password, hashedPassword)) {
-        const { roles, id } = found;
-
-        // Then create token
-        const token = this.jwt.sign({ sub: id, roles });
-
-        // Then emit AuthEvents.LOGIN event
-        this.eventEmitter.emit(
-          AuthEvents.LOGIN,
-          new LoginEventOptions(loginDto.username)
-        );
-        // Then return accessToken
-        return { accessToken: token };
-      }
-      // else throw UnauthorizedException
-      throw new UnauthorizedException('Password is wrong');
+      this.eventEmitter.emit(AuthEvents.LOGIN, new LoginEventOptions(username));
+      return token;
     }
-    // else throw UnauthorizedException
-    throw new UnauthorizedException('User not found!');
-  }
-
-  logout() {
-    return;
+    throw new UnauthorizedException('Password is wrong');
   }
 
   async signup(signupDto: SignupDto) {
     const { username, password } = signupDto;
 
-    // Find user
-    const found = await this.findByUsername(username);
+    // Check user exist or not
+    const found = await this.userRepo.findOneBy({ username });
 
-    // If user exist, then throw error
     if (found) {
       throw new UnprocessableEntityException('User already exist!');
     }
@@ -89,13 +80,14 @@ export class AuthService {
     // Else if user does not exist
     try {
       // Try to save the new user
-      await this.userRepo.save({ username, password });
+      const savedUser = await this.userRepo.save({ username, password });
       // Emit signup event
       this.eventEmitter.emit(
         AuthEvents.SIGNUP,
-        new SignupEventOptions(signupDto.username)
+        new SignupEventOptions(username)
       );
-      return { message: `Welcome, ${username}` };
+
+      return this.signToken(savedUser);
     } catch (err) {
       // If could not save the user, then throw error
       throw new UnprocessableEntityException(
@@ -104,55 +96,55 @@ export class AuthService {
     }
   }
 
-
   /**
    * Only authenticated user can call this method
-   * @param resetPasswordDto 
-   * @returns 
+   * @param resetPasswordDto
+   * @returns
    */
   async resetPassword(resetPasswordDto: ResetPasswordDto) {
     const { username, password } = resetPasswordDto;
-    const found = await this.findByUsername(username);
+    const found = await this.findByUsernameOrThrow(username);
 
-    if (found) {
-      try {
-        await this.userRepo.update(found.id, { password });
+    try {
+      await this.userRepo.update(found.id, { password });
 
-        this.eventEmitter.emit(
-          AuthEvents.RESET_PASSWORD,
-          new ResetPasswordEventOptions(username)
-        );
+      this.eventEmitter.emit(
+        AuthEvents.RESET_PASSWORD,
+        new ResetPasswordEventOptions(username)
+      );
 
-        return { message: 'Password is updated' };
-      } catch (err) {
-        throw new UnprocessableEntityException(
-          'Something went wrong. Try again!'
-        );
-      }
+      return { message: 'Password is updated' };
+    } catch (err) {
+      throw new UnprocessableEntityException(
+        'Something went wrong. Try again!'
+      );
     }
-
-    throw new NotFoundException('User not found');
   }
 
   async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
     const { username } = forgotPasswordDto;
-    const securityCode = v4().substring(0, 4);
 
-    const found = await this.findByUsername(username);
+    await this.findByUsernameOrThrow(username);
 
-    if (found) {
-      this.eventEmitter.emit(
-        AuthEvents.FORGOT_PASSWORD,
-        new ForgotPasswordEventOptions(username, securityCode)
-      );
-    }
+    const code = this.ssoService.setCode(username);
 
-    throw new NotFoundException('User not found');
+    this.eventEmitter.emit(
+      AuthEvents.FORGOT_PASSWORD,
+      new ForgotPasswordEventOptions(username, code)
+    );
+
+    return { message: `Check your inbox of ${username}` };
   }
 
-  loginWithCode(loginWithCodeDto: LoginWithCodeDto) {
+  async loginWithCode(loginWithCodeDto: LoginWithCodeDto) {
     const { username, code } = loginWithCodeDto;
-    console.log(code);
+
+    this.ssoService.verifyCodeOrThrow(username, code);
+
+    const found = await this.findByUsernameOrThrow(username);
+
     this.eventEmitter.emit(AuthEvents.LOGIN, new LoginEventOptions(username));
+
+    return this.signToken(found);
   }
 }

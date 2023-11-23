@@ -6,6 +6,7 @@ import { Permission, Role, User } from '../entities';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { SecurityCodeService } from './security-code.service';
 export type AuthModuleOptions = {
   secret: string;
 };
@@ -27,7 +28,7 @@ export class AuthModule {
         }),
       ],
       controllers: [AuthController],
-      providers: [AuthService],
+      providers: [AuthService, SecurityCodeService],
     };
   }
 }
