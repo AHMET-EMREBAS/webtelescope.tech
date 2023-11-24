@@ -1,0 +1,40 @@
+{
+  "name": "controller",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/controller/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/controller",
+        "main": "libs/controller/src/index.ts",
+        "tsConfig": "libs/controller/tsconfig.lib.json",
+        "assets": ["libs/controller/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs controller {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/controller/**/*.ts",
+          "libs/controller/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/controller/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

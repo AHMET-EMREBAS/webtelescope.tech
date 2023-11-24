@@ -1,0 +1,37 @@
+{
+  "name": "util",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/util/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/util",
+        "main": "libs/util/src/index.ts",
+        "tsConfig": "libs/util/tsconfig.lib.json",
+        "assets": ["libs/util/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs util {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/util/**/*.ts", "libs/util/package.json"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/util/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
