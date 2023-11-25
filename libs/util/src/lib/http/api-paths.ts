@@ -11,7 +11,7 @@ export type ApiPaths = {
   RELATION_NAME_AND_ID_PATH: string;
 };
 
-export enum ApiPathKeys {
+export enum ApiConstants {
   AUTH_TOKEN = 'authToken',
   ID_KEY = 'id',
   RELATION_ID_KEY = 'relationId',
@@ -31,9 +31,9 @@ export enum ApiPathKeys {
  * @returns
  */
 export function getApiPaths(resourceName: string): ApiPaths {
-  const ID_KEY = ApiPathKeys.ID_KEY;
-  const RELATION_ID_KEY = ApiPathKeys.RELATION_ID_KEY;
-  const RELATION_NAME_KEY = ApiPathKeys.RELATION_NAME_KEY;
+  const ID_KEY = ApiConstants.ID_KEY;
+  const RELATION_ID_KEY = ApiConstants.RELATION_ID_KEY;
+  const RELATION_NAME_KEY = ApiConstants.RELATION_NAME_KEY;
 
   const SINGULAR_PATH = resourceName.toLowerCase();
   const PLURAL_PATH = plural(SINGULAR_PATH);

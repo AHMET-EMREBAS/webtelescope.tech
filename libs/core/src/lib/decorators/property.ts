@@ -28,7 +28,7 @@ import {
   Transform,
   Type,
 } from 'class-transformer';
-
+import { ApiProperty } from '@nestjs/swagger';
 export type PropertyType =
   | 'string'
   | 'number'
@@ -111,7 +111,12 @@ export function Property(options: PropertyOptions) {
     enum: enumValues,
   } = options;
 
-  const decorators: PropertyDecorator[] = [];
+  const decorators: PropertyDecorator[] = [
+    ApiProperty({
+      ...options,
+      required: options.required === true ? true : false,
+    }),
+  ];
 
   // Is exposed or excluded?
   if (exclude == true) decorators.push(Exclude());

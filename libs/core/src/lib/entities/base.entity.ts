@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 import { Column } from '../decorators';
 
-export class BaseEntity {
+export class BaseEntity<T> {
   @PrimaryGeneratedColumn() id!: number;
   @CreateDateColumn() createdAt!: Date;
   @UpdateDateColumn() updatedAt!: Date;
@@ -14,4 +14,8 @@ export class BaseEntity {
   @Column({ type: 'boolean', nullable: true }) active!: boolean;
   @Column({ type: 'numeric', nullable: true }) createdBy!: number;
   @Column({ type: 'numeric', nullable: true }) updatedBy!: number;
+
+  constructor(entity: T) {
+    Object.assign(this, entity);
+  }
 }

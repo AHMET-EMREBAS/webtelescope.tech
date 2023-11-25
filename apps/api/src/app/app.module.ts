@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { SampleModule } from '@webpackages/resources';
 
 
 @Module({
@@ -18,6 +19,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       synchronize: true,
       dropSchema: true,
     }),
+    SampleModule
   ],
   controllers: [AppController],
   providers: [AppService],
