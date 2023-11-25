@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Exclude } from 'class-transformer';
 import { ClassType, combinePropertyDecorators } from '@webpackages/util';
-
 import {
   Column as __Column,
   ColumnOptions,
@@ -64,8 +62,4 @@ export function Relation(options: RelationOptions) {
   }
 
   return combinePropertyDecorators(...decorators);
-}
-
-export function Dto() {
-  return Exclude();
 }

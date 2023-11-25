@@ -1,7 +1,8 @@
-import { Dto } from "./decorators";
-import { Property } from "./property";
 
-@Dto()
+import { Exclude } from "class-transformer";
+import { Property } from "../decorators/property";
+
+@Exclude()
 export class FindOptionsDto {
   @Property({ type: 'number', default: 20, maximum: 100, minimum: 1 })
   take = 20;

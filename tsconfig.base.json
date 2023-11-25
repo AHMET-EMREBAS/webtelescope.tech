@@ -10,19 +10,30 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@webpackages/angular": ["libs/angular/src/index.ts"],
-      "@webpackages/auth": ["libs/auth/src/index.ts"],
-      "@webpackages/coder": ["libs/coder/src/index.ts"],
-      "@webpackages/core": ["libs/core/src/index.ts"],
-      "@webpackages/orm": ["libs/orm/src/index.ts"],
-      "@webpackages/property": ["libs/property/src/index.ts"],
-      "@webpackages/util": ["libs/util/src/index.ts"]
+      "@webpackages/angular": [
+        "libs/angular/src/index.ts"
+      ],
+      "@webpackages/auth": [
+        "libs/auth/src/index.ts"
+      ],
+      "@webpackages/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@webpackages/util": [
+        "libs/util/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

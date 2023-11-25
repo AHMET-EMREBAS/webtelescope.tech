@@ -1,2 +1,3 @@
 // @index(['./*', '!./*.spec.ts'], f => `export * from '${f.path}'`)
-export * from './combine'
+export * from './exclude-undefined'
+export * from './to-printable'

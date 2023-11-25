@@ -1,7 +1,7 @@
-import { Dto } from "./decorators";
-import { Property } from "./property";
+import { Exclude } from 'class-transformer';
+import { Property } from '../decorators/property';
 
-@Dto()
+@Exclude()
 export class RelationDto {
   @Property({ type: 'number', required: true, inQuery: true })
   id!: number;
@@ -13,7 +13,7 @@ export class RelationDto {
   relationId!: number;
 }
 
-@Dto()
+@Exclude()
 export class UnsetRelationDto {
   @Property({ type: 'number', required: true, inQuery: true })
   id!: number;
