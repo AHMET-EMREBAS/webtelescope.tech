@@ -17,8 +17,8 @@
     "paths": {
       "@webpackages/angular": ["libs/angular/src/index.ts"],
       "@webpackages/auth": ["libs/auth/src/index.ts"],
-      "@webpackages/controller": ["libs/controller/src/index.ts"],
-      "@webpackages/entity": ["libs/entity/src/index.ts"],
+      "@webpackages/coder": ["libs/coder/src/index.ts"],
+      "@webpackages/core": ["libs/core/src/index.ts"],
       "@webpackages/orm": ["libs/orm/src/index.ts"],
       "@webpackages/property": ["libs/property/src/index.ts"],
       "@webpackages/util": ["libs/util/src/index.ts"]
