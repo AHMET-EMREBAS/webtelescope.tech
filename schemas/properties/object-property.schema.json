@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Object Property",
+    "$id": "ObjectProperty",
+    "properties": {
+        "type": {
+            "const": "object"
+        },
+        "target": {
+            "$ref": "../names/model-names.schema.json"
+        },
+        "inputType": {
+            "enum": [
+                "select",
+                "autocomplete"
+            ]
+        }
+    },
+    "required": [
+        "type",
+        "target",
+        "inputType"
+    ]
+}

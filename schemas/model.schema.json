@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Model Schema",
+    "$id": "ModelSchema",
+    "properties": {
+        "properties": {
+            "type": "array",
+            "items": {
+                "allOf": [
+                    {
+                        "oneOf": [
+                            {
+                                "$ref": "./properties/string-property.schema.json"
+                            },
+                            {
+                                "$ref": "./properties/number-property.schema.json"
+                            },
+                            {
+                                "$ref": "./properties/boolean-property.schema.json"
+                            },
+                            {
+                                "$ref": "./properties/date-property.schema.json"
+                            },
+                            {
+                                "$ref": "./properties/object-property.schema.json"
+                            }
+                        ]
+                    },
+                    {
+                        "$ref": "./properties/common-property.schema.json"
+                    }
+                ]
+            }
+        },
+        "relations": {
+            "type": "array",
+            "items": {
+                "$ref": "./properties/relation-property.schema.json"
+            }
+        }
+    }
+}

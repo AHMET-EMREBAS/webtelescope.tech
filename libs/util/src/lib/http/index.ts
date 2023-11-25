@@ -1,2 +1,0 @@
-// @index(['./*', '!./*.spec.ts'], f => `export * from '${f.path}'`)
-export * from './api-paths'

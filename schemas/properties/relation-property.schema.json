@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Relation Property",
+    "$id": "RelationProperty",
+    "properties": {
+        "type": {
+            "description": "Type of the relation",
+            "enum": [
+                "owner",
+                "sub",
+                "subs"
+            ]
+        },
+        "target": {
+            "description": "Target relation name",
+            "$ref": "../names/model-names.schema.json"
+        },
+        "views": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "properties": {
+                    "name": {
+                        "description": "Actual property name",
+                        "$ref": "../names/property-names.schema.json"
+                    },
+                    "as": {
+                        "description": "Property will be viewd as the provided name",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "type",
+        "target"
+    ]
+}

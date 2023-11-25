@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "ModelNames",
+    "title": "Model Names",
+    "description": "Model names used accross the application.",
+    "enum": [
+        "Product",
+        "Order",
+        "Sku",
+        "Category",
+        "Department",
+        "Price",
+        "Quantity",
+        "Article"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "InputTypes",
+    "title": "Input Types",
+    "enum": [
+        "text",
+        "textarea",
+        "checkbox",
+        "switch",
+        "date-picker",
+        "radio",
+        "select",
+        "autocomplete",
+        "editor"
+    ]
+}
