@@ -25,7 +25,7 @@ export class QueryDto {
     required: false,
     maximum: 100,
     minimum: 0,
-    default: 20,
+    default: 0,
   })
   @Min(0)
   @Transform(({ value }) => value && parseInt(value))
