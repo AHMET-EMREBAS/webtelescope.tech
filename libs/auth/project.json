@@ -1,39 +1,35 @@
 {
-  "name": "rest",
+  "name": "auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/rest/src",
+  "sourceRoot": "libs/auth/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:swc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/rest",
-        "main": "libs/rest/src/index.ts",
-        "tsConfig": "libs/rest/tsconfig.lib.json",
-        "assets": ["libs/rest/*.md"]
+        "outputPath": "dist/libs/auth",
+        "main": "libs/auth/src/index.ts",
+        "tsConfig": "libs/auth/tsconfig.lib.json",
+        "assets": ["libs/auth/*.md"]
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs rest {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs auth {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/rest/**/*.ts",
-          "libs/rest/package.json",
-          "libs/rest/generators.json"
-        ]
+        "lintFilePatterns": ["libs/auth/**/*.ts", "libs/auth/package.json"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/rest/jest.config.ts"
+        "jestConfig": "libs/auth/jest.config.ts"
       }
     }
   },
