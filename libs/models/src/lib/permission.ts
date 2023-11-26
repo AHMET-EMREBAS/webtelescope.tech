@@ -6,5 +6,4 @@ import { Column, Entity } from 'typeorm';
 export class Permission extends BaseEntity implements PermissionModel {
   @Column({ type: 'string', unique: true })
   name!: string;
-  
 }

@@ -10,5 +10,5 @@ export class Quantity extends BaseEntity implements QuantityModel<Product> {
 
   @ManyToOne(() => Product, (p) => p.id, { eager: true })
   @JoinColumn()
-  product!: Product;
+  sku!: Product;
 }

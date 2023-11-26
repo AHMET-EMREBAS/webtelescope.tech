@@ -1,7 +1,7 @@
 import { ViewColumn, ViewEntity } from 'typeorm';
 import { Price } from './price';
-import { Product } from './product';
 import { Store } from './store';
+import { Sku } from './sku';
 
 @ViewEntity({
   expression(ds) {
@@ -15,7 +15,7 @@ import { Store } from './store';
       .addSelect('store.id', 'storeId')
       .addSelect('price.priceLevelid', 'priceLevelId')
       .from(Price, 'price')
-      .leftJoin(Product, 'product', 'product.id = price.productId')
+      .leftJoin(Sku, 'sku', 'sku.id = price.skuId')
       .leftJoin(Store, 'store', 'store.priceLevelId = price.priceLevelId');
   },
 })

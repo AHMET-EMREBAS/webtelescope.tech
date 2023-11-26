@@ -1,8 +1,8 @@
 import { BaseModel } from './base';
 
-export interface QuantityModel<Product> extends BaseModel {
+export interface QuantityModel<Sku> extends BaseModel {
   quantity: number;
-  product: Product;
+  sku: Sku;
 }
 
 
