@@ -2,29 +2,61 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   Category,
+  Message,
+  Permission,
   Price,
   PriceLevel,
   Product,
+  ProductImage,
   ProductView,
   Quantity,
+  Role,
+  Sku,
   Store,
+  User,
 } from '@webpackages/models';
-import { ProductController } from './product.controller';
-import { CategoryController } from './category.controller';
+import {
+  CategoryController,
+  PermissionController,
+  PriceController,
+  PriceLevelController,
+  ProductController,
+  QuantityController,
+  RoleController,
+  SkuController,
+  StoreController,
+  UserController,
+} from './controllers';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      Product,
+      Category,
+      Message,
+      Permission,
       Price,
       PriceLevel,
-      Category,
-      Price,
-      Quantity,
-      Store,
+      Product,
+      ProductImage,
       ProductView,
+      Quantity,
+      Role,
+      Sku,
+      Store,
+      User,
     ]),
   ],
-  controllers: [ProductController, CategoryController],
+  controllers: [
+    CategoryController,
+    PermissionController,
+    PriceController,
+    PriceLevelController,
+    ProductController,
+    QuantityController,
+    RoleController,
+    SkuController,
+    StoreController,
+    UserController,
+  ],
 })
-export class ProductModule {}
+export class InventoryModule {}

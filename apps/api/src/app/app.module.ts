@@ -1,24 +1,9 @@
 import { Module } from '@nestjs/common';
-import {
-  Product,
-  ProductView,
-  Category,
-  Price,
-  Quantity,
-  Store,
-  PriceLevel,
-  Message,
-  Permission,
-  ProductImage,
-  Role,
-  User,
-  Sku,
-} from '@webpackages/models';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-
+ import { InventoryModule} from '@webpackages/resources'
 @Module({
   imports: [
     EventEmitterModule.forRoot({ delimiter: '.' }),
@@ -31,21 +16,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       synchronize: true,
       dropSchema: true,
     }),
-    TypeOrmModule.forFeature([
-      Product,
-      ProductView,
-      Category,
-      Price,
-      Quantity,
-      Store,
-      PriceLevel,
-      Message,
-      Permission,
-      ProductImage,
-      Role,
-      User,
-      Sku,
-    ]),
+    InventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

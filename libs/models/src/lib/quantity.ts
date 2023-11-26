@@ -41,4 +41,4 @@ export class CreateQuantityDto
 }
 
 @Exclude()
-export class UdpateQuantityDto extends PartialType(CreateQuantityDto) {}
+export class UpdateQuantityDto extends PartialType(CreateQuantityDto) {}
