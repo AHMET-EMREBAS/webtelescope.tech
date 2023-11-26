@@ -3,7 +3,7 @@ import { Exclude, Expose } from 'class-transformer';
 import { MaxLength, MinLength } from 'class-validator';
 
 @Exclude()
-export class CreateCategoryDto {
+export class CreatePriceLevelDto {
   @ApiProperty({ type: 'string', minLength: 3, maxLength: 50 })
   @MinLength(3)
   @MaxLength(50)
