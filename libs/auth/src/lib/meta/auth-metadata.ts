@@ -32,4 +32,12 @@ export function SetRole(role: string) {
   return SetMetadata(ROLE, role);
 }
 
+
+export const SUBSCRIPTION_TYPE = Symbol('SUBSCRIPTION_TYPE');
+
+export function SetSubscriptionType(subscriptionType: string) {
+  return SetMetadata(SUBSCRIPTION_TYPE, subscriptionType);
+}
+
 export const ADMIN_ROLE_NAME = 'admin';
+export const SUBSCRIBER_ROLE_NAME = 'subscriber'

@@ -12,7 +12,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { SecurityCodeService } from './security-code.service';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ADMIN_ROLE_NAME } from './meta';
+import { ADMIN_ROLE_NAME, SUBSCRIBER_ROLE_NAME } from './meta';
 
 export class AuthModuleOptions {
   secret!: string;
@@ -60,11 +60,33 @@ export class AuthModule implements OnModuleInit {
 
   async onModuleInit() {
     const { username, password } = this.options;
-    const adminRole = await this.roleRepo.save({ name: ADMIN_ROLE_NAME });
-    await this.userRepo.save({
-      username,
-      password,
-      roles: [{ id: adminRole.id }],
+
+    const foundAdminRole = await this.roleRepo.findOneBy({
+      name: ADMIN_ROLE_NAME,
     });
+
+    let adminRole = foundAdminRole;
+
+    if (!foundAdminRole) {
+      adminRole = await this.roleRepo.save({ name: ADMIN_ROLE_NAME });
+    }
+
+    const  foundAdminUser = await this.userRepo.findOneBy({ username });
+    if (!foundAdminUser) {
+      await this.userRepo.save({
+        username,
+        password,
+        roles: [{ id: adminRole!.id }],
+      });
+    }
+
+    // Manage subscription roles
+    const foundSubscriberRole = await this.roleRepo.findOneBy({
+      name: SUBSCRIBER_ROLE_NAME,
+    });
+
+    if (!foundSubscriberRole) {
+      await this.roleRepo.save({ name: SUBSCRIBER_ROLE_NAME });
+    }
   }
 }

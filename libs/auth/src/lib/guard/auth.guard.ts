@@ -38,6 +38,11 @@ export class AuthGuard implements CanActivate {
 
     if (!tokenPayload) return false;
 
+    // If user has admin role then return true
+    const isAdmin = tokenPayload.roles.find((e) => e.name === ADMIN_ROLE_NAME);
+    if (isAdmin) return true;
+
+    // If resource require a permission
     if (requiredPermission) {
       if (tokenPayload.roles) {
         for (const role of tokenPayload.roles) {
@@ -54,6 +59,8 @@ export class AuthGuard implements CanActivate {
         }
       }
       return false;
+
+      // If resource requires a role
     } else if (requiredRole) {
       if (tokenPayload.roles) {
         for (const role of tokenPayload.roles) {

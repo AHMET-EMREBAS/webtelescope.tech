@@ -5,6 +5,7 @@ import {
   Post,
   Res,
   UnauthorizedException,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from './meta';
@@ -23,6 +24,7 @@ import { Response } from 'express';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { AuthEvents } from './auth.event';
 import { SecurityCodeService } from './security-code.service';
+import { SignupDto } from './dtos/signup.dto';
 
 @ApiTags('AuthController')
 @Controller('auth')
@@ -119,5 +121,21 @@ export class AuthController {
     }
 
     throw new NotFoundException('User not found!');
+  }
+
+  @Public()
+  @Post('signup')
+  async signup(@Body(ValidationPipe) signupDto: SignupDto) {
+    const found = await this.userService.findOneBy(
+      'username',
+      signupDto.username
+    );
+
+    if (found) {
+      throw new UnprocessableEntityException(`Username is alerady in use!`);
+    }
+
+    const { username, password } = signupDto;
+    await this.userService.save({ username, password, roles: [] });
   }
 }
