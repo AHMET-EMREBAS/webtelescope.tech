@@ -5,7 +5,6 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
-
 @Module({
   imports: [
     EventEmitterModule.forRoot({ delimiter: '.' }),

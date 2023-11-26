@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@webpackages/common": ["libs/common/src/index.ts"],
-      "@webpackages/core": ["libs/core/src/index.ts"]
+      "@webpackages/core": ["libs/rest/src/index.ts"],
+      "@webpackages/models": ["libs/models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
