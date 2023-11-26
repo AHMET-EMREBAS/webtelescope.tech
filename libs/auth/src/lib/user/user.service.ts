@@ -7,6 +7,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class UserService extends ResourceService<User> {
   constructor(@InjectRepository(User) repo: Repository<User>) {
-    super(repo, ['name'], ['name']);
+    super(repo, ['username'], ['username']);
   }
 }

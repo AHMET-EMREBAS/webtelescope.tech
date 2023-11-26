@@ -62,6 +62,10 @@ export class ResourceService<
     return this.findOneByIdOrThrow(id);
   }
 
+  async findOneBy(key: keyof T, value: any) {
+    return this.repo.findOneBy({ [key]: ILike(value) } as any);
+  }
+
   async update(id: number, entity: Partial<T>) {
     await this.findOneByIdOrThrow(id);
     return await this.repo.update(id, entity as any);

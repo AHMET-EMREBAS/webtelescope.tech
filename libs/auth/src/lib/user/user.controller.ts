@@ -11,10 +11,11 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AUTH_TOKEN_NAME } from '@webpackages/common';
-import { Permissions } from '@webpackages/auth';
-import { ValidationPipe } from '@webpackages/rest';
+
 import { CreateUserDto, QueryUserDto, UpdateUserDto } from './dto';
 import { UserService } from './user.service';
+import { Permissions } from '../meta';
+import { ValidationPipe } from '@webpackages/rest';
 
 @ApiBearerAuth(AUTH_TOKEN_NAME)
 @Controller()
