@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@webpackages/common": ["libs/common/src/index.ts"],
-      "@webpackages/core": ["libs/rest/src/index.ts"],
+      "@webpackages/rest": ["libs/rest/src/index.ts"],
       "@webpackages/models": ["libs/models/src/index.ts"],
       "@webpackages/resources": ["libs/resources/src/index.ts"]
     }

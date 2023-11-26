@@ -4,4 +4,5 @@ export interface SkuModel<Product> extends BaseModel {
   name: string;
   barcode: string;
   product: Product;
+  description: string;
 }
