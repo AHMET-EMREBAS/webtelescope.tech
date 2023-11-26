@@ -1,7 +1,7 @@
 export interface BaseModel {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date;
-  active: boolean;
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date;
+  active?: boolean;
 }

@@ -9,19 +9,19 @@ import { QueryDto } from './query.dto';
 import { BaseEntity } from './base.entity';
 
 export class ResourceService<
-  T extends Partial<BaseEntity>,
+  T extends BaseEntity,
   K extends string & keyof T = string & keyof T
 > {
   constructor(
-    protected readonly repo: Repository<Partial<T>>,
+    protected readonly repo: Repository<T>,
     protected readonly textFields: K[],
     protected readonly uniqueFields: K[]
   ) {}
 
-  private async isUnique(entity: Partial<T>) {
+  private async isUnique(entity: T) {
     for (const u of this.uniqueFields) {
       const found = await this.repo.findOneBy({
-        [u]: ILike(entity[u]),
+        [u]: ILike((entity as any)[u]),
       } as FindOptionsWhere<T>);
 
       if (found) {
@@ -36,7 +36,7 @@ export class ResourceService<
     throw new NotFoundException(`Entity not found by ${id}`);
   }
 
-  async save(entity: Partial<T>) {
+  async save(entity: T) {
     await this.isUnique(entity);
     return await this.repo.save(entity);
   }

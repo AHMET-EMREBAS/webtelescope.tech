@@ -9,7 +9,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AUTH_TOKEN_NAME } from '@webpackages/common';
 import { Permissions } from '@webpackages/auth';
 import { ValidationPipe } from '@webpackages/rest';
@@ -17,6 +17,7 @@ import { Create<%- className %>Dto, Query<%- className %>Dto, Update<%- classNam
 import { <%- className %>Service } from './<%- fileName %>.service';
 
 @ApiBearerAuth(AUTH_TOKEN_NAME)
+@ApiTags('<%- className %>Controller')
 @Controller()
 export class <%- className %>Controller {
   constructor(protected readonly <%- fileName %>Service: <%- className %>Service) {}

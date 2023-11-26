@@ -9,7 +9,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AUTH_TOKEN_NAME } from '@webpackages/common';
 import { Permissions } from '@webpackages/auth';
 import { ValidationPipe } from '@webpackages/rest';
@@ -17,6 +17,7 @@ import { CreateMessageDto, QueryMessageDto, UpdateMessageDto } from './dto';
 import { MessageService } from './message.service';
 
 @ApiBearerAuth(AUTH_TOKEN_NAME)
+@ApiTags('MessageController')
 @Controller()
 export class MessageController {
   constructor(protected readonly messageService: MessageService) {}

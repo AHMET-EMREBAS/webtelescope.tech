@@ -5,7 +5,7 @@ import { IsEmail } from 'class-validator';
 @Exclude()
 export class ForgotPasswordDto {
   @Expose()
-  @ApiProperty({ type: 'string', format: 'email' })
+  @ApiProperty({ type: 'string', format: 'email', default: 'root@root.com' })
   @IsEmail()
   username!: string;
 }

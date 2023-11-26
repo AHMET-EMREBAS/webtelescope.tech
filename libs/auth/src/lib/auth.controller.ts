@@ -98,7 +98,7 @@ export class AuthController {
   }
 
   @Public()
-  @Post('reset-password')
+  @Post('reset-password-with-code')
   async resetPasswordWithCode(
     @Body(ValidationPipe) dto: ResetPasswordWithCodeDto
   ) {
