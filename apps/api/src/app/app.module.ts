@@ -4,7 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AppEventService } from './app-event.service';
-import { AuthModule } from '@webpackages/auth';
+import { AuthGuard, AuthModule } from '@webpackages/auth';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -24,6 +25,10 @@ import { AuthModule } from '@webpackages/auth';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, AppEventService],
+  providers: [
+    AppService,
+    AppEventService,
+    { provide: APP_GUARD, useClass: AuthGuard },
+  ],
 })
 export class AppModule {}

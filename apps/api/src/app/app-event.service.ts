@@ -4,7 +4,7 @@ import { AuthEvents } from '@webpackages/auth';
 
 @Injectable()
 export class AppEventService {
-  @OnEvent(AuthEvents.FORGOT_PASSWORD)
+  @OnEvent(AuthEvents.FORGOT_PASSWORD_REQUEST)
   onForgotPassword(options: { username: string; code: string }) {
     console.log(options);
   }

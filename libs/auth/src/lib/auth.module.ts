@@ -35,6 +35,7 @@ export class AuthModule implements OnModuleInit {
         TypeOrmModule.forFeature([User, Role, Permission]),
         EventEmitterModule,
         JwtModule.register({
+          global: true,
           secret: options.secret,
           signOptions: { expiresIn: '30d' },
         }),
@@ -49,6 +50,7 @@ export class AuthModule implements OnModuleInit {
           useValue: options,
         },
       ],
+
       controllers: [
         AuthController,
         UserController,
@@ -71,7 +73,7 @@ export class AuthModule implements OnModuleInit {
       adminRole = await this.roleRepo.save({ name: ADMIN_ROLE_NAME });
     }
 
-    const  foundAdminUser = await this.userRepo.findOneBy({ username });
+    const foundAdminUser = await this.userRepo.findOneBy({ username });
     if (!foundAdminUser) {
       await this.userRepo.save({
         username,

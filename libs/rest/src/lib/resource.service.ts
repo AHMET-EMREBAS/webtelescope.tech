@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FindOptionsOrder, FindOptionsWhere, ILike, Repository } from 'typeorm';
+import {
+  DeepPartial,
+  FindOptionsOrder,
+  FindOptionsWhere,
+  ILike,
+  Repository,
+} from 'typeorm';
 
 import {
   NotFoundException,
@@ -18,7 +24,7 @@ export class ResourceService<
     protected readonly uniqueFields: K[]
   ) {}
 
-  private async isUnique(entity: T) {
+  private async isUnique(entity: DeepPartial<T>) {
     for (const u of this.uniqueFields) {
       const found = await this.repo.findOneBy({
         [u]: ILike((entity as any)[u]),
@@ -36,7 +42,7 @@ export class ResourceService<
     throw new NotFoundException(`Entity not found by ${id}`);
   }
 
-  async save(entity: T) {
+  async save(entity: DeepPartial<T>) {
     await this.isUnique(entity);
     return await this.repo.save(entity);
   }

@@ -4,6 +4,7 @@ import { Reflector } from '@nestjs/core';
 import { ADMIN_ROLE_NAME, PERMISSION, PUBLIC, ROLE } from '../meta';
 import { JwtService } from '@nestjs/jwt';
 import { TokenPayload } from '../dtos';
+import { AUTH_TOKEN_NAME } from '@webpackages/common';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -12,7 +13,7 @@ export class AuthGuard implements CanActivate {
     private readonly jwt: JwtService
   ) {}
 
-  canActivate(context: ExecutionContext) {
+  async canActivate(context: ExecutionContext) {
     const isPublic = this.reflector.getAllAndOverride(PUBLIC, [
       context.getHandler(),
       context.getClass(),
@@ -39,8 +40,11 @@ export class AuthGuard implements CanActivate {
     if (!tokenPayload) return false;
 
     // If user has admin role then return true
-    const isAdmin = tokenPayload.roles.find((e) => e.name === ADMIN_ROLE_NAME);
-    if (isAdmin) return true;
+    const isAdmin = tokenPayload.roles?.find((e) => e.name === ADMIN_ROLE_NAME);
+    if (isAdmin) {
+      await this.appendUserToRequest(context, tokenPayload);
+      return true;
+    }
 
     // If resource require a permission
     if (requiredPermission) {
@@ -77,13 +81,18 @@ export class AuthGuard implements CanActivate {
 
   extractToken(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest<Request>();
+    const token =
+      req.headers.authorization?.split(' ').pop() ||
+      req.cookies?.[AUTH_TOKEN_NAME];
 
-    if (req.headers.authorization) {
-      const [, token] = req.headers.authorization.split(' ');
+    return token;
+  }
 
-      return token;
-    }
-
-    return;
+  async appendUserToRequest(
+    context: ExecutionContext,
+    tokenPayload: TokenPayload
+  ) {
+    const req = context.switchToHttp().getRequest();
+    req.user = tokenPayload;
   }
 }
