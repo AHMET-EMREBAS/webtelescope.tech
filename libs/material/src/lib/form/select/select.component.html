@@ -1,1 +1,10 @@
-<p>select works!</p>
+<mat-form-field [formGroup]="formGroup">
+  <mat-label>{{ label }}</mat-label>
+  <mat-select [formControlName]="name" [multiple]="multiple">
+    @for (option of options; track options) {
+    <mat-option [value]="option">{{ option }}</mat-option>
+    }
+  </mat-select>
+  <mat-icon matPrefix color="primary" [attr.color]="getIconColor()">{{ icon }}</mat-icon>
+  <mat-error>{{ getError() }}</mat-error>
+</mat-form-field>

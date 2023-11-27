@@ -5,7 +5,7 @@ import { create } from '@storybook/theming';
 export default create({
     base: 'light',
     brandTitle: '@techbir/material',
-    brandUrl: 'https://github.com/ahmet-emrebas/',
+    brandUrl: 'https://webtelescope.tech/',
     brandImage: 'favicon.svg',
     brandTarget: '_black',
 

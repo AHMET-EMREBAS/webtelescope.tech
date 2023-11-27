@@ -1,7 +1,14 @@
-<mat-form-field appearance="outline">
-  <mat-label>{{ label }}</mat-label>
-  <input type="text" matInput autocomplete="off" />
-  <mat-icon matPrefix class="fill">home</mat-icon>
+<mat-form-field [formGroup]="formGroup" appearance="outline">
+  <mat-label>{{ label | titlecase }}</mat-label>
+  <input type="text" [formControlName]="name" matInput autocomplete="off" />
+  <mat-icon
+    matPrefix
+    class="fill"
+    color="primary"
+    [attr.color]="getIconColor()"
+  >
+    {{ icon }}
+  </mat-icon>
   <mat-hint>{{ hint }}</mat-hint>
-  <mat-error>{{ errorMessage }}</mat-error>
+  <mat-error>{{ getError() }}</mat-error>
 </mat-form-field>

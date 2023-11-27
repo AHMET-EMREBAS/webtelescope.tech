@@ -4,7 +4,54 @@
     "injectables": [],
     "guards": [],
     "interceptors": [],
-    "classes": [],
+    "classes": [
+        {
+            "name": "AutoCompleteService",
+            "id": "class-AutoCompleteService-b1972dcbd0970c51c2de678a939a61a46f72dd2983d63153a293fb64809a88edaa2bbed55daf18155c5742b0c617a8cb9ad41fb96140adcbcfd608186487430e",
+            "file": "libs/material/src/lib/form/autocomplete/autocomplete.service.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import { Observable, of } from 'rxjs';\r\n\r\nexport type AutocompleteOption = {\r\n  id: number;\r\n  name: string;\r\n};\r\n\r\nexport class AutoCompleteService {\r\n  getWithQuery(queryParams: {\r\n    search: string;\r\n  }): Observable<AutocompleteOption[]> {\r\n    return of(\r\n      [\r\n        { id: 1, name: 'First' },\r\n        { id: 2, name: 'Second' },\r\n        { id: 3, name: 'Third' },\r\n        { id: 4, name: 'Forth' },\r\n        { id: 5, name: 'Fifth' },\r\n      ].filter((e) => e.name.toLowerCase().includes(queryParams.search))\r\n    );\r\n  }\r\n}\r\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "getWithQuery",
+                    "args": [
+                        {
+                            "name": "queryParams",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<AutocompleteOption[]>",
+                    "typeParameters": [],
+                    "line": 10,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "queryParams",
+                            "type": "literal type",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
     "directives": [],
     "components": [
         {
@@ -52,7 +99,7 @@
         },
         {
             "name": "AutocompleteComponent",
-            "id": "component-AutocompleteComponent-d6ef31306cd7c7c2e49dee9857afce4616f17551090f55e8054301201a2de586ed7d8296952b7b1f0d4ce8c5a4f1ae3cb5696f1bc65fe6d83fdb2b32e830c1f5",
+            "id": "component-AutocompleteComponent-c3b8ee34668d68390889373ebfc5987088f1150ef1705c9fc032c5d5d1ae670b3a3361d816b7c948387be30836c49f02fbbf95c2fc49f57bc29772bb00710cea",
             "file": "libs/material/src/lib/form/autocomplete/autocomplete.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -67,10 +114,235 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "autoCompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "AutoCompleteService",
+                    "optional": false,
+                    "description": "",
+                    "line": 44,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "AutoCompleteService"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125
+                    ]
+                },
+                {
+                    "name": "entities$",
+                    "defaultValue": "this.control()?.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search });\n      })\n    )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<AutocompleteOption[]> | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -80,22 +352,89 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatAutocompleteModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent {}\n",
+            "sourceCode": "import { Component, Inject, Optional } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatAutocompleteModule } from '@angular/material/autocomplete';\nimport { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { CommonInputComponent } from '../common-input.component';\nimport {\n  AutoCompleteService,\n  AutocompleteOption,\n} from './autocomplete.service';\nimport { Observable, debounceTime, switchMap } from 'rxjs';\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatAutocompleteModule,\n  ],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent extends CommonInputComponent {\n  entities$: Observable<AutocompleteOption[]> | undefined =\n    this.control()?.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search });\n      })\n    );\n\n  constructor(\n    @Optional()\n    @Inject(FormGroup)\n    formGroup: FormGroup,\n    @Optional()\n    @Inject(AutoCompleteService)\n    public autoCompleteService: AutoCompleteService\n  ) {\n    super(formGroup);\n\n    if (!autoCompleteService) {\n      this.autoCompleteService = new AutoCompleteService();\n    }\n  }\n}\n",
             "styleUrl": "./autocomplete.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<p>autocomplete works!</p>\n"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "formGroup",
+                        "type": "FormGroup",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "autoCompleteService",
+                        "type": "AutoCompleteService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 36,
+                "jsdoctags": [
+                    {
+                        "name": "formGroup",
+                        "type": "FormGroup",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "autoCompleteService",
+                        "type": "AutoCompleteService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<mat-form-field [formGroup]=\"formGroup\" appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input\n    type=\"text\"\n    matInput\n    [formControlName]=\"name\"\n    [matAutocomplete]=\"auto\"\n  />\n  <mat-autocomplete autoActiveFirstOption #auto=\"matAutocomplete\">\n    @for (option of entities$ | async ; track option.id) {\n    <mat-option [value]=\"option.name\">{{ option.name }}</mat-option>\n    }\n  </mat-autocomplete>\n</mat-form-field>\n"
         },
         {
             "name": "CheckboxComponent",
-            "id": "component-CheckboxComponent-ce983ba6c3627a29cbc6213f17443e14453782af238ed6f9526c0e879b6e95cbadf58488bc7248842c6379f90392cfe1202e56fcdf0dee00388568408e211bf6",
+            "id": "component-CheckboxComponent-6f7588e072e87d47a3b475523120c60f388abca117f3de27b62a23fd012749c09250561759aadbfea41ffaf6d9da9106176f8df94dd7e8eb8af829f826675476",
             "file": "libs/material/src/lib/form/checkbox/checkbox.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -110,10 +449,201 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -123,18 +653,244 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatCheckboxModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-checkbox',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './checkbox.component.html',\n  styleUrl: './checkbox.component.scss',\n})\nexport class CheckboxComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { CommonInputComponent } from '../common-input.component';\n\n@Component({\n  selector: 'wt-checkbox',\n  standalone: true,\n  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatCheckboxModule],\n  templateUrl: './checkbox.component.html',\n  styleUrl: './checkbox.component.scss',\n})\nexport class CheckboxComponent extends CommonInputComponent {}\n",
             "styleUrl": "./checkbox.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<p>checkbox works!</p>\n"
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<div [formGroup]=\"formGroup\">\n  <mat-checkbox [formControlName]=\"name\">{{ label }}</mat-checkbox>\n</div>\n"
+        },
+        {
+            "name": "CommonInputComponent",
+            "id": "component-CommonInputComponent-260a5bad355509d94d0192e25df9817b00b9196148f2e8cd42b710526626dee7b7a4d45a4bb803493b32373a81cf52675423ac6ff3788154cc7b3278f6ce4384",
+            "file": "libs/material/src/lib/form/common-input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "styleUrls": [],
+            "styles": [],
+            "template": "",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Inject, Input, Optional } from '@angular/core';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\n\r\n@Component({ template: '' })\r\nexport class CommonInputComponent {\r\n  /**\r\n   * Upon form submit update the error message\r\n   */\r\n  @Input() errorMessage = 'Invalid input';\r\n\r\n  /**\r\n   * Input label\r\n   */\r\n  @Input() label = 'Input Label';\r\n\r\n  /**\r\n   * FormControlName\r\n   */\r\n  @Input() name = 'name';\r\n\r\n  /**\r\n   * Input icon\r\n   */\r\n  @Input() icon = 'info';\r\n\r\n  @Input() iconColor = 'primary';\r\n\r\n  /**\r\n   * Explain the constraints of input value\r\n   */\r\n  @Input() hint = '';\r\n\r\n  /**\r\n   * Select Options\r\n   */\r\n  @Input() options: string[] = ['First', 'Second', 'Third'];\r\n\r\n  @Input() multiple = false;\r\n\r\n  \r\n\r\n  constructor(\r\n    @Optional() @Inject(FormGroup) public readonly formGroup: FormGroup\r\n  ) {\r\n    if (!formGroup) {\r\n      this.formGroup = new FormGroup({ [this.name]: new FormControl('') });\r\n    }\r\n  }\r\n\r\n  control() {\r\n    return this.formGroup.get(this.name);\r\n  }\r\n  isInvalid() {\r\n    return this.control()?.invalid && this.control()?.touched;\r\n  }\r\n\r\n  getError() {\r\n    return this.control()?.getError('error');\r\n  }\r\n\r\n  getIconColor() {\r\n    return this.control()?.invalid && this.control()?.touched\r\n      ? 'red'\r\n      : this.iconColor;\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "formGroup",
+                        "type": "FormGroup",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 38,
+                "jsdoctags": [
+                    {
+                        "name": "formGroup",
+                        "type": "FormGroup",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": []
         },
         {
             "name": "DateComponent",
@@ -353,7 +1109,7 @@
         },
         {
             "name": "RadioComponent",
-            "id": "component-RadioComponent-09fafe18c9768a84e8a98227c0c6e1fdf5642862ae4fd43f5090d6c10f733b709657d11013bfb26c08f5c15d664040319e61dd82bc6224c5e841b7b3b827e756",
+            "id": "component-RadioComponent-69fc2b92f176438d1b1796e6c1040083f90572240faee8e49d968a787dfbddba4413480208b3172b56216bd4733bb6ee7f2cb1a9b28eebc54d8f8bedb377fafc",
             "file": "libs/material/src/lib/form/radio/radio.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -368,10 +1124,201 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -381,22 +1328,40 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatRadioModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-radio',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './radio.component.html',\n  styleUrl: './radio.component.scss',\n})\nexport class RadioComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatRadioModule } from '@angular/material/radio';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { CommonInputComponent } from '../common-input.component';\n@Component({\n  selector: 'wt-radio',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatRadioModule,\n    MatIconModule,\n  ],\n  templateUrl: './radio.component.html',\n  styleUrl: './radio.component.scss',\n})\nexport class RadioComponent extends CommonInputComponent {}\n",
             "styleUrl": "./radio.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<p>radio works!</p>\n"
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<div [formGroup]=\"formGroup\">\n  <label>{{ label }}</label>\n  <mat-radio-group\n    class=\"flex column\"\n    [formGroupName]=\"name\"\n    style=\"margin-top: 1em\"\n  >\n    @for (option of options; track option) {\n    <mat-radio-button class=\"example-radio-button\" [value]=\"option\">\n      {{ option }}\n    </mat-radio-button>\n    }\n  </mat-radio-group>\n</div>\n"
         },
         {
             "name": "SelectComponent",
-            "id": "component-SelectComponent-ad0ac40db7f94ac9a79722a9e540e7134d6a903e467a585159bfd487c73a7b0eb093dd79862e009390842efbcc61c33ab2b1229da888034e3c5c40996aee20f7",
+            "id": "component-SelectComponent-f743a52c0eebc5f2a1e9b04b54fce91fc6ddbd19ed049f3d7e7caa571ff51637c933d20c76c6d9833b12aeb9e3f7dad8105c28cbdb05218dff046bf9fec0a3ca",
             "file": "libs/material/src/lib/form/select/select.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -411,10 +1376,201 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -424,22 +1580,40 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatSelectModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-select',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './select.component.html',\n  styleUrl: './select.component.scss',\n})\nexport class SelectComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSelectModule } from '@angular/material/select';\nimport { CommonInputComponent } from '../common-input.component';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\n\n@Component({\n  selector: 'wt-select',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatSelectModule,\n  ],\n  templateUrl: './select.component.html',\n  styleUrl: './select.component.scss',\n})\nexport class SelectComponent extends CommonInputComponent {\n\n  \n}\n",
             "styleUrl": "./select.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<p>select works!</p>\n"
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<mat-form-field [formGroup]=\"formGroup\">\n  <mat-label>{{ label }}</mat-label>\n  <mat-select [formControlName]=\"name\" [multiple]=\"multiple\">\n    @for (option of options; track options) {\n    <mat-option [value]=\"option\">{{ option }}</mat-option>\n    }\n  </mat-select>\n  <mat-icon matPrefix color=\"primary\" [attr.color]=\"getIconColor()\">{{ icon }}</mat-icon>\n  <mat-error>{{ getError() }}</mat-error>\n</mat-form-field>\n"
         },
         {
             "name": "SwitchComponent",
-            "id": "component-SwitchComponent-01b00df704f1d8121f24fdd9eda1a9407fe609f256b8588af6798f9fa4124602910e130113d2103aee2aa7d9f1c6aef40582d53a50c3aead5c41d3d5d6806e88",
+            "id": "component-SwitchComponent-65eff2a1d09720f67476d3b5064fec164fba47eca26f889e96f14a793f3c26984f292cb79f21de628697c90fbbbeb0835aca442e7a99b835188c60caaa33048e",
             "file": "libs/material/src/lib/form/switch/switch.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -454,10 +1628,201 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -467,18 +1832,32 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatSlideToggleModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-switch',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './switch.component.html',\n  styleUrl: './switch.component.scss',\n})\nexport class SwitchComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSlideToggleModule } from '@angular/material/slide-toggle';\nimport { CommonInputComponent } from '../common-input.component';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\n@Component({\n  selector: 'wt-switch',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatSlideToggleModule,\n  ],\n  templateUrl: './switch.component.html',\n  styleUrl: './switch.component.scss',\n})\nexport class SwitchComponent extends CommonInputComponent {}\n",
             "styleUrl": "./switch.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<p>switch works!</p>\n"
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<div [formGroup]=\"formGroup\">\n  <mat-slide-toggle [formControlName]=\"name\">{{ label }}</mat-slide-toggle>\n</div>\n"
         },
         {
             "name": "TableComponent",
@@ -525,7 +1904,7 @@
         },
         {
             "name": "TextareaInputComponent",
-            "id": "component-TextareaInputComponent-33551b64880ba0aeaddaf1bf543afdf98704a71eb5359166f8d1ce12c0d79743c10edca3580f93c23e0c9275f180bd1cf6601ee9ef6a819a1342a42f7b1d68bf",
+            "id": "component-TextareaInputComponent-010ba8d3c0063379152aeb9bd71d09ef2b727e33980a4a587ae901884647e738c48b2fe82614c921e820940678e2a7c6ad976d7246ff6dd844418d06aec4ae35",
             "file": "libs/material/src/lib/form/textarea-input/textarea-input.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -540,10 +1919,201 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -553,76 +2123,13 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-textarea-input',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './textarea-input.component.html',\n  styleUrl: './textarea-input.component.scss',\n})\nexport class TextareaInputComponent {}\n",
-            "styleUrl": "./textarea-input.component.scss",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "extends": [],
-            "templateData": "<p>textarea-input works!</p>\n"
-        },
-        {
-            "name": "TextInputComponent",
-            "id": "component-TextInputComponent-6d2dfd4a8c090ba9f16efec7bb61d0a68ed41eeb2329d3bf26e928aed045e8ca9d8a8f262358d7bc073dc4f00606207f3f3fe91dcb14cae4e98bce487a4a338a",
-            "file": "libs/material/src/lib/form/text-input/text-input.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "wt-text-input",
-            "styleUrls": [],
-            "styles": [],
-            "templateUrl": [
-                "./text-input.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "errorMessage",
-                    "defaultValue": "'Error Message'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 16,
-                    "type": "string",
-                    "decorators": []
                 },
                 {
-                    "name": "hint",
-                    "defaultValue": "'Input Hint'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 17,
-                    "type": "string",
-                    "decorators": []
+                    "name": "FormsModule",
+                    "type": "module"
                 },
                 {
-                    "name": "label",
-                    "defaultValue": "'Not provided'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "string",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
+                    "name": "ReactiveFormsModule",
                     "type": "module"
                 },
                 {
@@ -641,13 +2148,271 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatIconModule } from '@angular/material/icon';\n\n@Component({\n  selector: 'wt-text-input',\n  standalone: true,\n  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatIconModule],\n  templateUrl: './text-input.component.html',\n  styleUrl: './text-input.component.scss',\n})\nexport class TextInputComponent {\n  @Input() label = 'Not provided';\n  @Input() errorMessage = 'Error Message';\n  @Input() hint = 'Input Hint';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatIconModule } from '@angular/material/icon';\nimport { CommonInputComponent } from '../common-input.component';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\n\n@Component({\n  selector: 'wt-textarea-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatIconModule,\n  ],\n  templateUrl: './textarea-input.component.html',\n  styleUrl: './textarea-input.component.scss',\n})\nexport class TextareaInputComponent extends CommonInputComponent {}\n",
+            "styleUrl": "./textarea-input.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<mat-form-field [formGroup]=\"formGroup\" appearance=\"outline\">\n  <mat-label>{{ label | titlecase }}</mat-label>\n  <textarea matInput [formControlName]=\"name\"></textarea>\n  <mat-icon matPrefix [color]=\"iconColor\" [attr.color]=\"getIconColor()\">\n    {{ icon }}\n  </mat-icon>\n  <mat-error>{{ getError() }}</mat-error>\n  <mat-hint>{{ hint }}</mat-hint>\n</mat-form-field>\n"
+        },
+        {
+            "name": "TextInputComponent",
+            "id": "component-TextInputComponent-0a767762df60eb9037beb3572b9076431536f535fb6c7275a069204ce6959f83595d3416ee1bcf5b1932717c73cf9b1235e225e2ddb9fd0352470873ca65bf27",
+            "file": "libs/material/src/lib/form/text-input/text-input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-text-input",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./text-input.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatIconModule } from '@angular/material/icon';\nimport { CommonInputComponent } from '../common-input.component';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\n\n@Component({\n  selector: 'wt-text-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatIconModule,\n  ],\n  templateUrl: './text-input.component.html',\n  styleUrl: './text-input.component.scss',\n})\nexport class TextInputComponent extends CommonInputComponent {}\n",
             "styleUrl": "./text-input.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<mat-form-field appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input type=\"text\" matInput autocomplete=\"off\" />\n  <mat-icon matPrefix>home</mat-icon>\n  <mat-hint>{{ hint }}</mat-hint>\n  <mat-error>{{ errorMessage }}</mat-error>\n</mat-form-field>\n"
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<mat-form-field [formGroup]=\"formGroup\" appearance=\"outline\">\n  <mat-label>{{ label | titlecase }}</mat-label>\n  <input type=\"text\" [formControlName]=\"name\" matInput autocomplete=\"off\" />\n  <mat-icon\n    matPrefix\n    class=\"fill\"\n    color=\"primary\"\n    [attr.color]=\"getIconColor()\"\n  >\n    {{ icon }}\n  </mat-icon>\n  <mat-hint>{{ hint }}</mat-hint>\n  <mat-error>{{ getError() }}</mat-error>\n</mat-form-field>\n"
         },
         {
             "name": "WebsiteComponent",
@@ -780,21 +2545,21 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/src/lib/form/editor/editor.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -884,7 +2649,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AutocompleteComponent>",
-                "defaultValue": "{\n  component: AutocompleteComponent,\n  title: 'AutocompleteComponent',\n}"
+                "defaultValue": "{\n  component: AutocompleteComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'AutocompleteComponent',\n}"
             },
             {
                 "name": "meta",
@@ -920,16 +2685,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<RadioComponent>",
-                "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/src/lib/form/editor/editor.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -940,11 +2695,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<RadioComponent>",
+                "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/form/select/select.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SelectComponent>",
-                "defaultValue": "{\n  component: SelectComponent,\n  title: 'SelectComponent',\n}"
+                "defaultValue": "{\n  component: SelectComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'SelectComponent',\n}"
             },
             {
                 "name": "meta",
@@ -964,7 +2729,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<TextInputComponent>",
-                "defaultValue": "{\n  component: TextInputComponent,\n\n  decorators: [\n    moduleMetadata({\n      imports: [\n        BrowserAnimationsModule,\n        MatIconModule,\n        MatFormFieldModule,\n        MatInputModule,\n      ],\n    }),\n  ],\n  title: 'TextInputComponent',\n}"
+                "defaultValue": "{\n  component: TextInputComponent,\n\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'TextInputComponent',\n}"
             },
             {
                 "name": "meta",
@@ -974,7 +2739,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<TextareaInputComponent>",
-                "defaultValue": "{\n  component: TextareaInputComponent,\n  title: 'TextareaInputComponent',\n}"
+                "defaultValue": "{\n  component: TextareaInputComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'TextareaInputComponent',\n}"
             },
             {
                 "name": "Primary",
@@ -1060,7 +2825,7 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
+                "file": "libs/material/src/lib/form/editor/editor.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -1070,7 +2835,7 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/editor/editor.component.stories.ts",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -1119,6 +2884,17 @@
         ],
         "functions": [],
         "typealiases": [
+            {
+                "name": "AutocompleteOption",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "libs/material/src/lib/form/autocomplete/autocomplete.service.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 187
+            },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
@@ -1211,8 +2987,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<RadioComponent>",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
+                "rawtype": "StoryObj<EditorComponent>",
+                "file": "libs/material/src/lib/form/editor/editor.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1222,8 +2998,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<EditorComponent>",
-                "file": "libs/material/src/lib/form/editor/editor.component.stories.ts",
+                "rawtype": "StoryObj<RadioComponent>",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1423,7 +3199,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AutocompleteComponent>",
-                    "defaultValue": "{\n  component: AutocompleteComponent,\n  title: 'AutocompleteComponent',\n}"
+                    "defaultValue": "{\n  component: AutocompleteComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'AutocompleteComponent',\n}"
                 },
                 {
                     "name": "Primary",
@@ -1532,38 +3308,6 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
-            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<RadioComponent>",
-                    "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {},\n}"
-                }
-            ],
             "libs/material/src/lib/form/editor/editor.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -1596,6 +3340,38 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
+            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<RadioComponent>",
+                    "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
             "libs/material/src/lib/form/select/select.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -1615,7 +3391,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<SelectComponent>",
-                    "defaultValue": "{\n  component: SelectComponent,\n  title: 'SelectComponent',\n}"
+                    "defaultValue": "{\n  component: SelectComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'SelectComponent',\n}"
                 },
                 {
                     "name": "Primary",
@@ -1679,7 +3455,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<TextInputComponent>",
-                    "defaultValue": "{\n  component: TextInputComponent,\n\n  decorators: [\n    moduleMetadata({\n      imports: [\n        BrowserAnimationsModule,\n        MatIconModule,\n        MatFormFieldModule,\n        MatInputModule,\n      ],\n    }),\n  ],\n  title: 'TextInputComponent',\n}"
+                    "defaultValue": "{\n  component: TextInputComponent,\n\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'TextInputComponent',\n}"
                 },
                 {
                     "name": "Primary",
@@ -1711,7 +3487,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<TextareaInputComponent>",
-                    "defaultValue": "{\n  component: TextareaInputComponent,\n  title: 'TextareaInputComponent',\n}"
+                    "defaultValue": "{\n  component: TextareaInputComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'TextareaInputComponent',\n}"
                 },
                 {
                     "name": "Primary",
@@ -1728,6 +3504,19 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "libs/material/src/lib/form/autocomplete/autocomplete.service.ts": [
+                {
+                    "name": "AutocompleteOption",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "libs/material/src/lib/form/autocomplete/autocomplete.service.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 187
+                }
+            ],
             "libs/material/src/lib/app-layout/app-layout.component.stories.ts": [
                 {
                     "name": "Story",
@@ -1832,19 +3621,6 @@
                     "kind": 183
                 }
             ],
-            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<RadioComponent>",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "libs/material/src/lib/form/editor/editor.component.stories.ts": [
                 {
                     "name": "Story",
@@ -1852,6 +3628,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<EditorComponent>",
                     "file": "libs/material/src/lib/form/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<RadioComponent>",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -1914,7 +3703,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 0,
+        "count": 5,
         "status": "low",
         "files": [
             {
@@ -1991,8 +3780,17 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AutocompleteComponent",
+                "coveragePercent": 35,
+                "coverageCount": "6/17",
+                "status": "medium"
+            },
+            {
+                "filePath": "libs/material/src/lib/form/autocomplete/autocomplete.service.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "AutoCompleteService",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -2030,9 +3828,18 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "CheckboxComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
+            },
+            {
+                "filePath": "libs/material/src/lib/form/common-input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CommonInputComponent",
+                "coveragePercent": 40,
+                "coverageCount": "6/15",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/form/date-time/date-time.component.stories.ts",
@@ -2225,9 +4032,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "RadioComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/form/select/select.component.stories.ts",
@@ -2264,9 +4071,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "SelectComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/form/switch/switch.component.stories.ts",
@@ -2303,9 +4110,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "SwitchComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/form/text-input/text-input.component.stories.ts",
@@ -2342,9 +4149,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "TextInputComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/4",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/form/textarea-input/textarea-input.component.stories.ts",
@@ -2381,9 +4188,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "TextareaInputComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/mobile-layout/mobile-layout.component.stories.ts",

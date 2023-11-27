@@ -68,7 +68,8 @@
         "styles": [
           "libs/material/src/style.css", 
           "libs/material/src/style-fonts.css",
-          "libs/material/src/style-icons.css"
+          "libs/material/src/style-icons.css",
+          "libs/material/src/style-flex.scss"
         ]
       },
       "configurations": {

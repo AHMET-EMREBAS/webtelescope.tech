@@ -29,7 +29,8 @@
         "styles": [
           "apps/client/src/styles.scss",
           "apps/client/src/styles-icons.scss",
-          "apps/client/src/styles-fonts.scss"
+          "apps/client/src/styles-fonts.scss",
+          "apps/client/src/styles-flex.scss"
         ],
         "scripts": [],
         "serviceWorker": true,

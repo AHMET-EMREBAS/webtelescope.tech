@@ -1,1 +1,9 @@
-<p>textarea-input works!</p>
+<mat-form-field [formGroup]="formGroup" appearance="outline">
+  <mat-label>{{ label | titlecase }}</mat-label>
+  <textarea matInput [formControlName]="name"></textarea>
+  <mat-icon matPrefix [color]="iconColor" [attr.color]="getIconColor()">
+    {{ icon }}
+  </mat-icon>
+  <mat-error>{{ getError() }}</mat-error>
+  <mat-hint>{{ hint }}</mat-hint>
+</mat-form-field>
