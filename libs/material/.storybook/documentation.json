@@ -647,7 +647,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<mat-form-field appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n\n  <input type=\"text\" matInput autocomplete=\"off\" />\n  <mat-hint>{{ hint }}</mat-hint>\n  <mat-error>{{ errorMessage }}</mat-error>\n</mat-form-field>\n"
+            "templateData": "<mat-form-field appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input type=\"text\" matInput autocomplete=\"off\" />\n  <mat-icon matPrefix>home</mat-icon>\n  <mat-hint>{{ hint }}</mat-hint>\n  <mat-error>{{ errorMessage }}</mat-error>\n</mat-form-field>\n"
         },
         {
             "name": "WebsiteComponent",
@@ -760,6 +760,16 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/date works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/form/date-time/date-time.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -770,11 +780,11 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/date works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -795,16 +805,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/select works!/gi)).toBeTruthy();\n  },\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -900,6 +900,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<DateComponent>",
+                "defaultValue": "{\n  component: DateComponent,\n  title: 'DateComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/form/date-time/date-time.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -910,11 +920,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<DateComponent>",
-                "defaultValue": "{\n  component: DateComponent,\n  title: 'DateComponent',\n}"
+                "type": "Meta<RadioComponent>",
+                "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
             },
             {
                 "name": "meta",
@@ -940,16 +950,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<RadioComponent>",
-                "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/src/lib/form/switch/switch.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -964,7 +964,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<TextInputComponent>",
-                "defaultValue": "{\n  component: TextInputComponent,\n  title: 'TextInputComponent',\n}"
+                "defaultValue": "{\n  component: TextInputComponent,\n\n  decorators: [\n    moduleMetadata({\n      imports: [\n        BrowserAnimationsModule,\n        MatIconModule,\n        MatFormFieldModule,\n        MatInputModule,\n      ],\n    }),\n  ],\n  title: 'TextInputComponent',\n}"
             },
             {
                 "name": "meta",
@@ -1040,6 +1040,16 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/form/date-time/date-time.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1050,7 +1060,7 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -1071,16 +1081,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "libs/material/src/lib/form/select/select.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {},\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -1189,6 +1189,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<DateComponent>",
+                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<DateTimeComponent>",
                 "file": "libs/material/src/lib/form/date-time/date-time.component.stories.ts",
                 "deprecated": false,
@@ -1200,8 +1211,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<DateComponent>",
-                "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                "rawtype": "StoryObj<RadioComponent>",
+                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1224,17 +1235,6 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<SelectComponent>",
                 "file": "libs/material/src/lib/form/select/select.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<RadioComponent>",
-                "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1468,6 +1468,38 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
+            "libs/material/src/lib/form/date/date.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/date works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<DateComponent>",
+                    "defaultValue": "{\n  component: DateComponent,\n  title: 'DateComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
             "libs/material/src/lib/form/date-time/date-time.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -1500,32 +1532,32 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
-            "libs/material/src/lib/form/date/date.component.stories.ts": [
+            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
                 {
                     "name": "Heading",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/date works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<DateComponent>",
-                    "defaultValue": "{\n  component: DateComponent,\n  title: 'DateComponent',\n}"
+                    "type": "Meta<RadioComponent>",
+                    "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
                 },
                 {
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -1596,38 +1628,6 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
-            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/radio works!/gi)).toBeTruthy();\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<RadioComponent>",
-                    "defaultValue": "{\n  component: RadioComponent,\n  title: 'RadioComponent',\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {},\n}"
-                }
-            ],
             "libs/material/src/lib/form/switch/switch.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -1679,7 +1679,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<TextInputComponent>",
-                    "defaultValue": "{\n  component: TextInputComponent,\n  title: 'TextInputComponent',\n}"
+                    "defaultValue": "{\n  component: TextInputComponent,\n\n  decorators: [\n    moduleMetadata({\n      imports: [\n        BrowserAnimationsModule,\n        MatIconModule,\n        MatFormFieldModule,\n        MatInputModule,\n      ],\n    }),\n  ],\n  title: 'TextInputComponent',\n}"
                 },
                 {
                     "name": "Primary",
@@ -1806,6 +1806,19 @@
                     "kind": 183
                 }
             ],
+            "libs/material/src/lib/form/date/date.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<DateComponent>",
+                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/material/src/lib/form/date-time/date-time.component.stories.ts": [
                 {
                     "name": "Story",
@@ -1819,13 +1832,13 @@
                     "kind": 183
                 }
             ],
-            "libs/material/src/lib/form/date/date.component.stories.ts": [
+            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<DateComponent>",
-                    "file": "libs/material/src/lib/form/date/date.component.stories.ts",
+                    "rawtype": "StoryObj<RadioComponent>",
+                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -1852,19 +1865,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<SelectComponent>",
                     "file": "libs/material/src/lib/form/select/select.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/material/src/lib/form/radio/radio.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<RadioComponent>",
-                    "file": "libs/material/src/lib/form/radio/radio.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
