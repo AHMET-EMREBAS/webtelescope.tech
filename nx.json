@@ -35,6 +35,15 @@
           "codeCoverage": true
         }
       }
+    },
+    "build-storybook": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "^production",
+        "{projectRoot}/.storybook/**/*",
+        "{projectRoot}/tsconfig.storybook.json"
+      ]
     }
   },
   "namedInputs": {
@@ -47,7 +56,10 @@
       "!{projectRoot}/src/test-setup.[jt]s",
       "!{projectRoot}/test-setup.[jt]s",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.js"
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/tsconfig.storybook.json"
     ],
     "sharedGlobals": []
   },
@@ -66,5 +78,12 @@
       "style": "scss"
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "client",
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "cacheableOperations": ["build-storybook"]
+      }
+    }
+  }
 }
