@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'wt-website',
+  selector: 'wt-form',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './website.component.html',
-  styleUrl: './website.component.scss',
+  templateUrl: './form.component.html',
+  styleUrl: './form.component.scss',
 })
-export class WebsiteComponent {}
+export class FormComponent {}

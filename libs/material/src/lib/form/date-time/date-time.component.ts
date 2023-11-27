@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'wt-website',
+  selector: 'wt-date-time',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './website.component.html',
-  styleUrl: './website.component.scss',
+  templateUrl: './date-time.component.html',
+  styleUrl: './date-time.component.scss',
 })
-export class WebsiteComponent {}
+export class DateTimeComponent {}

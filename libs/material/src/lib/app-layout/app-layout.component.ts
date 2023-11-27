@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'webpackages-app-layout',
+  selector: 'wt-app-layout',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './app-layout.component.html',

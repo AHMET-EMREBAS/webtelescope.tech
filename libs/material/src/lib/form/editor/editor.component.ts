@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'wt-website',
+  selector: 'wt-editor',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './website.component.html',
-  styleUrl: './website.component.scss',
+  templateUrl: './editor.component.html',
+  styleUrl: './editor.component.scss',
 })
-export class WebsiteComponent {}
+export class EditorComponent {}

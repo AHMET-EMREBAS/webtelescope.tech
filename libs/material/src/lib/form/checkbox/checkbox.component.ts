@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'wt-website',
+  selector: 'wt-checkbox',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './website.component.html',
-  styleUrl: './website.component.scss',
+  templateUrl: './checkbox.component.html',
+  styleUrl: './checkbox.component.scss',
 })
-export class WebsiteComponent {}
+export class CheckboxComponent {}
