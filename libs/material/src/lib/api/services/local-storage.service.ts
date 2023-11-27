@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Injectable } from '@angular/core';
 import { APP_NAME_TOKEN, MODULE_NAME_TOKEN } from '../providers';
 

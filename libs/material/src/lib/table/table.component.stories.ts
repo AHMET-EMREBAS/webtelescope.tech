@@ -21,7 +21,6 @@ import {
   provideTableColumns,
 } from '../api';
 import { of } from 'rxjs';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 class MockTableService {
   entityName = 'Entity';
