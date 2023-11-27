@@ -20,6 +20,7 @@
       "@webpackages/inventory": ["libs/inventory/src/index.ts"],
       "@webpackages/material": ["libs/material/src/index.ts"],
       "@webpackages/rest": ["libs/rest/src/index.ts"],
+      "@webpackages/utils": ["libs/utils/src/index.ts"],
       "chat": ["libs/chat/src/index.ts"],
       "notification": ["libs/notification/src/index.ts"],
       "project-management": ["libs/project-management/src/index.ts"]

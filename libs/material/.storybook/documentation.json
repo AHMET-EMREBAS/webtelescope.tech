@@ -7,13 +7,24 @@
     "classes": [
         {
             "name": "AutoCompleteService",
-            "id": "class-AutoCompleteService-b1972dcbd0970c51c2de678a939a61a46f72dd2983d63153a293fb64809a88edaa2bbed55daf18155c5742b0c617a8cb9ad41fb96140adcbcfd608186487430e",
+            "id": "class-AutoCompleteService-19385bf2293bb5ffe8f4394b13c7696a9f2d99f8e6180bf20d02eae51ad086f399a865b6bb536ab570eb366242779335c19fc3cc57410624de650fbc324bac44",
             "file": "libs/material/src/lib/form/autocomplete/autocomplete.service.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { Observable, of } from 'rxjs';\r\n\r\nexport type AutocompleteOption = {\r\n  id: number;\r\n  name: string;\r\n};\r\n\r\nexport class AutoCompleteService {\r\n  getWithQuery(queryParams: {\r\n    search: string;\r\n  }): Observable<AutocompleteOption[]> {\r\n    return of(\r\n      [\r\n        { id: 1, name: 'First' },\r\n        { id: 2, name: 'Second' },\r\n        { id: 3, name: 'Third' },\r\n        { id: 4, name: 'Forth' },\r\n        { id: 5, name: 'Fifth' },\r\n      ].filter((e) => e.name.toLowerCase().includes(queryParams.search))\r\n    );\r\n  }\r\n}\r\n",
-            "properties": [],
+            "sourceCode": "import { Observable, of } from 'rxjs';\r\n\r\nexport type AutocompleteOption = {\r\n  id: number;\r\n  name: string;\r\n};\r\n\r\nexport class AutoCompleteService {\r\n  data = [\r\n    { id: 1, name: 'First' },\r\n    { id: 2, name: 'Second' },\r\n    { id: 3, name: 'Third' },\r\n    { id: 4, name: 'Forth' },\r\n    { id: 5, name: 'Fifth' },\r\n  ];\r\n  getWithQuery(queryParams: {\r\n    search: string;\r\n  }): Observable<AutocompleteOption[]> {\r\n    return of(\r\n      this.data.filter((e) => {\r\n        if (queryParams.search) {\r\n          return e.name\r\n            .toLowerCase()\r\n            .includes(queryParams.search.toLowerCase());\r\n        }\r\n        return true;\r\n      })\r\n    );\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "data",
+                    "defaultValue": "[\r\n    { id: 1, name: 'First' },\r\n    { id: 2, name: 'Second' },\r\n    { id: 3, name: 'Third' },\r\n    { id: 4, name: 'Forth' },\r\n    { id: 5, name: 'Fifth' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
             "methods": [
                 {
                     "name": "getWithQuery",
@@ -28,7 +39,7 @@
                     "optional": false,
                     "returnType": "Observable<AutocompleteOption[]>",
                     "typeParameters": [],
-                    "line": 10,
+                    "line": 17,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -99,7 +110,7 @@
         },
         {
             "name": "AutocompleteComponent",
-            "id": "component-AutocompleteComponent-c3b8ee34668d68390889373ebfc5987088f1150ef1705c9fc032c5d5d1ae670b3a3361d816b7c948387be30836c49f02fbbf95c2fc49f57bc29772bb00710cea",
+            "id": "component-AutocompleteComponent-dcf068b675a482adf47500afea9fd46b414fbbd25730a5719a0f23950292b7cac212d927484e885859a5af3ecca273111f8fbc0e2fd8e413be2b28da5c0991e2",
             "file": "libs/material/src/lib/form/autocomplete/autocomplete.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -227,13 +238,23 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "autoCompleteOptions$",
+                    "defaultValue": "this.formControl.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search: search || '' });\n      })\n    )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<AutocompleteOption[]> | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 42
+                },
+                {
                     "name": "autoCompleteService",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "AutoCompleteService",
                     "optional": false,
                     "description": "",
-                    "line": 44,
+                    "line": 56,
                     "decorators": [
                         {
                             "name": "Optional",
@@ -251,14 +272,14 @@
                     ]
                 },
                 {
-                    "name": "entities$",
-                    "defaultValue": "this.control()?.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search });\n      })\n    )",
+                    "name": "formControl",
+                    "defaultValue": "new FormControl('')",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Observable<AutocompleteOption[]> | undefined",
+                    "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 30
+                    "line": 40
                 },
                 {
                     "name": "formGroup",
@@ -290,6 +311,34 @@
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "select",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "MatAutocompleteSelectedEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 65,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "MatAutocompleteSelectedEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "control",
                     "args": [],
@@ -381,7 +430,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Inject, Optional } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatAutocompleteModule } from '@angular/material/autocomplete';\nimport { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { CommonInputComponent } from '../common-input.component';\nimport {\n  AutoCompleteService,\n  AutocompleteOption,\n} from './autocomplete.service';\nimport { Observable, debounceTime, switchMap } from 'rxjs';\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatAutocompleteModule,\n  ],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent extends CommonInputComponent {\n  entities$: Observable<AutocompleteOption[]> | undefined =\n    this.control()?.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search });\n      })\n    );\n\n  constructor(\n    @Optional()\n    @Inject(FormGroup)\n    formGroup: FormGroup,\n    @Optional()\n    @Inject(AutoCompleteService)\n    public autoCompleteService: AutoCompleteService\n  ) {\n    super(formGroup);\n\n    if (!autoCompleteService) {\n      this.autoCompleteService = new AutoCompleteService();\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Inject, Optional } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  MatAutocompleteModule,\n  MatAutocompleteSelectedEvent,\n} from '@angular/material/autocomplete';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { CommonInputComponent } from '../common-input.component';\nimport {\n  AutoCompleteService,\n  AutocompleteOption,\n} from './autocomplete.service';\nimport { Observable, debounceTime, switchMap } from 'rxjs';\n\n\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatAutocompleteModule,\n  ],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent extends CommonInputComponent {\n  formControl = new FormControl('');\n\n  autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =\n    this.formControl.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search: search || '' });\n      })\n    );\n\n  constructor(\n    @Optional()\n    @Inject(FormGroup)\n    formGroup: FormGroup,\n    @Optional()\n    @Inject(AutoCompleteService)\n    public autoCompleteService: AutoCompleteService\n  ) {\n    super(formGroup);\n\n    if (!autoCompleteService) {\n      this.autoCompleteService = new AutoCompleteService();\n    }\n  }\n\n  select(value: MatAutocompleteSelectedEvent) {\n    this.formControl.setValue(value.option.value.name);\n    this.control()?.setValue(value.option.value);\n    console.log(value.option.value);\n  }\n}\n",
             "styleUrl": "./autocomplete.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -405,7 +454,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 36,
+                "line": 48,
                 "jsdoctags": [
                     {
                         "name": "formGroup",
@@ -430,7 +479,7 @@
             "extends": [
                 "CommonInputComponent"
             ],
-            "templateData": "<mat-form-field [formGroup]=\"formGroup\" appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input\n    type=\"text\"\n    matInput\n    [formControlName]=\"name\"\n    [matAutocomplete]=\"auto\"\n  />\n  <mat-autocomplete autoActiveFirstOption #auto=\"matAutocomplete\">\n    @for (option of entities$ | async ; track option.id) {\n    <mat-option [value]=\"option.name\">{{ option.name }}</mat-option>\n    }\n  </mat-autocomplete>\n</mat-form-field>\n"
+            "templateData": "<mat-form-field [formGroup]=\"formGroup\" appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n\n  <input\n    type=\"text\"\n    [formControlName]=\"name\"\n    style=\"visibility: collapse; position: absolute\"\n  />\n\n  <input\n    type=\"text\"\n    matInput\n    [formControl]=\"formControl\"\n    [matAutocomplete]=\"auto\"\n  />\n\n  <mat-autocomplete\n    autoActiveFirstOption\n    #auto=\"matAutocomplete\"\n    (optionSelected)=\"select($event)\"\n  >\n    @for (option of autoCompleteOptions$ | async;track option) {\n    <mat-option [value]=\"option\">\n      {{ option.name }}\n    </mat-option>\n    }\n  </mat-autocomplete>\n</mat-form-field>\n"
         },
         {
             "name": "CheckboxComponent",
@@ -894,7 +943,7 @@
         },
         {
             "name": "DateComponent",
-            "id": "component-DateComponent-0f28a2d16186578d5efffd41775f26c069d08c3547c246ebd903ecd90f62d0d6c50564a610465c13354308672f67c304c7c0e53f4b13bde3695d15e9e2d9303c",
+            "id": "component-DateComponent-506abc84203bb17b4c72fa1cb2af90edffe24d21745879613d9196f0914dfe72ed4b3c737b1c971b75bd6b10f0474564b1e476c1baf19cfe3b08e1264bd2fa20",
             "file": "libs/material/src/lib/form/date/date.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -909,10 +958,201 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -922,22 +1162,52 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatNativeDateModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatDatepickerModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-date',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './date.component.html',\n  styleUrl: './date.component.scss',\n})\nexport class DateComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatDatepickerModule } from '@angular/material/datepicker';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { CommonInputComponent } from '../common-input.component';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatNativeDateModule } from '@angular/material/core';\n\n@Component({\n  selector: 'wt-date',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatNativeDateModule,\n    MatInputModule,\n    MatFormFieldModule,\n    MatDatepickerModule,\n    MatIconModule,\n  ],\n  templateUrl: './date.component.html',\n  styleUrl: './date.component.scss',\n})\nexport class DateComponent extends CommonInputComponent {}\n",
             "styleUrl": "./date.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<p>date works!</p>\n"
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<mat-form-field [formGroup]=\"formGroup\" appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input matInput [formControlName]=\"name\" [matDatepicker]=\"picker\" />\n  <mat-hint>MM/DD/YYYY</mat-hint>\n  <mat-datepicker-toggle matIconSuffix [for]=\"picker\"></mat-datepicker-toggle>\n  <mat-datepicker #picker></mat-datepicker>\n</mat-form-field>\n"
         },
         {
             "name": "DateTimeComponent",
-            "id": "component-DateTimeComponent-96fca65ff11f19e240e1bf12d2b6ffc23320c0baf85a843fa93a5dc83267635f9ace824599853be6f0dd6cef801feef259a6989212b102577856cb02f637b956",
+            "id": "component-DateTimeComponent-03c38752aca9bff9ffaf581fd95bce2d89351a2cb60f6e071637a47195de4486741104698fa753e0b5b89c6e80bd2cd72dee9f4f5191f9ac97ff832dec751229",
             "file": "libs/material/src/lib/form/date-time/date-time.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -952,10 +1222,201 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 31,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 36,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 43,
+                    "decorators": [
+                        {
+                            "name": "Optional",
+                            "stringifiedArguments": ""
+                        },
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "FormGroup"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        170,
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -965,18 +1426,48 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatNativeDateModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatDatepickerModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-date-time',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './date-time.component.html',\n  styleUrl: './date-time.component.scss',\n})\nexport class DateTimeComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatNativeDateModule } from '@angular/material/core';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatDatepickerModule } from '@angular/material/datepicker';\nimport { MatIconModule } from '@angular/material/icon';\nimport { CommonInputComponent } from '../common-input.component';\n\n@Component({\n  selector: 'wt-date-time',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatNativeDateModule,\n    MatInputModule,\n    MatFormFieldModule,\n    MatDatepickerModule,\n    MatIconModule,\n  ],\n  templateUrl: './date-time.component.html',\n  styleUrl: './date-time.component.scss',\n})\nexport class DateTimeComponent extends CommonInputComponent {}\n",
             "styleUrl": "./date-time.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<p>date-time works!</p>\n"
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<mat-form-field [formGroup]=\"formGroup\" appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input type=\"datetime-local\" matInput [formControlName]=\"name\" />\n  <mat-error>{{ getError() }}</mat-error>\n  <mat-hint>{{ hint }}</mat-hint>\n</mat-form-field>\n"
         },
         {
             "name": "EditorComponent",
@@ -2669,7 +3160,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<DateComponent>",
-                "defaultValue": "{\n  component: DateComponent,\n  title: 'DateComponent',\n}"
+                "defaultValue": "{\n  component: DateComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'DateComponent',\n}"
             },
             {
                 "name": "meta",
@@ -2679,7 +3170,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<DateTimeComponent>",
-                "defaultValue": "{\n  component: DateTimeComponent,\n  title: 'DateTimeComponent',\n}"
+                "defaultValue": "{\n  component: DateTimeComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'DateTimeComponent',\n}"
             },
             {
                 "name": "meta",
@@ -3263,7 +3754,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<DateComponent>",
-                    "defaultValue": "{\n  component: DateComponent,\n  title: 'DateComponent',\n}"
+                    "defaultValue": "{\n  component: DateComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'DateComponent',\n}"
                 },
                 {
                     "name": "Primary",
@@ -3295,7 +3786,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<DateTimeComponent>",
-                    "defaultValue": "{\n  component: DateTimeComponent,\n  title: 'DateTimeComponent',\n}"
+                    "defaultValue": "{\n  component: DateTimeComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n  title: 'DateTimeComponent',\n}"
                 },
                 {
                     "name": "Primary",
@@ -3703,7 +4194,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 5,
+        "count": 6,
         "status": "low",
         "files": [
             {
@@ -3780,8 +4271,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AutocompleteComponent",
-                "coveragePercent": 35,
-                "coverageCount": "6/17",
+                "coveragePercent": 31,
+                "coverageCount": "6/19",
                 "status": "medium"
             },
             {
@@ -3790,7 +4281,7 @@
                 "linktype": "classe",
                 "name": "AutoCompleteService",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -3876,9 +4367,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DateTimeComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/form/date/date.component.stories.ts",
@@ -3915,9 +4406,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DateComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 42,
+                "coverageCount": "6/14",
+                "status": "medium"
             },
             {
                 "filePath": "libs/material/src/lib/form/editor/editor.component.stories.ts",
