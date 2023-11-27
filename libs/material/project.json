@@ -66,7 +66,9 @@
           "libs/material/src/favicon.svg"
         ],
         "styles": [
-          "libs/material/src/style.css"
+          "libs/material/src/style.css", 
+          "libs/material/src/style-fonts.css",
+          "libs/material/src/style-icons.css"
         ]
       },
       "configurations": {
@@ -98,7 +100,9 @@
           "libs/material/src/favicon.svg"
         ],
         "styles": [
-          "libs/material/src/style.css"
+          "libs/material/src/style.css", 
+          "libs/material/src/style-fonts.css",
+          "libs/material/src/style-icons.css"
         ]
       },
       "configurations": {

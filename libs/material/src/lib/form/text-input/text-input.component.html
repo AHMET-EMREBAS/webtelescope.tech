@@ -1,1 +1,8 @@
-<p>text-input works!</p>
+<mat-form-field appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input type="text" matInput autocomplete="off" />
+
+  <mat-icon matPrefix>home</mat-icon>
+  <mat-hint>{{ hint }}</mat-hint>
+  <mat-error>{{ errorMessage }}</mat-error>
+</mat-form-field>

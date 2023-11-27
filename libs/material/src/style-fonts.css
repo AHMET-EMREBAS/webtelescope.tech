@@ -1,0 +1,233 @@
+@font-face {
+  font-family: Handjet;
+  src: url(./assets/fonts/Handjet/Handjet-VariableFont.ttf);
+}
+@font-face {
+  font-family: Roboto;
+  src: url(./assets/fonts/Roboto_Flex/RobotoFlex.ttf);
+}
+@font-face {
+  font-family: Special Elite;
+  src: url(./assets/fonts/Special_Elite/SpecialElite-Regular.ttf);
+}
+@font-face {
+  font-family: Josefin Sans;
+  src: url(./assets/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Josefin Sans;
+  font-style: italic;
+  src: url(./assets/fonts/Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Lobster;
+  src: url(./assets/fonts/Lobster/Lobster-Regular.ttf);
+}
+@font-face {
+  font-family: Comfortaa;
+  src: url(./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Rubik Dirt;
+  src: url(./assets/fonts/Rubik_Dirt/RubikDirt-Regular.ttf);
+}
+@font-face {
+  font-family: Rubik Iso;
+  src: url(./assets/fonts/Rubik_Iso/RubikIso-Regular.ttf);
+}
+@font-face {
+  font-family: Black Ops One;
+  src: url(./assets/fonts/Black_Ops_One/BlackOpsOne-Regular.ttf);
+}
+@font-face {
+  font-family: Concert One;
+  src: url(./assets/fonts/Concert_One/ConcertOne-Regular.ttf);
+}
+@font-face {
+  font-family: Tourney;
+  src: url(./assets/fonts/Tourney/Tourney-VariableFont_wdth.ttf);
+}
+@font-face {
+  font-family: Tourney;
+  font-style: italic;
+  src: url(./assets/fonts/Tourney/Tourney-Italic-VariableFont_wdth.ttf);
+}
+@font-face {
+  font-family: Dancing Script;
+  src: url(./assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf);
+}
+:root {
+  --font-title: Comfortaa, Verdana;
+  --font-content: Roboto, Verdana;
+  --font-button: Roboto, Verdana;
+  --font-alert: Comfortaa, Roboto, Verdana;
+}
+
+/** Fonts */
+:root {
+  --font-roboto: $value;
+  --font-comfortaa: $value;
+  --font-josefin-sans: $value;
+  --font-concert-one: $value;
+  --font-special-elite: $value;
+  --font-tourney: $value;
+  --font-rubik-iso: $value;
+  --font-rubik-dirt: $value;
+  --font-lobster: $value;
+  --font-dancing-script: $value;
+  --font-black-ops-one: $value;
+  --font-handjet: $value;
+  --font-icon: $value;
+}
+
+.clear-margins {
+  margin: 0px;
+  padding: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bolder {
+  font-weight: bolder;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.overline {
+  text-decoration: overline;
+}
+
+.dashed {
+  text-decoration: dashed;
+}
+
+.font-weight-100 {
+  font-weight: 100;
+}
+
+.font-weight-200 {
+  font-weight: 200;
+}
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+.font-weight-400 {
+  font-weight: 400;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.font-weight-700 {
+  font-weight: 700;
+}
+
+.font-weight-800 {
+  font-weight: 800;
+}
+
+.font-weight-900 {
+  font-weight: 900;
+}
+
+.font-weight-1000 {
+  font-weight: 1000;
+}
+
+.title-1,
+.title-2,
+.subtitle-1,
+.subtitle-2 {
+  font-family: var(--font-title);
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 1.3em;
+  text-transform: capitalize;
+}
+
+.title-1,
+.title-2 {
+  font-weight: 800;
+}
+
+.title-1 {
+  font-size: 2.25em;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+}
+
+.title-2 {
+  font-size: 1.5em;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+}
+
+.title-1::before,
+.title-2::before {
+  content: attr(substring);
+  position: absolute;
+  left: 0.2em;
+  bottom: 0px;
+  font-size: 0.6em;
+  font-weight: 300;
+  opacity: 0.6;
+  letter-spacing: 0.3em;
+  transform: translateY(100%);
+}
+
+.subtitle-1,
+.subtitle-2 {
+  font-weight: 500;
+}
+
+.subtitle-1 {
+  font-size: 1.5em;
+  line-height: 1.2;
+  letter-spacing: 0.3em;
+}
+
+.subtitle-2 {
+  font-size: 1em;
+  line-height: 1.2;
+  letter-spacing: 0.3em;
+}
+
+.content-1,
+.content-2 {
+  line-height: 1.6;
+  font-weight: 300;
+  font-family: var(--font-content);
+  letter-spacing: 0.1em;
+  max-width: 40em;
+  text-justify: distribute;
+  text-align: justify;
+  text-indent: 3em;
+}
+
+.content-1 {
+  font-size: 1.2em;
+}
+
+.contenet-2 {
+  font-size: 0.6em;
+} /*# sourceMappingURL=styles.fonts.css.map */
