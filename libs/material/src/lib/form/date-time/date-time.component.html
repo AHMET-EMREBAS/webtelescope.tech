@@ -1,1 +1,6 @@
-<p>date-time works!</p>
+<mat-form-field [formGroup]="formGroup" appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input type="datetime-local" matInput [formControlName]="name" />
+  <mat-error>{{ getError() }}</mat-error>
+  <mat-hint>{{ hint }}</mat-hint>
+</mat-form-field>

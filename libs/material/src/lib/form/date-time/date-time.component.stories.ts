@@ -1,11 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DateTimeComponent } from './date-time.component';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const meta: Meta<DateTimeComponent> = {
   component: DateTimeComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [BrowserAnimationsModule],
+    }),
+  ],
   title: 'DateTimeComponent',
 };
 export default meta;

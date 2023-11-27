@@ -14,7 +14,11 @@
     [matAutocomplete]="auto"
   />
 
-  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  (optionSelected)="select($event)">
+  <mat-autocomplete
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    (optionSelected)="select($event)"
+  >
     @for (option of autoCompleteOptions$ | async;track option) {
     <mat-option [value]="option">
       {{ option.name }}
@@ -22,4 +26,3 @@
     }
   </mat-autocomplete>
 </mat-form-field>
-{{ control()?.valueChanges | async | json }}
