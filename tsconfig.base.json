@@ -18,6 +18,7 @@
       "@webpackages/auth": ["libs/auth/src/index.ts"],
       "@webpackages/common": ["libs/common/src/index.ts"],
       "@webpackages/inventory": ["libs/inventory/src/index.ts"],
+      "@webpackages/material": ["libs/material/src/index.ts"],
       "@webpackages/rest": ["libs/rest/src/index.ts"],
       "chat": ["libs/chat/src/index.ts"],
       "notification": ["libs/notification/src/index.ts"],
