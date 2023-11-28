@@ -1,4 +1,4 @@
-import { Component, Inject, Input, Optional } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({ template: '' })
@@ -37,15 +37,18 @@ export class CommonInputComponent {
 
   @Input() multiple = false;
 
-  
+  @Input() type: HTMLInputElement['type'] = 'text';
+  @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';
 
-  constructor(
-    @Optional() @Inject(FormGroup) public readonly formGroup: FormGroup
-  ) {
-    if (!formGroup) {
-      this.formGroup = new FormGroup({ [this.name]: new FormControl('') });
-    }
-  }
+  @Input() minLength = 0;
+  @Input() maxLength = 1000;
+  @Input() min = -99999999999;
+  @Input() max = 99999999999;
+  @Input() required = false;
+
+  @Input() public formGroup: FormGroup =
+    inject<FormGroup>(FormGroup, { optional: true }) ||
+    new FormGroup({ name: new FormControl('', []) });
 
   control() {
     return this.formGroup.get(this.name);
@@ -55,7 +58,34 @@ export class CommonInputComponent {
   }
 
   getError() {
-    return this.control()?.getError('error');
+    const errors = this.control()?.errors;
+
+    if (errors) {
+      const {
+        required,
+        minLength,
+        maxLength,
+        min,
+        max,
+        email,
+        error,
+        pattern,
+      } = errors;
+
+      if (required) return `${this.name} is required!`;
+      if (minLength)
+        return `${this.name} must be shorter than ${minLength} characters!`;
+      if (maxLength)
+        return `${this.name} must be longer than ${maxLength} characters!`;
+      if (min) return `${this.name} must be greater than ${min}!`;
+      if (max) return `${this.name} must be less than ${max}!`;
+      if (email) return `${this.name} must be a valid ${email}!`;
+
+      if (pattern) return `${this.name} is not strong!`;
+      if (error) return error;
+    }
+
+    return undefined;
   }
 
   getIconColor() {

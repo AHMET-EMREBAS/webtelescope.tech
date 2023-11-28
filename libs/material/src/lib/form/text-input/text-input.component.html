@@ -1,6 +1,16 @@
 <mat-form-field [formGroup]="formGroup" appearance="outline">
   <mat-label>{{ label | titlecase }}</mat-label>
-  <input type="text" [formControlName]="name" matInput autocomplete="off" />
+  <input
+    [type]="type"
+    [formControlName]="name"
+    matInput
+    [autocomplete]="autocomplete"
+    [minLength]="minLength"
+    [maxLength]="maxLength"
+    [min]="min"
+    [max]="max"
+    [required]="required"
+  />
   <mat-icon
     matPrefix
     class="fill"

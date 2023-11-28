@@ -1,15 +1,10 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatAutocompleteModule,
   MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +14,6 @@ import {
   AutocompleteOption,
 } from './autocomplete.service';
 import { Observable, debounceTime, switchMap } from 'rxjs';
-
 
 @Component({
   selector: 'wt-autocomplete',
@@ -36,8 +30,15 @@ import { Observable, debounceTime, switchMap } from 'rxjs';
   templateUrl: './autocomplete.component.html',
   styleUrl: './autocomplete.component.scss',
 })
-export class AutocompleteComponent extends CommonInputComponent {
+export class AutocompleteComponent
+  extends CommonInputComponent
+  implements OnInit
+{
   formControl = new FormControl('');
+
+  autoCompleteService: AutoCompleteService =
+    inject<AutoCompleteService>(AutoCompleteService) ||
+    new AutoCompleteService();
 
   autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =
     this.formControl.valueChanges.pipe(
@@ -47,24 +48,18 @@ export class AutocompleteComponent extends CommonInputComponent {
       })
     );
 
-  constructor(
-    @Optional()
-    @Inject(FormGroup)
-    formGroup: FormGroup,
-    @Optional()
-    @Inject(AutoCompleteService)
-    public autoCompleteService: AutoCompleteService
-  ) {
-    super(formGroup);
-
-    if (!autoCompleteService) {
-      this.autoCompleteService = new AutoCompleteService();
-    }
+  constructor() {
+    super();
   }
-
   select(value: MatAutocompleteSelectedEvent) {
     this.formControl.setValue(value.option.value.name);
     this.control()?.setValue(value.option.value);
     console.log(value.option.value);
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.formControl.setValue('');
+    }, 2000);
   }
 }

@@ -11,6 +11,7 @@ export class NavItem {
   name!: string;
   icon!: string;
   params?: NavItemParams;
+  position?: 'right' | 'left' | 'center';
 }
 
 export function provideNavItems(navItems: NavItem[]): Provider {
