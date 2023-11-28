@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatAutocompleteModule,
@@ -36,8 +36,8 @@ export class AutocompleteComponent
 {
   formControl = new FormControl('');
 
-  autoCompleteService: AutoCompleteService =
-    inject<AutoCompleteService>(AutoCompleteService) ||
+  @Input() autoCompleteService: AutoCompleteService =
+    inject<AutoCompleteService>(AutoCompleteService, { optional: true }) ||
     new AutoCompleteService();
 
   autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =

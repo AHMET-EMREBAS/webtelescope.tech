@@ -49,15 +49,16 @@ export class ResetPasswordComponent {
   @Output() resetPasswordEvent = new EventEmitter<ResetPasswordData>();
 
   submit() {
+    this.formGroup.markAsDirty({ onlySelf: false });
     if (this.formGroup.valid) {
       const { username, password, confirmPassword, newPassword } =
         this.formGroup.value;
-      if (username && password && confirmPassword && newPassword) {
+      if (username && password && newPassword && confirmPassword) {
         this.resetPasswordEvent.emit({
           username,
           password,
-          confirmPassword,
           newPassword,
+          confirmPassword,
         });
       }
     }

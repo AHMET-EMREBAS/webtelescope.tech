@@ -25,8 +25,11 @@ export const resetPasswordWithCode = new FormGroup({
     Validators.required,
     Validators.maxLength(50),
   ]),
-  newPassword: new FormControl('', [PasswordValidator]),
-  confirmPassword: new FormControl('', [PasswordValidator]),
+  newPassword: new FormControl('', [Validators.required, PasswordValidator]),
+  confirmPassword: new FormControl('', [
+    Validators.required,
+    PasswordValidator,
+  ]),
 });
 
 @Component({
@@ -50,6 +53,10 @@ export class ResetPasswordWithCodeComponent {
     new EventEmitter<ResetPasswordWithCodeData>();
 
   submit() {
+    for (const c of Object.values(this.formGroup.controls)) {
+      c.markAsTouched();
+      c.markAsDirty();
+    }
     if (this.formGroup.valid) {
       const { username, securityCode, confirmPassword, newPassword } =
         this.formGroup.value;

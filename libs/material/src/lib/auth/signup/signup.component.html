@@ -1,5 +1,6 @@
 <form class="flex column gap-1" [formGroup]="formGroup">
   <wt-text-input
+    i18n-label
     [formGroup]="formGroup"
     name="username"
     type="email"
@@ -10,8 +11,9 @@
     [formGroup]="formGroup"
     name="password"
     type="password"
-    autocomplete="off"
+    autocomplete="new-password"
     label="password"
+    i18n-label
   ></wt-text-input>
 
   <div class="flex column gap-1">
@@ -21,10 +23,17 @@
       mat-raised-button
       (click)="submit()"
       color="primary"
+      i18n
     >
       Signup
     </button>
-    <button class="grow-1" type="reset" mat-raised-button (click)="reset()">
+    <button
+      class="grow-1"
+      type="reset"
+      mat-raised-button
+      (click)="reset()"
+      i18n
+    >
       Clear Form
     </button>
   </div>

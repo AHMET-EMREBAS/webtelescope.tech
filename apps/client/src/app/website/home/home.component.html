@@ -1,1 +1,17 @@
 <p>home works!</p>
+<wt-form [formGroup]="formGroup">
+  <wt-form-input
+    [formGroup]="formGroup"
+    componentType="text-input"
+    type="text"
+    name="username"
+    label="Username"
+  ></wt-form-input>
+  <wt-form-input
+    [formGroup]="formGroup"
+    componentType="text-input"
+    type="password"
+    name="password"
+    label="Password"
+  ></wt-form-input>
+</wt-form>

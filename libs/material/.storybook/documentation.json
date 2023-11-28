@@ -1792,7 +1792,7 @@
         },
         {
             "name": "AutocompleteComponent",
-            "id": "component-AutocompleteComponent-1802c88fe6eabc3457e348c2053248fc2337d26016b461e8adbd0dc678ea9552cffa0e163f707a46b4b000777c495fc8fd476938074df14b396190d91681a9df",
+            "id": "component-AutocompleteComponent-756632762478d221b0788b6533cc5e49b2524020347853dc38120285e7a9b8fe15405d6be6f51fff08f7925ea73e18bb68910fc9d90b577b2d7ce3fb1587ee6d",
             "file": "libs/material/src/lib/form/autocomplete/autocomplete.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1809,12 +1809,32 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "autoCompleteService",
+                    "defaultValue": "inject<AutoCompleteService>(AutoCompleteService, { optional: true }) ||\n    new AutoCompleteService()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "AutoCompleteService",
+                    "decorators": []
+                },
+                {
                     "name": "autocomplete",
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -1827,7 +1847,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1839,7 +1859,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -1853,7 +1873,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1867,7 +1887,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1879,7 +1899,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1893,7 +1913,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1905,7 +1925,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -1917,7 +1937,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -1929,7 +1949,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -1941,7 +1961,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -1953,7 +1973,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -1967,7 +1987,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -1981,7 +2001,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -1993,7 +2013,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -2005,7 +2025,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -2024,16 +2044,6 @@
                     "optional": false,
                     "description": "",
                     "line": 43
-                },
-                {
-                    "name": "autoCompleteService",
-                    "defaultValue": "inject<AutoCompleteService>(AutoCompleteService) ||\n    new AutoCompleteService()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "AutoCompleteService",
-                    "optional": false,
-                    "description": "",
-                    "line": 39
                 },
                 {
                     "name": "formControl",
@@ -2091,7 +2101,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2104,7 +2114,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2117,7 +2127,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2130,7 +2140,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2176,7 +2186,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit, inject } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  MatAutocompleteModule,\n  MatAutocompleteSelectedEvent,\n} from '@angular/material/autocomplete';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { CommonInputComponent } from '../common-input.component';\nimport {\n  AutoCompleteService,\n  AutocompleteOption,\n} from './autocomplete.service';\nimport { Observable, debounceTime, switchMap } from 'rxjs';\n\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatAutocompleteModule,\n  ],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent\n  extends CommonInputComponent\n  implements OnInit\n{\n  formControl = new FormControl('');\n\n  autoCompleteService: AutoCompleteService =\n    inject<AutoCompleteService>(AutoCompleteService) ||\n    new AutoCompleteService();\n\n  autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =\n    this.formControl.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search: search || '' });\n      })\n    );\n\n  constructor() {\n    super();\n  }\n  select(value: MatAutocompleteSelectedEvent) {\n    this.formControl.setValue(value.option.value.name);\n    this.control()?.setValue(value.option.value);\n    console.log(value.option.value);\n  }\n\n  ngOnInit(): void {\n    setTimeout(() => {\n      this.formControl.setValue('');\n    }, 2000);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit, inject } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  MatAutocompleteModule,\n  MatAutocompleteSelectedEvent,\n} from '@angular/material/autocomplete';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { CommonInputComponent } from '../common-input.component';\nimport {\n  AutoCompleteService,\n  AutocompleteOption,\n} from './autocomplete.service';\nimport { Observable, debounceTime, switchMap } from 'rxjs';\n\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatAutocompleteModule,\n  ],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent\n  extends CommonInputComponent\n  implements OnInit\n{\n  formControl = new FormControl('');\n\n  @Input() autoCompleteService: AutoCompleteService =\n    inject<AutoCompleteService>(AutoCompleteService, { optional: true }) ||\n    new AutoCompleteService();\n\n  autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =\n    this.formControl.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search: search || '' });\n      })\n    );\n\n  constructor() {\n    super();\n  }\n  select(value: MatAutocompleteSelectedEvent) {\n    this.formControl.setValue(value.option.value.name);\n    this.control()?.setValue(value.option.value);\n    console.log(value.option.value);\n  }\n\n  ngOnInit(): void {\n    setTimeout(() => {\n      this.formControl.setValue('');\n    }, 2000);\n  }\n}\n",
             "styleUrl": "./autocomplete.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -2220,8 +2230,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -2234,7 +2255,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2246,7 +2267,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -2260,7 +2281,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2274,7 +2295,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2286,7 +2307,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2300,7 +2321,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2312,7 +2333,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2324,7 +2345,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2336,7 +2357,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2348,7 +2369,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2360,7 +2381,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -2374,7 +2395,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2388,7 +2409,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -2400,7 +2421,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -2412,7 +2433,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -2429,7 +2450,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2442,7 +2463,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2455,7 +2476,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2468,7 +2489,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2514,7 +2535,7 @@
         },
         {
             "name": "CommonInputComponent",
-            "id": "component-CommonInputComponent-cf18827c682cb4676a153493a9dbc0aa8805b7e3806565f401c720c87554d8b14877b9cb72f7b0e32b17e1f96b96f0228da63876ecd26e4adc8511758b5c61ab",
+            "id": "component-CommonInputComponent-f2773c8c2a43bc73dffa0affa9d2416346fbdd27b6b9ec486fdbdb21396a5247dc6229eb5ee9548a1c2a14a51164afdfec2e957bde8a398228705d54b2dd0143",
             "file": "libs/material/src/lib/form/common-input.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2533,8 +2554,16 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": []
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": []
                 },
                 {
@@ -2544,7 +2573,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": []
                 },
@@ -2553,7 +2582,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": []
                 },
@@ -2564,7 +2593,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": []
                 },
@@ -2575,7 +2604,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": []
                 },
@@ -2584,7 +2613,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": []
                 },
@@ -2595,7 +2624,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": []
                 },
@@ -2604,7 +2633,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": []
                 },
@@ -2613,7 +2642,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": []
                 },
@@ -2622,7 +2651,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": []
                 },
@@ -2631,7 +2660,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": []
                 },
@@ -2640,7 +2669,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2651,7 +2680,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": []
                 },
@@ -2662,7 +2691,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": []
                 },
@@ -2671,7 +2700,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -2680,7 +2709,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": []
                 }
@@ -2694,7 +2723,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2704,7 +2733,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2714,7 +2743,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2724,7 +2753,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -2738,7 +2767,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, inject } from '@angular/core';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\n\r\n@Component({ template: '' })\r\nexport class CommonInputComponent {\r\n  /**\r\n   * Upon form submit update the error message\r\n   */\r\n  @Input() errorMessage = 'Invalid input';\r\n\r\n  /**\r\n   * Input label\r\n   */\r\n  @Input() label = 'Input Label';\r\n\r\n  /**\r\n   * FormControlName\r\n   */\r\n  @Input() name = 'name';\r\n\r\n  /**\r\n   * Input icon\r\n   */\r\n  @Input() icon = 'info';\r\n\r\n  @Input() iconColor = 'primary';\r\n\r\n  /**\r\n   * Explain the constraints of input value\r\n   */\r\n  @Input() hint = '';\r\n\r\n  /**\r\n   * Select Options\r\n   */\r\n  @Input() options: string[] = ['First', 'Second', 'Third'];\r\n\r\n  @Input() multiple = false;\r\n\r\n  @Input() type: HTMLInputElement['type'] = 'text';\r\n  @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';\r\n\r\n  @Input() minLength = 0;\r\n  @Input() maxLength = 1000;\r\n  @Input() min = -99999999999;\r\n  @Input() max = 99999999999;\r\n  @Input() required = false;\r\n\r\n  @Input() public formGroup: FormGroup =\r\n    inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) });\r\n\r\n  control() {\r\n    return this.formGroup.get(this.name);\r\n  }\r\n  isInvalid() {\r\n    return this.control()?.invalid && this.control()?.touched;\r\n  }\r\n\r\n  getError() {\r\n    const errors = this.control()?.errors;\r\n\r\n    if (errors) {\r\n      const { required, minLength, maxLength, min, max, email, error } = errors;\r\n\r\n      if (required) return `${this.name} is required!`;\r\n      if (minLength)\r\n        return `${this.name} must be shorter than ${minLength} characters!`;\r\n      if (maxLength)\r\n        return `${this.name} must be longer than ${maxLength} characters!`;\r\n      if (min) return `${this.name} must be greater than ${min}!`;\r\n      if (max) return `${this.name} must be less than ${max}!`;\r\n      if (email) return `${this.name} must be a valid ${email}!`;\r\n      if (error) return error;\r\n    }\r\n\r\n    return undefined;\r\n  }\r\n\r\n  getIconColor() {\r\n    return this.control()?.invalid && this.control()?.touched\r\n      ? 'red'\r\n      : this.iconColor;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, inject } from '@angular/core';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { names } from '@webpackages/utils';\r\nimport { AutoCompleteService } from './autocomplete/autocomplete.service';\r\n\r\n@Component({ template: '' })\r\nexport class CommonInputComponent {\r\n  /**\r\n   * Upon form submit update the error message\r\n   */\r\n  @Input() errorMessage = 'Invalid input';\r\n\r\n  /**\r\n   * Input label\r\n   */\r\n  @Input() label = 'Input Label';\r\n\r\n  /**\r\n   * FormControlName\r\n   */\r\n  @Input() name = 'name';\r\n\r\n  /**\r\n   * Input icon\r\n   */\r\n  @Input() icon = 'info';\r\n\r\n  @Input() iconColor = 'primary';\r\n\r\n  /**\r\n   * Explain the constraints of input value\r\n   */\r\n  @Input() hint = '';\r\n\r\n  /**\r\n   * Select Options\r\n   */\r\n  @Input() options: string[] = ['First', 'Second', 'Third'];\r\n\r\n  @Input() multiple = false;\r\n\r\n  @Input() type: HTMLInputElement['type'] = 'text';\r\n  @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';\r\n\r\n  @Input() minLength = 0;\r\n  @Input() maxLength = 1000;\r\n  @Input() min = -99999999999;\r\n  @Input() max = 99999999999;\r\n  @Input() required = false;\r\n\r\n  @Input() autocompleteService?: AutoCompleteService;\r\n\r\n  @Input() public formGroup: FormGroup =\r\n    inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) });\r\n\r\n  control() {\r\n    return this.formGroup.get(this.name);\r\n  }\r\n  isInvalid() {\r\n    return this.control()?.invalid && this.control()?.touched;\r\n  }\r\n\r\n  getError() {\r\n    const errors = this.control()?.errors;\r\n\r\n    if (errors) {\r\n      const {\r\n        required,\r\n        minLength,\r\n        maxLength,\r\n        min,\r\n        max,\r\n        email,\r\n        error,\r\n        password,\r\n      } = errors;\r\n\r\n      const { readableName } = names(this.name);\r\n\r\n      if (required) return `${readableName} is required!`;\r\n      if (minLength)\r\n        return `${readableName} must be shorter than ${minLength} characters!`;\r\n      if (maxLength)\r\n        return `${readableName} must be longer than ${maxLength} characters!`;\r\n      if (min) return `${readableName} must be greater than ${min}!`;\r\n      if (max) return `${readableName} must be less than ${max}!`;\r\n      if (email) return `${readableName} must be a valid ${email}!`;\r\n\r\n      if (password) return password;\r\n      if (error) return error;\r\n    }\r\n\r\n    return undefined;\r\n  }\r\n\r\n  getIconColor() {\r\n    return this.control()?.invalid && this.control()?.touched\r\n      ? 'red'\r\n      : this.iconColor;\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2767,8 +2796,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -2781,7 +2821,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2793,7 +2833,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -2807,7 +2847,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2821,7 +2861,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2833,7 +2873,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2847,7 +2887,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2859,7 +2899,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2871,7 +2911,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2883,7 +2923,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2895,7 +2935,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -2907,7 +2947,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -2921,7 +2961,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -2935,7 +2975,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -2947,7 +2987,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -2959,7 +2999,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -2976,7 +3016,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2989,7 +3029,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3002,7 +3042,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3015,7 +3055,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3098,8 +3138,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -3112,7 +3163,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3124,7 +3175,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -3138,7 +3189,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3152,7 +3203,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3164,7 +3215,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3178,7 +3229,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3190,7 +3241,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3202,7 +3253,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3214,7 +3265,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3226,7 +3277,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3238,7 +3289,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -3252,7 +3303,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3266,7 +3317,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -3278,7 +3329,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -3290,7 +3341,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -3307,7 +3358,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3320,7 +3371,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3333,7 +3384,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3346,7 +3397,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3451,7 +3502,7 @@
         },
         {
             "name": "FormComponent",
-            "id": "component-FormComponent-6aa493d68c5145cc38ab5914aefdb4ead1c7fbbc5b1791d11afec9d3d400e52a617ac7f5a711c93c5db6639e81c05b84311a122aec9c9004f224fd4dd7518b1f",
+            "id": "component-FormComponent-03d2952160d0c0993bf86fa9d526eb45963171549cd5430507010275e09dc72a004a3f37d1dc2d9b3339f5267c5ff753d1298b0ea40d90c71abf5bb6e0a9162a",
             "file": "libs/material/src/lib/form/form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3466,10 +3517,59 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "formGroup",
+                    "defaultValue": "inject(FormGroup, { optional: true }) ||\n    new FormGroup({ name: new FormControl('') })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "FormGroup",
+                    "decorators": []
+                },
+                {
+                    "name": "submitLabel",
+                    "defaultValue": "'Submit'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "submitFormEvent",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "reset",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "submit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 34,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -3479,22 +3579,401 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n})\nexport class FormComponent {}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output, inject } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n  ],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n})\nexport class FormComponent {\n  @Output() submitFormEvent = new EventEmitter();\n\n  @Input() submitLabel = 'Submit';\n\n  @Input() formGroup: FormGroup =\n    inject(FormGroup, { optional: true }) ||\n    new FormGroup({ name: new FormControl('') });\n\n  submit() {\n    if (this.formGroup.valid) {\n      this.submitFormEvent.emit(this.formGroup.value);\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n}\n",
             "styleUrl": "./form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>form works!</p>\n"
+            "templateData": "<form class=\"flex column gap-2\" [formGroup]=\"formGroup\">\n  <ng-content></ng-content>\n\n  <div class=\"flex column gap-1\">\n    <button\n      class=\"grow-1\"\n      type=\"button\"\n      mat-raised-button\n      (click)=\"submit()\"\n      color=\"primary\"\n    >\n      {{ submitLabel }}\n    </button>\n    <button\n      class=\"grow-1\"\n      type=\"reset\"\n      mat-raised-button\n      (click)=\"reset()\"\n      i18n\n    >\n      Clear Form\n    </button>\n  </div>\n</form>\n"
+        },
+        {
+            "name": "FormInputComponent",
+            "id": "component-FormInputComponent-b8128701a9edb5043f0102d55c0554a1f660c0a8e159335bde1376c8a9bc10c97c63f290a0c8791b0e67d6da6f95b74d39f7f11602d3075f31b751e182252fbe",
+            "file": "libs/material/src/lib/form/form-input/form-input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-form-input",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./form-input.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "componentType",
+                    "defaultValue": "'text-input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "\"text-input\" | \"autocomplete\" | \"checkbox\" | \"date\" | \"date-time\" | \"editor\" | \"radio\" | \"select\" | \"switch\" | \"text-input\" | \"textarea-input\"",
+                    "decorators": []
+                },
+                {
+                    "name": "autocomplete",
+                    "defaultValue": "'off'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 43,
+                    "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "errorMessage",
+                    "defaultValue": "'Invalid input'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpon form submit update the error message\n",
+                    "description": "<p>Upon form submit update the error message</p>\n",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "formGroup",
+                    "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 53,
+                    "type": "FormGroup",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "hint",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nExplain the constraints of input value\n",
+                    "description": "<p>Explain the constraints of input value</p>\n",
+                    "line": 33,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput icon\n",
+                    "description": "<p>Input icon</p>\n",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "iconColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Input Label'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInput label\n",
+                    "description": "<p>Input label</p>\n",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "max",
+                    "defaultValue": "99999999999",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 48,
+                    "type": "number",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "maxLength",
+                    "defaultValue": "1000",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 46,
+                    "type": "number",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "min",
+                    "defaultValue": "-99999999999",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 47,
+                    "type": "number",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "minLength",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 45,
+                    "type": "number",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'name'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFormControlName\n",
+                    "description": "<p>FormControlName</p>\n",
+                    "line": 21,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "['First', 'Second', 'Third']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelect Options\n",
+                    "description": "<p>Select Options</p>\n",
+                    "line": 38,
+                    "type": "string[]",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "required",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 49,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'text'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "control",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getError",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 64,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "getIconColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 97,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "isInvalid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 60,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "AutocompleteComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "CheckboxComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "DateComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "DateTimeComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "EditorComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "RadioComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "SelectComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "SwitchComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TextInputComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TextareaInputComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AutocompleteComponent } from '../autocomplete/autocomplete.component';\nimport { CheckboxComponent } from '../checkbox/checkbox.component';\nimport { DateComponent } from '../date/date.component';\nimport { DateTimeComponent } from '../date-time/date-time.component';\nimport { EditorComponent } from '../editor/editor.component';\nimport { RadioComponent } from '../radio/radio.component';\nimport { SelectComponent } from '../select/select.component';\nimport { SwitchComponent } from '../switch/switch.component';\nimport { TextInputComponent } from '../text-input/text-input.component';\nimport { TextareaInputComponent } from '../textarea-input/textarea-input.component';\nimport { CommonInputComponent } from '../common-input.component';\n\n@Component({\n  selector: 'wt-form-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    AutocompleteComponent,\n    CheckboxComponent,\n    DateComponent,\n    DateTimeComponent,\n    EditorComponent,\n    RadioComponent,\n    SelectComponent,\n    SwitchComponent,\n    TextInputComponent,\n    TextareaInputComponent,\n  ],\n  templateUrl: './form-input.component.html',\n  styleUrl: './form-input.component.scss',\n})\nexport class FormInputComponent extends CommonInputComponent {\n  @Input() componentType:\n    | 'text-input'\n    | 'autocomplete'\n    | 'checkbox'\n    | 'date'\n    | 'date-time'\n    | 'editor'\n    | 'radio'\n    | 'select'\n    | 'switch'\n    | 'text-input'\n    | 'textarea-input' = 'text-input';\n}\n",
+            "styleUrl": "./form-input.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [
+                "CommonInputComponent"
+            ],
+            "templateData": "<wt-text-input\n  *ngIf=\"componentType === 'text-input'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n  [type]=\"type\"\n  [minLength]=\"minLength\"\n  [maxLength]=\"maxLength\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [required]=\"required\"\n></wt-text-input>\n\n<wt-textarea-input\n  *ngIf=\"componentType === 'textarea-input'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n  [type]=\"type\"\n  [minLength]=\"minLength\"\n  [maxLength]=\"maxLength\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [required]=\"required\"\n></wt-textarea-input>\n\n<wt-autocomplete\n  *ngIf=\"componentType === 'autocomplete'\"\n  [formGroup]=\"formGroup\"\n  [autocompleteService]=\"autocompleteService\"\n></wt-autocomplete>\n\n<wt-checkbox\n  [formGroup]=\"formGroup\"\n  *ngIf=\"componentType === 'checkbox'\"\n  [name]=\"name\"\n></wt-checkbox>\n\n<wt-radio\n  *ngIf=\"componentType === 'radio'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n  [options]=\"options\"\n></wt-radio>\n\n<wt-date\n  *ngIf=\"componentType === 'date'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n></wt-date>\n\n<wt-date-time\n  *ngIf=\"componentType === 'date-time'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n></wt-date-time>\n\n<wt-select\n  *ngIf=\"componentType === 'select'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n></wt-select>\n"
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-18d14780b0e2461f2f89fbc7fcc305e28686c7e46e6ed2146edac11a83e8e0525ff7f051ec98287f4cbc80da58d4b30e9827b9e08012b887bd0b5370954fb780",
+            "id": "component-LoginComponent-ec5a62613251508f1514b3743512fb0eb25bcc9538644907620f6a7328c5a50b8bd341b52d82e324d5c892d7a8138ab85732a41437588e5124c4d39845c4780c",
             "file": "libs/material/src/lib/auth/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3518,7 +3997,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAfter forgot-password button is clicked, if the username is valid, then emit username object\n",
                     "description": "<p>After forgot-password button is clicked, if the username is valid, then emit username object</p>\n",
-                    "line": 54,
+                    "line": 53,
                     "type": "EventEmitter"
                 },
                 {
@@ -3528,7 +4007,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAfter login button is clicked, if the form is valid, then emit form value\n",
                     "description": "<p>After login button is clicked, if the form is valid, then emit form value</p>\n",
-                    "line": 49,
+                    "line": 48,
                     "type": "EventEmitter"
                 }
             ],
@@ -3541,7 +4020,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 44
+                    "line": 43
                 }
             ],
             "methodsClass": [
@@ -3551,7 +4030,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 70,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3561,7 +4040,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 67,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3571,7 +4050,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 58,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3610,13 +4089,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\n\nexport type LoginData = {\n  username: string;\n  password: string;\n};\n\nconst loginFormGroup = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n});\n\n@Component({\n  selector: 'wt-login',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n\n  templateUrl: './login.component.html',\n  styleUrl: './login.component.scss',\n})\nexport class LoginComponent {\n  formGroup = loginFormGroup;\n\n  /**\n   * After login button is clicked, if the form is valid, then emit form value\n   */\n  @Output() loginEvent = new EventEmitter<LoginData>();\n\n  /**\n   * After forgot-password button is clicked, if the username is valid, then emit username object\n   */\n  @Output() forgotPasswordEvent = new EventEmitter<\n    Pick<LoginData, 'username'>\n  >();\n\n  submit() {\n    if (this.formGroup.valid) {\n      const { username, password } = this.formGroup.value;\n      if (username && password) {\n        this.loginEvent.emit({ username, password });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n\n  forgotPassword() {\n    const usernameControl = this.formGroup.get('username');\n\n    if (usernameControl?.valid && usernameControl.value) {\n      const username = usernameControl.value;\n      this.forgotPasswordEvent.emit({ username });\n    } else {\n      usernameControl?.setErrors({ error: `username is not a valid email!` });\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\n\nexport type LoginData = {\n  username: string;\n  password: string;\n};\n\nconst loginFormGroup = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.maxLength(50),\n  ]),\n});\n\n@Component({\n  selector: 'wt-login',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n\n  templateUrl: './login.component.html',\n  styleUrl: './login.component.scss',\n})\nexport class LoginComponent {\n  formGroup = loginFormGroup;\n\n  /**\n   * After login button is clicked, if the form is valid, then emit form value\n   */\n  @Output() loginEvent = new EventEmitter<LoginData>();\n\n  /**\n   * After forgot-password button is clicked, if the username is valid, then emit username object\n   */\n  @Output() forgotPasswordEvent = new EventEmitter<\n    Pick<LoginData, 'username'>\n  >();\n\n  submit() {\n    if (this.formGroup.valid) {\n      const { username, password } = this.formGroup.value;\n      if (username && password) {\n        this.loginEvent.emit({ username, password });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n\n  forgotPassword() {\n    const usernameControl = this.formGroup.get('username');\n\n    if (usernameControl?.valid && usernameControl.value) {\n      const username = usernameControl.value;\n      this.forgotPasswordEvent.emit({ username });\n    } else {\n      usernameControl?.setErrors({ error: `username is not a valid email!` });\n    }\n  }\n}\n",
             "styleUrl": "./login.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"email\"\n    label=\"Username\"\n  ></wt-text-input>\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"password\"\n    type=\"password\"\n    autocomplete=\"current-password\"\n    label=\"password\"\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <div class=\"flex row gap-1\">\n      <button\n        class=\"grow-1\"\n        type=\"button\"\n        mat-raised-button\n        (click)=\"submit()\"\n        color=\"primary\"\n      >\n        Login\n      </button>\n      <button class=\"grow-1\" type=\"reset\" mat-raised-button (click)=\"reset()\">\n        Clear Form\n      </button>\n    </div>\n    <div class=\"flex gap-1\">\n      <button\n        class=\"grow-1\"\n        type=\"button\"\n        mat-flat-button\n        color=\"accent\"\n        (click)=\"forgotPassword()\"\n      >\n        Forgot Password\n      </button>\n    </div>\n  </div>\n</form>\n"
+            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"email\"\n    label=\"Username\"\n  ></wt-text-input>\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"password\"\n    type=\"password\"\n    autocomplete=\"current-password\"\n    label=\"password\"\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <div class=\"flex row gap-1\">\n      <button\n        class=\"grow-1\"\n        type=\"button\"\n        mat-raised-button\n        (click)=\"submit()\"\n        color=\"primary\"\n        i18n\n      >\n        Login\n      </button>\n      <button class=\"grow-1\" type=\"reset\" mat-raised-button (click)=\"reset()\">\n        Clear Form\n      </button>\n    </div>\n    <div class=\"flex gap-1\">\n      <button\n        class=\"grow-1\"\n        type=\"button\"\n        mat-flat-button\n        color=\"accent\"\n        (click)=\"forgotPassword()\"\n        i18n\n      >\n        Forgot Password\n      </button>\n    </div>\n  </div>\n</form>\n"
         },
         {
             "name": "MobileLayoutComponent",
@@ -3684,8 +4163,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -3698,7 +4188,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3710,7 +4200,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -3724,7 +4214,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3738,7 +4228,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3750,7 +4240,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3764,7 +4254,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3776,7 +4266,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3788,7 +4278,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3800,7 +4290,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3812,7 +4302,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -3824,7 +4314,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -3838,7 +4328,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -3852,7 +4342,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -3864,7 +4354,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -3876,7 +4366,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -3893,7 +4383,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3906,7 +4396,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3919,7 +4409,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3932,7 +4422,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -3982,7 +4472,7 @@
         },
         {
             "name": "ResetPasswordComponent",
-            "id": "component-ResetPasswordComponent-de2b630aa2c40f0aefbfc82350a61dd253e531b8633d2162ac04080851021445dd32257637b0a36d964658baff703170a8c3a6a8d31935c077f9fd09e6cc33f5",
+            "id": "component-ResetPasswordComponent-8d3c68b3bef22d3364edb2753a077322845cbe11011fe5246e5bd87dc29f5b2d6421a133315be49e2b0e9f7cb0da86cc1735d0185f5205b9e2dd388c4770332c",
             "file": "libs/material/src/lib/auth/reset-password/reset-password.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4006,7 +4496,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAfter login button is clicked, if the form is valid, then emit form value\n",
                     "description": "<p>After login button is clicked, if the form is valid, then emit form value</p>\n",
-                    "line": 53,
+                    "line": 49,
                     "type": "EventEmitter"
                 }
             ],
@@ -4019,7 +4509,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 48
+                    "line": 44
                 }
             ],
             "methodsClass": [
@@ -4029,7 +4519,111 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 67,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "submit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TextInputComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\nimport { PasswordValidator } from '../../api';\n\nexport type ResetPasswordData = {\n  username: string;\n  password: string;\n  newPassword: string;\n  confirmPassword: string;\n};\n\nexport const resetPasswordForm = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl(''),\n  newPassword: new FormControl('', [PasswordValidator]),\n  confirmPassword: new FormControl('', [PasswordValidator]),\n});\n\n@Component({\n  selector: 'wt-reset-password',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n  templateUrl: './reset-password.component.html',\n  styleUrl: './reset-password.component.scss',\n})\nexport class ResetPasswordComponent {\n  formGroup = resetPasswordForm;\n\n  /**\n   * After login button is clicked, if the form is valid, then emit form value\n   */\n  @Output() resetPasswordEvent = new EventEmitter<ResetPasswordData>();\n\n  submit() {\n    this.formGroup.markAsDirty({ onlySelf: false });\n    if (this.formGroup.valid) {\n      const { username, password, confirmPassword, newPassword } =\n        this.formGroup.value;\n      if (username && password && newPassword && confirmPassword) {\n        this.resetPasswordEvent.emit({\n          username,\n          password,\n          newPassword,\n          confirmPassword,\n        });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n}\n",
+            "styleUrl": "./reset-password.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"email\"\n    label=\"Username\"\n    icon=\"email\"\n  ></wt-text-input>\n\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"password\"\n    type=\"password\"\n    autocomplete=\"current-password\"\n    label=\"current password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"newPassword\"\n    type=\"password\"\n    label=\"new password\"\n    autocomplete=\"new-password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"confirmPassword\"\n    type=\"password\"\n    label=\"confirm password\"\n    autocomplete=\"new-password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <button\n      class=\"grow-1\"\n      type=\"button\"\n      mat-raised-button\n      (click)=\"submit()\"\n      color=\"primary\"\n      i18n\n    >\n      Reset Password\n    </button>\n    <button\n      class=\"grow-1\"\n      type=\"reset\"\n      mat-raised-button\n      (click)=\"reset()\"\n      i18n\n    >\n      Clear Form\n    </button>\n  </div>\n</form>\n"
+        },
+        {
+            "name": "ResetPasswordWithCodeComponent",
+            "id": "component-ResetPasswordWithCodeComponent-504755425632a5c781e95d153fb6e26054e17cc229a656c3174e81a80c1bcb904fb057afda8525308931f12691d730519c80fc663e27f0427b26370be4c8ab4f",
+            "file": "libs/material/src/lib/auth/reset-password-with-code/reset-password-with-code.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-reset-password-with-code",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./reset-password-with-code.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "resetPasswordWithCodeEvent",
+                    "defaultValue": "new EventEmitter<ResetPasswordWithCodeData>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 52,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "defaultValue": "resetPasswordWithCode",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "reset",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 74,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4078,76 +4672,56 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\nimport { PasswordValidators } from '../../api';\n\nexport type ResetPasswordData = {\n  username: string;\n  password: string;\n  newPassword: string;\n  confirmPassword: string;\n};\n\nexport const resetPasswordForm = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', PasswordValidators),\n  confirmPassword: new FormControl('', PasswordValidators),\n});\n\n@Component({\n  selector: 'wt-reset-password',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n  templateUrl: './reset-password.component.html',\n  styleUrl: './reset-password.component.scss',\n})\nexport class ResetPasswordComponent {\n  formGroup = resetPasswordForm;\n\n  /**\n   * After login button is clicked, if the form is valid, then emit form value\n   */\n  @Output() resetPasswordEvent = new EventEmitter<ResetPasswordData>();\n\n  submit() {\n    if (this.formGroup.valid) {\n      const { username, password, confirmPassword, newPassword } =\n        this.formGroup.value;\n      if (username && password && confirmPassword && newPassword) {\n        this.resetPasswordEvent.emit({\n          username,\n          password,\n          confirmPassword,\n          newPassword,\n        });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n}\n",
-            "styleUrl": "./reset-password.component.scss",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\nimport { PasswordValidator } from '../../api';\n\nexport type ResetPasswordWithCodeData = {\n  username: string;\n  securityCode: string;\n  newPassword: string;\n  confirmPassword: string;\n};\n\nexport const resetPasswordWithCode = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  securityCode: new FormControl('', [\n    Validators.required,\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', [Validators.required, PasswordValidator]),\n  confirmPassword: new FormControl('', [\n    Validators.required,\n    PasswordValidator,\n  ]),\n});\n\n@Component({\n  selector: 'wt-reset-password-with-code',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n  templateUrl: './reset-password-with-code.component.html',\n  styleUrl: './reset-password-with-code.component.scss',\n})\nexport class ResetPasswordWithCodeComponent {\n  formGroup = resetPasswordWithCode;\n\n  @Output() resetPasswordWithCodeEvent =\n    new EventEmitter<ResetPasswordWithCodeData>();\n\n  submit() {\n    for (const c of Object.values(this.formGroup.controls)) {\n      c.markAsTouched();\n      c.markAsDirty();\n    }\n    if (this.formGroup.valid) {\n      const { username, securityCode, confirmPassword, newPassword } =\n        this.formGroup.value;\n      if (username && securityCode && confirmPassword && newPassword) {\n        this.resetPasswordWithCodeEvent.emit({\n          username,\n          securityCode,\n          newPassword,\n          confirmPassword,\n        });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n}\n",
+            "styleUrl": "./reset-password-with-code.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"email\"\n    label=\"Username\"\n    icon=\"email\"\n  ></wt-text-input>\n\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"password\"\n    type=\"password\"\n    autocomplete=\"current-password\"\n    label=\"current password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"newPassword\"\n    type=\"password\"\n    label=\"new password\"\n    autocomplete=\"new-password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"confirmPassword\"\n    type=\"password\"\n    label=\"confirm password\"\n    autocomplete=\"new-password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <button\n      class=\"grow-1\"\n      type=\"button\"\n      mat-raised-button\n      (click)=\"submit()\"\n      color=\"primary\"\n    >\n      Reset Password\n    </button>\n    <button class=\"grow-1\" type=\"reset\" mat-raised-button (click)=\"reset()\">\n      Clear Form\n    </button>\n  </div>\n</form>\n"
+            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"email\"\n    label=\"Username\"\n    icon=\"email\"\n  ></wt-text-input>\n\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"securityCode\"\n    type=\"text\"\n    autocomplete=\"off\"\n    label=\"Security Code\"\n    icon=\"security\"\n  ></wt-text-input>\n\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"newPassword\"\n    type=\"password\"\n    label=\"new password\"\n    autocomplete=\"new-password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"confirmPassword\"\n    type=\"password\"\n    label=\"confirm password\"\n    autocomplete=\"new-password\"\n    icon=\"password\"\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <button\n      class=\"grow-1\"\n      type=\"button\"\n      mat-raised-button\n      (click)=\"submit()\"\n      color=\"primary\"\n      i18n\n    >\n      Reset Password\n    </button>\n    <button\n      class=\"grow-1\"\n      type=\"reset\"\n      mat-raised-button\n      (click)=\"reset()\"\n      i18n\n    >\n      Clear Form\n    </button>\n  </div>\n</form>\n"
         },
         {
-            "name": "ResetPasswordWithCodeComponent",
-            "id": "component-ResetPasswordWithCodeComponent-f559177fb8bda1180ab7e6c2130111df92d7d4e452946e7960b40c4566e3f888554ca2679895158b2cfd07197ecbe67c8c34dc821016ef2886281bf810b421b7",
-            "file": "libs/material/src/lib/auth/reset-password-with-code/reset-password-with-code.component.ts",
+            "name": "SampleFormComponent",
+            "id": "component-SampleFormComponent-a3a05b5c40472e1ad008500a089e2cb0cd94c6c5358135ad4f6e6b69a009b0f90e6f9de2296e77aa208c750424833cf23f4fa58f0d80f8c427a473197bb8f3c7",
+            "file": "libs/material/src/lib/form/sample-form/sample-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "wt-reset-password-with-code",
+            "selector": "wt-sample-form",
             "styleUrls": [],
             "styles": [],
             "templateUrl": [
-                "./reset-password-with-code.component.html"
+                "./sample-form.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [],
-            "outputsClass": [
-                {
-                    "name": "resetPasswordWithCodeEvent",
-                    "defaultValue": "new EventEmitter<ResetPasswordWithCodeData>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 57,
-                    "type": "EventEmitter"
-                }
-            ],
+            "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "categories",
+                    "defaultValue": "['Cat 1', 'Cat 2']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
                     "name": "formGroup",
-                    "defaultValue": "resetPasswordWithCode",
+                    "defaultValue": "new FormGroup({\n    name: new FormControl(''),\n    category: new FormControl(''),\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 55
+                    "line": 15
                 }
             ],
-            "methodsClass": [
-                {
-                    "name": "reset",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 75,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "submit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 60,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -4159,36 +4733,24 @@
                     "type": "module"
                 },
                 {
-                    "name": "FormsModule",
-                    "type": "module"
+                    "name": "FormComponent",
+                    "type": "component"
                 },
                 {
-                    "name": "ReactiveFormsModule",
-                    "type": "module"
-                },
-                {
-                    "name": "MatButtonModule",
-                    "type": "module"
-                },
-                {
-                    "name": "MatIconModule",
-                    "type": "module"
-                },
-                {
-                    "name": "TextInputComponent",
+                    "name": "FormInputComponent",
                     "type": "component"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\n\nexport type ResetPasswordWithCodeData = {\n  username: string;\n  securityCode: string;\n  newPassword: string;\n  confirmPassword: string;\n};\n\nexport const resetPasswordWithCode = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  securityCode: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  confirmPassword: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n});\n\n@Component({\n  selector: 'wt-reset-password-with-code',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n  templateUrl: './reset-password-with-code.component.html',\n  styleUrl: './reset-password-with-code.component.scss',\n})\nexport class ResetPasswordWithCodeComponent {\n  formGroup = resetPasswordWithCode;\n\n  @Output() resetPasswordWithCodeEvent =\n    new EventEmitter<ResetPasswordWithCodeData>();\n\n  submit() {\n    if (this.formGroup.valid) {\n      const { username, securityCode, confirmPassword, newPassword } =\n        this.formGroup.value;\n      if (username && securityCode && confirmPassword && newPassword) {\n        this.resetPasswordWithCodeEvent.emit({\n          username,\n          securityCode,\n          newPassword,\n          confirmPassword,\n        });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n}\n",
-            "styleUrl": "./reset-password-with-code.component.scss",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormComponent } from '../form.component';\nimport { FormInputComponent } from '../form-input/form-input.component';\nimport { FormControl, FormGroup } from '@angular/forms';\n\n@Component({\n  selector: 'wt-sample-form',\n  standalone: true,\n  imports: [CommonModule, FormComponent, FormInputComponent],\n  templateUrl: './sample-form.component.html',\n  styleUrl: './sample-form.component.scss',\n})\nexport class SampleFormComponent {\n  formGroup = new FormGroup({\n    name: new FormControl(''),\n    category: new FormControl(''),\n  });\n\n  categories = ['Cat 1', 'Cat 2'];\n}\n",
+            "styleUrl": "./sample-form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"email\"\n    label=\"Username\"\n  ></wt-text-input>\n\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"password\"\n    type=\"password\"\n    autocomplete=\"current-password\"\n    label=\"current password\"\n  ></wt-text-input>\n\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"newPassword\"\n    type=\"password\"\n    label=\"new password\"\n    autocomplete=\"new-password\"\n  ></wt-text-input>\n\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"confirmPassword\"\n    type=\"password\"\n    label=\"confirm password\"\n    autocomplete=\"new-password\"\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <button\n      class=\"grow-1\"\n      type=\"button\"\n      mat-raised-button\n      (click)=\"submit()\"\n      color=\"primary\"\n    >\n      Reset Password\n    </button>\n    <button class=\"grow-1\" type=\"reset\" mat-raised-button (click)=\"reset()\">\n      Clear Form\n    </button>\n  </div>\n</form>\n"
+            "templateData": "<wt-form>\n  <wt-form-input componentType=\"text-input\" name=\"name\"></wt-form-input>\n  <wt-form-input componentType=\"text-input\" name=\"category\"></wt-form-input>\n</wt-form>\n"
         },
         {
             "name": "SelectComponent",
@@ -4213,8 +4775,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -4227,7 +4800,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4239,7 +4812,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -4253,7 +4826,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4267,7 +4840,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4279,7 +4852,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4293,7 +4866,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4305,7 +4878,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4317,7 +4890,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4329,7 +4902,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4341,7 +4914,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4353,7 +4926,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -4367,7 +4940,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4381,7 +4954,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -4393,7 +4966,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -4405,7 +4978,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -4422,7 +4995,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4435,7 +5008,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4448,7 +5021,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4461,7 +5034,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4511,7 +5084,7 @@
         },
         {
             "name": "SignupComponent",
-            "id": "component-SignupComponent-c5cb36c865b012eb92f652b0f715eef329deab312b91b1b41cdd43046a67cd28c8d35389ae0b71c700a2bf067c1969817661517b3f38a1e9f10d89d89dfc4b9e",
+            "id": "component-SignupComponent-58081f4e92089842ce076fad13942cf98005454109f52906fbff272f8047dfbabe1c8af1771f2041dd0ee2da813d94b217e63ac6a48af91a0697e1ea393781bf",
             "file": "libs/material/src/lib/auth/signup/signup.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4530,7 +5103,7 @@
             "outputsClass": [
                 {
                     "name": "signupEvent",
-                    "defaultValue": "new EventEmitter<LoginData>()",
+                    "defaultValue": "new EventEmitter<SignupData>()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAfter login button is clicked, if the form is valid, then emit form value\n",
@@ -4607,13 +5180,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { PasswordValidators } from '../../api';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\n\nexport type LoginData = {\n  username: string;\n  password: string;\n};\n\nconst signupFormGroup = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', PasswordValidators),\n});\n\n@Component({\n  selector: 'wt-signup',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n  templateUrl: './signup.component.html',\n  styleUrl: './signup.component.scss',\n})\nexport class SignupComponent {\n  formGroup = signupFormGroup;\n\n  /**\n   * After login button is clicked, if the form is valid, then emit form value\n   */\n  @Output() signupEvent = new EventEmitter<LoginData>();\n\n  submit() {\n    if (this.formGroup.valid) {\n      const { username, password } = this.formGroup.value;\n      if (username && password) {\n        this.signupEvent.emit({ username, password });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { TextInputComponent } from '../../form/text-input/text-input.component';\nimport { PasswordValidator } from '../../api';\n\nexport type SignupData = {\n  username: string;\n  password: string;\n};\n\nconst signupFormGroup = new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [PasswordValidator]),\n});\n\n@Component({\n  selector: 'wt-signup',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n    MatIconModule,\n    TextInputComponent,\n  ],\n  templateUrl: './signup.component.html',\n  styleUrl: './signup.component.scss',\n})\nexport class SignupComponent {\n  formGroup = signupFormGroup;\n\n  /**\n   * After login button is clicked, if the form is valid, then emit form value\n   */\n  @Output() signupEvent = new EventEmitter<SignupData>();\n\n  submit() {\n    if (this.formGroup.valid) {\n      const { username, password } = this.formGroup.value;\n      if (username && password) {\n        this.signupEvent.emit({ username, password });\n      }\n    }\n  }\n\n  reset() {\n    this.formGroup.reset();\n  }\n}\n",
             "styleUrl": "./signup.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"email\"\n    label=\"Username\"\n  ></wt-text-input>\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"password\"\n    type=\"password\"\n    autocomplete=\"current-password\"\n    label=\"password\"\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <button\n      class=\"grow-1\"\n      type=\"button\"\n      mat-raised-button\n      (click)=\"submit()\"\n      color=\"primary\"\n    >\n      Signup\n    </button>\n    <button class=\"grow-1\" type=\"reset\" mat-raised-button (click)=\"reset()\">\n      Clear Form\n    </button>\n  </div>\n</form>\n"
+            "templateData": "<form class=\"flex column gap-1\" [formGroup]=\"formGroup\">\n  <wt-text-input\n    i18n-label\n    [formGroup]=\"formGroup\"\n    name=\"username\"\n    type=\"email\"\n    autocomplete=\"off\"\n    label=\"Username\"\n  ></wt-text-input>\n  <wt-text-input\n    [formGroup]=\"formGroup\"\n    name=\"password\"\n    type=\"password\"\n    autocomplete=\"new-password\"\n    label=\"password\"\n    i18n-label\n  ></wt-text-input>\n\n  <div class=\"flex column gap-1\">\n    <button\n      class=\"grow-1\"\n      type=\"button\"\n      mat-raised-button\n      (click)=\"submit()\"\n      color=\"primary\"\n      i18n\n    >\n      Signup\n    </button>\n    <button\n      class=\"grow-1\"\n      type=\"reset\"\n      mat-raised-button\n      (click)=\"reset()\"\n      i18n\n    >\n      Clear Form\n    </button>\n  </div>\n</form>\n"
         },
         {
             "name": "SwitchComponent",
@@ -4638,8 +5211,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -4652,7 +5236,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4664,7 +5248,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -4678,7 +5262,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4692,7 +5276,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4704,7 +5288,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4718,7 +5302,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4730,7 +5314,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4742,7 +5326,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4754,7 +5338,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4766,7 +5350,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -4778,7 +5362,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -4792,7 +5376,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -4806,7 +5390,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -4818,7 +5402,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -4830,7 +5414,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -4847,7 +5431,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4860,7 +5444,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4873,7 +5457,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4886,7 +5470,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5350,8 +5934,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -5364,7 +5959,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5376,7 +5971,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -5390,7 +5985,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5404,7 +5999,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5416,7 +6011,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5430,7 +6025,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5442,7 +6037,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5454,7 +6049,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5466,7 +6061,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5478,7 +6073,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5490,7 +6085,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -5504,7 +6099,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5518,7 +6113,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -5530,7 +6125,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -5542,7 +6137,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -5559,7 +6154,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5572,7 +6167,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5585,7 +6180,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5598,7 +6193,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5673,8 +6268,19 @@
                     "defaultValue": "'off'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "CommonInputComponent"
+                    }
+                },
+                {
+                    "name": "autocompleteService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "AutoCompleteService",
                     "decorators": [],
                     "inheritance": {
                         "file": "CommonInputComponent"
@@ -5687,7 +6293,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpon form submit update the error message\n",
                     "description": "<p>Upon form submit update the error message</p>\n",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5699,7 +6305,7 @@
                     "defaultValue": "inject<FormGroup>(FormGroup, { optional: true }) ||\r\n    new FormGroup({ name: new FormControl('', []) })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 53,
                     "type": "FormGroup",
                     "decorators": [],
                     "inheritance": {
@@ -5713,7 +6319,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nExplain the constraints of input value\n",
                     "description": "<p>Explain the constraints of input value</p>\n",
-                    "line": 31,
+                    "line": 33,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5727,7 +6333,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput icon\n",
                     "description": "<p>Input icon</p>\n",
-                    "line": 24,
+                    "line": 26,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5739,7 +6345,7 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 28,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5753,7 +6359,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 14,
+                    "line": 16,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5765,7 +6371,7 @@
                     "defaultValue": "99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5777,7 +6383,7 @@
                     "defaultValue": "1000",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5789,7 +6395,7 @@
                     "defaultValue": "-99999999999",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5801,7 +6407,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
@@ -5813,7 +6419,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -5827,7 +6433,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFormControlName\n",
                     "description": "<p>FormControlName</p>\n",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5841,7 +6447,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSelect Options\n",
                     "description": "<p>Select Options</p>\n",
-                    "line": 36,
+                    "line": 38,
                     "type": "string[]",
                     "decorators": [],
                     "inheritance": {
@@ -5853,7 +6459,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
@@ -5865,7 +6471,7 @@
                     "defaultValue": "'text'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "",
                     "decorators": [],
                     "inheritance": {
@@ -5882,7 +6488,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5895,7 +6501,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5908,7 +6514,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5921,7 +6527,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -6351,7 +6957,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n})"
+                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.maxLength(50),\n  ]),\n})"
             },
             {
                 "name": "meta",
@@ -6361,7 +6967,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FormComponent>",
-                "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n}"
+                "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -6401,7 +7007,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ResetPasswordWithCodeComponent>",
-                "defaultValue": "{\n  component: ResetPasswordWithCodeComponent,\n  title: 'ResetPasswordWithCodeComponent',\n}"
+                "defaultValue": "{\n  component: ResetPasswordWithCodeComponent,\n  title: 'ResetPasswordWithCodeComponent',\n\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -6566,14 +7172,14 @@
                 "defaultValue": "'NAV_ITEMS_TOKEN'"
             },
             {
-                "name": "PasswordValidators",
+                "name": "PasswordValidator",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "libs/material/src/lib/api/validators/password-validator.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "ValidatorFn[]",
-                "defaultValue": "[\r\n  Validators.minLength(6),\r\n  Validators.maxLength(50),\r\n  Validators.pattern(/[A-Z]{1,}/),\r\n  Validators.pattern(/[a-z]{1,}/),\r\n  Validators.pattern(/[0-9]{1,}/),\r\n  Validators.pattern(/[~!@#$%^&*()_+{}:\"<>?[];',.\\/]{1,}/),\r\n]"
+                "type": "ValidatorFn",
+                "defaultValue": "(control: AbstractControl) => {\r\n  const upperCase = /[A-Z]{1,}/;\r\n  const lowerCase = /[a-z]{1,}/;\r\n  const number = /[0-9]{1,}/;\r\n  const specials = /[~!@#$%^&*()_+{}:\"<>?\\\\[\\]\\\\;',\\\\.\\\\/]{1,}/;\r\n  const value = control.value;\r\n  if (value) {\r\n    if (!upperCase.test(value))\r\n      return { password: 'Field must contain at least one upper-case value ' };\r\n    if (!lowerCase.test(value))\r\n      return { password: 'Field must contain at least one lower-case value ' };\r\n    if (!number.test(value))\r\n      return { password: 'Field must contain at least one number value ' };\r\n    if (!specials.test(value))\r\n      return {\r\n        password: 'Field must contain at least one special character value ',\r\n      };\r\n  }\r\n\r\n  return null;\r\n}"
             },
             {
                 "name": "Primary",
@@ -6773,7 +7379,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', PasswordValidators),\n  confirmPassword: new FormControl('', PasswordValidators),\n})"
+                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl(''),\n  newPassword: new FormControl('', [PasswordValidator]),\n  confirmPassword: new FormControl('', [PasswordValidator]),\n})"
             },
             {
                 "name": "resetPasswordWithCode",
@@ -6783,7 +7389,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  securityCode: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  confirmPassword: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n})"
+                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  securityCode: new FormControl('', [\n    Validators.required,\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', [Validators.required, PasswordValidator]),\n  confirmPassword: new FormControl('', [\n    Validators.required,\n    PasswordValidator,\n  ]),\n})"
             },
             {
                 "name": "SEARCH_CONTROL_TOKEN",
@@ -6803,7 +7409,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', PasswordValidators),\n})"
+                "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [PasswordValidator]),\n})"
             },
             {
                 "name": "TABLE_COLUMNS_TOKEN",
@@ -7365,17 +7971,6 @@
                 "kind": 187
             },
             {
-                "name": "LoginData",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "literal type",
-                "file": "libs/material/src/lib/auth/signup/signup.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 187
-            },
-            {
                 "name": "NavItemParams",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -7425,6 +8020,17 @@
                 "subtype": "typealias",
                 "rawtype": "literal type",
                 "file": "libs/material/src/lib/api/providers/form.provider.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 187
+            },
+            {
+                "name": "SignupData",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "libs/material/src/lib/auth/signup/signup.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -7746,7 +8352,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FormComponent>",
-                    "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n}"
+                    "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
@@ -7874,7 +8480,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ResetPasswordWithCodeComponent>",
-                    "defaultValue": "{\n  component: ResetPasswordWithCodeComponent,\n  title: 'ResetPasswordWithCodeComponent',\n}"
+                    "defaultValue": "{\n  component: ResetPasswordWithCodeComponent,\n  title: 'ResetPasswordWithCodeComponent',\n\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
@@ -8344,7 +8950,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n})"
+                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.maxLength(50),\n  ]),\n})"
                 }
             ],
             "libs/material/src/lib/api/providers/nav-item.provider.ts": [
@@ -8361,14 +8967,14 @@
             ],
             "libs/material/src/lib/api/validators/password-validator.ts": [
                 {
-                    "name": "PasswordValidators",
+                    "name": "PasswordValidator",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "libs/material/src/lib/api/validators/password-validator.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "ValidatorFn[]",
-                    "defaultValue": "[\r\n  Validators.minLength(6),\r\n  Validators.maxLength(50),\r\n  Validators.pattern(/[A-Z]{1,}/),\r\n  Validators.pattern(/[a-z]{1,}/),\r\n  Validators.pattern(/[0-9]{1,}/),\r\n  Validators.pattern(/[~!@#$%^&*()_+{}:\"<>?[];',.\\/]{1,}/),\r\n]"
+                    "type": "ValidatorFn",
+                    "defaultValue": "(control: AbstractControl) => {\r\n  const upperCase = /[A-Z]{1,}/;\r\n  const lowerCase = /[a-z]{1,}/;\r\n  const number = /[0-9]{1,}/;\r\n  const specials = /[~!@#$%^&*()_+{}:\"<>?\\\\[\\]\\\\;',\\\\.\\\\/]{1,}/;\r\n  const value = control.value;\r\n  if (value) {\r\n    if (!upperCase.test(value))\r\n      return { password: 'Field must contain at least one upper-case value ' };\r\n    if (!lowerCase.test(value))\r\n      return { password: 'Field must contain at least one lower-case value ' };\r\n    if (!number.test(value))\r\n      return { password: 'Field must contain at least one number value ' };\r\n    if (!specials.test(value))\r\n      return {\r\n        password: 'Field must contain at least one special character value ',\r\n      };\r\n  }\r\n\r\n  return null;\r\n}"
                 }
             ],
             "libs/material/src/lib/auth/reset-password/reset-password.component.ts": [
@@ -8380,7 +8986,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', PasswordValidators),\n  confirmPassword: new FormControl('', PasswordValidators),\n})"
+                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl(''),\n  newPassword: new FormControl('', [PasswordValidator]),\n  confirmPassword: new FormControl('', [PasswordValidator]),\n})"
                 }
             ],
             "libs/material/src/lib/auth/reset-password-with-code/reset-password-with-code.component.ts": [
@@ -8392,7 +8998,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  securityCode: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n  confirmPassword: new FormControl('', [\n    Validators.required,\n    Validators.minLength(6),\n    Validators.maxLength(50),\n  ]),\n})"
+                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  securityCode: new FormControl('', [\n    Validators.required,\n    Validators.maxLength(50),\n  ]),\n  newPassword: new FormControl('', [Validators.required, PasswordValidator]),\n  confirmPassword: new FormControl('', [\n    Validators.required,\n    PasswordValidator,\n  ]),\n})"
                 }
             ],
             "libs/material/src/lib/api/providers/table.provider.ts": [
@@ -8426,7 +9032,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', PasswordValidators),\n})"
+                    "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [PasswordValidator]),\n})"
                 }
             ],
             "libs/material/src/lib/api/middlewares/url.interceptor.ts": [
@@ -9033,19 +9639,6 @@
                     "kind": 187
                 }
             ],
-            "libs/material/src/lib/auth/signup/signup.component.ts": [
-                {
-                    "name": "LoginData",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "literal type",
-                    "file": "libs/material/src/lib/auth/signup/signup.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 187
-                }
-            ],
             "libs/material/src/lib/api/providers/nav-item.provider.ts": [
                 {
                     "name": "NavItemParams",
@@ -9079,6 +9672,19 @@
                     "subtype": "typealias",
                     "rawtype": "literal type",
                     "file": "libs/material/src/lib/auth/reset-password-with-code/reset-password-with-code.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 187
+                }
+            ],
+            "libs/material/src/lib/auth/signup/signup.component.ts": [
+                {
+                    "name": "SignupData",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "libs/material/src/lib/auth/signup/signup.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -9679,7 +10285,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "PasswordValidators",
+                "name": "PasswordValidator",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -9915,8 +10521,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AutocompleteComponent",
-                "coveragePercent": 22,
-                "coverageCount": "6/27",
+                "coveragePercent": 21,
+                "coverageCount": "6/28",
                 "status": "low"
             },
             {
@@ -9963,8 +10569,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "CheckboxComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {
@@ -9972,8 +10578,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "CommonInputComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {
@@ -10011,8 +10617,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DateTimeComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {
@@ -10050,8 +10656,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DateComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {
@@ -10094,6 +10700,15 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/material/src/lib/form/form-input/form-input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FormInputComponent",
+                "coveragePercent": 26,
+                "coverageCount": "6/23",
+                "status": "medium"
+            },
+            {
                 "filePath": "libs/material/src/lib/form/form.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -10129,7 +10744,7 @@
                 "linktype": "component",
                 "name": "FormComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -10167,9 +10782,18 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "RadioComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
+            },
+            {
+                "filePath": "libs/material/src/lib/form/sample-form/sample-form.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SampleFormComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
             },
             {
                 "filePath": "libs/material/src/lib/form/select/select.component.stories.ts",
@@ -10206,8 +10830,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "SelectComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {
@@ -10245,8 +10869,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "SwitchComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {
@@ -10284,8 +10908,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "TextInputComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {
@@ -10323,8 +10947,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "TextareaInputComponent",
-                "coveragePercent": 28,
-                "coverageCount": "6/21",
+                "coveragePercent": 27,
+                "coverageCount": "6/22",
                 "status": "medium"
             },
             {

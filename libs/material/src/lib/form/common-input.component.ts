@@ -1,5 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { names } from '@webpackages/utils';
+import { AutoCompleteService } from './autocomplete/autocomplete.service';
 
 @Component({ template: '' })
 export class CommonInputComponent {
@@ -46,6 +48,8 @@ export class CommonInputComponent {
   @Input() max = 99999999999;
   @Input() required = false;
 
+  @Input() autocompleteService?: AutoCompleteService;
+
   @Input() public formGroup: FormGroup =
     inject<FormGroup>(FormGroup, { optional: true }) ||
     new FormGroup({ name: new FormControl('', []) });
@@ -69,19 +73,21 @@ export class CommonInputComponent {
         max,
         email,
         error,
-        pattern,
+        password,
       } = errors;
 
-      if (required) return `${this.name} is required!`;
-      if (minLength)
-        return `${this.name} must be shorter than ${minLength} characters!`;
-      if (maxLength)
-        return `${this.name} must be longer than ${maxLength} characters!`;
-      if (min) return `${this.name} must be greater than ${min}!`;
-      if (max) return `${this.name} must be less than ${max}!`;
-      if (email) return `${this.name} must be a valid ${email}!`;
+      const { readableName } = names(this.name);
 
-      if (pattern) return `${this.name} is not strong!`;
+      if (required) return `${readableName} is required!`;
+      if (minLength)
+        return `${readableName} must be shorter than ${minLength} characters!`;
+      if (maxLength)
+        return `${readableName} must be longer than ${maxLength} characters!`;
+      if (min) return `${readableName} must be greater than ${min}!`;
+      if (max) return `${readableName} must be less than ${max}!`;
+      if (email) return `${readableName} must be a valid ${email}!`;
+
+      if (password) return password;
       if (error) return error;
     }
 

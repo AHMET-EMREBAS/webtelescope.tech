@@ -1,12 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { ResetPasswordWithCodeComponent } from './reset-password-with-code.component';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const meta: Meta<ResetPasswordWithCodeComponent> = {
   component: ResetPasswordWithCodeComponent,
   title: 'ResetPasswordWithCodeComponent',
+
+  decorators: [
+    moduleMetadata({
+      imports: [BrowserAnimationsModule],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<ResetPasswordWithCodeComponent>;

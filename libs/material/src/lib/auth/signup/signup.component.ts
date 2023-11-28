@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TextInputComponent } from '../../form/text-input/text-input.component';
 import { PasswordValidator } from '../../api';
 
-export type LoginData = {
+export type SignupData = {
   username: string;
   password: string;
 };
@@ -42,7 +42,7 @@ export class SignupComponent {
   /**
    * After login button is clicked, if the form is valid, then emit form value
    */
-  @Output() signupEvent = new EventEmitter<LoginData>();
+  @Output() signupEvent = new EventEmitter<SignupData>();
 
   submit() {
     if (this.formGroup.valid) {

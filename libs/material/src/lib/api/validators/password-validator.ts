@@ -8,14 +8,14 @@ export const PasswordValidator: ValidatorFn = (control: AbstractControl) => {
   const value = control.value;
   if (value) {
     if (!upperCase.test(value))
-      return { password: 'Field must contact at least one upper-case value ' };
+      return { password: 'Field must contain at least one upper-case value ' };
     if (!lowerCase.test(value))
-      return { password: 'Field must contact at least one lower-case value ' };
+      return { password: 'Field must contain at least one lower-case value ' };
     if (!number.test(value))
-      return { password: 'Field must contact at least one number value ' };
+      return { password: 'Field must contain at least one number value ' };
     if (!specials.test(value))
       return {
-        password: 'Field must contact at least one special character value ',
+        password: 'Field must contain at least one special character value ',
       };
   }
 

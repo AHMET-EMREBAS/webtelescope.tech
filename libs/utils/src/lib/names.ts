@@ -56,11 +56,23 @@ function __fileName(name: string) {
     .join('-');
 }
 
+function __upperFirst(text: string) {
+  return [text[0].toUpperCase(), text.substring(1)].join('');
+}
+
+function __readableName(name: string) {
+  return splitByUppercase(name)
+    .split('_')
+    .map((e) => __upperFirst(e))
+    .join(' ');
+}
+
 export function names(name: string) {
   return {
     className: __className(name),
     fileName: __fileName(name),
     propertyName: __propertyName(name),
     constName: __constName(name),
+    readableName: __readableName(name),
   };
 }
