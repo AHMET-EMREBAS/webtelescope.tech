@@ -18,7 +18,4 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
 })
-export class SelectComponent extends CommonInputComponent {
-
-  
-}
+export class SelectComponent extends CommonInputComponent {}

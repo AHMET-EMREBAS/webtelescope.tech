@@ -1,8 +1,13 @@
-<wt-form>
-  <wt-form-input componentType="text-input" name="name"></wt-form-input>
-  <wt-form-input
-    componentType="autocomplete"
-    name="category"
-    [options]="categories"
-  ></wt-form-input>
+<wt-form [formGroup]="formGroup" (submitFormEvent)="submit($event)">
+  <wt-form-input [formGroup]="formGroup" icon="person" componentType="text-input" name="firstName" label="First Name" autocomplete="given-name"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="person" componentType="text-input" name="lastName" label="Last Name"  autocomplete="family-name"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="email" componentType="text-input" name="email" label="Email"  autocomplete="email"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="phone" componentType="text-input" name="phone" label="Phone"  autocomplete="tel webauthn"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="social_distance" componentType="radio"  name="gender" label="Gender" [options]="['Male', 'Female']"  autocomplete="off"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="event" componentType="date" name="dob" label="Date of Birth"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="signpost" componentType="text-input" name="street" label="Street" autocomplete="street-address"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="location_city" componentType="text-input" name="city" label="City" autocomplete="address-level2"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="account_balance" componentType="text-input" name="state" label="State" autocomplete="address-level1"></wt-form-input>
+  <wt-form-input [formGroup]="formGroup" icon="flag" componentType="text-input" name="country" label="Country" autocomplete="country"></wt-form-input>
+  
 </wt-form>

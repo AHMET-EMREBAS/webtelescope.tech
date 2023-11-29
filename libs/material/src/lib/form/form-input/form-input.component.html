@@ -1,7 +1,10 @@
 <wt-text-input
   *ngIf="componentType === 'text-input'"
   [formGroup]="formGroup"
+  [icon]="icon"
   [name]="name"
+  [label]="label"
+  [autocomplete]="autocomplete"
   [type]="type"
   [minLength]="minLength"
   [maxLength]="maxLength"
@@ -13,7 +16,9 @@
 <wt-textarea-input
   *ngIf="componentType === 'textarea-input'"
   [formGroup]="formGroup"
+  [icon]="icon"
   [name]="name"
+  [label]="label"
   [type]="type"
   [minLength]="minLength"
   [maxLength]="maxLength"
@@ -24,37 +29,59 @@
 
 <wt-autocomplete
   *ngIf="componentType === 'autocomplete'"
+  [label]="label"
+  [name]="name"
+  [required]="required"
   [formGroup]="formGroup"
+  [icon]="icon"
   [autocompleteService]="autocompleteService"
 ></wt-autocomplete>
 
 <wt-checkbox
-  [formGroup]="formGroup"
-  *ngIf="componentType === 'checkbox'"
   [name]="name"
+  [label]="label"
+  [formGroup]="formGroup"
+  [icon]="icon"
+  *ngIf="componentType === 'checkbox'"
 ></wt-checkbox>
 
 <wt-radio
   *ngIf="componentType === 'radio'"
-  [formGroup]="formGroup"
   [name]="name"
+  [label]="label"
+  [formGroup]="formGroup"
+  [icon]="icon"
   [options]="options"
 ></wt-radio>
 
 <wt-date
   *ngIf="componentType === 'date'"
   [formGroup]="formGroup"
+  [icon]="icon"
   [name]="name"
+  [label]="label"
 ></wt-date>
 
 <wt-date-time
   *ngIf="componentType === 'date-time'"
   [formGroup]="formGroup"
+  [icon]="icon"
   [name]="name"
 ></wt-date-time>
 
 <wt-select
   *ngIf="componentType === 'select'"
   [formGroup]="formGroup"
+  [icon]="icon"
   [name]="name"
+  [label]="label"
+  [options]="options"
 ></wt-select>
+
+<wt-switch
+  *ngIf="componentType === 'switch'"
+  [formGroup]="formGroup"
+  [name]="name"
+  [label]="label"
+  [options]="options"
+></wt-switch>
