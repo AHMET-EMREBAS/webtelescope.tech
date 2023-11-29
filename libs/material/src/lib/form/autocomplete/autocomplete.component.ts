@@ -15,6 +15,9 @@ import {
 } from './autocomplete.service';
 import { Observable, debounceTime, switchMap } from 'rxjs';
 
+/**
+ * Autocomplete Component requires AutocompleteServices from which the component searches for inputs based on the user input.
+ */
 @Component({
   selector: 'wt-autocomplete',
   standalone: true,

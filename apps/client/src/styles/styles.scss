@@ -2,6 +2,12 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
+@forward './flex.scss';
+@forward './fonts.scss';
+@forward './icons.scss';
+@forward './margin-padding.scss';
+@forward './material.scss';
+@forward './scroll.scss';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -43,38 +49,4 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: orange;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: orangered;
-}
-/* Style the scrollbar thumb when it's in an active state (e.g., when scrolling) */
-::-webkit-scrollbar-thumb:active {
-  background: orange;
-}
-
-::-webkit-scrollbar-track {
-  background-color: royalblue;
-}
-
-::-webkit-scrollbar-track:active {
-  background: navy;
-}
-::-webkit-scrollbar-track:hover {
-  background: teal;
-}
-
-/* Style the scrollbar corner (the intersection between the horizontal and vertical scrollbars) */
-::-webkit-scrollbar-corner {
-  background: navy;
 }

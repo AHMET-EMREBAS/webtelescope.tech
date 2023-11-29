@@ -1,0 +1,24 @@
+@use 'sass:string';
+
+// Margin and padding
+@for $size from 1 through 10 {
+  @each $property in (margin, padding) {
+    .#{string.slice($property, 0, 1)}-#{$size} {
+      #{$property}: #{$size}em;
+    }
+    .#{string.slice($property, 0, 1)}r-#{$size} {
+      #{$property}-right: #{$size}em;
+    }
+
+    .#{string.slice($property, 0, 1)}l-#{$size} {
+      #{$property}-left: #{$size}em;
+    }
+
+    .#{string.slice($property, 0, 1)}t-#{$size} {
+      #{$property}-top: #{$size}em;
+    }
+    .#{string.slice($property, 0, 1)}b-#{$size} {
+      #{$property}-bottom: #{$size}em;
+    }
+  }
+}

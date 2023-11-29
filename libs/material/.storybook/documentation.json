@@ -1792,7 +1792,7 @@
         },
         {
             "name": "AutocompleteComponent",
-            "id": "component-AutocompleteComponent-756632762478d221b0788b6533cc5e49b2524020347853dc38120285e7a9b8fe15405d6be6f51fff08f7925ea73e18bb68910fc9d90b577b2d7ce3fb1587ee6d",
+            "id": "component-AutocompleteComponent-55a78bfbd0f4ce83685cdad0534298bfc8b6deafd5a8746b607294d9632300bb6b24d7df3113e1ec4c59827346c5b736d6901a7eb9f1b8121c1591d7a951a393",
             "file": "libs/material/src/lib/form/autocomplete/autocomplete.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1813,7 +1813,7 @@
                     "defaultValue": "inject<AutoCompleteService>(AutoCompleteService, { optional: true }) ||\n    new AutoCompleteService()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 42,
                     "type": "AutoCompleteService",
                     "decorators": []
                 },
@@ -2043,7 +2043,7 @@
                     "type": "Observable<AutocompleteOption[]> | undefined",
                     "optional": false,
                     "description": "",
-                    "line": 43
+                    "line": 46
                 },
                 {
                     "name": "formControl",
@@ -2053,7 +2053,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 37
+                    "line": 40
                 }
             ],
             "methodsClass": [
@@ -2063,7 +2063,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2080,7 +2080,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 54,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2183,10 +2183,10 @@
                     "type": "module"
                 }
             ],
-            "description": "",
-            "rawdescription": "\n",
+            "description": "<p>Autocomplete Component requires AutocompleteServices from which the component searches for inputs based on the user input.</p>\n",
+            "rawdescription": "\n\nAutocomplete Component requires AutocompleteServices from which the component searches for inputs based on the user input.\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit, inject } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  MatAutocompleteModule,\n  MatAutocompleteSelectedEvent,\n} from '@angular/material/autocomplete';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { CommonInputComponent } from '../common-input.component';\nimport {\n  AutoCompleteService,\n  AutocompleteOption,\n} from './autocomplete.service';\nimport { Observable, debounceTime, switchMap } from 'rxjs';\n\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatAutocompleteModule,\n  ],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent\n  extends CommonInputComponent\n  implements OnInit\n{\n  formControl = new FormControl('');\n\n  @Input() autoCompleteService: AutoCompleteService =\n    inject<AutoCompleteService>(AutoCompleteService, { optional: true }) ||\n    new AutoCompleteService();\n\n  autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =\n    this.formControl.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search: search || '' });\n      })\n    );\n\n  constructor() {\n    super();\n  }\n  select(value: MatAutocompleteSelectedEvent) {\n    this.formControl.setValue(value.option.value.name);\n    this.control()?.setValue(value.option.value);\n    console.log(value.option.value);\n  }\n\n  ngOnInit(): void {\n    setTimeout(() => {\n      this.formControl.setValue('');\n    }, 2000);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit, inject } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport {\n  MatAutocompleteModule,\n  MatAutocompleteSelectedEvent,\n} from '@angular/material/autocomplete';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { CommonInputComponent } from '../common-input.component';\nimport {\n  AutoCompleteService,\n  AutocompleteOption,\n} from './autocomplete.service';\nimport { Observable, debounceTime, switchMap } from 'rxjs';\n\n/**\n * Autocomplete Component requires AutocompleteServices from which the component searches for inputs based on the user input.\n */\n@Component({\n  selector: 'wt-autocomplete',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatFormFieldModule,\n    MatInputModule,\n    MatAutocompleteModule,\n  ],\n  templateUrl: './autocomplete.component.html',\n  styleUrl: './autocomplete.component.scss',\n})\nexport class AutocompleteComponent\n  extends CommonInputComponent\n  implements OnInit\n{\n  formControl = new FormControl('');\n\n  @Input() autoCompleteService: AutoCompleteService =\n    inject<AutoCompleteService>(AutoCompleteService, { optional: true }) ||\n    new AutoCompleteService();\n\n  autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =\n    this.formControl.valueChanges.pipe(\n      debounceTime(400),\n      switchMap((search) => {\n        return this.autoCompleteService.getWithQuery({ search: search || '' });\n      })\n    );\n\n  constructor() {\n    super();\n  }\n  select(value: MatAutocompleteSelectedEvent) {\n    this.formControl.setValue(value.option.value.name);\n    this.control()?.setValue(value.option.value);\n    console.log(value.option.value);\n  }\n\n  ngOnInit(): void {\n    setTimeout(() => {\n      this.formControl.setValue('');\n    }, 2000);\n  }\n}\n",
             "styleUrl": "./autocomplete.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -2197,7 +2197,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 49
+                "line": 52
             },
             "extends": [
                 "CommonInputComponent"
@@ -3969,7 +3969,7 @@
             "extends": [
                 "CommonInputComponent"
             ],
-            "templateData": "<wt-text-input\n  *ngIf=\"componentType === 'text-input'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n  [type]=\"type\"\n  [minLength]=\"minLength\"\n  [maxLength]=\"maxLength\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [required]=\"required\"\n></wt-text-input>\n\n<wt-textarea-input\n  *ngIf=\"componentType === 'textarea-input'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n  [type]=\"type\"\n  [minLength]=\"minLength\"\n  [maxLength]=\"maxLength\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [required]=\"required\"\n></wt-textarea-input>\n\n<wt-autocomplete\n  *ngIf=\"componentType === 'autocomplete'\"\n  [formGroup]=\"formGroup\"\n  [autocompleteService]=\"autocompleteService\"\n></wt-autocomplete>\n\n<wt-checkbox\n  [formGroup]=\"formGroup\"\n  *ngIf=\"componentType === 'checkbox'\"\n  [name]=\"name\"\n></wt-checkbox>\n\n<wt-radio\n  *ngIf=\"componentType === 'radio'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n  [options]=\"options\"\n></wt-radio>\n\n<wt-date\n  *ngIf=\"componentType === 'date'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n></wt-date>\n\n<wt-date-time\n  *ngIf=\"componentType === 'date-time'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n></wt-date-time>\n\n<wt-select\n  *ngIf=\"componentType === 'select'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n></wt-select>\n"
+            "templateData": "<wt-text-input\n  *ngIf=\"componentType === 'text-input'\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  [name]=\"name\"\n  [label]=\"label\"\n  [autocomplete]=\"autocomplete\"\n  [type]=\"type\"\n  [minLength]=\"minLength\"\n  [maxLength]=\"maxLength\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [required]=\"required\"\n></wt-text-input>\n\n<wt-textarea-input\n  *ngIf=\"componentType === 'textarea-input'\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  [name]=\"name\"\n  [label]=\"label\"\n  [type]=\"type\"\n  [minLength]=\"minLength\"\n  [maxLength]=\"maxLength\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [required]=\"required\"\n></wt-textarea-input>\n\n<wt-autocomplete\n  *ngIf=\"componentType === 'autocomplete'\"\n  [label]=\"label\"\n  [name]=\"name\"\n  [required]=\"required\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  [autocompleteService]=\"autocompleteService\"\n></wt-autocomplete>\n\n<wt-checkbox\n  [name]=\"name\"\n  [label]=\"label\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  *ngIf=\"componentType === 'checkbox'\"\n></wt-checkbox>\n\n<wt-radio\n  *ngIf=\"componentType === 'radio'\"\n  [name]=\"name\"\n  [label]=\"label\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  [options]=\"options\"\n></wt-radio>\n\n<wt-date\n  *ngIf=\"componentType === 'date'\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  [name]=\"name\"\n  [label]=\"label\"\n></wt-date>\n\n<wt-date-time\n  *ngIf=\"componentType === 'date-time'\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  [name]=\"name\"\n></wt-date-time>\n\n<wt-select\n  *ngIf=\"componentType === 'select'\"\n  [formGroup]=\"formGroup\"\n  [icon]=\"icon\"\n  [name]=\"name\"\n  [label]=\"label\"\n  [options]=\"options\"\n></wt-select>\n\n<wt-switch\n  *ngIf=\"componentType === 'switch'\"\n  [formGroup]=\"formGroup\"\n  [name]=\"name\"\n  [label]=\"label\"\n  [options]=\"options\"\n></wt-switch>\n"
         },
         {
             "name": "LoginComponent",
@@ -4468,7 +4468,7 @@
             "extends": [
                 "CommonInputComponent"
             ],
-            "templateData": "<div [formGroup]=\"formGroup\">\n  <label>{{ label }}</label>\n  <mat-radio-group\n    class=\"flex column\"\n    [formGroupName]=\"name\"\n    style=\"margin-top: 1em\"\n  >\n    @for (option of options; track option) {\n    <mat-radio-button class=\"example-radio-button\" [value]=\"option\">\n      {{ option }}\n    </mat-radio-button>\n    }\n  </mat-radio-group>\n</div>\n"
+            "templateData": "<div [formGroup]=\"formGroup\">\n  <label>{{ label }}</label>\n  <mat-radio-group\n    class=\"flex column\"\n    [formControlName]=\"name\"\n    style=\"margin-top: 1em\"\n  >\n    @for (option of options; track option) {\n    <mat-radio-button class=\"example-radio-button\" [value]=\"option\">\n      {{ option }}\n    </mat-radio-button>\n    }\n  </mat-radio-group>\n</div>\n"
         },
         {
             "name": "ResetPasswordComponent",
@@ -4682,7 +4682,7 @@
         },
         {
             "name": "SampleFormComponent",
-            "id": "component-SampleFormComponent-b00ce0a3af26cc9da4c8e3f51dd7b686f2af75170f0a1579d51f05a716bdf5cde58c0ca745a51c7a5d4d9f5d379e30439d6d60ec5359c9e69ff6ff746a7443c8",
+            "id": "component-SampleFormComponent-ca105e508268edd4bcd1b1408645ee24674e25b5a5ad7c4bd045834ddc3a93e3b681199cbf6d3118754b61e1acbb2745ef75148df63ece78d08bec36c93fb986",
             "file": "libs/material/src/lib/form/sample-form/sample-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4706,30 +4706,40 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nForm submit event\n",
                     "description": "<p>Form submit event</p>\n",
-                    "line": 19,
+                    "line": 20,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
                 {
-                    "name": "categories",
-                    "defaultValue": "['Cat 1', 'Cat 2']",
+                    "name": "cities",
+                    "defaultValue": "['Houston', 'Austin', 'Dallas']",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 35
                 },
                 {
                     "name": "formGroup",
-                    "defaultValue": "new FormGroup({\n    name: new FormControl(''),\n    category: new FormControl(''),\n  })",
+                    "defaultValue": "new FormGroup({\n    firstName: new FormControl(''),\n    lastName: new FormControl(''),\n    email: new FormControl(''),\n    phone: new FormControl(''),\n    gender: new FormControl(''),\n    dob: new FormControl(''),\n    street: new FormControl(''),\n    city: new FormControl(''),\n    state: new FormControl(''),\n    country: new FormControl(''),\n  })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 22
+                },
+                {
+                    "name": "states",
+                    "defaultValue": "States",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
                 }
             ],
             "methodsClass": [
@@ -4746,7 +4756,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4784,19 +4794,18 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormComponent } from '../form.component';\nimport { FormInputComponent } from '../form-input/form-input.component';\nimport { FormControl, FormGroup } from '@angular/forms';\n\n@Component({\n  selector: 'wt-sample-form',\n  standalone: true,\n  imports: [CommonModule, FormComponent, FormInputComponent],\n  templateUrl: './sample-form.component.html',\n  styleUrl: './sample-form.component.scss',\n})\nexport class SampleFormComponent {\n  /**\n   * Form submit event\n   */\n  @Output() formSubmit = new EventEmitter();\n  \n  formGroup = new FormGroup({\n    name: new FormControl(''),\n    category: new FormControl(''),\n  });\n\n  categories = ['Cat 1', 'Cat 2'];\n\n  submit(event: any) {\n    this.formSubmit.emit(event);\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormComponent } from '../form.component';\nimport { FormInputComponent } from '../form-input/form-input.component';\nimport { FormControl, FormGroup } from '@angular/forms';\nimport { States } from '../../api';\n\n@Component({\n  selector: 'wt-sample-form',\n  standalone: true,\n  imports: [CommonModule, FormComponent, FormInputComponent],\n  templateUrl: './sample-form.component.html',\n  styleUrl: './sample-form.component.scss',\n})\nexport class SampleFormComponent {\n  /**\n   * Form submit event\n   */\n  @Output() formSubmit = new EventEmitter();\n\n  formGroup = new FormGroup({\n    firstName: new FormControl(''),\n    lastName: new FormControl(''),\n    email: new FormControl(''),\n    phone: new FormControl(''),\n    gender: new FormControl(''),\n    dob: new FormControl(''),\n    street: new FormControl(''),\n    city: new FormControl(''),\n    state: new FormControl(''),\n    country: new FormControl(''),\n  });\n\n  cities = ['Houston', 'Austin', 'Dallas'];\n  states = States;\n\n  submit(event: any) {\n    this.formSubmit.emit(event);\n  }\n}\n",
             "styleUrl": "./sample-form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<wt-form [formGroup]=\"formGroup\" (submitFormEvent)=\"submit($event)\">\n  <wt-form-input\n    [formGroup]=\"formGroup\"\n    componentType=\"text-input\"\n    name=\"name\"\n  ></wt-form-input>\n  <wt-form-input\n    [formGroup]=\"formGroup\"\n    componentType=\"select\"\n    name=\"category\"\n    [options]=\"categories\"\n  ></wt-form-input>\n</wt-form>\n"
+            "templateData": "<wt-form [formGroup]=\"formGroup\" (submitFormEvent)=\"submit($event)\">\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"person\" componentType=\"text-input\" name=\"firstName\" label=\"First Name\" autocomplete=\"given-name\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"person\" componentType=\"text-input\" name=\"lastName\" label=\"Last Name\"  autocomplete=\"family-name\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"email\" componentType=\"text-input\" name=\"email\" label=\"Email\"  autocomplete=\"email\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"phone\" componentType=\"text-input\" name=\"phone\" label=\"Phone\"  autocomplete=\"tel webauthn\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"social_distance\" componentType=\"radio\"  name=\"gender\" label=\"Gender\" [options]=\"['Male', 'Female']\"  autocomplete=\"off\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"event\" componentType=\"date\" name=\"dob\" label=\"Date of Birth\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"signpost\" componentType=\"text-input\" name=\"street\" label=\"Street\" autocomplete=\"street-address\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"location_city\" componentType=\"text-input\" name=\"city\" label=\"City\" autocomplete=\"address-level2\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"account_balance\" componentType=\"text-input\" name=\"state\" label=\"State\" autocomplete=\"address-level1\"></wt-form-input>\n  <wt-form-input [formGroup]=\"formGroup\" icon=\"flag\" componentType=\"text-input\" name=\"country\" label=\"Country\" autocomplete=\"country\"></wt-form-input>\n  \n</wt-form>\n"
         },
         {
             "name": "SelectComponent",
-            "id": "component-SelectComponent-080cae2562e32152503681843a45f92f058ea92b83f65bdf14e7f8ae60b972cebcedc4cabedbaacd123b40be110268d04940fb8e5c38ece9b26b40d9c55092a3",
+            "id": "component-SelectComponent-964e6c3080071d9a0a9aa169029d6ba0a19afa23529adfa070672873721f95ef33e2312f02b2f3ab28752e2d594157ae03556f5dccd7893c22ac854b9e938f57",
             "file": "libs/material/src/lib/form/select/select.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -5113,7 +5122,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSelectModule } from '@angular/material/select';\nimport { CommonInputComponent } from '../common-input.component';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\n\n@Component({\n  selector: 'wt-select',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatSelectModule,\n  ],\n  templateUrl: './select.component.html',\n  styleUrl: './select.component.scss',\n  changeDetection:ChangeDetectionStrategy.OnPush\n})\nexport class SelectComponent extends CommonInputComponent {\n\n  \n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSelectModule } from '@angular/material/select';\nimport { CommonInputComponent } from '../common-input.component';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\n\n@Component({\n  selector: 'wt-select',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatSelectModule,\n  ],\n  templateUrl: './select.component.html',\n  styleUrl: './select.component.scss',\n})\nexport class SelectComponent extends CommonInputComponent {}\n",
             "styleUrl": "./select.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -7513,6 +7522,16 @@
                 "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [PasswordValidator]),\n})"
             },
             {
+                "name": "States",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/api/constants/states.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n  'Alabama',\r\n  'Alaska',\r\n  'Arizona',\r\n  'Arkansas',\r\n  'California',\r\n  'Colorado',\r\n  'Connecticut',\r\n  'Delaware',\r\n  'Florida',\r\n  'Georgia',\r\n  'Hawaii',\r\n  'Idaho',\r\n  'Illinois',\r\n  'Indiana',\r\n  'Iowa',\r\n  'Kansas',\r\n  'Kentucky',\r\n  'Louisiana',\r\n  'Maine',\r\n  'Maryland',\r\n  'Massachusetts',\r\n  'Michigan',\r\n  'Minnesota',\r\n  'Mississippi',\r\n  'Missouri',\r\n  'Montana',\r\n  'Nebraska',\r\n  'Nevada',\r\n  'New Hampshire',\r\n  'New Jersey',\r\n  'New Mexico',\r\n  'New York',\r\n  'North Carolina',\r\n  'North Dakota',\r\n  'Ohio',\r\n  'Oklahoma',\r\n  'Oregon',\r\n  'Pennsylvania',\r\n  'Rhode Island',\r\n  'South Carolina',\r\n  'South Dakota',\r\n  'Tennessee',\r\n  'Texas',\r\n  'Utah',\r\n  'Vermont',\r\n  'Virginia',\r\n  'Washington',\r\n  'West Virginia',\r\n  'Wisconsin',\r\n  'Wyoming',\r\n]"
+            },
+            {
                 "name": "TABLE_COLUMNS_TOKEN",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9222,6 +9241,18 @@
                     "defaultValue": "new FormGroup({\n  username: new FormControl('', [Validators.required, Validators.email]),\n  password: new FormControl('', [PasswordValidator]),\n})"
                 }
             ],
+            "libs/material/src/lib/api/constants/states.ts": [
+                {
+                    "name": "States",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/api/constants/states.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  'Alabama',\r\n  'Alaska',\r\n  'Arizona',\r\n  'Arkansas',\r\n  'California',\r\n  'Colorado',\r\n  'Connecticut',\r\n  'Delaware',\r\n  'Florida',\r\n  'Georgia',\r\n  'Hawaii',\r\n  'Idaho',\r\n  'Illinois',\r\n  'Indiana',\r\n  'Iowa',\r\n  'Kansas',\r\n  'Kentucky',\r\n  'Louisiana',\r\n  'Maine',\r\n  'Maryland',\r\n  'Massachusetts',\r\n  'Michigan',\r\n  'Minnesota',\r\n  'Mississippi',\r\n  'Missouri',\r\n  'Montana',\r\n  'Nebraska',\r\n  'Nevada',\r\n  'New Hampshire',\r\n  'New Jersey',\r\n  'New Mexico',\r\n  'New York',\r\n  'North Carolina',\r\n  'North Dakota',\r\n  'Ohio',\r\n  'Oklahoma',\r\n  'Oregon',\r\n  'Pennsylvania',\r\n  'Rhode Island',\r\n  'South Carolina',\r\n  'South Dakota',\r\n  'Tennessee',\r\n  'Texas',\r\n  'Utah',\r\n  'Vermont',\r\n  'Virginia',\r\n  'Washington',\r\n  'West Virginia',\r\n  'Wisconsin',\r\n  'Wyoming',\r\n]"
+                }
+            ],
             "libs/material/src/lib/api/middlewares/url.interceptor.ts": [
                 {
                     "name": "UrlInterceptorFn",
@@ -10172,6 +10203,16 @@
         "status": "low",
         "files": [
             {
+                "filePath": "libs/material/src/lib/api/constants/states.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "States",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/material/src/lib/api/middlewares/url.interceptor.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -10734,8 +10775,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AutocompleteComponent",
-                "coveragePercent": 21,
-                "coverageCount": "6/28",
+                "coveragePercent": 25,
+                "coverageCount": "7/28",
                 "status": "low"
             },
             {
@@ -11064,8 +11105,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "SampleFormComponent",
-                "coveragePercent": 20,
-                "coverageCount": "1/5",
+                "coveragePercent": 16,
+                "coverageCount": "1/6",
                 "status": "low"
             },
             {
