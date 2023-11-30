@@ -1,15 +1,14 @@
-import { Constructor } from './constructor';
 import { Printable } from './printer';
 
 export interface InterfacePrinterOptions {
   name: string;
-  extendings?: Constructor[];
+  extendings?: string[];
   properties?: Printable[];
   importings?: Printable[];
 }
 export interface IInterfacePrinter extends Printable {
   options: InterfacePrinterOptions;
-  printPropertyName(): string;
+  printClassName(): string;
   printImports(): string;
   printExtends(): string;
   printProperties(): string;

@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { stringify } from 'querystring';
 import { IDecoratorPrinter } from '../common';
-import { excludeUndefined } from '@webpackages/utils';
+import { excludeUndefined, stringify } from '@webpackages/utils';
 
 export abstract class AbstractDecoratorPrinter
   implements IDecoratorPrinter<any>

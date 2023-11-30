@@ -1,4 +1,4 @@
-import { ClassConstructor } from 'class-transformer';
+import { ClassConstructor, Exclude, Expose } from 'class-transformer';
 import { GoogleIcons, InputType, PropertyType, StringFormat } from './common';
 
 export class CommonValidtionMeta<TPropertyType extends PropertyType> {
@@ -59,3 +59,23 @@ export type PropertyMeta =
   | BooleanPropertyMeta
   | DatePropertyMeta
   | ObjectPropertyMeta;
+
+export type PrintablePropertyMeta = PropertyMeta & {
+  target?: string;
+};
+
+@Exclude()
+export class AllValidationMeta {
+  @Expose() name!: string;
+  @Expose() type!: PropertyType;
+  @Expose() isArray?: boolean;
+  @Expose() required?: boolean;
+  @Expose() unique?: boolean;
+  @Expose() minLength?: number;
+  @Expose() maxLength?: number;
+  @Expose() format?: StringFormat;
+  @Expose() isIn?: string[];
+  @Expose() min?: number;
+  @Expose() max?: number;
+  @Expose() isInt?: boolean;
+}

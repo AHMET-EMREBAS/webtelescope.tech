@@ -12,7 +12,7 @@ export abstract class AbstractClassPrinter
     public readonly options: ClassPrinterOptions
   ) {}
 
-  printPropertyName(): string {
+  printClassName(): string {
     return this.options.name;
   }
 
@@ -21,7 +21,7 @@ export abstract class AbstractClassPrinter
       return '';
     }
     if (this.options.implementings && this.options.implementings.length > 0) {
-      const list = this.options.implementings.map((e) => e.name).join(',');
+      const list = this.options.implementings.map((e) => e).join(',');
       return `implements ${list}`;
     }
     return '';
@@ -39,7 +39,7 @@ export abstract class AbstractClassPrinter
 
   printExtends(): string {
     if (this.options.extendings && this.options.extendings.length > 0) {
-      return 'extends ' + this.options.extendings.map((e) => e.name).join(',');
+      return 'extends ' + this.options.extendings.map((e) => e).join(',');
     }
     return '';
   }
@@ -53,7 +53,7 @@ export abstract class AbstractClassPrinter
 
   printProperties(): string {
     if (this.options.properties && this.options.properties.length > 0) {
-      return this.options.properties.map((e) => e.print()).join('\n') + '\n';
+      return '\n'+ this.options.properties.map((e) => e.print()).join('\n') + '\n';
     }
     return '';
   }
@@ -61,6 +61,6 @@ export abstract class AbstractClassPrinter
   print(): string {
     return `${this.printImports()}${this.printDecorators()}export ${
       this.classType
-    } ${this.printPropertyName()} ${this.printImplements()} ${this.printExtends()} { ${this.printProperties()}} `;
+    } ${this.printClassName()} ${this.printImplements()} ${this.printExtends()} { ${this.printProperties()}} `;
   }
 }

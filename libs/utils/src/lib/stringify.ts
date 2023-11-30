@@ -72,6 +72,9 @@ export function stringifyByOptions(options: StringifyOptions): string {
 
     const fvalue = entries
       .map(([key, value]) => {
+        if (key === 'target') {
+          return `target:${value}`;
+        }
         return `${[key]}: ${stringifyByOptions(getOptions(value))}`;
       })
       .join(',');

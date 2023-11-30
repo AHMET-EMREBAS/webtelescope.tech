@@ -6,17 +6,17 @@ import {
   RelationMeta,
 } from '../../meta';
 import { AbstractClassPropertyPrinter } from '../imp';
-import { DtoPropertyDecoratorPrinter } from './dto-property-decorator';
-import { DtoRelationDecoratorPrinter } from './dto-relation-decorator';
+import { EntityColumnDecoratorPrinter } from './entity-property-decorator';
+import { DtoRelationDecoratorPrinter } from './entity-relation-decorator';
 
-export class DtoPropertyPrinter extends AbstractClassPropertyPrinter<PrintablePropertyMeta> {
+export class EntityColumnPrinter extends AbstractClassPropertyPrinter<PrintablePropertyMeta> {
   constructor(options: PrintablePropertyMeta) {
     const decoratorOptions = plainToInstance<any, any>(
       AllValidationMeta,
       options,
       { exposeUnsetFields: false }
     );
-    super(options, [new DtoPropertyDecoratorPrinter(decoratorOptions)]);
+    super(options, [new EntityColumnDecoratorPrinter(decoratorOptions)]);
   }
 }
 
@@ -30,9 +30,8 @@ export class DtoRelationPrinter extends AbstractClassPropertyPrinter<RelationMet
 
   override printType(): string {
     if (this.options.type === 'subs') {
-      return `ID[]`;
-    } else {
-      return 'ID';
+      return `${this.options.target}[]`;
     }
+    return `${this.options.target}`;
   }
 }

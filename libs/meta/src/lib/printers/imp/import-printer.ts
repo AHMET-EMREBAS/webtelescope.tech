@@ -8,8 +8,8 @@ export class ImportPrinter implements IImportPrinter {
   ) {}
 
   print(): string {
-    return `import { ${this.target} } from '${this.basePath}${names(
-      this.target
-    )}'`;
+    return `import { ${this.target} } from '${this.basePath}${
+      names(this.target).fileName
+    };'`;
   }
 }

@@ -20,7 +20,7 @@ export abstract class AbstractInterfacePropertyPrinter<
     if (type === 'date') type = 'Date';
     else if (type === 'object') {
       if (this.options.target) {
-        type = this.options.target.name;
+        type = this.options.target;
       }
       throw new Error('Target must be provided when the type is set object!');
     }

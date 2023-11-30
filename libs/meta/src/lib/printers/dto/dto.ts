@@ -1,11 +1,14 @@
-import { ModelMeta } from '../../meta';
+import { PrintableModelMeta } from '../../meta';
 import { AbstractClassPrinter, toImports, toPrintable } from '../imp';
-import { DtoImports } from './do-imports';
+import { DtoImports } from './dto-imports';
 import { DtoClassDecorator } from './dto-decorator';
 import { DtoPropertyPrinter, DtoRelationPrinter } from './dto-property';
 
 export class DtoPrinter extends AbstractClassPrinter {
-  constructor(public readonly dtoType: 'Create' | 'Update', model: ModelMeta) {
+  constructor(
+    public readonly dtoType: 'Create' | 'Update',
+    model: PrintableModelMeta
+  ) {
     const { name, properties, relations } = model;
     const __properties = Object.values(properties || {}).map((value) =>
       toPrintable(value, DtoPropertyPrinter)
@@ -24,7 +27,15 @@ export class DtoPrinter extends AbstractClassPrinter {
     });
   }
 
-  override printPropertyName(): string {
-    return `${this.dtoType}${super.printPropertyName()}Dto`;
+  override printImports(): string {
+    return [
+      `import { Exclude } from 'class-transformer'`,
+      `import { Property, ID } from '@webpackages/core'`,
+      super.printImports(),
+    ].join('\n');
+  }
+
+  override printClassName(): string {
+    return `${this.dtoType}${super.printClassName()}Dto`;
   }
 }
