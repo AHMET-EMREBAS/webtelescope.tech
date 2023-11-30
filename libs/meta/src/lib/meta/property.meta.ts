@@ -64,6 +64,13 @@ export type PrintablePropertyMeta = PropertyMeta & {
   target?: string;
 };
 
+// type, required, unique
+
+export type ColumnPropertyMeta = Pick<
+  PrintablePropertyMeta,
+  'type' | 'required' | 'unique'
+>;
+
 @Exclude()
 export class AllValidationMeta {
   @Expose() name!: string;
