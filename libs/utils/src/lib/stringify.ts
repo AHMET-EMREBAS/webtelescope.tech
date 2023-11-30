@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type StringifyOptions = {
   type: 'string' | 'number' | 'date' | 'boolean' | 'object';
   isArray?: boolean;

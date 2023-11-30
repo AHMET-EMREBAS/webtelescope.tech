@@ -1,0 +1,15 @@
+export type InputType =
+  | 'text'
+  | 'textarea'
+  | 'checkbox'
+  | 'number'
+  | 'switch'
+  | 'select'
+  | 'autocomplete'
+  | 'autocomplete-static'
+  | 'date'
+  | 'date-time'
+  | 'date-range'
+  | 'editor'
+  | 'radio'
+  | 'multiple-checkbox';
