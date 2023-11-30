@@ -1,8 +1,7 @@
 export type InputType =
-  | 'text'
+  | 'text-input'
   | 'textarea'
   | 'checkbox'
-  | 'number'
   | 'switch'
   | 'select'
   | 'autocomplete'
