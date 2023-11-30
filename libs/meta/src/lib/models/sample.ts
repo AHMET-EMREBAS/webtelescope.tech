@@ -15,5 +15,11 @@ export const SampleModel: ModelMeta = {
       required: true,
     },
   },
-  relations: {},
+  relations: {
+    category: {
+      name: 'category',
+      target: 'Category',
+      type: 'sub',
+    },
+  },
 };

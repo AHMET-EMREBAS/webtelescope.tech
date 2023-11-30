@@ -24,9 +24,13 @@ export class EntityPrinter extends AbstractClassPrinter {
     });
   }
 
+  override printExtends(): string {
+    return ` extends BaseEntity `;
+  }
+
   override printImports(): string {
     return [
-      `import { Relation, Column, Entity } from '@webpackages/core'`,
+      `import { Relation, Column, Entity, BaseEntity } from '@webpackages/core'`,
       super.printImports(),
     ].join('\n');
   }
