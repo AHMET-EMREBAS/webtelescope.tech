@@ -6,8 +6,8 @@ import {
   RelationMeta,
 } from '../../meta';
 import { AbstractClassPropertyPrinter } from '../imp';
-import { EntityColumnDecoratorPrinter } from './entity-property-decorator';
-import { DtoRelationDecoratorPrinter } from './entity-relation-decorator';
+import { EntityColumnDecoratorPrinter } from './entity-column-decorator';
+import { EntityRelationDecoratorPrinter } from './entity-relation-decorator';
 
 export class EntityColumnPrinter extends AbstractClassPropertyPrinter<PrintablePropertyMeta> {
   constructor(options: PrintablePropertyMeta) {
@@ -20,12 +20,12 @@ export class EntityColumnPrinter extends AbstractClassPropertyPrinter<PrintableP
   }
 }
 
-export class DtoRelationPrinter extends AbstractClassPropertyPrinter<RelationMeta> {
+export class EntityRelationPrinter extends AbstractClassPropertyPrinter<RelationMeta> {
   constructor(options: RelationMeta) {
     const decoratorOptions = plainToInstance<any, any>(RelationMeta, options, {
       exposeUnsetFields: false,
     });
-    super(options, [new DtoRelationDecoratorPrinter(decoratorOptions)]);
+    super(options, [new EntityRelationDecoratorPrinter(decoratorOptions)]);
   }
 
   override printType(): string {

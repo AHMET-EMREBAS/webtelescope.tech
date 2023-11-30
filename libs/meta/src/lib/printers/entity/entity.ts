@@ -2,7 +2,7 @@ import { PrintableModelMeta } from '../../meta';
 import { AbstractClassPrinter, toImports, toPrintable } from '../imp';
 import { EntityImports } from './entity-imports';
 import { EntityClassDecorator } from './entity-decorator';
-import { EntityColumnPrinter, DtoRelationPrinter } from './entity-column';
+import { EntityColumnPrinter, EntityRelationPrinter } from './entity-column';
 
 export class EntityPrinter extends AbstractClassPrinter {
   constructor(model: PrintableModelMeta) {
@@ -11,7 +11,7 @@ export class EntityPrinter extends AbstractClassPrinter {
       toPrintable(value, EntityColumnPrinter)
     );
     const __relations = Object.values(relations || {}).map((value) =>
-      toPrintable(value, DtoRelationPrinter)
+      toPrintable(value, EntityRelationPrinter)
     );
 
     const ___imports = toImports(Object.values(relations || {}), EntityImports);
