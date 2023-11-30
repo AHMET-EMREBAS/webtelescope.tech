@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Public, SUBSCRIBER_ROLE_NAME } from './meta';
-import { ValidationPipe } from '@webpackages/rest';
+import { ValidationPipe } from '@webpackages/core';
 import {
   ForgotPasswordDto,
   LoginDto,

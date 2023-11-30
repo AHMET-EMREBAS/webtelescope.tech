@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IDDto } from '@webpackages/rest';
+import { ID } from '@webpackages/core';
 import { Exclude, Expose, Type } from 'class-transformer';
 import { IsEmail, IsStrongPassword, ValidateNested } from 'class-validator';
 import { Role } from '../../role';
@@ -18,6 +18,6 @@ export class CreateUserDto {
 
   @ApiProperty({ type: 'object' })
   @ValidateNested()
-  @Type(() => IDDto)
+  @Type(() => ID)
   roles!: Role[];
 }

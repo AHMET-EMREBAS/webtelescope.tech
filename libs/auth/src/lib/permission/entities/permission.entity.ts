@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseEntity } from '@webpackages/rest';
+import { BaseEntity } from '@webpackages/core';
 
 @Entity()
 export class Permission extends BaseEntity {

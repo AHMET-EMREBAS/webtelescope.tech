@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AUTH_TOKEN_NAME } from '@webpackages/common';
-import { ValidationPipe } from '@webpackages/rest';
+import { ValidationPipe } from '@webpackages/core';
 import { CreateRoleDto, QueryRoleDto, UpdateRoleDto } from './dto';
 import { RoleService } from './role.service';
 import { SetPermission } from '../meta';

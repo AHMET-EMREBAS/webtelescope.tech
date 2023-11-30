@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { ResourceService } from '@webpackages/rest';
+import { ResourceService } from '@webpackages/core';
 import { Role } from './entities';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';

@@ -14,7 +14,7 @@ import { AUTH_TOKEN_NAME } from '@webpackages/common';
 import { CreateUserDto, QueryUserDto, UpdateUserDto } from './dto';
 import { UserService } from './user.service';
 import { SetPermission } from '../meta';
-import { ValidationPipe } from '@webpackages/rest';
+import { ValidationPipe } from '@webpackages/core';
 
 @ApiBearerAuth(AUTH_TOKEN_NAME)
 @ApiTags('UserController')
