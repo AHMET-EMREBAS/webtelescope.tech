@@ -1,3 +1,3 @@
-export interface IPrinter {
+export interface Printable {
   print(): string;
 }

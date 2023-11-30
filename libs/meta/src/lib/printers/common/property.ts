@@ -1,4 +1,4 @@
-import { IPrinter } from './printer';
+import { Printable } from './printer';
 import { CommonPropertyOptions } from './common-property-options';
 
 export interface IInterfacePropertyPrinter<
@@ -13,7 +13,7 @@ export interface IInterfacePropertyPrinter<
 export interface IClassPropertyPrinter<
   PropertyOptions extends CommonPropertyOptions
 > extends IInterfacePropertyPrinter<PropertyOptions> {
-  decorators?: IPrinter[];
+  decorators?: Printable[];
   printDecorators(): string;
   print(): string;
 }

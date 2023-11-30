@@ -1,5 +1,5 @@
 import {
-  IPrinter,
+  Printable,
   CommonPropertyOptions,
   IClassPropertyPrinter,
   IInterfacePropertyPrinter,
@@ -43,7 +43,7 @@ export abstract class AbstractClassPropertyPrinter<
 {
   constructor(
     options: PropertyOptions,
-    public readonly decorators?: IPrinter[]
+    public readonly decorators?: Printable[]
   ) {
     super(options);
   }

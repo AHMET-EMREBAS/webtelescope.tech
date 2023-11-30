@@ -2,9 +2,11 @@ import { ClassConstructor } from 'class-transformer';
 import { GoogleIcons, InputType, PropertyType, StringFormat } from './common';
 
 export class CommonValidtionMeta<TPropertyType extends PropertyType> {
+  name!: string;
   type!: TPropertyType;
   isArray?: boolean;
   required?: boolean;
+  unique?: boolean;
 }
 
 export class StringValidationMeta extends CommonValidtionMeta<'string'> {

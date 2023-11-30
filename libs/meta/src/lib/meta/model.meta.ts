@@ -1,12 +1,9 @@
-import { KeyOf } from './common';
 import { PropertyMeta } from './property.meta';
 
 import { RelationMeta } from './relation.meta';
 
-export class ModelMeta<Model> {
+export class ModelMeta {
   name!: string;
-  properties?: Record<KeyOf<Model>, PropertyMeta>;
-  relations?: Record<KeyOf<Model>, RelationMeta>;
-  required?: KeyOf<Model>[];
-  uniques?: KeyOf<Model>[];
+  properties?: Record<string, PropertyMeta>;
+  relations?: Record<string, RelationMeta>;
 }

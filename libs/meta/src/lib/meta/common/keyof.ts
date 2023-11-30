@@ -1,1 +1,1 @@
-export type KeyOf<T> = keyof T & string;
+export type KeyOf<T> = keyof T;
