@@ -5,6 +5,7 @@ import {
   DtoPrinter,
   EntityPrinter,
   PrintableModelMeta,
+  ViewEntityPrinter,
 } from '@webpackages/meta';
 export async function restGenerator(tree: Tree, options: RestGeneratorSchema) {
   const projectRoot = `libs/${options.project}/src/lib`;
@@ -15,11 +16,13 @@ export async function restGenerator(tree: Tree, options: RestGeneratorSchema) {
 
   const entityContent = new EntityPrinter(model).print();
   const dtoContent = new DtoPrinter('Create', model).print();
+  const viewEntityContent = new ViewEntityPrinter(model).print();
 
   generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {
     ...names(options.name),
     entityContent,
     dtoContent,
+    viewEntityContent,
   });
   await formatFiles(tree);
 }

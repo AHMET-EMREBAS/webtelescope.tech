@@ -1,6 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { Property, ID } from '@webpackages/core';
-import { Category } from '../category';
+import { Category } from '../../category';
 @Exclude()
 export class CreateSampleDto {
   @Property({

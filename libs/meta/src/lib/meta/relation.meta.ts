@@ -1,16 +1,11 @@
 import { Exclude, Expose } from 'class-transformer';
 
-export type RelationView = {
-  name: string;
-  as: string;
-};
-
 export class RelationMeta {
   name!: string;
   type!: 'owner' | 'sub' | 'subs';
   target!: string;
   required?: boolean;
-  views?: RelationView[];
+  views?: Record<string, string>;
 }
 
 export class PrintableRelationMeta {
@@ -18,7 +13,7 @@ export class PrintableRelationMeta {
   type!: 'owner' | 'sub' | 'subs';
   target!: string;
   required?: boolean;
-  views?: RelationView[];
+  views?: Record<string, string>;
 }
 
 @Exclude()
