@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AUTH_TOKEN_NAME } from '@webpackages/common';
-import { Permissions } from '@webpackages/auth';
-import { ValidationPipe } from '@webpackages/rest';
-import { Create<%- className %>Dto, Query<%- className %>Dto, Update<%- className %>Dto } from './dto';
+import { SetPermission  } from '@webpackages/auth';
+import { ValidationPipe,QueryDto } from '@webpackages/core';
+import { Create<%- className %>Dto, Update<%- className %>Dto } from './dto';
 import { <%- className %>Service } from './<%- fileName %>.service';
 
 @ApiBearerAuth(AUTH_TOKEN_NAME)
@@ -22,24 +22,24 @@ import { <%- className %>Service } from './<%- fileName %>.service';
 export class <%- className %>Controller {
   constructor(protected readonly <%- fileName %>Service: <%- className %>Service) {}
 
-  @Permissions('<%- fileName %>:read')
+  @SetPermission('<%- fileName %>:read')
   @Get('<%- fileName %>s')
-  async findAll<%- className %>s(@Query(ValidationPipe) query: Query<%- className %>Dto) {
+  async findAll<%- className %>s(@Query(ValidationPipe) query: QueryDto) {
     return this.<%- fileName %>Service.find(query);
   }
 
-  @Permissions('<%- fileName %>:read')
+  @SetPermission('<%- fileName %>:read')
   @Get('<%- fileName %>/:id')
   find<%- className %>ById(@Param('id', ParseIntPipe) id: number) {
     return this.<%- fileName %>Service.findOneById(id);
   }
-  @Permissions('<%- fileName %>:read')
+  @SetPermission('<%- fileName %>:read')
   @Post('<%- fileName %>')
   async save(@Body(ValidationPipe) entity: Create<%- className %>Dto) {
     return this.<%- fileName %>Service.save(entity);
   }
 
-  @Permissions('<%- fileName %>:update')
+  @SetPermission('<%- fileName %>:update')
   @Put('<%- fileName %>/:id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -48,7 +48,7 @@ export class <%- className %>Controller {
     return this.<%- fileName %>Service.update(id, entity);
   }
 
-  @Permissions('<%- fileName %>:delete')
+  @SetPermission('<%- fileName %>:delete')
   @Delete('<%- fileName %>/:id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.<%- fileName %>Service.delete(id);
