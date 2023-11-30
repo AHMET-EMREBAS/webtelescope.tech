@@ -3,7 +3,7 @@ import { Exclude, Expose } from 'class-transformer';
 import { Min } from 'class-validator';
 
 @Exclude()
-export class IDDto {
+export class ID {
   @Expose()
   @ApiProperty({ type: 'integer', minimum: 1 })
   @Min(1)

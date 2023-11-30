@@ -1,4 +1,4 @@
-import { PropertyMeta } from '@webpackages/meta';
+import { AllValidationMeta } from '@webpackages/meta';
 import { propertyDecorators } from '@webpackages/utils';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -18,7 +18,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
-export function Property(options: PropertyMeta) {
+export function Property(options: AllValidationMeta) {
   const decorators: PropertyDecorator[] = [ApiProperty(options)];
 
   const { required, type, isArray: each } = options;
@@ -51,7 +51,7 @@ export function Property(options: PropertyMeta) {
   } else if (type === 'object') {
     decorators.push(IsObject({ each }));
     decorators.push(ValidateNested({ each }));
-    decorators.push(Type(() => options.target));
+    decorators.push(Type(() => options.target!));
   }
 
   return propertyDecorators(...decorators);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ClassConstructor, Exclude, Expose } from 'class-transformer';
 import { GoogleIcons, InputType, PropertyType, StringFormat } from './common';
 
@@ -73,7 +74,7 @@ export type ColumnPropertyMeta = Pick<
 
 @Exclude()
 export class AllValidationMeta {
-  @Expose() name!: string;
+  @Expose() name?: string;
   @Expose() type!: PropertyType;
   @Expose() isArray?: boolean;
   @Expose() required?: boolean;
@@ -85,4 +86,5 @@ export class AllValidationMeta {
   @Expose() min?: number;
   @Expose() max?: number;
   @Expose() isInt?: boolean;
+  @Expose() target?: ClassConstructor<any>;
 }
