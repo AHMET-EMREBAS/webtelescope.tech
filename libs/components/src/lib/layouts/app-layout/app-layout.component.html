@@ -69,13 +69,13 @@
           mat-icon-button
           (click)="drawer.toggle()"
         >
-          <mat-icon aria-label="Side nav toggle icon" style="color: white;">
+          <mat-icon aria-label="Side nav toggle icon" style="color: white">
             {{ drawer.opened ? 'menu_open' : 'menu' }}
           </mat-icon>
         </button>
-        <span>{{ title.getTitle() }} | {{ moduleName }}</span>
+        <span>{{ title.getTitle() }} </span>
       </mat-toolbar>
-    
+
       <router-outlet></router-outlet>
       <div class="flex-grow-1"></div>
       <mat-toolbar>Toolbar </mat-toolbar>

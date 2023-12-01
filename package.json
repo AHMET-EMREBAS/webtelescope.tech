@@ -115,6 +115,7 @@
     "@nestjs/platform-express": "^10.0.2",
     "@nestjs/swagger": "^7.1.16",
     "@nestjs/typeorm": "^10.0.1",
+    "@ngrx/data": "^17.0.1",
     "@ngrx/store": "^17.0.0",
     "@swc/helpers": "~0.5.2",
     "angular-animations": "^0.11.0",
