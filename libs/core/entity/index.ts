@@ -1,0 +1,1 @@
+export const EntityModule = 'entity module';

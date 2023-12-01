@@ -18,12 +18,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@webpackages/common": [
-        "libs/common/src/index.ts"
+      "@webpackages/common/*": [
+        "libs/common/*"
       ],
-      "@webpackages/core": [
-        "libs/core/src/index.ts"
+      "@webpackages/components/*": [
+        "libs/components/*"
       ],
+      "@webpackages/core/*": [
+        "libs/core/*"
+      ]
     }
   },
   "exclude": [
