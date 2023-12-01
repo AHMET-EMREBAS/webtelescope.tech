@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(./assets/fonts/material-symbols.woff2) format('woff2');
+}
+.material-icons {
+  position: relative;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-size: 24px !important;
+  line-height: 24px !important;
+  width: 24px !important ;
+  height: 24px !important;
+}
+
+.material-icons.fill {
+  font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
+}
+
+.material-icons[color='red'] {
+  color: crimson;
+}
+
+.material-icons[color='green'] {
+  color: mediumseagreen;
+}
+
+.material-icons[color='orange'] {
+  color: orange;
+}
+
+.material-icons[color='blue'] {
+  color: dodgerblue;
+}

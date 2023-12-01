@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import {  CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-
+import { NavItem } from '@webpackages/components';
 @Component({
   selector: 'wt-inventory-navigation',
   templateUrl: './inventory-navigation.component.html',
@@ -29,6 +29,34 @@ import { Title } from '@angular/platform-browser';
 export class InventoryNavigationComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
+  navItems: NavItem[] = [
+    {
+      icon: 'inventory',
+      label: 'Product',
+      route: 'product',
+    },
+    {
+      icon: 'category',
+      label: 'Category',
+      route: 'category',
+    },
+    {
+      icon: 'money',
+      label: 'Price',
+      route: 'price',
+    },
+    {
+      icon: 'numbers',
+      label: 'Quantity',
+      route: 'quantity',
+    },
+    {
+      icon: 'numbers',
+      label: 'Quantity',
+      route: 'quantity',
+    },
+  ];
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -36,7 +64,5 @@ export class InventoryNavigationComponent {
       shareReplay()
     );
 
-  constructor(public readonly title: Title) {
-    
-  }
+  constructor(public readonly title: Title) {}
 }

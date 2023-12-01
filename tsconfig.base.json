@@ -21,7 +21,8 @@
       "@webpackages/core": ["libs/core/src/index.ts"],
       "@webpackages/gen": ["libs/gen/src/index.ts"],
       "@webpackages/inventory": ["libs/inventory/src/index.ts"],
-      "@webpackages/inventory-client": ["libs/inventory-client/src/index.ts"]
+      "@webpackages/inventory-client": ["libs/inventory-client/src/index.ts"],
+      "@webpackages/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

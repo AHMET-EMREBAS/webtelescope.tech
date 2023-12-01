@@ -1,0 +1,63 @@
+.sidenav-container {
+  height: 100%;
+  min-height: 600px;
+}
+
+.sidenav {
+  width: 300px;
+  transition: width ease-in-out 400ms;
+}
+
+.mini-sidenav {
+  width: 60px;
+  /* transition: width ease-in-out 400ms; */
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.nav-item {
+  border: 1px dashed transparent;
+  box-sizing: border-box;
+  transition: border-color ease-in-out 400ms;
+}
+
+@keyframes fadeInOnEnter {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.nav-item:hover mat-icon {
+  font-variation-settings: 'FILL' 1 !important;
+  animation: fadeInOnEnter 2000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.material-icons {
+  transition: color ease-in-out 400ms;
+}
+
+.router-link-active {
+  border: 1px dashed orangered;
+
+  .material-icons {
+    color: orangered;
+  }
+}
+
+mat-sidenav-content {
+  border: 3px dashed rgba(201, 175, 175, 0.472);
+  box-sizing: border-box;
+  overflow-y: auto;
+}

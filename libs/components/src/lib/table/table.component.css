@@ -1,0 +1,16 @@
+.full-width-table {
+  width: 100%;
+}
+
+table{ 
+  overflow: hidden;
+}
+
+.table-th{ 
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  
+  gap: 1em;
+}

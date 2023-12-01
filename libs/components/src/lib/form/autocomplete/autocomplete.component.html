@@ -1,0 +1,28 @@
+<mat-form-field [formGroup]="formGroup" appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+
+  <input
+    type="text"
+    [formControlName]="name"
+    style="visibility: collapse; position: absolute"
+  />
+
+  <input
+    type="text"
+    matInput
+    [formControl]="formControl"
+    [matAutocomplete]="auto"
+  />
+
+  <mat-autocomplete
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    (optionSelected)="select($event)"
+  >
+    @for (option of autoCompleteOptions$ | async;track option) {
+    <mat-option [value]="option">
+      {{ option.name }}
+    </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

@@ -8,17 +8,19 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>Menu</mat-toolbar>
+
     <mat-nav-list>
+      @for (item of navItems; track $index) {
       <a
         mat-list-item
-        [routerLink]="['category']"
+        
+        [routerLink]="[item.route]"
         routerLinkActive="router-link-active"
       >
-        <mat-icon>category</mat-icon>
-        <span>Category</span>
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemLine>{{ item.label }}</span>
       </a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      }
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

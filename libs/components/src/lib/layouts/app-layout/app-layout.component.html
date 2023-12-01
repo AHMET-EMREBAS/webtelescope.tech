@@ -1,0 +1,84 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [class.mini-sidenav]="miniSidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>
+      <img src="./assets/icons/icon-72x72.png" alt="App Logo" width="30" />
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a
+        mat-list-item
+        (click)="toggleMiniSidenav()"
+        i18n-aria-label
+        aria-label="Minimize Sidenav"
+        [matTooltip]="miniSidenav ? 'Maximize Sidenav' : 'Minimize Sidenav'"
+        matTooltipPosition="right"
+      >
+        <span matListItemIcon style="transform: rotate(90deg)">
+          <mat-icon [class.big-icon]="miniSidenav" class="outline">
+            {{ miniSidenav ? 'unfold_more' : 'unfold_less' }}
+          </mat-icon>
+        </span>
+      </a>
+
+      <!-- Nav Items -->
+      <a
+        mat-list-item
+        [routerLink]="[item.route]"
+        [queryParams]="item.params"
+        routerLinkActive="router-link-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        matTooltip="{{ item.name | titlecase }}"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="!miniSidenav"
+        class="nav-item"
+        (click)="navItemClickHandler(item)"
+        i18n-aria-label
+        [attr.aria-label]="item.name + ' Page'"
+        *ngFor="let item of navItems"
+      >
+        <span matListItemLine>
+          {{ item.name | titlecase }}
+        </span>
+
+        <span matListItemIcon>
+          <mat-icon
+            [class.big-icon]="miniSidenav"
+            color="primary"
+            class="outline"
+          >
+            {{ item.icon }}
+          </mat-icon>
+        </span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="flex column flex-grow-1" style="height: 100%">
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon" style="color: white;">
+            {{ drawer.opened ? 'menu_open' : 'menu' }}
+          </mat-icon>
+        </button>
+        <span>{{ title.getTitle() }} | {{ moduleName }}</span>
+      </mat-toolbar>
+    
+      <router-outlet></router-outlet>
+      <div class="flex-grow-1"></div>
+      <mat-toolbar>Toolbar </mat-toolbar>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

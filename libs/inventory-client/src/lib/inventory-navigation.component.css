@@ -15,3 +15,15 @@
   top: 0;
   z-index: 1;
 }
+
+[mat-list-item] {
+  border-left: 4px solid rgba(255, 166, 0, 0.225);
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  letter-spacing: 1px;
+}
+
+.router-link-active {
+  border-left: 4px solid orange;
+  font-weight: 700;
+}
