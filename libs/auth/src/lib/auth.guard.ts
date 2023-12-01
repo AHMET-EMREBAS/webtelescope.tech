@@ -7,10 +7,10 @@ import {
   isPublic,
   requiredPermission,
   requiredRole,
-} from './auth';
+} from '@webpackages/core';
 import { Reflector } from '@nestjs/core';
 import { AuthService } from './auth.service';
-import { User } from './user.entity';
+import { Permission, Role, User } from './resources';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -37,14 +37,14 @@ export class AuthGuard implements CanActivate {
         req.user = __user;
 
         // If user has "admin" role, then return true;
-        if (__user.roles?.find((e) => e.name === ADMIN_ROLE)) {
+        if (__user.roles?.find((e: Role) => e.name === ADMIN_ROLE)) {
           return true;
         }
 
         // if there are required role
         if (__role) {
           // if user does not have the role, then return false
-          const hasRole = __user.roles?.find((e) => e.name === __role);
+          const hasRole = __user.roles?.find((e: Role) => e.name === __role);
           if (hasRole) {
             return true;
           }
@@ -53,8 +53,8 @@ export class AuthGuard implements CanActivate {
         // if there are required permission
         if (__permission) {
           // if user does not have required permission, then return false
-          const hasPermission = __user.roles?.find((e) =>
-            e.permissions?.find((p) => p.name === __permission)
+          const hasPermission = __user.roles?.find((e: Role) =>
+            e.permissions?.find((p: Permission) => p.name === __permission)
           );
           if (hasPermission) {
             return true;

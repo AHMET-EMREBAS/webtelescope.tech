@@ -1,19 +1,18 @@
 import { DynamicModule, Inject, Module, OnModuleInit } from '@nestjs/common';
-import { Permission, Role, User } from './user.entity';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-import { APP_GUARD } from '@nestjs/core';
 import { Repository } from 'typeorm';
 import {
   ADMIN_ROLE,
   ResourceAction,
   SUBSCRIBER_ROLE,
   createPermission,
-} from './auth';
+} from '@webpackages/core';
 import { ClassConstructor } from 'class-transformer';
+import { Permission, Role, User } from './resources';
 
 export class AuthModuleOptions {
   secret!: string;
@@ -41,11 +40,6 @@ export class AuthModule implements OnModuleInit {
       providers: [
         AuthService,
         AuthGuard,
-        {
-          provide: APP_GUARD,
-          useClass: AuthGuard,
-        },
-
         {
           provide: AuthModuleOptions,
           useValue: options,

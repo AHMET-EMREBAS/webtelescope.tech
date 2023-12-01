@@ -1,4 +1,4 @@
-import { formatFiles, generateFiles, Tree } from '@nx/devkit';
+import { formatFiles, generateFiles, Tree, names } from '@nx/devkit';
 import * as path from 'path';
 import { ResourceGeneratorSchema } from './schema';
 
@@ -8,7 +8,9 @@ export async function resourceGenerator(
 ) {
   const projectRoot = `libs/${options.project}/src/lib/resources`;
 
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
+  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {
+    ...names(options.name),
+  });
   await formatFiles(tree);
 }
 

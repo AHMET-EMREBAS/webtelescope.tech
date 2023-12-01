@@ -4,13 +4,18 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { LoginDto, SignupDto } from './dtos';
+
 import { Repository } from 'typeorm';
-import { Role, User } from './user.entity';
+import {
+  LoginDto,
+  SignupDto,
+  AuthPayload,
+  SUBSCRIBER_ROLE,
+} from '@webpackages/core';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthPayload, SUBSCRIBER_ROLE } from './auth';
+import { Role, User } from './resources';
 
 @Injectable()
 export class AuthService {
