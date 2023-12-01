@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Exclude, Expose, Transform } from 'class-transformer';
+import { Exclude } from 'class-transformer';
 import { Property } from '../validation';
-import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * Search, paginate, and order entities
@@ -32,7 +31,6 @@ export class QueryDto {
   @Property({ type: 'string', maxLength: 30 })
   search = '';
 
-  @Property({ type: 'array' })
-  @Transform(({ value }) => value && (value as string).split(',').map((e) => e.trim()))
+  @Property({ type: 'string', isArray: true })
   select?: any[];
 }

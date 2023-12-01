@@ -16,7 +16,7 @@ import {
   Max,
   IsEmail,
   IsStrongPassword,
-  IsArray,
+  IsPhoneNumber,
 } from 'class-validator';
 import { ClassConstructor, Expose, Transform, Type } from 'class-transformer';
 
@@ -82,7 +82,6 @@ export function Property(options: ExtendedApiPropertyOptions) {
     }
   }
 
-
   const { minLength, maxLength, minimum, maximum, format } = options;
 
   if (minLength) decorators.push(MinLength(minLength, { each }));
@@ -93,6 +92,7 @@ export function Property(options: ExtendedApiPropertyOptions) {
   if (format) {
     if (format === 'email') decorators.push(IsEmail({}, { each }));
     if (format === 'password') decorators.push(IsStrongPassword({}, { each }));
+    if (format === 'phone') decorators.push(IsPhoneNumber(undefined, { each }));
   }
 
   return applyDecorators(...decorators);

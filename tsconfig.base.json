@@ -19,7 +19,8 @@
       "@webpackages/common": ["libs/common/src/index.ts"],
       "@webpackages/components": ["libs/components/src/index.ts"],
       "@webpackages/core": ["libs/core/src/index.ts"],
-      "@webpackages/gen": ["libs/gen/src/index.ts"]
+      "@webpackages/gen": ["libs/gen/src/index.ts"],
+      "@webpackages/inventory": ["libs/inventory/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

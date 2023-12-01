@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '@webpackages/auth';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { InventoryModule } from '@webpackages/inventory';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       secret: 'Secret',
       resources: [],
     }),
+    InventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
