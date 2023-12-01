@@ -10,6 +10,11 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ILike, Repository } from 'typeorm';
+import { Sample } from './entities';
+import { CreateSampleDto, UpdateSampleDto } from './dtos';
+import { InjectRepository } from '@nestjs/typeorm';
+
 import {
   QueryDto,
   RELATION_AND_ID_PATH,
@@ -19,29 +24,24 @@ import {
   TransformAndValidatePipe,
   UserId,
 } from '@webpackages/core';
-
-import { ILike, Repository } from 'typeorm';
-import { User } from './entities';
-import { CreateUserDto, UpdateUserDto } from './dtos';
-import { InjectRepository } from '@nestjs/typeorm';
 import {
   AUTH_BEARER_NAME,
   DeletePermission,
   ReadPermission,
   UpdatePermission,
   WritePermission,
-} from '../../auth';
+} from '@webpackages/auth';
 
 @ApiBearerAuth(AUTH_BEARER_NAME)
-@ApiTags('UserController')
+@ApiTags('SampleController')
 @Controller()
-export class UserController {
+export class SampleController {
   constructor(
-    @InjectRepository(User) private readonly repo: Repository<User>
+    @InjectRepository(Sample) private readonly repo: Repository<Sample>
   ) {}
 
-  @ReadPermission('user')
-  @Get('users')
+  @ReadPermission('sample')
+  @Get('samples')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
     const { orderBy, orderDir, search, skip, take, withDeleted, select } =
       query;
@@ -53,21 +53,21 @@ export class UserController {
       },
       withDeleted,
       where: {
-        username: ILike(`%${search}%`),
+        name: ILike(`%${search}%`),
       },
       select,
     });
   }
-  @ReadPermission('user')
-  @Get('user/:id')
+  @ReadPermission('sample')
+  @Get('sample/:id')
   findOneById(@Param('id', ParseIntPipe) id: number) {
     return this.repo.findOneBy({ id });
   }
 
-  @WritePermission('user')
-  @Post('user')
+  @WritePermission('sample')
+  @Post('sample')
   async save(
-    @Body(TransformAndValidatePipe) body: CreateUserDto,
+    @Body(TransformAndValidatePipe) body: CreateSampleDto,
     @UserId() userId: number
   ) {
     return await this.repo.save({
@@ -77,24 +77,24 @@ export class UserController {
     });
   }
 
-  @UpdatePermission('user')
-  @Put('user/:id')
+  @UpdatePermission('sample')
+  @Put('sample/:id')
   udpate(
     @Param('id', ParseIntPipe) id: number,
-    @Body(TransformAndValidatePipe) body: UpdateUserDto,
+    @Body(TransformAndValidatePipe) body: UpdateSampleDto,
     @UserId() userId: number
   ) {
     return this.repo.update(id, { ...body, updatedBy: userId });
   }
 
-  @DeletePermission('user')
-  @Delete('user/:id')
+  @DeletePermission('sample')
+  @Delete('sample/:id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.repo.delete(id);
   }
 
-  @UpdatePermission('user')
-  @Put(`user/${RELATION_AND_ID_PATH}`)
+  @UpdatePermission('sample')
+  @Put(`sample/${RELATION_AND_ID_PATH}`)
   async add(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -108,8 +108,8 @@ export class UserController {
       .add(relationId);
   }
 
-  @UpdatePermission('user')
-  @Delete(`user/${RELATION_AND_ID_PATH}`)
+  @UpdatePermission('sample')
+  @Delete(`sample/${RELATION_AND_ID_PATH}`)
   async remove(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -123,8 +123,8 @@ export class UserController {
       .add(relationId);
   }
 
-  @UpdatePermission('user')
-  @Post(`user/${RELATION_AND_ID_PATH}`)
+  @UpdatePermission('sample')
+  @Post(`sample/${RELATION_AND_ID_PATH}`)
   async set(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -138,8 +138,8 @@ export class UserController {
       .set(relationId);
   }
 
-  @UpdatePermission('user')
-  @Delete(`user/${RELATION_PATH}`)
+  @UpdatePermission('sample')
+  @Delete(`sample/${RELATION_PATH}`)
   async unset(
     @Param(TransformAndValidatePipe) relation: RelationDto,
     @UserId() userId: number

@@ -13,7 +13,7 @@ export class PermissionSubscriber implements EntitySubscriberInterface {
   }
 
   @AfterInsert()
-  afterInsert(event: InsertEvent<any>): void | Promise<any> {
+  async afterInsert(event: InsertEvent<any>): Promise<void> {
     // TODO:
   }
 }

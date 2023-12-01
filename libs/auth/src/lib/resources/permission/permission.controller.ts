@@ -11,19 +11,23 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import {
-  AUTH_BEARER_NAME,
-  DeletePermission,
   QueryDto,
   RELATION_AND_ID_PATH,
   RELATION_PATH,
-  ReadPermission,
   RelationAndIdDto,
   RelationDto,
   TransformAndValidatePipe,
-  UpdatePermission,
   UserId,
-  WritePermission,
 } from '@webpackages/core';
+
+import {
+  AUTH_BEARER_NAME,
+  DeletePermission,
+  ReadPermission,
+  UpdatePermission,
+  WritePermission,
+} from '../../auth';
+
 import { ILike, Repository } from 'typeorm';
 import { Permission } from './entities';
 import { CreatePermissionDto, UpdatePermissionDto } from './dtos';

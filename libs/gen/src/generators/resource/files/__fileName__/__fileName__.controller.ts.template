@@ -10,24 +10,27 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import {
-  AUTH_BEARER_NAME,
-  DeletePermission,
-  QueryDto,
-  RELATION_AND_ID_PATH,
-  RELATION_PATH,
-  ReadPermission,
-  RelationAndIdDto,
-  RelationDto,
-  TransformAndValidatePipe,
-  UpdatePermission,
-  UserId,
-  WritePermission,
-} from '@webpackages/core';
 import { ILike, Repository } from 'typeorm';
 import { <%- className %> } from './entities';
 import { Create<%- className %>Dto, Update<%- className %>Dto } from './dtos';
 import { InjectRepository } from '@nestjs/typeorm';
+
+import {
+  QueryDto,
+  RELATION_AND_ID_PATH,
+  RELATION_PATH,
+  RelationAndIdDto,
+  RelationDto,
+  TransformAndValidatePipe,
+  UserId,
+} from '@webpackages/core';
+import {
+  AUTH_BEARER_NAME,
+  DeletePermission,
+  ReadPermission,
+  UpdatePermission,
+  WritePermission,
+} from '@webpackages/auth';
 
 @ApiBearerAuth(AUTH_BEARER_NAME)
 @ApiTags('<%- className %>Controller')
