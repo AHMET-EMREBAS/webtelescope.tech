@@ -1,5 +1,5 @@
 import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { TransformAndValidatePipe } from '@webpackages/core';
@@ -24,6 +24,7 @@ export class AuthController {
    * @param res
    * @returns
    */
+  @ApiOperation({ summary: 'Login with username and password' })
   @SetPublic()
   @Post('login')
   async login(
@@ -43,6 +44,7 @@ export class AuthController {
    * @param signupDto
    * @param res
    */
+  @ApiOperation({ summary: 'Signup with username and password' })
   @SetPublic()
   @Post('signup')
   async signup(
@@ -60,6 +62,7 @@ export class AuthController {
    * @param body
    * @returns
    */
+  @ApiOperation({ summary: 'Update password by username and current password' })
   @SetPublic()
   @Post('update-password')
   async updatePassword(
@@ -73,6 +76,7 @@ export class AuthController {
    * @param body
    * @returns
    */
+  @ApiOperation({ summary: 'Send one time security code by email' })
   @SetPublic()
   @Post('forgot-password')
   async forgotPassword(
@@ -81,6 +85,7 @@ export class AuthController {
     return await this.authService.forgotPassword(body);
   }
 
+  @ApiOperation({ summary: 'Update password by username and security code' })
   @SetPublic()
   @Post('update-password-by-code')
   async updatePasswordByCode(

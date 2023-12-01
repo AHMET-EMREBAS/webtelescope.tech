@@ -134,6 +134,8 @@ export class AuthService {
 
     const code = this.createSecurityCode(username);
     this.eventEmitter.emit(AuthEvents.FORGOT_PASSWORD, { username, code });
+
+    return { message: 'We sent one time security code' };
   }
 
   /**
@@ -177,6 +179,8 @@ export class AuthService {
         const difference = currentTime - codeTime;
 
         if (difference < 120_000) {
+          // Update security code
+          this.createSecurityCode(username);
           return;
         }
       }
