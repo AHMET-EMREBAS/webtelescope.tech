@@ -6,8 +6,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Id } from '../params';
 import { TransformAndValidatePipe } from '../pipes';
 import { QueryDto } from '../dto';
-import { ApiTags } from '@nestjs/swagger';
-import { SetPermission, readPermission } from '../auth';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AUTH_BEARER_NAME, SetPermission, readPermission } from '../auth';
 
 export type QueryControllerOptions = {
   singularPath: string;
@@ -21,6 +21,7 @@ export function QueryController(
 ): ClassConstructor<any> {
   const { pluralPath, singularPath, entity, searchFields } = options;
 
+  @ApiBearerAuth(AUTH_BEARER_NAME)
   @SetPermission(readPermission(entity.name))
   @ApiTags(`${entity.name}Controller`)
   @Controller()

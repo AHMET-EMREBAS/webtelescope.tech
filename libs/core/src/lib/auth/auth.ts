@@ -5,15 +5,13 @@ import { Request } from 'express';
 import { SetMetadata } from '@nestjs/common';
 
 export const AUTH_COOKIE_NAME = 'authtoken';
-export const AUTH_BEARER_NAME = Symbol('AUTH_BEARER_NAME')
+export const AUTH_BEARER_NAME = 'AUTH_BEARER_MAIN';
 export const SET_PERMISSION_TOKEN = Symbol('SET_PERMISSION_TOKEN');
 export const SET_PUBLIC_TOKEN = Symbol('SET_PUBLIC_TOKEN');
 export const SET_ROLE_TOKEN = Symbol('SET_ROLE_TOKEN');
 
 export interface AuthPayload {
   sub: number;
-  permissions: string;
-  roles: string;
 }
 
 /**
@@ -105,20 +103,6 @@ export function requiredRole(
     context.getHandler(),
     context.getClass(),
   ]);
-}
-
-export function hasPermission(
-  requiredPermission: string,
-  authPayload: AuthPayload
-) {
-  return authPayload.permissions.includes(requiredPermission);
-}
-
-export function hasRole(
-  requiredRole: string,
-  authPayload: AuthPayload
-): boolean {
-  return authPayload.roles.includes(requiredRole);
 }
 
 export function isPublic(

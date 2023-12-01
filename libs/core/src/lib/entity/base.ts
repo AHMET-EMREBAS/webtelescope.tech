@@ -8,7 +8,7 @@ import {
 import { hashSync, genSaltSync } from 'bcrypt';
 
 export class BaseEntity {
-  @PrimaryGeneratedColumn() id?: number;
+  @PrimaryGeneratedColumn() id!: number;
   @CreateDateColumn() createdAt?: Date;
   @UpdateDateColumn() updatedAt?: Date;
   @DeleteDateColumn() deletedAt?: Date;
@@ -25,8 +25,8 @@ export class BaseNameDescriptionEntity extends BaseNameEntity {
   @Column({ type: 'varchar', nullable: true }) description?: string;
 }
 
-export class BaseUserEntity {
-  @Column({ type: 'varchar', unique: true }) username?: string;
+export class BaseUserEntity extends BaseEntity {
+  @Column({ type: 'varchar', unique: true }) username!: string;
   @Column({
     type: 'varchar',
     transformer: {
@@ -38,5 +38,5 @@ export class BaseUserEntity {
       },
     },
   })
-  password?: string;
+  password!: string;
 }

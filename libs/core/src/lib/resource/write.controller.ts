@@ -13,6 +13,7 @@ import {
   RelationDto,
 } from '../dto';
 import {
+  AUTH_BEARER_NAME,
   SetPermission,
   deletePermission,
   updatePermission,
@@ -31,7 +32,7 @@ export function WriteController(
 ): ClassConstructor<any> {
   const { singularPath, createDto, updateDto, entity } = options;
 
-  @ApiBearerAuth()
+  @ApiBearerAuth(AUTH_BEARER_NAME)
   @ApiTags(`${entity.name}Controller`)
   @Controller()
   class __Controller {
