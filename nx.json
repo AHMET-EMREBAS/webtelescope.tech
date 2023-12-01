@@ -112,7 +112,11 @@
         "webpackages"
       ],
       "projectNameAndRootFormat": "derived",
-      "directory": "libs"
+      "directory": "libs",
+      "unitTestRunner": [
+        "jest"
+      ],
+      "importPath": "@webpackages/{projectName}"
     }
   },
   "defaultProject": "client",
