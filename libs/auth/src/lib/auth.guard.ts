@@ -27,11 +27,13 @@ export class AuthGuard implements CanActivate {
 
     const token = authCookie(context) || authHeader(context);
 
+    // If there is a token then, verify the token
     if (token) {
-      const __permission = requiredPermission(context, this.reflector);
-      const __role = requiredRole(context, this.reflector);
+      const __requiredPermission = requiredPermission(context, this.reflector);
+      const __requiredRole = requiredRole(context, this.reflector);
       const __user = await this.authService.verifyToken(token);
 
+      // Verified user token
       if (__user) {
         // If user has role or the permission then append user to request and return true
         req.user = __user;
@@ -42,29 +44,34 @@ export class AuthGuard implements CanActivate {
         }
 
         // if there are required role
-        if (__role) {
+        if (__requiredRole) {
           // if user does not have the role, then return false
-          const hasRole = __user.roles?.find((e: Role) => e.name === __role);
-          if (hasRole) {
-            return true;
-          }
-        }
-
-        // if there are required permission
-        if (__permission) {
-          // if user does not have required permission, then return false
-          const hasPermission = __user.roles?.find((e: Role) =>
-            e.permissions?.find((p: Permission) => p.name === __permission)
+          const userHasRole = __user.roles?.find(
+            (e: Role) => e.name === __requiredRole
           );
-          if (hasPermission) {
+          if (userHasRole) {
             return true;
           }
+          return false;
+          // if there are required permission
+        } else if (__requiredPermission) {
+          // if user does not have required permission, then return false
+          const userHasPermission = __user.roles?.find((e: Role) =>
+            e.permissions?.find(
+              (p: Permission) => p.name === __requiredPermission
+            )
+          );
+          if (userHasPermission) {
+            return true;
+          }
+          return false;
         }
-
-        return false;
+        // If there is no required role or permission, then return true;
+        return true;
       }
       return false;
     }
+    // If there is no token, then return false
     return false;
   }
 }

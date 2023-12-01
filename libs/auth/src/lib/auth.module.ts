@@ -14,6 +14,8 @@ import {
   SUBSCRIBER_ROLE,
   createPermission,
 } from './auth';
+import { APP_GUARD } from '@nestjs/core';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 export class AuthModuleOptions {
   secret!: string;
@@ -28,6 +30,7 @@ export class AuthModule implements OnModuleInit {
     return {
       module: AuthModule,
       imports: [
+        EventEmitterModule,
         JwtModule.register({
           global: true,
           secret: options.secret,
@@ -44,6 +47,10 @@ export class AuthModule implements OnModuleInit {
         {
           provide: AuthModuleOptions,
           useValue: options,
+        },
+        {
+          provide: APP_GUARD,
+          useClass: AuthGuard,
         },
       ],
     };

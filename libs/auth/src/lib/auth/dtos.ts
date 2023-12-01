@@ -1,7 +1,6 @@
 import { Property } from '@webpackages/core';
 import { Exclude } from 'class-transformer';
 
-
 @Exclude()
 export class LoginDto {
   @Property({ type: 'string', default: 'root@root.com' })
@@ -21,13 +20,13 @@ export class SignupDto {
 }
 
 @Exclude()
-export class ForgotPassword {
+export class ForgotPasswordDto {
   @Property({ type: 'string', format: 'email', default: 'root@root.com' })
   username!: string;
 }
 
 @Exclude()
-export class ResetPassword {
+export class UpdatePasswordDto {
   @Property({ type: 'string', format: 'email', default: 'root@root.com' })
   username!: string;
 
@@ -39,7 +38,7 @@ export class ResetPassword {
 }
 
 @Exclude()
-export class ResetPasswordWithCode {
+export class UpdatePasswordByCodeDto {
   @Property({ type: 'string', format: 'email', default: 'root@root.com' })
   username!: string;
 

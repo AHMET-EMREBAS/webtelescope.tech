@@ -3,8 +3,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Sample, SampleModule } from './sample';
-import { AuthModule } from '@webpackages/core';
+import { AuthModule } from '@webpackages/auth';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -14,13 +15,13 @@ import { AuthModule } from '@webpackages/core';
       synchronize: true,
       dropSchema: true,
     }),
+    EventEmitterModule.forRoot(),
     AuthModule.register({
       username: 'root@root.com',
       password: 'Pass123!',
       secret: 'Secret',
-      resources: [Sample],
+      resources: [],
     }),
-    SampleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
