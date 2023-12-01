@@ -1,11 +1,12 @@
 import { ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { SetMetadata } from '@nestjs/common';
 
+export const ADMIN_ROLE = 'admin';
+export const SUBSCRIBER_ROLE = 'subscriber';
 export const AUTH_COOKIE_NAME = 'authtoken';
-export const AUTH_BEARER_NAME = 'AUTH_BEARER_MAIN';
+export const AUTH_BEARER_NAME = 'autorization';
 export const SET_PERMISSION_TOKEN = Symbol('SET_PERMISSION_TOKEN');
 export const SET_PUBLIC_TOKEN = Symbol('SET_PUBLIC_TOKEN');
 export const SET_ROLE_TOKEN = Symbol('SET_ROLE_TOKEN');
@@ -43,20 +44,6 @@ export function SetPublic() {
   return SetMetadata(SET_PUBLIC_TOKEN, true);
 }
 
-export function signToken(
-  jwtService: JwtService,
-  payload: AuthPayload
-): string {
-  return jwtService.sign({ ...payload });
-}
-
-export function verifyToken(
-  jwtService: JwtService,
-  token: string
-): AuthPayload | never {
-  return jwtService.verify(token);
-}
-
 /**
  * Extract token from autorization header
  * @param context
@@ -66,7 +53,7 @@ export function authHeader(context: ExecutionContext): string | undefined {
   return context
     .switchToHttp()
     .getRequest<Request>()
-    .headers.authorization?.split(' ')
+    .headers?.authorization?.split(' ')
     .pop();
 }
 
@@ -76,7 +63,9 @@ export function authHeader(context: ExecutionContext): string | undefined {
  * @returns
  */
 export function authCookie(context: ExecutionContext): string {
-  return context.switchToHttp().getRequest<Request>().cookies[AUTH_COOKIE_NAME];
+  return context.switchToHttp().getRequest<Request>().cookies?.[
+    AUTH_COOKIE_NAME
+  ];
 }
 
 /**
@@ -115,18 +104,43 @@ export function isPublic(
   ]);
 }
 
+export type ResourceAction = 'read' | 'write' | 'update' | 'delete';
+
+export function createPermission(
+  action: ResourceAction,
+  resourceName: string
+): string {
+  return `${action}:${resourceName}`;
+}
+
 export function readPermission(resourceName: string) {
-  return `read:${resourceName}`;
+  return createPermission('read', resourceName);
 }
 
 export function writePermission(resourceName: string) {
-  return `write:${resourceName}`;
+  return createPermission('write', resourceName);
 }
 
 export function deletePermission(resourceName: string) {
-  return `delete:${resourceName}`;
+  return createPermission('delete', resourceName);
 }
 
 export function updatePermission(resourceName: string) {
-  return `update:${resourceName}`;
+  return createPermission('update', resourceName);
+}
+
+export function WritePermission(resourceName: string) {
+  return SetPermission(writePermission(resourceName));
+}
+
+export function ReadPermission(resourceName: string) {
+  return SetPermission(readPermission(resourceName));
+}
+
+export function UpdatePermission(resourceName: string) {
+  return SetPermission(updatePermission(resourceName));
+}
+
+export function DeletePermission(resourceName: string) {
+  return SetPermission(deletePermission(resourceName));
 }

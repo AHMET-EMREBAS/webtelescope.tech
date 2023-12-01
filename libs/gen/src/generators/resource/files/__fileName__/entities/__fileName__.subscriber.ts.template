@@ -1,0 +1,19 @@
+import {
+  AfterInsert,
+  EntitySubscriberInterface,
+  EventSubscriber,
+  InsertEvent,
+} from 'typeorm';
+import { <%- className %> } from './<%- fileName %>.entity';
+
+@EventSubscriber()
+export class <%- className %>Subscriber implements EntitySubscriberInterface {
+  listenTo() {
+    return <%- className %>;
+  }
+
+  @AfterInsert()
+  afterInsert(event: InsertEvent<any>): void | Promise<any> {
+    // TODO:
+  }
+}

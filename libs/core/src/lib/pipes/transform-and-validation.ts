@@ -7,5 +7,6 @@ export const TransformAndValidatePipe = new ValidationPipe({
   transform: true,
   transformOptions: {
     exposeUnsetFields: false,
+    exposeDefaultValues:true
   },
 });
