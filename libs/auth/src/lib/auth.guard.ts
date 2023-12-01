@@ -1,5 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Request } from 'express';
+import { Reflector } from '@nestjs/core';
+import { AuthService } from './auth.service';
+import { Permission, Role, User } from './resources';
 import {
   ADMIN_ROLE,
   authCookie,
@@ -7,10 +10,7 @@ import {
   isPublic,
   requiredPermission,
   requiredRole,
-} from '@webpackages/core';
-import { Reflector } from '@nestjs/core';
-import { AuthService } from './auth.service';
-import { Permission, Role, User } from './resources';
+} from './auth';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

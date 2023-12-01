@@ -1,15 +1,9 @@
 import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import {
-  AUTH_BEARER_NAME,
-  LoginDto,
-  SetPublic,
-  SignupDto,
-  TransformAndValidatePipe,
-} from '@webpackages/core';
+import { TransformAndValidatePipe } from '@webpackages/core';
+import { LoginDto, SignupDto, SetPublic, AUTH_BEARER_NAME } from './auth';
 
 @ApiTags('AuthController')
 @Controller('auth')

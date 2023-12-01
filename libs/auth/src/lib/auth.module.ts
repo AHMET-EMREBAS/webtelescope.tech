@@ -5,14 +5,15 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { Repository } from 'typeorm';
+
+import { ClassConstructor } from 'class-transformer';
+import { Permission, Role, User } from './resources';
 import {
   ADMIN_ROLE,
   ResourceAction,
   SUBSCRIBER_ROLE,
   createPermission,
-} from '@webpackages/core';
-import { ClassConstructor } from 'class-transformer';
-import { Permission, Role, User } from './resources';
+} from './auth';
 
 export class AuthModuleOptions {
   secret!: string;

@@ -6,16 +6,12 @@ import {
 } from '@nestjs/common';
 
 import { Repository } from 'typeorm';
-import {
-  LoginDto,
-  SignupDto,
-  AuthPayload,
-  SUBSCRIBER_ROLE,
-} from '@webpackages/core';
+
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role, User } from './resources';
+import { LoginDto, SignupDto, AuthPayload, SUBSCRIBER_ROLE } from './auth';
 
 @Injectable()
 export class AuthService {
