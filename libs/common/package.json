@@ -1,6 +1,15 @@
 {
   "name": "@webpackages/common",
   "version": "0.0.1",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "info@webtelescope.tech",
+    "url": "https://webtelescope.tech"
+  },
+  "repository": {
+    "directory": "libs/common", 
+    "url": "https://github.com/AHMET-EMREBAS/webtelescope.tech"
+  },
   "dependencies": {
     "@swc/helpers": "~0.5.2"
   },
