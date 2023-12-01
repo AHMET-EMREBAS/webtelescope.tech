@@ -5,7 +5,7 @@ import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { ClassConstructor } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Id } from '../params';
+import { Id, UserId } from '../params';
 import {
   RELATION_AND_ID_PATH,
   RELATION_PATH,
@@ -33,37 +33,52 @@ export function WriteController(
 
   @ApiBearerAuth()
   @ApiTags(`${entity.name}Controller`)
-  @Controller(singularPath)
+  @Controller()
   class __Controller {
     constructor(
       @InjectRepository(entity) public readonly repo: Repository<any>
     ) {}
 
     @SetPermission(writePermission(entity.name))
-    @Post()
+    @Post(singularPath)
     @ApiBody({ type: createDto })
-    async save(@Body(TransformAndValidatePipe) body: any) {
-      return await this.repo.save(body);
+    async save(
+      @Body(TransformAndValidatePipe) body: any,
+      @UserId() userId: number
+    ) {
+      return await this.repo.save({
+        ...body,
+        createdBy: userId,
+        updatedBy: userId,
+      });
     }
 
     @SetPermission(updatePermission(entity.name))
-    @Put(':id')
+    @Put(`${singularPath}/:id`)
     @ApiBody({ type: updateDto })
-    async update(@Id() id: number, @Body(TransformAndValidatePipe) body: any) {
-      return await this.repo.update(id, body);
+    async update(
+      @Id() id: number,
+      @Body(TransformAndValidatePipe) body: any,
+      @UserId() userId: number
+    ) {
+      return await this.repo.update(id, { ...body, updatedId: userId });
     }
 
     @SetPermission(deletePermission(entity.name))
-    @Delete(':id')
+    @Delete(`${singularPath}/:id`)
     @ApiBody({ type: updateDto })
     async delete(@Id() id: number) {
       return await this.repo.delete(id);
     }
 
     @SetPermission(updatePermission(entity.name))
-    @Put(RELATION_AND_ID_PATH)
-    async add(@Param(TransformAndValidatePipe) relation: RelationAndIdDto) {
+    @Put(`${singularPath}/${RELATION_AND_ID_PATH}`)
+    async add(
+      @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
+      @UserId() userId: number
+    ) {
       const { id, relationId, relationName } = relation;
+      await this.repo.update(id, { updatedBy: userId });
       return await this.repo
         .createQueryBuilder()
         .relation(relationName)
@@ -72,9 +87,13 @@ export function WriteController(
     }
 
     @SetPermission(updatePermission(entity.name))
-    @Delete(RELATION_AND_ID_PATH)
-    async remove(@Param(TransformAndValidatePipe) relation: RelationAndIdDto) {
+    @Delete(`${singularPath}/${RELATION_AND_ID_PATH}`)
+    async remove(
+      @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
+      @UserId() userId: number
+    ) {
       const { id, relationId, relationName } = relation;
+      await this.repo.update(id, { updatedBy: userId });
       return await this.repo
         .createQueryBuilder()
         .relation(relationName)
@@ -83,9 +102,13 @@ export function WriteController(
     }
 
     @SetPermission(updatePermission(entity.name))
-    @Post(RELATION_AND_ID_PATH)
-    async set(@Param(TransformAndValidatePipe) relation: RelationAndIdDto) {
+    @Post(`${singularPath}/${RELATION_AND_ID_PATH}`)
+    async set(
+      @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
+      @UserId() userId: number
+    ) {
       const { id, relationId, relationName } = relation;
+      await this.repo.update(id, { updatedBy: userId });
       return await this.repo
         .createQueryBuilder()
         .relation(relationName)
@@ -94,9 +117,13 @@ export function WriteController(
     }
 
     @SetPermission(updatePermission(entity.name))
-    @Delete(RELATION_PATH)
-    async unset(@Param(TransformAndValidatePipe) relation: RelationDto) {
+    @Delete(`${singularPath}/${RELATION_PATH}`)
+    async unset(
+      @Param(TransformAndValidatePipe) relation: RelationDto,
+      @UserId() userId: number
+    ) {
       const { id, relationName } = relation;
+      await this.repo.update(id, { updatedBy: userId });
       return await this.repo
         .createQueryBuilder()
         .relation(relationName)
