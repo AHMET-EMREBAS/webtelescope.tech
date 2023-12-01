@@ -10,27 +10,16 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@webpackages/common/*": [
-        "libs/common/*"
-      ],
-      "@webpackages/components/*": [
-        "libs/components/*"
-      ],
-      "@webpackages/core/*": [
-        "libs/core/*"
-      ]
+      "@webpackages/common": ["libs/common/src/index.ts"],
+      "@webpackages/components": ["libs/components/src/index.ts"],
+      "@webpackages/core": ["libs/core/src/index.ts"],
+      "@webpackages/gen": ["libs/gen/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
