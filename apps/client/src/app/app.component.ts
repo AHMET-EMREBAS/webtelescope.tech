@@ -5,8 +5,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   selector: 'wt-root',
-  template: `<h1>Welcome client</h1>
-    <router-outlet></router-outlet>`,
+  template: `<router-outlet></router-outlet>`,
   styleUrl: './app.component.scss',
 })
 export class AppComponent {}

@@ -5,6 +5,7 @@ import { InventoryNavigationComponent } from './inventory-navigation.component';
 export const inventoryRoutes: Routes = [
   {
     path: '',
+    title: 'Inventory',
     component: InventoryNavigationComponent,
     children: [
       {
