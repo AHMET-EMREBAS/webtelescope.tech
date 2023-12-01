@@ -101,7 +101,18 @@
     "@nx/angular:component": {
       "style": "scss",
       "nameAndDirectoryFormat": "derived",
-      "prefix": "wt"
+      "prefix": "wt",
+      "standalone": true
+    },
+    "@nx/js:lib": {
+      "compiler": "swc",
+      "bundler": "swc",
+      "publishable": true,
+      "tags": [
+        "webpackages"
+      ],
+      "projectNameAndRootFormat": "derived",
+      "directory": "libs"
     }
   },
   "defaultProject": "client",
