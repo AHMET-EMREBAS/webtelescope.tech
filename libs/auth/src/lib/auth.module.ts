@@ -14,7 +14,6 @@ import {
   SUBSCRIBER_ROLE,
   createPermission,
 } from './auth';
-import { APP_GUARD } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 export class AuthModuleOptions {
@@ -47,10 +46,6 @@ export class AuthModule implements OnModuleInit {
         {
           provide: AuthModuleOptions,
           useValue: options,
-        },
-        {
-          provide: APP_GUARD,
-          useClass: AuthGuard,
         },
       ],
     };

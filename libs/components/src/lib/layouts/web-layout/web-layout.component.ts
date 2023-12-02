@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NAV_ITEMS_TOKEN, NavItem } from '../../api';
+import { TOOLBAR_ITEMS_TOKEN, NavItem } from '../../api';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 @Component({
@@ -27,5 +27,5 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './web-layout.component.scss',
 })
 export class WebLayoutComponent {
-  constructor(@Inject(NAV_ITEMS_TOKEN) public readonly navitems: NavItem[]) {}
+  constructor(@Inject(TOOLBAR_ITEMS_TOKEN) public readonly navitems: NavItem[]) {}
 }

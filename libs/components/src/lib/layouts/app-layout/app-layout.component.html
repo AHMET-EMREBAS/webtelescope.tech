@@ -73,12 +73,40 @@
             {{ drawer.opened ? 'menu_open' : 'menu' }}
           </mat-icon>
         </button>
-        <span>{{ title.getTitle() }} </span>
+        <div class="grow-1"></div>
+
+        <!-- Toolbar items -->
+        @for (item of toolbarItems; track $index) {
+        <button
+          mat-icon-button
+          [routerLink]="[item.route]"
+          routerLinkActive="router-link-active"
+          [matTooltip]="item.name"
+          matTooltipPosition="below"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+        </button>
+        }
       </mat-toolbar>
 
       <router-outlet></router-outlet>
-      <div class="flex-grow-1"></div>
-      <mat-toolbar>Toolbar </mat-toolbar>
+
+      <div class="grow-1"></div>
+      <mat-toolbar>
+
+        <!-- Statusbar Items -->
+        @for (item of statusbarItems; track $index) {
+        <button
+          mat-icon-button
+          [routerLink]="[item.route]"
+          routerLinkActive="router-link-active"
+          [matTooltip]="item.name"
+          matTooltipPosition="above"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+        </button>
+        }
+      </mat-toolbar>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

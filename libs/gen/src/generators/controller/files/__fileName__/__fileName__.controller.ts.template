@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
-import { Category } from './entities';
-import { CreateCategoryDto, UpdateCategoryDto } from './dtos';
+import { <%- className %> } from './entities';
+import { Create<%- className %>Dto, Update<%- className %>Dto } from './dtos';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import {
@@ -33,28 +33,28 @@ import {
 } from '@webpackages/auth';
 
 @ApiBearerAuth(AUTH_BEARER_NAME)
-@ApiTags('CategoryController')
+@ApiTags('<%- className %>Controller')
 @Controller()
-export class CategoryController {
+export class <%- className %>Controller {
   constructor(
-    @InjectRepository(Category) private readonly repo: Repository<Category>
+    @InjectRepository(<%- className %>) private readonly repo: Repository<<%- className %>>
   ) {}
 
-  @ApiOperation({ summary: 'Category metadata' })
-  @ReadPermission('category')
-  @Get('category-meta')
+
+
+
+  @ApiOperation({ summary: '<%- className %> metadata' })
+  @ReadPermission('<%- fileName %>')
+  @Get('<%- fileName %>-meta')
   async meta() {
     return {
       count: await this.repo.count(),
     };
   }
 
-  @ApiOperation({
-    summary:
-      'Find all Category by query (paginator, order, search, and select)',
-  })
-  @ReadPermission('category')
-  @Get('categories')
+  @ApiOperation({ summary:'Find all <%- className %> by query (paginator, order, search, and select)' })
+  @ReadPermission('<%- fileName %>')
+  @Get('<%- fileName %>s')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
     const { orderBy, orderDir, search, skip, take, withDeleted, select } =
       query;
@@ -71,19 +71,19 @@ export class CategoryController {
       select,
     });
   }
-
-  @ApiOperation({ summary: 'Find Category by id' })
-  @ReadPermission('category')
-  @Get('category/:id')
+  
+  @ApiOperation({ summary:'Find <%- className %> by id' })
+  @ReadPermission('<%- fileName %>')
+  @Get('<%- fileName %>/:id')
   findOneById(@Param('id', ParseIntPipe) id: number) {
     return this.repo.findOneBy({ id });
   }
 
-  @ApiOperation({ summary: 'Save Category' })
-  @WritePermission('category')
-  @Post('category')
+  @ApiOperation({ summary:'Save <%- className %>' })
+  @WritePermission('<%- fileName %>')
+  @Post('<%- fileName %>')
   async save(
-    @Body(TransformAndValidatePipe) body: CreateCategoryDto,
+    @Body(TransformAndValidatePipe) body: Create<%- className %>Dto,
     @UserId() userId: number
   ) {
     return await this.repo.save({
@@ -93,27 +93,27 @@ export class CategoryController {
     });
   }
 
-  @ApiOperation({ summary: 'Update Category' })
-  @UpdatePermission('category')
-  @Put('category/:id')
+  @ApiOperation({ summary:'Update <%- className %>' })
+  @UpdatePermission('<%- fileName %>')
+  @Put('<%- fileName %>/:id')
   udpate(
     @Param('id', ParseIntPipe) id: number,
-    @Body(TransformAndValidatePipe) body: UpdateCategoryDto,
+    @Body(TransformAndValidatePipe) body: Update<%- className %>Dto,
     @UserId() userId: number
   ) {
     return this.repo.update(id, { ...body, updatedBy: userId });
   }
 
-  @ApiOperation({ summary: 'Delete Category by id' })
-  @DeletePermission('category')
-  @Delete('category/:id')
+  @ApiOperation({ summary:'Delete <%- className %> by id' })
+  @DeletePermission('<%- fileName %>')
+  @Delete('<%- fileName %>/:id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Category by id' })
-  @UpdatePermission('category')
-  @Put(`category/${RELATION_AND_ID_PATH}`)
+  @ApiOperation({ summary:'Update <%- className %> by id' })
+  @UpdatePermission('<%- fileName %>')
+  @Put(`<%- fileName %>/${RELATION_AND_ID_PATH}`)
   async add(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -127,11 +127,9 @@ export class CategoryController {
       .add(relationId);
   }
 
-  @ApiOperation({
-    summary: 'Remove Category relation by id, relationName, and relationId',
-  })
-  @UpdatePermission('category')
-  @Delete(`category/${RELATION_AND_ID_PATH}`)
+  @ApiOperation({ summary:'Remove <%- className %> relation by id, relationName, and relationId' })
+  @UpdatePermission('<%- fileName %>')
+  @Delete(`<%- fileName %>/${RELATION_AND_ID_PATH}`)
   async remove(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -145,9 +143,9 @@ export class CategoryController {
       .add(relationId);
   }
 
-  @ApiOperation({ summary: 'Set Category relation by id' })
-  @UpdatePermission('category')
-  @Post(`category/${RELATION_AND_ID_PATH}`)
+  @ApiOperation({ summary:'Set <%- className %> relation by id' })
+  @UpdatePermission('<%- fileName %>')
+  @Post(`<%- fileName %>/${RELATION_AND_ID_PATH}`)
   async set(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -161,9 +159,9 @@ export class CategoryController {
       .set(relationId);
   }
 
-  @ApiOperation({ summary: 'Unset Category relation by id' })
-  @UpdatePermission('category')
-  @Delete(`category/${RELATION_PATH}`)
+  @ApiOperation({ summary:'Unset <%- className %> relation by id' })
+  @UpdatePermission('<%- fileName %>')
+  @Delete(`<%- fileName %>/${RELATION_PATH}`)
   async unset(
     @Param(TransformAndValidatePipe) relation: RelationDto,
     @UserId() userId: number

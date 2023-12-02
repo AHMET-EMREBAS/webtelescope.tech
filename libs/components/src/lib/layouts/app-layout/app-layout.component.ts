@@ -1,4 +1,10 @@
-import { Component, Inject, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +23,8 @@ import {
   NAV_ITEMS_TOKEN,
   NavItem,
   NavItemParams,
+  STATUSBAR_ITEMS_TOKEN,
+  TOOLBAR_ITEMS_TOKEN,
 } from '../../api';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import '@angular/localize/init';
@@ -36,7 +44,7 @@ import '@angular/localize/init';
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
 })
-export class AppLayoutComponent {
+export class AppLayoutComponent implements AfterViewInit {
   protected readonly lastRouteStoreKey = `last_route`;
   protected readonly miniSideNavStoreKey = `mini_sidenav`;
 
@@ -60,6 +68,8 @@ export class AppLayoutComponent {
 
   constructor(
     @Inject(NAV_ITEMS_TOKEN) public readonly navItems: NavItem[],
+    @Inject(TOOLBAR_ITEMS_TOKEN) public readonly toolbarItems: NavItem[],
+    @Inject(STATUSBAR_ITEMS_TOKEN) public readonly statusbarItems: NavItem[],
     @Inject(APP_NAME_TOKEN) public readonly appName: string,
     @Inject(MODULE_NAME_TOKEN) public readonly moduleName: string,
     protected readonly lss: LocalStoreService,

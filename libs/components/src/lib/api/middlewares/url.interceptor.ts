@@ -13,5 +13,6 @@ export const UrlInterceptorFn: HttpInterceptorFn = (
 ): Observable<HttpEvent<any>> => {
   const url = req.url;
   const apiReq = req.clone({ url: 'http://localhost:3000/' + url });
+
   return next(apiReq);
 };
