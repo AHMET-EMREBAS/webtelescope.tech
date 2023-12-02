@@ -1,1 +1,16 @@
-<p>update works!</p>
+<wt-form
+  [itemId]="itemId"
+  [updateForm]="true"
+  submitLabel="Save Category"
+  [formGroup]="formGroup"
+>
+  <wt-form-input
+    [formGroup]="formGroup"
+    [minLength]="3"
+    [maxLength]="50"
+    name="name"
+    icon="category"
+    autocomplete="off"
+    label="Category Name"
+  ></wt-form-input>
+</wt-form>

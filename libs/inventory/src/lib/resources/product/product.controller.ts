@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Body,
   Controller,
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,28 @@ import {
 @ApiTags('ProductController')
 @Controller()
 export class ProductController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Product) private readonly repo: Repository<Product>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'Product metadata' })
+  @ReadPermission('product')
+  @Get('product-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
 
   @ApiOperation({
     summary: 'Find all Product by query (paginator, order, search, and select)',
@@ -55,10 +76,10 @@ export class ProductController {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        name: ILike(`%${search}%`),
-        description: ILike(`%${search}%`),
-      },
+      where: [
+        { name: ILike(`%${search}%`) },
+        { description: ILike(`%${search}%`) },
+      ],
       select,
     });
   }
@@ -77,6 +98,7 @@ export class ProductController {
     @Body(TransformAndValidatePipe) body: CreateProductDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -87,12 +109,17 @@ export class ProductController {
   @ApiOperation({ summary: 'Update Product' })
   @UpdatePermission('product')
   @Put('product/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdateProductDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete Product by id' })
@@ -102,7 +129,9 @@ export class ProductController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Product by id' })
+  @ApiOperation({
+    summary: 'Add Product relation by relationName and realationId',
+  })
   @UpdatePermission('product')
   @Put(`product/${RELATION_AND_ID_PATH}`)
   async add(

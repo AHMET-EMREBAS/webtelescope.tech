@@ -2,15 +2,15 @@
   width: 100%;
 }
 
-table{ 
+table {
   overflow: hidden;
 }
 
-.table-th{ 
+.table-th {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  
+
   gap: 1em;
 }

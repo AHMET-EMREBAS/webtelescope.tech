@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormComponent, FormInputComponent } from '@webpackages/components';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CategoryService } from '../../category/category.service';
 
 @Component({
   selector: 'wt-update',
@@ -20,7 +21,16 @@ export class UpdateComponent {
       Validators.minLength(3),
       Validators.maxLength(50),
     ]),
+    description: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+    ]),
+    categories: new FormControl('', [Validators.required]),
   });
 
-  constructor(private readonly route: ActivatedRoute) {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    public readonly categoryService: CategoryService
+  ) {}
 }

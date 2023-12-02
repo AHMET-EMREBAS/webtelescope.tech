@@ -37,6 +37,16 @@
   [autocompleteService]="autocompleteService"
 ></wt-autocomplete>
 
+<wt-chiplist
+  *ngIf="componentType === 'chiplist'"
+  [label]="label"
+  [name]="name"
+  [required]="required"
+  [formGroup]="formGroup"
+  [icon]="icon"
+  [autocompleteService]="autocompleteService"
+></wt-chiplist>
+
 <wt-checkbox
   [name]="name"
   [label]="label"

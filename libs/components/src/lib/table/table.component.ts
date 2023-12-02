@@ -29,7 +29,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { slideInRightOnEnterAnimation } from 'angular-animations';
 import '@angular/localize/init';
-
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule}  from '@angular/material/chips'
 @Component({
   selector: 'wt-table',
   templateUrl: './table.component.html',
@@ -37,15 +42,20 @@ import '@angular/localize/init';
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
+    MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+    MatChipsModule
   ],
   animations: [
     slideInRightOnEnterAnimation({ anchor: 'enter', duration: 200 }),
@@ -58,14 +68,17 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly entityName = this.service.entityName;
   readonly count$: Observable<number> = delayObservable(
     this.service.allCount$,
-    3000
+    1000
   );
 
   data: any[] = [];
 
+  selection = new SelectionModel<any>(true, []);
+  selectedItem?: any;
+
   readonly data$: Observable<any> = delayObservable(
     this.service.filteredEntities$,
-    2000
+    1000
   ).pipe(
     map((data) => {
       this.data = [];
@@ -96,12 +109,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     @Inject(TABLE_COLUMNS_TOKEN)
     private readonly tableColumns: TableColumn[],
     @Inject(SEARCH_CONTROL_TOKEN)
-    public readonly searchControl: FormControl
+    public readonly searchControl: FormControl,
+    public readonly router: Router,
+    public readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    const commonColumns = ['select', 'id'];
     const dColumns = this.lss.get<TableColumn[]>('visibleColumns');
-    this.columns = this.tableColumns.map((e) => e.name);
+    this.columns = [...commonColumns, ...this.tableColumns.map((e) => e.name)];
+
     if (dColumns) {
       this.visibleColumns = [...dColumns];
       this.displayedColumns = this.visibleColumns.map((e) => e.name);
@@ -109,9 +126,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.visibleColumns = [...this.tableColumns];
       this.displayedColumns = [...this.columns];
     }
-
-    this.columns.unshift('id');
-    this.displayedColumns.unshift('id');
   }
 
   ngAfterViewInit(): void {
@@ -163,5 +177,46 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       search: this.searchControl.value || undefined,
       withDeleted: false,
     };
+  }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    if (this.data) {
+      this.selection.select(...this.data);
+    }
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.position + 1
+    }`;
+  }
+
+  updateItem() {
+    this.router.navigate(['update', this.selection.selected.shift().id], {
+      relativeTo: this.route,
+    });
+  }
+
+  deleteItem() {
+    this.router.navigate(['delete', this.selection.selected.shift().id], {
+      relativeTo: this.route,
+    });
   }
 }

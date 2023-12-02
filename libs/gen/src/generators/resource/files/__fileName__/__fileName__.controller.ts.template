@@ -114,7 +114,11 @@ export class <%- className %>Controller {
     @Body(TransformAndValidatePipe) body: Update<%- className %>Dto,
     @UserId() userId: number
   ) {
-    await this.uniqueCheck(body);
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
     return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 

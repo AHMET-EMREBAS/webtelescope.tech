@@ -1,4 +1,4 @@
-import { Property } from '@webpackages/core';
+import { IdDto, Property } from '@webpackages/core';
 import { Exclude } from 'class-transformer';
 
 @Exclude()
@@ -8,4 +8,7 @@ export class CreateProductDto {
 
   @Property({ type: 'string', maxLength: 400 })
   description!: string;
+
+  @Property({ type: 'object', isArray: true, target: IdDto })
+  categories!: IdDto[];
 }

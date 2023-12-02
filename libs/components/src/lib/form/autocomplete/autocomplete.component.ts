@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatAutocompleteModule,
@@ -9,11 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonInputComponent } from '../common-input.component';
-import {
-  AutoCompleteService,
-  AutocompleteOption,
-} from './autocomplete.service';
-import { Observable, debounceTime, switchMap } from 'rxjs';
+import { AutocompleteOption } from './autocomplete.service';
+import { Observable, debounceTime } from 'rxjs';
 
 /**
  * Autocomplete Component requires AutocompleteServices from which the component searches for inputs based on the user input.
@@ -38,31 +35,21 @@ export class AutocompleteComponent
   implements OnInit
 {
   formControl = new FormControl('');
+  autoCompleteOptions$!: Observable<AutocompleteOption[]>;
 
-  @Input() autoCompleteService: AutoCompleteService =
-    inject<AutoCompleteService>(AutoCompleteService, { optional: true }) ||
-    new AutoCompleteService();
-
-  autoCompleteOptions$: Observable<AutocompleteOption[]> | undefined =
-    this.formControl.valueChanges.pipe(
-      debounceTime(400),
-      switchMap((search) => {
-        return this.autoCompleteService.getWithQuery({ search: search || '' });
-      })
-    );
-
-  constructor() {
-    super();
-  }
   select(value: MatAutocompleteSelectedEvent) {
     this.formControl.setValue(value.option.value.name);
     this.control()?.setValue(value.option.value);
-    console.log(value.option.value);
   }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.formControl.setValue('');
     }, 2000);
+    this.autoCompleteOptions$ = this.autocompleteService?.entities$ as any;
+
+    this.formControl.valueChanges.pipe(debounceTime(400)).subscribe((value) => {
+      this.autocompleteService?.search(value!);
+    });
   }
 }

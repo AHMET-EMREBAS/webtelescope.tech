@@ -11,6 +11,7 @@ import { SwitchComponent } from '../switch/switch.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { TextareaInputComponent } from '../textarea-input/textarea-input.component';
 import { CommonInputComponent } from '../common-input.component';
+import { ChiplistComponent } from '../chiplist/chiplist.component';
 
 @Component({
   selector: 'wt-form-input',
@@ -27,6 +28,7 @@ import { CommonInputComponent } from '../common-input.component';
     SwitchComponent,
     TextInputComponent,
     TextareaInputComponent,
+    ChiplistComponent
   ],
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss',
@@ -35,6 +37,7 @@ export class FormInputComponent extends CommonInputComponent {
   @Input() componentType:
     | 'text-input'
     | 'autocomplete'
+    | 'chiplist'
     | 'checkbox'
     | 'date'
     | 'date-time'

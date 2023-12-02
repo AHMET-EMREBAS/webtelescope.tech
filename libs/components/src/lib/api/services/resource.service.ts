@@ -76,7 +76,7 @@ export class ResourceService<T> extends EntityCollectionServiceBase<T> {
    * @returns
    */
   updateItem(item: T) {
-    return this.updateOneInCache(item);
+    return this.update(item);
   }
 
   /**

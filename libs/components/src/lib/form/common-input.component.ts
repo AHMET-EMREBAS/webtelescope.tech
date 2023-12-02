@@ -40,7 +40,7 @@ export class CommonInputComponent implements AfterViewInit {
    */
   @Input() options: string[] = ['First', 'Second', 'Third'];
 
-  @Input() multiple = false;
+  @Input() multiple?:boolean;
 
   @Input() type: HTMLInputElement['type'] = 'text';
   @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';
@@ -52,6 +52,8 @@ export class CommonInputComponent implements AfterViewInit {
   @Input() required = false;
 
   @Input() autocompleteService?: AutoCompleteService;
+
+  autocompleteOptions$?: Observable<{ id: number; name: string }[]>;
 
   @Input() public formGroup: FormGroup =
     inject<FormGroup>(FormGroup, { optional: true }) ||
@@ -65,13 +67,9 @@ export class CommonInputComponent implements AfterViewInit {
   }
 
   getError() {
-    if (this.formGroup.valid) {
-      return;
-    }
+    if (this.formGroup.valid) return;
+
     const errors = this.control()?.errors;
-
-    console.log('Errors : ', errors);
-
     if (errors) {
       const { required, minlength, maxlength, min, max, email } = errors;
 

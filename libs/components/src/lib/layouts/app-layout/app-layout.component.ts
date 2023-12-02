@@ -28,6 +28,10 @@ import {
 } from '../../api';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import '@angular/localize/init';
+
+export const LAST_ROUTE_STOREKEY = 'last_route';
+export const MINI_SIDENAV_STOREKEY = 'mini_sidenav';
+
 @Component({
   selector: 'wt-app-layout',
   standalone: true,
@@ -45,15 +49,12 @@ import '@angular/localize/init';
   styleUrl: './app-layout.component.scss',
 })
 export class AppLayoutComponent implements AfterViewInit {
-  protected readonly lastRouteStoreKey = `last_route`;
-  protected readonly miniSideNavStoreKey = `mini_sidenav`;
-
   @ViewChild('drawer') drawer!: MatDrawer;
 
   private breakpointObserver = inject(BreakpointObserver);
   readonly title = inject(Title);
 
-  miniSidenav = this.lss.get<boolean>(this.miniSideNavStoreKey, false);
+  miniSidenav = this.lss.get<boolean>(MINI_SIDENAV_STOREKEY, false);
 
   isHandset = false;
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -78,7 +79,7 @@ export class AppLayoutComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    const lastRoute = this.lss.get(this.lastRouteStoreKey);
+    const lastRoute = this.lss.get(LAST_ROUTE_STOREKEY);
     const params: NavItemParams = this.route.snapshot
       .queryParams as NavItemParams;
     if (params.ignoreLastRoute) {
@@ -90,7 +91,7 @@ export class AppLayoutComponent implements AfterViewInit {
 
   async toggleMiniSidenav() {
     this.miniSidenav = !this.miniSidenav;
-    this.lss.set(this.miniSideNavStoreKey, this.miniSidenav);
+    this.lss.set(MINI_SIDENAV_STOREKEY, this.miniSidenav);
     await this.drawer.close();
     await this.drawer.open();
   }
@@ -100,14 +101,14 @@ export class AppLayoutComponent implements AfterViewInit {
   }
 
   homePageClickHandler() {
-    this.lss.set(this.lastRouteStoreKey, '');
+    this.lss.set(LAST_ROUTE_STOREKEY, '');
   }
 
   navItemClickHandler(navItem: NavItem) {
     if (this.isHandset && !this.miniSidenav) this.drawer.close();
 
     if (this.canPersistRoute(navItem)) {
-      this.lss.set(this.lastRouteStoreKey, navItem.route);
+      this.lss.set(LAST_ROUTE_STOREKEY, navItem.route);
     }
   }
 }

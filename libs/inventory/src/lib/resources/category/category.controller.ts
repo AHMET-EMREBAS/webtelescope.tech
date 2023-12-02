@@ -8,7 +8,6 @@ import {
   Post,
   Put,
   Query,
-  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -40,7 +39,7 @@ import {
 export class CategoryController {
   uniqueFields = this.repo.metadata.uniques
     .map((e) => e.columns.pop()?.propertyName)
-    .filter((e) => e) as string[];
+    .filter((e) => e) as (keyof Category)[];
 
   constructor(
     @InjectRepository(Category) private readonly repo: Repository<Category>
@@ -77,9 +76,11 @@ export class CategoryController {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        // name: ILike(`%${search}%`),
-      },
+      where: [
+        {
+          name: ILike(`%${search}%`),
+        },
+      ],
       select,
     });
   }
@@ -114,7 +115,11 @@ export class CategoryController {
     @Body(TransformAndValidatePipe) body: UpdateCategoryDto,
     @UserId() userId: number
   ) {
-    await this.uniqueCheck(body);
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
     return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
