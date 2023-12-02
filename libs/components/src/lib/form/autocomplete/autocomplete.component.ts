@@ -9,8 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonInputComponent } from '../common-input.component';
-import { AutocompleteOption } from './autocomplete.service';
-import { Observable, debounceTime } from 'rxjs';
+import { Observable, debounceTime, map } from 'rxjs';
 
 /**
  * Autocomplete Component requires AutocompleteServices from which the component searches for inputs based on the user input.
@@ -35,10 +34,10 @@ export class AutocompleteComponent
   implements OnInit
 {
   formControl = new FormControl('');
-  autoCompleteOptions$!: Observable<AutocompleteOption[]>;
+  autoCompleteOptions$?: Observable<any[]>;
 
   select(value: MatAutocompleteSelectedEvent) {
-    this.formControl.setValue(value.option.value.name);
+    this.formControl.setValue(value.option.value[this.propertyName]);
     this.control()?.setValue(value.option.value);
   }
 
@@ -46,7 +45,7 @@ export class AutocompleteComponent
     setTimeout(() => {
       this.formControl.setValue('');
     }, 2000);
-    this.autoCompleteOptions$ = this.autocompleteService?.entities$ as any;
+    this.autoCompleteOptions$ = this.autocompleteService?.entities$;
 
     this.formControl.valueChanges.pipe(debounceTime(400)).subscribe((value) => {
       this.autocompleteService?.search(value!);

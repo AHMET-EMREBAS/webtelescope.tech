@@ -21,20 +21,21 @@
   ></wt-form-input>
   <wt-form-input
     componentType="autocomplete"
-    [multiple]="true"
     [formGroup]="formGroup"
     name="sku"
     icon="barcode"
     [autocompleteService]="skuService"
     label="Select Sku"
+    propertyName="sku"
   ></wt-form-input>
+  
   <wt-form-input
     componentType="autocomplete"
-    [multiple]="true"
     [formGroup]="formGroup"
     name="priceLevel"
     icon="barcode"
     [autocompleteService]="priceLevelService"
     label="Select price level"
+    propertyName="name"
   ></wt-form-input>
 </wt-form>

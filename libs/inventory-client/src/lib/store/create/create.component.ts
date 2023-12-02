@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormComponent, FormInputComponent } from '@webpackages/components';
-import { CategoryService } from '../../category/category.service';
+import { PriceLevelService } from '../../price-level/component';
 
 @Component({
   selector: 'wt-create',
@@ -13,18 +13,9 @@ import { CategoryService } from '../../category/category.service';
 })
 export class CreateComponent {
   formGroup = new FormGroup({
-    name: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(50),
-    ]),
-    description: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(50),
-    ]),
-    categories: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    priceLevel: new FormControl('', [Validators.required]),
   });
 
-  constructor(public readonly categoryService: CategoryService) {}
+  constructor(public readonly priceLevelService: PriceLevelService) {}
 }

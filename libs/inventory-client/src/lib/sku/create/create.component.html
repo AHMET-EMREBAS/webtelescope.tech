@@ -1,33 +1,33 @@
 <wt-form submitLabel="Save Product" [formGroup]="formGroup">
   <wt-form-input
     [formGroup]="formGroup"
-    [minLength]="3"
-    [maxLength]="50"
+    [minLength]="6"
+    [maxLength]="14"
     componentType="text-input"
-    name="name"
-    icon="info"
+    name="sku"
+    icon="barcode"
     autocomplete="off"
-    label="Product Name"
-  ></wt-form-input>
-  <wt-form-input
-    type="string"
-    componentType="textarea-input"
-    [formGroup]="formGroup"
-    [minLength]="3"
-    [maxLength]="400"
-    name="description"
-    icon="description"
-    autocomplete="off"
-    label="Description"
+    label="SKU Code"
   ></wt-form-input>
 
   <wt-form-input
-    componentType="chiplist"
+    [formGroup]="formGroup"
+    [minLength]="6"
+    [maxLength]="14"
+    componentType="text-input"
+    name="barcode"
+    icon="barcode"
+    autocomplete="off"
+    label="Barcode"
+  ></wt-form-input>
+
+  <wt-form-input
+    componentType="autocomplete"
     [multiple]="true"
     [formGroup]="formGroup"
-    name="categories"
-    icon="category"
-    [autocompleteService]="categoryService"
-    label="Category"
+    name="product"
+    icon="inventory"
+    [autocompleteService]="productService"
+    label="Product"
   ></wt-form-input>
 </wt-form>

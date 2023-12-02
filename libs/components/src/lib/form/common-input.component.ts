@@ -21,7 +21,7 @@ export class CommonInputComponent implements AfterViewInit {
   /**
    * FormControlName
    */
-  @Input() name = 'name';
+  @Input() name!: string;
 
   /**
    * Input icon
@@ -35,12 +35,13 @@ export class CommonInputComponent implements AfterViewInit {
    */
   @Input() hint = '';
 
+  @Input() propertyName = 'name';
   /**
    * Select Options
    */
   @Input() options: string[] = ['First', 'Second', 'Third'];
 
-  @Input() multiple?:boolean;
+  @Input() multiple?: boolean;
 
   @Input() type: HTMLInputElement['type'] = 'text';
   @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';
@@ -53,7 +54,7 @@ export class CommonInputComponent implements AfterViewInit {
 
   @Input() autocompleteService?: AutoCompleteService;
 
-  autocompleteOptions$?: Observable<{ id: number; name: string }[]>;
+  autocompleteOptions$?: Observable<any[]>;
 
   @Input() public formGroup: FormGroup =
     inject<FormGroup>(FormGroup, { optional: true }) ||
@@ -62,6 +63,7 @@ export class CommonInputComponent implements AfterViewInit {
   control() {
     return this.formGroup.get(this.name);
   }
+  
   isInvalid() {
     return this.control()?.invalid && this.control()?.touched;
   }

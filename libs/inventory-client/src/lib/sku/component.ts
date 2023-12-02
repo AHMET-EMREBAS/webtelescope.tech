@@ -41,15 +41,13 @@ export class SkuService extends ResourceService<Sku> {
   template: '<router-outlet></router-outlet>',
   providers: [
     provideTableColumns([
-      { name: 'name', icon: 'info', label: 'Sku Name' },
-      { name: 'description', icon: 'description', label: 'Description' },
+      { name: 'sku', icon: 'code', label: 'SKU Code' },
+      { name: 'barcode', icon: 'barcode', label: 'Barcode' },
       {
-        name: 'categories',
-        icon: 'category',
-        label: 'Category',
-        mapFrom: (value) => {
-          return value && value.map && value.map((e: any) => e.name);
-        },
+        name: 'product',
+        icon: 'inventory',
+        label: 'Product Name',
+        mapFrom: (value) => value && value.name,
       },
     ]),
     provideSearchControl(),

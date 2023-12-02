@@ -53,8 +53,8 @@ export class PriceLevelController {
   }
 
   @ApiOperation({ summary: 'PriceLevel metadata' })
-  @ReadPermission('price-level')
-  @Get('price-level-meta')
+  @ReadPermission('pricelevel')
+  @Get('pricelevel-meta')
   async meta() {
     return {
       count: await this.repo.count(),
@@ -65,8 +65,8 @@ export class PriceLevelController {
     summary:
       'Find all PriceLevel by query (paginator, order, search, and select)',
   })
-  @ReadPermission('price-level')
-  @Get('price-levels')
+  @ReadPermission('pricelevel')
+  @Get('pricelevels')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
     const { orderBy, orderDir, search, skip, take, withDeleted, select } =
       query;
@@ -85,15 +85,15 @@ export class PriceLevelController {
   }
 
   @ApiOperation({ summary: 'Find PriceLevel by id' })
-  @ReadPermission('price-level')
-  @Get('price-level/:id')
+  @ReadPermission('pricelevel')
+  @Get('pricelevel/:id')
   findOneById(@Param('id', ParseIntPipe) id: number) {
     return this.repo.findOneBy({ id });
   }
 
   @ApiOperation({ summary: 'Save PriceLevel' })
-  @WritePermission('price-level')
-  @Post('price-level')
+  @WritePermission('pricelevel')
+  @Post('pricelevel')
   async save(
     @Body(TransformAndValidatePipe) body: CreatePriceLevelDto,
     @UserId() userId: number
@@ -107,8 +107,8 @@ export class PriceLevelController {
   }
 
   @ApiOperation({ summary: 'Update PriceLevel' })
-  @UpdatePermission('price-level')
-  @Put('price-level/:id')
+  @UpdatePermission('pricelevel')
+  @Put('pricelevel/:id')
   async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdatePriceLevelDto,
@@ -123,8 +123,8 @@ export class PriceLevelController {
   }
 
   @ApiOperation({ summary: 'Delete PriceLevel by id' })
-  @DeletePermission('price-level')
-  @Delete('price-level/:id')
+  @DeletePermission('pricelevel')
+  @Delete('pricelevel/:id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.repo.delete(id);
   }
@@ -132,8 +132,8 @@ export class PriceLevelController {
   @ApiOperation({
     summary: 'Add PriceLevel relation by relationName and realationId',
   })
-  @UpdatePermission('price-level')
-  @Put(`price-level/${RELATION_AND_ID_PATH}`)
+  @UpdatePermission('pricelevel')
+  @Put(`pricelevel/${RELATION_AND_ID_PATH}`)
   async add(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -150,8 +150,8 @@ export class PriceLevelController {
   @ApiOperation({
     summary: 'Remove PriceLevel relation by id, relationName, and relationId',
   })
-  @UpdatePermission('price-level')
-  @Delete(`price-level/${RELATION_AND_ID_PATH}`)
+  @UpdatePermission('pricelevel')
+  @Delete(`pricelevel/${RELATION_AND_ID_PATH}`)
   async remove(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -166,8 +166,8 @@ export class PriceLevelController {
   }
 
   @ApiOperation({ summary: 'Set PriceLevel relation by id' })
-  @UpdatePermission('price-level')
-  @Post(`price-level/${RELATION_AND_ID_PATH}`)
+  @UpdatePermission('pricelevel')
+  @Post(`pricelevel/${RELATION_AND_ID_PATH}`)
   async set(
     @Param(TransformAndValidatePipe) relation: RelationAndIdDto,
     @UserId() userId: number
@@ -182,8 +182,8 @@ export class PriceLevelController {
   }
 
   @ApiOperation({ summary: 'Unset PriceLevel relation by id' })
-  @UpdatePermission('price-level')
-  @Delete(`price-level/${RELATION_PATH}`)
+  @UpdatePermission('pricelevel')
+  @Delete(`pricelevel/${RELATION_PATH}`)
   async unset(
     @Param(TransformAndValidatePipe) relation: RelationDto,
     @UserId() userId: number

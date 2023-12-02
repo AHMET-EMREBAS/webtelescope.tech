@@ -19,9 +19,9 @@
     #auto="matAutocomplete"
     (optionSelected)="select($event)"
   >
-    @for (option of autoCompleteOptions$ | async;track option) {
+    @for (option of autoCompleteOptions$ | async; track option) {
     <mat-option [value]="option">
-      {{ option.name }}
+      {{ option[propertyName] }}
     </mat-option>
     }
   </mat-autocomplete>

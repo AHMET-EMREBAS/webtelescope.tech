@@ -42,14 +42,11 @@ export class StoreService extends ResourceService<Store> {
   providers: [
     provideTableColumns([
       { name: 'name', icon: 'info', label: 'Store Name' },
-      { name: 'description', icon: 'description', label: 'Description' },
       {
-        name: 'categories',
-        icon: 'category',
-        label: 'Category',
-        mapFrom: (value) => {
-          return value && value.map && value.map((e: any) => e.name);
-        },
+        name: 'priceLevel',
+        icon: 'layers',
+        label: 'Price Level',
+        mapFrom: (value) => value && value.name,
       },
     ]),
     provideSearchControl(),

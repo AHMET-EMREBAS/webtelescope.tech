@@ -7,27 +7,15 @@
     name="name"
     icon="info"
     autocomplete="off"
-    label="Product Name"
+    label="Store Name"
   ></wt-form-input>
   <wt-form-input
-    type="string"
-    componentType="textarea-input"
-    [formGroup]="formGroup"
-    [minLength]="3"
-    [maxLength]="400"
-    name="description"
-    icon="description"
-    autocomplete="off"
-    label="Description"
-  ></wt-form-input>
-
-  <wt-form-input
-    componentType="chiplist"
+    componentType="autocomplete"
     [multiple]="true"
     [formGroup]="formGroup"
-    name="categories"
+    name="priceLevel"
     icon="category"
-    [autocompleteService]="categoryService"
-    label="Category"
+    [autocompleteService]="priceLevelService"
+    label="Price Level"
   ></wt-form-input>
 </wt-form>
