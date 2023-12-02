@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @nx/enforce-module-boundaries */
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, Provider, inject } from '@angular/core';
+import { Inject, Injectable, Provider, Type, inject } from '@angular/core';
 import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
 import { Observable, map } from 'rxjs';
 import { excludeUndefined, names } from '@webpackages/utils';
+import { ENTITY_NAME_TOKEN } from '../providers';
 
 export type QueryObject = {
   take?: number;
@@ -16,15 +18,6 @@ export type QueryObject = {
   withDeleted?: boolean;
   search?: string;
 };
-
-export const ENTITY_NAME_TOKEN = 'ENTITY_NAME_TOKEN';
-
-export function provideEntityName(name: string): Provider {
-  return {
-    provide: ENTITY_NAME_TOKEN,
-    useValue: name,
-  };
-}
 
 export type ErrorType = {
   property: string;
@@ -103,4 +96,13 @@ export class ResourceService<T> extends EntityCollectionServiceBase<T> {
   search(text: string) {
     this.queryItem({ take: 20, search: text });
   }
+}
+
+export function provideResourceService(
+  service: Type<ResourceService<any>>
+): Provider {
+  return {
+    provide: ResourceService,
+    useClass: service,
+  };
 }

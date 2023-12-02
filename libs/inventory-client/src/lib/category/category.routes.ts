@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
 import { CategoryComponent } from './category.component';
+import { provideResourceService } from '@webpackages/components';
+import { CategoryService } from './category.service';
 
 export const categoryRoutes: Routes = [
   {
     path: '',
     component: CategoryComponent,
+    providers: [provideResourceService(CategoryService)],
     children: [
       {
         path: '',

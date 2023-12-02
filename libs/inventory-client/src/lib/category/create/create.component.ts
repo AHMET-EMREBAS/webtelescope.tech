@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -8,8 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { ResourceService, TextInputComponent } from '@webpackages/components';
-import { CategoryService } from '../category.service';
+import { FormComponent, FormInputComponent } from '@webpackages/components';
 
 @Component({
   selector: 'wt-create',
@@ -19,25 +18,18 @@ import { CategoryService } from '../category.service';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-
-    TextInputComponent,
+    FormInputComponent,
+    FormComponent,
   ],
-
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss',
 })
 export class CreateComponent {
   formGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+    ]),
   });
-
-  constructor(private readonly service: CategoryService) {}
-
-  save() {
-    const { name } = this.formGroup.value;
-
-    console.log(this.formGroup.value);
-
-    this.service.saveItem({ name: name! });
-  }
 }

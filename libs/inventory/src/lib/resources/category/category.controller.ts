@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,19 @@ import {
 @ApiTags('CategoryController')
 @Controller()
 export class CategoryController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Category) private readonly repo: Repository<Category>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
 
   @ApiOperation({ summary: 'Category metadata' })
   @ReadPermission('category')
@@ -54,7 +66,7 @@ export class CategoryController {
       'Find all Category by query (paginator, order, search, and select)',
   })
   @ReadPermission('category')
-  @Get('categorys')
+  @Get('categories')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
     const { orderBy, orderDir, search, skip, take, withDeleted, select } =
       query;
@@ -66,7 +78,7 @@ export class CategoryController {
       },
       withDeleted,
       where: {
-        name: ILike(`%${search}%`),
+        // name: ILike(`%${search}%`),
       },
       select,
     });
@@ -86,6 +98,7 @@ export class CategoryController {
     @Body(TransformAndValidatePipe) body: CreateCategoryDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -96,12 +109,13 @@ export class CategoryController {
   @ApiOperation({ summary: 'Update Category' })
   @UpdatePermission('category')
   @Put('category/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdateCategoryDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    await this.uniqueCheck(body);
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete Category by id' })
@@ -111,7 +125,9 @@ export class CategoryController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Category by id' })
+  @ApiOperation({
+    summary: 'Add Category relation by relationName and realationId',
+  })
   @UpdatePermission('category')
   @Put(`category/${RELATION_AND_ID_PATH}`)
   async add(

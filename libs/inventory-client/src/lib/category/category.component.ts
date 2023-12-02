@@ -5,11 +5,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {
-  ResourceService,
   provideSearchControl,
   provideTableColumns,
 } from '@webpackages/components';
-import { CategoryService } from './category.service';
 
 @Component({
   selector: 'wt-category',
@@ -25,10 +23,6 @@ import { CategoryService } from './category.service';
     provideTableColumns([
       { name: 'name', icon: 'info', label: 'Category Name' },
     ]),
-    {
-      provide: ResourceService,
-      useClass: CategoryService,
-    },
     provideSearchControl(),
   ],
   templateUrl: './category.component.html',

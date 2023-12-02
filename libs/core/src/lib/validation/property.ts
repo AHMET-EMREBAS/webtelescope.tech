@@ -84,10 +84,10 @@ export function Property(options: ExtendedApiPropertyOptions) {
 
   const { minLength, maxLength, minimum, maximum, format } = options;
 
-  if (minLength) decorators.push(MinLength(minLength, { each }));
-  if (maxLength) decorators.push(MaxLength(maxLength, { each }));
-  if (minimum) decorators.push(Min(minimum, { each }));
-  if (maximum) decorators.push(Max(maximum, { each }));
+  if (minLength != undefined) decorators.push(MinLength(minLength, { each }));
+  if (maxLength != undefined) decorators.push(MaxLength(maxLength, { each }));
+  if (minimum != undefined) decorators.push(Min(minimum, { each }));
+  if (maximum != undefined) decorators.push(Max(maximum, { each }));
 
   if (format) {
     if (format === 'email') decorators.push(IsEmail({}, { each }));

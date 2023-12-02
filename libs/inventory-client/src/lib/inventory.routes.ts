@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { categoryRoutes } from './category/category.routes';
-import { priceRoutes } from './price/category.routes';
 import {
   AppLayoutComponent,
   LocalStoreService,
@@ -10,6 +9,7 @@ import {
   provideStatusbarItems,
   provideToolbarItems,
 } from '@webpackages/components';
+
 export const inventoryRoutes: Routes = [
   {
     path: '',
@@ -19,7 +19,6 @@ export const inventoryRoutes: Routes = [
       LocalStoreService,
       provideNavItems([
         { name: 'Category', icon: 'category', route: 'category' },
-        { name: 'Price', icon: 'money', route: 'price' },
       ]),
       provideToolbarItems([
         { name: 'Settings', icon: 'settings', route: 'settings' },
@@ -37,12 +36,12 @@ export const inventoryRoutes: Routes = [
     children: [
       {
         path: 'category',
-        providers: [],
+        providers: [
+          LocalStoreService,
+          provideAppName('Inventory'),
+          provideModuleName('Category'),
+        ],
         loadChildren: () => categoryRoutes,
-      },
-      {
-        path: 'price',
-        loadChildren: () => priceRoutes,
       },
     ],
   },

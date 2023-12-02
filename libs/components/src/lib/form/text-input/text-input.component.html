@@ -1,15 +1,11 @@
+<ng-container *ngIf="parseNumber$ | async"></ng-container>
 <mat-form-field [formGroup]="formGroup" appearance="outline">
   <mat-label>{{ label | titlecase }}</mat-label>
   <input
+    matInput
     [type]="type"
     [formControlName]="name"
-    matInput
     [autocomplete]="autocomplete"
-    [minLength]="minLength"
-    [maxLength]="maxLength"
-    [min]="min"
-    [max]="max"
-    [required]="required"
   />
   <mat-icon
     matPrefix

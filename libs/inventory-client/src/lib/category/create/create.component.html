@@ -1,16 +1,11 @@
-<form [formGroup]="formGroup">
-  <wt-text-input
+<wt-form submitLabel="Save Category" [formGroup]="formGroup">
+  <wt-form-input
     [formGroup]="formGroup"
+    [minLength]="3"
+    [maxLength]="50"
     name="name"
     icon="category"
     autocomplete="off"
     label="Category Name"
-  ></wt-text-input>
-
-  <div class="flex row gap-3">
-    <button mat-raised-button type="button" color="primary" (click)="save()">
-      Save Category
-    </button>
-    <button mat-flat-button type="reset">Clear Form</button>
-  </div>
-</form>
+  ></wt-form-input>
+</wt-form>

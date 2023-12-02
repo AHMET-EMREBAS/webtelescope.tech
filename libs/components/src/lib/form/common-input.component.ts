@@ -1,10 +1,13 @@
-import { Component, Input, inject } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { AfterViewInit, Component, Input, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { names } from '@webpackages/utils';
 import { AutoCompleteService } from './autocomplete/autocomplete.service';
+import { Observable, debounceTime, of, switchMap } from 'rxjs';
 
 @Component({ template: '' })
-export class CommonInputComponent {
+export class CommonInputComponent implements AfterViewInit {
+  parseNumber$!: Observable<any>;
+
   /**
    * Upon form submit update the error message
    */
@@ -42,10 +45,10 @@ export class CommonInputComponent {
   @Input() type: HTMLInputElement['type'] = 'text';
   @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';
 
-  @Input() minLength = 0;
-  @Input() maxLength = 1000;
-  @Input() min = -99999999999;
-  @Input() max = 99999999999;
+  @Input() minLength?: number;
+  @Input() maxLength?: number;
+  @Input() min?: number;
+  @Input() max?: number;
   @Input() required = false;
 
   @Input() autocompleteService?: AutoCompleteService;
@@ -62,41 +65,55 @@ export class CommonInputComponent {
   }
 
   getError() {
+    if (this.formGroup.valid) {
+      return;
+    }
     const errors = this.control()?.errors;
 
+    console.log('Errors : ', errors);
+
     if (errors) {
-      const {
-        required,
-        minLength,
-        maxLength,
-        min,
-        max,
-        email,
-        error,
-        password,
-      } = errors;
+      const { required, minlength, maxlength, min, max, email } = errors;
 
-      const { readableName } = names(this.name);
+      if (required) return `${this.name} is required!`;
+      if (minlength)
+        return `${this.name} should be longer than ${this.minLength}!`;
+      if (maxlength)
+        return `${this.name} should be longer than ${this.maxLength}!`;
+      if (min) return `${this.name} should be more than ${this.min}!`;
+      if (max) return `${this.name} should be more than ${this.max}!`;
+      if (email) return `${this.name} should be email!`;
 
-      if (required) return `${readableName} is required!`;
-      if (minLength)
-        return `${readableName} must be shorter than ${minLength} characters!`;
-      if (maxLength)
-        return `${readableName} must be longer than ${maxLength} characters!`;
-      if (min) return `${readableName} must be greater than ${min}!`;
-      if (max) return `${readableName} must be less than ${max}!`;
-      if (email) return `${readableName} must be a valid ${email}!`;
+      const { _required, _minLength, _maxLength, _min, _max, _email, _unique } =
+        errors;
 
-      if (password) return password;
-      if (error) return error;
+      return (
+        _required ||
+        _minLength ||
+        _maxLength ||
+        _min ||
+        _max ||
+        _email ||
+        _unique
+      );
     }
-
-    return undefined;
   }
 
   getIconColor() {
     return this.control()?.invalid && this.control()?.touched
       ? 'red'
       : this.iconColor;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.type === 'number') {
+      this.parseNumber$ = this.control()!.valueChanges.pipe(
+        debounceTime(400),
+        switchMap((value) => {
+          this.control()?.setValue(parseFloat(value));
+          return of(value);
+        })
+      );
+    }
   }
 }

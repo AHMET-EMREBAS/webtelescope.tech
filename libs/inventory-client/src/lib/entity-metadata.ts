@@ -1,14 +1,9 @@
-import { EntityMetadataMap, EntityDataModuleConfig } from '@ngrx/data';
+import { EntityMetadataMap } from '@ngrx/data';
 
-const entityMetadata: EntityMetadataMap = {
+export const inventoryEntityMetadata: EntityMetadataMap = {
   Category: {},
 };
 
-const pluralNames = {
+export const inventoryPluralNames = {
   Category: 'Categories',
-};
-
-export const entityConfig: EntityDataModuleConfig = {
-  entityMetadata,
-  pluralNames,
 };

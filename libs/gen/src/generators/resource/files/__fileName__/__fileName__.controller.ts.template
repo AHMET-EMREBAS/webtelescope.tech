@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,31 @@ import {
 @ApiTags('<%- className %>Controller')
 @Controller()
 export class <%- className %>Controller {
+   uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
+
   constructor(
     @InjectRepository(<%- className %>) private readonly repo: Repository<<%- className %>>
   ) {}
+
+
+ async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+  
+
+  @ApiOperation({ summary: '<%- className %> metadata' })
+  @ReadPermission('<%- fileName %>')
+  @Get('<%- fileName %>-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
 
   @ApiOperation({ summary:'Find all <%- className %> by query (paginator, order, search, and select)' })
   @ReadPermission('<%- fileName %>')
@@ -54,7 +78,7 @@ export class <%- className %>Controller {
       },
       withDeleted,
       where: {
-        name: ILike(`%${search}%`),
+        // name: ILike(`%${search}%`),
       },
       select,
     });
@@ -74,6 +98,7 @@ export class <%- className %>Controller {
     @Body(TransformAndValidatePipe) body: Create<%- className %>Dto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -84,12 +109,13 @@ export class <%- className %>Controller {
   @ApiOperation({ summary:'Update <%- className %>' })
   @UpdatePermission('<%- fileName %>')
   @Put('<%- fileName %>/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: Update<%- className %>Dto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    await this.uniqueCheck(body);
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary:'Delete <%- className %> by id' })
@@ -99,7 +125,7 @@ export class <%- className %>Controller {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary:'Update <%- className %> by id' })
+  @ApiOperation({ summary:'Add <%- className %> relation by relationName and realationId' })
   @UpdatePermission('<%- fileName %>')
   @Put(`<%- fileName %>/${RELATION_AND_ID_PATH}`)
   async add(
