@@ -54,7 +54,7 @@ export class CategoryController {
       'Find all Category by query (paginator, order, search, and select)',
   })
   @ReadPermission('category')
-  @Get('categories')
+  @Get('categorys')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
     const { orderBy, orderDir, search, skip, take, withDeleted, select } =
       query;

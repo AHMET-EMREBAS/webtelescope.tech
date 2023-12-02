@@ -14,6 +14,7 @@ import { ILike, Repository } from 'typeorm';
 import { Customer } from './entities';
 import { CreateCustomerDto, UpdateCustomerDto } from './dtos';
 import { InjectRepository } from '@nestjs/typeorm';
+
 import {
   QueryDto,
   RELATION_AND_ID_PATH,
@@ -39,6 +40,15 @@ export class CustomerController {
     @InjectRepository(Customer) private readonly repo: Repository<Customer>
   ) {}
 
+  @ApiOperation({ summary: 'Customer metadata' })
+  @ReadPermission('customer')
+  @Get('customer-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
+
   @ApiOperation({
     summary:
       'Find all Customer by query (paginator, order, search, and select)',
@@ -58,8 +68,8 @@ export class CustomerController {
       where: {
         firstName: ILike(`%${search}%`),
         lastName: ILike(`%${search}%`),
-        phone: ILike(`%${search}%`),
         organization: ILike(`%${search}%`),
+        phone: ILike(`%${search}%`),
       },
       select,
     });
