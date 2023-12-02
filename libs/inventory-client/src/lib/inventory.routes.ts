@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Routes } from '@angular/router';
 import {
   AppLayoutComponent,
@@ -10,7 +11,27 @@ import {
 } from '@webpackages/components';
 import { categoryRoutes } from './category/category.routes';
 import { productRoutes } from './product/routes';
+import { permissionRoutes } from './permission/routes';
+import { priceRoutes } from './price/routes';
+import { priceLevelRoutes } from './price-level/routes';
+import { quantityRoutes } from './quantity/routes';
+import { roleRoutes } from './role/routes';
+import { skuRoutes } from './sku/routes';
+import { storeRoutes } from './store/routes';
+import { userRoutes } from './user/routes';
 
+const childRoutes: [string, Routes][] = [
+  ['category', categoryRoutes],
+  ['permission', permissionRoutes],
+  ['price', priceRoutes],
+  ['price-level', priceLevelRoutes],
+  ['product', productRoutes],
+  ['quantity', quantityRoutes],
+  ['role', roleRoutes],
+  ['sku', skuRoutes],
+  ['store', storeRoutes],
+  ['user', userRoutes],
+];
 export const inventoryRoutes: Routes = [
   {
     path: '',
@@ -19,8 +40,16 @@ export const inventoryRoutes: Routes = [
     providers: [
       LocalStoreService,
       provideNavItems([
-        { name: 'Category', icon: 'category', route: 'category' },
-        { name: 'Product', icon: 'inventory', route: 'product' },
+        { name: 'product', icon: 'inventory', route: 'product' },
+        { name: 'sku', icon: 'barcode', route: 'sku' },
+        { name: 'quantity', icon: 'numbers', route: 'quantity' },
+        { name: 'price', icon: 'money', route: 'price' },
+        { name: 'user', icon: 'person', route: 'user' },
+        { name: 'permission', icon: 'security', route: 'permission' },
+        { name: 'role', icon: 'security', route: 'role' },
+        { name: 'store', icon: 'store', route: 'store' },
+        { name: 'price-level', icon: 'layers', route: 'price-level' },
+        { name: 'category', icon: 'category', route: 'category' },
       ]),
       provideToolbarItems([
         { name: 'Settings', icon: 'settings', route: 'settings' },
@@ -35,25 +64,17 @@ export const inventoryRoutes: Routes = [
       provideAppName('Inventory'),
       provideModuleName('Home'),
     ],
-    children: [
-      {
-        path: 'category',
+
+    children: childRoutes.map(([name, routes]) => {
+      return {
+        path: name,
         providers: [
           LocalStoreService,
           provideAppName('Inventory'),
-          provideModuleName('Category'),
+          provideModuleName(name),
         ],
-        loadChildren: () => categoryRoutes,
-      },
-      {
-        path: 'product',
-        providers: [
-          LocalStoreService,
-          provideAppName('Inventory'),
-          provideModuleName('Product'),
-        ],
-        loadChildren: () => productRoutes,
-      },
-    ],
+        loadChildren: () => routes,
+      };
+    }),
   },
 ];

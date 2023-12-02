@@ -1,7 +1,7 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Routes } from '@angular/router';
-import { ProductComponent } from './component';
+import { ProductComponent, ProductService } from './component';
 import { provideResourceService } from '@webpackages/components';
-import { ProductService } from './service';
 
 export const productRoutes: Routes = [
   {
@@ -12,7 +12,7 @@ export const productRoutes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./view/view.component').then((e) => e.ViewComponent),
+          import('@webpackages/components').then((e) => e.TableComponent),
       },
       {
         path: 'create',
@@ -22,7 +22,7 @@ export const productRoutes: Routes = [
       {
         path: 'delete/:id',
         loadComponent: () =>
-          import('./delete/delete.component').then((e) => e.DeleteComponent),
+          import('@webpackages/components').then((e) => e.DeleteItemComponent),
       },
       {
         path: 'update/:id',

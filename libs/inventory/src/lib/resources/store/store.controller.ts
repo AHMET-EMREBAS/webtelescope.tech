@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,28 @@ import {
 @ApiTags('StoreController')
 @Controller()
 export class StoreController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Store) private readonly repo: Repository<Store>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'Store metadata' })
+  @ReadPermission('store')
+  @Get('store-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
 
   @ApiOperation({
     summary: 'Find all Store by query (paginator, order, search, and select)',
@@ -48,8 +69,6 @@ export class StoreController {
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
     const { orderBy, orderDir, search, skip, take, withDeleted, select } =
       query;
-
-    console.log(query);
     return this.repo.find({
       take,
       skip,
@@ -57,9 +76,9 @@ export class StoreController {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        name: ILike(`%${search}%`),
-      },
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }
@@ -78,6 +97,7 @@ export class StoreController {
     @Body(TransformAndValidatePipe) body: CreateStoreDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -88,12 +108,17 @@ export class StoreController {
   @ApiOperation({ summary: 'Update Store' })
   @UpdatePermission('store')
   @Put('store/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdateStoreDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete Store by id' })
@@ -103,7 +128,9 @@ export class StoreController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Store by id' })
+  @ApiOperation({
+    summary: 'Add Store relation by relationName and realationId',
+  })
   @UpdatePermission('store')
   @Put(`store/${RELATION_AND_ID_PATH}`)
   async add(

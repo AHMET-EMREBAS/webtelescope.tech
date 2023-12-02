@@ -8,9 +8,10 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Order } from './entities';
 import { CreateOrderDto, UpdateOrderDto } from './dtos';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,28 @@ import {
 @ApiTags('OrderController')
 @Controller()
 export class OrderController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Order) private readonly repo: Repository<Order>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'Order metadata' })
+  @ReadPermission('order')
+  @Get('order-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
 
   @ApiOperation({
     summary: 'Find all Order by query (paginator, order, search, and select)',
@@ -46,7 +67,8 @@ export class OrderController {
   @ReadPermission('order')
   @Get('orders')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
-    const { orderBy, orderDir, skip, take, withDeleted, select } = query;
+    const { orderBy, orderDir, search, skip, take, withDeleted, select } =
+      query;
     return this.repo.find({
       take,
       skip,
@@ -54,6 +76,9 @@ export class OrderController {
         [orderBy]: orderDir,
       },
       withDeleted,
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }
@@ -72,6 +97,7 @@ export class OrderController {
     @Body(TransformAndValidatePipe) body: CreateOrderDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -82,12 +108,17 @@ export class OrderController {
   @ApiOperation({ summary: 'Update Order' })
   @UpdatePermission('order')
   @Put('order/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdateOrderDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete Order by id' })
@@ -97,7 +128,9 @@ export class OrderController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Order by id' })
+  @ApiOperation({
+    summary: 'Add Order relation by relationName and realationId',
+  })
   @UpdatePermission('order')
   @Put(`order/${RELATION_AND_ID_PATH}`)
   async add(

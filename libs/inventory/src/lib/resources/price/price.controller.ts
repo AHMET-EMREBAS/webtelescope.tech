@@ -8,9 +8,10 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Price } from './entities';
 import { CreatePriceDto, UpdatePriceDto } from './dtos';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,28 @@ import {
 @ApiTags('PriceController')
 @Controller()
 export class PriceController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Price) private readonly repo: Repository<Price>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'Price metadata' })
+  @ReadPermission('price')
+  @Get('price-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
 
   @ApiOperation({
     summary: 'Find all Price by query (paginator, order, search, and select)',
@@ -46,7 +67,8 @@ export class PriceController {
   @ReadPermission('price')
   @Get('prices')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
-    const { orderBy, orderDir, skip, take, withDeleted, select } = query;
+    const { orderBy, orderDir, search, skip, take, withDeleted, select } =
+      query;
     return this.repo.find({
       take,
       skip,
@@ -54,6 +76,9 @@ export class PriceController {
         [orderBy]: orderDir,
       },
       withDeleted,
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }
@@ -72,6 +97,7 @@ export class PriceController {
     @Body(TransformAndValidatePipe) body: CreatePriceDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -82,12 +108,17 @@ export class PriceController {
   @ApiOperation({ summary: 'Update Price' })
   @UpdatePermission('price')
   @Put('price/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdatePriceDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete Price by id' })
@@ -97,7 +128,9 @@ export class PriceController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Price by id' })
+  @ApiOperation({
+    summary: 'Add Price relation by relationName and realationId',
+  })
   @UpdatePermission('price')
   @Put(`price/${RELATION_AND_ID_PATH}`)
   async add(

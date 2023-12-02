@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,28 @@ import {
 @ApiTags('QuantityController')
 @Controller()
 export class QuantityController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Quantity) private readonly repo: Repository<Quantity>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'Quantity metadata' })
+  @ReadPermission('quantity')
+  @Get('quantity-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
 
   @ApiOperation({
     summary:
@@ -47,7 +68,7 @@ export class QuantityController {
   @ReadPermission('quantity')
   @Get('quantitys')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
-    const { orderBy, orderDir,  skip, take, withDeleted, select } =
+    const { orderBy, orderDir, search, skip, take, withDeleted, select } =
       query;
     return this.repo.find({
       take,
@@ -56,6 +77,9 @@ export class QuantityController {
         [orderBy]: orderDir,
       },
       withDeleted,
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }
@@ -74,6 +98,7 @@ export class QuantityController {
     @Body(TransformAndValidatePipe) body: CreateQuantityDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -84,12 +109,17 @@ export class QuantityController {
   @ApiOperation({ summary: 'Update Quantity' })
   @UpdatePermission('quantity')
   @Put('quantity/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdateQuantityDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete Quantity by id' })
@@ -99,7 +129,9 @@ export class QuantityController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Quantity by id' })
+  @ApiOperation({
+    summary: 'Add Quantity relation by relationName and realationId',
+  })
   @UpdatePermission('quantity')
   @Put(`quantity/${RELATION_AND_ID_PATH}`)
   async add(

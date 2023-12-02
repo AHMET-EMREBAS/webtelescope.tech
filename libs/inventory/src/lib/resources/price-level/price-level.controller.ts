@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,28 @@ import {
 @ApiTags('PriceLevelController')
 @Controller()
 export class PriceLevelController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(PriceLevel) private readonly repo: Repository<PriceLevel>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'PriceLevel metadata' })
+  @ReadPermission('price-level')
+  @Get('price-level-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
 
   @ApiOperation({
     summary:
@@ -56,9 +77,9 @@ export class PriceLevelController {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        name: ILike(`%${search}%`),
-      },
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }
@@ -77,6 +98,7 @@ export class PriceLevelController {
     @Body(TransformAndValidatePipe) body: CreatePriceLevelDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -87,12 +109,17 @@ export class PriceLevelController {
   @ApiOperation({ summary: 'Update PriceLevel' })
   @UpdatePermission('price-level')
   @Put('price-level/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdatePriceLevelDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete PriceLevel by id' })
@@ -102,7 +129,9 @@ export class PriceLevelController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update PriceLevel by id' })
+  @ApiOperation({
+    summary: 'Add PriceLevel relation by relationName and realationId',
+  })
   @UpdatePermission('price-level')
   @Put(`price-level/${RELATION_AND_ID_PATH}`)
   async add(

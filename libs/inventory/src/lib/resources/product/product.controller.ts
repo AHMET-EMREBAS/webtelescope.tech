@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Body,
   Controller,
@@ -9,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -77,8 +77,7 @@ export class ProductController {
       },
       withDeleted,
       where: [
-        { name: ILike(`%${search}%`) },
-        { description: ILike(`%${search}%`) },
+        // { name: ILike(`%${search}%`),}
       ],
       select,
     });

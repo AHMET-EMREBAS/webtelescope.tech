@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @nx/enforce-module-boundaries */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -9,6 +11,23 @@ import {
   provideTableColumns,
 } from '@webpackages/components';
 
+/* eslint-disable @nx/enforce-module-boundaries */
+import { ResourceService } from '@webpackages/components';
+import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
+import { Injectable } from '@angular/core';
+
+export interface Product {
+  name?: string;
+  age?: number;
+}
+
+@Injectable({ providedIn: 'root' })
+export class ProductService extends ResourceService<Product> {
+  constructor(factory: EntityCollectionServiceElementsFactory) {
+    super('Product', factory);
+  }
+}
+
 @Component({
   selector: 'wt-product',
   standalone: true,
@@ -19,6 +38,7 @@ import {
     MatButtonModule,
     MatIconModule,
   ],
+  template: '<router-outlet></router-outlet>',
   providers: [
     provideTableColumns([
       { name: 'name', icon: 'info', label: 'Product Name' },
@@ -28,15 +48,12 @@ import {
         icon: 'category',
         label: 'Category',
         mapFrom: (value) => {
-          console.log(value);
           return value && value.map && value.map((e: any) => e.name);
         },
       },
     ]),
     provideSearchControl(),
   ],
-  templateUrl: './component.html',
-  styleUrl: './component.scss',
 })
 export class ProductComponent {
   constructor() {}

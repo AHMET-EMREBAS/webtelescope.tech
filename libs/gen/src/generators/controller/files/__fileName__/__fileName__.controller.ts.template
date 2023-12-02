@@ -77,9 +77,9 @@ export class <%- className %>Controller {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        // name: ILike(`%${search}%`),
-      },
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }

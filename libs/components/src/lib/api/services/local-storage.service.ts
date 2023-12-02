@@ -11,9 +11,7 @@ export class LocalStoreService {
   constructor(
     @Inject(APP_NAME_TOKEN) private readonly appName: string,
     @Inject(MODULE_NAME_TOKEN) private readonly moduleName: string
-  ) {
-    console.log(this.appName, this.moduleName);
-  }
+  ) {}
 
   protected __key(key: string) {
     return `${this.appName}_${this.moduleName}_${key}`;

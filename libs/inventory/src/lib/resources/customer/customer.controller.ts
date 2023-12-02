@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   Query,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ILike, Repository } from 'typeorm';
@@ -23,6 +24,7 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
 import {
   AUTH_BEARER_NAME,
@@ -36,9 +38,19 @@ import {
 @ApiTags('CustomerController')
 @Controller()
 export class CustomerController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Customer) private readonly repo: Repository<Customer>
   ) {}
+
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
 
   @ApiOperation({ summary: 'Customer metadata' })
   @ReadPermission('customer')
@@ -65,12 +77,9 @@ export class CustomerController {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        firstName: ILike(`%${search}%`),
-        lastName: ILike(`%${search}%`),
-        organization: ILike(`%${search}%`),
-        phone: ILike(`%${search}%`),
-      },
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }
@@ -89,6 +98,7 @@ export class CustomerController {
     @Body(TransformAndValidatePipe) body: CreateCustomerDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -99,12 +109,17 @@ export class CustomerController {
   @ApiOperation({ summary: 'Update Customer' })
   @UpdatePermission('customer')
   @Put('customer/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdateCustomerDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
   @ApiOperation({ summary: 'Delete Customer by id' })
@@ -114,7 +129,9 @@ export class CustomerController {
     return this.repo.delete(id);
   }
 
-  @ApiOperation({ summary: 'Update Customer by id' })
+  @ApiOperation({
+    summary: 'Add Customer relation by relationName and realationId',
+  })
   @UpdatePermission('customer')
   @Put(`customer/${RELATION_AND_ID_PATH}`)
   async add(
