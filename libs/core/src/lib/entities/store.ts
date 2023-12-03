@@ -16,6 +16,10 @@ import {
   PositiveNumberProperty,
   PositiveIntegerProperty,
   ManyRelation,
+  UniqueTextColumn,
+  TextProperty,
+  TextColumn,
+  URLProperty,
 } from '../properties';
 import { Exclude } from 'class-transformer';
 import { PartialType } from '@nestjs/swagger';
@@ -126,6 +130,8 @@ export class UpdateProductDto extends PartialType(CreateProductDto) {}
 export class Sku<
   TProduct extends BaseIDEntity = Product
 > extends BaseNameDescriptionEntity {
+  @UniqueTextColumn() barcode!: string;
+
   @OwnerRelation({ target: Product }) product!: TProduct;
 }
 
@@ -134,6 +140,7 @@ export class CreateSkuDto
   extends BaseNameAndDescriptionDto
   implements Sku<ObjectId>
 {
+  @TextProperty({ required: true }) barcode!: string;
   @ObjectIdProperty({ required: true }) product!: ObjectId;
 }
 
@@ -195,3 +202,30 @@ export class CreateQuantityDto implements Quantity<ObjectId, ObjectId> {
 
 @Exclude()
 export class UpdateQuantityDto extends PartialType(CreateQuantityDto) {}
+
+/**
+ * User image
+ *
+ *
+ *
+ *
+ */
+@Entity()
+export class ProductImage<
+  TProduct extends BaseIDEntity = Product
+> extends BaseEntity {
+  @TextColumn()
+  url!: string;
+
+  @OwnerRelation({ target: Product })
+  product!: TProduct;
+}
+
+@Exclude()
+export class CreateProductImageDto implements ProductImage<ObjectId> {
+  @URLProperty({ required: true }) url!: string;
+  @ObjectIdProperty({ required: true }) product!: ObjectId;
+}
+
+@Exclude()
+export class UpdateProductImageDto extends PartialType(CreateProductImageDto) {}
