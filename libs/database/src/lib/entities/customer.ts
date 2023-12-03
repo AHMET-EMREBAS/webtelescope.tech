@@ -5,7 +5,7 @@ import {
   BaseNameEntity,
   BaseCredentialDto,
   BaseNameDto,
-} from './base.entity';
+} from './__base-entities';
 import { ObjectId, ObjectIdProperty, OneRelation } from '../properties';
 
 import { Exclude } from 'class-transformer';
@@ -38,7 +38,7 @@ export class UpdateCustomerTypeDto extends PartialType(CreateCustomerTypeDto) {}
  */
 @Entity()
 export class Customer<
-  TCustomerType extends BaseIDEntity
+  TCustomerType extends BaseIDEntity = CustomerType
 > extends BaseCredentialEntity {
   @OneRelation({ target: CustomerType }) customerType!: TCustomerType;
 }

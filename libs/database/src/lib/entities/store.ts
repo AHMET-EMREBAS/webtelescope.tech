@@ -6,7 +6,7 @@ import {
   BaseNameEntity,
   BaseNameDto,
   BaseNameAndDescriptionDto,
-} from './base.entity';
+} from './__base-entities';
 import {
   NumberColumn,
   OwnerRelation,

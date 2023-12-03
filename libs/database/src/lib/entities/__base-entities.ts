@@ -6,7 +6,12 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 } from 'uuid';
-import { PasswordColumn, TextColumn, UniqueTextColumn } from '../properties';
+import {
+  IntergerProperty,
+  PasswordColumn,
+  TextColumn,
+  UniqueTextColumn,
+} from '../properties';
 import {
   TextProperty,
   NameProperty,
@@ -15,6 +20,7 @@ import {
   PasswordProperty,
 } from '../properties';
 import { Exclude } from 'class-transformer';
+import { PickType } from '@nestjs/swagger';
 
 /**
  * Base id entity
@@ -133,3 +139,29 @@ export class BaseCredentialDto implements BaseCredentialEntity {
   @UsernameProperty({ required: true }) username!: string;
   @PasswordProperty({ required: true }) password!: string;
 }
+
+/**
+ * Used for add, remove, and set relations
+ * 
+ * 
+ * 
+ * 
+ */
+@Exclude()
+export class RelationByIdDto {
+  @IntergerProperty({ required: true }) id!: number;
+  @NameProperty({ required: true }) relationName!: string;
+  @IntergerProperty({ required: true }) relationId!: number;
+}
+
+/**
+ * Used for set relation
+ * 
+ * 
+ * 
+ */
+@Exclude()
+export class RelationDto extends PickType(RelationByIdDto, [
+  'id',
+  'relationName',
+]) {}

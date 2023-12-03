@@ -18,7 +18,7 @@ import {
   BaseCredentialDto,
   BaseNameDto,
   BaseUserDetailDto,
-} from './base.entity';
+} from './__base-entities';
 import { Exclude } from 'class-transformer';
 import { PartialType } from '@nestjs/swagger';
 
