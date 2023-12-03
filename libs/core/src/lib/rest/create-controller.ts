@@ -9,7 +9,7 @@ import {
   ApiTags,
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
-import { BaseService, RepoMetadata, serviceToken } from '../services';
+import { BaseService, InjectService, RepoMetadata } from '../services';
 import {
   BaseIDEntity,
   QueryDto,
@@ -21,7 +21,6 @@ import {
   Controller,
   Delete,
   Get,
-  Inject,
   Param,
   ParseIntPipe,
   Post,
@@ -31,8 +30,7 @@ import {
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { ClassConstructor } from 'class-transformer';
 import { ValidateDtoPipe } from './validation-pipe';
-import { API_BEARER_NAME } from '../constants';
-import { SecurityBuilder } from '../auth';
+import { AuthTokens, SecurityBuilder, UserId } from '../auth';
 
 export type ControllerOptions = {
   singularPath: string;
@@ -51,12 +49,12 @@ export function BuildController<T extends BaseIDEntity = BaseIDEntity>(
 
   const AUTH = new SecurityBuilder(entity);
 
-  @ApiBearerAuth(API_BEARER_NAME)
+  @ApiBearerAuth(AuthTokens.API_BEARER_NAME)
   @ApiTags(`${entity.name}Controller`)
   @Controller()
   class __Controller {
     constructor(
-      @Inject(serviceToken(entity)) public readonly service: BaseService<T>
+      @InjectService(entity) public readonly service: BaseService<T>
     ) {}
 
     @ApiOkResponse({ description: `Success`, type: RepoMetadata })
@@ -90,8 +88,8 @@ export function BuildController<T extends BaseIDEntity = BaseIDEntity>(
     @Post(singularPath)
     @ApiBody({ type: createDto })
     @AUTH.WRITE()
-    save(@Body(ValidateDtoPipe) body: T) {
-      return this.service.save(body);
+    save(@Body(ValidateDtoPipe) body: T, @UserId() createdBy: number) {
+      return this.service.save(body, createdBy);
     }
 
     @ApiOkResponse({ description: 'Success', type: entity })
@@ -103,9 +101,10 @@ export function BuildController<T extends BaseIDEntity = BaseIDEntity>(
     @AUTH.UPDATE()
     async update(
       @Param('id', ParseIntPipe) id: number,
-      @Body(ValidateDtoPipe) body: QueryDeepPartialEntity<T>
+      @Body(ValidateDtoPipe) body: QueryDeepPartialEntity<T>,
+      @UserId() createdBy: number
     ) {
-      await this.service.update(id, body);
+      await this.service.update(id, body, createdBy);
       return await this.service.findOneById(id);
     }
 

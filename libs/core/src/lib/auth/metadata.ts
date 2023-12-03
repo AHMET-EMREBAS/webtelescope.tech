@@ -1,4 +1,8 @@
-import { SetMetadata } from '@nestjs/common';
+import {
+  ExecutionContext,
+  SetMetadata,
+  createParamDecorator,
+} from '@nestjs/common';
 import { ClassConstructor } from 'class-transformer';
 
 export class AuthActions {
@@ -9,12 +13,49 @@ export class AuthActions {
 }
 
 export class AuthTokens {
+  /**
+   * Api bearer name
+   */
   static API_BEARER_NAME = 'authBearer';
+
+  /**
+   * Auth cookie name
+   */
+  static AUTH_COOKIE_NAME = 'authtoken';
+
+  /**
+   * Permission metadata token
+   */
   static PERMISSION = Symbol('permission');
+
+  /**
+   * Role metadata token
+   */
   static ROLE = Symbol('role');
+
+  /**
+   * Public metadata token
+   */
   static PUBLIC = Symbol('public');
+
+  /**
+   * Admin role name
+   */
   static ADMIN_ROLE = 'admin';
+
+  /**
+   * Subscriber name
+   */
+  static SUBSCRIBER_ROLE = 'subscriber';
+
+  /**
+   * Root role name
+   */
   static ROOT_ROLE = 'root';
+}
+
+export function Public() {
+  return SetMetadata(AuthTokens.PUBLIC, true);
 }
 
 export class SecurityBuilder {
@@ -96,3 +137,9 @@ export class SecurityBuilder {
     return SetMetadata(AuthTokens.ROLE, AuthTokens.ROOT_ROLE);
   }
 }
+
+export const UserId = createParamDecorator(
+  (data: unknown, context: ExecutionContext) => {
+    return context.switchToHttp().getRequest().user?.id;
+  }
+);

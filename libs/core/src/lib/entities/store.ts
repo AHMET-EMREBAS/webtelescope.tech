@@ -15,6 +15,7 @@ import {
   ObjectId,
   PositiveNumberProperty,
   PositiveIntegerProperty,
+  ManyRelation,
 } from '../properties';
 import { Exclude } from 'class-transformer';
 import { PartialType } from '@nestjs/swagger';
@@ -97,12 +98,19 @@ export class UpdateStoreDto extends PartialType(CreateStoreDto) {}
  *
  */
 @Entity()
-export class Product extends BaseNameDescriptionEntity {}
+export class Product<
+  TCategory extends BaseIDEntity = Category
+> extends BaseNameDescriptionEntity {
+  @ManyRelation({ target: Category }) categories!: TCategory[];
+}
 
 @Exclude()
 export class CreateProductDto
-  extends BaseNameDescriptionEntity
-  implements Product {}
+  extends BaseNameAndDescriptionDto
+  implements Product<ObjectId>
+{
+  @ObjectIdProperty({ isArray: true }) categories!: ObjectId[];
+}
 
 @Exclude()
 export class UpdateProductDto extends PartialType(CreateProductDto) {}

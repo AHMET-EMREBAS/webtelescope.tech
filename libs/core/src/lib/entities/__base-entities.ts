@@ -65,6 +65,14 @@ export class BaseEntity extends BaseIDEntity {
     },
   })
   uuid?: string;
+
+  @ApiProperty({ type: 'integer' })
+  @Column({ type: 'numeric', nullable: true })
+  createdBy?: number;
+
+  @ApiProperty({ type: 'integer' })
+  @Column({ type: 'numeric', nullable: true })
+  updatedBy?: number;
 }
 
 /**

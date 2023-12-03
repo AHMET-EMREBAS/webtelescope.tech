@@ -23,20 +23,6 @@ import { Exclude } from 'class-transformer';
 import { PartialType } from '@nestjs/swagger';
 
 /**
- * User
- *
- *
- */
-@Entity()
-export class User extends BaseEntity {}
-
-@Exclude()
-export class CreateUserDto implements User {}
-
-@Exclude()
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
-
-/**
  * Permission
  *
  *
@@ -79,30 +65,21 @@ export class UpdateRoleDto extends PartialType(CreateRoleDto) {}
  *
  */
 @Entity()
-export class UserCredential<
-  TRole extends BaseIDEntity = Role,
-  TUser extends BaseIDEntity = User
+export class User<
+  TRole extends BaseIDEntity = Role
 > extends BaseCredentialEntity {
   @ManyRelation({ target: Role })
   roles!: TRole[];
-
-  @OwnerRelation({ target: User })
-  user!: TUser;
 }
 
 @Exclude()
-export class CreateUserCredentialDto
-  extends BaseCredentialDto
-  implements UserCredential<ObjectId, ObjectId>
-{
+export class CreateUserDto extends BaseCredentialDto implements User<ObjectId> {
   @ObjectIdProperty({ required: true, isArray: true }) roles!: ObjectId[];
   @ObjectIdProperty({ required: true }) user!: ObjectId;
 }
 
 @Exclude()
-export class UpdateUserCredentialDto extends PartialType(
-  CreateUserCredentialDto
-) {}
+export class UpdateUserDto extends PartialType(CreateUserDto) {}
 
 /**
  * User Detail

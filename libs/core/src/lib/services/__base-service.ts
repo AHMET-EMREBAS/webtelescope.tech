@@ -8,6 +8,7 @@ import {
 } from '../entities';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import {
+  Inject,
   NotFoundException,
   Provider,
   UnprocessableEntityException,
@@ -111,12 +112,24 @@ export class BaseService<Entity extends BaseIDEntity> {
     return await this.repo.findOneBy({ id } as any);
   }
 
-  async save(entity: Entity) {
-    await this.throwIfNotUnqiue(entity);
-    return await this.repo.save(entity);
+  async findOneBy(key: keyof Entity, value: any) {
+    return await this.repo.findOneBy({ [key]: value } as any);
   }
 
-  async update(id: number, entity: QueryDeepPartialEntity<Entity>) {
+  async save(entity: Entity, userId: number) {
+    await this.throwIfNotUnqiue(entity);
+    return await this.repo.save({
+      ...entity,
+      createdBy: userId,
+      updatedBy: userId,
+    });
+  }
+
+  async update(
+    id: number,
+    entity: QueryDeepPartialEntity<Entity>,
+    userId: number
+  ) {
     const found = await this.findOneByIdOrThrow(id);
 
     const __isUnique = await this.isUnique(entity);
@@ -128,7 +141,10 @@ export class BaseService<Entity extends BaseIDEntity> {
       if (
         found[__isUnique.property] == (entity as Entity)[__isUnique.property]
       ) {
-        return await this.repo.update(id, entity);
+        return await this.repo.update(id, {
+          ...entity,
+          updatedBy: userId,
+        });
       } else {
         this.throwUniqueException(__isUnique);
         return;
@@ -227,4 +243,8 @@ export function provideService(entity: ClassConstructor<unknown>): Provider {
     provide: serviceToken(entity),
     useClass: BuildService(entity),
   };
+}
+
+export function InjectService(entity: ClassConstructor<unknown>) {
+  return Inject(serviceToken(entity));
 }
