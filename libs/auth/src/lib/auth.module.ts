@@ -7,7 +7,14 @@ import { AuthGuard } from './auth.guard';
 import { Repository } from 'typeorm';
 
 import { ClassConstructor } from 'class-transformer';
-import { Permission, Role, User } from './resources';
+import {
+  Permission,
+  PermissionModule,
+  Role,
+  RoleModule,
+  User,
+  UserModule,
+} from './resources';
 import {
   ADMIN_ROLE,
   ResourceAction,
@@ -38,6 +45,9 @@ export class AuthModule implements OnModuleInit {
           },
         }),
         TypeOrmModule.forFeature([User, Role, Permission]),
+        UserModule,
+        RoleModule,
+        PermissionModule,
       ],
       controllers: [AuthController],
       providers: [

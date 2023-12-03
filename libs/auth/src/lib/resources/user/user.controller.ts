@@ -9,7 +9,12 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ILike, Repository } from 'typeorm';
+import { User } from './entities';
+import { CreateUserDto, UpdateUserDto } from './dtos';
+import { InjectRepository } from '@nestjs/typeorm';
+
 import {
   QueryDto,
   RELATION_AND_ID_PATH,
@@ -18,12 +23,8 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
-
-import { ILike, Repository } from 'typeorm';
-import { User } from './entities';
-import { CreateUserDto, UpdateUserDto } from './dtos';
-import { InjectRepository } from '@nestjs/typeorm';
 import {
   AUTH_BEARER_NAME,
   DeletePermission,
@@ -36,10 +37,32 @@ import {
 @ApiTags('UserController')
 @Controller()
 export class UserController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(User) private readonly repo: Repository<User>
   ) {}
 
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'User metadata' })
+  @ReadPermission('user')
+  @Get('user-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
+
+  @ApiOperation({
+    summary: 'Find all User by query (paginator, order, search, and select)',
+  })
   @ReadPermission('user')
   @Get('users')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
@@ -52,24 +75,26 @@ export class UserController {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        username: ILike(`%${search}%`),
-      },
+      where: [{ username: ILike(`%${search}%`) }],
       select,
     });
   }
+
+  @ApiOperation({ summary: 'Find User by id' })
   @ReadPermission('user')
   @Get('user/:id')
   findOneById(@Param('id', ParseIntPipe) id: number) {
     return this.repo.findOneBy({ id });
   }
 
+  @ApiOperation({ summary: 'Save User' })
   @WritePermission('user')
   @Post('user')
   async save(
     @Body(TransformAndValidatePipe) body: CreateUserDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -77,22 +102,32 @@ export class UserController {
     });
   }
 
+  @ApiOperation({ summary: 'Update User' })
   @UpdatePermission('user')
   @Put('user/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdateUserDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
+  @ApiOperation({ summary: 'Delete User by id' })
   @DeletePermission('user')
   @Delete('user/:id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.repo.delete(id);
   }
 
+  @ApiOperation({
+    summary: 'Add User relation by relationName and realationId',
+  })
   @UpdatePermission('user')
   @Put(`user/${RELATION_AND_ID_PATH}`)
   async add(
@@ -108,6 +143,9 @@ export class UserController {
       .add(relationId);
   }
 
+  @ApiOperation({
+    summary: 'Remove User relation by id, relationName, and relationId',
+  })
   @UpdatePermission('user')
   @Delete(`user/${RELATION_AND_ID_PATH}`)
   async remove(
@@ -123,6 +161,7 @@ export class UserController {
       .add(relationId);
   }
 
+  @ApiOperation({ summary: 'Set User relation by id' })
   @UpdatePermission('user')
   @Post(`user/${RELATION_AND_ID_PATH}`)
   async set(
@@ -138,6 +177,7 @@ export class UserController {
       .set(relationId);
   }
 
+  @ApiOperation({ summary: 'Unset User relation by id' })
   @UpdatePermission('user')
   @Delete(`user/${RELATION_PATH}`)
   async unset(

@@ -9,7 +9,12 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Repository } from 'typeorm';
+import { Permission } from './entities';
+import { CreatePermissionDto, UpdatePermissionDto } from './dtos';
+import { InjectRepository } from '@nestjs/typeorm';
+
 import {
   QueryDto,
   RELATION_AND_ID_PATH,
@@ -18,8 +23,8 @@ import {
   RelationDto,
   TransformAndValidatePipe,
   UserId,
+  validateUnique,
 } from '@webpackages/core';
-
 import {
   AUTH_BEARER_NAME,
   DeletePermission,
@@ -28,19 +33,37 @@ import {
   WritePermission,
 } from '../../auth';
 
-import { ILike, Repository } from 'typeorm';
-import { Permission } from './entities';
-import { CreatePermissionDto, UpdatePermissionDto } from './dtos';
-import { InjectRepository } from '@nestjs/typeorm';
-
 @ApiBearerAuth(AUTH_BEARER_NAME)
 @ApiTags('PermissionController')
 @Controller()
 export class PermissionController {
+  uniqueFields = this.repo.metadata.uniques
+    .map((e) => e.columns.pop()?.propertyName)
+    .filter((e) => e) as string[];
+
   constructor(
     @InjectRepository(Permission) private readonly repo: Repository<Permission>
   ) {}
 
+  async uniqueCheck(entity: any) {
+    if (this.uniqueFields) {
+      await validateUnique(this.repo, entity, this.uniqueFields);
+    }
+  }
+
+  @ApiOperation({ summary: 'Permission metadata' })
+  @ReadPermission('permission')
+  @Get('permission-meta')
+  async meta() {
+    return {
+      count: await this.repo.count(),
+    };
+  }
+
+  @ApiOperation({
+    summary:
+      'Find all Permission by query (paginator, order, search, and select)',
+  })
   @ReadPermission('permission')
   @Get('permissions')
   find(@Query(TransformAndValidatePipe) query: QueryDto) {
@@ -53,24 +76,28 @@ export class PermissionController {
         [orderBy]: orderDir,
       },
       withDeleted,
-      where: {
-        name: ILike(`%${search}%`),
-      },
+      where: [
+        // { name: ILike(`%${search}%`),}
+      ],
       select,
     });
   }
+
+  @ApiOperation({ summary: 'Find Permission by id' })
   @ReadPermission('permission')
   @Get('permission/:id')
   findOneById(@Param('id', ParseIntPipe) id: number) {
     return this.repo.findOneBy({ id });
   }
 
+  @ApiOperation({ summary: 'Save Permission' })
   @WritePermission('permission')
   @Post('permission')
   async save(
     @Body(TransformAndValidatePipe) body: CreatePermissionDto,
     @UserId() userId: number
   ) {
+    await this.uniqueCheck(body);
     return await this.repo.save({
       ...body,
       createdBy: userId,
@@ -78,22 +105,32 @@ export class PermissionController {
     });
   }
 
+  @ApiOperation({ summary: 'Update Permission' })
   @UpdatePermission('permission')
   @Put('permission/:id')
-  udpate(
+  async udpate(
     @Param('id', ParseIntPipe) id: number,
     @Body(TransformAndValidatePipe) body: UpdatePermissionDto,
     @UserId() userId: number
   ) {
-    return this.repo.update(id, { ...body, updatedBy: userId });
+    for (const u of this.uniqueFields) {
+      const found = await this.repo.findOneBy({ [u]: (body as any)[u] });
+      if (found?.id == id) continue;
+      await this.uniqueCheck(body);
+    }
+    return await this.repo.update(id, { ...body, updatedBy: userId });
   }
 
+  @ApiOperation({ summary: 'Delete Permission by id' })
   @DeletePermission('permission')
   @Delete('permission/:id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.repo.delete(id);
   }
 
+  @ApiOperation({
+    summary: 'Add Permission relation by relationName and realationId',
+  })
   @UpdatePermission('permission')
   @Put(`permission/${RELATION_AND_ID_PATH}`)
   async add(
@@ -109,6 +146,9 @@ export class PermissionController {
       .add(relationId);
   }
 
+  @ApiOperation({
+    summary: 'Remove Permission relation by id, relationName, and relationId',
+  })
   @UpdatePermission('permission')
   @Delete(`permission/${RELATION_AND_ID_PATH}`)
   async remove(
@@ -124,6 +164,7 @@ export class PermissionController {
       .add(relationId);
   }
 
+  @ApiOperation({ summary: 'Set Permission relation by id' })
   @UpdatePermission('permission')
   @Post(`permission/${RELATION_AND_ID_PATH}`)
   async set(
@@ -139,6 +180,7 @@ export class PermissionController {
       .set(relationId);
   }
 
+  @ApiOperation({ summary: 'Unset Permission relation by id' })
   @UpdatePermission('permission')
   @Delete(`permission/${RELATION_PATH}`)
   async unset(
