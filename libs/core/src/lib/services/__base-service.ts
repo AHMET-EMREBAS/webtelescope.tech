@@ -45,12 +45,19 @@ export class BaseService<Entity extends BaseIDEntity> {
    * @returns
    */
   protected async isUnique(entity: any): Promise<UniqueError<Entity> | true> {
+    // If has unique fields
     if (this.unqiueFields) {
+      // Iterate unique fields
       for (const u of this.unqiueFields) {
+        // if input does not have value of the property, continue
+        if (!entity[u]) continue;
+
+        // If input has the value of the property, then find one by property name
         const found = await this.repo.findOneBy({
           [u]: (entity as any)[u],
         } as FindOptionsWhere<Entity>);
 
+        // If found, then return the error payload
         if (found) {
           return {
             property: u.toString() as keyof Entity,
@@ -60,9 +67,11 @@ export class BaseService<Entity extends BaseIDEntity> {
           };
         }
       }
+      // If the entity is not unique, then return true
       return true;
     }
 
+    // If the entity does not have unique fields, then return true;
     return true;
   }
 
@@ -134,6 +143,7 @@ export class BaseService<Entity extends BaseIDEntity> {
 
     const __isUnique = await this.isUnique(entity);
 
+    console.log('Update: ', __isUnique);
     if (__isUnique === true) {
       await this.repo.update(id, entity);
       return found;
