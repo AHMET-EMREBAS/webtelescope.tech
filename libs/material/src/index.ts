@@ -1,1 +1,2 @@
-export * from './lib/material/material.component';
+// @index('./*', f => `export * from '${f.path}'`)
+export * from './lib'
