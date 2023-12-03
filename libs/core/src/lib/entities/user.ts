@@ -1,10 +1,13 @@
 import { Entity } from 'typeorm';
 import {
+  BooleanColumn,
+  BooleanProperty,
   ManyRelation,
   ObjectId,
   ObjectIdProperty,
   OwnerRelation,
   TextColumn,
+  TextProperty,
   URLProperty,
   UniqueTextColumn,
   UsernameProperty,
@@ -18,9 +21,11 @@ import {
   BaseCredentialDto,
   BaseNameDto,
   BaseUserDetailDto,
+  BaseNameDescriptionEntity,
+  BaseNameAndDescriptionDto,
 } from './__base-entities';
 import { Exclude } from 'class-transformer';
-import { PartialType } from '@nestjs/swagger';
+import { PartialType, PickType } from '@nestjs/swagger';
 
 /**
  * Permission
@@ -80,6 +85,51 @@ export class CreateUserDto extends BaseCredentialDto implements User<ObjectId> {
 
 @Exclude()
 export class UpdateUserDto extends PartialType(CreateUserDto) {}
+
+/**
+ * Notification entity
+ *
+ *
+ *
+ *
+ */
+@Entity()
+export class Notification extends BaseNameDescriptionEntity {
+  @BooleanColumn() read?: boolean;
+  @OwnerRelation({ target: User }) user!: User;
+}
+
+@Exclude()
+export class CreateNotificationDto extends BaseNameAndDescriptionDto {}
+
+@Exclude()
+export class UpdateNotificationDto {
+  @BooleanProperty({ required: true }) read?: boolean;
+}
+
+/**
+ * Notification entity
+ *
+ *
+ *
+ *
+ */
+@Entity()
+export class Message<TUser extends BaseEntity = User> extends BaseEntity {
+  @TextColumn() message!: string;
+  @OwnerRelation({ target: User }) to!: TUser;
+}
+
+@Exclude()
+export class CreateMessageDto implements Message<ObjectId> {
+  @TextProperty({ required: true }) message!: string;
+  @ObjectIdProperty({ required: true }) to!: ObjectId;
+}
+
+@Exclude()
+export class UpdateMessageDto extends PartialType(
+  PickType(CreateMessageDto, ['message'])
+) {}
 
 /**
  * User Detail
