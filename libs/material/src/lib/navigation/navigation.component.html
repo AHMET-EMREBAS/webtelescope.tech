@@ -1,0 +1,48 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>
+      <img
+        src="./assets/icons/icon-72x72.png"
+        alt="App Logo"
+        width="40"
+        height="40"
+      />
+    </mat-toolbar>
+    <mat-nav-list>
+      @for (item of navigationItems; track $index) {
+      <a
+        mat-list-item
+        [routerLink]="[item.route]"
+        routerLinkActive="router-link-active"
+      >
+        <span matListItemLine>{{ item.label }}</span>
+
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+      </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (isHandset$ | async) {
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      }
+      <span>{{ title.getTitle() }}</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

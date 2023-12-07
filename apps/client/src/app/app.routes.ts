@@ -1,3 +1,16 @@
 import { Route } from '@angular/router';
-
-export const appRoutes: Route[] = [];
+import {
+  NavigationComponent,
+  provideNavigationItems,
+} from '@webpackages/material';
+export const appRoutes: Route[] = [
+  {
+    path: '',
+    component: NavigationComponent,
+    providers: [
+      provideNavigationItems([
+        { label: 'Category', icon: 'category', route: '' },
+      ]),
+    ],
+  },
+];
