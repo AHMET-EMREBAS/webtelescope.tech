@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'wt-category',
+  selector: 'wt-delete',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './category.component.html',
-  styleUrl: './category.component.scss',
+  templateUrl: './delete.component.html',
+  styleUrl: './delete.component.scss',
 })
-export class CategoryComponent {}
+export class DeleteComponent {}
