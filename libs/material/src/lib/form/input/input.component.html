@@ -66,7 +66,7 @@
       <legend>{{ label }}</legend>
       <mat-radio-group [formControlName]="name" [attr.aria-label]="label">
         @for (item of options; track $index) {
-        <mat-radio-button [value]="item">{{ item.label }} </mat-radio-button>
+        <mat-radio-button [value]="item">{{ item }} </mat-radio-button>
         }
       </mat-radio-group>
     </fieldset>
@@ -77,33 +77,11 @@
 <ng-template #selectInput>
   <mat-form-field [formGroup]="formGroup" [appearance]="appearance">
     <mat-label>{{ label }}</mat-label>
-    <mat-select>
+    <mat-select [formControlName]="name" [multiple]="multiple">
       @for (option of options; track option) {
-      <mat-option [value]="option">{{ option.label }}</mat-option>
-      }
-    </mat-select>
-    <mat-icon matPrefix color="primary"> {{ icon }}</mat-icon>
-  </mat-form-field>
-</ng-template>
-
-<!-- Enums -->
-<ng-template #enumInput>
-  <mat-form-field [formGroup]="formGroup" [appearance]="appearance">
-    <mat-label>{{ label }}</mat-label>
-    <input
-      type="text"
-      matInput
-      placeholder="Pick one"
-      [attr.aria-label]="label"
-      [formControlName]="name"
-      [matAutocomplete]="auto"
-    />
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      @for (option of enums ; track option) {
       <mat-option [value]="option">{{ option }}</mat-option>
       }
-    </mat-autocomplete>
-
+    </mat-select>
     <mat-icon matPrefix color="primary"> {{ icon }}</mat-icon>
   </mat-form-field>
 </ng-template>
@@ -122,12 +100,10 @@
 
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
       @for (option of options ; track option) {
-      <mat-option [value]="option.label">{{ option.label }}</mat-option>
+      <mat-option [value]="option">{{ option }}</mat-option>
       }
     </mat-autocomplete>
-    <mat-icon matPrefix color="primary">
-      {{ icon }}</mat-icon
-    >
+    <mat-icon matPrefix color="primary"> {{ icon }}</mat-icon>
     <mat-error>{{ getError() }}</mat-error>
   </mat-form-field>
 </ng-template>
@@ -155,8 +131,6 @@
 <ng-container *ngTemplateOutlet="radioGroupInput"></ng-container>
 } @else if(inputType =='switch'){
 <ng-container *ngTemplateOutlet="switchInput"></ng-container>
-} @else if(inputType =='enums'){
-<ng-container *ngTemplateOutlet="enumInput"></ng-container>
 } @else if(inputType =='checkbox'){
 <ng-container *ngTemplateOutlet="checkboxInput"></ng-container>
 } @else {

@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import {
   FormComponent,
   InputComponent,
-  SelectOption,
+  SelectOptions,
 } from '@webpackages/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'wt-create',
@@ -21,18 +22,13 @@ export class CreateComponent {
       Validators.minLength(3),
       Validators.maxLength(50),
     ]),
-
-    status: new FormControl('', [Validators.required]),
   });
 
-  statusOptions: SelectOption[] = [
-    { id: 1, label: 'Todo' },
-    { id: 2, label: 'Done' },
-    { id: 3, label: 'In Progress' },
-    { id: 4, label: 'Complete' },
-  ];
+  statusOptions: SelectOptions = ['Todo', 'InProgress', 'Complete'];
+
+  constructor(private readonly service: CategoryService) {}
 
   submit(event: any) {
-    console.log('Saving Category: ', event);
+    this.service.saveItem(this.formGroup.value);
   }
 }

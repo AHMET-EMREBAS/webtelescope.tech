@@ -27,10 +27,7 @@ export type InputType =
   | 'radio'
   | 'enums';
 
-export type SelectOption = {
-  id: number;
-  label: string;
-};
+export type SelectOptions = string[];
 
 @Component({
   selector: 'wt-input',
@@ -68,9 +65,10 @@ export class InputComponent {
   @Input() label?: string;
   @Input() icon = 'info';
 
-  @Input() options?: SelectOption[];
-  @Input() enums?: string[];
+  @Input() options?: SelectOptions;
   @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';
+
+  @Input() multiple = false;
 
   errorMessage$!: Observable<string | undefined>;
 

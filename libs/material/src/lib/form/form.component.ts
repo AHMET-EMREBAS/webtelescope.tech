@@ -24,8 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class FormComponent implements OnInit {
   @Input() formGroup!: FormGroup;
-  @Output() submitEvent = new EventEmitter();
   @Input() defaultValue?: Record<string, any>;
+  @Output() submitEvent = new EventEmitter();
 
   ngOnInit(): void {
     if (this.defaultValue) {

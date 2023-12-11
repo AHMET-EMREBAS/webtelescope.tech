@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 import { CategoryComponent } from './category.component';
+import { CategoryService } from './category.service';
 
 export const categoryRoutes: Routes = [
   {
     path: '',
     component: CategoryComponent,
     title: 'Category',
+    providers: [CategoryService],
     children: [
       {
         path: '',
@@ -23,7 +25,7 @@ export const categoryRoutes: Routes = [
         path: 'update/:id',
         title: 'Update Category',
         loadComponent: () =>
-          import('./update/update.component').then((e) => e.UpdateComponent),
+          import('./create/create.component').then((e) => e.CreateComponent),
       },
       {
         path: 'delete/:id',
