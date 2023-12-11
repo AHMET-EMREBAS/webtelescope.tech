@@ -1,8 +1,15 @@
 <form [formGroup]="formGroup">
   <ng-content></ng-content>
-
   <div class="actions">
-    <button type="button" mat-raised-button color="primary" i18n>Submit</button>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      i18n
+      [disabled]="formGroup.untouched && formGroup.invalid"
+    >
+      Submit
+    </button>
     <button type="reset" mat-raised-button color="primary" i18n>Reset</button>
   </div>
 </form>

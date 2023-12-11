@@ -1,0 +1,139 @@
+<!-- Text input -->
+
+<ng-template #textInput>
+  <mat-form-field [formGroup]="formGroup" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControlName]="name"
+      [attr.required]="required"
+      [minLength]="minLength || null"
+      [maxLength]="maxLength || null"
+      [autocomplete]="autocomplete"
+    />
+
+    <mat-icon matPrefix> {{ icon }}</mat-icon>
+
+    <mat-error>{{ errorMessage$ | async }}</mat-error>
+  </mat-form-field>
+</ng-template>
+
+<!-- Textarea input -->
+<ng-template #textareaInput>
+  <mat-form-field [formGroup]="formGroup" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <textarea
+      type="text"
+      matInput
+      [formControlName]="name"
+      [attr.required]="required"
+      [minLength]="minLength || null"
+      [maxLength]="maxLength || null"
+      [autocomplete]="autocomplete"
+    ></textarea>
+    <mat-icon matPrefix> {{ icon }}</mat-icon>
+    <mat-error>{{ errorMessage$ | async }}</mat-error>
+  </mat-form-field>
+</ng-template>
+
+<!-- Number input -->
+<ng-template #numberInput>
+  <mat-form-field [formGroup]="formGroup" appearance="outline">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      type="number"
+      matInput
+      [min]="min || null"
+      [max]="max || null"
+      [attr.required]="required || null"
+      [autocomplete]="autocomplete"
+      [formControlName]="name"
+    />
+    <mat-icon matPrefix> {{ icon }}</mat-icon>
+    <mat-error>{{ errorMessage$ | async }}</mat-error>
+  </mat-form-field>
+</ng-template>
+
+<!-- Checkbox -->
+<ng-template #checkboxInput>
+  <mat-checkbox [formControlName]="name">{{ label }}</mat-checkbox>
+</ng-template>
+
+<!-- Radio Group -->
+<ng-template #radioGroupInput>
+  <div [formGroup]="formGroup">
+    <mat-radio-group [formControlName]="name" [attr.aria-label]="label">
+      @for (item of options; track $index) {
+      <mat-radio-button [value]="item">{{ item.label }} </mat-radio-button>
+      }
+    </mat-radio-group>
+  </div>
+</ng-template>
+
+<!-- Select Input -->
+
+<ng-template #selectInput>
+  <mat-form-field>
+    <mat-label>{{ label }}</mat-label>
+    <mat-select>
+      @for (option of options; track option) {
+      <mat-option [value]="option">{{ option.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</ng-template>
+
+<!-- Enums -->
+<ng-template #autocompleteInput>
+  <mat-form-field>
+    <mat-label>{{ label }}</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="Pick one"
+      [attr.aria-label]="label"
+      [formControlName]="name"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      @for (option of enums ; track option) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</ng-template>
+
+<!-- Autocomplete Input  -->
+<ng-template #autocompleteInput>
+  <mat-form-field>
+    <mat-label>{{ label }}</mat-label>
+    <input
+      type="text"
+      matInput
+      [attr.aria-label]="label"
+      [formControlName]="name"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      @for (option of enums ; track option) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</ng-template>
+
+@if (inputType =='text') {
+<ng-container *ngTemplateOutlet="textInput"></ng-container>
+
+} @else if(inputType =='number') {
+<ng-container *ngTemplateOutlet="numberInput"></ng-container>
+} @else if(inputType =='select') {
+<ng-container *ngTemplateOutlet="selectInput"></ng-container>
+} @else if(inputType =='autocomplete') {
+<ng-container *ngTemplateOutlet="autocompleteInput"></ng-container>
+} @else if(inputType =='textarea'){
+<ng-container *ngTemplateOutlet="textareaInput"></ng-container>
+} @else if(inputType =='radio'){
+<ng-container *ngTemplateOutlet="radioGroupInput"></ng-container>
+}
