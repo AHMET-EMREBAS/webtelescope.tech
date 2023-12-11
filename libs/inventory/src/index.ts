@@ -1,3 +1,2 @@
 // @index(['./**/*.component.ts'], f => `export * from '${f.path}'`)
-export * from './lib/category/category.component'
-export * from './lib/navigation/navigation.component'
+export * from './lib/inventory.routes';

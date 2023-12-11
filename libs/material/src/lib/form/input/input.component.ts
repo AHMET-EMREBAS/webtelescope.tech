@@ -1,16 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormFieldAppearance,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 export type InputType =
   | 'text'
@@ -43,66 +47,64 @@ export type SelectOption = {
     MatIconModule,
     MatButtonModule,
     MatRadioModule,
+    MatSlideToggleModule,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
 })
-export class InputComponent implements OnInit {
+export class InputComponent {
+  @Input() appearance: MatFormFieldAppearance = 'outline';
+
   @Input() name!: string;
   @Input() type: HTMLInputElement['type'] = 'text';
   @Input() formGroup!: FormGroup;
   @Input() inputType!: InputType;
 
-  @Input() minLength?: number;
-  @Input() maxLength?: number;
+  @Input() minlength?: number;
+  @Input() maxlength?: number;
   @Input() min?: number;
   @Input() max?: number;
   @Input() required?: boolean;
-  @Input() label?: boolean;
-  @Input() icon?: string;
+  @Input() label?: string;
+  @Input() icon = 'info';
 
   @Input() options?: SelectOption[];
-
   @Input() enums?: string[];
-
   @Input() autocomplete: HTMLInputElement['autocomplete'] = 'off';
 
   errorMessage$!: Observable<string | undefined>;
 
-  ngOnInit(): void {
-    this.errorMessage$ = this.formGroup!.valueChanges.pipe(
-      map(() => {
-        const control = this.formGroup!.get(this.name!);
-        const errors = control?.errors as any;
+  getError() {
+    const errors = this.formGroup.get(this.name)?.errors;
 
-        if (errors) {
-          const {
-            required,
-            minLength,
-            maxLength,
-            min,
-            max,
-            email,
-            unique,
-            barcode,
-          } = errors;
+    if (errors) {
+      const {
+        required,
+        minlength,
+        maxlength,
+        min,
+        max,
+        email,
+        unique,
+        barcode,
+      } = errors;
 
-          if (required) return `${this.name} is required!`;
-          if (minLength)
-            return `${this.name} should contain at least ${this.minLength} characters!`;
-          if (maxLength)
-            return `${this.name} should contain at most ${this.maxLength} characters!`;
-          if (min)
-            return `${this.name} should contain at most ${this.min} characters!`;
-          if (max)
-            return `${this.name} should contain at most ${this.max} characters!`;
-          if (unique) return `${this.name} should be unique!`;
-          if (email) return `${this.name} should be valid email!`;
-          if (barcode) return `${this.name} should be valid barcode!`;
+      if (required) return `${this.name} is required!`;
+      if (minlength)
+        return `${this.name} should contain at least ${this.minlength} characters!`;
+      if (maxlength)
+        return `${this.name} should contain at most ${this.maxlength} characters!`;
+      if (min)
+        return `${this.name} should contain at most ${this.min} characters!`;
+      if (max)
+        return `${this.name} should contain at most ${this.max} characters!`;
+      if (unique) return `${this.name} should be unique!`;
+      if (email) return `${this.name} should be valid email!`;
+      if (barcode) return `${this.name} should be valid barcode!`;
 
-          return undefined;
-        }
-      })
-    );
+      return undefined;
+    }
+
+    return undefined;
   }
 }

@@ -1,12 +1,12 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" (ngSubmit)="submit()" novalidate>
   <ng-content></ng-content>
   <div class="actions">
     <button
-      type="button"
+      type="submit"
       mat-raised-button
       color="primary"
+      [disabled]="formGroup.invalid"
       i18n
-      [disabled]="formGroup.untouched && formGroup.invalid"
     >
       Submit
     </button>
