@@ -15,9 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@webpackages/core": ["libs/core/src/index.ts"],
-      "@webpackages/gen": ["libs/gen/src/index.ts"],
-      "@webpackages/inventory": ["libs/inventory/src/index.ts"],
+      "@webpackages/auth": ["libs/auth/src/index.ts"],
       "@webpackages/material": ["libs/material/src/index.ts"]
     }
   },

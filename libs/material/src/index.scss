@@ -1,0 +1,3 @@
+@use './scss/color' as colors;
+
+@include colors.init(red, blue);

@@ -1,0 +1,13 @@
+@use 'sass:string';
+
+@function firstLetter($value) {
+  @return #{string.slice($value, 0, 1)};
+}
+
+@mixin createMediaClass($className, $min, $max, $propertyName, $valueName) {
+  @media screen and  (width > #{$min}) and (width <= #{$max}) {
+    .#{$className} {
+      #{$propertyName}: var(--#{$valueName}) !important;
+    }
+  }
+}

@@ -1,3 +1,0 @@
-# inventory
-
-Inventory components

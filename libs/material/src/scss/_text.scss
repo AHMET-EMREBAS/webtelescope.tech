@@ -1,0 +1,39 @@
+@for $i from 1 through 12 {
+  .ls-#{$i} {
+    letter-spacing: #{$i / 12}em;
+  }
+
+  .fs-#{$i} {
+    font-size: #{$i / 2}em;
+    line-height: 160%;
+    border: 1px solid black;
+  }
+}
+
+@for $i from 1 through 9 {
+  .fw-#{$i} {
+    font-weight: #{$i * 100};
+  }
+}
+
+.s {
+  vertical-align: auto;
+  vertical-align: baseline;
+  vertical-align: bottom;
+  vertical-align: middle;
+  vertical-align: sub;
+  vertical-align: super;
+  vertical-align: top;
+}
+
+@each $i in (center, end, start, justify, right, left) {
+  .ta-#{$i} {
+    text-align: #{$i};
+  }
+}
+
+@each $i in (auto, baseline, bottom, middle, sub, super, top) {
+  .va-#{$i} {
+    vertical-align: #{$i};
+  }
+}

@@ -1,0 +1,26 @@
+@use 'color' as color;
+@forward 'margin';
+@forward 'button';
+@forward 'text';
+@forward 'border';
+
+@mixin init($primary, $accent) {
+  @include color.init($primary, $accent);
+}
+
+@include init(orange, purple);
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}

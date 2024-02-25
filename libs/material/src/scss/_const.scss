@@ -1,0 +1,24 @@
+$mediaSizes: (
+  xs: (
+    0px,
+    400px,
+  ),
+  sm: (
+    400px,
+    500px,
+  ),
+  md: (
+    500px,
+    800px,
+  ),
+  lg: (
+    800px,
+    1400px,
+  ),
+  xl: (
+    1400px,
+    5000px,
+  ),
+);
+
+$sides: (left, top, right, bottom);

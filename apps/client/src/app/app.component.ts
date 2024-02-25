@@ -1,12 +1,20 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
+import { ButtonComponent } from '@webpackages/material';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, ButtonModule],
+  imports: [RouterModule, ButtonComponent],
   selector: 'wt-root',
-  template: `<router-outlet></router-outlet>`,
+  template: `
+    <h1>Welcome client</h1>
+    <hr />
+    <wt-button label="some" (click)="handle()"></wt-button>
+    <router-outlet></router-outlet>
+    <hr />
+  `,
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  handle = () => console.log('CLicked');
+}
