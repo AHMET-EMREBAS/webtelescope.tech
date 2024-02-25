@@ -1,20 +1,28 @@
 @use 'color' as color;
+.btn {
+  padding-left: var(--p-4);
+  padding-right: var(--p-4);
+  padding-top: var(--p-1);
+  padding-bottom: var(--p-1);
+  font-size: var(--fs-2);
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
 
 @each $color in color.$colorNames {
-  .btn-#{$color} {
-    background-color: var(--#{$color});
-    color: var(--#{$color}-face);
+  .btn.bg-#{$color} {
+    border: 0.2em solid var(--#{$color}-lighter);
   }
 
-  .btn-#{$color}:active {
-    background-color: var(--#{$color});
+  .btn.bg-#{$color}:active,
+  .btn.bg-#{$color}:focus {
+    background-color: var(--#{$color}-dark);
+    border: 0.2em solid var(--#{$color}-light);
   }
 
-  .btn-#{$color}:focus {
-    background-color: var(--#{$color});
-  }
-
-  .btn-#{$color}:hover {
-    background-color: var(--#{$color});
+  .btn.bg-#{$color}:hover {
+    background-color: var(--#{$color}-dark);
   }
 }

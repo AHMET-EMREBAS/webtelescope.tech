@@ -24,8 +24,10 @@ $colorNames: (primary, accent, warn, success, error, 'white', 'black');
 
 @mixin __createColorVar($name, $value) {
   --#{$name}: #{$value};
-  --#{$name}-light: #{lighten($value, 20)};
-  --#{$name}-dark: #{darken($value, 20)};
+  --#{$name}-light: #{lighten($value, 10)};
+  --#{$name}-lighter: #{lighten($value, 20)};
+  --#{$name}-dark: #{darken($value, 10)};
+  --#{$name}-darker: #{darken($value, 20)};
   --#{$name}-face: #{__faceColor($value)};
 }
 

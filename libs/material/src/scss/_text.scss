@@ -1,12 +1,21 @@
+:root {
+  @for $i from 1 through 12 {
+    --fs-#{$i}: #{$i / 2}em;
+  }
+}
+
 @for $i from 1 through 12 {
   .ls-#{$i} {
     letter-spacing: #{$i / 12}em;
   }
 
+  .ti-#{$i} {
+    text-indent: #{$i / 2}em;
+  }
+
   .fs-#{$i} {
-    font-size: #{$i / 2}em;
+    font-size: var(--fs-#{$i});
     line-height: 160%;
-    border: 1px solid black;
   }
 }
 
@@ -14,16 +23,6 @@
   .fw-#{$i} {
     font-weight: #{$i * 100};
   }
-}
-
-.s {
-  vertical-align: auto;
-  vertical-align: baseline;
-  vertical-align: bottom;
-  vertical-align: middle;
-  vertical-align: sub;
-  vertical-align: super;
-  vertical-align: top;
 }
 
 @each $i in (center, end, start, justify, right, left) {
@@ -36,4 +35,20 @@
   .va-#{$i} {
     vertical-align: #{$i};
   }
+}
+
+@each $i in (capitalize, lowercase, uppercase) {
+  .tt-#{$i} {
+    text-transform: #{$i};
+  }
+}
+
+@each $i in (underline, line-through, overline) {
+  .#{$i} {
+    text-decoration: #{$i};
+  }
+}
+
+.noline {
+  text-decoration: none;
 }
