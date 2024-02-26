@@ -1,0 +1,248 @@
+@use 'sass:color';
+
+$colorList: (
+  aliceblue,
+  antiquewhite,
+  aquamarine,
+  azure,
+  beige,
+  bisque,
+  black,
+  blanchedalmond,
+  blue,
+  blueviolet,
+  brown,
+  burlywood,
+  cadetblue,
+  chartreuse,
+  chocolate,
+  coral,
+  cornflowerblue,
+  cornsilk,
+  crimson,
+  cyan,
+  darkblue,
+  darkcyan,
+  darkgoldenrod,
+  darkgray,
+  darkgrey,
+  darkgreen,
+  darkkhaki,
+  darkmagenta,
+  darkolivegreen,
+  darkorange,
+  darkorchid,
+  darkred,
+  darksalmon,
+  darkseagreen,
+  darkslateblue,
+  darkslategray,
+  darkslategrey,
+  darkturquoise,
+  darkviolet,
+  deeppink,
+  deepskyblue,
+  dimgray,
+  dimgrey,
+  dodgerblue,
+  firebrick,
+  floralwhite,
+  forestgreen,
+  fuchsia,
+  gainsboro,
+  ghostwhite,
+  gold,
+  goldenrod,
+  gray,
+  grey,
+  green,
+  greenyellow,
+  honeydew,
+  hotpink,
+  indianred,
+  indigo,
+  ivory,
+  khaki,
+  lavender,
+  lavenderblush,
+  lawngreen,
+  lemonchiffon,
+  lightblue,
+  lightcoral,
+  lightcyan,
+  lightgoldenrodyellow,
+  lightgray,
+  lightgrey,
+  lightgreen,
+  lightpink,
+  lightsalmon,
+  lightseagreen,
+  lightskyblue,
+  lightslategray,
+  lightslategrey,
+  lightsteelblue,
+  lightyellow,
+  lime,
+  limegreen,
+  linen,
+  magenta,
+  maroon,
+  mediumaquamarine,
+  mediumblue,
+  mediumorchid,
+  mediumpurple,
+  mediumseagreen,
+  mediumslateblue,
+  mediumspringgreen,
+  mediumturquoise,
+  mediumvioletred,
+  midnightblue,
+  mintcream,
+  mistyrose,
+  moccasin,
+  navajowhite,
+  navy,
+  oldlace,
+  olive,
+  olivedrab,
+  orange,
+  orangered,
+  orchid,
+  palegoldenrod,
+  palegreen,
+  paleturquoise,
+  palevioletred,
+  papayawhip,
+  peachpuff,
+  peru,
+  pink,
+  plum,
+  powderblue,
+  purple,
+  rebeccapurple,
+  red,
+  rosybrown,
+  royalblue,
+  saddlebrown,
+  salmon,
+  sandybrown,
+  seagreen,
+  seashell,
+  sienna,
+  silver,
+  skyblue,
+  slateblue,
+  slategray,
+  slategrey,
+  snow,
+  springgreen,
+  steelblue,
+  tan,
+  teal,
+  thistle,
+  tomato,
+  turquoise,
+  violet,
+  wheat,
+  white,
+  whitesmoke,
+  yellow,
+  yellowgreen
+);
+
+/**
+ * Ex: (primary: blue, accent:purple, some:teal, info:lightblue, ...)
+ */
+@mixin createColors($colors) {
+  @each $name in $colors {
+    --#{$name}: $name;
+    --#{$name}-50: #{color.change($name, $lightness: 90)};
+    --#{$name}-100: #{color.change($name, $lightness: 80)};
+    --#{$name}-200: #{color.change($name, $lightness: 70)};
+    --#{$name}-300: #{color.change($name, $lightness: 60)};
+    --#{$name}-400: #{color.change($name, $lightness: 50)};
+    --#{$name}-500: #{color.change($name, $lightness: 40)};
+    --#{$name}-600: #{color.change($name, $lightness: 30)};
+    --#{$name}-700: #{color.change($name, $lightness: 20)};
+    --#{$name}-800: #{color.change($name, $lightness: 15)};
+    --#{$name}-900: #{color.change($name, $lightness: 10)};
+  }
+}
+
+@mixin createColorClasses($colors) {
+  @each $name in $colors {
+    .#{$name} {
+      color: var(--#{$name});
+    }
+    .#{$name}-50 {
+      color: var(--#{$name}-50);
+    }
+    .#{$name}-100 {
+      color: var(--#{$name}-100);
+    }
+    .#{$name}-200 {
+      color: var(--#{$name}-200);
+    }
+    .#{$name}-300 {
+      color: var(--#{$name}-300);
+    }
+    .#{$name}-400 {
+      color: var(--#{$name}-400);
+    }
+    .#{$name}-500 {
+      color: var(--#{$name}-500);
+    }
+    .#{$name}-600 {
+      color: var(--#{$name}-600);
+    }
+    .#{$name}-700 {
+      color: var(--#{$name}-700);
+    }
+    .#{$name}-800 {
+      color: var(--#{$name}-800);
+    }
+    .#{$name}-900 {
+      color: var(--#{$name}-900);
+    }
+
+    .bg-#{$name} {
+      background-color: var(--#{$name});
+    }
+    .bg-#{$name}-50 {
+      background-color: var(--#{$name}-50);
+    }
+    .bg-#{$name}-100 {
+      background-color: var(--#{$name}-100);
+    }
+    .bg-#{$name}-200 {
+      background-color: var(--#{$name}-200);
+    }
+    .bg-#{$name}-300 {
+      background-color: var(--#{$name}-300);
+    }
+    .bg-#{$name}-400 {
+      background-color: var(--#{$name}-400);
+    }
+    .bg-#{$name}-500 {
+      background-color: var(--#{$name}-500);
+    }
+    .bg-#{$name}-600 {
+      background-color: var(--#{$name}-600);
+    }
+    .bg-#{$name}-700 {
+      background-color: var(--#{$name}-700);
+    }
+    .bg-#{$name}-800 {
+      background-color: var(--#{$name}-800);
+    }
+    .bg-#{$name}-900 {
+      background-color: var(--#{$name}-900);
+    }
+  }
+}
+
+:root {
+  @include createColors($colorList);
+}
+
+@include createColorClasses($colorList);
