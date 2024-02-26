@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use 'sass:string';
 
 $colorList: (
   aliceblue,
@@ -150,99 +151,95 @@ $colorList: (
   yellowgreen
 );
 
-/**
- * Ex: (primary: blue, accent:purple, some:teal, info:lightblue, ...)
- */
-@mixin createColors($colors) {
-  @each $name in $colors {
-    --#{$name}: $name;
-    --#{$name}-50: #{color.change($name, $lightness: 90)};
-    --#{$name}-100: #{color.change($name, $lightness: 80)};
-    --#{$name}-200: #{color.change($name, $lightness: 70)};
-    --#{$name}-300: #{color.change($name, $lightness: 60)};
-    --#{$name}-400: #{color.change($name, $lightness: 50)};
-    --#{$name}-500: #{color.change($name, $lightness: 40)};
-    --#{$name}-600: #{color.change($name, $lightness: 30)};
-    --#{$name}-700: #{color.change($name, $lightness: 20)};
-    --#{$name}-800: #{color.change($name, $lightness: 15)};
-    --#{$name}-900: #{color.change($name, $lightness: 10)};
-  }
+$themeColors: (primary, accent, warn, error, info, 'white', 'black');
+
+$colorVariants: (50, 100, 200, 300, 400, 500, 600, 700, 800, 900);
+
+@mixin createColorVariant($name, $value) {
+  --#{$name}: #{$value};
+  --#{$name}-50: #{color.change($value, $lightness: 90)};
+  --#{$name}-100: #{color.change($value, $lightness: 80)};
+  --#{$name}-200: #{color.change($value, $lightness: 70)};
+  --#{$name}-300: #{color.change($value, $lightness: 60)};
+  --#{$name}-400: #{color.change($value, $lightness: 50)};
+  --#{$name}-500: #{color.change($value, $lightness: 40)};
+  --#{$name}-600: #{color.change($value, $lightness: 30)};
+  --#{$name}-700: #{color.change($value, $lightness: 20)};
+  --#{$name}-800: #{color.change($value, $lightness: 15)};
+  --#{$name}-900: #{color.change($value, $lightness: 10)};
 }
 
-@mixin createColorClasses($colors) {
-  @each $name in $colors {
+@mixin builtinColors() {
+  :root {
+    @each $name in $colorList {
+      @include createColorVariant($name, $name);
+    }
+  }
+
+  @each $name in $colorList {
     .#{$name} {
       color: var(--#{$name});
     }
-    .#{$name}-50 {
-      color: var(--#{$name}-50);
+    @each $variant in $colorVariants {
+      .#{$name}-#{$variant} {
+        color: var(--#{$name}-#{$variant});
+      }
     }
-    .#{$name}-100 {
-      color: var(--#{$name}-100);
+  }
+
+  @each $name in $colorList {
+    .bg-#{$name} {
+      background-color: var(--#{$name});
     }
-    .#{$name}-200 {
-      color: var(--#{$name}-200);
+
+    @each $variant in $colorVariants {
+      .bg-#{$name}-#{$variant} {
+        background-color: var(--#{$name}-#{$variant});
+      }
     }
-    .#{$name}-300 {
-      color: var(--#{$name}-300);
+  }
+}
+
+@mixin theme($colorMap) {
+  @include builtinColors();
+
+  :root {
+    @each $name, $color in $colorMap {
+      @include createColorVariant($name, $color);
     }
-    .#{$name}-400 {
-      color: var(--#{$name}-400);
+  }
+
+  @each $name, $color in $colorMap {
+    .#{$name} {
+      color: var(--#{$name});
     }
-    .#{$name}-500 {
-      color: var(--#{$name}-500);
-    }
-    .#{$name}-600 {
-      color: var(--#{$name}-600);
-    }
-    .#{$name}-700 {
-      color: var(--#{$name}-700);
-    }
-    .#{$name}-800 {
-      color: var(--#{$name}-800);
-    }
-    .#{$name}-900 {
-      color: var(--#{$name}-900);
+
+    @each $variant in $colorVariants {
+      .#{$name}-#{$variant} {
+        color: var(--#{$name}-#{$variant});
+      }
     }
 
     .bg-#{$name} {
       background-color: var(--#{$name});
     }
-    .bg-#{$name}-50 {
-      background-color: var(--#{$name}-50);
-    }
-    .bg-#{$name}-100 {
-      background-color: var(--#{$name}-100);
-    }
-    .bg-#{$name}-200 {
-      background-color: var(--#{$name}-200);
-    }
-    .bg-#{$name}-300 {
-      background-color: var(--#{$name}-300);
-    }
-    .bg-#{$name}-400 {
-      background-color: var(--#{$name}-400);
-    }
-    .bg-#{$name}-500 {
-      background-color: var(--#{$name}-500);
-    }
-    .bg-#{$name}-600 {
-      background-color: var(--#{$name}-600);
-    }
-    .bg-#{$name}-700 {
-      background-color: var(--#{$name}-700);
-    }
-    .bg-#{$name}-800 {
-      background-color: var(--#{$name}-800);
-    }
-    .bg-#{$name}-900 {
-      background-color: var(--#{$name}-900);
+
+    @each $variant in $colorVariants {
+      .bg-#{$name}-#{$variant} {
+        background-color: var(--#{$name}-#{$variant});
+      }
     }
   }
 }
 
-:root {
-  @include createColors($colorList);
-}
-
-@include createColorClasses($colorList);
+@include theme(
+  (
+    primary: blue,
+    accent: pink,
+    warn: orange,
+    info: teal,
+    error: crimson,
+    black: black,
+    white: white,
+  )
+);

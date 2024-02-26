@@ -1,0 +1,63 @@
+@use 'sass:string';
+@use 'color' as color;
+// color.$themeColorNames
+
+$borderStyles: (
+  dashed,
+  dotted,
+  double,
+  groove,
+  outset,
+  ridge,
+  solid,
+  hidden,
+  none
+);
+
+@each $bs in $borderStyles {
+  .b-#{$bs} {
+    border-style: #{$bs};
+  }
+
+  @each $s in (left, top, right, bottom) {
+    .b#{string.slice($s, 0, 1)}-#{$bs} {
+      border-#{$s}-style: #{$bs} !important;
+    }
+  }
+}
+
+@each $c in color.$themeColors {
+  .b-#{$c} {
+    border-color: var(--#{$c});
+  }
+
+  @each $s in (left, top, right, bottom) {
+    .b#{string.slice($s, 0, 1)}-#{$c} {
+      border-#{$s}-color: var(--#{$c}) !important;
+    }
+  }
+
+  @each $cv in color.$colorVariants {
+    .b-#{$c}-#{$cv} {
+      border-color: var(--#{$c}-#{$cv});
+    }
+
+    @each $s in (left, top, right, bottom) {
+      .b#{string.slice($s, 0, 1)}-#{$c}-#{$cv} {
+        border-#{$s}-color: var(--#{$c}-#{$cv}) !important;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 12 {
+  .b-#{$i} {
+    border-width: #{$i * 0.1}em;
+  }
+
+  @each $s in (left, top, right, bottom) {
+    .b#{string.slice($s, 0, 1)}-#{$i} {
+      border-#{$s}-width: #{$i * 0.1}em !important;
+    }
+  }
+}

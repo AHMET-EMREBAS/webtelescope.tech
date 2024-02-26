@@ -1,0 +1,18 @@
+@use 'sass:string';
+
+@mixin __gen($pn, $cn) {
+  @for $i from 1 through 12 {
+    .#{$cn}-#{$i} {
+      #{$pn}: #{$i * 0.5}em;
+    }
+
+    @each $s in (left, top, right, bottom) {
+      .#{$cn}#{string.slice($s, 0, 1)}-#{$i} {
+        #{$pn}-#{$s}: #{$i * 0.5}em;
+      }
+    }
+  }
+}
+
+@include __gen(margin, m);
+@include __gen(padding, p);
