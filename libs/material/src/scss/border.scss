@@ -55,9 +55,21 @@ $borderStyles: (
     border-width: #{$i * 0.1}em;
   }
 
+  .brad-#{$i} {
+    border-radius: #{$i}em;
+  }
+
   @each $s in (left, top, right, bottom) {
     .b#{string.slice($s, 0, 1)}-#{$i} {
       border-#{$s}-width: #{$i * 0.1}em !important;
+    }
+  }
+
+  @each $y in (top, bottom) {
+    @each $x in (left, right) {
+      .brad-#{string.slice($y,0,1)}#{string.slice($x,0,1)}-#{$i} {
+        border-#{$y}-#{$x}-radius: #{$i}em !important;
+      }
     }
   }
 }
