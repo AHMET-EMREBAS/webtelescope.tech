@@ -1,8 +1,35 @@
-@for $i from 1 through 100 {
-  .width-#{$i} {
-    width: #{$i * 1%};
-  }
-  .height-#{$i} {
-    height: #{$i * 1%};
-  }
+@use 'class' as class;
+
+@for $i from 5 through 100 {
+  @include class.createClass(
+    width-#{$i},
+    (
+      width: #{$i * 1%},
+    )
+  );
+
+  @include class.createClass(
+    height-#{$i},
+    (
+      height: #{$i * 1%},
+    )
+  );
+  $i: $i + 5;
+}
+
+@for $i from 10 through 500 {
+  @include class.createClass(
+    width-#{$i}px,
+    (
+      width: #{$i}px,
+    )
+  );
+  @include class.createClass(
+    height-#{$i}px,
+    (
+      height: #{$i}px,
+    )
+  );
+
+  $i: $i + 10;
 }

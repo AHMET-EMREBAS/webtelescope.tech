@@ -40,3 +40,15 @@ $__medias: (
     }
   }
 }
+
+@mixin createMediaClass($className, $propertyMap) {
+  @each $name, $comparison in $__medias {
+    @media #{$comparison} {
+      [class~='#{$name}:#{$className}'] {
+        @each $property, $value in $propertyMap {
+          #{$property}: #{$value} !important;
+        }
+      }
+    }
+  }
+}

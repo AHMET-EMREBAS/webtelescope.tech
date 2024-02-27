@@ -5,3 +5,13 @@
     #{$property}: #{$value};
   }
 }
+
+@mixin createActionClass($className, $propertyMap) {
+  [class~='hover:#{$className}']:hover,
+  [class~='active:#{$className}']:active,
+  [class~='focus:#{$className}']:focus {
+    @each $property, $value in $propertyMap {
+      #{$property}: #{$value};
+    }
+  }
+}

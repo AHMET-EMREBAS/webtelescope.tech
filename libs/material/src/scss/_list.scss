@@ -1,0 +1,32 @@
+@use 'class' as class;
+
+$__listStyle: (
+  armenian,
+  circle,
+  decimal,
+  decimal-leading-zero,
+  disc,
+  georgian,
+  lower-alpha,
+  lower-greek,
+  lower-latin,
+  lower-roman,
+  none,
+  square,
+  upper-greek,
+  upper-latin,
+  upper-roman
+);
+
+@each $i in $__listStyle {
+  .list-style-#{$i} {
+    list-style: #{$i};
+  }
+
+  @include class.createClass(
+    list-style-#{$i},
+    (
+      list-style: #{$i},
+    )
+  );
+}

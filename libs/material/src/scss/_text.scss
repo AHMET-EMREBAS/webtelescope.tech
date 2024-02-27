@@ -1,11 +1,19 @@
-@for $i from 1 through 12 {
-  .fs-#{$i} {
-    font-size: #{$i * 0.3}em;
-  }
+@use 'class' as class;
 
-  .ls-#{$i} {
-    letter-spacing: #{$i * 0.1}em;
-  }
+@for $i from 1 through 12 {
+  @include class.createClass(
+    font-size-#{$i},
+    (
+      font-size: #{$i * 0.3}em,
+    )
+  );
+
+  @include class.createClass(
+    letter-spacing-#{$i},
+    (
+      letter-spacing: #{$i * 0.1}em,
+    )
+  );
 }
 
 h1,
@@ -13,9 +21,11 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+ul {
   padding: 0px;
   margin: 0px;
+  text-indent: 0px;
 }
 
 p {
@@ -46,6 +56,7 @@ p {
 .lowercase {
   text-transform: lowercase;
 }
+
 .capitalize {
   text-transform: capitalize;
 }

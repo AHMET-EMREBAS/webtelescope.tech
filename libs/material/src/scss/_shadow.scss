@@ -1,27 +1,16 @@
-@use 'pesudo' as pesudo;
-@use 'transition' as transition;
+@use 'class' as class;
 
 @for $i from 1 through 12 {
-  .box-shadow-#{$i} {
-    box-shadow: 0px 0px #{$i * 3}px black;
-  }
-  @include pesudo.createActionClasses(
+  @include class.createClass(
     box-shadow-#{$i},
-    box-shadow,
-    0px 0px #{$i * 3}px black
+    (
+      box-shadow: 0px 0px #{$i * 3}px black,
+    )
   );
-
-  @include transition.createTransition(box-shadow);
-
-
-  .text-shadow-#{$i} {
-    text-shadow: 0px 0px #{$i * 3}px black;
-  }
-  @include pesudo.createActionClasses(
+  @include class.createClass(
     text-shadow-#{$i},
-    text-shadow,
-    0px 0px #{$i * 3}px black
+    (
+      text-shadow: 0px 0px #{$i * 3}px black,
+    )
   );
-
-  @include transition.createTransition(text-shadow);
 }

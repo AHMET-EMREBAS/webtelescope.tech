@@ -1,40 +1,69 @@
-.relative {
-  position: relative;
+@use 'class' as class;
+
+@include class.createClass(
+  relative,
+  (
+    position: relative,
+  )
+);
+@include class.createClass(
+  absolute,
+  (
+    position: absolute,
+  )
+);
+@include class.createClass(
+  fixed,
+  (
+    position: fixed,
+  )
+);
+@include class.createClass(
+  sticky-top,
+  (
+    position: sticky,
+    top: 0px,
+  )
+);
+@include class.createClass(
+  sticky-bottom,
+  (
+    position: sticky,
+    bottom: 0px,
+  )
+);
+@include class.createClass(
+  top-0,
+  (
+    top: 0px,
+  )
+);
+@include class.createClass(
+  bottom-0,
+  (
+    bottom: 0px,
+  )
+);
+@include class.createClass(
+  right-0,
+  (
+    right: 0px,
+  )
+);
+@include class.createClass(
+  left-0,
+  (
+    left: 0px,
+  )
+);
+
+$overFlowProperty: (overflow, overflow-x, overflow-y);
+$overFlowsValues: (hidden, auto, scroll);
+
+@each $property in $overFlowProperty {
+  @each $value in $overFlowsValues {
+    .#{$property}-#{$value} {
+      #{$property}: #{$value};
+    }
+  }
 }
-
-.absolute {
-  position: absolute;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.sticky-top {
-  position: sticky;
-  top: 0px;
-}
-
-.sticky-bottom {
-  position: sticky;
-  bottom: 0px;
-}
-
-.top-0 {
-  top: 0px;
-}
-
-.bottom-0 {
-  bottom: 0;
-}
-
-.left-0 {
-  left: 0px;
-}
-
-.right-0 {
-  right: 0px;
-}
-
-
-
