@@ -1,7 +1,21 @@
-@forward 'color';
 @forward 'border';
-@forward 'margin';
-@forward 'width';
+@forward 'color';
 @forward 'flex';
+@forward 'margin';
 @forward 'position';
 @forward 'text';
+@forward 'width';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body,
+html {
+  margin: 0px;
+  padding: 0px;
+}
