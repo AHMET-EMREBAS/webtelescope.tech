@@ -1,0 +1,7 @@
+@mixin createActionClasses($className, $property, $value) {
+  [class~='hover:#{$className}']:hover,
+  [class~='active:#{$className}']:active,
+  [class~='focus:#{$className}']:focus {
+    #{$property}: #{$value};
+  }
+}

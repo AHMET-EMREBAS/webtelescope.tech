@@ -1,0 +1,42 @@
+$__medias: (
+  sm: (
+    '(width <= 500px)',
+  ),
+  msm: (
+    '(width > 500px)',
+  ),
+  md: (
+    '(width > 500px) and (width <= 800px)',
+  ),
+  mmd: (
+    '(width > 800px)',
+  ),
+  lmd: (
+    '(width <= 500px)',
+  ),
+  lg: (
+    '(width > 800px) and (width <= 1400px)',
+  ),
+  mlg: (
+    '(width > 1400px)',
+  ),
+  llg: (
+    '(width <= 800px)',
+  ),
+  xl: (
+    '(width > 1400px)',
+  ),
+  lxl: (
+    '(width <= 1400px)',
+  ),
+);
+
+@mixin createMediaClasses($className, $property, $value) {
+  @each $name, $comparison in $__medias {
+    @media #{$comparison} {
+      [class~='#{$name}:#{$className}'] {
+        #{$property}: #{$value} !important;
+      }
+    }
+  }
+}

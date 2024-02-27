@@ -1,0 +1,7 @@
+@mixin createTransition($property) {
+  @for $i from 1 through 12 {
+    .#{$property}-#{$i*400}ms {
+      transition: #{$property} ease-in-out #{$i * 400}ms;
+    }
+  }
+}

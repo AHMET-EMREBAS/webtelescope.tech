@@ -1,42 +1,25 @@
-.row {
-  display: flex;
-  flex-direction: row;
+@use 'class' as class;
+
+@include class.createClasses(flex, display, flex);
+
+$__flexDirection: (column, column-reverse, row, row-reverse);
+
+@each $value in $__flexDirection {
+  @include class.createClasses(#{$value}, flex-direction, #{$value});
 }
 
-.row-reverse {
-  display: flex;
-  flex-direction: row-reverse;
+@for $value from 1 through 12 {
+  @include class.createClasses(grow-#{$value}, flex-grow, #{$value});
+  @include class.createClasses(gap-#{$value}, gap, #{$value}em);
 }
 
-.col {
-  display: flex;
-  flex-direction: column;
+$__flexWrap: (wrap, wrap-reverse);
+
+@each $value in $__flexWrap {
+  @include class.createClasses(#{$value}, flex-wrap, #{$value});
 }
 
-.col-reverse {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-@for $i from 1 through 12 {
-  .grow-#{$i} {
-    flex-grow: #{$i};
-  }
-
-  .gap-#{$i} {
-    gap: #{$i}em;
-  }
-}
-
-.wrap {
-  flex-wrap: wrap;
-}
-
-.wrap-reverse {
-  flex-wrap: wrap-reverse;
-}
-
-$justifyContent: (
+$__justifyContent: (
   baseline,
   center,
   end,
@@ -47,23 +30,42 @@ $justifyContent: (
   space-between,
   space-evenly
 );
-$justifyItems: (auto, baseline, center, end, flex-end, flex-start, left);
-$alignItems: (baseline, center, end, flex-end, flex-start, start, stretch);
 
-@each $i in $justifyContent {
-  .justify-content-#{$i} {
-    justify-content: #{$i};
-  }
+@each $value in $__justifyContent {
+  @include class.createClasses(
+    justify-content-#{$value},
+    justify-content,
+    #{$value}
+  );
 }
 
-@each $i in $alignItems {
-  .align-items-#{$i} {
-    align-items: #{$i};
-  }
+$__alignItems: (baseline, center, end, flex-end, flex-start, start, stretch);
+
+@each $value in $__alignItems {
+  @include class.createClasses(align-items-#{$value}, align-items, #{$value});
 }
 
-@each $i in $justifyItems {
-  .justify-items-#{$i} {
-    justify-items: #{$i};
-  }
+@each $value in $__alignItems {
+  @include class.createClasses(align-self-#{$value}, align-self, #{$value});
 }
+
+$justifyItems: (
+  auto,
+  baseline,
+  center,
+  end,
+  stretch,
+  flex-end,
+  flex-start,
+  left
+);
+@each $value in $justifyItems {
+  @include class.createClasses(
+    justify-items-#{$value},
+    justify-items,
+    #{$value}
+  );
+}
+
+
+

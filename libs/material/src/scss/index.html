@@ -7,36 +7,32 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="col b-1 b-solid b-primary brad-3 p-2 px-3">
-      <h1
-        class="fs-5 bl-3 bl-dotted pl-1 b-black-600 black-600 ls-5 pl-3 lowercase capitalize"
-      >
-        hello world
-      </h1>
+    <div class="border-dotted border-accent sm:border-solid">
+      <h1>hello world</h1>
       <p class="fs-4">
-        <span class="bold line-through red-100">Bold One</span>
-        Content goes here
-        <span
-          class="bold underline orange-200 ls-2 bg-pink-300 px-3 brad-3 py-1"
-          >somehow</span
-        >
-        here some how here Content goes here somehow here some how hereContent
-        goes here somehow here some how hereContent goes here somehow here some
+        Content goes here here some how here Content goes here somehow here some
         how hereContent goes here somehow here some how hereContent goes here
-        somehow here some how hereContent goes here somehow here some how here
+        somehow here some
       </p>
     </div>
-    <div class="w-30 bg-primary mr-1">
-      <button class="px-6 py-1">Button</button>
-      <button class="px-6 py-1">Button</button>
-    </div>
-    <div class="w-30 bg-accent">
-      <button class="px-6 py-1">Button</button>
-      <button class="px-6 py-1">Button</button>
-    </div>
-    <div class="w-40 bg-error">
-      <button class="px-6 py-1">Button</button>
-      <button class="px-6 py-1">Button</button>
+
+    <div
+      class="flex column border-3 border-solid justify-content-space-evenly align-items-flex-end width-100"
+      style="min-height: 200px"
+    >
+      <div
+        class="border-solid align-self-stretch gap-1flex msm:justify-content-space-evenly sm:column msm:row"
+      >
+        <div class="border-solid border-accent p-3">First Column</div>
+        <div class="border-solid border-accent p-3">Second Column</div>
+        <div class="border-solid border-accent p-3">Third Column</div>
+      </div>
+      <div class="column align-items-center border-solid border-primary">
+        Second Row
+      </div>
+      <div class="column align-items-center border-solid border-primary">
+        Third Row
+      </div>
     </div>
   </body>
 </html>

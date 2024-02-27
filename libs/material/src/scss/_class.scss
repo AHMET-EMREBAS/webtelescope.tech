@@ -1,0 +1,13 @@
+@use 'pesudo' as pesudo;
+@use 'media' as media;
+@use 'transition' as transition;
+
+@mixin createClasses($className, $propertyName, $value) {
+  .#{$className} {
+    #{$propertyName}: #{$value};
+  }
+
+  @include pesudo.createActionClasses($className, $propertyName, $value);
+  @include media.createMediaClasses($className, $propertyName, $value);
+  @include transition.createTransition($propertyName);
+}
