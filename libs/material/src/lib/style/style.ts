@@ -1,129 +1,120 @@
-const classMaps: Record<string, string> = {
-  // Margin Padding
-  m: 'margin',
-  ml: 'margin-left',
-  mt: 'margin-top',
-  mr: 'margin-right',
-  mb: 'margin-bottom',
+import {
+  actionPseudoMap as actionPseudoSelectors,
+  childPseudoMap as childPseudoSelectors,
+  mediaBreakPoints as mediaBreakpoints,
+  propertyNameMap,
+} from './common';
+/**
+ * If the className contains a pesudo selector, then return the pesudo selector, else return empty string
+ * @param className complete class name
+ * @returns the pesudo value
+ */
+export function getPseudoSelector(className: string): string {
+  const [first, ...rest] = className.split(':');
+  return rest?.length > 0 ? first : '';
+}
 
-  p: 'padding',
-  pl: 'padding-left',
-  pt: 'padding-top',
-  pr: 'padding-right',
-  pb: 'padding-bottom',
+/**
+ * If the className contains media rule, then return the media breakpoint value, else empty string
+ * @param className
+ * @returns the media breakpoint value
+ */
+export function getMediaBreakpoint(className: string): string {
+  return mediaBreakpoints[getPseudoSelector(className)] || '';
+}
 
-  c: 'color',
-  bg: 'background-color',
+/**
+ * If the classname contains action rule (hover, active, focus, selection), then return the action rule, else empty string
+ * @param className
+ * @returns the action pesudo value
+ */
+export function getActionPseudoSelector(className: string): string {
+  return actionPseudoSelectors[getPseudoSelector(className)] || '';
+}
 
-  // Border
-  bw: 'border-width',
-  blw: 'border-left-width',
-  brw: 'border-top-width',
-  btw: 'border-right-width',
-  bbw: 'border-bottom-width',
+/**
+ * If the classname contains child rule (child, first-child, last-child, nth-child), then return the child rule, else empty string
+ * @param className
+ * @returns the child pesudo value
+ */
+export function getChildPseudoSelector(className: string): string {
+  return childPseudoSelectors[getPseudoSelector(className)] || '';
+}
 
-  bs: 'border-style',
-  bls: 'border-left-style',
-  bts: 'border-top-style',
-  brs: 'border-right-style',
-  bbs: 'border-bottom-style',
+/**
+ * If the classname contains transitoin value, then return the transition value, else empty string
+ * @param className
+ * @returns
+ */
+export function getTransitionValue(className: string): string {
+  const lastValue = className.split('-').pop();
+  return lastValue?.endsWith('ms') ? lastValue : '';
+}
 
-  bc: 'border-color',
-  blc: 'border-left-color',
-  btc: 'border-top-color',
-  brc: 'border-right-color',
-  bbc: 'border-bottom-color',
+/**
+ * Get the property value
+ * @param className
+ * @returns
+ */
+export function getPropertyValue(className: string): string {
+  const [prefix, ...preValue] = className.split(':').pop()!.split('-');
 
-  // Border Radius
-  br: 'border-radius',
-  btlr: 'border-top-left-radius',
-  btrr: 'border-top-right-radius',
-  bblr: 'border-bottom-left-radius',
-  bbrr: 'border-bottom-right-radius',
+  // If there is a transition value, then remove it from the list
+  if (getTransitionValue(className)) preValue.pop();
 
-  w: 'width',
-  h: 'height',
+  if (preValue.length > 0) return preValue.join('-');
 
-  // Font
-  fs: 'font-size',
-  ls: 'letter-spacing',
+  return prefix;
+}
 
-  // Flex
-  d: 'display',
-  fd: 'flex-direction',
-  jc: 'justify-content',
-  ji: 'justify-items',
-  ai: 'align-items',
-  ac: 'align-content',
-  as: 'align-self',
-  js: 'justify-self',
-  gap: 'gap',
-  grow: 'flex-grow',
-};
+export function getPropertyName(className: string): string {
+  const [prefix, ...preValue] = className.split(':').pop()!.split('-');
+  return propertyNameMap[prefix];
+}
 
-const mediaBreakPoints: Record<string, string> = {
-  xs: '(width <= 400px)',
-  mxs: '(width > 400px)',
+/**
+ * Convert the property value to valid css value
+ * @param propertyValue
+ * @returns
+ */
+export function normalizePropertyValue(propertyValue: string) {
+  return propertyValue.replace('per', '%');
+}
 
-  sm: '(width > 400px) and (width <= 500px)',
-  msm: '(width > 500px)',
-  lsm: '(width <= 400px)',
+export function convertClassDeclerationToCssRule(className: string): string {
+  const propertyName = getPropertyName(className);
+  const propertyValue = normalizePropertyValue(getPropertyValue(className));
 
-  md: '(width > 500px) and (width <= 800px)',
-  mmd: '(width > 800px)',
-  lmd: '(width <= 500px)',
+  const transitionValue = getTransitionValue(className);
+  const mediaBreakpoint = getMediaBreakpoint(className);
+  const actionPseudo = getActionPseudoSelector(className);
+  const childPseudo = getChildPseudoSelector(className);
 
-  lg: '(width > 800px) and (width <= 1400px)',
-  mlg: '(width > 1400px)',
-  llg: '(width <= 800px)',
+  const transitionRule = transitionValue
+    ? `transition: ${propertyName} ease-in-out ${transitionValue};`
+    : '';
 
-  xl: '(width > 1400px)',
-  lxl: '(width <= 1400px)',
-};
+  const cssRule = `${propertyName}:${propertyValue.split('|').join(' ')}; ${transitionRule};`;
 
-export function initStyles() {
-  document.querySelectorAll('.wt').forEach((e) => {
-    e.classList.forEach((preClassName) => {
-      const [media, rest] = preClassName.split(':');
+  const cssClass = `
+  [class~='${className}']${childPseudo || actionPseudo || ''} {
+     ${cssRule} 
+  }`;
 
-      if (media && rest) {
-        const [classPrefix, preValue, transitionValue] = rest.split('-');
-        const transition = transitionValue
-          ? `transition:${classMaps[classPrefix]} ease-in-out ${transitionValue};`
-          : '';
-        if (!preValue) return;
+  if (mediaBreakpoint) {
+    return `@media ${mediaBreakpoint} { ${cssClass} }`;
+  }
 
-        const value = preValue.endsWith('per')
-          ? preValue.replace('per', '%')
-          : preValue;
+  return cssClass;
+}
 
-        document.querySelector('style')?.sheet?.insertRule(
-          `@media ${mediaBreakPoints[media]} { 
-            [class~='${preClassName}']  { ${classMaps[classPrefix]}:${value} !important; ${transition}}
-          }`
-        );
-
-        return;
-      } else {
-        const className = rest || media;
-        const [classPrefix, preValue, transitionValue] = className.split('-');
-
-        const transition = transitionValue
-          ? `transition:${classMaps[classPrefix]} ease-in-out ${transitionValue};`
-          : '';
-
-        if (!preValue) return;
-
-        const value = preValue.endsWith('per')
-          ? preValue.replace('per', '%')
-          : preValue;
-
-        document
-          .querySelector('style')
-          ?.sheet?.insertRule(
-            `.${className}  { ${classMaps[classPrefix]}:${value}; ${transition}}`
-          );
-      }
+export function styleDocument() {
+  const sheet = document.querySelector('style')?.sheet;
+  const elements = document.querySelectorAll('*');
+  elements.forEach((e) => {
+    e.classList.forEach((c) => {
+      const cssRule = convertClassDeclerationToCssRule(c);
+      sheet?.insertRule(cssRule);
     });
   });
 }
