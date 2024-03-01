@@ -1,12 +1,11 @@
+/// <reference types="@angular/localize" />
+
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { styleDocument } from '@webpackages/material';
 
 bootstrapApplication(AppComponent, appConfig)
-  .then(() => {
-    styleDocument();
-  })
+  .then(() => {})
   .catch((err) => {
     console.error(err);
   });
