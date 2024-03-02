@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="es" datatype="plaintext" original="ng2.template">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="7106327322456204362" datatype="html">
+        <source>Application Logo:ES</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/material/src/lib/navigation/navigation.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5816357137413448259" datatype="html">
+        <source>Side nav toggle icon:ES</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">libs/material/src/lib/navigation/navigation.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>
