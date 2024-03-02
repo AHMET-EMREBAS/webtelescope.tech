@@ -1,8 +1,9 @@
 import {
   Component,
+  Directive,
   Inject,
+  NgModule,
   OnInit,
-  Optional,
   Provider,
   inject,
 } from '@angular/core';
@@ -19,8 +20,9 @@ import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-const APP_NAME = Symbol('APP_NAME');
-const NAV_ITEMS = Symbol('NAV_ITEMS');
+export const APP_NAME_TOKEN = Symbol('APP_NAME');
+export const NAV_ITEMS_TOKEN = Symbol('NAV_ITEMS');
+export const LOCALE_TOKEN = Symbol('LOCALE');
 
 export type NavItem = {
   path: string;
@@ -30,17 +32,34 @@ export type NavItem = {
 
 export function provideAppName(appName: string): Provider {
   return {
-    provide: APP_NAME,
+    provide: APP_NAME_TOKEN,
     useValue: appName,
+  };
+}
+
+/**
+ * provides the selected locale by browser
+ * @returns
+ */
+export function provideLocale(): Provider {
+  return {
+    provide: LOCALE_TOKEN,
+    useValue: window.navigator.language,
   };
 }
 
 export function provideNavItems(navItems: NavItem[]): Provider {
   return {
-    provide: NAV_ITEMS,
+    provide: NAV_ITEMS_TOKEN,
     useValue: navItems,
   };
 }
+
+/**
+ * Place the navigation content under toolbar-right position
+ */
+@Directive({ selector: '[wtToolbarRight]', standalone: true })
+export class ToolbarRightDirective {}
 
 @Component({
   selector: 'wt-navigation',
@@ -54,9 +73,7 @@ export function provideNavItems(navItems: NavItem[]): Provider {
     MatListModule,
     MatIconModule,
     MatTooltipModule,
-
     RouterModule,
-
     AsyncPipe,
     NgFor,
     NgIf,
@@ -76,11 +93,17 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private readonly __title: Title,
-    @Inject(NAV_ITEMS) public readonly navItems: NavItem[],
-    @Optional() @Inject(APP_NAME) public readonly appName: string
+    @Inject(NAV_ITEMS_TOKEN) public readonly navItems: NavItem[],
+    @Inject(APP_NAME_TOKEN) public readonly appName: string
   ) {}
 
   ngOnInit(): void {
     this.title = this.__title.getTitle();
   }
 }
+
+@NgModule({
+  imports: [NavigationComponent, ToolbarRightDirective],
+  exports: [NavigationComponent, ToolbarRightDirective],
+})
+export class NavigationModule {}

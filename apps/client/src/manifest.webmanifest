@@ -9,13 +9,15 @@
   "description": "APP_DESCRIPTION",
   "screenshots": [
     {
-      "src": "assets/icons/icon-192x192.png",
-      "sizes": "192x192",
+      "src": "assets/icons/icon-384x384.png",
+      "sizes": "384x384",
       "type": "image/png",
       "label": "Wonder Widgets",
+      "name": "APP_NAME",
       "description": "APP_DESCRIPTION"
     },
     {
+      "name": "APP_NAME",
       "src": "assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",

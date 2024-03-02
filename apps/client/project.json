@@ -14,6 +14,10 @@
       "es": {
         "translation": "apps/client/src/locale/messages.es.xlf",
         "baseHref": ""
+      },
+      "tr": {
+        "translation": "apps/client/src/locale/messages.tr.xlf",
+        "baseHref": ""
       }
     }
   },

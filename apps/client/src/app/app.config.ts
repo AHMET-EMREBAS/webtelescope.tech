@@ -3,7 +3,11 @@ import { provideRouter, withHashLocation } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideServiceWorker } from '@angular/service-worker';
-import { provideAppName, provideNavItems } from '@webpackages/material';
+import {
+  provideAppName,
+  provideLocale,
+  provideNavItems,
+} from '@webpackages/material';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
 
     provideAppName('APP_NAME'),
-
+    provideLocale(),
     provideNavItems([
       {
         path: '',

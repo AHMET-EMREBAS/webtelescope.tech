@@ -1,11 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    class="sidenav"
+    class="sidenav mat-elevation-z8"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
+    position="start"
   >
     <mat-toolbar>
       <img
@@ -36,8 +37,9 @@
       }
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" class="mat-elevation-z8">
       @if (isHandset$ | async) {
       <button
         type="button"
@@ -51,6 +53,10 @@
       </button>
       }
       <span>{{ title }}</span>
+
+      <span class="grow-1"></span>
+
+      <ng-content select="[wtToolbarRight]"></ng-content>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
