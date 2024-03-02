@@ -8,12 +8,7 @@ import { NavigationModule } from '@webpackages/material';
   standalone: true,
   imports: [CommonModule, RouterModule, NavigationModule],
   selector: 'wt-root',
-  template: `
-    <wt-navigation>
-      <router-outlet></router-outlet>
-      <div wtToolbarRight>Toolbar Right</div>
-    </wt-navigation>
-  `,
+  template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent {
   constructor(private readonly title: Title) {

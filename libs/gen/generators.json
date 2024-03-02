@@ -1,0 +1,29 @@
+{
+  "generators": {
+    "entity": {
+      "factory": "./src/generators/entity/generator",
+      "schema": "./src/generators/entity/schema.json",
+      "description": "entity generator"
+    },
+    "controller": {
+      "factory": "./src/generators/controller/generator",
+      "schema": "./src/generators/controller/schema.json",
+      "description": "controller generator"
+    },
+    "form": {
+      "factory": "./src/generators/form/generator",
+      "schema": "./src/generators/form/schema.json",
+      "description": "form generator"
+    },
+    "resolver": {
+      "factory": "./src/generators/resolver/generator",
+      "schema": "./src/generators/resolver/schema.json",
+      "description": "resolver generator"
+    },
+    "object": {
+      "factory": "./src/generators/object/generator",
+      "schema": "./src/generators/object/schema.json",
+      "description": "object generator"
+    }
+  }
+}
