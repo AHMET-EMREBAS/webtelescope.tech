@@ -8,6 +8,8 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+@import './styles.font.scss';
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -36,7 +38,8 @@ $client-theme: mat.define-light-theme(
 
 html,
 body {
-  height: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 body {
   margin: 0;

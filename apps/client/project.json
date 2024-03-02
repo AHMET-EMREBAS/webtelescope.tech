@@ -33,7 +33,7 @@
         "tsConfig": "apps/client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/client/src/favicon.ico",
+          "apps/client/src/favicon.svg",
           "apps/client/src/assets",
           "apps/client/src/manifest.webmanifest"
         ],
@@ -43,7 +43,6 @@
         "scripts": [],
         "serviceWorker": true,
         "ngswConfigPath": "apps/client/ngsw-config.json",
-        "localize": true
       },
       "configurations": {
         "production": {
@@ -59,7 +58,8 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "localize": true
         },
         "development": {
           "buildOptimizer": false,
