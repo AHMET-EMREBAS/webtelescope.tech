@@ -1,11 +1,11 @@
-import { IAddress } from './address';
-import { IBaseEntity } from './base';
-import { IEmail } from './email';
-import { IPhone } from './phone';
+import { ITimestampEntity } from './base';
 
-export interface IManufacturer extends IBaseEntity {
+export interface IManufacturer extends ITimestampEntity {
   name: string;
-  addresses: IAddress[];
-  emails: IEmail[];
-  phones: IPhone[];
 }
+
+export interface ICreateManufacturerDto extends Pick<IManufacturer, 'name'> {}
+
+export interface IUpdateManufacturerDto
+  extends Partial<ICreateManufacturerDto> {}
+  

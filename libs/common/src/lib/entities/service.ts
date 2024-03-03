@@ -1,8 +1,6 @@
-import { IBaseEntity } from './base';
-import { IRecord } from './record';
+import { ITimestampEntity } from './base';
 
-export interface IService extends IBaseEntity {
+export interface IService extends ITimestampEntity {
   name: string;
   description: string;
-  details: IRecord[];
 }

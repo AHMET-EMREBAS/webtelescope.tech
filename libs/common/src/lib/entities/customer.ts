@@ -1,17 +1,11 @@
-import { IAddress } from './address';
-import { IBaseEntity } from './base';
+import { IID, ITimestampEntity } from './base';
 import { ICredential } from './credential';
-import { IEmail } from './email';
-import { IPhone } from './phone';
-import { IPriceLevel } from './price-level';
-import { IProfile } from './profile';
-import { IUser } from './user';
 
-export interface ICustomer extends IBaseEntity, ICredential {
-  emails: IEmail[];
-  addresses: IAddress[];
-  phones: IPhone[];
-  associates: IUser[];
-  priceLevel: IPriceLevel;
-  profile: IProfile;
+export interface ICustomer<P> extends ITimestampEntity, ICredential {
+  priceLevel: P;
 }
+
+export interface ICreateCustomerDto
+  extends Pick<ICustomer<IID>, 'username' | 'password' | 'priceLevel'> {}
+
+export interface IUpdateCustomerDto extends Partial<ICreateCustomerDto> {}

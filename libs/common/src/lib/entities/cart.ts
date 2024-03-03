@@ -1,8 +1,6 @@
-import { IBaseEntity } from './base';
-import { ICustomer } from './customer';
-import { IOrder } from './order';
+import { IID, IOwnedEntity } from './base';
 
-export interface ICart extends IBaseEntity {
-  orders: IOrder[];
-  customer: ICustomer;
-}
+export interface ICart<U> extends IOwnedEntity<U> {}
+
+export interface ICreateCart extends Pick<ICart<IID>, 'owner'> {}
+export interface IUpdateCart extends Partial<ICreateCart> {}

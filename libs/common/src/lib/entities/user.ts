@@ -1,17 +1,15 @@
-import { IBaseEntity } from './base';
+import { IBasicEntity, ITimestampEntity } from './base';
 import { ICredential } from './credential';
-import { IProfile } from './profile';
 
-export interface IPermission extends IBaseEntity {
+export interface IPermission extends IBasicEntity {
   name: string;
 }
 
-export interface IRole extends IBaseEntity {
+export interface IRole<P> extends IBasicEntity {
   name: string;
-  permissions: IPermission[];
+  permissions: P[];
 }
 
-export interface IUser extends IBaseEntity, ICredential {
-  roles: IRole[];
-  profile: IProfile;
+export interface IUser<R> extends ITimestampEntity, ICredential {
+  roles: R[];
 }

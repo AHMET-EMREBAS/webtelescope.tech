@@ -1,8 +1,15 @@
-export interface IBaseEntity {
+export interface IID {
   id: number;
+}
+
+export interface IBasicEntity extends IID {}
+
+export interface ITimestampEntity extends IBasicEntity {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date;
-  active: boolean;
-  uuid: string;
+}
+
+export interface IOwnedEntity<T = unknown> extends ITimestampEntity {
+  owner: T;
 }

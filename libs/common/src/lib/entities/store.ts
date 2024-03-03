@@ -1,5 +1,5 @@
-import { IBaseEntity } from './base';
+import { IBasicEntity } from './base';
 
-export interface IStore extends IBaseEntity {
+export interface IStore extends IBasicEntity {
   name: string;
 }

@@ -1,5 +1,5 @@
-import { IBaseEntity } from './base';
+import { IOwnedEntity } from './base';
 
-export interface IRecord extends IBaseEntity {
+export interface IRecord<T> extends IOwnedEntity<T> {
   record: Record<string, string>;
 }

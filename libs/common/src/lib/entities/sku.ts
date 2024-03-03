@@ -1,10 +1,7 @@
-import { IBaseEntity } from './base';
-import { IProduct } from './product';
-import { IRecord } from './record';
+import { IOwnedEntity } from './base';
 
-export interface ISku extends IBaseEntity {
-  sku: string;
+export interface ISku<O> extends IOwnedEntity<O> {
+  name: string;
   description: string;
-  details: IRecord;
-  product: IProduct;
+  barcode: string;
 }

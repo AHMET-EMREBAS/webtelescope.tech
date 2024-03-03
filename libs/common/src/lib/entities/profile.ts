@@ -1,9 +1,7 @@
-import { IBaseEntity } from './base';
-import { IImage } from './image';
+import { IOwnedEntity } from './base';
 
-export interface IProfile extends IBaseEntity {
+export interface IProfile<U> extends IOwnedEntity<U> {
   firstName: string;
   lastName: string;
   middleName: string;
-  avatar: IImage;
 }

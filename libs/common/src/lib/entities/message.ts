@@ -1,10 +1,15 @@
-import { IBaseEntity } from './base';
-import { IFile } from './file';
-import { IUser } from './user';
+import { IID, IOwnedEntity } from './base';
 
-export interface IMessage extends IBaseEntity {
-  from: IUser;
-  to: IUser[];
+export interface IMessage<T, O, F> extends IOwnedEntity<O> {
+  to: T;
   message: string;
-  attachments: IFile[];
+  attachments: F[];
 }
+
+export interface ICreateMessageDto
+  extends Pick<
+    IMessage<IID, IID, IID>,
+    'attachments' | 'message' | 'owner' | 'to'
+  > {}
+
+export interface IUpdateMessageDto extends Partial<ICreateMessageDto> {}

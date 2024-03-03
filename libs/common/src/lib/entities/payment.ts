@@ -1,11 +1,19 @@
-import { IBaseEntity } from './base';
-import { ICart } from './cart';
+import { IBasicEntity, IID } from './base';
 
-export interface IPayment extends IBaseEntity {
-  cart: ICart;
+export interface IPayment<C, E> extends IBasicEntity {
+  cart: C;
+  customer: E;
+  discount: number;
+  paid: boolean;
   subtotal: number;
   tax: number;
-  discount: number;
   total: number;
-  paid: boolean;
 }
+
+export interface ICreatePaymentDto
+  extends Pick<
+    IPayment<IID, IID>,
+    'cart' | 'customer' | 'discount' | 'subtotal' | 'paid' | 'tax' | 'total'
+  > {}
+
+export interface IUpdatePaymentDto extends Partial<ICreatePaymentDto> {}
