@@ -1,6 +1,6 @@
-import { IBasicEntity, IID } from './base';
+import { IID, ITimestampEntity } from './base';
 
-export interface IPayment<C, E> extends IBasicEntity {
+export interface IPayment<C, E> extends ITimestampEntity {
   cart: C;
   customer: E;
   discount: number;

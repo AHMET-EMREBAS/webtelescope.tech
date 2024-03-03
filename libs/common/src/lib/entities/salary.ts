@@ -12,3 +12,7 @@ export interface ICreateSalaryDto
     ISalary<IID>,
     'startDate' | 'endDate' | 'type' | 'salary' | 'owner'
   > {}
+
+export interface IUpdateSalaryDto extends Partial<ICreateSalaryDto> {}
+
+
