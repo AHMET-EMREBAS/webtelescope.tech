@@ -1,0 +1,147 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "oneOf": [
+        {
+            "$ref": "#/definitions/OneToOne"
+        },
+        {
+            "$ref": "#/definitions/OneToMany"
+        },
+        {
+            "$ref": "#/definitions/ManyToOne"
+        },
+        {
+            "$ref": "#/definitions/ManyToMany"
+        }
+    ],
+    "definitions": {
+        "CascadeList": {
+            "enum": [
+                "RESTRICT",
+                "CASCADE",
+                "SET NULL",
+                "DEFAULT",
+                "NO ACTION"
+            ]
+        },
+        "Common": {
+            "properties": {
+                "target": {
+                    "$ref": "./entity-names.schema.json"
+                },
+                "nullable": {
+                    "const": true
+                },
+                "lazy": {
+                    "const": true
+                },
+                "eager": {
+                    "const": true
+                },
+                "foreignKey": {
+                    "$ref": "./property-names.schema.json"
+                },
+                "cascade": {
+                    "oneOf": [
+                        {
+                            "const": true
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "insert",
+                                    "update",
+                                    "remove",
+                                    "soft-remove",
+                                    "recover"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "onDelete": {
+                    "$ref": "#/definitions/CascadeList"
+                },
+                "onUpdate": {
+                    "$ref": "#/definitions/CascadeList"
+                },
+                "createForeignKeyConstraints": {
+                    "const": false
+                }
+            },
+            "required": [
+                "target",
+                "foreignKey"
+            ]
+        },
+        "OneToOne": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Common"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "OneToOne"
+                        },
+                        "joinColumn": {
+                            "const": true
+                        }
+                    }
+                }
+            ]
+        },
+        "OneToMany": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Common"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "OneToMany"
+                        },
+                        "joinTable": {
+                            "const": true
+                        }
+                    }
+                }
+            ]
+        },
+        "ManyToOne": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Common"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "ManyToOne"
+                        },
+                        "joinTable": {
+                            "const": true
+                        }
+                    }
+                }
+            ]
+        },
+        "ManyToMany": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Common"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "ManyToMany"
+                        },
+                        "joinTable": {
+                            "const": true
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

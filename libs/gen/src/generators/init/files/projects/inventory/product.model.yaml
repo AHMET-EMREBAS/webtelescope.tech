@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=C:\Users\aemre\Projects\webtelescope.tech\libs\gen\src\generators\init\files\schemas\entity.schema.json
+properties:
+  firstName:
+    type: string
+
+createDto:
+  - firstName
+  - address
+  - email
+
+readDto:
+  name:
+  firstName:
+
+relations:
+  category:
+    type: ManyToOne
+    target: Category
+    foreignKey: category
+
+required:
+  - name
+
+unique:
+  - name

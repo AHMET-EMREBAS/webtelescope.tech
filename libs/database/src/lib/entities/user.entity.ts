@@ -13,7 +13,13 @@ export class Permission extends BasicEntity implements IPermission {
 export class Role extends BasicEntity implements IRole<Permission> {
   @Column({ type: 'varchar' }) name!: string;
 
-  @ManyToMany(() => Permission, (p) => p.id, { nullable: true, eager: true })
+  @ManyToMany(() => Permission, (p) => p.id, {
+    nullable: true,
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    lazy: true,
+  })
   @JoinTable()
   permissions!: Permission[];
 }
