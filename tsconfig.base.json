@@ -15,11 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@webpackages/auth": ["libs/auth/src/index.ts"],
       "@webpackages/common": ["libs/common/src/index.ts"],
-      "@webpackages/database": ["libs/database/src/index.ts"],
-      "@webpackages/gen": ["libs/gen/src/index.ts"],
-      "@webpackages/material": ["libs/material/src/index.ts"]
+      "@webpackages/core": ["libs/core/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
