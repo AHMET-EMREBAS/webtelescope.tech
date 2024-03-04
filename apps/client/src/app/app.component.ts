@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { RouterModule } from '@angular/router';
-import { NavigationModule } from '@webpackages/material';
+
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, NavigationModule],
+  imports: [CommonModule, RouterModule],
   selector: 'wt-root',
   template: `<router-outlet></router-outlet>`,
 })
