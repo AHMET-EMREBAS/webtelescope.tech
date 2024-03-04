@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "Init",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "prefix": {
+      "type": "string",
+      "description": "Prefix to add to generated libraries.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What prefix would you like to use?"
+    },
+    "companyName": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What is the company name of your package? (npm company/team name)"
+    }
+  }
+}
