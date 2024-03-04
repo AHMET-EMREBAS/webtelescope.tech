@@ -1,6 +1,23 @@
 {
   "name": "@webpackages/class-generator",
   "version": "0.0.1",
+  "homepage": "https://webtelescope.tech",
+  "description": "Generate code from class definations",
+  "license": "MIT",
+  "keywords": [
+    "TypeScript Generator",
+    "Class Generator",
+    "Code Generator",
+    "Schematics Helper"
+  ],
+  "repository": {
+    "url": "https://github.com/AHMET-EMREBAS/webtelescope.tech"
+  },
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "info@webtelescope.tech",
+    "url": "https://webtelescope.tech"
+  },
   "dependencies": {
     "@swc/helpers": "~0.5.2"
   },
