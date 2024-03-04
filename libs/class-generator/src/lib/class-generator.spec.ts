@@ -58,6 +58,12 @@ describe('classGenerator', () => {
               {
                 decoratorName: 'Validation',
                 decoratorOptions: { minLength: 10 },
+                imports: [
+                  {
+                    imports: ['Validation'],
+                    packageName: '@webpackages/validation',
+                  },
+                ],
               },
             ],
           },
@@ -65,7 +71,7 @@ describe('classGenerator', () => {
       });
 
       expect(printer.print()).toBe(
-        `import { Entity, Column } from 'typeorm'; @Entity() export class Abc { @Validation({"minLength":10}) name?:string; }`
+        `import { Entity, Column } from 'typeorm'; import { Validation } from '@webpackages/validation'; @Entity() export class Abc { @Validation({"minLength":10}) name?:string; }`
       );
     });
   });

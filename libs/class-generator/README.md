@@ -1,11 +1,45 @@
 # class-generator
 
-This library was generated with [Nx](https://nx.dev).
+Generate typescript classes from class defination.
 
-## Building
+```typescript
+import { ClassPrinter } from '@webpackages/class-generator';
 
-Run `nx build class-generator` to build the library.
+const printer = new ClassPrinter({
+  className: 'Abc',
+  imports: [{ imports: ['Entity', 'Column'], packageName: 'typeorm' }],
+  decorators: [{ decoratorName: 'Entity' }],
+  properties: [
+    {
+      propertyName: 'name',
+      type: 'string',
+      decorators: [
+        {
+          decoratorName: 'Validation',
+          decoratorOptions: { minLength: 10 },
+          imports: [
+            {
+              imports: ['Validation'],
+              packageName: '@webpackages/validation',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+});
 
-## Running unit tests
+printer.print();
+```
 
-Run `nx test class-generator` to execute the unit tests via [Jest](https://jestjs.io).
+Print method will output the following code
+
+```typescript
+import { Entity, Column } from 'typeorm';
+import { Validation } from '@webpackges/validation';
+
+@Entity()
+export class Abc {
+  @Validation({ minLength: 10 }) name?: string;
+}
+```
