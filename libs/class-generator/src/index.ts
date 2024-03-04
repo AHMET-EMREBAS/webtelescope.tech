@@ -1,1 +1,2 @@
-export * from './lib/class-generator';
+// @index('./*', f => `export * from '${f.path}'`)
+export * from './lib';
