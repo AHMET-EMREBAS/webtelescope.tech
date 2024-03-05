@@ -8,7 +8,7 @@ describe('ClassPrinter', () => {
     ${{ name: 'A' } as CO}                                                                     | ${`export class A{}`}
     ${{ name: 'A', properties: [new PP({ name: 'name', type: 'string' })] } as CO}             | ${`export class A{name?:string;}`}
     ${{ name: 'A', properties: [new PP({ name: 'name', type: 'string' })] } as CO}             | ${`export class A{name?:string;}`}
-    ${{ name: 'A', decorators: [new DP({ name: 'V', options: { m: 100 } })] } as CO}           | ${`@V({"m":100})export class A{}`}
+    ${{ name: 'A', decorators: [new DP({ name: 'V', options: { m: 100 } })] } as CO}           | ${`@V({m:100})export class A{}`}
     ${{ name: 'A' } as CO}                                                                     | ${`export class A{}`}
     ${{ name: 'A', imports: [new IP({ items: ['B', 'C', 'D'], packageName: 'some' })] } as CO} | ${`import {B, C, D} from 'some';export class A{}`}
   `('$options should print $result', ({ options, result }) => {

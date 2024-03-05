@@ -2,8 +2,19 @@ import { DecoratorPrinter } from './decorator-printer';
 
 describe('Decorator Printer', () => {
   it('should print decorator', () => {
-    const decoratorText =  new DecoratorPrinter({ name: 'Validation', options: { minLength: 3, maxLength:10 } }).print()
+    const decoratorText = new DecoratorPrinter({
+      name: 'Validation',
+      options: { minLength: 3, maxLength: 10 },
+    }).print();
 
-    expect(decoratorText).toBe(`@Validation({"minLength":3,"maxLength":10})`)
+    expect(decoratorText).toBe(`@Validation({minLength:3,maxLength:10})`);
+  });
+  it('should print decorator', () => {
+    const decoratorText = new DecoratorPrinter({
+      name: 'Validation',
+      options: { target: DecoratorPrinter },
+    }).print();
+
+    expect(decoratorText).toBe(`@Validation({target:DecoratorPrinter})`);
   });
 });

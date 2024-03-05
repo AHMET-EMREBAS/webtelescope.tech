@@ -1,21 +1,21 @@
 {
-  "name": "validation",
+  "name": "typeorm",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/validation/src",
+  "sourceRoot": "libs/typeorm/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:swc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/validation",
-        "main": "libs/validation/src/index.ts",
-        "tsConfig": "libs/validation/tsconfig.lib.json",
-        "assets": ["libs/validation/*.md"]
+        "outputPath": "dist/libs/typeorm",
+        "main": "libs/typeorm/src/index.ts",
+        "tsConfig": "libs/typeorm/tsconfig.lib.json",
+        "assets": ["libs/typeorm/*.md"]
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs validation {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs typeorm {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {
@@ -23,8 +23,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/validation/**/*.ts",
-          "libs/validation/package.json"
+          "libs/typeorm/**/*.ts",
+          "libs/typeorm/package.json"
         ]
       }
     },
@@ -32,7 +32,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/validation/jest.config.ts"
+        "jestConfig": "libs/typeorm/jest.config.ts"
       }
     }
   },
