@@ -1,2 +1,2 @@
 // @index(['./*', '!./*.{spec,test}.ts'], f => `export * from '${f.path}'`)
-export * from './class-generator';
+export * from './core/class-generator';
