@@ -1,0 +1,6 @@
+import { Entity, Column, Relation } from '@webpackages/typeorm';
+
+@Entity()
+export class <%- className %> extends BaseEntity {
+    
+}

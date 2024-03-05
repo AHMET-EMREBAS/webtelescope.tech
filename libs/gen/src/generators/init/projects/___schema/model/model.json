@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Model Schema",
+    "properties": {
+        "properties": {
+            "patternProperties": {
+                "[a-zA-Z-]{3,}": {
+                    "$ref": "./property.json"
+                }
+            },
+            "propertyNames": {
+                "$ref": "#/definitions/PN"
+            }
+        },
+        "relations": {
+            "patternProperties": {
+                "[a-zA-Z-]{3,}": {
+                    "$ref": "./relation.json"
+                }
+            },
+            "propertyNames": {
+                "$ref": "#/definitions/PN"
+            }
+        },
+        "required": {
+            "$ref": "#/definitions/PNS"
+        },
+        "unique": {
+            "$ref": "#/definitions/PNS"
+        }
+    },
+    "definitions": {
+        "PN": {
+            "description": "Property Name",
+            "$ref": "./../enums/property.json"
+        },
+        "PNS": {
+            "description": "Property Names",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/PN"
+            }
+        }
+    }
+}

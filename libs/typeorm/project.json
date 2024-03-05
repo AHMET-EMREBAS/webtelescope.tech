@@ -24,7 +24,8 @@
       "options": {
         "lintFilePatterns": [
           "libs/typeorm/**/*.ts",
-          "libs/typeorm/package.json"
+          "libs/typeorm/package.json",
+          "libs/typeorm/generators.json"
         ]
       }
     },
