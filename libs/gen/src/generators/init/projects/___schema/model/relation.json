@@ -11,6 +11,18 @@
         },
         "target": {
             "$ref": "./../enums/entity.json"
+        },
+        "icon": {
+            "$ref": "./../enums/icon.json"
+        },
+        "label": {
+            "type": "string"
         }
-    }
+    },
+    "additionalProperties": false,
+    "required": [
+        "type",
+        "icon",
+        "label"
+    ]
 }

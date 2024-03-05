@@ -4,6 +4,12 @@
     "enum": [
         "email",
         "password",
-        "phone"
+        "phone",
+        "shortText",
+        "longText",
+        "positive",
+        "positiveInt",
+        "upc",
+        "uuid"
     ]
 }

@@ -138,7 +138,7 @@
                     }
                 },
                 "format": {
-                    "$ref": "./../enums/input.json"
+                    "$ref": "./../enums/format.json"
                 }
             },
             "additionalProperties": false
@@ -155,5 +155,10 @@
             },
             "additionalProperties": false
         }
-    }
+    },
+    "required": [
+        "type",
+        "icon",
+        "label"
+    ]
 }
