@@ -13,7 +13,9 @@ export async function initGenerator(tree: Tree, options: InitGeneratorSchema) {
 
   packageJSONObject['webpacakgesGeneratorName'] = name;
 
-  writeFileSync('./package.json', JSON.stringify(pacakgeJSON));
+  const newJSONText = JSON.stringify(packageJSONObject);
+
+  writeFileSync('./package.json', newJSONText, 'utf-8');
 
   generateFiles(tree, join(__dirname, 'files'), name, {});
 
