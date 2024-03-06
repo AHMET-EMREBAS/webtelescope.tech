@@ -1,9 +1,4 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nx/devkit';
+import { formatFiles, generateFiles, names, Tree } from '@nx/devkit';
 import * as path from 'path';
 import { ClassGeneratorSchema } from './schema';
 
@@ -11,14 +6,13 @@ export async function classGenerator(
   tree: Tree,
   options: ClassGeneratorSchema
 ) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
+  const { name, project } = options;
+  const projectRoot = `libs/${project}/src/lib`;
+
+  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {
+    content: 'Hello there',
+    ...names(name),
   });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
   await formatFiles(tree);
 }
 

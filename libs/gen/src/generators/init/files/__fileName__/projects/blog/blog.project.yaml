@@ -1,0 +1,4 @@
+# yaml-language-server: $schema=./../../schema/project/project.json
+
+title: Blog Application
+description: Manage your blog contents

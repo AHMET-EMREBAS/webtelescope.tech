@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=./../___schema/model/model.json
+# yaml-language-server: $schema=./../../schema/model/model.json
 properties:
   title:
     type: string

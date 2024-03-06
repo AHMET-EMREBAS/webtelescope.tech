@@ -1,0 +1,3 @@
+# yaml-language-server: $schema=./../../schema/project/project.json
+title: Todo Application
+description: Manage your daily tasks.

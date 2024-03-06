@@ -1,4 +1,3 @@
 export interface InitGeneratorSchema {
-  prefix: string;
-  companyName: string;
+  name: string;
 }

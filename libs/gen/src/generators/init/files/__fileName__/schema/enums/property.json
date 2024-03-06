@@ -71,6 +71,10 @@
         "articles",
         "author",
         "authors",
-        "publishedAt"
+        "publishedAt",
+        "user",
+        "users",
+        "store",
+        "stores"
     ]
 }

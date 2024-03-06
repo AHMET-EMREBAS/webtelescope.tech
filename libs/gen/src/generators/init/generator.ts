@@ -1,21 +1,21 @@
-import { formatFiles, Tree } from '@nx/devkit';
-import { execSync } from 'child_process';
+import { formatFiles, generateFiles, Tree } from '@nx/devkit';
+
 import { InitGeneratorSchema } from './schema';
+import { readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 
 export async function initGenerator(tree: Tree, options: InitGeneratorSchema) {
-  const prefix = options.prefix ? options.prefix + '-' : '';
-  const importPrefix = options.companyName || '';
+  const { name } = options;
 
-  const libs = ['entity', 'rest', 'graph', 'common'];
+  const pacakgeJSON = readFileSync('./package.json').toString();
 
-  for (const lib of libs) {
-    const packageName = prefix + lib;
-    const importPath = `@${importPrefix}/${packageName}`;
+  const packageJSONObject = JSON.parse(pacakgeJSON);
 
-    execSync(
-      `npx nx g @nx/js:lib ${packageName} --publishable --unitTestRunner=jest --bundler=swc --importPath=${importPath}`
-    );
-  }
+  packageJSONObject['webpacakgesGeneratorName'] = name;
+
+  writeFileSync('./package.json', JSON.stringify(pacakgeJSON));
+
+  generateFiles(tree, join(__dirname, 'files'), name, {});
 
   await formatFiles(tree);
 }
