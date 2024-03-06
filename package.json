@@ -149,5 +149,6 @@
   },
   "nx": {
     "includedScripts": []
-  }
+  },
+  "webpacakgesGeneratorName": "ssot"
 }
