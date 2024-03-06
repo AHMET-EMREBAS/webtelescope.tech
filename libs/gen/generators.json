@@ -39,6 +39,11 @@
       "factory": "./src/generators/client-resource/generator",
       "schema": "./src/generators/client-resource/schema.json",
       "description": "client-resource generator"
+    },
+    "init": {
+      "factory": "./src/generators/init/generator",
+      "schema": "./src/generators/init/schema.json",
+      "description": "init generator"
     }
   }
 }

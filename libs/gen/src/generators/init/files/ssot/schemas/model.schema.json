@@ -1,0 +1,169 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ProjectSchema",
+    "properties": {
+        "properties": {
+            "patternProperties": {
+                ".*": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Common"
+                        },
+                        {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/Property"
+                                },
+                                {
+                                    "$ref": "#/definitions/Relation"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "propertyNames": {
+                "pattern": "[a-z]{1}.*"
+            }
+        }
+    },
+    "definitions": {
+        "Common": {
+            "properties": {
+                "icon": {
+                    "default": "info",
+                    "type": "string"
+                },
+                "label": {
+                    "default": "Label",
+                    "type": "string"
+                },
+                "inputType": {
+                    "enum": [
+                        "text",
+                        "number",
+                        "textarea",
+                        "checkbox",
+                        "select",
+                        "radio",
+                        "autocomplete",
+                        "switch",
+                        "slider",
+                        "range",
+                        "button"
+                    ]
+                }
+            }
+        },
+        "Property": {
+            "properties": {
+                "type": {
+                    "default": "Text",
+                    "enum": [
+                        "Text",
+                        "LongText",
+                        "Number",
+                        "Integer",
+                        "PositiveInteger",
+                        "Date",
+                        "Boolean",
+                        "Record",
+                        "Password",
+                        "Range"
+                    ]
+                },
+                "required": {
+                    "default": true,
+                    "type": "boolean"
+                },
+                "unique": {
+                    "default": true,
+                    "type": "boolean"
+                }
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "type": {
+                                "const": "Range"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "start": {
+                                "type": "integer"
+                            },
+                            "end": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "type": {
+                                "enum": [
+                                    "Text",
+                                    "LongText"
+                                ]
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "minLength": {
+                                "type": "integer"
+                            },
+                            "maxLength": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "type": {
+                                "enum": [
+                                    "Number",
+                                    "Integer",
+                                    "PositiveInteger"
+                                ]
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "min": {
+                                "type": "number"
+                            },
+                            "max": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "Relation": {
+            "properties": {
+                "target": {
+                    "default": "Category",
+                    "type": "string",
+                    "pattern": "^[A-Z]{1,}.*"
+                },
+                "type": {
+                    "default": "One",
+                    "enum": [
+                        "One",
+                        "Many",
+                        "Owner"
+                    ]
+                }
+            }
+        }
+    }
+}

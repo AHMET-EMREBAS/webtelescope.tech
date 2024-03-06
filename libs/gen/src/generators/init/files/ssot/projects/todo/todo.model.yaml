@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=./../../schemas/model.schema.json
+
+properties:
+  title:
+    type: Text
+    label: Property Label
+    required: true
+    unique: true
+    icon: title
+    inputType: text
+
+  description:
+    type: PositiveInteger
+    icon: description
+    label: Label
+    inputType: number
+
+  scale:
+    type: Range
+    start: 0
+    end: 100
+
+  category:
+    type: One
+    target: Category
+    icon: info
+    label: Category
