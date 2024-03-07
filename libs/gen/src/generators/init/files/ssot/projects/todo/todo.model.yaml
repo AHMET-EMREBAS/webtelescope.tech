@@ -7,16 +7,17 @@ properties:
     required: true
     unique: true
     icon: title
+    format: email
     inputType: text
 
   description:
-    type: PositiveInteger
+    type: Text
     icon: description
     label: Label
     inputType: number
 
   scale:
-    type: Range
+    type: Number
     start: 0
     end: 100
 
@@ -25,3 +26,4 @@ properties:
     target: Category
     icon: info
     label: Category
+    inputType: autocomplete

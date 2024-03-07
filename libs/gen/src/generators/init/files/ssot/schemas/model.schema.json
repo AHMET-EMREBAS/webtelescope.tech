@@ -39,38 +39,14 @@
                     "type": "string"
                 },
                 "inputType": {
-                    "enum": [
-                        "text",
-                        "number",
-                        "textarea",
-                        "checkbox",
-                        "select",
-                        "radio",
-                        "autocomplete",
-                        "switch",
-                        "slider",
-                        "range",
-                        "button"
-                    ]
+                    "$ref": "./input-type.schema.json"
                 }
             }
         },
         "Property": {
             "properties": {
                 "type": {
-                    "default": "Text",
-                    "enum": [
-                        "Text",
-                        "LongText",
-                        "Number",
-                        "Integer",
-                        "PositiveInteger",
-                        "Date",
-                        "Boolean",
-                        "Record",
-                        "Password",
-                        "Range"
-                    ]
+                    "$ref": "./property-type.schema.json"
                 },
                 "required": {
                     "default": true,
@@ -86,62 +62,16 @@
                     "if": {
                         "properties": {
                             "type": {
-                                "const": "Range"
-                            }
-                        }
-                    },
-                    "then": {
-                        "properties": {
-                            "start": {
-                                "type": "integer"
-                            },
-                            "end": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "type": {
                                 "enum": [
-                                    "Text",
-                                    "LongText"
+                                    "Text"
                                 ]
                             }
                         }
                     },
                     "then": {
                         "properties": {
-                            "minLength": {
-                                "type": "integer"
-                            },
-                            "maxLength": {
-                                "type": "integer"
-                            }
-                        }
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "type": {
-                                "enum": [
-                                    "Number",
-                                    "Integer",
-                                    "PositiveInteger"
-                                ]
-                            }
-                        }
-                    },
-                    "then": {
-                        "properties": {
-                            "min": {
-                                "type": "number"
-                            },
-                            "max": {
-                                "type": "number"
+                            "format": {
+                                "$ref": "./format.schema.json"
                             }
                         }
                     }
@@ -163,7 +93,11 @@
                         "Owner"
                     ]
                 }
-            }
+            },
+            "required": [
+                "target",
+                "type"
+            ]
         }
     }
 }
