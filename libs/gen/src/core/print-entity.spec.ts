@@ -1,9 +1,9 @@
 import {
   printEntity,
-  printEntityColumn,
-  printModelImport,
-  printPropertyDefinition,
-  printPropertyType,
+  printColumn,
+  printEntityImport,
+  printColumnDefinition,
+  printColumnType,
 } from './print-entity';
 import { PropertyDefinition as PD, PropertyType, RelationType } from '../type';
 
@@ -20,7 +20,7 @@ describe('Print Entity', () => {
     const property: PD = {
       type: type,
     };
-    expect(printPropertyType(property)).toBe(result);
+    expect(printColumnType(property)).toBe(result);
   });
 
   it.each`
@@ -35,7 +35,7 @@ describe('Print Entity', () => {
         type: type,
         target,
       };
-      expect(printPropertyType(property)).toBe(result);
+      expect(printColumnType(property)).toBe(result);
     }
   );
 
@@ -49,7 +49,7 @@ describe('Print Entity', () => {
   `(
     'should print property defination $result from $options',
     ({ name, options, result }) => {
-      const text = printPropertyDefinition(name, options);
+      const text = printColumnDefinition(name, options);
       expect(text).toBe(result);
     }
   );
@@ -63,7 +63,7 @@ describe('Print Entity', () => {
   `(
     'should print entity column $result from $options',
     ({ name, options, result }) => {
-      const text = printEntityColumn(name, options);
+      const text = printColumn(name, options);
       expect(text).toBe(result);
     }
   );
@@ -77,7 +77,7 @@ describe('Print Entity', () => {
   `(
     'should print model import $result from $options',
     ({ options, result }) => {
-      const text = printModelImport(options);
+      const text = printEntityImport(options);
       expect(text).toBe(result);
     }
   );

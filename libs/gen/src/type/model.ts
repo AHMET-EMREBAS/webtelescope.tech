@@ -38,7 +38,6 @@ export type RelationDefinition = {
 };
 
 export type PropertyDefinition =
-  | CommonPropertyDefinition<PropertyType>
   | StringPropertyDefinition
   | NumberPropertyDefinition
   | BooleanPropertyDefinition

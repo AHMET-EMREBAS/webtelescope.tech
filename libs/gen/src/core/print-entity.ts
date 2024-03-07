@@ -15,7 +15,7 @@ function getPackagePrefix(): string {
   throw new Error('set name property in pacakge.json!');
 }
 
-export function isRelationProperty(
+export function isRelationColumn(
   property: PropertyDefinition
 ): property is RelationDefinition {
   return (
@@ -29,14 +29,14 @@ export function toColumnDecoratorName(type: PropertyType) {
   return `${type}Column`;
 }
 
-export function printCoreImports(model: ModelDefinition) {
+export function printEntityCoreImports(model: ModelDefinition) {
   const entries = Object.entries(model.properties);
 
   const imports =
     entries
       .map((obj) => {
         const value = obj[1];
-        if (!isRelationProperty(value)) {
+        if (!isRelationColumn(value)) {
           return toColumnDecoratorName(value.type);
         }
         return undefined;
@@ -47,8 +47,8 @@ export function printCoreImports(model: ModelDefinition) {
   return `import{Entity,BaseEntity,${imports}}from'${getPackagePrefix()}/core';`;
 }
 
-export function printModelImport(options: PropertyDefinition) {
-  if (isRelationProperty(options)) {
+export function printEntityImport(options: PropertyDefinition) {
+  if (isRelationColumn(options)) {
     return `import{${options.target}}from'./../../${
       names(options.target).fileName
     }';`;
@@ -56,12 +56,12 @@ export function printModelImport(options: PropertyDefinition) {
   return '';
 }
 
-export function printModelImports(model: ModelDefinition) {
+export function printEntityImports(model: ModelDefinition) {
   const entries = Object.entries(model.properties);
   const imports =
     entries
       .map((obj) => {
-        return printModelImport(obj[1]);
+        return printEntityImport(obj[1]);
       })
       .filter((e) => e)
       .join(' ') || '';
@@ -69,8 +69,8 @@ export function printModelImports(model: ModelDefinition) {
   return imports;
 }
 
-export function printPropertyType(property: PropertyDefinition) {
-  if (isRelationProperty(property)) {
+export function printColumnType(property: PropertyDefinition) {
+  if (isRelationColumn(property)) {
     const isArray = property.type === 'Many' ? '[]' : '';
     return `${property.target}${isArray}`;
   } else {
@@ -88,22 +88,22 @@ export function printPropertyType(property: PropertyDefinition) {
   }
 }
 
-export function printPropertyDefinition(
+export function printColumnDefinition(
   name: string,
   property: PropertyDefinition
 ) {
-  if (isRelationProperty(property)) {
+  if (isRelationColumn(property)) {
     const isRequiredMark = property.type === 'Owner' ? '!:' : '?:';
 
-    return `${name}${isRequiredMark}${printPropertyType(property)};`;
+    return `${name}${isRequiredMark}${printColumnType(property)};`;
   } else {
     const isRequiredMark = property.required ? '!:' : '?:';
-    return `${name}${isRequiredMark}${printPropertyType(property)};`;
+    return `${name}${isRequiredMark}${printColumnType(property)};`;
   }
 }
 
 export function printColumnDecorator(property: PropertyDefinition) {
-  if (isRelationProperty(property)) {
+  if (isRelationColumn(property)) {
     return `@${property.type}(${property.target})`;
   } else {
     const __decoratorOptions = [
@@ -119,18 +119,18 @@ export function printColumnDecorator(property: PropertyDefinition) {
   }
 }
 
-export function printEntityColumn(name: string, property: PropertyDefinition) {
-  return `${printColumnDecorator(property)}${printPropertyDefinition(
+export function printColumn(name: string, property: PropertyDefinition) {
+  return `${printColumnDecorator(property)}${printColumnDefinition(
     name,
     property
   )}`;
 }
 
 export function printEntity(name: string, model: ModelDefinition) {
-  const imports = `${printCoreImports(model)}${printModelImports(model)}`;
+  const imports = `${printEntityCoreImports(model)}${printEntityImports(model)}`;
   const properties = Object.entries(model.properties)
     .map(([key, value]) => {
-      return printEntityColumn(key, value);
+      return printColumn(key, value);
     })
     .join(' ');
   return `${imports}@Entity()export class ${
