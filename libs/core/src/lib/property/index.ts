@@ -10,7 +10,7 @@ import {
 import { ApiProperty, ApiPropertyOptions } from '@nestjs/swagger';
 import { applyDecorators } from '@nestjs/common';
 import { IDDto } from '../dtos';
-import { Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 
 type PropertyOptions = {
   required?: boolean;
@@ -23,8 +23,13 @@ export function __commonDecorators(options?: ApiPropertyOptions) {
       required: options?.required === true,
       nullable: options?.required !== true,
     }),
+    Expose(),
     options?.required === true ? IsNotEmpty() : IsOptional()
   );
+}
+
+export function Dto() {
+  return applyDecorators(Exclude());
 }
 
 export function EmailProperty(options?: PropertyOptions) {
@@ -37,6 +42,7 @@ export function EmailProperty(options?: PropertyOptions) {
     IsEmail()
   );
 }
+
 export function PasswordProperty(options?: PropertyOptions) {
   return applyDecorators(
     __commonDecorators({
@@ -47,6 +53,7 @@ export function PasswordProperty(options?: PropertyOptions) {
     IsStrongPassword()
   );
 }
+
 export function PhoneProperty(options: PropertyOptions) {
   return applyDecorators(
     __commonDecorators({
@@ -57,7 +64,7 @@ export function PhoneProperty(options: PropertyOptions) {
     IsPhoneNumber()
   );
 }
-export function TextProperty(options: PropertyOptions) {
+export function TextProperty(options: PropertyOptions = {}) {
   return applyDecorators(
     __commonDecorators({
       type: 'string',
@@ -66,7 +73,7 @@ export function TextProperty(options: PropertyOptions) {
   );
 }
 
-export function NumberProperty(options: PropertyOptions) {
+export function NumberProperty(options: PropertyOptions = {}) {
   return applyDecorators(
     __commonDecorators({
       type: 'number',
@@ -75,7 +82,7 @@ export function NumberProperty(options: PropertyOptions) {
   );
 }
 
-export function DateProperty(options: PropertyOptions) {
+export function DateProperty(options: PropertyOptions = {}) {
   return applyDecorators(
     __commonDecorators({
       type: 'date',
@@ -93,7 +100,7 @@ export function BooleanProperty() {
   );
 }
 
-export function RecordProperty(options?: PropertyOptions) {
+export function RecordProperty(options: PropertyOptions = {}) {
   return applyDecorators(
     __commonDecorators({
       type: 'object',

@@ -1,3 +1,5 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './property';
-export * from './typeorm';
+export * from './dtos'
+export * from './property'
+export * from './rest'
+export * from './typeorm'

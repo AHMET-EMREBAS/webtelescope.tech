@@ -8,13 +8,11 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   JoinTable,
+  Entity as __Entity,
+  EntityOptions,
 } from 'typeorm';
 import { applyDecorators } from '@nestjs/common';
 import { ClassConstructor } from 'class-transformer';
-
-export class IDDto {
-  id!: number;
-}
 
 export class BaseEntity {
   @PrimaryGeneratedColumn() id!: number;
@@ -28,6 +26,9 @@ export type ColumnOptions = {
   unique?: boolean;
 };
 
+export function Entity(options: EntityOptions = {}) {
+  return applyDecorators(__Entity(options));
+}
 export function TextColumn(options?: ColumnOptions) {
   return Column({
     type: 'varchar',
@@ -55,7 +56,6 @@ export function NumberColumn(options?: ColumnOptions) {
 export function DateColumn(options?: ColumnOptions) {
   return Column({
     type: 'varchar',
-
     nullable: options?.required !== true,
     unique: options?.unique === true,
     transformer: {
