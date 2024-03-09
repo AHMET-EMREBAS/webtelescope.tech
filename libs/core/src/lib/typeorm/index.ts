@@ -1,5 +1,5 @@
 import {
-  Column,
+  Column as __Column,
   ManyToOne,
   ManyToMany,
   CreateDateColumn,
@@ -10,10 +10,11 @@ import {
   JoinTable,
   Entity as __Entity,
   EntityOptions,
+  ColumnOptions as __ColumnOptions,
 } from 'typeorm';
 import { applyDecorators } from '@nestjs/common';
 import { ClassConstructor } from 'class-transformer';
-
+import { hashSync, genSaltSync } from 'bcrypt';
 export class BaseEntity {
   @PrimaryGeneratedColumn() id!: number;
   @CreateDateColumn() createdAt!: Date;
@@ -21,86 +22,14 @@ export class BaseEntity {
   @DeleteDateColumn() deletedAt!: Date;
 }
 
-export type ColumnOptions = {
-  required?: boolean;
-  unique?: boolean;
-};
-
 export function Entity(options: EntityOptions = {}) {
   return applyDecorators(__Entity(options));
 }
-export function TextColumn(options?: ColumnOptions) {
-  return Column({
-    type: 'varchar',
-    unique: options?.unique === true,
-    nullable: options?.required !== true,
-  });
-}
 
-export function NumberColumn(options?: ColumnOptions) {
-  return Column({
-    type: 'varchar',
-    unique: options?.unique === true,
-    nullable: options?.required !== true,
-    transformer: {
-      to(value: number) {
-        value?.toString();
-      },
-      from(value) {
-        return parseFloat(value);
-      },
-    },
-  });
-}
-
-export function DateColumn(options?: ColumnOptions) {
-  return Column({
-    type: 'varchar',
-    nullable: options?.required !== true,
-    unique: options?.unique === true,
-    transformer: {
-      to: (value: Date) => value.toISOString(),
-      from: (value) => new Date(value),
-    },
-  });
-}
-
-export function BooleanColumn() {
-  return Column({
-    type: 'varchar',
-    default: '0',
-    transformer: {
-      to(value: boolean) {
-        return value === true ? '1' : value === false ? '-1' : '0';
-      },
-      from(value: '-1' | '1' | '0') {
-        return value == '-1'
-          ? false
-          : value === '0'
-          ? undefined
-          : value === '1'
-          ? true
-          : undefined;
-      },
-    },
-  });
-}
-
-export function RecordColumn(options?: ColumnOptions) {
-  return Column({
-    type: 'varchar',
-    nullable: options?.required !== true,
-    unique: options?.unique === true,
-    transformer: {
-      to(value: Record<string, unknown>) {
-        return JSON.stringify(value);
-      },
-      from(value: string) {
-        return value && JSON.parse(value);
-      },
-    },
-  });
-}
+export type RelationOptions = {
+  type: 'One' | 'Many' | 'Owner';
+  target: ClassConstructor<BaseEntity>;
+};
 
 export function One<T extends BaseEntity>(target: ClassConstructor<T>) {
   return applyDecorators(
@@ -133,4 +62,66 @@ export function Owner<T extends BaseEntity>(target: ClassConstructor<T>) {
     ),
     JoinColumn()
   );
+}
+
+export function Relation(options: RelationOptions): PropertyDecorator {
+  if (options.type === 'Many') {
+    return Many(options.target);
+  } else if (options.type === 'One') {
+    return One(options.target);
+  } else if (options.type === 'Owner') {
+    return Owner(options.target);
+  }
+
+  throw new Error(`Relation type ${options.type} is not found! `);
+}
+
+export type ColumnOptions = __ColumnOptions & {
+  type: 'string' | 'number' | 'date' | 'boolean' | 'object' | 'hash';
+  required?: boolean;
+};
+
+export function Column(options?: ColumnOptions) {
+  if (options) {
+    const { type } = options;
+
+    const nullable = options.required === true ? false : true;
+
+    if (type === 'string') {
+      return __Column({ type: 'varchar', nullable });
+    } else if (type === 'boolean') {
+      return __Column({ type: 'boolean', nullable: true, default: false });
+    } else if (type === 'date') {
+      return __Column({ type: 'varchar', nullable });
+    } else if (type === 'number') {
+      return __Column({ type: 'real', nullable });
+    } else if (type === 'object') {
+      return __Column({
+        type: 'varchar',
+        transformer: {
+          to(value) {
+            return value && JSON.stringify(value);
+          },
+          from(value) {
+            return value && JSON.parse(value);
+          },
+        },
+      });
+    } else if (type === 'hash') {
+      return __Column({
+        type: 'varchar',
+        nullable,
+        transformer: {
+          to(value) {
+            return value && hashSync(value, genSaltSync(8));
+          },
+          from(value) {
+            return value;
+          },
+        },
+      });
+    }
+  }
+
+  return __Column({ type: 'varchar', nullable: true });
 }

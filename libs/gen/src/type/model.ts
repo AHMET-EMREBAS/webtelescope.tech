@@ -13,7 +13,16 @@ export type InputType =
 
 export type PropertyType = 'Text' | 'Number' | 'Date' | 'Boolean' | 'Record';
 export type RelationType = 'One' | 'Many' | 'Owner';
-export type StringFormat = 'email' | 'password' | 'phone';
+export type StringFormat =
+  | 'email'
+  | 'password'
+  | 'phone'
+  | 'shortText'
+  | 'longText'
+  | 'ip4'
+  | 'ip6'
+  | 'url'
+  | 'barcode';
 
 export type CommonPropertyDefinition<T extends PropertyType> = {
   type: T;

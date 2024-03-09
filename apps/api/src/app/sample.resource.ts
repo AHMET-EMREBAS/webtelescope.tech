@@ -3,11 +3,8 @@ import { PartialType } from '@nestjs/swagger';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   BaseEntity,
-  DateProperty,
-  Dto,
   Entity,
   NumberColumn,
-  NumberProperty,
   One,
   TextColumn,
   TextProperty,

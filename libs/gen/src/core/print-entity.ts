@@ -7,7 +7,7 @@ import {
 } from '../type';
 import { names } from '@nx/devkit';
 
-function getPackagePrefix(): string {
+export function getPackagePrefix(): string {
   const packageJSON = JSON.parse(readFileSync('./package.json')?.toString());
   if (packageJSON.name) {
     return (packageJSON.name as string).split('/').shift();
@@ -127,7 +127,9 @@ export function printColumn(name: string, property: PropertyDefinition) {
 }
 
 export function printEntity(name: string, model: ModelDefinition) {
-  const imports = `${printEntityCoreImports(model)}${printEntityImports(model)}`;
+  const imports = `${printEntityCoreImports(model)}${printEntityImports(
+    model
+  )}`;
   const properties = Object.entries(model.properties)
     .map(([key, value]) => {
       return printColumn(key, value);

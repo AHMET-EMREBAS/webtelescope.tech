@@ -3,36 +3,28 @@ import {
   BooleanProperty,
   Dto,
   NumberProperty,
-  RecordProperty,
+  ObjectProperty,
   TextProperty,
 } from '../property';
-import { IsIn, Max, Min } from 'class-validator';
 
 @Dto()
 export class QueryDto {
-  @NumberProperty()
-  @Min(100)
-  @Max(100)
+  @NumberProperty({ maximum: 100, minimum: 1, default: 20 })
   take?: number = 20;
 
-  @NumberProperty()
-  @Min(0)
+  @NumberProperty({ minimum: 0, default: 0 })
   skip?: number = 0;
 
-  @BooleanProperty()
+  @BooleanProperty({ default: false })
   withDeleted?: boolean = false;
 
-  @TextProperty()
+  @TextProperty({ default: 'id' })
   orderBy?: string = 'id';
 
-  @TextProperty()
-  @IsIn(['ASC', 'DESC'])
+  @TextProperty({ enum: ['DESC', 'ASC'] })
   orderDir?: 'ASC' | 'DESC' = 'ASC';
 
-  @TextProperty()
-  searchBy?: string[];
-
-  @RecordProperty()
+  @ObjectProperty()
   @Transform(({ obj }) => {
     if (obj.orderDir && obj.orderBy) {
       return { [obj.orderBy]: obj.orderDir };
