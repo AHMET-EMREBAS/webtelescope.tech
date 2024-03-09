@@ -43,6 +43,7 @@ export function printPropertyDecoratorOptions(property: PropertyDefinition) {
     return `${required}${unique}`;
   }
 }
+
 export function printPropertyDecorator(property: PropertyDefinition) {
   const name = toPropertyDecoratorName(property);
   const options = printPropertyDecoratorOptions(property);

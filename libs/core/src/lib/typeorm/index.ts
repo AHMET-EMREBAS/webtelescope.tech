@@ -76,7 +76,7 @@ export function Relation(options: RelationOptions): PropertyDecorator {
   throw new Error(`Relation type ${options.type} is not found! `);
 }
 
-export type ColumnOptions = __ColumnOptions & {
+export type ColumnOptions = Omit<__ColumnOptions, 'type' | 'nullable'> & {
   type: 'string' | 'number' | 'date' | 'boolean' | 'object' | 'hash';
   required?: boolean;
 };

@@ -1,0 +1,7 @@
+import { Dto, Property } from '@webpackages/core';
+
+@Dto()
+export class Create<%- className %>Dto {
+  @Property()
+  name!: string;
+}
