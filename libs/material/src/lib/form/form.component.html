@@ -1,0 +1,21 @@
+{{ formGroup.value | json }}
+
+<form [formGroup]="formGroup" style="padding: 20px">
+  <wt-text-input
+    [formGroup]="formGroup"
+    inputName="name"
+    label="Name label"
+    prefixIcon="home"
+    suffixIcon="person"
+  ></wt-text-input>
+
+  <wt-autocomplete-input
+    prefixIcon="home"
+    suffixIcon="person"
+    [formGroup]="formGroup"
+    visibleKey="name"
+    [options]="options"
+    label="Autocomplete Label"
+    inputName="category"
+  ></wt-autocomplete-input>
+</form>

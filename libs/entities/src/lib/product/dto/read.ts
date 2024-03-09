@@ -6,7 +6,7 @@ import {
 } from '@webpackages/core';
 
 @Dto()
-export class ReadDto {
+export class ReadProductDto {
   @NumberProperty() id!: string;
   @TextProperty() name!: string;
   @DateProperty() createdAt!: Date;
