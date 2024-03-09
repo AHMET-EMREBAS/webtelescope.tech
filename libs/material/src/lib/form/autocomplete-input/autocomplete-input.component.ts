@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonInputComponent } from '../common';
-import { Observable, debounceTime, map, scheduled, startWith } from 'rxjs';
+import { Observable, debounceTime, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'wt-autocomplete-input',
