@@ -6,6 +6,7 @@ import {
   NotFoundException,
   NotImplementedException,
   Query,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ClassConstructor } from 'class-transformer';
@@ -21,7 +22,10 @@ import {
   RemoveRelationDto,
   SetRelationDto,
   UnsetRelationDto,
+  toFindManyOptions,
 } from '../dtos';
+
+const ValidateAndTransformPipe = new ValidationPipe({ transform: true });
 
 export function getResourceController(
   options: ResourceMetadata
@@ -36,8 +40,9 @@ export function getResourceController(
     ) {}
 
     @HTTP.FindAll()
-    findAll(@Query() query: QueryDto) {
-      return this.repo.find(query);
+    findAll(@Query(ValidateAndTransformPipe) query: QueryDto) {
+      const options = toFindManyOptions(query);
+      return this.repo.find(options);
     }
 
     @HTTP.FindOneByID()
@@ -50,22 +55,25 @@ export function getResourceController(
     }
 
     @HTTP.SaveOne()
-    saveOne(@Body() entity: any) {
+    saveOne(@Body(ValidateAndTransformPipe) entity: any) {
       return this.repo.save(entity);
     }
 
     @HTTP.SaveMany()
-    saveMany(@Body() entities: any) {
+    saveMany(@Body(ValidateAndTransformPipe) entities: any) {
       return this.repo.save(entities);
     }
 
     @HTTP.UpdateOne()
-    updateOne(@IdParam() id: number, @Body() entity: any) {
+    updateOne(
+      @IdParam() id: number,
+      @Body(ValidateAndTransformPipe) entity: any
+    ) {
       return this.repo.update(id, entity);
     }
 
     @HTTP.UpdateMany()
-    upateMany(@Body() entities: any[]) {
+    upateMany(@Body(ValidateAndTransformPipe) entities: any[]) {
       throw new NotImplementedException();
     }
 
@@ -85,7 +93,9 @@ export function getResourceController(
     }
 
     @HTTP.AddRelation()
-    async addRelation(@Query() relation: AddRelationDto) {
+    async addRelation(
+      @Query(ValidateAndTransformPipe) relation: AddRelationDto
+    ) {
       return await this.repo
         .createQueryBuilder()
         .relation(relation.relationName)
@@ -94,7 +104,9 @@ export function getResourceController(
     }
 
     @HTTP.RemoveRelation()
-    async removeRelation(@Query() relation: RemoveRelationDto) {
+    async removeRelation(
+      @Query(ValidateAndTransformPipe) relation: RemoveRelationDto
+    ) {
       return await this.repo
         .createQueryBuilder()
         .relation(relation.relationName)
@@ -103,7 +115,9 @@ export function getResourceController(
     }
 
     @HTTP.SetRelation()
-    async setRelation(@Query() relation: SetRelationDto) {
+    async setRelation(
+      @Query(ValidateAndTransformPipe) relation: SetRelationDto
+    ) {
       return await this.repo
         .createQueryBuilder()
         .relation(relation.relationName)
@@ -112,7 +126,9 @@ export function getResourceController(
     }
 
     @HTTP.UnsetRelation()
-    async unsetRelation(@Query() relation: UnsetRelationDto) {
+    async unsetRelation(
+      @Query(ValidateAndTransformPipe) relation: UnsetRelationDto
+    ) {
       return await this.repo
         .createQueryBuilder()
         .relation(relation.relationName)
