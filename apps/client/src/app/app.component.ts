@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
-import { FormComponent } from '@webpackages/material';
+
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, FormComponent],
+  imports: [CommonModule, RouterModule],
   selector: 'wt-root',
-  template: `<wt-form></wt-form><router-outlet></router-outlet>`,
+  template: `<div class="wt w-200px bw-10px bs-solid  mxs:fs-20em-1000ms">Hello</div>
+    <router-outlet></router-outlet>`,
 })
 export class AppComponent {}
