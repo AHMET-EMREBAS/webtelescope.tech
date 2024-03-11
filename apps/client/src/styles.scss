@@ -9,7 +9,6 @@
 @include mat.core();
 
 @import './styles.font.scss';
-@import './styles.util.scss';
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -54,10 +53,4 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   font-size: 16px;
   zoom: 0.8;
-}
-
-@media (width < 400px) {
-  body {
-    border: 3px solid red;
-  }
 }
