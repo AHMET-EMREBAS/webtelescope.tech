@@ -32,6 +32,11 @@ export type ColumnOptions = {
   hash?: boolean;
 };
 
+/**
+ * Convert column type into compatible column type.
+ * @param type
+ * @returns
+ */
 export function parseColumnType(type: PropertyType): __ColumnType {
   return type === 'string'
     ? 'varchar'
@@ -45,10 +50,6 @@ export function parseColumnType(type: PropertyType): __ColumnType {
     ? 'varchar'
     : 'varchar';
 }
-
-// export function isNullableColumn(required?: boolean) {
-//   return required === true ? false : true;
-// }
 
 export function parseCommonColumnOptions(
   options: ColumnOptions
