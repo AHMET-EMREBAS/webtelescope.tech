@@ -1,0 +1,40 @@
+{
+  "name": "route-builder",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/route-builder/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/route-builder",
+        "main": "libs/route-builder/src/index.ts",
+        "tsConfig": "libs/route-builder/tsconfig.lib.json",
+        "assets": ["libs/route-builder/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs route-builder {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/route-builder/**/*.ts",
+          "libs/route-builder/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/route-builder/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

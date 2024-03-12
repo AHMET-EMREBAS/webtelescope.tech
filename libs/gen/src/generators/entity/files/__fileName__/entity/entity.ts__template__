@@ -1,7 +1,0 @@
-import { BaseEntity, Entity, Column } from '@webpackages/core';
-
-@Entity()
-export class <%- className %> extends BaseEntity {
-  @Column({ type: 'string', required: true })
-  name!: string;
-}
