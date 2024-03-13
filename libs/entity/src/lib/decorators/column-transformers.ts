@@ -2,6 +2,10 @@
 import { ColumnOptions } from 'typeorm';
 import { hashSync, genSaltSync } from 'bcrypt';
 
+/**
+ * Save date value as string and read as Date object
+ * @returns
+ */
 export function DateTransformer(): Pick<ColumnOptions, 'transformer'> {
   return {
     transformer: {
@@ -15,6 +19,10 @@ export function DateTransformer(): Pick<ColumnOptions, 'transformer'> {
   };
 }
 
+/**
+ * Save object value as JSON string and read as Object
+ * @returns
+ */
 export function ObjectTransformer(): Pick<ColumnOptions, 'transformer'> {
   return {
     transformer: {
@@ -28,6 +36,10 @@ export function ObjectTransformer(): Pick<ColumnOptions, 'transformer'> {
   };
 }
 
+/**
+ * Save column value as hash
+ * @returns
+ */
 export function HashTransformer(): Pick<ColumnOptions, 'transformer'> {
   return {
     transformer: {
@@ -41,6 +53,10 @@ export function HashTransformer(): Pick<ColumnOptions, 'transformer'> {
   };
 }
 
+/**
+ * Do not do anything
+ * @returns
+ */
 export function NoneTransformer(): Pick<ColumnOptions, 'transformer'> {
   return {
     transformer: {

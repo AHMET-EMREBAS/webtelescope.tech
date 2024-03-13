@@ -179,7 +179,7 @@ export class RouteBuilder {
    * @param pluralName Plural route
    */
   constructor(
-    protected readonly singularName: string,
-    protected readonly pluralName: string
+    public readonly singularName: string,
+    public readonly pluralName: string
   ) {}
 }

@@ -22,6 +22,11 @@ import {
 } from 'class-validator';
 import { parseValidationOptions } from './common-property';
 
+/**
+ * Validate string format like email, password, uuid etc.
+ * @param options
+ * @returns
+ */
 export function IsStringFormat(
   options: Pick<StringPropertyOptions, 'format' | 'isArray'>
 ) {
@@ -54,6 +59,11 @@ export function IsStringFormat(
   return applyDecorators(...decorators);
 }
 
+/**
+ * Text property decorator
+ * @param options
+ * @returns
+ */
 export function TextProperty(options: StringPropertyOptions) {
   const decorators: PropertyDecorator[] = [];
 

@@ -3,6 +3,11 @@ import { parseValidationOptions } from './common-property';
 import { applyDecorators } from '@nestjs/common';
 import { IsInt, Max, Min } from 'class-validator';
 
+/**
+ * Number property decorator
+ * @param options
+ * @returns
+ */
 export function NumberProperty(
   options: NumberPropertyOptions = { type: 'number', required: false }
 ) {

@@ -6,9 +6,14 @@ export interface ObjectLiteral {
 export declare type ClassConstructor<T> = {
   new (...args: any[]): T;
 };
-
+/**
+ * Used both property and colum type
+ */
 export type PropertyType = 'string' | 'number' | 'date' | 'boolean' | 'object';
 
+/**
+ * Available format validations
+ */
 export type StringFormat =
   | 'email'
   | 'password'
@@ -30,9 +35,11 @@ export type StringFormat =
 
 export type CommonPropertyOptions<T extends PropertyType> = {
   type: T;
+  inQuery?: boolean;
   required?: boolean;
   unique?: boolean;
   isArray?: boolean;
+  default?: any;
 };
 
 export type PickKeysOf<T, K extends keyof T> = Partial<Pick<T, K>>;
@@ -53,7 +60,7 @@ export type NumberPropertyOptions = CommonPropertyOptions<'number'> & {
 export type BooleanPropertyOptions = CommonPropertyOptions<'boolean'>;
 export type DatePropertyOptions = CommonPropertyOptions<'date'>;
 export type ObjectPropertyOptions = CommonPropertyOptions<'object'> & {
-  target: ClassConstructor<any>;
+  target?: ClassConstructor<any>;
 };
 
 export type PropertyOptions =

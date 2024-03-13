@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PropertyOptions as PO } from '@webpackages/common';
 import { Dto, Property } from './property';
 import { plainToInstance } from 'class-transformer';

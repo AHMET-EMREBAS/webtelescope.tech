@@ -6,6 +6,12 @@ import { TextProperty } from './text-property';
 import { NumberProperty } from './number-property';
 import { Exclude } from 'class-transformer';
 
+/**
+ * Dto property decorator.
+ * Define validations and descriptions of dto property.
+ * @param options
+ * @returns
+ */
 export function Property(
   options: PropertyOptions = { type: 'string', required: false }
 ) {
