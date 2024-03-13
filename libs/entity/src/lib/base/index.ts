@@ -1,4 +1,4 @@
-// @index('./*', f => `export * from '${f.path}'`)
+// @index(['./*', '!./*.spec.ts'], f => `export * from '${f.path}'`)
 export * from './base-entity'
 export * from './blog-entity'
 export * from './contact-entity'

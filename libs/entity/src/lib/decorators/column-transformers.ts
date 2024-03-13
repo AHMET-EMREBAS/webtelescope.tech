@@ -5,11 +5,11 @@ import { hashSync, genSaltSync } from 'bcrypt';
 export function DateTransformer(): Pick<ColumnOptions, 'transformer'> {
   return {
     transformer: {
-      from(value) {
-        return new Date(value);
+      from(value: string) {
+        return value && new Date(value);
       },
       to(value: Date) {
-        return value.toISOString();
+        return value && value.toISOString();
       },
     },
   };

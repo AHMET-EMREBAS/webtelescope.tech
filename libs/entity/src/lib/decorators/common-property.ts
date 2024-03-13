@@ -1,7 +1,7 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { PropertyOptions } from '@webpackages/common';
-import { Type } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import {
   IsBoolean,
   IsDate,
@@ -25,7 +25,7 @@ export function parseValidationOptions(
 export function CommonPropertyDecorators(
   options: PropertyOptions
 ): PropertyDecorator {
-  const decorators: PropertyDecorator[] = [ApiProperty(options)];
+  const decorators: PropertyDecorator[] = [Expose(), ApiProperty(options)];
   const required = options.required;
   const type = options.type;
   const vo: ValidationOptions = parseValidationOptions(options);

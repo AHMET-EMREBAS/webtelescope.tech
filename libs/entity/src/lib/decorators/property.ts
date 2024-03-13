@@ -4,6 +4,7 @@ import { PropertyOptions } from '@webpackages/common';
 import { CommonPropertyDecorators } from './common-property';
 import { TextProperty } from './text-property';
 import { NumberProperty } from './number-property';
+import { Exclude } from 'class-transformer';
 
 export function Property(
   options: PropertyOptions = { type: 'string', required: false }
@@ -25,4 +26,8 @@ export function Property(
   }
 
   return applyDecorators(...decorators);
+}
+
+export function Dto() {
+  return Exclude();
 }

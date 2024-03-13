@@ -15,7 +15,6 @@ import { ClassConstructor } from 'class-transformer';
 import {
   DateTransformer,
   HashTransformer,
-  NoneTransformer,
   ObjectTransformer,
 } from './column-transformers';
 import { PropertyType } from '@webpackages/common';
@@ -51,6 +50,11 @@ export function parseColumnType(type: PropertyType): __ColumnType {
     : 'varchar';
 }
 
+/**
+ * Normalize column options.
+ * @param options
+ * @returns
+ */
 export function parseCommonColumnOptions(
   options: ColumnOptions
 ): __ColumnOptions {
@@ -59,9 +63,6 @@ export function parseCommonColumnOptions(
     type: parseColumnType(options.type),
     nullable: !options.required,
     unique: !!options.unique,
-    transformer: options.hash
-      ? HashTransformer().transformer
-      : NoneTransformer().transformer,
   };
 
   return columnOptions;
@@ -81,7 +82,11 @@ export function BooleanColumn(options: Omit<ColumnOptions, 'type'>) {
 
 export function DateColumn(options: Omit<ColumnOptions, 'type'>) {
   return __Column(
-    parseCommonColumnOptions({ ...options, ...DateTransformer(), type: 'date' })
+    parseCommonColumnOptions({
+      ...options,
+      ...DateTransformer(),
+      type: 'date',
+    })
   );
 }
 
@@ -95,9 +100,21 @@ export function ObjectColumn(options: Omit<ColumnOptions, 'type'>) {
   );
 }
 
+export function HashColumn(options: Omit<ColumnOptions, 'type'>) {
+  return __Column(
+    parseCommonColumnOptions({
+      ...options,
+      ...HashTransformer(),
+      type: 'string',
+    })
+  );
+}
+
 export function Column(
   options: ColumnOptions = { type: 'string' }
 ): PropertyDecorator {
+  if (options.hash) return HashColumn(options);
+
   return options.type === 'string'
     ? TextColumn(options)
     : options.type === 'boolean'
