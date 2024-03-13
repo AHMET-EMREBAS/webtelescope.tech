@@ -37,27 +37,35 @@ export function QueryParamTransformer(options: PropertyOptions) {
   const type = options.type;
   const defaultValue =
     options.default !== undefined ? options.default : undefined;
+  const __isArray = options.isArray;
+
   return Transform(({ value }) => {
     if (type === 'string') {
-      return value !== undefined ? value : defaultValue;
-    } else if (type === 'boolean')
-      return value === 'true' ? true : value === 'false' ? false : defaultValue;
-    else if (type === 'date') {
+      const result = value !== undefined ? value : defaultValue;
+      return __isArray ? (!isArray(result) ? [result] : result) : result;
+    } else if (type === 'boolean') {
+      const result =
+        value === 'true' ? true : value === 'false' ? false : defaultValue;
+      return __isArray ? (!isArray(result) ? [result] : result) : result;
+    } else if (type === 'date') {
       if (isDateString(value)) {
-        return new Date(value);
+        const result = new Date(value);
+        return __isArray ? (!isArray(result) ? [result] : result) : result;
       }
       return defaultValue;
     } else if (type === 'number') {
-      return isNumberString(value) ? parseFloat(value) : defaultValue;
+      const result = isNumberString(value) ? parseFloat(value) : defaultValue;
+      return __isArray ? (!isArray(result) ? [result] : result) : result;
     } else if (type === 'object') {
       if (value) {
         if (isString(value)) {
           const [k, v] = value.split(':');
           if (k && v) {
-            return { [k]: v };
+            const result = { [k]: v };
+            return __isArray ? (!isArray(result) ? [result] : result) : result;
           }
         } else if (isArray(value)) {
-          return value
+          const result = value
             .map((e) => {
               const [k, v] = e.split(':');
               if (k && v) {
@@ -69,6 +77,7 @@ export function QueryParamTransformer(options: PropertyOptions) {
             .reduce((p, c) => {
               return { ...p, ...c };
             });
+          return __isArray ? (!isArray(result) ? [result] : result) : result;
         }
         return defaultValue;
       }
@@ -121,7 +130,6 @@ export function WhereQueryTransformer(options: PropertyOptions) {
       return value
         .map((e) => {
           if (e) {
-            console.log('From Array: ', e);
             const wq = parseWhereQuery(e);
             if (wq) {
               return createWhereQueryOperator(wq);

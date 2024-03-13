@@ -31,7 +31,12 @@ export function parseValidationOptions(
 export function CommonPropertyDecorators(
   options: PropertyOptions
 ): PropertyDecorator {
-  const decorators: PropertyDecorator[] = [Expose(), ApiProperty(options)];
+  const nullable = options.required !== undefined ? !options.required : true;
+
+  const decorators: PropertyDecorator[] = [
+    Expose(),
+    ApiProperty({ ...options, nullable, required: !nullable }),
+  ];
   const required = options.required;
   const type = options.type;
 

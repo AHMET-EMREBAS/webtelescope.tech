@@ -1,37 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ClassConstructor } from 'class-transformer';
 import { Delete, Get, Post, Put, applyDecorators } from '@nestjs/common';
 import { RouteBuilder } from '@webpackages/route-builder';
 import {
+  ApiBody,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiQuery,
   ApiUnauthorizedResponse,
   ApiUnprocessableEntityResponse,
+  PickType,
 } from '@nestjs/swagger';
+import { ResourceControllerOptions } from './controller-options';
 
-export type ControllerMethodsOptions = {
-  singularName: string;
-  pluralName: string;
-  entity: ClassConstructor<any>;
-  createDto: ClassConstructor<any>;
-  updateDto: ClassConstructor<any>;
-  readDto: ClassConstructor<any>;
-};
-
-export class ControllerMethods {
+export class ResourceControllerMethods {
   readonly routes = new RouteBuilder(
     this.options.singularName,
     this.options.pluralName
   );
 
-  constructor(protected readonly options: ControllerMethodsOptions) {}
+  constructor(protected readonly options: ResourceControllerOptions) {}
 
   FIND_ALL() {
     return applyDecorators(
       ApiOperation({ summary: 'Find all entities by query.' }),
-      ApiOkResponse({ description: 'Success' }),
+      ApiOkResponse({
+        type: this.options.readDto,
+        isArray: true,
+        description: 'Success',
+      }),
+      ApiQuery({ type: this.options.queryDto }),
       ApiUnprocessableEntityResponse({ description: 'Invalid query options.' }),
       ApiUnauthorizedResponse({ description: 'Unautorized user.' }),
       ApiInternalServerErrorResponse({ description: 'Unexpected errors.' }),
@@ -42,7 +40,10 @@ export class ControllerMethods {
   FIND_ONE_BY_ID() {
     return applyDecorators(
       ApiOperation({ summary: 'Find one entity by id.' }),
-      ApiOkResponse({ description: 'Success' }),
+      ApiOkResponse({ type: this.options.readDto, description: 'Success' }),
+      ApiQuery({
+        type: PickType(this.options.queryDto, ['select', 'withDeleted']),
+      }),
       ApiNotFoundResponse({ description: 'Entity not found.' }),
       ApiUnauthorizedResponse({ description: 'Unautorized user.' }),
       ApiInternalServerErrorResponse({ description: 'Unexpected errors.' }),
@@ -52,8 +53,9 @@ export class ControllerMethods {
 
   CREATE() {
     return applyDecorators(
+      ApiBody({ type: this.options.createDto }),
       ApiOperation({ summary: 'Create one entity.' }),
-      ApiOkResponse({ description: 'Success' }),
+      ApiOkResponse({ type: this.options.readDto, description: 'Success' }),
       ApiUnprocessableEntityResponse({
         description: 'Input validation failed.',
       }),
@@ -65,6 +67,7 @@ export class ControllerMethods {
 
   UPDATE_ONE_BY_ID() {
     return applyDecorators(
+      ApiBody({ type: this.options.updateDto }),
       ApiOperation({ summary: 'Update one entity by id.' }),
       ApiOkResponse({ description: 'Success' }),
       ApiUnprocessableEntityResponse({
@@ -198,6 +201,7 @@ export class ControllerMethods {
   COUNT() {
     return applyDecorators(
       ApiOperation({ summary: 'Count entities by query' }),
+      ApiQuery({ type: this.options.queryDto }),
       ApiOkResponse({ description: 'Success' }),
       ApiUnauthorizedResponse({ description: 'Unautorized user.' }),
       ApiInternalServerErrorResponse({ description: 'Unexpected errors.' }),
