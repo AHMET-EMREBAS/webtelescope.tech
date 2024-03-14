@@ -1,20 +1,19 @@
 import { Module } from '@nestjs/common';
 
-import { AppController, Sample } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SampleModule, SampleSubscriber } from './__fileName__';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: './tmp/test/sample.sqlite',
-      entities: [Sample],
+      autoLoadEntities: true,
+      subscribers: [SampleSubscriber],
       synchronize: true,
       dropSchema: true,
     }),
-    TypeOrmModule.forFeature([Sample]),
+    SampleModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

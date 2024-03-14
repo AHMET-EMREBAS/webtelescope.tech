@@ -201,7 +201,7 @@ export class ResourceControllerMethods {
   COUNT() {
     return applyDecorators(
       ApiOperation({ summary: 'Count entities by query' }),
-      ApiQuery({ type: this.options.queryDto }),
+      ApiQuery({ type: PickType(this.options.queryDto, ['where']) }),
       ApiOkResponse({ description: 'Success' }),
       ApiUnauthorizedResponse({ description: 'Unautorized user.' }),
       ApiInternalServerErrorResponse({ description: 'Unexpected errors.' }),

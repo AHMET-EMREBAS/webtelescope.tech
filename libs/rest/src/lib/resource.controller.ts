@@ -51,7 +51,7 @@ export function BasicController(
     }
 
     @M.COUNT()
-    COUNT(@QueryParam(options.queryDto) queryDto: any) {
+    COUNT(@QueryParam(PickType(options.queryDto, ['where'])) queryDto: any) {
       return this.repo.count(queryDto);
     }
   }

@@ -6,8 +6,11 @@ import {
   WhereQueryTransformer,
 } from '../decorators/property-transformers';
 import { ClassConstructor } from 'class-transformer';
+import { BaseEntity } from './base-entity';
 
-export function CreateQueryDto(columns: string[] = []): ClassConstructor<any> {
+export function CreateQueryDto<T extends BaseEntity>(
+  columns: (keyof T)[] = []
+): ClassConstructor<any> {
   @Dto()
   class QueryDto {
     @Property({
@@ -37,7 +40,14 @@ export function CreateQueryDto(columns: string[] = []): ClassConstructor<any> {
     @Property({
       type: 'string',
       isArray: true,
-      enum: [...columns, 'id', 'createdAt', 'updatedAt', 'deletedAt', 'active'],
+      enum: [
+        ...columns,
+        'id',
+        'createdAt',
+        'updatedAt',
+        'deletedAt',
+        'active',
+      ] as string[],
     })
     @QueryParamTransformer({ type: 'string', isArray: true, default: [] })
     select?: any[];
