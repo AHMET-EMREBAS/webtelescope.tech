@@ -46,7 +46,15 @@ export class SessionService {
    * @param id Session id
    * @returns
    */
-  clear(id: number) {
+  clearSession(id: number) {
     return this.sessionRepo.delete(id);
+  }
+
+  async clearRecord(id: number, key: string) {
+    const found = await this.sessionView.find({ where: { id, key } });
+    if (found) {
+      const rids = found.map((e) => e.rid);
+      await this.recordRepo.delete(rids);
+    }
   }
 }

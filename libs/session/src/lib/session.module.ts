@@ -21,6 +21,7 @@ export class SessionModule {
       ],
       providers: [SessionService],
       exports: [
+        SessionService,
         getRepositoryToken(Session),
         getRepositoryToken(SessionRecord),
         getRepositoryToken(SessionView),

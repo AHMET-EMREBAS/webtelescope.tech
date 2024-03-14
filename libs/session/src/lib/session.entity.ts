@@ -7,14 +7,15 @@ import {
   Owner,
 } from '@webpackages/entity';
 import { ViewEntity, DataSource, ViewColumn } from 'typeorm';
+import { Time } from '@webpackages/time';
 
 @Entity()
 export class Session extends BaseEntity {
-  @Column({
-    type: 'date',
-    required: true,
-  })
-  expiration?: Date;
+  /**
+   * Duration milisecond, default is one month
+   */
+  @Column({ type: 'date', required: true, default: Time.month() })
+  expiration!: number;
 }
 
 @Entity()
@@ -29,7 +30,6 @@ export class SessionRecord extends IDEntity {
     return ds
       .createQueryBuilder()
       .select('s.id', 'id')
-
       .addSelect('r.key', 'key')
       .addSelect('r.value', 'value')
       .addSelect('r.id', 'rid')
