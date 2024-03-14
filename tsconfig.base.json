@@ -18,6 +18,7 @@
       "@webpackages/common": ["libs/common/src/index.ts"],
       "@webpackages/entity": ["libs/entity/src/index.ts"],
       "@webpackages/gen": ["libs/gen/src/index.ts"],
+      "@webpackages/graphql": ["libs/graphql/src/index.ts"],
       "@webpackages/resource": ["libs/resource/src/index.ts"],
       "@webpackages/rest": ["libs/rest/src/index.ts"],
       "@webpackages/route-builder": ["libs/route-builder/src/index.ts"]

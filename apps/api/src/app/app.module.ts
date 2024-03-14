@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ProductModule } from './product.module';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -11,7 +11,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       dropSchema: true,
     }),
-    ProductModule,
   ],
 })
 export class AppModule {}

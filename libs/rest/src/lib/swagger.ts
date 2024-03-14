@@ -1,24 +1,26 @@
-import { NestApplication } from '@nestjs/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export type SwaggerOptions = {
-  app: NestApplication;
+  appInstance: INestApplication;
   title: string;
   version: string;
   basePath: string;
-  tokenName: string;
+  authtokenName: string;
 };
+
 export function configureSwagger(options: SwaggerOptions) {
-  const { app, basePath, title, tokenName, version } = options;
+  const { appInstance, basePath, title, authtokenName, version } = options;
 
   const config = new DocumentBuilder()
     .setTitle(title)
     .setVersion(version)
     .setBasePath(basePath)
-    .addBearerAuth({ type: 'http' }, tokenName)
+    .addBearerAuth({ type: 'http' }, authtokenName)
     .build();
 
-  const doc = SwaggerModule.createDocument(app, config);
+  const doc = SwaggerModule.createDocument(appInstance, config);
 
-  SwaggerModule.setup('api', app, doc);
+  SwaggerModule.setup('api', appInstance, doc);
 }
