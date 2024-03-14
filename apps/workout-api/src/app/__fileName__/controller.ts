@@ -6,17 +6,14 @@ import {
   ReadSampleDto,
   UpdateSampleDto,
 } from './dto';
-import { Controller } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags(SampleController.name)
-@Controller()
 export class SampleController extends BasicController({
+  resourceName: 'SampleController',
+  singularName: 'sample',
+  pluralName: 'samples',
   entity: Sample,
   createDto: CreateSampleDto,
   readDto: ReadSampleDto,
   updateDto: UpdateSampleDto,
   queryDto: QuerySampleDto,
-  singularName: 'sample',
-  pluralName: 'samples',
 }) {}

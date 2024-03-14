@@ -1,1 +1,2 @@
-export * from './lib/resource.controller';
+// @index('./*', f => `export * from '${f.path}'`)
+export * from './lib'

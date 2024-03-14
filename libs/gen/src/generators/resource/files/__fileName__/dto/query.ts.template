@@ -1,0 +1,5 @@
+import { CreateQueryDto, Dto } from '@webpackages/entity';
+import { <%- className %> } from '../entity';
+
+@Dto()
+export class Query<%- className %>Dto extends CreateQueryDto<<%- className %>>(['name']) {}

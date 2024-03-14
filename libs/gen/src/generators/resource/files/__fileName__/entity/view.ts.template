@@ -1,0 +1,15 @@
+import { ViewEntity, DataSource, ViewColumn } from 'typeorm';
+import { <%- className %> } from './entity';
+
+@ViewEntity({
+  expression(ds: DataSource) {
+    return ds
+      .createQueryBuilder()
+      .select('main.id', 'id')
+      .from(<%- className %>, 'main');
+  },
+})
+export class <%- className %>View {
+  @ViewColumn() id!: number;
+
+}

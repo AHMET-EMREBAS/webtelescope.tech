@@ -1,0 +1,7 @@
+import { BaseEntity, Column, Entity } from '@webpackages/entity';
+
+@Entity()
+export class <%- className %> extends BaseEntity {
+  @Column({ type: 'string', unique: true, required: true })
+  name!: string;
+}

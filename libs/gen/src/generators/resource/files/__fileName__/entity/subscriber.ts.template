@@ -1,0 +1,21 @@
+import {
+  AfterInsert,
+  BeforeInsert,
+  EntitySubscriberInterface,
+  EventSubscriber,
+  InsertEvent,
+} from 'typeorm';
+import { <%- className %> } from './entity';
+
+@EventSubscriber()
+export class <%- className %>Subscriber implements EntitySubscriberInterface<<%- className %>> {
+  @AfterInsert()
+  afterInsert(event: InsertEvent<<%- className %>>) {
+    console.log('AfterInsert: ', event.entity);
+  }
+
+  @BeforeInsert()
+  beforeInsert(event: InsertEvent<<%- className %>>) {
+    console.log('BeforeInsert: ', event.entity);
+  }
+}

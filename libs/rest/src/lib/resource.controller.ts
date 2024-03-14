@@ -2,17 +2,22 @@
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { ResourceControllerMethods } from './methods';
+import { ResourceControllerMethods } from './resource-controller-methods';
 import { ResourceControllerOptions } from './controller-options';
 import { BodyParam, ParamId, QueryParam } from './param-decorators';
 import { ClassConstructor } from 'class-transformer';
-import { PickType } from '@nestjs/swagger';
+import { ApiTags, PickType } from '@nestjs/swagger';
+import { Controller } from '@nestjs/common';
+import { ResourceName } from './metadata';
 
 export function BasicController(
   options: ResourceControllerOptions
 ): ClassConstructor<any> {
   const M = new ResourceControllerMethods(options);
 
+  @ApiTags(options.resourceName)
+  @ResourceName(options.resourceName)
+  @Controller()
   class __ResourceController {
     constructor(
       @InjectRepository(options.entity) public readonly repo: Repository<any>
