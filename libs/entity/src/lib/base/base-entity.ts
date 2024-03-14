@@ -5,11 +5,11 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Column } from '../decorators';
+export class IDEntity {
+  @PrimaryGeneratedColumn() id!: number;
+}
 
-export class BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export class BaseEntity extends IDEntity {
   @CreateDateColumn()
   createdAt!: Date;
 
