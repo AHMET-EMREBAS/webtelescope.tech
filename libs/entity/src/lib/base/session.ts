@@ -6,6 +6,7 @@ import { User } from './user';
 
 @Entity()
 export class Session extends IDEntity {
+  @Column({ type: 'number' }) uid!: number;
   @Column({ type: 'object' }) user!: User;
 }
 
@@ -21,6 +22,7 @@ export class SessionRecord extends IDEntity {
     return ds
       .createQueryBuilder()
       .select('s.id', 'id')
+      .addSelect('s.uid', 'uid')
       .addSelect('r.id', 'rid')
       .addSelect('r.key', 'key')
       .addSelect('r.value', 'value')
@@ -30,6 +32,7 @@ export class SessionRecord extends IDEntity {
 })
 export class SessionView {
   @ViewColumn() id!: number;
+  @ViewColumn() uid!: number;
   @ViewColumn() rid!: number;
   @ViewColumn() key!: string;
   @ViewColumn() value!: string;

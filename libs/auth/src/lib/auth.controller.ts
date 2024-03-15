@@ -1,7 +1,7 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Session, Subscription, User } from '@webpackages/entity';
+import { Session, SessionView, Subscription, User } from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import { LoginDto, SignupDto } from './dto';
 
@@ -12,6 +12,7 @@ import {
   RequiredPermission,
   RequiredRole,
   SessionId,
+  UserData,
 } from './decorators';
 
 @ApiTags(AuthController.name)
@@ -21,6 +22,8 @@ export class AuthController {
     @InjectRepository(User) private readonly userRepo: Repository<User>,
     @InjectRepository(Session)
     private readonly sessionRepo: Repository<Session>,
+    @InjectRepository(SessionView)
+    private readonly sessionViewRepo: Repository<SessionView>,
     @InjectRepository(Subscription)
     private readonly subRepo: Repository<Subscription>
   ) {}
@@ -36,6 +39,15 @@ export class AuthController {
   @Post('logout')
   async logout(@SessionId() sessionId: number) {
     return await this.sessionRepo.delete(sessionId);
+  }
+
+  @Auth()
+  @Post('logout-from-all-devices')
+  async logoutFromAllDevices(@UserData() user: User) {
+    const sessions = await this.sessionViewRepo.find({
+      where: { uid: user.id },
+    });
+    return await this.sessionRepo.delete(sessions.map((e) => e.id));
   }
 
   @Public()
