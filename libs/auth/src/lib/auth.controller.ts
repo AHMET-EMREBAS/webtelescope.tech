@@ -76,7 +76,7 @@ export class AuthController {
     return 'You got the permission';
   }
 
-  @Post('test-permission')
+  @Post('test-role')
   @RequiredRole('test-role')
   testRole() {
     return 'You got the role!';

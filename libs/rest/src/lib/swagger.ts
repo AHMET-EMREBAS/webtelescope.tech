@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
-export const ACCESS_TOKEN_NAME = 'access-token';
+import { ACCESS_TOKEN_NAME } from '@webpackages/common';
 
 export type SwaggerOptions = {
   appInstance: INestApplication;

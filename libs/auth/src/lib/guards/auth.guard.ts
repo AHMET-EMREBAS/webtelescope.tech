@@ -15,7 +15,7 @@ import { Request } from 'express';
 import { SessionService } from '../session.service';
 import { Role, User } from '@webpackages/entity';
 import { ApiBearerAuth } from '@nestjs/swagger';
-
+import { ACCESS_TOKEN_NAME} from '@webpackages/common'
 export const PUBLIC_TOKEN = Symbol('Public Resource');
 
 /**
@@ -82,24 +82,20 @@ export class AuthGurad implements CanActivate {
     const req = ctx.switchToHttp().getRequest() as Request;
     const token = this.extractToken(req);
 
-    try {
-      const payload = (await this.jwt.verifyAsync(token)) as { sub: number };
-      const session = await this.sessionService.getSession(payload.sub);
-      if (session) {
-        (req as any).sessionId = session?.id;
-        (req as any).user = session.user;
+    const payload = (await this.jwt.verifyAsync(token)) as { sub: number };
+    const session = await this.sessionService.getSession(payload.sub);
+    if (session) {
+      (req as any).sessionId = session?.id;
+      (req as any).user = session.user;
 
-        if (this.isAdmin(session.user)) return true;
+      if (this.isAdmin(session.user)) return true;
 
-        this.checkUserHasRolesOrThrow(ctx, session.user.roles);
-        this.checkUserHasPermissionsOrThrow(ctx, session.user.roles);
+      this.checkUserHasRolesOrThrow(ctx, session.user.roles);
+      this.checkUserHasPermissionsOrThrow(ctx, session.user.roles);
 
-        return true;
-      }
-      return false;
-    } catch (err) {
-      return false;
+      return true;
     }
+    throw new UnauthorizedException('You do not have session!');
   }
 
   extractToken(req: Request) {
@@ -164,7 +160,7 @@ export class AuthGurad implements CanActivate {
 
         if (!foundPermission) {
           throw new UnauthorizedException(
-            'You do not have the required permission!'
+            'You do not have the required permission for this operation!'
           );
         }
       }
@@ -203,5 +199,5 @@ export class AuthGurad implements CanActivate {
  * @returns
  */
 export function Auth() {
-  return applyDecorators(ApiBearerAuth('access-token'), UseGuards(AuthGurad));
+  return applyDecorators(ApiBearerAuth(ACCESS_TOKEN_NAME), UseGuards(AuthGurad));
 }
