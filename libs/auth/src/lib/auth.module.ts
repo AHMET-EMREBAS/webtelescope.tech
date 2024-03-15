@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module, OnModuleInit } from '@nestjs/common';
+import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import {
   User,
   Role,
@@ -12,7 +12,7 @@ import {
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { v4 } from 'uuid';
-import { SessionService } from './session.service';
+import { Repository } from 'typeorm';
 
 const entities = [
   Subscription,
@@ -39,6 +39,16 @@ const entities = [
     TypeOrmModule.forFeature([...entities]),
   ],
   controllers: [AuthController],
-  providers: [SessionService],
 })
-export class AuthModule {}
+export class AuthModule implements OnModuleInit {
+  constructor(
+    @InjectRepository(User) private readonly userRepo: Repository<User>
+  ) {}
+
+  async onModuleInit() {
+    await this.userRepo.save({
+      username: 'user@email.com',
+      password: '!Password1',
+    });
+  }
+}

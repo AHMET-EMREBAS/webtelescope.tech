@@ -41,6 +41,7 @@ export type CommonPropertyOptions<T extends PropertyType> = {
   isArray?: boolean;
   default?: any;
   examples?: any;
+  defaultValue?: any;
 };
 
 export type PickKeysOf<T, K extends keyof T> = Partial<Pick<T, K>>;

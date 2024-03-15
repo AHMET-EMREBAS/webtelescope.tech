@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ACCESS_TOKEN_NAME } from '@webpackages/common';
+import { AUTH_NAME } from '@webpackages/common';
 
 export type SwaggerOptions = {
   appInstance: INestApplication;
@@ -17,7 +17,7 @@ export function configureSwagger(options: SwaggerOptions) {
     .setVersion(version || '1.0.0')
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      ACCESS_TOKEN_NAME
+      AUTH_NAME
     )
     .build();
 

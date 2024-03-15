@@ -35,7 +35,12 @@ export function CommonPropertyDecorators(
 
   const decorators: PropertyDecorator[] = [
     Expose(),
-    ApiProperty({ ...options, nullable, required: !nullable }),
+    ApiProperty({
+      ...options,
+      default: options.defaultValue || options.default,
+      nullable,
+      required: !nullable,
+    }),
   ];
   const required = options.required;
   const type = options.type;

@@ -3,67 +3,31 @@ import {
   CanActivate,
   ExecutionContext,
   Injectable,
-  SetMetadata,
   UnauthorizedException,
   UseGuards,
   applyDecorators,
-  createParamDecorator,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { SessionService } from '../session.service';
-import { Role, User } from '@webpackages/entity';
+import { Role, Session, User } from '@webpackages/entity';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { ACCESS_TOKEN_NAME} from '@webpackages/common'
-export const PUBLIC_TOKEN = Symbol('Public Resource');
-
-/**
- * Define public resource
- * @returns
- */
-export function Public() {
-  return SetMetadata(PUBLIC_TOKEN, true);
-}
-
-export const REQUIRED_PERMISSION_TOKEN = Symbol('REQUIRED_PERMISSION_TOKEN');
-
-export function RequiredPermission(permission: string) {
-  return SetMetadata(REQUIRED_PERMISSION_TOKEN, permission);
-}
-
-export const REQUIRED_ROLE_TOKEN = Symbol('REQUIRED_ROLE_TOKEN');
-
-export function RequiredRole(permission: string) {
-  return SetMetadata(REQUIRED_ROLE_TOKEN, permission);
-}
-
-/**
- * Get sesion id
- * @returns
- */
-export const SessionId = createParamDecorator(
-  (data: unknown, context: ExecutionContext) => {
-    return context.switchToHttp().getRequest().sessionId;
-  }
-);
-
-/**
- * Get sesion id
- * @returns
- */
-export const UserData = createParamDecorator(
-  (data: unknown, context: ExecutionContext) => {
-    return context.switchToHttp().getRequest().user as User;
-  }
-);
+import { AUTH_NAME } from '@webpackages/common';
+import {
+  PUBLIC_TOKEN,
+  REQUIRED_PERMISSION_TOKEN,
+  REQUIRED_ROLE_TOKEN,
+} from '../decorators';
+import { getTokenFromAutorizationHeader } from '../utils';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AuthGurad implements CanActivate {
   constructor(
     private readonly jwt: JwtService,
     private readonly reflector: Reflector,
-    private readonly sessionService: SessionService
+    @InjectRepository(Session) private readonly sessionRepo: Repository<Session>
   ) {}
 
   async canActivate(ctx: ExecutionContext) {
@@ -75,36 +39,28 @@ export class AuthGurad implements CanActivate {
       resourceClass,
     ]);
 
-    if (isPublic) {
-      return true;
-    }
+    if (isPublic) return true;
 
     const req = ctx.switchToHttp().getRequest() as Request;
-    const token = this.extractToken(req);
+    const token = getTokenFromAutorizationHeader(req);
+
+    if (!token) throw new UnauthorizedException('You do not have a session!');
 
     const payload = (await this.jwt.verifyAsync(token)) as { sub: number };
-    const session = await this.sessionService.getSession(payload.sub);
+    const session = await this.sessionRepo.findOneBy({ id: payload.sub });
+
     if (session) {
       (req as any).sessionId = session?.id;
       (req as any).user = session.user;
 
       if (this.isAdmin(session.user)) return true;
 
-      this.checkUserHasRolesOrThrow(ctx, session.user.roles);
-      this.checkUserHasPermissionsOrThrow(ctx, session.user.roles);
+      this.verifyRoles(ctx, session.user.roles);
+      this.verifyPermissions(ctx, session.user.roles);
 
       return true;
     }
     throw new UnauthorizedException('You do not have session!');
-  }
-
-  extractToken(req: Request) {
-    const [name, token] = req.headers.authorization?.split(' ') ?? [];
-    if (name === 'Bearer' && token) {
-      return token;
-    }
-
-    throw new UnauthorizedException('Access token is not provided!');
   }
 
   isAdmin(user: User) {
@@ -146,7 +102,7 @@ export class AuthGurad implements CanActivate {
    * @param userRoles
    * @returns
    */
-  checkUserHasPermissionsOrThrow(ctx: ExecutionContext, userRoles: Role[]) {
+  verifyPermissions(ctx: ExecutionContext, userRoles: Role[]) {
     const permissions = this.getMeta(ctx, REQUIRED_PERMISSION_TOKEN, 'merge');
 
     if (permissions.length > 0)
@@ -174,7 +130,7 @@ export class AuthGurad implements CanActivate {
    * @param userRoles
    * @returns
    */
-  checkUserHasRolesOrThrow(ctx: ExecutionContext, userRoles: Role[]) {
+  verifyRoles(ctx: ExecutionContext, userRoles: Role[]) {
     const __roles = this.getMeta(ctx, REQUIRED_ROLE_TOKEN, 'merge');
 
     if (__roles.length > 0)
@@ -199,5 +155,5 @@ export class AuthGurad implements CanActivate {
  * @returns
  */
 export function Auth() {
-  return applyDecorators(ApiBearerAuth(ACCESS_TOKEN_NAME), UseGuards(AuthGurad));
+  return applyDecorators(ApiBearerAuth(AUTH_NAME), UseGuards(AuthGurad));
 }

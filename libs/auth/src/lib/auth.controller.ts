@@ -1,67 +1,49 @@
-import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Subscription, User } from '@webpackages/entity';
+import { Session, Subscription, User } from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import { LoginDto, SignupDto } from './dto';
-import { compare } from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
-import { SessionService } from './session.service';
+
+import { Auth, BasicAuth } from './guards';
 import {
-  Auth,
+  AccessToken,
   Public,
   RequiredPermission,
   RequiredRole,
   SessionId,
-  UserData,
-} from './guards';
+} from './decorators';
 
-@Auth()
 @ApiTags(AuthController.name)
 @Controller('auth')
 export class AuthController {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>,
+    @InjectRepository(Session)
+    private readonly sessionRepo: Repository<Session>,
     @InjectRepository(Subscription)
-    private readonly subRepo: Repository<Subscription>,
-    private readonly sessionService: SessionService,
-    private readonly jwt: JwtService
+    private readonly subRepo: Repository<Subscription>
   ) {}
 
-  @Public()
+  @BasicAuth()
   @Post('login')
-  async login(@Body() loginDto: LoginDto) {
-    const { username, password } = loginDto;
-
-    const found = await this.userRepo.findOneBy({ username });
-
-    if (found) {
-      const match = await compare(password, found.password);
-      if (match) {
-        const session = await this.sessionService.createSession(found);
-
-        const token = await this.jwt.signAsync({ sub: session.id });
-
-        return { accessToken: token };
-      }
-    }
-    throw new UnauthorizedException();
+  @ApiBody({ type: LoginDto })
+  async login(@AccessToken() token: string) {
+    return { accessToken: token };
   }
 
+  @Auth()
   @Post('logout')
-  async logout(@SessionId() sessionId: number, @UserData() userPolicy: User) {
-    console.log(sessionId);
-    console.log(userPolicy);
-    return await this.sessionService.deleteSession(sessionId);
+  async logout(@SessionId() sessionId: number) {
+    return await this.sessionRepo.delete(sessionId);
   }
 
   @Public()
   @Post('signup')
-  async signup(@Body() sub: SignupDto) {
-    const savedSub = await this.subRepo.save(sub);
-    const savedUser = await this.userRepo.save(sub);
-
-    return await this.login(sub);
+  async signup(@Body(ValidationPipe) sub: SignupDto) {
+    await this.subRepo.save(sub);
+    await this.userRepo.save(sub);
+    return { message: 'Wellcome' };
   }
 
   @Post('reset-password')
