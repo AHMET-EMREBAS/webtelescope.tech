@@ -1,6 +1,6 @@
 import { Column, Entity, Relation } from '../decorators';
-import { BaseEntity } from './base-entity';
-import { User } from './user-entity';
+import { BaseEntity } from './base';
+import { User } from './user';
 
 @Entity()
 export class Contact extends BaseEntity {

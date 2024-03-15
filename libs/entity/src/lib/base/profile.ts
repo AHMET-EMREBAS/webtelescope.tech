@@ -1,6 +1,6 @@
 import { Column, Entity, Relation } from '../decorators';
-import { BaseEntity } from './base-entity';
-import { Image } from './image-entity';
+import { BaseEntity } from './base';
+import { Image } from './image';
 
 @Entity()
 export class Profile extends BaseEntity {

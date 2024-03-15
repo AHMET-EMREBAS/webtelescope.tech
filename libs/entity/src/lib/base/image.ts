@@ -1,5 +1,5 @@
 import { Column, Entity } from '../decorators';
-import { BaseEntity } from './base-entity';
+import { BaseEntity } from './base';
 
 @Entity()
 export class Image extends BaseEntity {

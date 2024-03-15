@@ -6,7 +6,7 @@ import {
   WhereQueryTransformer,
 } from '../decorators/property-transformers';
 import { ClassConstructor } from 'class-transformer';
-import { BaseEntity } from './base-entity';
+import { BaseEntity } from './base';
 
 export function CreateQueryDto<T extends BaseEntity>(
   columns: (keyof T)[] = []

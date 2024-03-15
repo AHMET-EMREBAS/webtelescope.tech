@@ -2,22 +2,24 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+export const ACCESS_TOKEN_NAME = 'access-token';
+
 export type SwaggerOptions = {
   appInstance: INestApplication;
-  title: string;
-  version: string;
-  basePath: string;
-  authtokenName: string;
+  title?: string;
+  version?: string;
 };
 
 export function configureSwagger(options: SwaggerOptions) {
-  const { appInstance, basePath, title, authtokenName, version } = options;
+  const { appInstance, title, version } = options;
 
   const config = new DocumentBuilder()
-    .setTitle(title)
-    .setVersion(version)
-    .setBasePath(basePath)
-    .addBearerAuth({ type: 'http' }, authtokenName)
+    .setTitle(title || 'Api')
+    .setVersion(version || '1.0.0')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      ACCESS_TOKEN_NAME
+    )
     .build();
 
   const doc = SwaggerModule.createDocument(appInstance, config);

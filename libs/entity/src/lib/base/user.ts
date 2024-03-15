@@ -1,6 +1,6 @@
-import { Column, Entity, Relation } from '../decorators';
-import { BaseEntity } from './base-entity';
-import { NameEntity } from './name-entity';
+import { Column, Entity, Many, Relation } from '../decorators';
+import { BaseEntity } from './base';
+import { NameEntity } from './name';
 
 @Entity()
 export class Permission extends NameEntity {}
@@ -19,6 +19,6 @@ export class User extends BaseEntity {
   @Column({ type: 'string', hash: true, required: true })
   password!: string;
 
-  @Column({ type: 'string' })
-  temp?: string;
+  @Many(Role)
+  roles!: Role[]
 }

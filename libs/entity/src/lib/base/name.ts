@@ -1,5 +1,5 @@
 import { Column } from '../decorators';
-import { BaseEntity } from './base-entity';
+import { BaseEntity } from './base';
 
 /**
  * Entity with unique & requried name property
