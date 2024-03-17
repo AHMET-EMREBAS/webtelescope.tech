@@ -4,7 +4,7 @@ import {
   parseWhereOption,
 } from '@webpackages/common';
 import { Transform } from 'class-transformer';
-import { ILike, LessThan, MoreThan } from 'typeorm';
+import { ILike, LessThan, MoreThan, MoreThanOrEqual } from 'typeorm';
 
 export function OrderTransformer() {
   return Transform(({ value }) => (value ? parseOrderOption(value) : null));
@@ -19,12 +19,16 @@ export function toFindOperator(option: IWhereOption) {
     return { [name]: ILike(`%${value}`) };
   } else if (operator === 'equals') {
     return { [name]: ILike(`${value}`) };
-  } else if (operator === 'greaterThan') {
-    return { [name]: MoreThan(value) };
+  } else if (operator === 'moreThan') {
+    return { [name]: MoreThan(parseFloat(value)) };
   } else if (operator === 'lessThan') {
-    return { [name]: LessThan(value) };
+    return { [name]: LessThan(parseFloat(value)) };
   } else if (operator === 'startsWith') {
     return { [name]: ILike(`${value}%`) };
+  } else if (operator === 'before') {
+    return { [name]: LessThan(new Date(parseFloat(value))) };
+  } else if (operator === 'after') {
+    return { [name]: MoreThanOrEqual(new Date(parseFloat(value))) };
   }
 
   return null;

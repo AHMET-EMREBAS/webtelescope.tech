@@ -16,6 +16,7 @@ export class SampleController {
   samples(@Query(new ValidationPipe({ transform: true })) query: QueryDto) {
     console.log(query);
 
+    console.log(query.where);
     return this.repo.find(query as any);
   }
 }

@@ -5,8 +5,10 @@ export type WhereOperator =
   | 'contains'
   | 'startsWith'
   | 'endsWith'
-  | 'greaterThan'
-  | 'lessThan';
+  | 'moreThan'
+  | 'lessThan'
+  | 'before'
+  | 'after';
 
 export interface IWhereOption {
   name: string;
