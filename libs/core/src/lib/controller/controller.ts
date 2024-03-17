@@ -1,4 +1,4 @@
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   applyDecorators,
   Delete,
@@ -19,9 +19,9 @@ export class ResourceController {
 
   Controller() {
     return applyDecorators(
+      Policy.Auth(),
       ApiTags(this.singularName),
-      NestController(),
-      ApiBearerAuth(Policy.ACCESS_TOKEN_NAME)
+      NestController()
     );
   }
 

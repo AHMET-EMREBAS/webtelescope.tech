@@ -24,7 +24,7 @@ export class User extends BaseEntity {
     type: 'varchar',
     transformer: {
       to(value) {
-        return hashSync(value, genSaltSync(8));
+        return value && hashSync(value, genSaltSync(8));
       },
       from(value) {
         return value;
@@ -36,4 +36,24 @@ export class User extends BaseEntity {
   @ManyToMany(() => Role, (r) => r.id, { eager: true })
   @JoinTable()
   roles!: Role[];
+}
+
+@Entity()
+export class Session extends BaseEntity {
+  @Column({ type: 'numeric' }) userId!: number;
+  @Column({
+    type: 'varchar',
+    transformer: {
+      to(value) {
+        return value && JSON.stringify(value);
+      },
+      from(value) {
+        return value && JSON.parse(value);
+      },
+    },
+  })
+  user!: User;
+
+  @Column({ type: 'varchar' })
+  token!: string;
 }

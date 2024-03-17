@@ -1,19 +1,25 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UseGuards,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { GuardHelper } from './guard-helper';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../user';
+import { Session, User } from '../user';
 
 @Injectable()
 export class AuthGuard extends GuardHelper implements CanActivate {
   constructor(
     reflector: Reflector,
     jwt: JwtService,
-    @InjectRepository(User) repo: Repository<User>
+    @InjectRepository(User) userRepo: Repository<User>,
+    @InjectRepository(Session) sessionRepo: Repository<Session>
   ) {
-    super(reflector, jwt, repo);
+    super(reflector, jwt, userRepo, sessionRepo);
   }
 
   async canActivate(ctx: ExecutionContext) {
@@ -21,17 +27,26 @@ export class AuthGuard extends GuardHelper implements CanActivate {
 
     const req = this.request(ctx);
 
-    const token = this.extractToken(req);
+    const token = this.tokenFromRequest(req);
 
     const payload = this.verifyToken(token);
 
-    this.isUserAuthorized(ctx);
-    
-    const user = await this.findUserById(payload.sub);
-    
+    const existingSession = await this.sessionById(payload.sub);
 
-    this.appendUserToRequest(ctx, user);
+    this.sessionToRequest(ctx, existingSession);
+
+    if (this.isAdmin(ctx)) return true;
+
+    this.isAuthorized(ctx);
 
     return true;
   }
+}
+
+/**
+ * Secure the resource
+ * @returns
+ */
+export function Auth() {
+  return UseGuards(AuthGuard);
 }

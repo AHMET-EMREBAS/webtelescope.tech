@@ -2,9 +2,12 @@
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { Policy } from '../decorators';
-import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { User } from '../user';
+import { Policy, USER_SESSION_NAME } from '../decorators';
+import {
+  ExecutionContext as EC,
+  UnauthorizedException as UA,
+} from '@nestjs/common';
+import { Session, User } from '../user';
 import { Repository } from 'typeorm';
 import { compareSync } from 'bcrypt';
 
@@ -12,113 +15,246 @@ export abstract class GuardHelper {
   constructor(
     protected readonly reflector: Reflector,
     protected readonly jwt: JwtService,
-    protected readonly repo: Repository<User>
+    protected readonly userRepo: Repository<User>,
+    protected readonly sessionRepo: Repository<Session>
   ) {}
 
+  /**
+   * Verify token
+   * @param token
+   * @returns
+   */
   protected verifyToken(token: string): { sub: number } {
     try {
       return this.jwt.verify(token);
     } catch (err) {
-      throw new UnauthorizedException('Invalid token!');
+      throw new UA('Invalid token');
     }
   }
 
-  protected extractToken(req: Request): string | never {
+  protected __tokenFromRequest(req: Request): string | undefined {
     const [, token] = req.headers.authorization?.split(' ') ?? [];
+    return token;
+  }
+  /**
+   * Extract bearer tokenn from authorization header.
+   * @param req
+   * @returns
+   */
+  protected tokenFromRequest(req: Request): string | never {
+    const token = this.__tokenFromRequest(req);
     if (token) {
       return token;
     } else {
-      throw new UnauthorizedException('You do not have a valid session!');
+      throw new UA('Access token is not provided');
     }
   }
 
-  protected permissions(ctx: ExecutionContext) {
+  protected __sessionFromRequest(ctx: EC): Session | undefined {
+    return ctx.switchToHttp().getRequest()[USER_SESSION_NAME];
+  }
+  /**
+   * Extract session value from request
+   * @param ctx
+   * @returns
+   */
+  protected sessionFromRequest(ctx: EC): Session | never {
+    const userSession = this.__sessionFromRequest(ctx);
+    if (userSession) return userSession;
+    throw new UA('Not extracted session');
+  }
+
+  /**
+   * Get required permissions
+   * @param ctx
+   * @returns
+   */
+  protected permissionsMeta(ctx: EC) {
     return this.reflector.getAllAndMerge(Policy.PERMISSION_METADATA_KEY, [
       ctx.getHandler(),
       ctx.getClass(),
     ]);
   }
 
-  protected roles(ctx: ExecutionContext) {
+  /**
+   * Get required roles
+   * @param ctx
+   * @returns
+   */
+  protected rolesMeta(ctx: EC) {
     return this.reflector.getAllAndMerge(Policy.ROLE_METADATA_KEY, [
       ctx.getHandler(),
       ctx.getClass(),
     ]);
   }
 
-  protected userEntity(ctx: ExecutionContext): User | never {
-    const user = ctx.switchToHttp().getRequest().user;
-    if (user) return user;
-    throw new UnauthorizedException('User information is not foudn!');
-  }
-
-  protected isPublic(ctx: ExecutionContext) {
+  /**
+   * Check the source is public or not
+   * @param ctx
+   * @returns
+   */
+  protected isPublic(ctx: EC) {
     return !!this.reflector.getAllAndOverride(Policy.PUBLIC_METADATA_KEY, [
       ctx.getHandler(),
       ctx.getClass(),
     ]);
   }
 
-  protected appendUserToRequest(ctx: ExecutionContext, user: User) {
-    ctx.switchToHttp().getRequest()['user'] = user;
+  /**
+   * Write session to request
+   * @param ctx
+   * @param session
+   */
+  protected sessionToRequest(ctx: EC, session: Session) {
+    ctx.switchToHttp().getRequest()[USER_SESSION_NAME] = session;
   }
 
-  protected async findUserByUsername(username: string): Promise<User> | never {
-    const found = await this.repo.findOneBy({ username });
-    if (found) {
-      return found;
-    }
-    throw new UnauthorizedException('User not found!');
-  }
-
+  /**
+   * Compare user password
+   * @param password
+   * @param hashValue
+   * @returns
+   */
   protected async comparePassword(password: string, hashValue: string) {
     if (compareSync(password, hashValue)) {
       return true;
     }
 
-    throw new UnauthorizedException('Wrong password!');
+    throw new UA('Wrong password');
   }
-  protected async findUserById(id: number): Promise<User> | never {
+
+  /**
+   * Find user by id
+   * @param id
+   * @returns
+   */
+  protected async userById(id: number): Promise<User> | never {
     try {
-      return await this.repo.findOneByOrFail({ id });
+      return await this.userRepo.findOneByOrFail({ id });
     } catch (err) {
-      throw new UnauthorizedException('User not found');
+      throw new UA('User not found');
     }
   }
 
-  protected request(ctx: ExecutionContext): Request {
+  /**
+   * Find user by username
+   * @param username
+   * @returns
+   */
+  protected async userByUsername(username: string): Promise<User> | never {
+    const found = await this.userRepo.findOneBy({ username });
+    if (found) {
+      return found;
+    }
+    throw new UA('User not found!');
+  }
+
+  /**
+   * Find session by id
+   * @param id
+   * @returns
+   */
+  protected async sessionById(id: number): Promise<Session> | never {
+    try {
+      return await this.sessionRepo.findOneByOrFail({ id });
+    } catch (err) {
+      throw new UA(`Session not found`);
+    }
+  }
+
+  /**
+   * Find session by user-id
+   * @param userId
+   * @returns
+   */
+  protected async sessionByUserId(userId: number): Promise<Session> | never {
+    const foundSession = await this.sessionRepo.findOneBy({ userId });
+
+    if (foundSession) {
+      return foundSession;
+    }
+
+    throw new UA('Session not found');
+  }
+
+  /**
+   * Create a new session, sign token, and return token
+   * @param user
+   * @returns
+   */
+  protected async newSession(user: User): Promise<string> | never {
+    const session = await this.sessionRepo.save({
+      userId: user.id,
+      user,
+      token: '',
+    });
+    const token = this.signToken(session.id);
+    await this.sessionRepo.update(session.id, { token });
+
+    return token;
+  }
+
+  /**
+   * Http request instance
+   * @param ctx
+   * @returns
+   */
+  protected request(ctx: EC): Request {
     return ctx.switchToHttp().getRequest() as Request;
   }
 
-  protected isUserAuthorized(ctx: ExecutionContext) {
-    const permissions = this.permissions(ctx);
-    const roles = this.roles(ctx);
-    const user = this.userEntity(ctx);
+  /**
+   * Check user has admin role.
+   * @param ctx
+   * @returns
+   */
+  protected isAdmin(ctx: EC) {
+    const { user } = this.sessionFromRequest(ctx);
+
+    if (user?.roles?.find((e) => e.name === 'admin')) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Check user have required permissions and roles
+   * @param ctx
+   */
+  protected isAuthorized(ctx: EC) {
+    const permissions = this.permissionsMeta(ctx);
+    const roles = this.rolesMeta(ctx);
+    const { user } = this.sessionFromRequest(ctx);
 
     for (const r of roles) {
       if (!user.roles.find((e) => e.name === r)) {
-        throw new UnauthorizedException(
-          'You are not authorized for this operation!'
-        );
+        throw new UA('You are not authorized for this operation!');
       }
     }
 
     for (const p of permissions) {
       if (!user.roles.find((e) => e.permissions.find((k) => k.name === p))) {
-        throw new UnauthorizedException(
-          'You are not authorized for this operation!'
-        );
+        throw new UA('You are not authorized for this operation');
       }
     }
   }
 
+  /**
+   * Sign session token
+   * @param sub
+   * @returns
+   */
   signToken(sub: number) {
     return this.jwt.sign({ sub });
   }
 
-  appendTokenToRequest(ctx: ExecutionContext, token: string) {
+  /**
+   * Write bearer token to http request
+   * @param ctx
+   * @param token
+   */
+  tokenToRequest(ctx: EC, token: string) {
     const req = this.request(ctx);
-    (req as any)[Policy.ACCESS_TOKEN_NAME] = token;
-    
+    (req as any)[Policy.BEARER_AUTH_NAME] = token;
   }
 }

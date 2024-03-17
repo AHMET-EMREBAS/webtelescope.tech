@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 /**
  * This is not a production server yet!
  * This is only a minimal backend to get started.
@@ -10,6 +11,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+
+import favicon from 'serve-favicon';
 
 export type BootstrapOptions = {
   appModule: ClassConstructor<unknown>;
@@ -48,6 +51,8 @@ export async function bootstrap(options: BootstrapOptions) {
   app.setGlobalPrefix(GLOBAL_PREFIX);
   app.use(helmet());
   app.enableCors({ origin: '*' });
+
+  app.use(favicon(join(__dirname, 'favicon.svg')));
 
   const config = new DocumentBuilder()
     .setTitle(appName)
