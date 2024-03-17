@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Post, Put, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {  ApiCreatedResponse, ApiOkResponse, ApiOperation} from '@nestjs/swagger';
 import { FindManyOptions, Repository } from 'typeorm';
 import { <%- className %> } from './entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,13 +9,12 @@ import {
   ParamId,
   API_BEARER_AUTH_NAME,
   DeleteResult,
-  UpdateResult
+  UpdateResult,
+  ResourceController
 } from '@webpackages/core';
 import { Read<%- className %>Dto, Update<%- className %>Dto, Create<%- className %>Dto } from './dto';
 
-@ApiTags('<%- className %>')
-@ApiBearerAuth(API_BEARER_AUTH_NAME)
-@Controller()
+@ResourceController('Todo')
 export class <%- className %>Controller {
   constructor(
     @InjectRepository(<%- className %>) private readonly repo: Repository<<%- className %>>
