@@ -46,7 +46,7 @@
         ],
         "scripts": [],
         "serviceWorker": true,
-        "ngswConfigPath": "apps/client/ngsw-config.json",
+        "ngswConfigPath": "apps/client/ngsw-config.json"
       },
       "configurations": {
         "production": {

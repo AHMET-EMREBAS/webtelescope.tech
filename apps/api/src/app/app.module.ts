@@ -1,16 +1,22 @@
-import { Controller, Get, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
-import { AuthModule } from '@webpackages/auth';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { SampleModule } from './sample';
 
-@Controller()
-class AppController {
-  @Get('hello')
-  get() {
-    return 'Hello there';
-  }
-}
 @Module({
-  imports: [AuthModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'better-sqlite3',
+      database: './tmp/app.sqlite',
+      autoLoadEntities: true,
+      synchronize: true,
+      dropSchema: true,
+    }),
+    SampleModule,
+  ],
   controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

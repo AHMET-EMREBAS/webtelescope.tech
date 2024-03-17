@@ -1,4 +1,0 @@
-# WebtelescopeTech
-
-Welcome to WebTelescope.
-
