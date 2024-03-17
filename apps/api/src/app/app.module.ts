@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SampleModule } from './sample';
+import { TodoModule } from './todo';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { SampleModule } from './sample';
       synchronize: true,
       dropSchema: true,
     }),
-    SampleModule,
+    TodoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
