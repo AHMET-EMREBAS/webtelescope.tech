@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBooleanString, IsNumberString, IsOptional } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IOrder, IQueryDto, IWhereOption } from '@webpackages/common';
 import {
-  IOrder,
-  IQueryDto,
-  IWhereOption,
-  ObjectLiteral,
-} from '@webpackages/common';
+  IntegerTransformer,
+  OrderTransformer,
+  WhereTransformer,
+} from '../transformer';
 
-export class QueryDto<T extends ObjectLiteral> implements IQueryDto<T> {
+export class QueryDto implements IQueryDto<IWhereOption, IOrder> {
   @ApiProperty({
     type: 'integer',
     minimum: 1,
@@ -15,7 +15,7 @@ export class QueryDto<T extends ObjectLiteral> implements IQueryDto<T> {
     nullable: true,
     default: 20,
   })
-  @IsNumberString()
+  @IntegerTransformer()
   @IsOptional()
   take = 20;
 
@@ -25,21 +25,41 @@ export class QueryDto<T extends ObjectLiteral> implements IQueryDto<T> {
     nullable: true,
     default: 0,
   })
-  @IsNumberString()
+  @IntegerTransformer()
   @IsOptional()
   skip = 0;
 
-  @ApiProperty({ type: 'string' })
-  order?: IOrder<T> = {};
-
-  @ApiProperty({ type: 'string' })
+  @ApiProperty({
+    type: 'string',
+    example: ['name:ASC', 'id:DESC'],
+    nullable: true,
+  })
+  @OrderTransformer()
   @IsOptional()
-  select?: (keyof T)[] = [];
+  order?: IOrder;
 
-  where?: IWhereOption<T>[] | undefined;
+  @ApiProperty({
+    type: 'string',
+    isArray: true,
+    example: ['id', 'name'],
+    nullable: true,
+  })
+  @IsString({ each: true })
+  @IsOptional()
+  select?: string[] | undefined;
+
+  @ApiProperty({
+    type: 'string',
+    isArray: true,
+    example: 'name:contain:value',
+    nullable: true,
+  })
+  @WhereTransformer()
+  @IsOptional()
+  where?: IWhereOption[] | undefined;
 
   @ApiProperty({ type: 'boolean', nullable: true, default: false })
-  @IsBooleanString()
+  @IsBoolean()
   @IsOptional()
-  withDeleted = false;
+  withDeleted?: boolean | undefined;
 }

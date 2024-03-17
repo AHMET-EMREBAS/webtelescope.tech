@@ -22,24 +22,24 @@ describe('Query', () => {
   });
 
   it('should parseOrderOption', () => {
-    const result = parseOrderOption(['name:ASC', 'id:ASC']);
-    expect(result).toStrictEqual({ name: 'ASC', id: 'ASC' } as IOrder<any>);
+    const result = parseOrderOption('name:ASC', 'id:ASC');
+    expect(result).toStrictEqual({ name: 'ASC', id: 'ASC' } as IOrder);
   });
 
   it('should parseWhereOption', () => {
-    const result = parseWhereOption(['name:contains:value', 'id:equals:1']);
+    const result = parseWhereOption('name:contains:value', 'id:equals:1');
 
     expect(result).toStrictEqual([
       {
         name: 'name',
         operator: 'contains',
         value: 'value',
-      } as IWhereOption<any>,
+      } as IWhereOption,
       {
         name: 'id',
         operator: 'equals',
         value: '1',
-      } as IWhereOption<any>,
-    ] as IWhereOption<any>[]);
+      } as IWhereOption,
+    ] as IWhereOption[]);
   });
 });
