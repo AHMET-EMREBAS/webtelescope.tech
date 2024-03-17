@@ -13,6 +13,10 @@ export class SampleModule implements OnModuleInit {
     @InjectRepository(Sample) private readonly repo: Repository<Sample>
   ) {}
   async onModuleInit() {
+    await this.repo.save({ name: 'first' });
     await this.repo.save({ name: 'some' });
+    await this.repo.save({ name: 'other' });
+    await this.repo.save({ name: 'first' });
+    await this.repo.save({ name: 'last' });
   }
 }

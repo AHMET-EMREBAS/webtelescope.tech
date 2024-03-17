@@ -1,13 +1,13 @@
 import { Transform } from 'class-transformer';
 
-export function NumberTransformer() {
+export function NumberTransformer(defaultValue?: number) {
   return Transform(({ value }) => {
-    return value ? parseFloat(value) : null;
+    return value ? parseFloat(value) : defaultValue;
   });
 }
 
-export function IntegerTransformer() {
+export function IntegerTransformer(defaultValue?: number) {
   return Transform(({ value }) => {
-    return value ? parseInt(value) : null;
+    return value ? parseInt(value) : defaultValue;
   });
 }

@@ -10,6 +10,27 @@ export type WhereOperator =
   | 'before'
   | 'after';
 
+export const whereOperatorList: Readonly<string[]> = [
+  'equals',
+  'contains',
+  'startsWith',
+  'endsWith',
+  'moreThan',
+  'lessThan',
+  'before',
+  'after',
+];
+
+const orderDirectionList: Readonly<string[]> = ['ASC', 'DESC', 'asc', 'desc'];
+
+export function isValidOperator(operator: string) {
+  return whereOperatorList.includes(operator);
+}
+
+export function isValidOrderDir(order: string) {
+  return orderDirectionList.includes(order);
+}
+
 export interface IWhereOption {
   name: string;
   operator: WhereOperator;
@@ -23,9 +44,13 @@ export interface IWhereOption {
  */
 export function parseWhereOption(...queryStrings: string[]) {
   const result = queryStrings
-    .map((queryString) => {
-      if (queryString) {
-        const [name, operator, value] = queryString.split(':');
+    .map((qs) => {
+      if (qs) {
+        const [name, operator, value] = qs.split(':');
+
+        if (!isValidOperator(operator)) {
+          return undefined;
+        }
         if (name && operator && value) {
           return {
             name,
@@ -34,14 +59,14 @@ export function parseWhereOption(...queryStrings: string[]) {
           } as IWhereOption;
         }
       }
-      return null;
+      return undefined;
     })
     .filter((e) => e);
 
   if (result.length > 0) {
     return result;
   }
-  return null;
+  return undefined;
 }
 
 /**
@@ -54,10 +79,13 @@ export function toWhereString(whereOptions: IWhereOption[]) {
     const whereQuery = whereOptions
       .map((where) => {
         const { name, operator, value } = where;
+        if (!isValidOperator(operator)) {
+          return undefined;
+        }
         if (name && operator && value) {
           return `where=${String(name)}:${operator}:${value}`;
         }
-        return null;
+        return undefined;
       })
       .filter((e) => e)
       .join('&');
@@ -82,13 +110,17 @@ export function parseOrderOption(...queryStrings: string[]) {
       .map((queryString) => {
         if (queryString) {
           const [name, order] = queryString.split(':');
+
+          if (!isValidOrderDir(order)) {
+            return undefined;
+          }
           if (name && order) {
             return {
               [name]: order,
             } as IOrder;
           }
         }
-        return null;
+        return undefined;
       })
       .filter((e) => e);
 
@@ -99,7 +131,7 @@ export function parseOrderOption(...queryStrings: string[]) {
     }
   }
 
-  return null;
+  return undefined;
 }
 
 /**

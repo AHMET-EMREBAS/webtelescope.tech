@@ -1,9 +1,9 @@
-import { Controller, Get, Query, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Repository } from 'typeorm';
 import { Sample } from './entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QueryDto } from '@webpackages/core';
+import { QueryDto, Validate } from '@webpackages/core';
 
 @ApiTags('Sample')
 @Controller()
@@ -13,9 +13,8 @@ export class SampleController {
   ) {}
 
   @Get('samples')
-  samples(@Query(new ValidationPipe({ transform: true })) query: QueryDto) {
+  samples(@Query(Validate()) query: QueryDto) {
     console.log(query);
-
     console.log(query.where);
     return this.repo.find(query as any);
   }

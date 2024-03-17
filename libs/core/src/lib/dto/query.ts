@@ -1,65 +1,79 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString, Max } from 'class-validator';
 import { IOrder, IQueryDto, IWhereOption } from '@webpackages/common';
 import {
+  BooleanTransformer,
   IntegerTransformer,
   OrderTransformer,
+  StringOrArrayTransformer,
   WhereTransformer,
 } from '../transformer';
+import { Exclude, Expose } from 'class-transformer';
 
+@Exclude()
 export class QueryDto implements IQueryDto<IWhereOption, IOrder> {
+  @Expose()
   @ApiProperty({
     type: 'integer',
     minimum: 1,
     maximum: 100,
-    nullable: true,
+    required: false,
     default: 20,
   })
-  @IntegerTransformer()
+  @Max(200)
+  @IntegerTransformer(20)
   @IsOptional()
-  take = 20;
+  take?: number;
 
+  @Expose()
   @ApiProperty({
     type: 'integer',
     minimum: 0,
-    nullable: true,
+    required: false,
     default: 0,
   })
   @IntegerTransformer()
   @IsOptional()
-  skip = 0;
+  skip?: number;
 
+  @Expose()
   @ApiProperty({
     type: 'string',
+    isArray: true,
     example: ['name:ASC', 'id:DESC'],
-    nullable: true,
+    required: false,
   })
   @OrderTransformer()
   @IsOptional()
-  order?: IOrder;
+  order?: IOrder[];
 
+  @Expose()
   @ApiProperty({
     type: 'string',
     isArray: true,
     example: ['id', 'name'],
-    nullable: true,
+    required: false,
   })
   @IsString({ each: true })
+  @StringOrArrayTransformer()
   @IsOptional()
-  select?: string[] | undefined;
+  select?: string[];
 
+  @Expose()
   @ApiProperty({
     type: 'string',
     isArray: true,
     example: 'name:contain:value',
-    nullable: true,
+    required: false,
   })
   @WhereTransformer()
   @IsOptional()
-  where?: IWhereOption[] | undefined;
+  where?: IWhereOption[];
 
-  @ApiProperty({ type: 'boolean', nullable: true, default: false })
+  @Expose()
+  @ApiProperty({ type: 'boolean', required: false, default: false })
+  @BooleanTransformer()
   @IsBoolean()
   @IsOptional()
-  withDeleted?: boolean | undefined;
+  withDeleted?: boolean;
 }
