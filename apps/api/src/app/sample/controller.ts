@@ -1,5 +1,4 @@
-import { Body, Controller, Delete, Get, Put, Query } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Query } from '@nestjs/common';
 import { FindManyOptions, Repository } from 'typeorm';
 import { Sample } from './entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,38 +6,39 @@ import {
   QueryDto,
   Validate,
   ParamId,
-  API_BEARER_AUTH_NAME,
+  ResourceController,
 } from '@webpackages/core';
-import { UpdateSampleDto } from './dto';
+import { CreateSampleDto, UpdateSampleDto } from './dto';
 
-@ApiTags('Sample')
-@ApiBearerAuth(API_BEARER_AUTH_NAME)
-@Controller()
+const C = new ResourceController('sample', 'samples');
+
+@C.Controller()
 export class SampleController {
   constructor(
     @InjectRepository(Sample) private readonly repo: Repository<Sample>
   ) {}
 
-  @ApiOperation({ summary: 'Query samples.' })
-  @Get('samples')
+  @C.Create()
+  create(@Body(Validate()) entity: CreateSampleDto) {
+    return this.repo.save(entity);
+  }
+
+  @C.Query()
   find(@Query(Validate()) query: QueryDto) {
     return this.repo.find(query as FindManyOptions<Sample>);
   }
 
-  @ApiOperation({ summary: 'Find sample by id.' })
-  @Get('sample/:id')
+  @C.FindById()
   findOneById(@ParamId() id: number) {
     return this.repo.findOneBy({ id });
   }
 
-  @ApiOperation({ summary: 'Update sample.' })
-  @Put('sample/:id')
+  @C.Update()
   update(@ParamId() id: number, @Body(Validate()) entity: UpdateSampleDto) {
     return this.repo.update(id, entity);
   }
 
-  @ApiOperation({ summary: 'Delete sample' })
-  @Delete('sample/:id')
+  @C.Delete()
   delete(@ParamId() id: number) {
     return this.repo.delete(id);
   }

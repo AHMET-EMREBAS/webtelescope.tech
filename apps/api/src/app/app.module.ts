@@ -16,6 +16,7 @@ import { TodoModule } from './todo';
       dropSchema: true,
     }),
     TodoModule,
+    SampleModule
   ],
   controllers: [AppController],
   providers: [AppService],
