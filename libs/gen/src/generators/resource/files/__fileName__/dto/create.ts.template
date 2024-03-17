@@ -1,7 +1,0 @@
-import { Dto, Property } from '@webpackages/entity';
-
-@Dto()
-export class Create<%- className %>Dto {
-  @Property({ type: 'string', required: true })
-  name!: string;
-}

@@ -1,6 +1,0 @@
-import { PartialType } from '@nestjs/swagger';
-import { Dto } from '@webpackages/entity';
-import { Create<%- className %>Dto } from './create';
-
-@Dto()
-export class Update<%- className %>Dto extends PartialType(Create<%- className %>Dto) {}
