@@ -149,10 +149,10 @@ export function toOrderString(obj: IOrder) {
   return '';
 }
 
-export interface IQueryDto<Where = string, Order = string> {
+export interface IQueryDto<T,Where = string, Order = string> {
   take?: number;
   skip?: number;
-  select?: string[] | string;
+  select?: keyof T[] | keyof T;
   where?: Where[] | Where;
   order?: Order[] | Order;
   withDeleted?: boolean;

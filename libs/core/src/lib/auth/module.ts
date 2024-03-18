@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   DynamicModule,
   Global,
@@ -7,14 +8,16 @@ import {
 } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './controller';
-import { InjectRepository as Inc, TypeOrmModule } from '@nestjs/typeorm';
+import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { Permission, Role, Session, User } from './user';
 import { Repository as Repo } from 'typeorm';
-import { ClassConstructor as CC } from 'class-transformer';
-import { PermissionAction, createPermission } from './decorators';
+import { ClassConstructor } from 'class-transformer';
+
+import { AuthService } from './service';
+import { OperationNames, createPermission } from './policy';
 
 export type AuthModuleOptions = {
-  resourceEntities: CC<any>[];
+  resourceEntities: ClassConstructor<any>[];
   roleNames: string[];
   root: RootUser;
 };
@@ -27,14 +30,16 @@ export type RootUser = {
   username: string;
   password: string;
 };
+
 @Global()
 @Module({})
 export class AuthModule implements OnModuleInit {
   constructor(
-    @Inc(User) private readonly userRepo: Repo<User>,
-    @Inc(Role) private readonly roleRepo: Repo<Role>,
-    @Inc(Permission) private readonly perRepo: Repo<Permission>,
-    @Inject(RESOURCE_ENTITIES) private readonly resEntities: CC<any>[],
+    @InjectRepository(User) private readonly userRepo: Repo<User>,
+    @InjectRepository(Role) private readonly roleRepo: Repo<Role>,
+    @InjectRepository(Permission) private readonly perRepo: Repo<Permission>,
+    @Inject(RESOURCE_ENTITIES)
+    private readonly resEntities: ClassConstructor<any>[],
     @Inject(ROLE_NAMES) private readonly roleNames: string[],
     @Inject(ROOT_USER) private readonly rootUser: RootUser
   ) {}
@@ -54,6 +59,7 @@ export class AuthModule implements OnModuleInit {
       ],
       controllers: [AuthController],
       providers: [
+        AuthService,
         {
           provide: RESOURCE_ENTITIES,
           useValue: options.resourceEntities,
@@ -69,6 +75,7 @@ export class AuthModule implements OnModuleInit {
       ],
       exports: [
         JwtModule,
+        AuthService,
         TypeOrmModule.forFeature([User, Role, Permission, Session]),
       ],
     };
@@ -80,9 +87,9 @@ export class AuthModule implements OnModuleInit {
         'read',
         'update',
         'delete',
-      ] as PermissionAction[]) {
+      ] as OperationNames[]) {
         await this.perRepo.save({
-          name: createPermission(actionName, resourceEntity.name),
+          name: createPermission(resourceEntity.name, actionName),
         });
       }
     }

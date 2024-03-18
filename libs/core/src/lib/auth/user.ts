@@ -2,6 +2,10 @@ import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { BaseEntity } from '../entity';
 import { hashSync, genSaltSync } from 'bcrypt';
 
+export type SessionPayload = {
+  sub: number;
+};
+
 @Entity()
 export class Permission extends BaseEntity {
   @Column({ type: 'varchar', unique: true }) name!: string;
@@ -52,8 +56,18 @@ export class Session extends BaseEntity {
       },
     },
   })
-  user!: User;
+  roles!: string[];
 
-  @Column({ type: 'varchar' })
-  token!: string;
+  @Column({
+    type: 'varchar',
+    transformer: {
+      to(value) {
+        return value && JSON.stringify(value);
+      },
+      from(value) {
+        return value && JSON.parse(value);
+      },
+    },
+  })
+  permissions!: string[];
 }

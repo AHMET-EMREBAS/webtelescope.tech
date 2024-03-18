@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 import { IsBoolean, IsOptional, IsString, Max } from 'class-validator';
 import { IOrder, IQueryDto, IWhereOption } from '@webpackages/common';
 import {
@@ -11,7 +11,9 @@ import {
 import { Exclude, Expose } from 'class-transformer';
 
 @Exclude()
-export class QueryDto implements IQueryDto<IWhereOption, IOrder> {
+export class QueryDto<T = unknown>
+  implements IQueryDto<T, IWhereOption, IOrder>
+{
   @Expose()
   @ApiProperty({
     type: 'integer',
@@ -35,7 +37,6 @@ export class QueryDto implements IQueryDto<IWhereOption, IOrder> {
   @IntegerTransformer()
   @IsOptional()
   skip?: number;
-
   @Expose()
   @ApiProperty({
     type: 'string',
@@ -57,7 +58,7 @@ export class QueryDto implements IQueryDto<IWhereOption, IOrder> {
   @IsString({ each: true })
   @StringOrArrayTransformer()
   @IsOptional()
-  select?: string[];
+  select?: keyof T[];
 
   @Expose()
   @ApiProperty({
@@ -77,3 +78,31 @@ export class QueryDto implements IQueryDto<IWhereOption, IOrder> {
   @IsOptional()
   withDeleted?: boolean;
 }
+
+@Exclude()
+export class SingleQueryDto<T> {
+  @Expose()
+  @ApiProperty({
+    type: 'string',
+    isArray: true,
+    example: ['id', 'name'],
+    required: false,
+  })
+  @IsString({ each: true })
+  @StringOrArrayTransformer()
+  @IsOptional()
+  select?: (keyof T)[];
+
+  @Expose()
+  @ApiProperty({ type: 'boolean', required: false, default: false })
+  @BooleanTransformer()
+  @IsBoolean()
+  @IsOptional()
+  withDeleted?: boolean;
+}
+
+@Exclude()
+export class CountQueryDto extends PickType(QueryDto, [
+  'where',
+  'withDeleted',
+]) {}
