@@ -22,6 +22,8 @@ export class AuthGuard implements CanActivate {
     );
     this.authService.userHasRolesOrThrow(session.roles, requiredRoles);
 
+    this.authService.appendSessionToRequest(ctx, session);
+
     return true;
   }
 }

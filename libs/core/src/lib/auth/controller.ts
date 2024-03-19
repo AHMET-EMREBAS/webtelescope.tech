@@ -2,26 +2,28 @@ import { Body, Controller, Post } from '@nestjs/common';
 import {
   ApiOkResponse,
   ApiOperation,
-  ApiResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Validate } from '../pipe';
 
-import { Session } from './user';
+import { Session, User } from './user';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BearerAccess, CredentialAccess, SessionAccess } from './guards';
 import { AuthHeaderParam, SessionParam } from './params';
-import { LoginDto, AccessTokenDto } from './dto';
-import { DeleteResult } from '../dto';
+import { LoginDto, AccessTokenDto, UpdatePasswordDto } from './dto';
+import { DeleteResult, UpdateResult } from '../dto';
+import { BodyParam } from '../controller';
 
 @ApiTags('Auth')
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
   constructor(
-    @InjectRepository(Session) private readonly sessionRepo: Repository<Session>
+    @InjectRepository(Session)
+    private readonly sessionRepo: Repository<Session>,
+    @InjectRepository(User) private readonly userRepo: Repository<User>
   ) {}
 
   @ApiOperation({ summary: 'Login with username and password' })
@@ -59,5 +61,17 @@ export class AuthController {
   @Post('has-session')
   hasSession() {
     return true;
+  }
+
+  @ApiOperation({ summary: 'Update password' })
+  @ApiOkResponse({ type: UpdateResult })
+  @ApiUnauthorizedResponse()
+  @Post('update-password')
+  updatePassword(
+    @SessionParam() session: Session,
+    @BodyParam() passwordDto: UpdatePasswordDto
+  ) {
+    console.log(session);
+    return this.userRepo.update(session.userId, passwordDto);
   }
 }

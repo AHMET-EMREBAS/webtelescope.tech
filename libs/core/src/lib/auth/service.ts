@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session, SessionPayload, User } from './user';
 import { Repository } from 'typeorm';
@@ -98,11 +99,16 @@ export class AuthService {
     this.request(ctx).headers.authorization = token;
   }
 
+  appendSessionToRequest(ctx: ExecutionContext, session: Session) {
+    (this.request(ctx) as any)[AuthEnums.SESSION] = session;
+  }
+
   extractUsernameAndPassworFromBody(ctx: ExecutionContext) {
     const { username, password } = this.request(ctx).body;
     if (username && password) return { username, password };
     return undefined;
   }
+  
   extractUsernameAndPassworFromBodyThrow(ctx: ExecutionContext) {
     const credentials = this.extractUsernameAndPassworFromBody(ctx);
     if (credentials) return credentials;

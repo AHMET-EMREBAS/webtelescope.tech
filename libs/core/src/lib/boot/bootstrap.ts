@@ -53,7 +53,7 @@ export async function bootstrap(options: BootstrapOptions) {
   app.use(helmet());
   app.enableCors({ origin: '*' });
 
-  app.use(favicon(join(__dirname, 'favicon.svg')));
+  app.use(favicon(join(__dirname, 'public', 'favicon.ico')));
 
   const config = new DocumentBuilder()
     .setTitle(appName)
@@ -64,11 +64,17 @@ export async function bootstrap(options: BootstrapOptions) {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    customfavIcon: './favicon.ico',
+    customSiteTitle: appName,
+    explorer: true,
+    yamlDocumentUrl: 'api-yaml',
+    jsonDocumentUrl: 'api-json',
+  });
 
   await app.listen(port);
 
   Logger.log(
-    `🚀 Application is running on: http://${host}:${port}/${GLOBAL_PREFIX}`
+    `🚀 ${appName} application is running on: http://${host}:${port}/${GLOBAL_PREFIX}`
   );
 }

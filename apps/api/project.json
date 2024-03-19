@@ -18,7 +18,8 @@
         "tsConfig": "apps/api/tsconfig.app.json",
         "assets": [
           "apps/api/src/assets",
-          "apps/api/src/favicon.svg"
+          "apps/api/src/public",
+          "apps/api/src/emails"
         ],
         "isolatedConfig": true,
         "webpackConfig": "apps/api/webpack.config.js"

@@ -37,6 +37,7 @@ export function CredentialAccess() {
 export function SessionAccess() {
   return applyDecorators(
     ApiBearerAuth(AuthEnums.BEARER),
+    PublicAccess(),
     UseGuards(SessionGuard)
   );
 }

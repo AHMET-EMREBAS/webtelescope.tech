@@ -9,6 +9,7 @@ import {
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
 import { IBaseEntity } from '@webpackages/common';
+import { EmailComponent } from '@webpackages/material';
 
 export interface Sample extends IBaseEntity {
   name: string;
@@ -23,9 +24,10 @@ export class SampleService extends EntityCollectionServiceBase<Sample> {
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, EmailComponent],
   selector: 'wt-root',
-  template: `<router-outlet></router-outlet>`,
+  template: ` <wt-email></wt-email>
+    <router-outlet></router-outlet>`,
   providers: [SampleService],
 })
 export class AppComponent implements OnInit {

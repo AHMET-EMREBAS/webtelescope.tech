@@ -17,7 +17,8 @@
     "paths": {
       "@webpackages/common": ["libs/common/src/index.ts"],
       "@webpackages/core": ["libs/core/src/index.ts"],
-      "@webpackages/gen": ["libs/gen/src/index.ts"]
+      "@webpackages/gen": ["libs/gen/src/index.ts"],
+      "@webpackages/material": ["libs/material/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
