@@ -20,7 +20,6 @@ import { DeleteResult, UpdateResult } from '../dto';
 import { BodyParam, QueryParam } from '../controller';
 import { ForgotPasswordDto } from './dto/forgot-password';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { PublicAccess } from './policy';
 import { AuthEvents } from './auth-events';
 import { LoginWithCodeDto } from './dto/login-with-code';
 import { AuthService } from './service';
@@ -91,8 +90,9 @@ export class AuthController {
     @BodyParam() __: ForgotPasswordDto,
     @UserParam() user: User
   ) {
-    const { id, securityCode } =
-      await this.authService.createSecurityCodeOrThrow(user);
+    const { securityCode } = await this.authService.createSecurityCodeOrThrow(
+      user
+    );
     this.eventEmitter.emit(AuthEvents.FORGOT_PASSWORD_EVENT, {
       username: user.username,
       securityCode,
