@@ -1,4 +1,4 @@
-import { Global, Module, OnModuleInit } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,7 +7,7 @@ import { SampleModule } from './sample';
 import { TodoModule } from './todo';
 import {
   AuthModule,
-  EmailModule,
+  EmailClustorModule,
   EmailService,
   InjectEmailService,
   getAppNameToken,
@@ -17,12 +17,10 @@ import {
   provideCompanyName,
   provideDomainName,
 } from '@webpackages/core';
-import { Todo } from './todo/entity';
-import { Sample } from './sample/entity';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
-const [user, pass] = process.env['INFO_EMAIL'].split('|||') ?? [];
+const [, pass] = process.env['INFO_EMAIL'].split('|||') ?? [];
 
 @Global()
 @Module({
@@ -40,12 +38,29 @@ export class CommonModule {}
 @Module({
   imports: [
     CommonModule,
-    EmailModule.configure({
-      auth: {
-        user,
-        pass,
-      },
-      templateName: 'verify',
+    EmailClustorModule.configure({
+      host: 'smtp.titan.email',
+      templates: [
+        [
+          'promotions@webtelescope.tech',
+          pass,
+          'Web Telescope Promotions',
+          'promotions',
+        ],
+        // [
+        //   'security@webtelescope.tech',
+        //   pass,
+        //   'Verify Your Email Addresss',
+        //   'verify',
+        // ],
+        // [
+        //   'security@webtelescope.tech',
+        //   pass,
+        //   'Reset Password',
+        //   'reset-password',
+        // ],
+        // ['career@webtelescope.tech', pass, 'Careers', 'career'],
+      ],
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, 'public'),
@@ -58,34 +73,277 @@ export class CommonModule {}
       synchronize: true,
       dropSchema: true,
     }),
-    AuthModule.configure({
-      resourceEntities: [Todo, Sample],
-      roleNames: ['admin'],
-      root: {
-        username: 'root@webtelescope.tech',
-        password: '!Password1',
-      },
-    }),
+    AuthModule,
     TodoModule,
     SampleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements OnModuleInit {
+export class AppModule {
   constructor(
-    @InjectEmailService('verify') private readonly email: EmailService
-  ) {}
-
-  async onModuleInit() {
-    const result = await this.email.send({
-      message: 'Hello there',
-      subject: 'Verify Email',
-      to: 'aemrebas.dev@gmail.com',
-      token: 'token goes here.',
-      securityCode: 'code goes here',
-    });
-
-    console.log(result);
+    @InjectEmailService('promotions') private readonly promotions: EmailService
+  ) {
+    this.promotions
+      .send({
+        subject: 'New Products',
+        to: 'aemrebas.dev@gmail.com',
+        text: 'We try to send our product list',
+        data: {
+          title: 'Promotions',
+          message: 'Here are some products you might interested in.',
+          domain: 'webtelescope.tech',
+          company: 'Web Telescope Inc',
+          items: [
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+            {
+              title: 'Product title 1',
+              subTitle: 'Sub title',
+              content: 'Content ',
+              href: 'href',
+              imgSrc:
+                'https://ahmet-emrebas.github.io/assets/icons/icon-512x512.png',
+            },
+          ],
+        },
+      })
+      .then();
   }
 }

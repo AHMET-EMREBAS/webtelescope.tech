@@ -8,6 +8,11 @@ import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
 import { compareSync } from 'bcrypt';
 import { AuthEnums } from './enums';
+import {
+  getRequiredPermissions,
+  getRequiredRoles,
+  isPublicAccess,
+} from './policy';
 
 export class AuthService {
   constructor(
@@ -108,7 +113,7 @@ export class AuthService {
     if (username && password) return { username, password };
     return undefined;
   }
-  
+
   extractUsernameAndPassworFromBodyThrow(ctx: ExecutionContext) {
     const credentials = this.extractUsernameAndPassworFromBody(ctx);
     if (credentials) return credentials;
@@ -134,21 +139,15 @@ export class AuthService {
   }
 
   isPublic(ctx: ExecutionContext) {
-    return this.getAllAndOverride(ctx, AuthEnums.PUBLIC);
+    return isPublicAccess(this.reflector, ctx);
   }
 
   requiredPermissions(ctx: ExecutionContext) {
-    return this.reflector.getAllAndMerge(AuthEnums.PERMISSION, [
-      ctx.getHandler(),
-      ctx.getClass(),
-    ]);
+    return getRequiredPermissions(this.reflector, ctx);
   }
 
   requiredRoles(ctx: ExecutionContext) {
-    return this.reflector.getAllAndMerge(AuthEnums.ROLE, [
-      ctx.getHandler(),
-      ctx.getClass(),
-    ]);
+    return getRequiredRoles(this.reflector, ctx);
   }
 
   userHasPermissions(userPermissions: string[], requiredPermissions: string[]) {

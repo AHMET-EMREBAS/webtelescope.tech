@@ -1,3 +1,12 @@
+<!-- 
+  export type CareerEmailTemplate = { 
+    title:string;
+    message:string;
+    domain:string;
+    company:string;
+    requirements:string[]
+  }
+ -->
 <div style="text-align: center; background-color: rgb(120, 138, 138)">
   <div
     class=""
@@ -20,14 +29,13 @@
       border-radius: 3em 10em 7em 5em;
     "
   >
+    <!--  -->
+    <%- include('partials/message', { title:data.title, message: data.message    }); -%>
 
-<!--  -->
-<%- include('partials/message', { title:data.title, message: data.message    }); -%>
+    <!--  -->
+    <%- include('partials/list', { title:'Requirements', items: data.items }); -%>
 
-
-<!--  -->
-<%- include('partials/footer', { domain:data.domain, company: data.company }); -%>
-
-
-</div>
+    <!--  -->
+    <%- include('partials/footer'); -%>
+  </div>
 </div>

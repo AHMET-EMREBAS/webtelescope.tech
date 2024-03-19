@@ -1,4 +1,8 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './permission'
-export * from './public'
-export * from './role'
+
+import { createMetadata } from '../../providers';
+
+export const [PublicAccess, isPublicAccess] = createMetadata();
+export const [SetPermission, getRequiredPermissions] = createMetadata(false);
+export const [SetRole, getRequiredRoles] = createMetadata(false);
+

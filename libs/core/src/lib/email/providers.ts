@@ -2,7 +2,7 @@ import { createTransport } from 'nodemailer';
 import { EmailAuth } from './email-auth';
 import { Inject, Provider } from '@nestjs/common';
 import { readFileSync } from 'fs';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { compile } from 'ejs';
 
 export function getEmailTransporter<T extends string = string>(
@@ -13,12 +13,13 @@ export function getEmailTransporter<T extends string = string>(
 
 export function provideEmailTransporter<T extends string = string>(
   templateName: T,
-  auth: EmailAuth
+  auth: EmailAuth,
+  host: string
 ): Provider {
   return {
     provide: getEmailTransporter(templateName),
     useValue: createTransport({
-      host: 'smtp.titan.email',
+      host,
       port: 465,
       secure: true,
       auth,
@@ -45,7 +46,12 @@ export function provideEmailTemplateFunction<T extends string = string>(
     join(__dirname, 'emails', templateName + '.ejs')
   ).toString();
 
-  const templateFunc = compile(content);
+  const templateFunc = compile(content, {
+    includer: (file) => {
+      const modifiedFilename = join(__dirname, 'emails', file + '.ejs');
+      return { filename: modifiedFilename };
+    },
+  });
 
   return {
     provide: getEmailTemplateFunctionToken(templateName),

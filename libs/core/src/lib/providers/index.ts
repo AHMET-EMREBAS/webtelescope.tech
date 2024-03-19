@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Inject, Provider } from '@nestjs/common';
+import {
+  CustomDecorator,
+  ExecutionContext,
+  Inject,
+  Provider,
+  SetMetadata,
+} from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { v4 } from 'uuid';
 
 export function createProviders(
@@ -26,3 +33,31 @@ export const [provideDomainName, InjectDomainName, getDomainNameToken] =
   createProviders('DOMAIN_NAME');
 export const [provideCompanyName, InjectCompanyName, getCompanyNameToken] =
   createProviders('COMPANY_NAME');
+
+export function createMetadata(
+  override = true
+): [
+  (value?: any) => CustomDecorator<any>,
+  (reflector: Reflector, ctx: ExecutionContext) => any
+] {
+  const token: string = v4();
+  return [
+    function set(value?: any) {
+      return SetMetadata(token, value !== undefined ? value : true);
+    },
+
+    function get(reflector: Reflector, ctx: ExecutionContext) {
+      if (override) {
+        return reflector.getAllAndOverride(token, [
+          ctx.getClass(),
+          ctx.getHandler(),
+        ]);
+      } else {
+        return reflector.getAllAndMerge(token, [
+          ctx.getClass(),
+          ctx.getHandler(),
+        ]);
+      }
+    },
+  ];
+}

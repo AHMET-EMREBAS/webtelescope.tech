@@ -1,0 +1,8 @@
+<div style="max-height: 800px; overflow-y: auto">
+  <% for(const item of items) { %>
+  <!--  -->
+  <%- include('partials/cardlist-item', { title: item.title, subTitle:
+  item.subTitle, content: item.content, href: item.href, imgSrc: item.imgSrc }) -%>
+  <!--  -->
+  <% } %>
+</div>

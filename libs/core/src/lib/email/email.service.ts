@@ -5,45 +5,32 @@ import {
   InjectEmailTemplateFunction,
   InjectEmailTransporter,
 } from './providers';
-import {
-  InjectAppName,
-  InjectCompanyName,
-  InjectDomainName,
-} from '../providers';
 
-export type EmailOptions = {
+export type EmailOptions<
+  T extends { [key: string]: unknown } = Record<string, unknown>
+> = {
   to: string;
   subject: string;
-  username: string;
-  message: string;
-  securityCode?: string;
-  token?: string;
-  asText?: string;
+  text?: string;
+  data?: T;
 };
 
 export class EmailService {
   constructor(
     private readonly transporter: Transporter,
     private readonly templateFunction: TemplateFunction,
-    private readonly companyName: string,
-    private readonly domain: string,
-    private readonly appName: string
+    private readonly from: string
   ) {}
   async send(options: EmailOptions) {
-    const { to, subject, asText, username } = options;
+    const { to, subject, text } = options;
 
-    const html = this.templateFunction({
-      ...options,
-      domain: this.domain,
-      appName: this.appName,
-      company: this.companyName,
-      username,
-    });
+    const html = this.templateFunction({ data: options.data });
 
     await this.transporter.sendMail({
       to,
+      from: this.from,
       subject,
-      text: asText ?? '',
+      text,
       html,
     });
   }
@@ -53,17 +40,17 @@ export function getEmailServiceToken(templateName: string) {
   return `${templateName}_EMAIL_SERVICE_TOKEN`;
 }
 
-export function provideEmailService(templateName: string): Provider {
+export function provideEmailService(
+  templateName: string,
+  from: string
+): Provider {
   class XEmailService extends EmailService {
     constructor(
       @InjectEmailTransporter(templateName) transporter: Transporter,
       @InjectEmailTemplateFunction(templateName)
-      templateFunction: TemplateFunction,
-      @InjectDomainName() domain: string,
-      @InjectAppName() appName: string,
-      @InjectCompanyName() companyName: string
+      templateFunction: TemplateFunction
     ) {
-      super(transporter, templateFunction, companyName, domain, appName);
+      super(transporter, templateFunction, from);
     }
   }
 
