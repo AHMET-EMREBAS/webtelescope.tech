@@ -1,4 +1,4 @@
-import { generateFiles, Tree } from '@nx/devkit';
+import { Tree, formatFiles, moveFilesToNewDirectory } from '@nx/devkit';
 
 import { EmailGeneratorSchema } from './schema';
 import { join } from 'path';
@@ -7,9 +7,11 @@ export async function emailGenerator(
   tree: Tree,
   options: EmailGeneratorSchema
 ) {
-  const projectRoot = `apps/${options.project}/src`;
+  console.log(options);
+  const projectRoot = `apps/${options.project}/src/app`;
 
-  generateFiles(tree, join(__dirname, 'files'), projectRoot, options);
+  moveFilesToNewDirectory(tree, join(__dirname, 'files', 'app'), projectRoot);
+  formatFiles(tree);
 }
 
 export default emailGenerator;
