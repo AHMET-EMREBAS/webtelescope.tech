@@ -24,6 +24,11 @@
       "factory": "./src/generators/template/generator",
       "schema": "./src/generators/template/schema.json",
       "description": "template generator"
+    },
+    "email": {
+      "factory": "./src/generators/email/generator",
+      "schema": "./src/generators/email/schema.json",
+      "description": "email generator"
     }
   }
 }
