@@ -1,16 +1,17 @@
-import { Tree, formatFiles, moveFilesToNewDirectory } from '@nx/devkit';
+import { Tree, formatFiles } from '@nx/devkit';
 
 import { EmailGeneratorSchema } from './schema';
 import { join } from 'path';
+import { cp } from 'fs/promises';
+import { cwd } from 'process';
 
 export async function emailGenerator(
   tree: Tree,
   options: EmailGeneratorSchema
 ) {
-  console.log(options);
-  const projectRoot = `apps/${options.project}/src/app`;
+  const projectRoot = join(cwd(), `apps/${options.project}/src`);
 
-  moveFilesToNewDirectory(tree, join(__dirname, 'files', 'app'), projectRoot);
+  await cp(join(__dirname, 'files'), projectRoot, { recursive: true });
   formatFiles(tree);
 }
 
