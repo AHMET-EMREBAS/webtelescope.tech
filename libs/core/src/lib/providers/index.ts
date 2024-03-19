@@ -9,10 +9,16 @@ import {
 import { Reflector } from '@nestjs/core';
 import { v4 } from 'uuid';
 
-export function createProviders(
-  prefix: string = ''
-): [(value: any) => Provider, () => ParameterDecorator, () => string] {
+/**
+ * Create provider, inject function, and getToken function.
+ * @param tokenPrefix Token prefix
+ * @returns
+ */
+export function createProvider<T>(
+  prefix: string
+): [(value: T) => Provider<T>, () => ParameterDecorator, () => string] {
   const token = prefix + v4();
+
   return [
     function provideIt(useValue: any): Provider {
       return {
@@ -28,11 +34,11 @@ export function createProviders(
 }
 
 export const [provideAppName, InjectAppName, getAppNameToken] =
-  createProviders('APP_NAME');
+  createProvider('APP_NAME');
 export const [provideDomainName, InjectDomainName, getDomainNameToken] =
-  createProviders('DOMAIN_NAME');
+  createProvider('DOMAIN_NAME');
 export const [provideCompanyName, InjectCompanyName, getCompanyNameToken] =
-  createProviders('COMPANY_NAME');
+  createProvider('COMPANY_NAME');
 
 export function createMetadata(
   override = true

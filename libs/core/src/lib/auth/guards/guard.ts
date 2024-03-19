@@ -5,6 +5,8 @@ import { AuthGuard } from './auth';
 import { LocalGuard } from './local';
 import { SessionGuard } from './session';
 import { PublicAccess } from '../policy';
+import { SecurityCodeGuard } from './security-code';
+import { UsernameGuard } from './username';
 
 /**
  * Authenticate and authorize users
@@ -40,4 +42,16 @@ export function SessionAccess() {
     PublicAccess(),
     UseGuards(SessionGuard)
   );
+}
+
+export function SecurityCodeAccess() {
+  return applyDecorators(
+    ApiBasicAuth('security-code'),
+    PublicAccess(),
+    UseGuards(SecurityCodeGuard)
+  );
+}
+
+export function UsernameAccess() {
+  return applyDecorators(PublicAccess(), UseGuards(UsernameGuard));
 }

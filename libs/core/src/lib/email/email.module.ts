@@ -2,6 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { EmailModuleOptions } from './email-auth';
 import {
   getEmailTemplateFunctionToken,
+  getEmailTransporterToken,
   provideEmailTemplateFunction,
   provideEmailTransporter,
 } from './providers';
@@ -19,9 +20,9 @@ export class EmailModule {
         provideEmailService(templateName, `"${emailTitle}" <${auth.user}>`),
       ],
       exports: [
+        getEmailTransporterToken(templateName),
         getEmailServiceToken(templateName),
         getEmailTemplateFunctionToken(templateName),
-        getEmailServiceToken(templateName),
       ],
     };
   }

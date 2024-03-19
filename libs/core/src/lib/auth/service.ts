@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
-import { Session, SessionPayload, User } from './user';
-import { Repository } from 'typeorm';
+import { Session, SessionPayload, SecurityCode, User } from './user';
+import { Equal, ILike, Like, Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { Request } from 'express';
@@ -13,12 +13,16 @@ import {
   getRequiredRoles,
   isPublicAccess,
 } from './policy';
+import { LoginWithCodeDto, UpdatePasswordDto } from './dto';
+import { v4 } from 'uuid';
 
 export class AuthService {
   constructor(
     @InjectRepository(User) protected readonly userRepo: Repository<User>,
     @InjectRepository(Session)
     protected readonly sessionRepo: Repository<Session>,
+    @InjectRepository(SecurityCode)
+    private readonly tokenRepo: Repository<SecurityCode>,
     protected readonly reflector: Reflector,
     protected readonly jwt: JwtService
   ) {}
@@ -33,6 +37,45 @@ export class AuthService {
     throw new UnauthorizedException('User not found!');
   }
 
+  async findUserById(id: number) {
+    return this.userRepo.findOneBy({ id });
+  }
+  async findUserByIdOrThrow(id: number) {
+    const found = await this.findUserById(id);
+    if (found) return found;
+    throw new UnauthorizedException('User not found by id!');
+  }
+
+  async updatePassword(userId: number, updatePasswordDto: UpdatePasswordDto) {
+    await this.findUserByIdOrThrow(userId);
+    return await this.userRepo.update(userId, {
+      password: updatePasswordDto.password,
+    });
+  }
+
+  async findUserBySecurityCode(securityCode: string) {
+    const all = await this.tokenRepo.find();
+    console.log(all);
+    console.log(`$${securityCode}$`);
+    const found = await this.tokenRepo.findOneBy({ securityCode });
+    console.log(found);
+
+    if (found) {
+      const user = found.user;
+      if (user) {
+        const id = user.id;
+        return await this.userRepo.findOneBy({ id });
+      }
+    }
+    return undefined;
+  }
+
+  async findUserBySecurityCodeOrThrow(securityCode: string) {
+    const user = await this.findUserBySecurityCode(securityCode);
+    if (user) return user;
+    throw new UnauthorizedException('Could not find user by security code!');
+  }
+
   comparePassword(password: string, hashPassword: string) {
     return compareSync(password, hashPassword);
   }
@@ -41,6 +84,17 @@ export class AuthService {
     if (this.comparePassword(password, hashPassword)) return true;
 
     throw new UnauthorizedException('Wrong password');
+  }
+
+  async createSecurityCode(user: User) {
+    const { id } = await this.tokenRepo.save({ securityCode: v4(), user });
+    return await this.tokenRepo.findOneBy({ id });
+  }
+
+  async createSecurityCodeOrThrow(user: User) {
+    const securityCode = await this.createSecurityCode(user);
+    if (securityCode) return securityCode;
+    throw new UnauthorizedException('Could not create security code!');
   }
 
   findSessionById(sessionId: number) {
@@ -53,7 +107,7 @@ export class AuthService {
     throw new UnauthorizedException('Session not found!');
   }
 
-  async createNewSession(user: User) {
+  async createSession(user: User) {
     const { id: userId, roles: userRoles } = user;
 
     const roles = userRoles.map((e) => e.name);
@@ -108,6 +162,22 @@ export class AuthService {
     (this.request(ctx) as any)[AuthEnums.SESSION] = session;
   }
 
+  appendUserToRequest(ctx: ExecutionContext, user: User) {
+    (this.request(ctx) as any)[AuthEnums.USER] = user;
+  }
+
+  extractUsernameFromBody(ctx: ExecutionContext) {
+    const { username } = this.request(ctx).body;
+    if (username) return username;
+    return undefined;
+  }
+
+  extractUsernameFromBodyOrThrow(ctx: ExecutionContext) {
+    const username = this.extractUsernameFromBody(ctx);
+    if (username) return username;
+    throw new UnauthorizedException('Username is not provided!');
+  }
+
   extractUsernameAndPassworFromBody(ctx: ExecutionContext) {
     const { username, password } = this.request(ctx).body;
     if (username && password) return { username, password };
@@ -117,7 +187,19 @@ export class AuthService {
   extractUsernameAndPassworFromBodyThrow(ctx: ExecutionContext) {
     const credentials = this.extractUsernameAndPassworFromBody(ctx);
     if (credentials) return credentials;
-    throw new UnauthorizedException('Username or password is not provided');
+    throw new UnauthorizedException('Username or password is not provided!');
+  }
+
+  extractSecurityCodeFromQuery(ctx: ExecutionContext) {
+    const { securityCode } = this.request(ctx).query as any as LoginWithCodeDto;
+    return securityCode;
+  }
+
+  extractSecurityCodeFromQueryOrThrow(ctx: ExecutionContext) {
+    const securityCode = this.extractSecurityCodeFromQuery(ctx);
+
+    if (securityCode) return securityCode;
+    throw new UnauthorizedException('Security code is not provided!');
   }
 
   request(ctx: ExecutionContext): Request {

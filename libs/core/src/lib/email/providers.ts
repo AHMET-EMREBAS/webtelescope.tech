@@ -2,10 +2,10 @@ import { createTransport } from 'nodemailer';
 import { EmailAuth } from './email-auth';
 import { Inject, Provider } from '@nestjs/common';
 import { readFileSync } from 'fs';
-import { join, resolve } from 'path';
+import { join } from 'path';
 import { compile } from 'ejs';
 
-export function getEmailTransporter<T extends string = string>(
+export function getEmailTransporterToken<T extends string = string>(
   templateName: T
 ) {
   return `${templateName}_TRANSPORTER_TOKEN`;
@@ -17,7 +17,7 @@ export function provideEmailTransporter<T extends string = string>(
   host: string
 ): Provider {
   return {
-    provide: getEmailTransporter(templateName),
+    provide: getEmailTransporterToken(templateName),
     useValue: createTransport({
       host,
       port: 465,
@@ -30,7 +30,7 @@ export function provideEmailTransporter<T extends string = string>(
 export function InjectEmailTransporter<T extends string = string>(
   templateName: T
 ) {
-  return Inject(getEmailTransporter(templateName));
+  return Inject(getEmailTransporterToken(templateName));
 }
 
 export function getEmailTemplateFunctionToken<T extends string = string>(
@@ -63,4 +63,27 @@ export function InjectEmailTemplateFunction<T extends string = string>(
   templateName: T
 ) {
   return Inject(getEmailTemplateFunctionToken(templateName));
+}
+
+
+
+
+
+export function getEmailAuthToken(templateName: string) {
+  return `${templateName}_EMAIL_AUTH_TOKEN`;
+}
+
+export function provideEmailAuth(
+  templateName: string,
+  user: string,
+  pass: string
+): Provider {
+  return {
+    provide: getEmailAuthToken(templateName),
+    useValue: { user, pass },
+  };
+}
+
+export function InjectEmailAuth(templateName: string) {
+  return Inject(getEmailAuthToken(templateName));
 }

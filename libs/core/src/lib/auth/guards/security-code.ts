@@ -1,20 +1,19 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthService } from '../service';
 
-/**
- * Check user credentials and create a new session
- */
 @Injectable()
-export class LocalGuard implements CanActivate {
+export class SecurityCodeGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
-
   async canActivate(ctx: ExecutionContext) {
-    const { username, password } =
-      this.authService.extractUsernameAndPassworFromBodyThrow(ctx);
+    const securityCode =
+      this.authService.extractSecurityCodeFromQueryOrThrow(ctx);
 
-    const user = await this.authService.findUserByUserNameOrThrow(username);
+    console.log(securityCode);
+    const user = await this.authService.findUserBySecurityCodeOrThrow(
+      securityCode
+    );
 
-    this.authService.comparePasswordOrThrow(password, user.password);
+    console.log(user);
 
     const session = await this.authService.createSession(user);
 

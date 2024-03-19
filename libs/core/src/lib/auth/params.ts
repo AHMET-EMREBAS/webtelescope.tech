@@ -13,3 +13,9 @@ export const SessionParam = createParamDecorator(
     return ctx.switchToHttp().getRequest()[AuthEnums.SESSION];
   }
 );
+
+export const UserParam = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {
+    return ctx.switchToHttp().getRequest()[AuthEnums.USER];
+  }
+);

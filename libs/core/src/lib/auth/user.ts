@@ -1,6 +1,14 @@
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseEntity } from '../entity';
 import { hashSync, genSaltSync } from 'bcrypt';
+import { v4 } from 'uuid';
 
 export type SessionPayload = {
   sub: number;
@@ -70,4 +78,23 @@ export class Session extends BaseEntity {
     },
   })
   permissions!: string[];
+}
+
+@Entity()
+export class SecurityCode extends BaseEntity {
+  @Column({ type: 'varchar' })
+  securityCode!: string;
+
+  @Column({
+    type: 'varchar',
+    transformer: {
+      to(value) {
+        return value && JSON.stringify(value);
+      },
+      from(value) {
+        return value && JSON.parse(value);
+      },
+    },
+  })
+  user!: User;
 }

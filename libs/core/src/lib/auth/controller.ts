@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import {
   ApiOkResponse,
   ApiOperation,
@@ -6,24 +6,32 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { Validate } from '../pipe';
-
 import { Session, User } from './user';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import { BearerAccess, CredentialAccess, SessionAccess } from './guards';
-import { AuthHeaderParam, SessionParam } from './params';
+import {
+  BearerAccess,
+  CredentialAccess,
+  SecurityCodeAccess,
+  SessionAccess,
+  UsernameAccess,
+} from './guards';
+import { AuthHeaderParam, SessionParam, UserParam } from './params';
 import { LoginDto, AccessTokenDto, UpdatePasswordDto } from './dto';
 import { DeleteResult, UpdateResult } from '../dto';
-import { BodyParam } from '../controller';
+import { BodyParam, QueryParam } from '../controller';
+import { ForgotPasswordDto } from './dto/forgot-password';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { PublicAccess } from './policy';
+import { AuthEvents } from './auth-events';
+import { LoginWithCodeDto } from './dto/login-with-code';
+import { AuthService } from './service';
 
 @ApiTags('Auth')
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
   constructor(
-    @InjectRepository(Session)
-    private readonly sessionRepo: Repository<Session>,
-    @InjectRepository(User) private readonly userRepo: Repository<User>
+    private readonly authService: AuthService,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   @ApiOperation({ summary: 'Login with username and password' })
@@ -41,24 +49,24 @@ export class AuthController {
   @ApiOperation({ summary: 'Logout from the current session' })
   @ApiUnauthorizedResponse()
   @ApiOkResponse({ type: DeleteResult })
-  @Post('logout')
+  @Get('logout')
   async logout(@SessionParam() session: Session) {
-    return await this.sessionRepo.delete(session.id);
+    return this.authService.deleteSession(session.id);
   }
 
   @ApiOperation({ summary: 'Logout from the current session' })
   @ApiUnauthorizedResponse()
   @ApiOkResponse({ type: DeleteResult, isArray: true })
-  @Post('logout-all-devices')
+  @Get('logout-all-devices')
   async logoutAllDevices(@SessionParam() session: Session) {
-    return await this.sessionRepo.delete({ userId: session.userId });
+    return await this.authService.deleteAllSessionsByUserId(session.userId);
   }
 
   @ApiOperation({ summary: 'Has active session' })
   @ApiOkResponse({ type: 'boolean' })
   @ApiUnauthorizedResponse()
   @SessionAccess()
-  @Post('has-session')
+  @Get('has-session')
   hasSession() {
     return true;
   }
@@ -67,11 +75,41 @@ export class AuthController {
   @ApiOkResponse({ type: UpdateResult })
   @ApiUnauthorizedResponse()
   @Post('update-password')
-  updatePassword(
+  async updatePassword(
     @SessionParam() session: Session,
     @BodyParam() passwordDto: UpdatePasswordDto
   ) {
-    console.log(session);
-    return this.userRepo.update(session.userId, passwordDto);
+    this.authService.updatePassword(session.userId, passwordDto);
+  }
+
+  @ApiOperation({ summary: 'Forgot password' })
+  @UsernameAccess()
+  @ApiOkResponse({ type: UpdateResult })
+  @ApiUnauthorizedResponse()
+  @Post('forgot-password')
+  async forgotPassword(
+    @BodyParam() __: ForgotPasswordDto,
+    @UserParam() user: User
+  ) {
+    const { id, securityCode } =
+      await this.authService.createSecurityCodeOrThrow(user);
+    this.eventEmitter.emit(AuthEvents.FORGOT_PASSWORD_EVENT, {
+      username: user.username,
+      securityCode,
+    });
+
+    return;
+  }
+
+  @ApiOperation({ summary: 'Forgot password' })
+  @SecurityCodeAccess()
+  @ApiOkResponse({ type: UpdateResult })
+  @ApiUnauthorizedResponse()
+  @Get('login-with-code')
+  loginWithCode(
+    @QueryParam() __: LoginWithCodeDto,
+    @AuthHeaderParam() accessToken: string
+  ) {
+    return { accessToken };
   }
 }
