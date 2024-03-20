@@ -17,7 +17,7 @@ export class AppEventService {
   async sendEmail({ username, securityCode }: ForgotPasswordEventPayload) {
     await this.email.send({
       subject: 'Reset Password',
-      to: 'aemrebas.dev@gmail.com',
+      to: username,
       data: {
         title: 'Reset Password',
         message: 'Use the one-time security code to login.',

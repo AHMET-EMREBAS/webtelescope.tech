@@ -38,7 +38,7 @@ const entities = [User, Role, Permission, Session, SecurityCode];
 export class AuthModule {
   constructor(@InjectRepository(User) private readonly repo: Repository<User>) {
     repo
-      .save({ username: 'root@webtelescope.tech', password: '!Password1' })
+      .save({ username: 'aemrebas.dev@gmail.com', password: '!Password1' })
       .then();
   }
 }

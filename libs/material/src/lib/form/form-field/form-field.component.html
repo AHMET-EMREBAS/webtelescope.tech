@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline">
+  <input
+    matInput
+    [placeholder]="label"
+    [value]="defaultValue"
+    [required]="required"
+    [min]="min"
+    [max]="max"
+  />
+
+  <mat-icon matIconPrefix *ngIf="matIconPrefix">{{ prefixIcon }}</mat-icon>
+  <mat-icon matIconSuffix *ngIf="matIconSuffix">{{ suffixIcon }}</mat-icon>
+
+  <mat-hint>{{ hints }}</mat-hint>
+</mat-form-field>

@@ -13,7 +13,10 @@
     "url": "https://webtelescope.tech"
   },
   "scripts": {
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "stories": "npx nx g @nx/angular:stories --project=material",
+    "storybook": "npx nx run material:storybook",
+    "build-storybook": "npx nx run material:build-storybook"
   },
   "private": true,
   "devDependencies": {
