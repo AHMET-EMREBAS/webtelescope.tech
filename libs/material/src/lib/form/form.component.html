@@ -1,0 +1,26 @@
+<form
+  #form="ngForm"
+  [formGroup]="formGroup"
+  (ngSubmit)="submit($event)"
+  novalidate
+>
+  <wt-form-field
+    name="name"
+    label="First Name"
+    [minLength]="3"
+    [maxLength]="10"
+    [required]="true"
+  ></wt-form-field>
+
+  <wt-form-field
+    type="number"
+    label="Age"
+    name="age"
+    [min]="18"
+    [max]="200"
+  ></wt-form-field>
+
+  <div class="form-actions">
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+  </div>
+</form>

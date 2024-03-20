@@ -7,6 +7,9 @@ import {
   BrowserAnimationsModule,
   provideAnimations,
 } from '@angular/platform-browser/animations';
+import { provideFormGroup } from '../../api';
+import { FormBuilder, Validators } from '@angular/forms';
+import { provideSubmittedErrorStateMatcher } from '../error-state-matcher';
 
 const meta: Meta<FormFieldComponent> = {
   component: FormFieldComponent,
@@ -14,15 +17,55 @@ const meta: Meta<FormFieldComponent> = {
   decorators: [
     moduleMetadata({
       imports: [BrowserAnimationsModule],
-      providers: [provideAnimations()],
+      providers: [
+        provideAnimations(),
+        provideSubmittedErrorStateMatcher(),
+        provideFormGroup(
+          new FormBuilder().group({
+            age: ['', [Validators.required]],
+            name: [
+              '',
+              [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(10),
+              ],
+            ],
+          })
+        ),
+      ],
     }),
   ],
 };
 export default meta;
+
 type Story = StoryObj<FormFieldComponent>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    type: 'text',
+    name: 'name',
+    hints: 'Type your first name',
+    prefixIcon: 'info',
+    suffixIcon: 'input',
+    label: 'First Name',
+    minLength: 3,
+    maxLength: 10,
+    required: true,
+  },
+};
+export const NumberInput: Story = {
+  args: {
+    type: 'number',
+    name: 'age',
+    hints: 'You age',
+    prefixIcon: 'numbers',
+    suffixIcon: 'input',
+    label: 'Age',
+    min: 18,
+    max: 200,
+    required: true,
+  },
 };
 
 export const Heading: Story = {

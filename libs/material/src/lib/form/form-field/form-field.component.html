@@ -1,15 +1,64 @@
-<mat-form-field appearance="outline">
+{{ inputStatus$ | async }}
+<mat-form-field appearance="outline" [formGroup]="formGroup">
+  <mat-label *ngIf="label"> {{ label }} </mat-label>
+
   <input
+    #input="matInput"
     matInput
+    [formControlName]="name"
+    [type]="type"
     [placeholder]="label"
     [value]="defaultValue"
     [required]="required"
+    [minLength]="minLength"
+    [maxLength]="maxLength"
     [min]="min"
     [max]="max"
   />
 
-  <mat-icon matIconPrefix *ngIf="matIconPrefix">{{ prefixIcon }}</mat-icon>
-  <mat-icon matIconSuffix *ngIf="matIconSuffix">{{ suffixIcon }}</mat-icon>
+  <mat-error *ngIf="errors$ | async as e">
+    <span [@enter] [@exit] *ngIf="e.required">
+      {{ name | titlecase }} is requried
+    </span>
+    <span [@enter] [@exit] *ngIf="e.minlength">
+      {{ name | titlecase }} must be longer than
+      {{ minLength }}
+    </span>
+    <span [@enter] [@exit] *ngIf="e.maxlength">
+      {{ name | titlecase }} must be shorter than
+      {{ maxLength }}
+    </span>
+    <span [@enter] [@exit] *ngIf="e.email">
+      {{ name | titlecase }} must be email
+    </span>
+    <span [@enter] [@exit] *ngIf="e.min">
+      {{ name | titlecase }} must be greater than {{ min }}
+    </span>
+    <span [@enter] [@exit] *ngIf="e.max">
+      {{ name | titlecase }} must be less than {{ max }}
+    </span>
+  </mat-error>
 
-  <mat-hint>{{ hints }}</mat-hint>
+  <mat-icon [color]="iconColor$ | async" matIconPrefix *ngIf="prefixIcon">
+    {{ prefixIcon }}
+  </mat-icon>
+
+  <mat-icon [color]="iconColor$ | async" matIconSuffix *ngIf="suffixIcon">
+    {{ suffixIcon }}
+  </mat-icon>
+
+  <mat-hint *ngIf="hints" align="start">
+    <strong>
+      <small> {{ hints }} </small>
+    </strong>
+  </mat-hint>
+
+  <mat-hint align="end" *ngIf="showValidationDetails">
+    <!--  -->
+    @if(type ==='text' && maxLength > 0){ ({{ input.value.length }}/{{
+      maxLength
+    }}) }
+    <!--  -->
+    @if(type ==='number' && max > 0){ ({{ min }} {{ ' < ' }} {{ max }}) }
+  </mat-hint>
 </mat-form-field>
