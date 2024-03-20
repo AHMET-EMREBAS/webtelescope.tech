@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=./entity.json
+
+type: Entity
+
+properties:
+  name:
+    ui:
+      inputType: text
+    validation:
+      type: string
+      format: ean
+
+relations:
+  name:
+    type: Many
+    target: Category
+
+  description:
+    type: Many
+    target: Task
+
+required:
+  - category
+  - name
+
+unique:
+  - name
+  - category
+  - lastName

@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "String Property",
+    "$id": "StringProperty",
+    "oneOf": [
+        {
+            "properties": {
+                "type": {
+                    "const": "string"
+                },
+                "format": {
+                    "$ref": "./../names/format.json"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "format"
+            ]
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "string"
+                },
+                "minLength": {
+                    "type": "integer"
+                },
+                "maxLength": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": false
+        }
+    ]
+}

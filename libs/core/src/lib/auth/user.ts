@@ -1,14 +1,6 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { BaseEntity } from '../entity';
 import { hashSync, genSaltSync } from 'bcrypt';
-import { v4 } from 'uuid';
 
 export type SessionPayload = {
   sub: number;

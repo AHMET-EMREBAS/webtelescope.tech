@@ -7,18 +7,20 @@
   <wt-form-field
     name="name"
     label="First Name"
-    [minLength]="3"
-    [maxLength]="10"
     [required]="true"
+    [minLength]="3"
+    [maxLength]="30"
   ></wt-form-field>
 
-  <wt-form-field
-    type="number"
-    label="Age"
-    name="age"
-    [min]="18"
-    [max]="200"
-  ></wt-form-field>
+  <wt-textarea
+    name="description"
+    label="Description"
+    [minLength]="10"
+    [maxLength]="30"
+    [required]="true"
+  ></wt-textarea>
+
+  <wt-form-field name="age" type="number" label="Age"></wt-form-field>
 
   <div class="form-actions">
     <button type="submit" mat-raised-button color="primary">Submit</button>

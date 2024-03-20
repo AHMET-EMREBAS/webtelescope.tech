@@ -29,6 +29,16 @@
       "factory": "./src/generators/email/generator",
       "schema": "./src/generators/email/schema.json",
       "description": "email generator"
+    },
+    "form": {
+      "factory": "./src/generators/form/generator",
+      "schema": "./src/generators/form/schema.json",
+      "description": "form generator"
+    },
+    "init": {
+      "factory": "./src/generators/init/generator",
+      "schema": "./src/generators/init/schema.json",
+      "description": "init generator"
     }
   }
 }

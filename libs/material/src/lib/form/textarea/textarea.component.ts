@@ -1,24 +1,23 @@
 import { Component } from '@angular/core';
-import { FormCommonModule } from '../common/common.module';
-import { FieldComponent } from '../common/field.component';
-import { FormGroup } from '@angular/forms';
+import { FieldComponent, FormCommonModule } from '../common';
 import {
   bounceInOnEnterAnimation,
   bounceOutOnLeaveAnimation,
 } from 'angular-animations';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'wt-form-field',
+  selector: 'wt-textarea',
   standalone: true,
   imports: [FormCommonModule],
-  templateUrl: './form-field.component.html',
-  styleUrl: './form-field.component.scss',
+  templateUrl: './textarea.component.html',
+  styleUrl: './textarea.component.scss',
   animations: [
     bounceInOnEnterAnimation({ anchor: 'enter', duration: 600, delay: 600 }),
     bounceOutOnLeaveAnimation({ anchor: 'exit', duration: 200 }),
   ],
 })
-export class FormFieldComponent extends FieldComponent {
+export class TextareaComponent extends FieldComponent {
   constructor(formGroup: FormGroup) {
     super(formGroup);
   }

@@ -7,6 +7,25 @@ import { Transform } from 'class-transformer';
 import { isArray, isBooleanString, isNumberString } from 'class-validator';
 import { ILike, LessThan, MoreThan, MoreThanOrEqual } from 'typeorm';
 
+export function ObjectTransformer() {
+  return Transform(({ value }) => {
+    if (value) {
+      return (value as string[])
+        .map((e) => e.split(':'))
+        .map(([k, v]) => {
+          try {
+            const vvalue = JSON.parse(v);
+            return { [k]: vvalue };
+          } catch (err) {
+            return { [k]: v };
+          }
+        })
+        .reduce((p, c) => ({ ...p, ...c }));
+    }
+    return undefined;
+  });
+}
+
 export function OrderTransformer() {
   return Transform(({ value }) => {
     if (value) {
@@ -99,6 +118,15 @@ export function BooleanTransformer() {
       } else {
         return undefined;
       }
+    }
+    return undefined;
+  });
+}
+
+export function EmptyStringTransformer() {
+  return Transform(({ value }) => {
+    if (value && value.length > 0) {
+      return value;
     }
     return undefined;
   });

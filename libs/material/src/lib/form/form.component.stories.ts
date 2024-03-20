@@ -3,6 +3,9 @@ import { FormComponent } from './form.component';
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideFormGroup } from '../api';
+import { FormControl, FormGroup } from '@angular/forms';
+import { InputValidator } from './validators';
 
 const meta: Meta<FormComponent> = {
   component: FormComponent,
@@ -10,7 +13,32 @@ const meta: Meta<FormComponent> = {
   decorators: [
     moduleMetadata({
       imports: [BrowserAnimationsModule],
-      providers: [],
+      providers: [
+        provideFormGroup(
+          new FormGroup({
+            name: new FormControl(
+              '',
+              new InputValidator('name')
+                .required()
+                .minlength(3)
+                .maxlength(10)
+                .build()
+            ),
+            description: new FormControl(
+              '',
+              new InputValidator('description')
+                .required()
+                .minlength(10)
+                .maxlength(400)
+                .build()
+            ),
+            age: new FormControl(
+              0,
+              new InputValidator('age').min(3).max(10).build()
+            ),
+          })
+        ),
+      ],
     }),
   ],
 };

@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Entity Schema",
+    "$id": "EntitySchema",
+    "properties": {
+        "type": {
+            "enum": [
+                "Entity",
+                "Object"
+            ]
+        },
+        "properties": {
+            "$ref": "./properties/property.json"
+        },
+        "relations": {
+            "$ref": "./properties/relation.json"
+        },
+        "required": {
+            "description": "Required properties",
+            "type": "array",
+            "items": {
+                "$ref": "./names/property.json"
+            },
+            "uniqueItems": true
+        },
+        "unique": {
+            "description": "Unique properties",
+            "type": "array",
+            "items": {
+                "$ref": "./names/property.json"
+            },
+            "uniqueItems": true
+        },
+        "array": {
+            "description": "Array Properties",
+            "type": "array",
+            "items": {
+                "$ref": "./names/property.json"
+            }
+        }
+    },
+    "required": [
+        "type",
+        "properties"
+    ]
+}

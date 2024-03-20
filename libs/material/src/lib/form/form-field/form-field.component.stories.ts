@@ -9,7 +9,7 @@ import {
 } from '@angular/platform-browser/animations';
 import { provideFormGroup } from '../../api';
 import { FormBuilder, Validators } from '@angular/forms';
-import { provideSubmittedErrorStateMatcher } from '../error-state-matcher';
+import { provideErrorStateMatcher2 } from '../error-state-matcher';
 
 const meta: Meta<FormFieldComponent> = {
   component: FormFieldComponent,
@@ -19,7 +19,7 @@ const meta: Meta<FormFieldComponent> = {
       imports: [BrowserAnimationsModule],
       providers: [
         provideAnimations(),
-        provideSubmittedErrorStateMatcher(),
+        provideErrorStateMatcher2(),
         provideFormGroup(
           new FormBuilder().group({
             age: ['', [Validators.required]],

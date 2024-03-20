@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "enum": [
+        "text",
+        "textarea",
+        "number",
+        "checkbox",
+        "slider",
+        "select",
+        "autocomplete",
+        "select-list",
+        "radio",
+        "color"
+    ]
+}

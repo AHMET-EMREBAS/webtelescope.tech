@@ -1,18 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Icon, InputErrors, InputType } from '../../api';
 import { BehaviorSubject, Observable, debounceTime, map } from 'rxjs';
 import { MatInput } from '@angular/material/input';
 
-@Component({
-  selector: 'wt-common-form-field',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './common-form-field.component.html',
-  styleUrl: './common-form-field.component.scss',
-})
-export class CommonFormFieldComponent implements OnInit {
+@Component({ template: '' })
+export class FieldComponent implements OnInit {
   @ViewChild('input') inputRef!: MatInput;
   /**
    * Form Controller
@@ -121,5 +114,9 @@ export class CommonFormFieldComponent implements OnInit {
 
   length() {
     return this.formControl.value.length;
+  }
+
+  getError() {
+    return Object.entries(this.formControl.errors || {})?.pop()?.[1];
   }
 }

@@ -1,52 +1,24 @@
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormFieldComponent } from './form-field/form-field.component';
+import { FormGroup } from '@angular/forms';
 import {
-  FormControl,
-  FormGroup,
-  NgForm,
-  NgModel,
-  Validators,
-} from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { ErrorStateMacher2 } from './error-state-matcher';
-import { CommonFormFieldModule } from './common-form-field/common-form-field.module';
-import { provideFormGroup } from '../api';
+  ErrorStateMacher2,
+  provideErrorStateMatcher2,
+} from './error-state-matcher';
+import { FormCommonModule } from './common/common.module';
+import { parseFormValue } from './parse-form-value';
+import { TextareaComponent } from './textarea/textarea.component';
 
 @Component({
   selector: 'wt-form',
   standalone: true,
-  imports: [CommonFormFieldModule, FormFieldComponent],
-  providers: [
-    ErrorStateMacher2,
-    // {
-    //   provide: ErrorStateMatcher,
-    //   useClass: SubmitedErrorStateMacher,
-    // },
-    provideFormGroup(
-      new FormGroup({
-        name: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(30),
-        ]),
-        description: new FormControl('', []),
-        age: new FormControl(0, []),
-      })
-    ),
-  ],
+  imports: [FormCommonModule, FormFieldComponent , TextareaComponent],
+  providers: [ErrorStateMacher2, provideErrorStateMatcher2()],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
 })
 export class FormComponent {
-  @ViewChild('form') form!: NgForm;
-  /**
-   *
-   * @ignore @param formGroup
-   */
-  constructor(
-    public readonly formGroup: FormGroup,
-    public readonly esm: ErrorStateMacher2
-  ) {}
+  constructor(public readonly formGroup: FormGroup) {}
 
   submit(event: any) {
     Object.entries(this.formGroup.controls).forEach(([_, c]) => {
@@ -55,5 +27,9 @@ export class FormComponent {
     });
 
     this.formGroup.enable();
+
+    const parsedValue = parseFormValue(this.formGroup.value);
+
+    console.log(parsedValue);
   }
 }

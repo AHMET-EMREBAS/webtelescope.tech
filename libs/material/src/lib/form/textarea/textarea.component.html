@@ -1,8 +1,7 @@
-{{ inputStatus$ | async }}
 <mat-form-field appearance="outline" [formGroup]="formGroup">
   <mat-label *ngIf="label"> {{ label }} </mat-label>
 
-  <input
+  <textarea
     #input="matInput"
     matInput
     [formControlName]="name"
@@ -12,11 +11,14 @@
     [required]="required"
     [minLength]="minLength"
     [maxLength]="maxLength"
-    [min]="min"
-    [max]="max"
-  />
+  ></textarea>
 
-  <mat-error [@enter] [@exit] *ngIf="errors$ | async as e">
+  <mat-error
+    style="position: relative"
+    [@enter]
+    [@exit]
+    *ngIf="errors$ | async as e"
+  >
     {{ getError() }}
   </mat-error>
 

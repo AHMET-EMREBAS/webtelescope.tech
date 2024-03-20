@@ -9,7 +9,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonFormFieldComponent } from './common-form-field.component';
 
 const modules = [
   CommonModule,
@@ -22,11 +21,10 @@ const modules = [
   MatRadioModule,
   MatIconModule,
   MatButtonModule,
-  CommonFormFieldComponent,
 ];
 @NgModule({
   declarations: [],
   imports: [...modules],
   exports: [...modules],
 })
-export class CommonFormFieldModule {}
+export class FormCommonModule {}

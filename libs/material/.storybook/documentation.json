@@ -3,8 +3,8 @@
     "interfaces": [],
     "injectables": [
         {
-            "name": "SubmitedErrorStateMacher",
-            "id": "injectable-SubmitedErrorStateMacher-8eb1caee5872b5412e517ec50221a39c7a1bcbce1aeda03f02e0433b775d4a8d4f29d6807af6453363fed8ba3f10e467933a8ec671ef7b5b8adfa66881d4fb2f",
+            "name": "ErrorStateMacher2",
+            "id": "injectable-ErrorStateMacher2-abad9a141cacd782516bfe2e8be8036afc02ea40bc60733e53c015874a4b4b4067b86eff0d5c7e57767b8489445cafdebf186bf42ef5986db65c33a452e0005a",
             "file": "libs/material/src/lib/form/error-state-matcher.ts",
             "properties": [],
             "methods": [
@@ -14,12 +14,6 @@
                         {
                             "name": "control",
                             "type": "AbstractControl<any | any> | null",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "form",
-                            "type": "FormGroupDirective | NgForm | null",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -42,15 +36,6 @@
                             "tagName": {
                                 "text": "param"
                             }
-                        },
-                        {
-                            "name": "form",
-                            "type": "FormGroupDirective | NgForm | null",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
                         }
                     ]
                 }
@@ -59,7 +44,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable, Provider } from '@angular/core';\r\nimport { AbstractControl, FormGroupDirective, NgForm } from '@angular/forms';\r\nimport { ErrorStateMatcher } from '@angular/material/core';\r\nimport {} from '@angular/material/form-field';\r\n\r\n@Injectable()\r\nexport class SubmitedErrorStateMacher extends ErrorStateMatcher {\r\n  override isErrorState(\r\n    control: AbstractControl<any, any> | null,\r\n    form: FormGroupDirective | NgForm | null\r\n  ): boolean {\r\n    console.log(control?.value);\r\n    console.log('Is Submitted: ', form?.submitted);\r\n    if (form) {\r\n      if (form) {\r\n        if (control?.invalid) {\r\n          return true;\r\n        }\r\n        return false;\r\n      }\r\n    }\r\n    return false;\r\n  }\r\n}\r\n\r\nexport function provideSubmittedErrorStateMatcher(): Provider {\r\n  return {\r\n    provide: ErrorStateMatcher,\r\n    useClass: SubmitedErrorStateMacher,\r\n  };\r\n}\r\n",
+            "sourceCode": "import { Injectable, Provider } from '@angular/core';\r\nimport { AbstractControl } from '@angular/forms';\r\nimport { ErrorStateMatcher } from '@angular/material/core';\r\nimport {} from '@angular/material/form-field';\r\n\r\n@Injectable()\r\nexport class ErrorStateMacher2 extends ErrorStateMatcher {\r\n  override isErrorState(control: AbstractControl<any, any> | null): boolean {\r\n    if (control)\r\n      if (control.touched && control.dirty) {\r\n        if (control.invalid) {\r\n          return true;\r\n        }\r\n        return false;\r\n      }\r\n    return false;\r\n  }\r\n}\r\n\r\nexport function provideErrorStateMatcher2(): Provider {\r\n  return {\r\n    provide: ErrorStateMatcher,\r\n    useClass: ErrorStateMacher2,\r\n  };\r\n}\r\n",
             "extends": [
                 "ErrorStateMatcher"
             ],
@@ -72,20 +57,18 @@
     "directives": [],
     "components": [
         {
-            "name": "CommonFormFieldComponent",
-            "id": "component-CommonFormFieldComponent-83db21dd92864d61d6eccbf72290c4fc103516459d6d4c88ff801fe8325f2ff01511fb16e8b9151086d66c1eef9e04dbcae73e37abfdc269a35806294011b82f",
-            "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.ts",
+            "name": "AbstractFormFieldComponent",
+            "id": "component-AbstractFormFieldComponent-00c7b5ea69e3c5d81b617c15a32935fd04f089e806be269ce4a7a36518fa0122bfcbf6b464afa839927a54512dd89f0fa5cdfa7a873d5f1a6c1a703b08a896bb",
+            "file": "libs/material/src/lib/form/common-form-field/abstract-form-field.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "wt-common-form-field",
             "styleUrls": [],
             "styles": [],
-            "templateUrl": [
-                "./common-form-field.component.html"
-            ],
+            "template": "",
+            "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
@@ -96,7 +79,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nDefault value\n",
                     "description": "<p>Default value</p>\n",
-                    "line": 36,
+                    "line": 28,
                     "type": " | null",
                     "decorators": []
                 },
@@ -106,7 +89,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput hints\n",
                     "description": "<p>Input hints</p>\n",
-                    "line": 61,
+                    "line": 53,
                     "type": "string",
                     "decorators": []
                 },
@@ -117,7 +100,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 31,
+                    "line": 23,
                     "type": "string",
                     "decorators": []
                 },
@@ -128,7 +111,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate max\n",
                     "description": "<p>Validate max</p>\n",
-                    "line": 81,
+                    "line": 73,
                     "type": "number",
                     "decorators": []
                 },
@@ -139,7 +122,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate maxLength\n",
                     "description": "<p>Validate maxLength</p>\n",
-                    "line": 71,
+                    "line": 63,
                     "type": "number",
                     "decorators": []
                 },
@@ -150,7 +133,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate min\n",
                     "description": "<p>Validate min</p>\n",
-                    "line": 76,
+                    "line": 68,
                     "type": "number",
                     "decorators": []
                 },
@@ -161,7 +144,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate minLength\n",
                     "description": "<p>Validate minLength</p>\n",
-                    "line": 66,
+                    "line": 58,
                     "type": "number",
                     "decorators": []
                 },
@@ -172,7 +155,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nForm Controller\n",
                     "description": "<p>Form Controller</p>\n",
-                    "line": 21,
+                    "line": 13,
                     "type": "string",
                     "decorators": []
                 },
@@ -183,7 +166,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput placeholder\n",
                     "description": "<p>Input placeholder</p>\n",
-                    "line": 46,
+                    "line": 38,
                     "type": "string | null",
                     "decorators": []
                 },
@@ -193,7 +176,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nPrefix icon\n",
                     "description": "<p>Prefix icon</p>\n",
-                    "line": 51,
+                    "line": 43,
                     "type": "Icon",
                     "decorators": []
                 },
@@ -204,7 +187,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nRequried field\n",
                     "description": "<p>Requried field</p>\n",
-                    "line": 41,
+                    "line": 33,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -214,7 +197,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSuffix icon\n",
                     "description": "<p>Suffix icon</p>\n",
-                    "line": 56,
+                    "line": 48,
                     "type": "Icon",
                     "decorators": []
                 },
@@ -225,7 +208,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput type\n",
                     "description": "<p>Input type</p>\n",
-                    "line": 26,
+                    "line": 18,
                     "type": "InputType",
                     "decorators": []
                 }
@@ -240,7 +223,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 83
+                    "line": 75
                 },
                 {
                     "name": "formControl",
@@ -249,7 +232,7 @@
                     "type": "AbstractControl",
                     "optional": false,
                     "description": "",
-                    "line": 89
+                    "line": 81
                 },
                 {
                     "name": "formGroup",
@@ -258,7 +241,7 @@
                     "type": "FormGroup",
                     "optional": false,
                     "description": "",
-                    "line": 93,
+                    "line": 85,
                     "modifierKind": [
                         125,
                         148
@@ -272,7 +255,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 85
+                    "line": 77
                 },
                 {
                     "name": "inputRef",
@@ -281,7 +264,7 @@
                     "type": "MatInput",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 9,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -299,7 +282,7 @@
                     "type": "Observable<>",
                     "optional": true,
                     "description": "",
-                    "line": 87
+                    "line": 79
                 },
                 {
                     "name": "showValidationDetails",
@@ -309,7 +292,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 91
+                    "line": 83
                 }
             ],
             "methodsClass": [
@@ -319,7 +302,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 118,
+                    "line": 111,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -329,7 +312,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 122,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -339,7 +322,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 95,
+                    "line": 87,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -348,18 +331,12 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
+            "standalone": false,
+            "imports": [],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AbstractControl, FormGroup } from '@angular/forms';\nimport { Icon, InputErrors, InputType } from '../../api';\nimport { BehaviorSubject, Observable, debounceTime, map } from 'rxjs';\nimport { MatInput } from '@angular/material/input';\nimport { ErrorStateMatcher } from '@angular/material/core';\n\n@Component({\n  selector: 'wt-common-form-field',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './common-form-field.component.html',\n  styleUrl: './common-form-field.component.scss',\n})\nexport class CommonFormFieldComponent implements OnInit {\n  @ViewChild('input') inputRef!: MatInput;\n  /**\n   * Form Controller\n   */\n  @Input() name = 'name';\n\n  /**\n   * Input type\n   */\n  @Input() type: InputType = 'text';\n\n  /**\n   * Input label\n   */\n  @Input() label: string = '';\n\n  /**\n   * Default value\n   */\n  @Input() defaultValue: unknown | null = null;\n\n  /**\n   * Requried field\n   */\n  @Input() required: boolean = false;\n\n  /**\n   * Input placeholder\n   */\n  @Input() placeholder: string | null = null;\n\n  /**\n   * Prefix icon\n   */\n  @Input() prefixIcon?: Icon;\n\n  /**\n   * Suffix icon\n   */\n  @Input() suffixIcon?: Icon;\n\n  /**\n   * Input hints\n   */\n  @Input() hints?: string;\n\n  /**\n   * Validate minLength\n   */\n  @Input() minLength: number = 1;\n\n  /**\n   * Validate maxLength\n   */\n  @Input() maxLength: number = 100;\n\n  /**\n   * Validate min\n   */\n  @Input() min: number = Number.MIN_SAFE_INTEGER;\n\n  /**\n   * Validate max\n   */\n  @Input() max: number = Number.MAX_SAFE_INTEGER;\n\n  errors$ = new BehaviorSubject<InputErrors | null>(null);\n\n  iconColor$ = new BehaviorSubject<'primary' | 'warn'>('primary');\n\n  inputStatus$?: Observable<unknown>;\n\n  formControl!: AbstractControl;\n\n  showValidationDetails = false;\n\n  constructor(public readonly formGroup: FormGroup) {}\n\n  ngOnInit(): void {\n    {\n      const control = this.formGroup.get(this.name);\n      if (!control) throw new Error(`${this.name} is not in the FormGroup`);\n      this.formControl = control;\n    }\n\n    this.inputStatus$ = this.formControl.valueChanges.pipe(\n      debounceTime(200),\n      map(() => {\n        const s = this.formControl.status;\n        if (this.inputRef._parentFormGroup.submitted)\n          if (s === 'INVALID') {\n            this.errors$.next(this.formControl.errors);\n            this.iconColor$.next('warn');\n          } else {\n            this.errors$.next({});\n            this.iconColor$.next('primary');\n          }\n      })\n    );\n  }\n\n  focus() {\n    this.inputRef.focus();\n  }\n\n  length() {\n    return this.formControl.value.length;\n  }\n}\n",
-            "styleUrl": "./common-form-field.component.scss",
+            "sourceCode": "import { Component, Input, OnInit, ViewChild } from '@angular/core';\nimport { AbstractControl, FormGroup } from '@angular/forms';\nimport { Icon, InputErrors, InputType } from '../../api';\nimport { BehaviorSubject, Observable, debounceTime, map } from 'rxjs';\nimport { MatInput } from '@angular/material/input';\n\n@Component({ template: '' })\nexport class AbstractFormFieldComponent implements OnInit {\n  @ViewChild('input') inputRef!: MatInput;\n  /**\n   * Form Controller\n   */\n  @Input() name = 'name';\n\n  /**\n   * Input type\n   */\n  @Input() type: InputType = 'text';\n\n  /**\n   * Input label\n   */\n  @Input() label: string = '';\n\n  /**\n   * Default value\n   */\n  @Input() defaultValue: unknown | null = null;\n\n  /**\n   * Requried field\n   */\n  @Input() required: boolean = false;\n\n  /**\n   * Input placeholder\n   */\n  @Input() placeholder: string | null = null;\n\n  /**\n   * Prefix icon\n   */\n  @Input() prefixIcon?: Icon;\n\n  /**\n   * Suffix icon\n   */\n  @Input() suffixIcon?: Icon;\n\n  /**\n   * Input hints\n   */\n  @Input() hints?: string;\n\n  /**\n   * Validate minLength\n   */\n  @Input() minLength: number = 1;\n\n  /**\n   * Validate maxLength\n   */\n  @Input() maxLength: number = 100;\n\n  /**\n   * Validate min\n   */\n  @Input() min: number = Number.MIN_SAFE_INTEGER;\n\n  /**\n   * Validate max\n   */\n  @Input() max: number = Number.MAX_SAFE_INTEGER;\n\n  errors$ = new BehaviorSubject<InputErrors | null>(null);\n\n  iconColor$ = new BehaviorSubject<'primary' | 'warn'>('primary');\n\n  inputStatus$?: Observable<unknown>;\n\n  formControl!: AbstractControl;\n\n  showValidationDetails = false;\n\n  constructor(public readonly formGroup: FormGroup) {}\n\n  ngOnInit(): void {\n    {\n      const control = this.formGroup.get(this.name);\n      if (!control) throw new Error(`${this.name} is not in the FormGroup`);\n      this.formControl = control;\n    }\n\n    this.inputStatus$ = this.formControl.valueChanges.pipe(\n      debounceTime(200),\n      map(() => {\n        const s = this.formControl.status;\n\n        if (s === 'INVALID') {\n          this.errors$.next(this.formControl.errors);\n          this.iconColor$.next('warn');\n        } else {\n          this.errors$.next(null);\n          this.iconColor$.next('primary');\n        }\n        this.formControl.enable();\n      })\n    );\n  }\n\n  focus() {\n    this.inputRef.focus();\n  }\n\n  length() {\n    return this.formControl.value.length;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -376,7 +353,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 91,
+                "line": 83,
                 "jsdoctags": [
                     {
                         "name": "formGroup",
@@ -392,8 +369,7 @@
             "extends": [],
             "implements": [
                 "OnInit"
-            ],
-            "templateData": "<div class=\"invalid\">This component is abstract!</div>\n"
+            ]
         },
         {
             "name": "EmailComponent",
@@ -440,7 +416,7 @@
         },
         {
             "name": "FormComponent",
-            "id": "component-FormComponent-bbcb65c49bbfc5cfb978ae8292fb54ae2a7b78826bd0752955f6f212684e0226a682d6aee051e3e157affa233165de857249285fb2257c2f11976d9427896365",
+            "id": "component-FormComponent-68c1c34d204f376b2d019e08626af6b28d9f162bf63845495484d3c3e6f1d29b1e5ea5e1b2d27f42fc3ad8f83a1c912bad8344d8b5c356897b3faa78b1d31a29",
             "file": "libs/material/src/lib/form/form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -448,11 +424,10 @@
             "outputs": [],
             "providers": [
                 {
-                    "name": "SubmitedErrorStateMacher"
+                    "name": "ErrorStateMacher2"
                 },
                 {
-                    "name": "provideFormGroup(new FormGroup({\n    name: new FormControl(, [\n        Validators.required, Validators.minLength(), Validators.maxLength(),\n    ]), age: new FormControl(, []),\n}))",
-                    "ns": "provideFormGroup(new FormGroup({\n    name: new FormControl(, [\n        Validators"
+                    "name": "provideErrorStateMatcher2()"
                 }
             ],
             "selector": "wt-form",
@@ -467,21 +442,16 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "form",
+                    "name": "formGroup",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "NgForm",
+                    "type": "FormGroup",
                     "optional": false,
                     "description": "",
-                    "line": 40,
-                    "decorators": [
-                        {
-                            "name": "ViewChild",
-                            "stringifiedArguments": "'form'"
-                        }
-                    ],
+                    "line": 19,
                     "modifierKind": [
-                        170
+                        125,
+                        148
                     ]
                 }
             ],
@@ -499,7 +469,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 21,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -533,17 +503,43 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Inject, ViewChild } from '@angular/core';\nimport { FormFieldComponent } from './form-field/form-field.component';\nimport {\n  FormControl,\n  FormGroup,\n  NgForm,\n  NgModel,\n  Validators,\n} from '@angular/forms';\nimport { ErrorStateMatcher } from '@angular/material/core';\nimport { SubmitedErrorStateMacher } from './error-state-matcher';\nimport { CommonFormFieldModule } from './common-form-field/common-form-field.module';\nimport { provideFormGroup } from '../api';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [CommonFormFieldModule, FormFieldComponent],\n  providers: [\n    SubmitedErrorStateMacher,\n    // {\n    //   provide: ErrorStateMatcher,\n    //   useClass: SubmitedErrorStateMacher,\n    // },\n    provideFormGroup(\n      new FormGroup({\n        name: new FormControl('', [\n          Validators.required,\n          Validators.minLength(3),\n          Validators.maxLength(30),\n        ]),\n        age: new FormControl(0, []),\n      })\n    ),\n  ],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n})\nexport class FormComponent {\n  @ViewChild('form') form!: NgForm;\n  /**\n   *\n   * @ignore @param formGroup\n   */\n  constructor(\n    public readonly formGroup: FormGroup,\n    public readonly esm: SubmitedErrorStateMacher\n  ) {}\n\n  submit(event: any) {\n    Object.entries(this.formGroup.controls).forEach(([_, c]) => {\n      c.markAsDirty();\n      c.markAsTouched();\n    });\n\n    this.formGroup.enable();\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormFieldComponent } from './form-field/form-field.component';\nimport { FormGroup } from '@angular/forms';\nimport {\n  ErrorStateMacher2,\n  provideErrorStateMatcher2,\n} from './error-state-matcher';\nimport { CommonFormFieldModule } from './common-form-field/common-form-field.module';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [CommonFormFieldModule, FormFieldComponent],\n  providers: [ErrorStateMacher2, provideErrorStateMatcher2()],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n})\nexport class FormComponent {\n  constructor(public readonly formGroup: FormGroup) {}\n\n  submit(event: any) {\n    console.log(this.formGroup.value);\n  }\n}\n",
             "styleUrl": "./form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "formGroup",
+                        "type": "FormGroup",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 18,
+                "jsdoctags": [
+                    {
+                        "name": "formGroup",
+                        "type": "FormGroup",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
-            "templateData": "<form\n  #form=\"ngForm\"\n  [formGroup]=\"formGroup\"\n  (ngSubmit)=\"submit($event)\"\n  novalidate\n>\n  <wt-form-field\n    [minLength]=\"3\"\n    [maxLength]=\"10\"\n    [required]=\"true\"\n    type=\"text\"\n    label=\"First Name\"\n    name=\"name\"\n  ></wt-form-field>\n\n  <wt-form-field\n    type=\"number\"\n    label=\"Age\"\n    name=\"age\"\n    [min]=\"18\"\n    [max]=\"200\"\n  ></wt-form-field>\n\n  <div class=\"form-actions\">\n    <button type=\"submit\" mat-raised-button color=\"primary\">Submit</button>\n  </div>\n</form>\n"
+            "templateData": "<form\n  #form=\"ngForm\"\n  [formGroup]=\"formGroup\"\n  (ngSubmit)=\"submit($event)\"\n  novalidate\n>\n  <wt-form-field\n    name=\"name\"\n    label=\"First Name\"\n    [minLength]=\"3\"\n    [maxLength]=\"10\"\n    [required]=\"true\"\n  ></wt-form-field>\n\n  <wt-form-field\n    name=\"age\"\n    type=\"number\"\n    label=\"Age\"\n    [min]=\"18\"\n    [max]=\"200\"\n  ></wt-form-field>\n\n  <div class=\"form-actions\">\n    <button type=\"submit\" mat-raised-button color=\"primary\">Submit</button>\n  </div>\n</form>\n"
         },
         {
             "name": "FormFieldComponent",
-            "id": "component-FormFieldComponent-f10b3b2646d06fb9864e204a2f1ed9386192dcda1c3c388f0eabb49a141afd94f0b74ee070d99a499db50cd3da9f4a051cff08510c0ae5498ad45531b48bdd01",
+            "id": "component-FormFieldComponent-d02366a2729158794fd3542e94696b78918bf40faa95563fcf495641031ee94604fda17ff413fb0bec7fa02a21aa198758c49b3083305efbedb3ec3a2e04c158",
             "file": "libs/material/src/lib/form/form-field/form-field.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -566,11 +562,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nDefault value\n",
                     "description": "<p>Default value</p>\n",
-                    "line": 36,
+                    "line": 28,
                     "type": " | null",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -579,11 +575,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput hints\n",
                     "description": "<p>Input hints</p>\n",
-                    "line": 61,
+                    "line": 53,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -593,11 +589,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput label\n",
                     "description": "<p>Input label</p>\n",
-                    "line": 31,
+                    "line": 23,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -607,11 +603,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate max\n",
                     "description": "<p>Validate max</p>\n",
-                    "line": 81,
+                    "line": 73,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -621,11 +617,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate maxLength\n",
                     "description": "<p>Validate maxLength</p>\n",
-                    "line": 71,
+                    "line": 63,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -635,11 +631,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate min\n",
                     "description": "<p>Validate min</p>\n",
-                    "line": 76,
+                    "line": 68,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -649,11 +645,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValidate minLength\n",
                     "description": "<p>Validate minLength</p>\n",
-                    "line": 66,
+                    "line": 58,
                     "type": "number",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -663,11 +659,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nForm Controller\n",
                     "description": "<p>Form Controller</p>\n",
-                    "line": 21,
+                    "line": 13,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -677,11 +673,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput placeholder\n",
                     "description": "<p>Input placeholder</p>\n",
-                    "line": 46,
+                    "line": 38,
                     "type": "string | null",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -690,11 +686,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nPrefix icon\n",
                     "description": "<p>Prefix icon</p>\n",
-                    "line": 51,
+                    "line": 43,
                     "type": "Icon",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -704,11 +700,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nRequried field\n",
                     "description": "<p>Requried field</p>\n",
-                    "line": 41,
+                    "line": 33,
                     "type": "boolean",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -717,11 +713,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSuffix icon\n",
                     "description": "<p>Suffix icon</p>\n",
-                    "line": 56,
+                    "line": 48,
                     "type": "Icon",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -731,11 +727,11 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput type\n",
                     "description": "<p>Input type</p>\n",
-                    "line": 26,
+                    "line": 18,
                     "type": "InputType",
                     "decorators": [],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 }
             ],
@@ -749,9 +745,9 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 83,
+                    "line": 75,
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -761,9 +757,9 @@
                     "type": "AbstractControl",
                     "optional": false,
                     "description": "",
-                    "line": 89,
+                    "line": 81,
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -773,13 +769,13 @@
                     "type": "FormGroup",
                     "optional": false,
                     "description": "",
-                    "line": 93,
+                    "line": 85,
                     "modifierKind": [
                         125,
                         148
                     ],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -790,9 +786,9 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 85,
+                    "line": 77,
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -802,7 +798,7 @@
                     "type": "MatInput",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 9,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -813,7 +809,7 @@
                         170
                     ],
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -823,9 +819,9 @@
                     "type": "Observable<>",
                     "optional": true,
                     "description": "",
-                    "line": 87,
+                    "line": 79,
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -836,9 +832,9 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 91,
+                    "line": 83,
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 }
             ],
@@ -849,11 +845,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 118,
+                    "line": 111,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -862,11 +858,11 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 122,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 },
                 {
@@ -875,11 +871,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 95,
+                    "line": 87,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
-                        "file": "CommonFormFieldComponent"
+                        "file": "AbstractFormFieldComponent"
                     }
                 }
             ],
@@ -897,7 +893,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonFormFieldModule } from '../common-form-field/common-form-field.module';\nimport { CommonFormFieldComponent } from '../common-form-field/common-form-field.component';\nimport { FormGroup } from '@angular/forms';\nimport {\n  bounceInOnEnterAnimation,\n  bounceOutOnLeaveAnimation,\n} from 'angular-animations';\nimport { SubmitedErrorStateMacher } from '../error-state-matcher';\n\n@Component({\n  selector: 'wt-form-field',\n  standalone: true,\n  imports: [CommonFormFieldModule],\n  templateUrl: './form-field.component.html',\n  styleUrl: './form-field.component.scss',\n  animations: [\n    bounceInOnEnterAnimation({ anchor: 'enter', duration: 600, delay: 600 }),\n    bounceOutOnLeaveAnimation({ anchor: 'exit', duration: 200 }),\n  ],\n})\nexport class FormFieldComponent extends CommonFormFieldComponent {\n  constructor(formGroup: FormGroup) {\n    super(formGroup);\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonFormFieldModule } from '../common-form-field/common-form-field.module';\nimport { AbstractFormFieldComponent } from '../common-form-field/abstract-form-field';\nimport { FormGroup } from '@angular/forms';\nimport {\n  bounceInOnEnterAnimation,\n  bounceOutOnLeaveAnimation,\n} from 'angular-animations';\n\n@Component({\n  selector: 'wt-form-field',\n  standalone: true,\n  imports: [CommonFormFieldModule],\n  templateUrl: './form-field.component.html',\n  styleUrl: './form-field.component.scss',\n  animations: [\n    bounceInOnEnterAnimation({ anchor: 'enter', duration: 600, delay: 600 }),\n    bounceOutOnLeaveAnimation({ anchor: 'exit', duration: 200 }),\n  ],\n})\nexport class FormFieldComponent extends AbstractFormFieldComponent {\n  constructor(formGroup: FormGroup) {\n    super(formGroup);\n  }\n}\n",
             "styleUrl": "./form-field.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -915,7 +911,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 22,
+                "line": 21,
                 "jsdoctags": [
                     {
                         "name": "formGroup",
@@ -929,88 +925,9 @@
                 ]
             },
             "extends": [
-                "CommonFormFieldComponent"
+                "AbstractFormFieldComponent"
             ],
-            "templateData": "{{ inputStatus$ | async }}\n<mat-form-field appearance=\"outline\" [formGroup]=\"formGroup\">\n  <mat-label *ngIf=\"label\"> {{ label }} </mat-label>\n\n  <input\n    #input=\"matInput\"\n    matInput\n    [formControlName]=\"name\"\n    [type]=\"type\"\n    [placeholder]=\"label\"\n    [value]=\"defaultValue\"\n    [required]=\"required\"\n    [minLength]=\"minLength\"\n    [maxLength]=\"maxLength\"\n    [min]=\"min\"\n    [max]=\"max\"\n  />\n\n  <mat-error *ngIf=\"errors$ | async as e\">\n    <ul class=\"error-list\">\n      <li [@enter] [@exit] *ngIf=\"e.required\">\n        {{ name | titlecase }} is requried\n      </li>\n      <li [@enter] [@exit] *ngIf=\"e.minlength\">\n        {{ name | titlecase }} must be longer than\n        {{ minLength }}\n      </li>\n      <li [@enter] [@exit] *ngIf=\"e.maxlength\">\n        {{ name | titlecase }} must be shorter than\n        {{ maxLength }}\n      </li>\n      <li [@enter] [@exit] *ngIf=\"e.email\">\n        {{ name | titlecase }} must be email\n      </li>\n      <li [@enter] [@exit] *ngIf=\"e.min\">\n        {{ name | titlecase }} must be greater than {{ min }}\n      </li>\n      <li [@enter] [@exit] *ngIf=\"e.max\">\n        {{ name | titlecase }} must be less than {{ max }}\n      </li>\n    </ul>\n  </mat-error>\n\n  <mat-icon [color]=\"iconColor$ | async\" matIconPrefix *ngIf=\"prefixIcon\">\n    {{ prefixIcon }}\n  </mat-icon>\n\n  <mat-icon [color]=\"iconColor$ | async\" matIconSuffix *ngIf=\"suffixIcon\">\n    {{ suffixIcon }}\n  </mat-icon>\n\n  <mat-hint *ngIf=\"hints\" align=\"start\">\n    <strong>\n      <small> {{ hints }} </small>\n    </strong>\n  </mat-hint>\n\n  <mat-hint align=\"end\" *ngIf=\"showValidationDetails\">\n    <!--  -->\n    @if(type ==='text' && maxLength > 0){ ({{ input.value.length }}/{{\n      maxLength\n    }}) }\n    <!--  -->\n    @if(type ==='number' && max > 0){ ({{ min }} {{ ' < ' }} {{ max }}) }\n  </mat-hint>\n</mat-form-field>\n"
-        },
-        {
-            "name": "FormFieldWrapperComponent",
-            "id": "component-FormFieldWrapperComponent-7fd671e2609a801fd99016f325ada2d2109474cae14b460e9f668ae10369f54d2a5ba5e38a8f225e2d16e26c65ee813da41928d7e3f6f2461403e2882d58317c",
-            "file": "libs/material/src/lib/form/form-field/form-field.component.stories.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [
-                {
-                    "name": "provideSubmittedErrorStateMatcher()"
-                }
-            ],
-            "selector": "wt-form-field-wrapper",
-            "styleUrls": [],
-            "styles": [],
-            "template": "<form #form=\"ngForm\" [formGroup]=\"formGroup\" novalidate>\n  <ng-content></ng-content>\n</form>\n",
-            "templateUrl": [],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "formGroup",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "FormGroup",
-                    "optional": false,
-                    "description": "",
-                    "line": 31,
-                    "modifierKind": [
-                        125,
-                        148
-                    ]
-                }
-            ],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import {\n  Meta,\n  StoryObj,\n  componentWrapperDecorator,\n  moduleMetadata,\n} from '@storybook/angular';\nimport { FormFieldComponent } from './form-field.component';\n\nimport { within } from '@storybook/testing-library';\nimport { expect } from '@storybook/jest';\nimport {\n  BrowserAnimationsModule,\n  provideAnimations,\n} from '@angular/platform-browser/animations';\nimport { provideFormGroup } from '../../api';\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\nimport { Component } from '@angular/core';\nimport { provideSubmittedErrorStateMatcher } from '../error-state-matcher';\n\n@Component({\n  selector: 'wt-form-field-wrapper',\n  standalone: true,\n  template: `\n    <form #form=\"ngForm\" [formGroup]=\"formGroup\" novalidate>\n      <ng-content></ng-content>\n    </form>\n  `,\n  providers: [provideSubmittedErrorStateMatcher()],\n})\nclass FormFieldWrapperComponent {\n  constructor(public readonly formGroup: FormGroup) {}\n}\n\nconst meta: Meta<FormFieldComponent> = {\n  component: FormFieldComponent,\n  title: 'FormFieldComponent',\n  decorators: [\n    componentWrapperDecorator((e) => {\n      return `\n      <wt-form-field-wrapper>\n        ${e}\n      </wt-form-field-wrapper>\n       `;\n    }),\n    moduleMetadata({\n      imports: [BrowserAnimationsModule, FormFieldWrapperComponent],\n      providers: [\n        provideAnimations(),\n        provideSubmittedErrorStateMatcher(),\n        provideFormGroup(\n          new FormBuilder().group({\n            name: [\n              '',\n              [\n                Validators.required,\n                Validators.minLength(3),\n                Validators.maxLength(10),\n              ],\n            ],\n          })\n        ),\n      ],\n    }),\n  ],\n};\nexport default meta;\n\ntype Story = StoryObj<FormFieldComponent>;\n\nexport const Primary: Story = {\n  args: {\n    type: 'text',\n    name: 'name',\n    hints: 'Type your first name',\n    prefixIcon: 'info',\n    suffixIcon: 'input',\n    label: 'First Name',\n    minLength: 3,\n    maxLength: 10,\n    required: true,\n  },\n};\nexport const NumberInput: Story = {\n  args: {\n    type: 'number',\n    name: 'age',\n    hints: 'You age',\n    prefixIcon: 'numbers',\n    suffixIcon: 'input',\n    label: 'Age',\n    min: 18,\n    max: 200,\n    required: true,\n  },\n};\n\nexport const Heading: Story = {\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/form-field works!/gi)).toBeTruthy();\n  },\n};\n",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "formGroup",
-                        "type": "FormGroup",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 30,
-                "jsdoctags": [
-                    {
-                        "name": "formGroup",
-                        "type": "FormGroup",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
-            "extends": []
+            "templateData": "{{ inputStatus$ | async }}\n<mat-form-field appearance=\"outline\" [formGroup]=\"formGroup\">\n  <mat-label *ngIf=\"label\"> {{ label }} </mat-label>\n\n  <input\n    #input=\"matInput\"\n    matInput\n    [formControlName]=\"name\"\n    [type]=\"type\"\n    [placeholder]=\"label\"\n    [value]=\"defaultValue\"\n    [required]=\"required\"\n    [minLength]=\"minLength\"\n    [maxLength]=\"maxLength\"\n    [min]=\"min\"\n    [max]=\"max\"\n  />\n\n  <mat-error *ngIf=\"errors$ | async as e\">\n    <span [@enter] [@exit] *ngIf=\"e.required\">\n      {{ name | titlecase }} is requried\n    </span>\n    <span [@enter] [@exit] *ngIf=\"e.minlength\">\n      {{ name | titlecase }} must be longer than\n      {{ minLength }}\n    </span>\n    <span [@enter] [@exit] *ngIf=\"e.maxlength\">\n      {{ name | titlecase }} must be shorter than\n      {{ maxLength }}\n    </span>\n    <span [@enter] [@exit] *ngIf=\"e.email\">\n      {{ name | titlecase }} must be email\n    </span>\n    <span [@enter] [@exit] *ngIf=\"e.min\">\n      {{ name | titlecase }} must be greater than {{ min }}\n    </span>\n    <span [@enter] [@exit] *ngIf=\"e.max\">\n      {{ name | titlecase }} must be less than {{ max }}\n    </span>\n  </mat-error>\n\n  <mat-icon [color]=\"iconColor$ | async\" matIconPrefix *ngIf=\"prefixIcon\">\n    {{ prefixIcon }}\n  </mat-icon>\n\n  <mat-icon [color]=\"iconColor$ | async\" matIconSuffix *ngIf=\"suffixIcon\">\n    {{ suffixIcon }}\n  </mat-icon>\n\n  <mat-hint *ngIf=\"hints\" align=\"start\">\n    <strong>\n      <small> {{ hints }} </small>\n    </strong>\n  </mat-hint>\n\n  <mat-hint align=\"end\" *ngIf=\"showValidationDetails\">\n    <!--  -->\n    @if(type ==='text' && maxLength > 0){ ({{ input.value.length }}/{{\n      maxLength\n    }}) }\n    <!--  -->\n    @if(type ==='number' && max > 0){ ({{ min }} {{ ' < ' }} {{ max }}) }\n  </mat-hint>\n</mat-form-field>\n"
         },
         {
             "name": "LoginComponent",
@@ -1267,13 +1184,13 @@
         },
         {
             "name": "CommonFormFieldModule",
-            "id": "module-CommonFormFieldModule-a3ffc1605a8b522d0a5b6b5c930bec3ae1817dc1c2092ce9d329ebaef1bf0fc3fb517672cc58a1e214ec006de7f4fb2e452bb7664af07743638b7b4c3bf68f97",
+            "id": "module-CommonFormFieldModule-967c4cdc0823632f6776edf2bc71c0a2ddd8ca647e48fb8566745afd9c4c44fd28b6b3b53da1a485732cebcc3086e57dcb554eaf2c22b8cf7aeeee615917e180",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "libs/material/src/lib/form/common-form-field/common-form-field.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { MatInputModule } from '@angular/material/input';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { MatRadioModule } from '@angular/material/radio';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { CommonFormFieldComponent } from './common-form-field.component';\n\nconst modules = [\n  CommonModule,\n  FormsModule,\n  ReactiveFormsModule,\n  MatInputModule,\n  MatFormFieldModule,\n  MatSelectModule,\n  MatCheckboxModule,\n  MatRadioModule,\n  MatIconModule,\n  MatButtonModule,\n  CommonFormFieldComponent,\n];\n@NgModule({\n  declarations: [],\n  imports: [...modules],\n  exports: [...modules],\n})\nexport class CommonFormFieldModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { MatInputModule } from '@angular/material/input';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { MatRadioModule } from '@angular/material/radio';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { AbstractFormFieldComponent } from './abstract-form-field';\n\nconst modules = [\n  CommonModule,\n  FormsModule,\n  ReactiveFormsModule,\n  MatInputModule,\n  MatFormFieldModule,\n  MatSelectModule,\n  MatCheckboxModule,\n  MatRadioModule,\n  MatIconModule,\n  MatButtonModule,\n];\n@NgModule({\n  declarations: [],\n  imports: [...modules],\n  exports: [...modules],\n})\nexport class CommonFormFieldModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -1285,19 +1202,11 @@
                 },
                 {
                     "type": "imports",
-                    "elements": [
-                        {
-                            "name": "CommonFormFieldComponent"
-                        }
-                    ]
+                    "elements": []
                 },
                 {
                     "type": "exports",
-                    "elements": [
-                        {
-                            "name": "CommonFormFieldComponent"
-                        }
-                    ]
+                    "elements": []
                 },
                 {
                     "type": "bootstrap",
@@ -1402,16 +1311,6 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'name',\n    type: 'text',\n    label: '',\n    defaultValue: '',\n    required: false,\n    placeholder: '',\n    hints: '',\n    minLength: 0,\n    maxLength: Number.MAX_SAFE_INTEGER,\n    min: Number.MIN_SAFE_INTEGER,\n    max: Number.MAX_SAFE_INTEGER,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/common-form-field works!/gi)).toBeTruthy();\n  },\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/src/lib/form/form-field/form-field.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1456,7 +1355,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FormComponent>",
-                "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n      providers: [],\n    }),\n  ],\n}"
+                "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n      providers: [\n        provideFormGroup(\n          new FormGroup({\n            name: new FormControl('', []),\n            age: new FormControl('', [Validators.min(18), Validators.max(100)]),\n          })\n        ),\n      ],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -1492,21 +1391,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<CommonFormFieldComponent>",
-                "defaultValue": "{\n  component: CommonFormFieldComponent,\n  title: 'CommonFormFieldComponent',\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/src/lib/form/form-field/form-field.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FormFieldComponent>",
-                "defaultValue": "{\n  component: FormFieldComponent,\n  title: 'FormFieldComponent',\n  decorators: [\n    componentWrapperDecorator((e) => {\n      return `\n      <wt-form-field-wrapper>\n        ${e}\n      </wt-form-field-wrapper>\n       `;\n    }),\n    moduleMetadata({\n      imports: [BrowserAnimationsModule, FormFieldWrapperComponent],\n      providers: [\n        provideAnimations(),\n        provideSubmittedErrorStateMatcher(),\n        provideFormGroup(\n          new FormBuilder().group({\n            name: [\n              '',\n              [\n                Validators.required,\n                Validators.minLength(3),\n                Validators.maxLength(10),\n              ],\n            ],\n          })\n        ),\n      ],\n    }),\n  ],\n}"
+                "defaultValue": "{\n  component: FormFieldComponent,\n  title: 'FormFieldComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n      providers: [\n        provideAnimations(),\n        provideErrorStateMatcher2(),\n        provideFormGroup(\n          new FormBuilder().group({\n            age: ['', [Validators.required]],\n            name: [\n              '',\n              [\n                Validators.required,\n                Validators.minLength(3),\n                Validators.maxLength(10),\n              ],\n            ],\n          })\n        ),\n      ],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -1536,7 +1425,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  CommonModule,\n  FormsModule,\n  ReactiveFormsModule,\n  MatInputModule,\n  MatFormFieldModule,\n  MatSelectModule,\n  MatCheckboxModule,\n  MatRadioModule,\n  MatIconModule,\n  MatButtonModule,\n  CommonFormFieldComponent,\n]"
+                "defaultValue": "[\n  CommonModule,\n  FormsModule,\n  ReactiveFormsModule,\n  MatInputModule,\n  MatFormFieldModule,\n  MatSelectModule,\n  MatCheckboxModule,\n  MatRadioModule,\n  MatIconModule,\n  MatButtonModule,\n]"
             },
             {
                 "name": "NumberInput",
@@ -1602,16 +1491,6 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'name',\n    type: 'text',\n    label: '',\n    defaultValue: '',\n    required: false,\n    placeholder: '',\n    hints: '',\n    minLength: 0,\n    maxLength: Number.MAX_SAFE_INTEGER,\n    min: Number.MIN_SAFE_INTEGER,\n    max: Number.MAX_SAFE_INTEGER,\n  },\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/src/lib/form/form-field/form-field.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1641,6 +1520,17 @@
         ],
         "functions": [
             {
+                "name": "provideErrorStateMatcher2",
+                "file": "libs/material/src/lib/form/error-state-matcher.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [],
+                "returnType": "Provider"
+            },
+            {
                 "name": "provideFormGroup",
                 "file": "libs/material/src/lib/api/providers/form-group.ts",
                 "ctype": "miscellaneous",
@@ -1668,17 +1558,6 @@
                         }
                     }
                 ]
-            },
-            {
-                "name": "provideSubmittedErrorStateMatcher",
-                "file": "libs/material/src/lib/form/error-state-matcher.ts",
-                "ctype": "miscellaneous",
-                "subtype": "function",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "args": [],
-                "returnType": "Provider"
             }
         ],
         "typealiases": [
@@ -1774,17 +1653,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<CommonFormFieldComponent>",
-                "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<FormFieldComponent>",
                 "file": "libs/material/src/lib/form/form-field/form-field.component.stories.ts",
                 "deprecated": false,
@@ -1868,7 +1736,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FormComponent>",
-                    "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n      providers: [],\n    }),\n  ],\n}"
+                    "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n      providers: [\n        provideFormGroup(\n          new FormGroup({\n            name: new FormControl('', []),\n            age: new FormControl('', [Validators.min(18), Validators.max(100)]),\n          })\n        ),\n      ],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
@@ -1977,38 +1845,6 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
-            "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'name',\n    type: 'text',\n    label: '',\n    defaultValue: '',\n    required: false,\n    placeholder: '',\n    hints: '',\n    minLength: 0,\n    maxLength: Number.MAX_SAFE_INTEGER,\n    min: Number.MIN_SAFE_INTEGER,\n    max: Number.MAX_SAFE_INTEGER,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/common-form-field works!/gi)).toBeTruthy();\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<CommonFormFieldComponent>",
-                    "defaultValue": "{\n  component: CommonFormFieldComponent,\n  title: 'CommonFormFieldComponent',\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'name',\n    type: 'text',\n    label: '',\n    defaultValue: '',\n    required: false,\n    placeholder: '',\n    hints: '',\n    minLength: 0,\n    maxLength: Number.MAX_SAFE_INTEGER,\n    min: Number.MIN_SAFE_INTEGER,\n    max: Number.MAX_SAFE_INTEGER,\n  },\n}"
-                }
-            ],
             "libs/material/src/lib/form/form-field/form-field.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -2028,7 +1864,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FormFieldComponent>",
-                    "defaultValue": "{\n  component: FormFieldComponent,\n  title: 'FormFieldComponent',\n  decorators: [\n    componentWrapperDecorator((e) => {\n      return `\n      <wt-form-field-wrapper>\n        ${e}\n      </wt-form-field-wrapper>\n       `;\n    }),\n    moduleMetadata({\n      imports: [BrowserAnimationsModule, FormFieldWrapperComponent],\n      providers: [\n        provideAnimations(),\n        provideSubmittedErrorStateMatcher(),\n        provideFormGroup(\n          new FormBuilder().group({\n            name: [\n              '',\n              [\n                Validators.required,\n                Validators.minLength(3),\n                Validators.maxLength(10),\n              ],\n            ],\n          })\n        ),\n      ],\n    }),\n  ],\n}"
+                    "defaultValue": "{\n  component: FormFieldComponent,\n  title: 'FormFieldComponent',\n  decorators: [\n    moduleMetadata({\n      imports: [BrowserAnimationsModule],\n      providers: [\n        provideAnimations(),\n        provideErrorStateMatcher2(),\n        provideFormGroup(\n          new FormBuilder().group({\n            age: ['', [Validators.required]],\n            name: [\n              '',\n              [\n                Validators.required,\n                Validators.minLength(3),\n                Validators.maxLength(10),\n              ],\n            ],\n          })\n        ),\n      ],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "NumberInput",
@@ -2124,11 +1960,24 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  CommonModule,\n  FormsModule,\n  ReactiveFormsModule,\n  MatInputModule,\n  MatFormFieldModule,\n  MatSelectModule,\n  MatCheckboxModule,\n  MatRadioModule,\n  MatIconModule,\n  MatButtonModule,\n  CommonFormFieldComponent,\n]"
+                    "defaultValue": "[\n  CommonModule,\n  FormsModule,\n  ReactiveFormsModule,\n  MatInputModule,\n  MatFormFieldModule,\n  MatSelectModule,\n  MatCheckboxModule,\n  MatRadioModule,\n  MatIconModule,\n  MatButtonModule,\n]"
                 }
             ]
         },
         "groupedFunctions": {
+            "libs/material/src/lib/form/error-state-matcher.ts": [
+                {
+                    "name": "provideErrorStateMatcher2",
+                    "file": "libs/material/src/lib/form/error-state-matcher.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [],
+                    "returnType": "Provider"
+                }
+            ],
             "libs/material/src/lib/api/providers/form-group.ts": [
                 {
                     "name": "provideFormGroup",
@@ -2158,19 +2007,6 @@
                             }
                         }
                     ]
-                }
-            ],
-            "libs/material/src/lib/form/error-state-matcher.ts": [
-                {
-                    "name": "provideSubmittedErrorStateMatcher",
-                    "file": "libs/material/src/lib/form/error-state-matcher.ts",
-                    "ctype": "miscellaneous",
-                    "subtype": "function",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "args": [],
-                    "returnType": "Provider"
                 }
             ]
         },
@@ -2274,19 +2110,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<ResetPasswordComponent>",
                     "file": "libs/material/src/lib/auth/reset-password/reset-password.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<CommonFormFieldComponent>",
-                    "file": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2506,40 +2329,10 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Heading",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "libs/material/src/lib/form/common-form-field/common-form-field.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "libs/material/src/lib/form/common-form-field/common-form-field.component.ts",
+                "filePath": "libs/material/src/lib/form/common-form-field/abstract-form-field.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "CommonFormFieldComponent",
+                "name": "AbstractFormFieldComponent",
                 "coveragePercent": 52,
                 "coverageCount": "13/25",
                 "status": "good"
@@ -2558,7 +2351,7 @@
                 "filePath": "libs/material/src/lib/form/error-state-matcher.ts",
                 "type": "injectable",
                 "linktype": "injectable",
-                "name": "SubmitedErrorStateMacher",
+                "name": "ErrorStateMacher2",
                 "coveragePercent": 0,
                 "coverageCount": "0/2",
                 "status": "low"
@@ -2568,18 +2361,9 @@
                 "type": "function",
                 "linktype": "miscellaneous",
                 "linksubtype": "function",
-                "name": "provideSubmittedErrorStateMatcher",
+                "name": "provideErrorStateMatcher2",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "libs/material/src/lib/form/form-field/form-field.component.stories.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "FormFieldWrapperComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -2667,7 +2451,7 @@
                 "linktype": "component",
                 "name": "FormComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {

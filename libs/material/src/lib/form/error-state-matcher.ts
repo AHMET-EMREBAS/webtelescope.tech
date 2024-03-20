@@ -18,7 +18,7 @@ export class ErrorStateMacher2 extends ErrorStateMatcher {
   }
 }
 
-export function provideSubmittedErrorStateMatcher(): Provider {
+export function provideErrorStateMatcher2(): Provider {
   return {
     provide: ErrorStateMatcher,
     useClass: ErrorStateMacher2,
