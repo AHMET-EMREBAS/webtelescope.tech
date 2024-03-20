@@ -1,4 +1,4 @@
-// @index('./*', f => `export * from '${f.path}'`)
+// @index(['./*', '!./*.spec.ts'], f => `export * from '${f.path}'`)
 export * from './column';
 export * from './input-type';
 export * from './property';
