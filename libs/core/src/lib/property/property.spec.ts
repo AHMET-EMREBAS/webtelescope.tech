@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Exclude, Expose, Type, plainToInstance } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { Dto, Property, PropertyOptions as PO } from './property';
-import {
-  IsNotEmpty,
-  MinLength,
-  ValidateNested,
-  validateSync,
-} from 'class-validator';
+import { validateSync } from 'class-validator';
 
 @Dto()
 class SubDto {
