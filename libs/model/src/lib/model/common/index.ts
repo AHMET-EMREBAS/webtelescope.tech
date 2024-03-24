@@ -1,7 +1,12 @@
 // @index('./*', f => `export * from '${f.path}'`)
 export * from './address'
+export * from './comment'
+export * from './counter'
 export * from './email'
 export * from './img'
 export * from './phone'
+export * from './range'
 export * from './record'
+export * from './review'
+export * from './tag'
 export * from './value'

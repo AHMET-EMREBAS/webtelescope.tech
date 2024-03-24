@@ -8,3 +8,11 @@ export interface IOwner<Owner> {
    */
   owner: Owner;
 }
+
+/**
+ * Target proeprty is like an owner property.
+ * While the owner describes the ownership, target describes the associated entity
+ */
+export interface ITarget<Owner> {
+  target: Owner;
+}

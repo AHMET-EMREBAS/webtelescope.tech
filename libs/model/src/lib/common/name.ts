@@ -1,9 +1,15 @@
-/**
- * @param  name {@link name}
- */
 export interface IName {
-  /**
-   * Unique name property
-   */
   name: string;
 }
+
+export interface ITitle {
+  title: string;
+}
+
+export interface IDescription {
+  description: string;
+}
+
+export interface INameDescription extends IName, IDescription {}
+
+export interface ITitleDescription extends ITitle, IDescription {}
