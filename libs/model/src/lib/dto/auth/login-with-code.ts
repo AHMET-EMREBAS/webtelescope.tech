@@ -1,4 +1,4 @@
-import { ICredentials } from './credentials';
+import { ICredentials } from '../../common';
 
 /**
  * After forgot-password request, a security code is sent to the user.
@@ -6,7 +6,7 @@ import { ICredentials } from './credentials';
  * @param username {@link ICredentials.username}
  * @param securityCode {@link securityCode}
  */
-export interface ILoginWithCode extends Pick<ICredentials, 'username'> {
+export interface ILoginWithCodeDto extends Pick<ICredentials, 'username'> {
   /**
    * Uniquely generated security code. The code is used only once. New code is generated upon every forgot-password request.
    */

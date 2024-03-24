@@ -1,5 +1,4 @@
-import { IID } from '../../common';
-import { ICredentials } from '../../dto/auth';
+import { ICredentials, IID } from '../../common';
 
 /**
  * The user interface contains the user information, credentials, permissions.

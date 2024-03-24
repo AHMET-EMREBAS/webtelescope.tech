@@ -1,4 +1,4 @@
-import { ICredentials } from './credentials';
+import { ICredentials } from '../../common';
 
 /**
  * Users send the information to the server to create an organization. Organization is an entity that stores all subscription details
@@ -7,7 +7,7 @@ import { ICredentials } from './credentials';
  * @param password {@link ICredentials.password}
  * @param organization
  */
-export interface ISignup extends ICredentials {
+export interface ISignupDto extends ICredentials {
   /**
    * Name of the organization that the user belongs to. It is unique and in name format, 3 to 30 characters.
    */

@@ -1,8 +1,8 @@
-import { ICredentials } from './credentials';
+import { ICredentials } from '../../common';
 
 /**
  * Users send the information to the server to get the access-token.
  * @param username {@link ICredentials.username}
  * @param password {@link ICredentials.password}
  */
-export interface ILogin extends ICredentials {}
+export interface ILoginDto extends ICredentials {}

@@ -1,4 +1,4 @@
-import { ICredentials } from './credentials';
+import { ICredentials } from '../../common';
 
 /**
  * Users send the information to the server to update their password
@@ -7,7 +7,7 @@ import { ICredentials } from './credentials';
  * @param newPassword
  *
  */
-export interface IUpdatePassword
+export interface IUpdatePasswordDto
   extends Pick<ICredentials, 'username' | 'password'> {
   /**
    * Updated password the password constraints are the same as the password.

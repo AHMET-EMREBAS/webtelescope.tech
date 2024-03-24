@@ -3,8 +3,8 @@
  * If the user is found by username,
  * then access-token is sent to the client for allowing further operation without credentials.
  *
- * @param username
- * @param password
+ * @param username {@link username}
+ * @param password {@link password}
  */
 export interface ICredentials {
   /**
