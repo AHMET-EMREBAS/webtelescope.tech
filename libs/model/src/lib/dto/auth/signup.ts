@@ -1,15 +1,23 @@
-import { ICredentials } from '../../common';
+import { ICredentials, IID } from '../../common';
 
 /**
- * Users send the information to the server to create an organization. Organization is an entity that stores all subscription details
+ * Users send the information to the server to create an organization.
+ * Organization is an entity that stores all subscription details
  *
+ * @param id {@link IID.id}
  * @param username {@link ICredentials.username}
  * @param password {@link ICredentials.password}
- * @param organization
+ * @param organizationName {@link organizationName}
+ * @param subscriptionType {@link subscriptionType}
  */
 export interface ISignupDto extends ICredentials {
   /**
-   * Name of the organization that the user belongs to. It is unique and in name format, 3 to 30 characters.
+   * Unique organization name
    */
-  organization: string;
+  organizationName: string;
+
+  /**
+   * Subscription type
+   */
+  subscriptionType: IID;
 }

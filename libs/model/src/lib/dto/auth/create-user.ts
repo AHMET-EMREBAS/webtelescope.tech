@@ -1,4 +1,4 @@
-import { IID, ICredentials } from '../../common';
+import { IUser } from '../../model';
 
 /**
  * The User' manager is able to create new users. After creating user, an invitation email/text is sent to the user.
@@ -7,6 +7,5 @@ import { IID, ICredentials } from '../../common';
  * @param username {@link ICredentials.username}
  * @param roles  {@link roles}
  */
-export interface ICreateUserDto extends Pick<ICredentials, 'username'> {
-  roles: IID[];
-}
+export interface ICreateUserDto
+  extends Pick<IUser<unknown, unknown>, 'username' | 'roles'> {}

@@ -13,3 +13,7 @@ export interface IDescription {
 export interface INameDescription extends IName, IDescription {}
 
 export interface ITitleDescription extends ITitle, IDescription {}
+
+export interface IDomain {
+  domain: string;
+}
