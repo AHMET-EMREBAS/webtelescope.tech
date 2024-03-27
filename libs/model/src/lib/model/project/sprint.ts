@@ -1,11 +1,11 @@
-import { IID, INameDescription, ITarget } from '../../common';
+import { IID } from '../../common';
+
 /**
  * @param id {@link IID.id}
- * @param name {@link INameDescription.name}
- * @param description {@link INameDescription.description}
- * @param target {@link ITarget.target} Project
+ * @param sprintName {@link sprintName}
+ * @param project {@link Project}
  */
-export interface ISprint<Target extends IID>
-  extends IID,
-    INameDescription,
-    ITarget<Target> {}
+export interface ISprint<Project extends IID> extends IID {
+  sprintName: string;
+  project: Project;
+}

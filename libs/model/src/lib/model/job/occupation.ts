@@ -1,3 +1,11 @@
-import { IID, IName, ITarget } from '../../common';
+import { IID } from '../../common';
 
-export interface IOccupation<Target> extends IID, IName, ITarget<Target> {}
+/**
+ * @param id {@link IID.id}
+ * @param occupationName {@link occupationName}
+ * @param industry {@link industry}
+ */
+export interface IOccupation<Industry extends IID> extends IID {
+  occupationName: string;
+  industry: Industry;
+}

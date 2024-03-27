@@ -1,4 +1,4 @@
-import { IID, ITarget, ITimestamp } from '../../common';
+import { IID, ITimestamp } from '../../common';
 
 /**
  * @param id {@link IID.id}
@@ -7,7 +7,7 @@ import { IID, ITarget, ITimestamp } from '../../common';
  * @param start {@link start}
  * @param held {@link held}
  * @param goals {@link goals}
- * @param target {@link ITarget.target} Sprint
+ * @param sprint {@link Sprint} Sprint
  * @param delayedTo {@link delayedTo} IMeeting
  * @param invitedMembers {@link invitedMembers}
  * @param attendantMembers {@link attendantMembers}
@@ -15,10 +15,7 @@ import { IID, ITarget, ITimestamp } from '../../common';
  * @param updatedAt {@link ITimestamp.updatedAt}
  * @param deletedAt {@link ITimestamp.deletedAt}
  */
-export interface IMeeting<User, Target>
-  extends IID,
-    ITimestamp,
-    ITarget<Target> {
+export interface IMeeting<User, Sprint> extends IID, ITimestamp {
   /**
    * Start date-time of the meeting
    */
@@ -62,5 +59,10 @@ export interface IMeeting<User, Target>
   /**
    * If the meeting is delayed, the new meeting is created with the new start date
    */
-  delayedTo: IMeeting<User, Target>;
+  delayedTo: IMeeting<User, Sprint>;
+
+  /**
+   * Associated sprint
+   */
+  sprint: Sprint;
 }

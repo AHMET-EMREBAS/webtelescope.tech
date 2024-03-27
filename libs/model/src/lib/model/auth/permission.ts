@@ -1,8 +1,10 @@
-import { IID, IName } from '../../common';
+import { IID } from '../../common';
 
 /**
  * User permission
  * @param id {@link IID.id}
- * @param name {@link IName.name}
+ * @param permission {@link permission}
  */
-export interface IPermission extends IName, IID {}
+export interface IPermission extends IID {
+  permission: string;
+}

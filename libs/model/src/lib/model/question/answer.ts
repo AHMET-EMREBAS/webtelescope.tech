@@ -1,21 +1,23 @@
-import { IID, IOwner, ITarget, ITimestamp } from '../../common';
+import { IID, ITimestamp } from '../../common';
 
 /**
  * @param id {@link IID.id}
  * @param answer {@link answer}
- * @param owner {@link IOwner.owner} User
- * @param target {@link ITarget.target} Question
+ * @param user {@link User} User
+ * @param question {@link Question} Question
  * @param createdAt {@link ITimestamp.createdAt}
  * @param updatedAt {@link ITimestamp.updatedAt}
  * @param deletedAt {@link ITimestamp.deletedAt}
  */
-export interface IAnswer<Owner extends IID, Target extends IID>
+export interface IAnswer<User extends IID, Question extends IID>
   extends IID,
-    ITimestamp,
-    IOwner<Owner>,
-    ITarget<Target> {
+    ITimestamp {
   /**
    * Mark-down formatted string
    */
   answer: string;
+
+  user: User;
+
+  question: Question;
 }

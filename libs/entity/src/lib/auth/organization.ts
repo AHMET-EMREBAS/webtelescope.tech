@@ -4,6 +4,5 @@ import { Entity } from 'typeorm';
 
 @Entity()
 export class Organization extends TimestampEntity implements IOrganization {
-  @NameColumn()
-  name!: string;
+  @NameColumn() organizationName!: string;
 }

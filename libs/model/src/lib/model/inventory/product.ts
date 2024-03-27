@@ -1,22 +1,16 @@
-import { IID, IName, ITimestamp } from '../../common';
+import { IID, ITimestamp } from '../../common';
 
 /**
  * @param id {@link IID.id}
- * @param name {@link IName.name}
+ * @param productName {@link productName}
+ * @param productDescription {@link productDescription}
  * @param barcode {@link barcode}
- * @param description {@link description}
  * @param createdAt {@link ITimestamp.createdAt}
  * @param updatedAt {@link ITimestamp.updatedAt}
  * @param deletedAt {@link ITimestamp.deletedAt}
  */
-export interface IProduct extends IName, ITimestamp, IID {
-  /**
-   * Unique barcode
-   */
+export interface IProduct extends ITimestamp, IID {
+  productName: string;
+  productDescription: string;
   barcode: string;
-
-  /**
-   * Description
-   */
-  description: string;
 }

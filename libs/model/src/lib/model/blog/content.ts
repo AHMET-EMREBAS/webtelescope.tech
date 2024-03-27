@@ -1,14 +1,16 @@
-import { IID, IOwner } from '../../common';
+import { IID } from '../../common';
 
 /**
  * Content is a paragraph.
  * @param id {@link IID.id}
- * @param contents {@link contents}
+ * @param content {@link content}
  * @param owner {@link IOwner.owner}
  */
-export interface IContent<Owner extends IID> extends IID, IOwner<Owner> {
+export interface IContent<Article extends IID> extends IID {
   /**
    * Article content
    */
   content: string;
+
+  article: Article;
 }

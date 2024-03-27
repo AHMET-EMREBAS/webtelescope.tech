@@ -1,14 +1,11 @@
-import { IID, IOwner } from '../../common';
+import { IID } from '../../common';
 
 /**
  * @param id {@link IID.id}
  * @param title {@link title}
- * @param contents {@link contents}
- * @param owner {@link IOwner.owner}
+ * @param blog {@link blog}
  */
-export interface IArticle<Owner extends IID> extends IID, IOwner<Owner> {
-  /**
-   * Article title
-   */
+export interface IArticle<Blog extends IID> extends IID {
   title: string;
+  blog: Blog;
 }

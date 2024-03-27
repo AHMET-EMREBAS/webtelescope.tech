@@ -1,7 +1,9 @@
-import { IID, IName } from '../../common';
+import { IID } from '../../common';
 
 /**
  * @param id {@link IID.id}
- * @param name {@link IName.name}
+ * @param category {@link category}
  */
-export interface ICategory extends IID, IName {}
+export interface ICategory extends IID {
+  category: string;
+}

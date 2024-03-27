@@ -1,14 +1,20 @@
-import { IID, IOwner } from '../../common';
+import { IID } from '../../common';
 
 /**
  * Extra information about the associated entity such us product details, sku details etc.
- * @param details {@link record}
  * @param id {@link IID.id}
- * @param owner {@link IID.owner}
+ * @param details {@link record}
+ * @param record {@link record}
+ * @param owner {@link owner}
  */
-export interface IRecord<Owner extends IID> extends IID, IOwner<Owner> {
+export interface IRecord<Owner extends IID> extends IID {
   /**
    * JSON data
    */
   record: Record<string, string>;
+
+  /**
+   * Whose record is this?
+   */
+  owner: Owner;
 }

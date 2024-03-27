@@ -6,8 +6,8 @@ import { Range5 } from './range';
  * @param id {@link IID.id}
  * @param comment {@link comment}
  * @param rate {@link Range5}
- * @param target {@link target} Task, Blog
- * @param owner {@link IOwner.owner} User
+ * @param target {@link IComment.target} Task, Blog
+ * @param owner {@link IComment.owner} User
  * @param createdAt {@link ITimestamp.createdAt}
  * @param updatedAt {@link ITimestamp.updatedAt}
  * @param deletedAt {@link ITimestamp.deletedAt}

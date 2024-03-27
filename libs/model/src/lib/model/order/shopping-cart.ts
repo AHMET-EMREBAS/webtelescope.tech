@@ -1,8 +1,13 @@
-import { IID, IOwner } from '../../common';
+import { IID, ITimestamp } from '../../common';
 
 /**
  * ShopingCart is associated with one/many orders and an owner( customer )
  * @param id {@link IID.id}
- * @param owner {@link IOwner.owner}
+ * @param customer {@link customer}
  */
-export interface IShoppingCart<Owner extends IID> extends IID, IOwner<Owner> {}
+export interface IShoppingCart<Customer extends IID> extends ITimestamp {
+  /**
+   * Associated customer
+   */
+  customer: Customer;
+}

@@ -1,15 +1,21 @@
-import { IID, IName } from '../../common';
-import { IOwner } from '../../common/owner';
+import { IID } from '../../common';
+import { ILink } from './link';
 
 /**
  * Store image name and url
- * @param id {@link IName.id}
- * @param name {@link IName.name}
- * @param owner {@link IOwner.owner}
+ * @param id {@link ILink.id}
+ * @param imageName {@link imageName}
+ * @param href {@link ILink.href}
+ * @param owner {@link Owner}
  */
-export interface IImg<Owner extends IID> extends IID, IName, IOwner<Owner> {
+export interface IImg<Owner extends IID> extends ILink {
   /**
-   * Image location url
+   * Image name
    */
-  href: string;
+  imageName: string;
+  
+  /**
+   * Whose image is this?
+   */
+  owner: Owner;
 }

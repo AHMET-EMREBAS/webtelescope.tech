@@ -1,20 +1,20 @@
-import { IID, ITarget, ITitleDescription } from '../../common';
+import { IID } from '../../common';
 import { Range10 } from '../common';
 
 /**
  * @param id {@link IID.id}
- * @param name {@link IName.name}
- * @param description {@link description}
+ * @param taskTitle {@link taskTitle}
+ * @param taskDescription {@link taskDescription}
  * @param due {@link due}
  * @param status {@link status}
  * @param tags {@link Tag}
  * @param assignees {@link assignees} User
- * @param target {@link ITarget.target} Sprint
+ * @param sprint {@link Sprint} Sprint
  */
-export interface ITask<Target extends IID, User extends IID, Tag extends IID>
-  extends IID,
-    ITitleDescription,
-    ITarget<Target> {
+export interface ITask<Sprint extends IID, User extends IID, Tag extends IID>
+  extends IID {
+  taskTitle: string;
+  taskDescription: string;
   /**
    * Task status
    */
@@ -44,4 +44,6 @@ export interface ITask<Target extends IID, User extends IID, Tag extends IID>
    * Associated users for this task
    */
   assignees: User[];
+
+  sprint: Sprint;
 }

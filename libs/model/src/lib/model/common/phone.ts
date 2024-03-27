@@ -4,6 +4,6 @@ import { IValue } from './value';
 /**
  * @param id {@link IID.id}
  * @param value {@link value} Phone number
- * @param owner {@link IOwner.owner}
+ * @param owner {@link IValue.owner}
  */
 export interface IPhone<Owner extends IID> extends IValue<Owner, string> {}

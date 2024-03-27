@@ -1,4 +1,4 @@
-import { IID, IName } from '../../common';
+import { IID } from '../../common';
 
 /**
  * Price level allows us to create multiple prices based on store, and customer profile,
@@ -6,6 +6,8 @@ import { IID, IName } from '../../common';
  * Each store might have different price for a product.
  * Each price is associated with a price level.
  * @param id {@link IID.id}
- * @param name {@link IName.name}
+ * @param priceLevelName {@link priceLevelName}
  */
-export interface IPriceLevel extends IID, IName {}
+export interface IPriceLevel extends IID {
+  priceLevelName: string;
+}

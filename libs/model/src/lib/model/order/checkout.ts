@@ -1,4 +1,4 @@
-import { IID, IOwner } from '../../common';
+import { IID } from '../../common';
 
 /**
  * @type success means payment is successful.
@@ -25,8 +25,7 @@ export interface ICheckout<
   Employee extends IID,
   Customer extends IID,
   ShoppingCart extends IID
-> extends IID,
-    IOwner<Customer> {
+> extends IID {
   /**
    * Total price of the items in the shopping cart
    */
@@ -65,6 +64,11 @@ export interface ICheckout<
    * Associated shopping cart
    */
   shoppingCart: ShoppingCart;
+
+  /**
+   * Associated Customer
+   */
+  customer: Customer;
 
   /**
    * Associated employee

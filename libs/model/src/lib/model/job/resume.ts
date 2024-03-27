@@ -1,10 +1,11 @@
-import { INameDescription, IOwner } from '../../common';
+import { IID } from '../../common';
 
-export interface IResume<Owner, Experience, Address, Phone, Email>
-  extends IOwner<Owner>,
-    INameDescription {
-  experiences: Experience[];
-  address: Address;
-  phone: Phone;
-  email: Email;
+/**
+ * @param id {@link IID.id}
+ * @param user {@link User}
+ * @param resumeName {@link resumeName}
+ */
+export interface IResume<User extends IID> {
+  resumeName: string;
+  user: User;
 }

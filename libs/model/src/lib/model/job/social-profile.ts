@@ -1,5 +1,10 @@
-import { IDomain, IID } from '../../common';
+import { IID } from '../../common';
 
-export interface ISocialProfile extends IID, IDomain {
+/**
+ * @param id {@link IID.id}
+ * @param profileLink {@link profileLink}
+ */
+export interface ISocialProfile<User extends IID> extends IID {
   profileLink: string;
+  user:User
 }

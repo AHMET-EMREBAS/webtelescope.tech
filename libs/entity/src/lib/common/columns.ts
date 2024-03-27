@@ -12,6 +12,10 @@ export function NameColumn(): PropertyDecorator {
   return Column({ type: 'varchar', unique: true });
 }
 
+export function UniqueTextColumn(): PropertyDecorator {
+  return Column({ type: 'varchar', unique: true });
+}
+
 /**
  * Nullable text column
  * @returns PropertyDecorator {@link Column}

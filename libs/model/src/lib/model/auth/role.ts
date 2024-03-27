@@ -1,12 +1,13 @@
-import { IID, IName } from '../../common';
+import { IID } from '../../common';
 
 /**
  * User role
  * @param id {@link IID.id}
- * @param name {@link IName.name}
+ * @param role {@link role}
  * @param permissions {@link Permission}
  */
-export interface IRole<Permission> extends IName, IID {
+export interface IRole<Permission> extends IID {
+  role: string;
   /**
    * List of permissions
    */

@@ -1,6 +1,10 @@
-import { IDescription, IID, ITarget } from '../../common';
+import { IDescription, IID } from '../../common';
 
-export interface IAccomplishment<Target>
-  extends IID,
-    IDescription,
-    ITarget<Target> {}
+/**
+ * @param id {@link IID.id}
+ * @param description {@link IDescription.description}
+ * @param occupation {@link Occupation}
+ */
+export interface IAccomplishment<Occupation> extends IID, IDescription {
+  occupation: Occupation;
+}

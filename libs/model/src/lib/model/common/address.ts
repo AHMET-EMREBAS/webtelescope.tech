@@ -1,5 +1,4 @@
 import { IID } from '../../common';
-import { IOwner } from '../../common';
 
 /**
  * Store address of a user, customer, or organization
@@ -11,7 +10,7 @@ import { IOwner } from '../../common';
  * @param country {@link country}
  * @param owner {@link IOwner.owner}
  */
-export interface IAddress<Owner extends IID> extends IID, IOwner<Owner> {
+export interface IAddress<User extends IID> extends IID {
   /**
    * street proeprty
    **/
@@ -42,4 +41,9 @@ export interface IAddress<Owner extends IID> extends IID, IOwner<Owner> {
    * country property
    */
   country: string;
+
+  /**
+   * Whose address is this?
+   */
+  user: User;
 }

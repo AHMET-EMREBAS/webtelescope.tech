@@ -7,7 +7,8 @@ import { ICredentials, IID, ITimestamp } from '../../common';
  * @param id {@link id}
  * @param username {@link ICredentials.username}
  * @param password {@link ICredentials.password}
- * @param type {@link type}
+ * @param organization {@link Organization}
+ * @param priceLevel {@link priceLevel}
  * @param createdAt {@link ITimestamp.createdAt}
  * @param updatedAt {@link ITimestamp.updatedAt}
  * @param deletedAt {@link ITimestamp.deletedAt}
