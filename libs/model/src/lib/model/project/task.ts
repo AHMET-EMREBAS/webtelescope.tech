@@ -1,4 +1,4 @@
-import { IID } from '../../common';
+import { IID, ITimestamp } from '../../common';
 import { Range10 } from '../common';
 
 /**
@@ -12,7 +12,8 @@ import { Range10 } from '../common';
  * @param sprint {@link Sprint} Sprint
  */
 export interface ITask<Sprint extends IID, User extends IID, Tag extends IID>
-  extends IID {
+  extends IID,
+    ITimestamp {
   taskTitle: string;
   taskDescription: string;
   /**

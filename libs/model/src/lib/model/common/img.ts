@@ -8,12 +8,12 @@ import { ILink } from './link';
  * @param href {@link ILink.href}
  * @param owner {@link Owner}
  */
-export interface IImg<Owner extends IID> extends ILink {
+export interface IImg<Owner extends IID> extends ILink<Owner> {
   /**
-   * Image name
+   * Image name or description.
    */
   imageName: string;
-  
+
   /**
    * Whose image is this?
    */

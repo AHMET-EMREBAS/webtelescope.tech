@@ -1,9 +1,18 @@
 import { IID } from '../../common';
-import { IValue } from './value';
 
 /**
  * @param id {@link IID.id}
- * @param value {@link value} Email address
- * @param owner {@link IValue.owner}
+ * @param email {@link email}
+ * @param user {@link User}
  */
-export interface IEmail<User extends IID> extends IValue<User, string> {}
+export interface IEmail<User extends IID> {
+  /**
+   * Email address that belongs to the user
+   */
+  email: string;
+
+  /**
+   * The user who owns the email address.
+   */
+  user: User;
+}

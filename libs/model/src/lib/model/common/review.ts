@@ -12,8 +12,8 @@ import { Range5 } from './range';
  * @param updatedAt {@link ITimestamp.updatedAt}
  * @param deletedAt {@link ITimestamp.deletedAt}
  */
-export interface IReview<Owner extends IID, Target extends IID>
-  extends IComment<Owner, Target> {
+export interface IReview<User extends IID, Target extends IID>
+  extends IComment<User, Target> {
   /**
    * Rate 1 to 5
    */

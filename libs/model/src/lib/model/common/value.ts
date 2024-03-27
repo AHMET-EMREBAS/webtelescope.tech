@@ -5,7 +5,7 @@ import { IID } from '../../common';
  *
  * @param id {@link IID.id}
  * @param value {@link value}
- * @param owner {@link IOwner.owner}
+ * @param owner {@link Owner}
  */
 export interface IValue<Owner, Value> extends IID {
   /**

@@ -1,9 +1,11 @@
 import { IID } from '../../common';
-import { IValue } from './value';
 
 /**
  * @param id {@link IID.id}
- * @param value {@link value} Phone number
- * @param owner {@link IValue.owner}
+ * @param phone {@link phone}
+ * @param user {@link User}
  */
-export interface IPhone<Owner extends IID> extends IValue<Owner, string> {}
+export interface IPhone<User extends IID> {
+  phone: string;
+  user: User;
+}

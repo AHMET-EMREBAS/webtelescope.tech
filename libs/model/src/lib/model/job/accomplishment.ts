@@ -1,10 +1,11 @@
-import { IDescription, IID } from '../../common';
+import { IID } from '../../common';
 
 /**
  * @param id {@link IID.id}
- * @param description {@link IDescription.description}
+ * @param description {@link description}
  * @param occupation {@link Occupation}
  */
-export interface IAccomplishment<Occupation> extends IID, IDescription {
-  occupation: Occupation;
+export interface IAccomplishment<JobTitle> extends IID {
+  description: string;
+  jobTitle: JobTitle;
 }

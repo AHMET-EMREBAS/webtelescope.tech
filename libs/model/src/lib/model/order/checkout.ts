@@ -1,4 +1,4 @@
-import { IID } from '../../common';
+import { IID, ITimestamp } from '../../common';
 
 /**
  * @type success means payment is successful.
@@ -25,7 +25,8 @@ export interface ICheckout<
   Employee extends IID,
   Customer extends IID,
   ShoppingCart extends IID
-> extends IID {
+> extends IID,
+    ITimestamp {
   /**
    * Total price of the items in the shopping cart
    */
