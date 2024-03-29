@@ -8,20 +8,20 @@ import { v4 } from 'uuid';
  * Unique name column
  * @returns PropertyDecorator {@link Column}
  */
-export function NameColumn(): PropertyDecorator {
-  return Column({ type: 'varchar', unique: true });
+export function NameColumn(nullable = false): PropertyDecorator {
+  return Column({ type: 'varchar', unique: true, nullable });
 }
 
-export function UniqueTextColumn(): PropertyDecorator {
-  return Column({ type: 'varchar', unique: true });
+export function UniqueTextColumn(nullable = true): PropertyDecorator {
+  return Column({ type: 'varchar', unique: true, nullable });
 }
 
 /**
  * Nullable text column
  * @returns PropertyDecorator {@link Column}
  */
-export function TextColumn(): PropertyDecorator {
-  return Column({ type: 'varchar', nullable: true });
+export function TextColumn(nullable = true): PropertyDecorator {
+  return Column({ type: 'varchar', nullable });
 }
 
 /**
@@ -32,6 +32,10 @@ export function TextColumn(): PropertyDecorator {
  */
 export function NumberColumn(nullable = true) {
   return Column({ type: 'numeric', nullable });
+}
+
+export function BooleanColumn(defaultValue = false) {
+  return Column({ type: 'boolean', nullable: true, default: defaultValue });
 }
 
 /**
@@ -50,6 +54,21 @@ export function ObjectColumn(nullable = true) {
       },
       from(value) {
         return value && JSON.parse(value);
+      },
+    },
+  });
+}
+
+export function DateColumn(nullable = true) {
+  return Column({
+    type: 'varchar',
+    nullable,
+    transformer: {
+      to(value: Date) {
+        return value.toISOString();
+      },
+      from(value: string) {
+        return new Date(value);
       },
     },
   });

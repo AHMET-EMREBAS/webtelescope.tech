@@ -9,10 +9,15 @@ import { Range10 } from '../common';
  * @param status {@link status}
  * @param tags {@link Tag}
  * @param assignees {@link assignees} User
- * @param sprint {@link Sprint} Sprint
+ * @param sprint {@link Sprint}
+ * @param project {@link Project}
  */
-export interface ITask<Sprint extends IID, User extends IID, Tag extends IID>
-  extends IID,
+export interface ITask<
+  Project extends IID,
+  Sprint extends IID,
+  User extends IID,
+  Tag extends IID
+> extends IID,
     ITimestamp {
   taskTitle: string;
   taskDescription: string;
@@ -47,4 +52,6 @@ export interface ITask<Sprint extends IID, User extends IID, Tag extends IID>
   assignees: User[];
 
   sprint: Sprint;
+
+  project: Project;
 }
