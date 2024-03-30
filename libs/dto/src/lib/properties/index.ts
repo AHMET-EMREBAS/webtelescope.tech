@@ -4,4 +4,4 @@ export * from './date';
 export * from './number';
 export * from './object';
 export * from './required';
-export * from './text';
+export * from './string';
