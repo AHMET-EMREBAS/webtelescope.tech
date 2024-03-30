@@ -1,4 +1,4 @@
-import { ValidationOptions, isDateString } from 'class-validator';
+import { IsDate, ValidationOptions, isDateString } from 'class-validator';
 import { CommonPropertyOptions } from './common-options';
 import { ApiProperty } from '@nestjs/swagger';
 import { applyDecorators } from '@nestjs/common';
@@ -23,6 +23,7 @@ export function DateProperty(
       default: defaultValue,
     }),
     IsRequired(required, vo),
+    IsDate(),
     Transform(({ value }) => {
       if (defaultValue) {
         if (isDateString(value)) {

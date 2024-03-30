@@ -2,7 +2,7 @@ import { IsNotEmpty, IsOptional, ValidationOptions } from 'class-validator';
 
 export function IsRequired(
   required: boolean | undefined,
-  validationOptions: ValidationOptions
+  validationOptions?: ValidationOptions
 ) {
   return required === true
     ? IsNotEmpty(validationOptions)
