@@ -8,6 +8,12 @@ import {
   TimestampEntity,
   Entity,
 } from '@webpackages/typeorm';
+import {
+  AddressEntity,
+  EmailEntity,
+  ImageEntity,
+  RecordEntity,
+} from '../common';
 
 @Entity()
 export class Customer
@@ -19,3 +25,15 @@ export class Customer
   @NameColumn() username!: string;
   @PasswordColumn() password!: string;
 }
+
+@Entity()
+export class CustomerEmail extends EmailEntity(Customer) {}
+
+@Entity()
+export class CustomerAddress extends AddressEntity(Customer) {}
+
+@Entity()
+export class CustomerImage extends ImageEntity(Customer) {}
+
+@Entity()
+export class CustomerRecord extends RecordEntity(Customer) {}

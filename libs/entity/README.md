@@ -1,11 +1,23 @@
 # entity
 
-This library was generated with [Nx](https://nx.dev).
+This library provides a set of predefined typeorm entities.
 
-## Building
+- auth
 
-Run `nx build entity` to build the library.
+  - organization
+  - user
+  - role
+  - permission
+  - session
+  - subscription
+  - user-address
+  - user-email
+  - user-image
+  - user-phone
+  - user-profile
+  - user-record
 
-## Running unit tests
-
-Run `nx test entity` to execute the unit tests via [Jest](https://jestjs.io).
+- Blog
+  - article
+  - blog
+  - content

@@ -8,7 +8,7 @@ import { IID } from '../../common';
  * @param state {@link state}
  * @param zip {@link zip}
  * @param country {@link country}
- * @param owner {@link IOwner.owner}
+ * @param user {@link user}
  */
 export interface IAddress<User extends IID> extends IID {
   /**
