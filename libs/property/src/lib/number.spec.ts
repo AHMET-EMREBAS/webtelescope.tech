@@ -27,6 +27,7 @@ describe('Number Property Decorator', () => {
     ${{ required: true } as NPO} | ${{ val: true }}     | ${['isNumber']}
     ${{ required: true } as NPO} | ${{}}                | ${['isNotEmpty']}
     ${{ required: true } as NPO} | ${{ val: 1 } as ITS} | ${undefined}
+    ${{ required: true } as NPO} | ${{ val: '1' }}      | ${undefined}
     ${{ minimum: 1 } as NPO}     | ${{ val: 1 } as ITS} | ${undefined}
     ${{ maximum: 1 } as NPO}     | ${{ val: 1 } as ITS} | ${undefined}
     ${{ minimum: 1 } as NPO}     | ${{ val: 0 } as ITS} | ${['min']}

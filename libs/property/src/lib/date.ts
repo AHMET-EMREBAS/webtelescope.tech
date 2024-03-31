@@ -27,12 +27,16 @@ export function DateProperty(
     IsRequired(required, vo),
     IsDate(),
     Transform(({ value }) => {
-      if (defaultValue) {
-        if (isDateString(value)) {
-          return new Date(value);
+      if (value == undefined) {
+        if (defaultValue != undefined) {
+          return defaultValue;
         }
-        return defaultValue;
       }
+
+      if (isDateString(value)) {
+        return new Date(value);
+      }
+
       return value;
     }),
     Expose(),

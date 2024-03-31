@@ -49,8 +49,8 @@ export function StringProperty(options: StringPropertyOptions) {
     IsRequired(required, vo),
     IsString(vo),
     Transform(({ value }) => {
-      if (defaultValue) {
-        if (!value) {
+      if (value == undefined) {
+        if (defaultValue) {
           return defaultValue;
         }
       }

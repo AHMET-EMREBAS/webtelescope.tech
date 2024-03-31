@@ -24,8 +24,8 @@ export function BooleanProperty(options: BooleanPropertyOptions = {}) {
     }),
     IsRequired(required, vo),
     Transform(({ value }) => {
-      if (value === undefined) {
-        if (defaultValue !== undefined) {
+      if (value == undefined) {
+        if (defaultValue != undefined) {
           return defaultValue;
         }
       }

@@ -53,12 +53,17 @@ export function NumberProperty(
     }),
     IsRequired(required, vo),
     Transform(({ value }) => {
-      if (defaultValue) {
-        if (isNumberString(value)) {
-          return parseFloat(value);
-        }
-        return defaultValue;
+      
+      if (isNumberString(value)) {
+        return parseFloat(value);
       }
+
+      if (value == undefined) {
+        if (defaultValue != undefined) {
+          return defaultValue;
+        }
+      }
+
       return value;
     }),
     isInt ? IsInt(vo) : IsNumber(undefined, vo),

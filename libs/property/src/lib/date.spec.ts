@@ -20,13 +20,14 @@ const NO_ERROR = undefined;
 
 describe('Date Property Decorator', () => {
   it.each`
-    options                          | value                  | errors
-    ${{} as Options}                 | ${{} as ITS}           | ${NO_ERROR}
-    ${{ required: true } as Options} | ${{} as ITS}           | ${['isNotEmpty']}
-    ${{ required: true } as Options} | ${{ val: new Date() }} | ${NO_ERROR}
-    ${{ required: true } as Options} | ${{ val: '' }}         | ${['isDate']}
-    ${{ required: true } as Options} | ${{ val: 1 }}          | ${['isDate']}
-    ${{ required: true } as Options} | ${{ val: true }}       | ${['isDate']}
+    options                          | value                                | errors
+    ${{} as Options}                 | ${{} as ITS}                         | ${NO_ERROR}
+    ${{} as Options}                 | ${{ val: new Date().toISOString() }} | ${NO_ERROR}
+    ${{ required: true } as Options} | ${{} as ITS}                         | ${['isNotEmpty']}
+    ${{ required: true } as Options} | ${{ val: new Date() }}               | ${NO_ERROR}
+    ${{ required: true } as Options} | ${{ val: '' }}                       | ${['isDate']}
+    ${{ required: true } as Options} | ${{ val: 1 }}                        | ${['isDate']}
+    ${{ required: true } as Options} | ${{ val: true }}                     | ${['isDate']}
   `('$options | $value | $errors', ({ options, value, errors }) => {
     const vErrors = tav(options, value);
 
