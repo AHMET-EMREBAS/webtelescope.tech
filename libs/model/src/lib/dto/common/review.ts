@@ -1,5 +1,5 @@
 import { IID } from '../../common';
 import { IReview } from '../../model';
 
-export interface ICreateReview
+export interface ICreateReviewDto
   extends Pick<IReview<IID, IID>, 'comment' | 'rate' | 'user' | 'target'> {}

@@ -2,14 +2,14 @@ import { IID } from '../../common';
 
 /**
  * @param id {@link IID.id}
- * @param href {@link href}
+ * @param href {@link url}
  * @param owner {@link Owner}
  */
-export interface ILink<Owner> extends IID {
+export interface IURL<Owner> extends IID {
   /**
    * Url
    */
-  href: string;
+  url: string;
   
   /**
    * Owner of the link

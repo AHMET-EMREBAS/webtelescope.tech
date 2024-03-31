@@ -1,3 +1,2 @@
 // @index('./*', f => `export * from '${f.path}'`)
-
-export const ___SOME = '';
+export * from './customer'

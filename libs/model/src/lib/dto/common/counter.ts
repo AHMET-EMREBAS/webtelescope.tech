@@ -1,6 +1,8 @@
 import { IID } from '../../common';
 import { ICounter } from '../../model';
 
-
-export interface ICreateCounter
+/**
+ * @ref {@link ICounter}
+ */
+export interface ICreateCounterDto
   extends Pick<ICounter<IID, IID>, 'user' | 'target'> {}

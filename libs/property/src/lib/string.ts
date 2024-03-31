@@ -6,6 +6,7 @@ import {
   IsPhoneNumber,
   IsString,
   IsStrongPassword,
+  IsUrl,
   Length,
   MaxLength,
   MinLength,
@@ -17,7 +18,7 @@ import { CommonPropertyOptions } from './common-options';
 export type StringPropertyOptions = {
   minLength?: number;
   maxLength?: number;
-  format?: 'email' | 'password' | 'barcode';
+  format?: 'email' | 'password' | 'barcode' | 'phone' | 'uri';
 } & CommonPropertyOptions<string>;
 
 export function StringProperty(options: StringPropertyOptions) {
@@ -68,6 +69,8 @@ export function StringProperty(options: StringPropertyOptions) {
     des.push(IsStrongPassword(undefined, vo));
   } else if (format === 'phone') {
     des.push(IsPhoneNumber(undefined, vo));
+  } else if (format === 'uri') {
+    des.push(IsUrl({}, vo));
   }
 
   // String specific contraints
@@ -77,55 +80,95 @@ export function StringProperty(options: StringPropertyOptions) {
   return applyDecorators(...des);
 }
 
+export type NamePropertyOptions = Pick<CommonPropertyOptions, 'isArray'>;
+export type ShortTextPropertyOptions = NamePropertyOptions;
+export type LongTextPropertyOptions = NamePropertyOptions;
+export type EmailPropertyOptions = NamePropertyOptions;
+export type PhonePropertyOptions = NamePropertyOptions;
+export type BarcodePropertyOptions = NamePropertyOptions;
+export type URLPropertyOptions = NamePropertyOptions;
+
 /**
  * Required name property decorator
- * @returns
  */
-export function NameProperty() {
+export function NameProperty(options: NamePropertyOptions = {}) {
   return StringProperty({
     required: true,
     maxLength: 30,
     minLength: 3,
     description: 'Required name property',
+    ...options,
   });
 }
 
 /**
- * Short string property decorator
- * @returns
+ * Optional short string property decorator
  */
-export function ShortTextProperty() {
+export function ShortTextProperty(options: ShortTextPropertyOptions = {}) {
   return StringProperty({
     maxLength: 400,
-    description: 'Maximu 400 characters string property',
+    description: 'Maximum 400 characters string property',
+    ...options,
+  });
+}
+
+/**
+ * Optional text property
+ */
+export function OptionalTextProperty(options: ShortTextPropertyOptions = {}) {
+  return StringProperty({
+    maxLength: 1000,
+    description: 'Optional text property',
+    required: false,
+    ...options,
+  });
+}
+
+export function RequiredTextProperty() {
+  return StringProperty({
+    maxLength: 1000,
+    description: 'Required text property',
+    required: true,
+    minLength: 1,
   });
 }
 
 /**
  * Long string property decorator
- * @returns
  */
-export function LongTextProperty() {
+export function LongTextProperty(options: LongTextPropertyOptions = {}) {
   return StringProperty({
     maxLength: 1000,
     description: 'Maximum 1000 characters string property',
+    ...options,
   });
 }
 
 /**
  * Requird email property decorator
- * @returns
  */
-export function EmailProperty() {
+export function EmailProperty(options: EmailPropertyOptions = {}) {
   return StringProperty({
     format: 'email',
     required: true,
     description: 'Email property',
+    ...options,
+  });
+}
+
+/**
+ * Requird email property decorator
+ */
+export function PhoneProperty(options: PhonePropertyOptions = {}) {
+  return StringProperty({
+    format: 'phone',
+    required: true,
+    description: 'Phone property',
+    ...options,
   });
 }
 /**
  * Requird password property decorator
- * @returns
  */
 export function PasswordProperty() {
   return StringProperty({
@@ -136,12 +179,21 @@ export function PasswordProperty() {
 }
 /**
  * Requird barcode property decorator
- * @returns
  */
-export function BarcodeProperty() {
+export function BarcodeProperty(options: BarcodePropertyOptions = {}) {
   return StringProperty({
     format: 'barcode',
     required: true,
     description: 'Barcode property',
+    ...options,
+  });
+}
+
+export function URLProperty(options: URLPropertyOptions = {}) {
+  return StringProperty({
+    format: 'uri',
+    required: true,
+    description: 'URI value',
+    ...options,
   });
 }

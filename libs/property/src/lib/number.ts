@@ -53,7 +53,6 @@ export function NumberProperty(
     }),
     IsRequired(required, vo),
     Transform(({ value }) => {
-      
       if (isNumberString(value)) {
         return parseFloat(value);
       }

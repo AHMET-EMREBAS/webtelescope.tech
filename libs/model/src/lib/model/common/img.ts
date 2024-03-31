@@ -1,14 +1,14 @@
 import { IID } from '../../common';
-import { ILink } from './link';
+import { IURL } from './link';
 
 /**
  * Store image name and url
- * @param id {@link ILink.id}
+ * @param id {@link IURL.id}
  * @param imageName {@link imageName}
- * @param href {@link ILink.href}
+ * @param href {@link IURL.url}
  * @param owner {@link Owner}
  */
-export interface IImg<Owner extends IID> extends ILink<Owner> {
+export interface IImg<Owner extends IID> extends IURL<Owner> {
   /**
    * Image name or description.
    */

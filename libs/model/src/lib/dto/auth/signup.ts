@@ -8,7 +8,7 @@ import { ICredentials, IID } from '../../common';
  * @param username {@link ICredentials.username}
  * @param password {@link ICredentials.password}
  * @param organizationName {@link organizationName}
- * @param subscriptionType {@link subscriptionType}
+ * @param subscription {@link subscription}
  */
 export interface ISignupDto extends ICredentials {
   /**
@@ -19,5 +19,5 @@ export interface ISignupDto extends ICredentials {
   /**
    * Subscription type
    */
-  subscriptionType: IID;
+  subscription: IID;
 }
