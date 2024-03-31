@@ -1,15 +1,15 @@
 import { IProduct } from '@webpackages/model';
 import {
-  NameDescriptionEntity,
   UniqueTextColumn,
-  WithTimestampEntity,
-} from '../common';
-import { Entity } from 'typeorm';
+  Entity,
+  TimestampEntity,
+  NameColumn,
+  TextColumn,
+} from '@webpackages/typeorm';
 
 @Entity()
-export class Product
-  extends WithTimestampEntity(NameDescriptionEntity)
-  implements IProduct
-{
+export class Product extends TimestampEntity implements IProduct {
+  @NameColumn() productName!: string;
+  @TextColumn() productDescription!: string;
   @UniqueTextColumn() barcode!: string;
 }

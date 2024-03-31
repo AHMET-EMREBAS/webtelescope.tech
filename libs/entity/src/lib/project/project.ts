@@ -1,6 +1,5 @@
 import { IProject } from '@webpackages/model';
-import { NameColumn, TimestampEntity } from '../common';
-import { Entity } from 'typeorm';
+import { NameColumn, TimestampEntity, Entity } from '@webpackages/typeorm';
 
 @Entity()
 export class Project extends TimestampEntity implements IProject {

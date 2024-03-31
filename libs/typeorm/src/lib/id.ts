@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Type } from '@nestjs/common';
-import { IID } from '@webpackages/model';
 import { PrimaryGeneratedColumn } from 'typeorm';
+import { IID } from './types';
 
 /**
  * @param id {@link id}

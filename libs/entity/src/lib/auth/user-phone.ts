@@ -1,7 +1,11 @@
 import { IPhone } from '@webpackages/model';
-import { OwnerRelation, TextColumn, TimestampEntity } from '../common';
+import {
+  OwnerRelation,
+  TextColumn,
+  TimestampEntity,
+  Entity,
+} from '@webpackages/typeorm';
 import { User } from './user';
-import { Entity } from 'typeorm';
 
 @Entity()
 export class UserPhone extends TimestampEntity implements IPhone<User> {

@@ -1,8 +1,8 @@
 import { Column, JoinColumn, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
 import { Type, applyDecorators } from '@nestjs/common';
-import { IID } from '@webpackages/model';
 import { hashSync, genSaltSync } from 'bcrypt';
 import { v4 } from 'uuid';
+import { IID } from './types';
 
 /**
  * Unique name column

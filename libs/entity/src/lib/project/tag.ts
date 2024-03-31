@@ -1,6 +1,5 @@
 import { ITag } from '@webpackages/model';
-import { IDEntity, NameColumn } from '../common';
-import { Entity } from 'typeorm';
+import { IDEntity, NameColumn, Entity } from '@webpackages/typeorm';
 
 @Entity()
 export class Tag extends IDEntity implements ITag {

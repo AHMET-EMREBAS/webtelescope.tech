@@ -1,7 +1,11 @@
 import { IContent } from '@webpackages/model';
-import { IDEntity, OwnerRelation, TextColumn } from '../common';
+import {
+  IDEntity,
+  OwnerRelation,
+  TextColumn,
+  Entity,
+} from '@webpackages/typeorm';
 import { Article } from './article';
-import { Entity } from 'typeorm';
 
 @Entity()
 export class Content extends IDEntity implements IContent<Article> {

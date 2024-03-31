@@ -1,6 +1,6 @@
 import { ITask, Range10 } from '@webpackages/model';
 import { Sprint } from './sprint';
-import { Entity } from 'typeorm';
+
 import { User } from '../auth';
 import { Tag } from './tag';
 import {
@@ -12,7 +12,8 @@ import {
   OwnerRelation,
   TextColumn,
   TimestampEntity,
-} from '../common';
+  Entity,
+} from '@webpackages/typeorm';
 import { Project } from './project';
 
 @Entity()

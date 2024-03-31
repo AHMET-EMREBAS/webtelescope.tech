@@ -1,5 +1,4 @@
-import { Entity } from 'typeorm';
-import { OwnerRelation, TimestampEntity } from '../common';
+import { OwnerRelation, TimestampEntity, Entity } from '@webpackages/typeorm';
 import { User } from './user';
 
 @Entity()

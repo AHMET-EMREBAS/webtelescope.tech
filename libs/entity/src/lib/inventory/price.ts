@@ -1,8 +1,14 @@
 import { IPrice } from '@webpackages/model';
 import { Sku } from './sku';
 import { PriceLevel } from './price-level';
-import { NumberColumn, OwnerRelation, TimestampEntity } from '../common';
+import {
+  NumberColumn,
+  OwnerRelation,
+  TimestampEntity,
+  Entity,
+} from '@webpackages/typeorm';
 
+@Entity()
 export class Price extends TimestampEntity implements IPrice<PriceLevel, Sku> {
   @NumberColumn() price!: number;
   @NumberColumn() cost!: number;

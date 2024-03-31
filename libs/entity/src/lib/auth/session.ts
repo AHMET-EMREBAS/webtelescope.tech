@@ -4,8 +4,9 @@ import {
   OwnerRelation,
   TextColumn,
   TimestampEntity,
-} from '../common';
-import { Entity } from 'typeorm';
+  Entity,
+} from '@webpackages/typeorm';
+
 import { User } from './user';
 
 @Entity()

@@ -1,7 +1,11 @@
 import { IRecord } from '@webpackages/model';
-import { ObjectColumn, OwnerRelation, TimestampEntity } from '../common';
+import {
+  ObjectColumn,
+  OwnerRelation,
+  TimestampEntity,
+  Entity,
+} from '@webpackages/typeorm';
 import { User } from './user';
-import { Entity } from 'typeorm';
 
 @Entity()
 export class UserRecord extends TimestampEntity implements IRecord<User> {

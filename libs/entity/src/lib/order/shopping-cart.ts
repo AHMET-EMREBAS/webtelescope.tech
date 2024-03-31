@@ -1,9 +1,11 @@
 import { IShoppingCart } from '@webpackages/model';
 import { Customer } from '../customer';
-import { OwnerRelation, TimestampEntity } from '../common';
-import { Entity } from 'typeorm';
+import { OwnerRelation, TimestampEntity, Entity } from '@webpackages/typeorm';
 
 @Entity()
-export class ShoppingCart extends TimestampEntity implements IShoppingCart<Customer> {
+export class ShoppingCart
+  extends TimestampEntity
+  implements IShoppingCart<Customer>
+{
   @OwnerRelation(Customer) customer!: Customer;
 }

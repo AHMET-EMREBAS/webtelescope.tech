@@ -1,6 +1,5 @@
 import { IPriceLevel } from '@webpackages/model';
-import { IDEntity, NameColumn } from '../common';
-import { Entity } from 'typeorm';
+import { IDEntity, NameColumn, Entity } from '@webpackages/typeorm';
 
 @Entity()
 export class PriceLevel extends IDEntity implements IPriceLevel {

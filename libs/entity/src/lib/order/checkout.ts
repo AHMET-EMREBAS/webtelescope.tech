@@ -5,8 +5,8 @@ import {
   OwnerRelation,
   TextColumn,
   TimestampEntity,
-} from '../common';
-import { Entity } from 'typeorm';
+  Entity,
+} from '@webpackages/typeorm';
 import { User } from '../auth';
 import { Customer } from '../customer';
 import { ShoppingCart } from './shopping-cart';

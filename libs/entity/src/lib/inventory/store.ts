@@ -1,5 +1,9 @@
-import { Entity } from 'typeorm';
-import { OneRelation, TextColumn, TimestampEntity } from '../common';
+import {
+  OneRelation,
+  TextColumn,
+  TimestampEntity,
+  Entity,
+} from '@webpackages/typeorm';
 import { IStore } from '@webpackages/model';
 import { PriceLevel } from './price-level';
 

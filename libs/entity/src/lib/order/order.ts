@@ -1,8 +1,12 @@
 import { IOrder } from '@webpackages/model';
-import { Entity } from 'typeorm';
 import { Sku } from '../inventory';
 import { ShoppingCart } from './shopping-cart';
-import { NumberColumn, OwnerRelation, TimestampEntity } from '../common';
+import {
+  NumberColumn,
+  OwnerRelation,
+  TimestampEntity,
+  Entity,
+} from '@webpackages/typeorm';
 
 @Entity()
 export class Order

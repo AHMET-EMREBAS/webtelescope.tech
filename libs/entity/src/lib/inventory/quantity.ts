@@ -6,8 +6,8 @@ import {
   OwnerRelation,
   TimestampEntity,
   WithIDEntity,
-} from '../common';
-import { Entity } from 'typeorm';
+  Entity,
+} from '@webpackages/typeorm';
 
 @Entity()
 export class Quantity

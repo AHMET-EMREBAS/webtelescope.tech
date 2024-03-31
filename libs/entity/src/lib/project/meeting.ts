@@ -9,8 +9,9 @@ import {
   OneRelation,
   TextColumn,
   TimestampEntity,
-} from '../common';
-import { Entity } from 'typeorm';
+  Entity,
+} from '@webpackages/typeorm';
+
 import { User } from '../auth';
 import { Sprint } from './sprint';
 

@@ -5,10 +5,10 @@ import {
   OwnerRelation,
   PasswordColumn,
   TimestampEntity,
-} from '../common';
+  Entity,
+} from '@webpackages/typeorm';
 import { Organization } from './organization';
 import { Role } from './role';
-import { Entity } from 'typeorm';
 
 @Entity()
 export class User extends TimestampEntity implements IUser<Organization, Role> {

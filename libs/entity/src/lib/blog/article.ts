@@ -1,6 +1,10 @@
 import { IArticle } from '@webpackages/model';
-import { NameColumn, OwnerRelation, TimestampEntity } from '../common';
-import { Entity } from 'typeorm';
+import {
+  NameColumn,
+  OwnerRelation,
+  TimestampEntity,
+  Entity,
+} from '@webpackages/typeorm';
 import { Blog } from './blog';
 
 @Entity()

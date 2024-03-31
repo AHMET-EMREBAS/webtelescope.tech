@@ -6,8 +6,8 @@ import {
   OneRelation,
   PasswordColumn,
   TimestampEntity,
-} from '../common';
-import { Entity } from 'typeorm';
+  Entity,
+} from '@webpackages/typeorm';
 
 @Entity()
 export class Customer

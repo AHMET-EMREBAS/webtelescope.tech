@@ -1,10 +1,12 @@
 {
-  "name": "@webpackages/entity",
+  "name": "@webpackages/typeorm",
   "version": "0.0.1",
   "dependencies": {
     "@swc/helpers": "~0.5.2",
-    "@webpackages/model": "*",
-    "@webpackages/typeorm": "*"
+    "@nestjs/common": "^10.0.2",
+    "typeorm": "^0.3.17",
+    "bcrypt": "^5.1.1",
+    "uuid": "^9.0.1"
   },
   "type": "commonjs",
   "main": "./src/index.js",

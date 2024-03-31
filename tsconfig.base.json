@@ -22,7 +22,8 @@
       "@webpackages/gen": ["libs/gen/src/index.ts"],
       "@webpackages/material": ["libs/material/src/index.ts"],
       "@webpackages/model": ["libs/model/src/index.ts"],
-      "@webpackages/property": ["libs/property/src/index.ts"]
+      "@webpackages/property": ["libs/property/src/index.ts"],
+      "@webpackages/typeorm": ["libs/typeorm/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

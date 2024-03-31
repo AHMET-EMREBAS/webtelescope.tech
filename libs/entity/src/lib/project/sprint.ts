@@ -1,7 +1,11 @@
 import { ISprint } from '@webpackages/model';
-import { NameColumn, OwnerRelation, TimestampEntity } from '../common';
+import {
+  NameColumn,
+  OwnerRelation,
+  TimestampEntity,
+  Entity,
+} from '@webpackages/typeorm';
 import { Project } from './project';
-import { Entity } from 'typeorm';
 
 @Entity()
 export class Sprint extends TimestampEntity implements ISprint<Project> {

@@ -1,5 +1,9 @@
-import { Entity } from 'typeorm';
-import { IDEntity, ObjectColumn, OwnerRelation } from '../common';
+import {
+  IDEntity,
+  ObjectColumn,
+  OwnerRelation,
+  Entity,
+} from '@webpackages/typeorm';
 import { Sku } from './sku';
 
 @Entity()
