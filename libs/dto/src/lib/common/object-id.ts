@@ -1,7 +1,7 @@
-import { Exclude } from 'class-transformer';
 import { IID } from '@webpackages/model';
-import { PositiveIntegerProperty } from '@webpackages/property';
-@Exclude()
+import { PositiveIntegerProperty, Dto } from '@webpackages/property';
+
+@Dto()
 export class ObjectIdDto implements IID {
   @PositiveIntegerProperty()
   id!: number;
