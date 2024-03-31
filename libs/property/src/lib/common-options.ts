@@ -3,4 +3,6 @@ export type CommonPropertyOptions<DF = any> = {
   isArray?: boolean;
   required?: boolean;
   defaultValue?: DF;
+  description?: string;
+  example?: any;
 };

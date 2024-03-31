@@ -5,6 +5,7 @@ import {
   IsObject,
   ValidateNested,
   ValidationOptions,
+  isJSON,
   isObject,
 } from 'class-validator';
 import { IsRequired } from './required';
@@ -22,7 +23,8 @@ export function ObjectProperty(
     objectType: DefaultObjectType,
   }
 ) {
-  const { isArray, required, objectType, defaultValue } = options;
+  const { isArray, required, objectType, defaultValue, example, description } =
+    options;
 
   const vo: ValidationOptions = { each: isArray };
 
@@ -33,11 +35,18 @@ export function ObjectProperty(
       nullable: !required,
       default: defaultValue,
       isArray,
+      example,
+      description,
     }),
     Transform(({ value }) => {
       if (isObject(value)) {
         return value;
       }
+
+      if (isJSON(value)) {
+        return JSON.parse(value);
+      }
+
       if (defaultValue) {
         return defaultValue;
       }

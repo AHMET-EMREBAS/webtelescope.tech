@@ -18,10 +18,24 @@ export type NumberPropertyOptions = {
   isInt?: boolean;
 } & CommonPropertyOptions<number>;
 
+/**
+ * Number Property Decorator
+ * @param options {@link NumberPropertyOptions} ```` { required: true } ```` as default
+ * @returns
+ */
 export function NumberProperty(
   options: NumberPropertyOptions = { required: true }
 ) {
-  const { isArray, isInt, maximum, minimum, required, defaultValue } = options;
+  const {
+    isArray,
+    isInt,
+    maximum,
+    minimum,
+    required,
+    defaultValue,
+    example,
+    description,
+  } = options;
 
   const vo: ValidationOptions = { each: isArray };
 
@@ -34,6 +48,8 @@ export function NumberProperty(
       required,
       nullable: !required,
       default: defaultValue,
+      example,
+      description,
     }),
     IsRequired(required, vo),
     Transform(({ value }) => {
@@ -61,6 +77,11 @@ export type PositiveNumberPropertyOptions = Pick<
   'required' | 'isArray' | 'defaultValue'
 >;
 
+/**
+ * Positive Number Property Decorator
+ * @param options {@link PositiveNumberPropertyOptions} ````{ required: true }```` as default
+ * @returns
+ */
 export function PositiveNumberProperty(
   options: PositiveNumberPropertyOptions = { required: true }
 ) {
@@ -70,13 +91,18 @@ export function PositiveNumberProperty(
   });
 }
 
+export type PositiveIntegerPropertyOptions = Pick<
+  NumberPropertyOptions,
+  'required' | 'isArray' | 'defaultValue'
+>;
+
+/**
+ * Positive integer property decorator
+ * @param options {@link NumberPropertyOptions} ````{ required: true }```` by default
+ * @returns
+ */
 export function PositiveIntegerProperty(
-  options: Pick<
-    NumberPropertyOptions,
-    'required' | 'isArray' | 'defaultValue'
-  > = {
-    required: true,
-  }
+  options: PositiveIntegerPropertyOptions = { required: true }
 ) {
   return NumberProperty({
     ...options,

@@ -21,8 +21,16 @@ export type StringPropertyOptions = {
 } & CommonPropertyOptions<string>;
 
 export function StringProperty(options: StringPropertyOptions) {
-  const { format, maxLength, minLength, required, isArray, defaultValue } =
-    options;
+  const {
+    format,
+    maxLength,
+    minLength,
+    required,
+    isArray,
+    defaultValue,
+    example,
+    description,
+  } = options;
   const vo: ValidationOptions = { each: !!isArray };
 
   const des: PropertyDecorator[] = [
@@ -35,6 +43,8 @@ export function StringProperty(options: StringPropertyOptions) {
       required,
       nullable: !required,
       default: defaultValue,
+      example,
+      description,
     }),
     IsRequired(required, vo),
     IsString(vo),
@@ -72,7 +82,12 @@ export function StringProperty(options: StringPropertyOptions) {
  * @returns
  */
 export function NameProperty() {
-  return StringProperty({ required: true, maxLength: 30, minLength: 3 });
+  return StringProperty({
+    required: true,
+    maxLength: 30,
+    minLength: 3,
+    description: 'Required name property',
+  });
 }
 
 /**
@@ -80,7 +95,10 @@ export function NameProperty() {
  * @returns
  */
 export function ShortTextProperty() {
-  return StringProperty({ maxLength: 400 });
+  return StringProperty({
+    maxLength: 400,
+    description: 'Maximu 400 characters string property',
+  });
 }
 
 /**
@@ -88,7 +106,10 @@ export function ShortTextProperty() {
  * @returns
  */
 export function LongTextProperty() {
-  return StringProperty({ maxLength: 1000 });
+  return StringProperty({
+    maxLength: 1000,
+    description: 'Maximum 1000 characters string property',
+  });
 }
 
 /**
@@ -96,19 +117,31 @@ export function LongTextProperty() {
  * @returns
  */
 export function EmailProperty() {
-  return StringProperty({ format: 'email', required: true });
+  return StringProperty({
+    format: 'email',
+    required: true,
+    description: 'Email property',
+  });
 }
 /**
  * Requird password property decorator
  * @returns
  */
 export function PasswordProperty() {
-  return StringProperty({ format: 'email', required: true });
+  return StringProperty({
+    format: 'password',
+    required: true,
+    description: 'Password property',
+  });
 }
 /**
  * Requird barcode property decorator
  * @returns
  */
 export function BarcodeProperty() {
-  return StringProperty({ format: 'barcode', required: true });
+  return StringProperty({
+    format: 'barcode',
+    required: true,
+    description: 'Barcode property',
+  });
 }
