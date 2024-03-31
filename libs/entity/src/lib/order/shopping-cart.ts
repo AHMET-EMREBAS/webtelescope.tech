@@ -1,6 +1,6 @@
 import { IShoppingCart } from '@webpackages/model';
-import { Customer } from '../customer';
 import { OwnerRelation, TimestampEntity, Entity } from '@webpackages/typeorm';
+import { Customer } from '../customer';
 
 @Entity()
 export class ShoppingCart
