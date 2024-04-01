@@ -54,7 +54,7 @@ export function RecordEntity<U extends IID>(owner: Type<U>) {
 export function ImageEntity<U extends IID>(owner: Type<U>) {
   class Phone extends TimestampEntity implements IImg<U> {
     @TextColumn() imageName!: string;
-    @TextColumn() href!: string;
+    @TextColumn() url!: string;
     @OwnerRelation(owner) owner!: U;
   }
   return Phone;
