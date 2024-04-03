@@ -11,6 +11,7 @@ import {
   MaxLength,
   MinLength,
   ValidationOptions,
+  isString,
 } from 'class-validator';
 import { IsRequired } from './required';
 import { CommonPropertyOptions } from './common-options';
@@ -19,6 +20,7 @@ export type StringPropertyOptions = {
   minLength?: number;
   maxLength?: number;
   format?: 'email' | 'password' | 'barcode' | 'phone' | 'uri';
+  enum?: string[];
 } & CommonPropertyOptions<string>;
 
 export function StringProperty(options: StringPropertyOptions) {
@@ -31,6 +33,7 @@ export function StringProperty(options: StringPropertyOptions) {
     defaultValue,
     example,
     description,
+    enum: enumValue,
   } = options;
   const vo: ValidationOptions = { each: !!isArray };
 
@@ -46,6 +49,7 @@ export function StringProperty(options: StringPropertyOptions) {
       default: defaultValue,
       example,
       description,
+      enum: enumValue,
     }),
     IsRequired(required, vo),
     IsString(vo),
@@ -53,6 +57,11 @@ export function StringProperty(options: StringPropertyOptions) {
       if (value == undefined) {
         if (defaultValue) {
           return defaultValue;
+        }
+      }
+      if (isArray) {
+        if (isString(value)) {
+          return [value];
         }
       }
       return value;
@@ -80,7 +89,10 @@ export function StringProperty(options: StringPropertyOptions) {
   return applyDecorators(...des);
 }
 
-export type NamePropertyOptions = Pick<CommonPropertyOptions, 'isArray'>;
+export type NamePropertyOptions = Pick<
+  CommonPropertyOptions,
+  'isArray' | 'required'
+>;
 export type ShortTextPropertyOptions = NamePropertyOptions;
 export type LongTextPropertyOptions = NamePropertyOptions;
 export type EmailPropertyOptions = NamePropertyOptions;
@@ -96,8 +108,21 @@ export function NameProperty(options: NamePropertyOptions = {}) {
     required: true,
     maxLength: 30,
     minLength: 3,
-    description: 'Required name property',
+    description: 'Name property',
     ...options,
+  });
+}
+
+export type EnumPropertyOptions = {
+  enums: string[];
+  required?: boolean;
+};
+
+export function EnumProperty(options: EnumPropertyOptions) {
+  return StringProperty({
+    required: false,
+    ...options,
+    description: `Enum property`,
   });
 }
 

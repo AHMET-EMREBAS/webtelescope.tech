@@ -31,7 +31,7 @@ export function BooleanProperty(options: BooleanPropertyOptions = {}) {
       }
 
       if (isBooleanString(value)) {
-        return value === 'true' ? true : false;
+        return value === 'true' ? true : value === 'false' ? false : undefined;
       }
 
       return value;

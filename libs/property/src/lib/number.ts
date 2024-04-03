@@ -110,7 +110,7 @@ export function PositiveIntegerProperty(
 ) {
   return NumberProperty({
     ...options,
-    minimum: 1,
+    minimum: 0,
     isInt: true,
   });
 }
