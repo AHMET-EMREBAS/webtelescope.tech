@@ -217,7 +217,7 @@ export class RestResource {
   RemoveRelation() {
     return applyDecorators(
       RemoveRelationResponse(this.entity),
-      ApiOperation({ summary: `Remoe relation from ${this.RESOURCE_NAME}` }),
+      ApiOperation({ summary: `Remove relation from ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
       Delete(this.API_PATHS.RELATION_NAME_AND_ID_PATH)
     );
