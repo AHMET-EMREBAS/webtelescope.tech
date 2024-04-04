@@ -1,15 +1,9 @@
 import { IProduct } from '@webpackages/model';
-import {
-  UniqueTextColumn,
-  Entity,
-  TimestampEntity,
-  NameColumn,
-  TextColumn,
-} from '@webpackages/typeorm';
+import { Entity, TimestampEntity, StringColumn } from '@webpackages/typeorm';
 
 @Entity()
 export class Product extends TimestampEntity implements IProduct {
-  @NameColumn() productName!: string;
-  @TextColumn() productDescription!: string;
-  @UniqueTextColumn() barcode!: string;
+  @StringColumn({ unique: true }) productName!: string;
+  @StringColumn({}) productDescription!: string;
+  @StringColumn({ unique: true }) barcode!: string;
 }

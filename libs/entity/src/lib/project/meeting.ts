@@ -3,11 +3,10 @@ import {
   BooleanColumn,
   DateColumn,
   ManyRelation,
-  NameColumn,
+  StringColumn,
   NumberColumn,
   ObjectColumn,
   OneRelation,
-  TextColumn,
   TimestampEntity,
   Entity,
 } from '@webpackages/typeorm';
@@ -17,14 +16,14 @@ import { Sprint } from './sprint';
 
 @Entity()
 export class Meeting extends TimestampEntity implements IMeeting<User, Sprint> {
-  @NameColumn() title!: string;
-  @TextColumn() description!: string;
+  @StringColumn() title!: string;
+  @StringColumn({ required: false }) description!: string;
   @DateColumn() start!: Date;
   @NumberColumn() duration!: number;
   @ObjectColumn() goals!: string[];
   @ManyRelation(User) invitedMembers!: User[];
   @ManyRelation(User) attendantMembers!: User[];
-  @BooleanColumn() held!: boolean;
+  @BooleanColumn({ required: false }) held!: boolean;
   @OneRelation(Meeting) delayedTo!: IMeeting<User, Sprint>;
   @OneRelation(Sprint) sprint!: Sprint;
 }

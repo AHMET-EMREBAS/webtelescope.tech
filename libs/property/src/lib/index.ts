@@ -2,4 +2,4 @@
 export * from './builtin-properties'
 export * from './buitin-object-properties'
 export * from './property'
-export * from './url-query-object-property'
+export * from './url-query-property'

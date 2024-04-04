@@ -3,7 +3,7 @@ import {
   BooleanColumn,
   NumberColumn,
   OwnerRelation,
-  TextColumn,
+  StringColumn,
   TimestampEntity,
   Entity,
 } from '@webpackages/typeorm';
@@ -19,10 +19,10 @@ export class Checkout
   @NumberColumn() total!: number;
   @NumberColumn() subtotal!: number;
   @NumberColumn() tax!: number;
-  @BooleanColumn() taxexempt!: boolean;
-  @TextColumn() federalTaxExemptID!: string;
-  @TextColumn() stateTaxExemptID!: string;
-  @TextColumn() status!: CheckoutStatus;
+  @BooleanColumn({ required: false }) taxexempt!: boolean;
+  @StringColumn({ required: false }) federalTaxExemptID!: string;
+  @StringColumn({ required: false }) stateTaxExemptID!: string;
+  @StringColumn({ required: false }) status!: CheckoutStatus;
   @OwnerRelation(ShoppingCart) shoppingCart!: ShoppingCart;
   @OwnerRelation(Customer) customer!: Customer;
   @OwnerRelation(User) employee!: User;

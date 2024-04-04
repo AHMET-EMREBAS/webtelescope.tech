@@ -1,6 +1,6 @@
 import { ISprint } from '@webpackages/model';
 import {
-  NameColumn,
+  StringColumn,
   OwnerRelation,
   TimestampEntity,
   Entity,
@@ -9,6 +9,6 @@ import { Project } from './project';
 
 @Entity()
 export class Sprint extends TimestampEntity implements ISprint<Project> {
-  @NameColumn() sprintName!: string;
+  @StringColumn() sprintName!: string;
   @OwnerRelation(Project) project!: Project;
 }

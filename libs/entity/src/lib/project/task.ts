@@ -6,11 +6,10 @@ import { Tag } from './tag';
 import {
   DateColumn,
   ManyRelation,
-  NameColumn,
+  StringColumn,
   NumberColumn,
   OneRelation,
   OwnerRelation,
-  TextColumn,
   TimestampEntity,
   Entity,
 } from '@webpackages/typeorm';
@@ -21,9 +20,9 @@ export class Task
   extends TimestampEntity
   implements ITask<Project, Sprint, User, Tag>
 {
-  @NameColumn() taskTitle!: string;
-  @TextColumn() taskDescription!: string;
-  @TextColumn() status!: string;
+  @StringColumn() taskTitle!: string;
+  @StringColumn({ required: false }) taskDescription!: string;
+  @StringColumn({ required: false }) status!: string;
   @NumberColumn() difficulty!: Range10;
   @NumberColumn() priority!: Range10;
   @DateColumn() due!: Date;

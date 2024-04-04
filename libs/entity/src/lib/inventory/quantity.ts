@@ -5,15 +5,11 @@ import {
   NumberColumn,
   OwnerRelation,
   TimestampEntity,
-  WithIDEntity,
   Entity,
 } from '@webpackages/typeorm';
 
 @Entity()
-export class Quantity
-  extends WithIDEntity(TimestampEntity)
-  implements IQuantity<Sku, Store>
-{
+export class Quantity extends TimestampEntity implements IQuantity<Sku, Store> {
   @NumberColumn() quantity!: number;
   @OwnerRelation(Sku) sku!: Sku;
   @OwnerRelation(Store) store!: Store;

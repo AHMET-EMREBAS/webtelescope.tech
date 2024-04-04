@@ -1,6 +1,6 @@
 import {
   OneRelation,
-  TextColumn,
+  StringColumn,
   TimestampEntity,
   Entity,
 } from '@webpackages/typeorm';
@@ -9,6 +9,6 @@ import { PriceLevel } from './price-level';
 
 @Entity()
 export class Store extends TimestampEntity implements IStore<PriceLevel> {
-  @TextColumn() storeName!: string;
+  @StringColumn({ unique: true }) storeName!: string;
   @OneRelation(PriceLevel) priceLevel!: PriceLevel;
 }

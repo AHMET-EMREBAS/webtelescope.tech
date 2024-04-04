@@ -1,6 +1,6 @@
 import { IBlog } from '@webpackages/model';
 import {
-  NameColumn,
+  StringColumn,
   OwnerRelation,
   TimestampEntity,
   Entity,
@@ -9,6 +9,6 @@ import { User } from '../auth';
 
 @Entity()
 export class Blog extends TimestampEntity implements IBlog<User> {
-  @NameColumn() title!: string;
+  @StringColumn() title!: string;
   @OwnerRelation(User) author!: User;
 }
