@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
-import { SecurityCode, Session, User } from '@webpackages/entity';
+import { SecurityCode, Session, Signup, User } from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import {
+  ExecutionContext,
+  UnauthorizedException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
 import { compareSync } from 'bcrypt';
@@ -13,18 +17,29 @@ import {
   getRequiredRoles,
   isPublicAccess,
 } from './policy';
-import { LoginWithCodeDto, UpdatePasswordDto } from '@webpackages/dto';
+import {
+  LoginWithCodeDto,
+  SignupDto,
+  UpdatePasswordDto,
+} from '@webpackages/dto';
 import { v4 } from 'uuid';
 import { SessionPayload } from '@webpackages/model';
 import { AuthEnums } from './enums';
 
 export class AuthService {
   constructor(
-    @InjectRepository(User) protected readonly userRepo: Repository<User>,
+    @InjectRepository(User)
+    protected readonly userRepo: Repository<User>,
+
     @InjectRepository(Session)
     protected readonly sessionRepo: Repository<Session>,
+
+    @InjectRepository(Signup)
+    protected readonly signupRepo: Repository<Signup>,
+
     @InjectRepository(SecurityCode)
     private readonly tokenRepo: Repository<SecurityCode>,
+
     protected readonly reflector: Reflector,
     protected readonly jwt: JwtService
   ) {}
@@ -266,5 +281,18 @@ export class AuthService {
     if (this.userHasRoles(userRoles, roles)) return true;
 
     throw new UnauthorizedException('You do not have required role!');
+  }
+
+  async signup(signupDto: SignupDto) {
+    const found = await this.signupRepo.findOneBy({
+      username: signupDto.username,
+    });
+
+    if (found) {
+      throw new UnprocessableEntityException(
+        'The username is already in user!'
+      );
+    }
+    return await this.signupRepo.save(signupDto);
   }
 }

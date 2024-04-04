@@ -10,6 +10,8 @@ import {
   Query,
   Param,
   Body,
+  UpdateResult,
+  DeleteResult,
 } from '@webpackages/dto';
 import { ObjectIDDto } from '@webpackages/property';
 import { ApiBody } from '@nestjs/swagger';
@@ -76,18 +78,16 @@ export function CreateController<
 
     @R.Update()
     @ApiBody({ type: options.updateDto })
-    async update(query: ObjectIDDto, entity: U): Promise<E> {
+    async update(query: ObjectIDDto, entity: U): Promise<UpdateResult> {
       await this.isUniqueOrThrow(entity);
       await this.findOneById(query);
-      await this.repo.update(query.id, entity as any);
-      return await this.findOneById(query);
+      return await this.repo.update(query.id, entity as any);
     }
 
     @R.Delete()
-    async delete(@Param() query: ObjectIDDto): Promise<E> {
+    async delete(@Param() query: ObjectIDDto): Promise<DeleteResult> {
       await this.findOneById(query);
-      await this.repo.delete(query.id);
-      return await this.findOneById(query);
+      return await this.repo.delete(query.id);
     }
 
     @R.AddRelation()

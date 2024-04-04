@@ -20,6 +20,7 @@ import {
   ApiUnauthorizedResponse,
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
+import { DeleteResult, UpdateResult } from '@webpackages/dto';
 
 export function __commonApiResponses() {
   return applyDecorators(
@@ -72,7 +73,7 @@ export function FindOneByIdResponse(entity: Type) {
   );
 }
 
-export function DeleteResponse(entity: Type) {
+export function DeleteResponse() {
   return applyDecorators(
     __commonApiResponses(),
     ApiNotFoundResponse({
@@ -80,12 +81,12 @@ export function DeleteResponse(entity: Type) {
     }),
     ApiOkResponse({
       description: 'Deleted entity',
-      type: entity,
+      type: DeleteResult,
     })
   );
 }
 
-export function UpdateResponse(entity: Type) {
+export function UpdateResponse() {
   return applyDecorators(
     __commonApiResponses(),
     ApiNotFoundResponse({
@@ -96,7 +97,7 @@ export function UpdateResponse(entity: Type) {
     }),
     ApiOkResponse({
       description: 'Updated entity',
-      type: entity,
+      type: UpdateResult,
     })
   );
 }
@@ -189,7 +190,7 @@ export class RestResource {
 
   Update() {
     return applyDecorators(
-      UpdateResponse(this.entity),
+      UpdateResponse(),
       ApiOperation({ summary: `Update ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
       Put(this.API_PATHS.BY_ID_PATH)
@@ -198,7 +199,7 @@ export class RestResource {
 
   Delete() {
     return applyDecorators(
-      DeleteResponse(this.entity),
+      DeleteResponse(),
       ApiOperation({ summary: `Delete ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
       Delete(this.API_PATHS.BY_ID_PATH)

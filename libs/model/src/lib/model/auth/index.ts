@@ -6,5 +6,6 @@ export * from './role';
 export * from './security-code';
 export * from './session-payload';
 export * from './session';
+export * from './signup';
 export * from './subscription';
 export * from './user';
