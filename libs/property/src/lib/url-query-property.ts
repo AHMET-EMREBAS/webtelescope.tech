@@ -16,13 +16,13 @@ import { ApiProperty } from '@nestjs/swagger';
  * @returns
  */
 export function URLQueryProperty(
-  options: Omit<ApiPropertyOptions, 'isArray' | 'type'> = {}
+  options: Omit<ApiPropertyOptions, 'type'> = {}
 ) {
   const { exclude, required, objectType } = options;
 
   const des: PropertyDecorator[] = [
     ApiProperty({
-      type: 'object',
+      type: 'string',
       description: 'String object property.',
       example: `?some=a:12&some=b:14&some=c:hello`,
       required: required === false ? false : true,
@@ -45,6 +45,7 @@ export function URLQueryProperty(
         const [key, v] = value!.split(':');
         return { [key]: v };
       }
+
       return value;
     }),
   ];

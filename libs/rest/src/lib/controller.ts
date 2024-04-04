@@ -1,38 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Repository } from 'typeorm';
+import {
+  AddRelationDto,
+  QueryDto,
+  RemoveRelationDto,
+  SetRelationDto,
+  UnsetRelationDto,
+} from '@webpackages/dto';
+import { ObjectIDDto } from '@webpackages/property';
 
-export function RestController() {
-  class RController {
-    constructor(public readonly repo: Repository<any>) {}
-    findAll(query: any) {
-      return this.repo.find(query);
-    }
-
-    findOneById(id: number) {
-      return this.repo.findOneBy({ id });
-    }
-
-    save(entity: any) {
-      return this.repo.save(entity);
-    }
-
-    delete(id: number) {
-      return this.repo.delete(id);
-    }
-
-    softDelete(id: number) {
-      return this.repo.softDelete(id);
-    }
-
-    update(id: number, entity: any) {
-      return this.repo.update(id, entity);
-    }
-
-    addRelation() {}
-    removeRelation() {}
-    setRelation() {}
-    unsetRelation() {}
-  }
-
-  return RController;
+export interface IController<E, CreateDto, UpdateDto> {
+  findAll(query: QueryDto<E>): Promise<E[]>;
+  findOneById(query: ObjectIDDto): Promise<E>;
+  save(entity: CreateDto): Promise<E>;
+  update(query: ObjectIDDto, entity: UpdateDto): Promise<E>;
+  delete(query: ObjectIDDto): Promise<E>;
+  addRelation(relation: AddRelationDto): Promise<E>;
+  removeRelation(relation: RemoveRelationDto): Promise<E>;
+  setRelation(relation: SetRelationDto): Promise<E>;
+  unsetRelation(relation: UnsetRelationDto): Promise<E>;
+  count(): Promise<number>;
 }

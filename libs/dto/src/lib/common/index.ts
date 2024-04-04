@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/swagger';
 import {
   ICreateAddressDto,
   ICreateCommentDto,
@@ -96,3 +97,19 @@ export class CreateUrlDto implements ICreateUrlDto {
 export class CreateCategoryDto implements ICreateCategoryDto {
   @NameProperty() category!: string;
 }
+
+
+
+
+
+@Dto() export class UpdateEmailDto extends PartialType(CreateEmailDto) {}
+@Dto() export class UpdateAddressDto extends PartialType(CreateAddressDto) {}
+@Dto() export class UpdatePhoneDto extends PartialType(CreatePhoneDto) {}
+@Dto() export class UpdateCounterDto extends PartialType(CreateCounterDto) {}
+@Dto() export class UpdateRecordDto extends PartialType(CreateRecordDto) {}
+@Dto() export class UpdateCommentDto extends PartialType(CreateCommentDto) {}
+@Dto() export class UpdateReviewDto extends PartialType(CreateReviewDto) {}
+@Dto() export class UpdateTagDto extends PartialType(CreateTagDto) {}
+@Dto() export class UpdateImgDto extends PartialType(CreateImgDto) {}
+@Dto() export class UpdateUrlDto extends PartialType(CreateUrlDto) {}
+@Dto() export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}

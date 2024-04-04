@@ -25,6 +25,7 @@
       "@webpackages/model": ["libs/model/src/index.ts"],
       "@webpackages/property": ["libs/property/src/index.ts"],
       "@webpackages/rest": ["libs/rest/src/index.ts"],
+      "@webpackages/rest-resource": ["libs/rest-resource/src/index.ts"],
       "@webpackages/typeorm": ["libs/typeorm/src/index.ts"],
       "@webpackages/utils": ["libs/utils/src/index.ts"]
     }

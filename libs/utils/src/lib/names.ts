@@ -56,7 +56,14 @@ function __fileName(name: string) {
     .join('-');
 }
 
-export function names(name: string) {
+export type NameResult = {
+  className: string;
+  fileName: string;
+  propertyName: string;
+  constName: string;
+};
+
+export function names(name: string): NameResult {
   return {
     className: __className(name),
     fileName: __fileName(name),

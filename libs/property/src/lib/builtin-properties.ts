@@ -10,7 +10,6 @@ export function StringProperty(
 ) {
   return Property({
     type: 'string',
-
     description: 'String property',
     example: 'string value',
     ...options,
@@ -170,7 +169,7 @@ export function NumberProperty(
   return Property({
     type: 'number',
     description: 'Number property',
-    example: 300,
+    example: 0,
     ...options,
   });
 }

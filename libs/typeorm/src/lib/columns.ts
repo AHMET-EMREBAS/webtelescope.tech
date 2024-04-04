@@ -11,6 +11,8 @@ import { hashSync, genSaltSync } from 'bcrypt';
 import { v4 } from 'uuid';
 import { IID } from './types';
 
+import { ApiProperty } from '@nestjs/swagger';
+
 export type ColumnOptions = {
   type: 'string' | 'number' | 'boolean' | 'date' | 'object';
   required?: boolean;
@@ -33,51 +35,54 @@ export function Column(options: ColumnOptions) {
   const isNullable = required === false ? true : false;
   const isUnique = unique === true ? true : false;
 
-  return Col({
-    type: colType,
-    unique: isUnique,
-    nullable: isNullable,
+  return applyDecorators(
+    ApiProperty({ type: options.type }),
+    Col({
+      type: colType,
+      unique: isUnique,
+      nullable: isNullable,
 
-    default: defaultValue,
-    transformer: {
-      from(value) {
-        if (value) {
-          if (type === 'date') {
-            if (value)
-              if (__isArray) {
-                return JSON.parse(value).map((e: string) => new Date(e));
-              } else {
-                return new Date(value);
-              }
-          } else if (type === 'object') {
-            return JSON.parse(value);
-          }
-
-          if (__isArray) {
-            return JSON.parse(value);
-          }
-        }
-        return value;
-      },
-      to(value) {
-        if (value) {
-          if (type === 'date') {
-            if (__isArray) {
-              return JSON.stringify(value.map((e: Date) => e.toISOString()));
+      default: defaultValue,
+      transformer: {
+        from(value) {
+          if (value) {
+            if (type === 'date') {
+              if (value)
+                if (__isArray) {
+                  return JSON.parse(value).map((e: string) => new Date(e));
+                } else {
+                  return new Date(value);
+                }
+            } else if (type === 'object') {
+              return JSON.parse(value);
             }
-            return (value as Date).toISOString();
-          } else if (type === 'object') {
-            return JSON.stringify(value);
-          }
 
-          if (__isArray) {
-            return JSON.stringify(value);
+            if (__isArray) {
+              return JSON.parse(value);
+            }
           }
-        }
-        return value;
+          return value;
+        },
+        to(value) {
+          if (value) {
+            if (type === 'date') {
+              if (__isArray) {
+                return JSON.stringify(value.map((e: Date) => e.toISOString()));
+              }
+              return (value as Date).toISOString();
+            } else if (type === 'object') {
+              return JSON.stringify(value);
+            }
+
+            if (__isArray) {
+              return JSON.stringify(value);
+            }
+          }
+          return value;
+        },
       },
-    },
-  });
+    })
+  );
 }
 
 export function StringColumn(

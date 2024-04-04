@@ -1,29 +1,20 @@
 import { Global, Module } from '@nestjs/common';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { CategoryController } from '@webpackages/rest-resource';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SampleModule } from './sample';
-import { TodoModule } from './todo';
-import { AuthModule } from '@webpackages/core';
-import { CommonModule } from './common.module';
+import { Category } from '@webpackages/entity';
 
 @Global()
 @Module({
   imports: [
-    CommonModule,
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
-      database: './tmp/app.sqlite',
-      autoLoadEntities: true,
+      database: './tmp/database.sqlite',
+      entities: [Category],
       synchronize: true,
       dropSchema: true,
     }),
-    AuthModule,
-    TodoModule,
-    SampleModule,
+    TypeOrmModule.forFeature([Category]),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [CategoryController],
 })
 export class AppModule {}

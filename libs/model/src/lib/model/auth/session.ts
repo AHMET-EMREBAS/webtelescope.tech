@@ -8,7 +8,7 @@ import { IID, ITimestamp } from '../../common';
  * - A user might have multiple sessions
  * User
  */
-export interface ISession<User> extends IID, ITimestamp {
+export interface ISession extends IID, ITimestamp {
   /**
    * Generated device id
    */
@@ -19,5 +19,8 @@ export interface ISession<User> extends IID, ITimestamp {
    */
   permissions: string[];
 
-  user: User;
+  /**
+   * user id
+   */
+  userId: number;
 }

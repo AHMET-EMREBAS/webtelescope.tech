@@ -9,6 +9,7 @@ export type ApiPaths = {
   BY_ID_PATH: string;
   RELATION_NAME_PATH: string;
   RELATION_NAME_AND_ID_PATH: string;
+  COUNT_PATH: string;
 };
 
 export enum ApiPathKeys {
@@ -42,6 +43,8 @@ export function getApiPaths(resourceName: string): ApiPaths {
   const RELATION_NAME_PATH = `${SINGULAR_PATH}/:${ID_KEY}/:${RELATION_NAME_KEY}`;
   const RELATION_NAME_AND_ID_PATH = `${RELATION_NAME_PATH}/:${RELATION_ID_KEY}`;
 
+  const COUNT_PATH = `${PLURAL_PATH}/count`;
+
   return {
     ID_KEY,
     RELATION_ID_KEY,
@@ -51,5 +54,6 @@ export function getApiPaths(resourceName: string): ApiPaths {
     BY_ID_PATH,
     RELATION_NAME_PATH,
     RELATION_NAME_AND_ID_PATH,
+    COUNT_PATH,
   };
 }

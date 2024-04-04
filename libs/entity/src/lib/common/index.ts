@@ -1,2 +1,4 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './sub-entities'
+export * from './category';
+export * from './department';
+export * from './sub-entities';

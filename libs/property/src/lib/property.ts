@@ -80,7 +80,7 @@ export function __commonProperty(options: ApiPropertyOptions) {
 
   des.push(
     Transform(({ value }) => {
-      if (value != undefined) {
+      if (value == undefined) {
         if (defaultValue) {
           return defaultValue;
         }
@@ -168,6 +168,7 @@ export function __commonStringProperty(options: ApiPropertyOptions) {
 
   if (minLength != undefined) des.push(MinLength(minLength, vo));
   if (maxLength != undefined) des.push(MaxLength(maxLength, vo));
+
   return applyDecorators(...des);
 }
 

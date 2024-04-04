@@ -1,4 +1,8 @@
-import { Type, ValidationPipe as VP } from '@nestjs/common';
+import {
+  Type,
+  UnprocessableEntityException,
+  ValidationPipe as VP,
+} from '@nestjs/common';
 
 export function ValidationPipe(expectedType?: Type) {
   return new VP({
@@ -10,6 +14,10 @@ export function ValidationPipe(expectedType?: Type) {
     validationError: {
       target: false,
       value: false,
+    },
+
+    exceptionFactory(errors) {
+      return new UnprocessableEntityException(errors);
     },
   });
 }

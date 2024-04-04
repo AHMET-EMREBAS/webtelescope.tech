@@ -1,16 +1,15 @@
 import { ISession } from '@webpackages/model';
 import {
-  OwnerRelation,
   TimestampEntity,
   Entity,
   StringColumn,
+  NumberColumn,
 } from '@webpackages/typeorm';
 
-import { User } from './user';
-
 @Entity()
-export class Session extends TimestampEntity implements ISession<User> {
+export class Session extends TimestampEntity implements ISession {
   @StringColumn() deviceId!: string;
   @StringColumn({ isArray: true }) permissions!: string[];
-  @OwnerRelation(User) user!: User;
+  @StringColumn({ isArray: true }) roles!: string[];
+  @NumberColumn() userId!: number;
 }
