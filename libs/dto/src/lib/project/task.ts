@@ -3,20 +3,19 @@ import {
   DateProperty,
   Dto,
   NameProperty,
-  NumberProperty,
   ObjectIdProperty,
-  OptionalTextProperty,
-  RequiredTextProperty,
+  StringProperty,
+  TenProperty,
 } from '@webpackages/property';
 
 @Dto()
 export class CreateTaskDto implements ICreateTaskDto {
   @NameProperty() taskTitle!: string;
-  @OptionalTextProperty() taskDescription!: string;
-  @RequiredTextProperty() status!: string;
+  @StringProperty({ required: false }) taskDescription!: string;
+  @StringProperty() status!: string;
   @ObjectIdProperty({ isArray: true }) tags!: IID[];
-  @NumberProperty({ minimum: 1, maximum: 10 }) difficulty!: Range10;
-  @NumberProperty({ minimum: 1, maximum: 10 }) priority!: Range10;
+  @TenProperty() difficulty!: Range10;
+  @TenProperty() priority!: Range10;
   @DateProperty() due!: Date;
   @ObjectIdProperty() sprint!: IID;
   @ObjectIdProperty({ isArray: true }) assignees!: IID[];

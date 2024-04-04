@@ -21,7 +21,7 @@ import {
   ObjectIdProperty,
   ObjectProperty,
   PhoneProperty,
-  RequiredTextProperty,
+  StringProperty,
   URLProperty,
 } from '@webpackages/property';
 
@@ -34,12 +34,12 @@ export class CreateEmailDto implements ICreateEmailDto {
 @Dto()
 export class CreateAddressDto implements ICreateAddressDto {
   @ObjectIdProperty() user!: IID;
-  @RequiredTextProperty() street!: string;
-  @RequiredTextProperty() unit!: string;
-  @RequiredTextProperty() city!: string;
-  @RequiredTextProperty() state!: string;
-  @RequiredTextProperty() zip!: string;
-  @RequiredTextProperty() country!: string;
+  @StringProperty() street!: string;
+  @StringProperty() unit!: string;
+  @StringProperty() city!: string;
+  @StringProperty() state!: string;
+  @StringProperty() zip!: string;
+  @StringProperty() country!: string;
 }
 
 @Dto()
@@ -64,15 +64,15 @@ export class CreateRecordDto implements ICreateRecord {
 export class CreateCommentDto implements ICreateCommentDto {
   @ObjectIdProperty() user!: IID;
   @ObjectIdProperty() target!: IID;
-  @RequiredTextProperty() comment!: string;
+  @StringProperty() comment!: string;
 }
 
 @Dto()
 export class CreateReviewDto implements ICreateReviewDto {
   @ObjectIdProperty() user!: IID;
   @ObjectIdProperty() target!: IID;
-  @NumberProperty({ required: true, minimum: 1, maximum: 5 }) rate!: Range5;
-  @RequiredTextProperty() comment!: string;
+  @NumberProperty({ minimum: 1, maximum: 5 }) rate!: Range5;
+  @StringProperty() comment!: string;
 }
 
 @Dto()

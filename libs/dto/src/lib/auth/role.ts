@@ -7,9 +7,6 @@ import { Dto, NameProperty, ObjectIdProperty } from '@webpackages/property';
  */
 @Dto()
 export class CreateRoleDto implements ICreateRoleDto {
-  @NameProperty()
-  role!: string;
-
-  @ObjectIdProperty({ isArray: true, required: false })
-  permissions!: IID[];
+  @NameProperty() role!: string;
+  @ObjectIdProperty({ isArray: true }) permissions!: IID[];
 }

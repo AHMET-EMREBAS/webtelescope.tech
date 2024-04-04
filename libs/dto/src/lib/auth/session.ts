@@ -1,14 +1,14 @@
 import { ICreateSessionDto } from '@webpackages/model';
 import {
   Dto,
-  ObjectIdDto,
+  NameProperty,
+  ObjectIDDto,
   ObjectIdProperty,
-  ShortTextProperty,
 } from '@webpackages/property';
 
 @Dto()
 export class CreateSessionDto implements ICreateSessionDto {
-  @ShortTextProperty() deviceId!: string;
-  @ShortTextProperty({ isArray: true }) permissions!: string[];
-  @ObjectIdProperty() user!: ObjectIdDto;
+  @NameProperty() deviceId!: string;
+  @NameProperty({ isArray: true }) permissions!: string[];
+  @ObjectIdProperty() user!: ObjectIDDto;
 }

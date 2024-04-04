@@ -4,8 +4,7 @@ import {
   Dto,
   ObjectIdProperty,
   PositiveNumberProperty,
-  RequiredTextProperty,
-  ShortTextProperty,
+  StringProperty,
 } from '@webpackages/property';
 
 @Dto()
@@ -13,9 +12,9 @@ export class CreateCheckoutDto implements ICreateCheckoutDto {
   @ObjectIdProperty() employee!: IID;
   @ObjectIdProperty() customer!: IID;
   @ObjectIdProperty() shoppingCart!: IID;
-  @ShortTextProperty() federalTaxExemptID!: string;
-  @ShortTextProperty() stateTaxExemptID!: string;
-  @RequiredTextProperty() status!: CheckoutStatus;
+  @StringProperty() federalTaxExemptID!: string;
+  @StringProperty() stateTaxExemptID!: string;
+  @StringProperty() status!: CheckoutStatus;
   @PositiveNumberProperty() subtotal!: number;
   @PositiveNumberProperty() tax!: number;
   @PositiveNumberProperty() total!: number;

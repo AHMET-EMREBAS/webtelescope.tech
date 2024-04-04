@@ -1,14 +1,14 @@
 import { ICreateProductDto } from '@webpackages/model';
 import {
-  BarcodeProperty,
   Dto,
+  EanProperty,
   NameProperty,
-  ShortTextProperty,
+  StringProperty,
 } from '@webpackages/property';
 
 @Dto()
 export class CreateProductDto implements ICreateProductDto {
   @NameProperty() productName!: string;
-  @ShortTextProperty() productDescription!: string;
-  @BarcodeProperty() barcode!: string;
+  @StringProperty() productDescription!: string;
+  @EanProperty() barcode!: string;
 }

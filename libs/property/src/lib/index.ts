@@ -1,10 +1,4 @@
-// @index(['./*', '!./*.spec.ts'], f => `export * from '${f.path}'`)
-export * from './boolean'
-export * from './common-options'
-export * from './date'
-export * from './dto'
-export * from './number'
-export * from './object-id'
-export * from './object'
-export * from './required'
-export * from './string'
+// @index(['./*','!./*.spec.ts'], f => `export * from '${f.path}'`)
+export * from './builtin-properties'
+export * from './buitin-object-properties'
+export * from './property'

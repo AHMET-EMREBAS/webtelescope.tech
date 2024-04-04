@@ -2,12 +2,13 @@ import { ICreateCompanyDto, IID } from '@webpackages/model';
 import {
   Dto,
   ObjectIdProperty,
-  RequiredTextProperty,
+  StringProperty,
+  URLProperty,
 } from '@webpackages/property';
 
 @Dto()
 export class CreateCompanyDto implements ICreateCompanyDto {
-  @RequiredTextProperty() companyName!: string;
-  @RequiredTextProperty() companyDomain!: string;
+  @StringProperty() companyName!: string;
+  @URLProperty() companyDomain!: string;
   @ObjectIdProperty({ isArray: true }) industries!: IID[];
 }

@@ -1,12 +1,8 @@
 import { ICreateAccomplishementDto, IID } from '@webpackages/model';
-import {
-  Dto,
-  ObjectIdProperty,
-  RequiredTextProperty,
-} from '@webpackages/property';
+import { Dto, ObjectIdProperty, StringProperty } from '@webpackages/property';
 
 @Dto()
 export class CreateAccomplishmentDto implements ICreateAccomplishementDto {
   @ObjectIdProperty() jobTitle!: IID;
-  @RequiredTextProperty() description!: string;
+  @StringProperty() description!: string;
 }

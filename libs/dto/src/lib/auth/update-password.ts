@@ -3,12 +3,12 @@ import {
   Dto,
   EmailProperty,
   PasswordProperty,
-  ShortTextProperty,
+  StringProperty,
 } from '@webpackages/property';
 
 @Dto()
 export class UpdatePasswordDto implements IUpdatePasswordDto {
   @EmailProperty() username!: string;
-  @ShortTextProperty() password!: string;
+  @StringProperty() password!: string;
   @PasswordProperty() newPassword!: string;
 }

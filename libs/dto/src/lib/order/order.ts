@@ -2,12 +2,12 @@ import { ICreateOrderDto, IID } from '@webpackages/model';
 import {
   Dto,
   ObjectIdProperty,
-  PositiveIntegerProperty,
+  PositiveNumberProperty,
 } from '@webpackages/property';
 
 @Dto()
 export class CreateOrderDto implements ICreateOrderDto {
-  @PositiveIntegerProperty() quantity!: number;
+  @PositiveNumberProperty() quantity!: number;
   @ObjectIdProperty() sku!: IID;
   @ObjectIdProperty() shoppingCart!: IID;
 }

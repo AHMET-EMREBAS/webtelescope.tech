@@ -1,12 +1,8 @@
 import { ICreateQuestionDto, IID } from '@webpackages/model';
-import {
-  Dto,
-  ObjectIdProperty,
-  RequiredTextProperty,
-} from '@webpackages/property';
+import { Dto, ObjectIdProperty, StringProperty } from '@webpackages/property';
 
 @Dto()
 export class CreateQuestionDto implements ICreateQuestionDto {
-  @RequiredTextProperty() question!: string;
+  @StringProperty() question!: string;
   @ObjectIdProperty() user!: IID;
 }

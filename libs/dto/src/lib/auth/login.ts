@@ -2,8 +2,8 @@ import { ILoginDto } from '@webpackages/model';
 import { Dto, EmailProperty, PasswordProperty } from '@webpackages/property';
 
 /**
- * @param username string
- * @param password string
+ * @param username {@link username}
+ * @param password {@link password}
  */
 @Dto()
 export class LoginDto implements ILoginDto {

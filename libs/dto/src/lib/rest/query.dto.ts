@@ -1,16 +1,18 @@
 import {
+  BooleanProperty,
   Dto,
   NameProperty,
-  PositiveIntegerProperty,
+  NumberProperty,
+  StringProperty,
 } from '@webpackages/property';
 import { Expose, Transform } from 'class-transformer';
 
 @Dto()
 export class QueryDto {
-  @PositiveIntegerProperty({ defaultValue: 0 })
+  @NumberProperty({ default: 0 })
   skip?: number;
 
-  @PositiveIntegerProperty({ defaultValue: 20 })
+  @NumberProperty({ default: 20 })
   take?: number;
 
   @NameProperty({ isArray: true, required: false })
@@ -19,8 +21,8 @@ export class QueryDto {
   @NameProperty({ isArray: true, required: false })
   orderBy?: string;
 
-  @Property({ name: 'orderDir', type: 'string' })
-  orderDir?: 'ASC' | 'DESC' | '-1' | '1';
+  @StringProperty({ enum: ['ASC', 'DESC'] })
+  orderDir?: 'ASC' | 'DESC';
 
   @Transform(({ obj }) => {
     if (obj.orderBy && obj.orderDir) {
@@ -32,15 +34,15 @@ export class QueryDto {
   @Expose()
   order?: Record<string, string>;
 
-  @Property({ name: 'withDeleted', type: 'boolean' })
+  @BooleanProperty({ required: false })
   withDeleted?: boolean;
 
-  @Property({ name: 'search', type: 'string' })
+  @StringProperty({ required: false })
   search?: string;
 
-  @Property({ name: 'before', type: 'string' })
+  @StringProperty({ required: false })
   before?: string;
 
-  @Property({ name: 'after', type: 'string' })
+  @StringProperty({ required: false })
   after?: string;
 }
