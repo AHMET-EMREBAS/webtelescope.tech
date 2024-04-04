@@ -163,8 +163,8 @@ export function __commonProperty(options: ApiPropertyOptions) {
 export function __commonStringProperty(options: ApiPropertyOptions) {
   const des: PropertyDecorator[] = [];
 
-  const { isArray, minLength, maxLength } = options;
-  const vo: ValidationOptions = { each: isArray };
+  const { isArray: __isArray, minLength, maxLength } = options;
+  const vo: ValidationOptions = { each: __isArray };
 
   if (minLength != undefined) des.push(MinLength(minLength, vo));
   if (maxLength != undefined) des.push(MaxLength(maxLength, vo));
@@ -174,8 +174,8 @@ export function __commonStringProperty(options: ApiPropertyOptions) {
 export function __commonFormatProperty(options: ApiPropertyOptions) {
   const des: PropertyDecorator[] = [];
 
-  const { isArray, specialFormat } = options;
-  const vo: ValidationOptions = { each: isArray };
+  const { isArray: __isArray, specialFormat } = options;
+  const vo: ValidationOptions = { each: __isArray };
 
   if (specialFormat) {
     if (specialFormat === 'email') des.push(IsEmail({}, vo));

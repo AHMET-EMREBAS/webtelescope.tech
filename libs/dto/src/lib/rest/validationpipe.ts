@@ -1,9 +1,8 @@
-import { ValidationPipe as VP } from '@nestjs/common';
-import { ClassConstructor } from '@techbir/utils';
+import { Type, ValidationPipe as VP } from '@nestjs/common';
 
-export function ValidationPipe(expectedType?: ClassConstructor<any>) {
+export function ValidationPipe(expectedType?: Type) {
   return new VP({
-    expectedType: expectedType,
+    expectedType,
     transform: true,
     transformOptions: {
       excludeExtraneousValues: true,
