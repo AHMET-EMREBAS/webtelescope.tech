@@ -6,6 +6,7 @@ import { CreateRoleDto } from './role';
 import { CreateSubscriptionDto } from './subscription';
 import { CreatePermissionDto } from './permission';
 import { CreateUserDto } from './user';
+import { CreateSecurityCodeDto } from './security-code';
 
 @Dto()
 export class UpdateSessionDto extends PartialType(CreateSessionDto) {}
@@ -20,3 +21,6 @@ export class UpdateSubscriptionDto extends PartialType(CreateSubscriptionDto) {}
 
 @Dto()
 export class UpdateUserDto extends PartialType(CreateUserDto) {}
+
+
+export class UpdateSecurityCodeDto extends PartialType(CreateSecurityCodeDto){}

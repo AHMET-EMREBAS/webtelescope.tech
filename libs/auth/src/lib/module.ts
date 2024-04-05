@@ -17,8 +17,20 @@ import {
 import { AuthService } from './service';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AuthGuard, LocalGuard, SessionGuard } from './guards';
+import {
+  CreateOrganizationDto,
+  CreatePermissionDto,
+  CreateRoleDto,
+  CreateSecurityCodeDto,
+  CreateSessionDto,
+  CreateUserDto,
+  UpdateOrganizationDto,
+  UpdateRoleDto,
+  UpdateSecurityCodeDto,
+  UpdateSessionDto,
+  UpdateUserDto,
+} from '@webpackages/dto';
 import { CreateController } from '@webpackages/rest';
-import { CreateUserDto, UpdateUserDto } from '@webpackages/dto';
 
 export const AUTH_MODULE_ENTITIES = [
   User,
@@ -58,6 +70,31 @@ export class AuthModule {
           entity: User,
           createDto: CreateUserDto,
           updateDto: UpdateUserDto,
+        }),
+        CreateController({
+          entity: Organization,
+          createDto: CreateOrganizationDto,
+          updateDto: UpdateOrganizationDto,
+        }),
+        CreateController({
+          entity: Session,
+          createDto: CreateSessionDto,
+          updateDto: UpdateSessionDto,
+        }),
+        CreateController({
+          entity: Role,
+          createDto: CreateRoleDto,
+          updateDto: UpdateRoleDto,
+        }),
+        CreateController({
+          entity: Permission,
+          createDto: CreatePermissionDto,
+          updateDto: UpdateSessionDto,
+        }),
+        CreateController({
+          entity: SecurityCode,
+          createDto: CreateSecurityCodeDto,
+          updateDto: UpdateSecurityCodeDto,
         }),
       ],
       providers: [AuthService, AuthGuard, LocalGuard, SessionGuard],
