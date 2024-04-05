@@ -29,7 +29,7 @@ export function Column(options: ColumnOptions) {
       : type === 'boolean'
       ? 'boolean'
       : type === 'number'
-      ? 'number'
+      ? 'numeric'
       : 'varchar';
 
   const isNullable = required === false ? true : false;

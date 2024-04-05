@@ -1,3 +1,4 @@
+import { IID } from '../../common';
 import { IUser } from '../../model';
 
 /**
@@ -7,5 +8,5 @@ import { IUser } from '../../model';
  * @param username {@link ICredentials.username}
  * @param roles  {@link roles}
  */
-export interface ICreateUserDto
-  extends Pick<IUser<unknown, unknown>, 'username' | 'roles'> {}
+export interface ICreateUserDto<Organization extends IID, Role extends IID>
+  extends Pick<IUser<Organization, Role>, 'username' | 'roles'> {}

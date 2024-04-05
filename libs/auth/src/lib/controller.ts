@@ -15,8 +15,6 @@ import {
   UsernameAccess,
 } from './guards';
 
-import { EventEmitter2 } from '@nestjs/event-emitter';
-
 import { AuthService } from './service';
 import {
   AccessTokenDto,
@@ -32,17 +30,13 @@ import {
 } from '@webpackages/dto';
 import { AuthHeaderParam, SessionParam, UserParam } from './context';
 import { Session, User } from '@webpackages/entity';
-import { AuthEvents } from './auth-events';
-import { PublicAccess } from './policy';
+import { PublicAccess } from '@webpackages/core';
 
 @ApiTags('Auth')
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly eventEmitter: EventEmitter2
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @ApiOperation({ summary: 'Login with username and password' })
   @ApiOkResponse({ type: AccessTokenDto })
@@ -101,11 +95,11 @@ export class AuthController {
     const { securityCode } = await this.authService.createSecurityCodeOrThrow(
       user
     );
-    this.eventEmitter.emit(AuthEvents.EMAIL, {
-      username: user.username,
-      securityCode,
+    this.authService.sendEmail({
+      to: user.username,
+      subject: 'Security Code',
+      message: `Here is your one-time security code ${securityCode}`,
     });
-
     return;
   }
 

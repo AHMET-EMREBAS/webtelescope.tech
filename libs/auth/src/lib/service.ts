@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
-import { SecurityCode, Session, Signup, User } from '@webpackages/entity';
+import { Mail, SecurityCode, Session, Signup, User } from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import {
@@ -16,8 +16,10 @@ import {
   getRequiredPermissions,
   getRequiredRoles,
   isPublicAccess,
-} from './policy';
+} from '@webpackages/core';
+
 import {
+  CreateMailDto,
   LoginWithCodeDto,
   SignupDto,
   UpdatePasswordDto,
@@ -39,6 +41,8 @@ export class AuthService {
 
     @InjectRepository(SecurityCode)
     private readonly tokenRepo: Repository<SecurityCode>,
+
+    @InjectRepository(Mail) protected readonly mailRepo: Repository<Mail>,
 
     protected readonly reflector: Reflector,
     protected readonly jwt: JwtService
@@ -294,5 +298,9 @@ export class AuthService {
       );
     }
     return await this.signupRepo.save(signupDto);
+  }
+
+  async sendEmail(mail: CreateMailDto) {
+    return await this.mailRepo.save(mail);
   }
 }

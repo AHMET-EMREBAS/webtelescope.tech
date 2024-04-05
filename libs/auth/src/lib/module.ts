@@ -10,10 +10,15 @@ import {
   SecurityCode,
   User,
   Mail,
+  Signup,
+  Subscription,
+  Organization,
 } from '@webpackages/entity';
 import { AuthService } from './service';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AuthGuard, LocalGuard, SessionGuard } from './guards';
+import { CreateController } from '@webpackages/rest';
+import { CreateUserDto, UpdateUserDto } from '@webpackages/dto';
 
 export const AUTH_MODULE_ENTITIES = [
   User,
@@ -21,6 +26,9 @@ export const AUTH_MODULE_ENTITIES = [
   Permission,
   Session,
   SecurityCode,
+  Signup,
+  Subscription,
+  Organization,
   Mail,
 ];
 
@@ -44,7 +52,14 @@ export class AuthModule {
           },
         }),
       ],
-      controllers: [AuthController],
+      controllers: [
+        AuthController,
+        CreateController({
+          entity: User,
+          createDto: CreateUserDto,
+          updateDto: UpdateUserDto,
+        }),
+      ],
       providers: [AuthService, AuthGuard, LocalGuard, SessionGuard],
       exports: [JwtModule, AuthService, AuthGuard, LocalGuard, SessionGuard],
     };

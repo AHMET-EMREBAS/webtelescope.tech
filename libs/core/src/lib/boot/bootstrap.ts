@@ -13,7 +13,6 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 import favicon from 'serve-favicon';
-import { AuthEnums } from '../auth';
 
 export type BootstrapOptions = {
   appModule: ClassConstructor<unknown>;
@@ -58,7 +57,7 @@ export async function bootstrap(options: BootstrapOptions) {
   const config = new DocumentBuilder()
     .setTitle(appName)
     .setDescription(appDescription)
-    .addBearerAuth({ type: 'http', scheme: 'Bearer' }, AuthEnums.BEARER)
+    .addBearerAuth({ type: 'http', scheme: 'Bearer' }, 'bearer')
     .setContact('Contact', website, email)
     .build();
 

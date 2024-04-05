@@ -39,6 +39,8 @@ export const [provideDomainName, InjectDomainName, getDomainNameToken] =
   createProvider('DOMAIN_NAME');
 export const [provideCompanyName, InjectCompanyName, getCompanyNameToken] =
   createProvider('COMPANY_NAME');
+export const [provideJWTSecret, InjectSecret, getSecretToken] =
+  createProvider('JWT_SECRET');
 
 export function createMetadata(
   override = true

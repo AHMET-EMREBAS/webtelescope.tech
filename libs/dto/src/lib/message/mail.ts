@@ -9,8 +9,7 @@ import {
 @Dto()
 export class CreateMailDto implements ICreateMailDto {
   @EmailProperty() to!: string;
-  @EmailProperty() from!: string;
   @StringProperty() subject!: string;
   @StringProperty() message!: string;
-  @BooleanProperty() sent!: boolean;
+  @BooleanProperty() sent?: boolean;
 }

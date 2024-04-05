@@ -9,7 +9,7 @@ import {
   applyDecorators,
 } from '@nestjs/common';
 import { ApiPaths, NameResult, getApiPaths, names } from '@webpackages/utils';
-import { CanRead, CanUpdate, CanWrite } from '@webpackages/auth';
+import { CanRead, CanUpdate, CanWrite } from '@webpackages/core';
 import {
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
