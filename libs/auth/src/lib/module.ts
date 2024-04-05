@@ -9,37 +9,36 @@ import {
   Session,
   SecurityCode,
   User,
+  Mail,
 } from '@webpackages/entity';
 import { AuthService } from './service';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AuthGuard, LocalGuard, SessionGuard } from './guards';
 
-const entities = [User, Role, Permission, Session, SecurityCode];
+export const AUTH_MODULE_ENTITIES = [
+  User,
+  Role,
+  Permission,
+  Session,
+  SecurityCode,
+  Mail,
+];
 
-function secret() {
-  const s = process.env['SECRET'];
-  if (!s) throw new Error('SECRET is not provided!');
-  return s;
-}
+export type AuthModuleOptions = {
+  secret: string;
+};
 
 @Module({})
 export class AuthModule {
-  static configure(): DynamicModule {
+  static configure(options: AuthModuleOptions): DynamicModule {
     return {
       module: AuthModule,
       imports: [
         EventEmitterModule,
-        TypeOrmModule.forRoot({
-          type: 'better-sqlite3',
-          database: './tmp/auth.sqlite',
-          entities,
-          synchronize: true,
-          dropSchema: true,
-        }),
-        TypeOrmModule.forFeature(entities),
+        TypeOrmModule.forFeature(AUTH_MODULE_ENTITIES),
         JwtModule.register({
           global: true,
-          secret: secret(),
+          secret: options.secret,
           signOptions: {
             expiresIn: '30d',
           },
