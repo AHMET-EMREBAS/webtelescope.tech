@@ -10,7 +10,7 @@ import { IID, ITimestamp } from '../../common';
  * @param updatedAt {@link ITimestamp.updatedAt}
  * @param deletedAt {@link ITimestamp.deletedAt}
  */
-export interface ISubscription extends ITimestamp, IID {
+export interface ISubType extends ITimestamp, IID {
   subscriptionName: string;
   description: string;
 }

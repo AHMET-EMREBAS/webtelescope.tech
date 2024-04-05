@@ -1,16 +1,19 @@
-import { ISignup } from '@webpackages/model';
+import { ISub } from '@webpackages/model';
 import {
   OneRelation,
   PasswordColumn,
   StringColumn,
   TimestampEntity,
 } from '@webpackages/typeorm';
-import { Subscription } from './subscription';
+import { SubType } from './sub-type';
 import { Entity } from 'typeorm';
 
+/**
+ * Subscription
+ */
 @Entity()
-export class Signup extends TimestampEntity implements ISignup<Subscription> {
+export class Sub extends TimestampEntity implements ISub<SubType> {
   @StringColumn() username!: string;
   @PasswordColumn() password!: string;
-  @OneRelation(Subscription) subscription!: Subscription;
+  @OneRelation(SubType) subscription!: SubType;
 }

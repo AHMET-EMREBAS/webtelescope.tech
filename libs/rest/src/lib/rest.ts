@@ -5,12 +5,12 @@ import {
   Post,
   Put,
   Type,
-  UseGuards,
   applyDecorators,
 } from '@nestjs/common';
 import { ApiPaths, NameResult, getApiPaths, names } from '@webpackages/utils';
 import { CanRead, CanUpdate, CanWrite } from '@webpackages/core';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
@@ -156,8 +156,8 @@ export class RestResource {
   Controller() {
     return applyDecorators(
       Controller(),
-      ApiTags(this.RESOURCE_NAME + 'Controller'),
-      UseGuards()
+      ApiBearerAuth('bearer'),
+      ApiTags(this.RESOURCE_NAME + 'Controller')
     );
   }
 

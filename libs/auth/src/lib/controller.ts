@@ -8,15 +8,6 @@ import {
 } from '@nestjs/swagger';
 
 import {
-  BearerAccess,
-  CredentialAccess,
-  SecurityCodeAccess,
-  SessionAccess,
-  UsernameAccess,
-} from './guards';
-
-import { AuthService } from './service';
-import {
   AccessTokenDto,
   Body,
   DeleteResult,
@@ -24,13 +15,23 @@ import {
   LoginDto,
   LoginWithCodeDto,
   Query,
-  SignupDto,
+  CreateSubDto,
   UpdatePasswordDto,
   UpdateResult,
 } from '@webpackages/dto';
-import { AuthHeaderParam, SessionParam, UserParam } from './context';
 import { Session, User } from '@webpackages/entity';
-import { PublicAccess } from '@webpackages/core';
+import {
+  AuthService,
+  PublicAccess,
+  BearerAccess,
+  CredentialAccess,
+  SecurityCodeAccess,
+  SessionAccess,
+  UsernameAccess,
+  AuthHeaderParam,
+  SessionParam,
+  UserParam,
+} from '@webpackages/core';
 
 @ApiTags('Auth')
 @BearerAccess()
@@ -120,7 +121,7 @@ export class AuthController {
   @PublicAccess()
   @ApiUnprocessableEntityResponse()
   @Post('signup')
-  signup(@Body() signup: SignupDto) {
+  signup(@Body() signup: CreateSubDto) {
     return this.authService.signup(signup);
   }
 }

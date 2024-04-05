@@ -10,7 +10,7 @@ import { ICredentials, IID } from '../../common';
  * @param organizationName {@link organizationName}
  * @param subscription {@link subscription}
  */
-export interface ISignupDto extends ICredentials {
+export interface ICreateSubDto extends ICredentials {
   /**
    * Unique organization name
    */

@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
-import { Mail, SecurityCode, Session, Signup, User } from '@webpackages/entity';
+import { Mail, SecurityCode, Session, Sub, User } from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import {
   ExecutionContext,
+  Injectable,
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
@@ -16,18 +17,19 @@ import {
   getRequiredPermissions,
   getRequiredRoles,
   isPublicAccess,
-} from '@webpackages/core';
+} from './policy';
 
 import {
   CreateMailDto,
   LoginWithCodeDto,
-  SignupDto,
+  CreateSubDto,
   UpdatePasswordDto,
 } from '@webpackages/dto';
 import { v4 } from 'uuid';
 import { SessionPayload } from '@webpackages/model';
 import { AuthEnums } from './enums';
 
+@Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
@@ -36,8 +38,8 @@ export class AuthService {
     @InjectRepository(Session)
     protected readonly sessionRepo: Repository<Session>,
 
-    @InjectRepository(Signup)
-    protected readonly signupRepo: Repository<Signup>,
+    @InjectRepository(Sub)
+    protected readonly signupRepo: Repository<Sub>,
 
     @InjectRepository(SecurityCode)
     private readonly tokenRepo: Repository<SecurityCode>,
@@ -287,7 +289,7 @@ export class AuthService {
     throw new UnauthorizedException('You do not have required role!');
   }
 
-  async signup(signupDto: SignupDto) {
+  async signup(signupDto: CreateSubDto) {
     const found = await this.signupRepo.findOneBy({
       username: signupDto.username,
     });

@@ -12,7 +12,7 @@ import helmet from 'helmet';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-import favicon from 'serve-favicon';
+import favicon = require('serve-favicon');
 
 export type BootstrapOptions = {
   appModule: ClassConstructor<unknown>;

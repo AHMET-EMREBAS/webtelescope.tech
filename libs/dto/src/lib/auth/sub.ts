@@ -1,4 +1,4 @@
-import { IID, ISignupDto } from '@webpackages/model';
+import { IID, ICreateSubDto } from '@webpackages/model';
 import {
   Dto,
   EmailProperty,
@@ -8,7 +8,7 @@ import {
 } from '@webpackages/property';
 
 @Dto()
-export class SignupDto implements ISignupDto {
+export class CreateSubDto implements ICreateSubDto {
   @EmailProperty() username!: string;
   @PasswordProperty() password!: string;
   @NameProperty() organizationName!: string;
