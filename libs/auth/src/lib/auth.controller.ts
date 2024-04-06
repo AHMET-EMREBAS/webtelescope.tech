@@ -8,7 +8,7 @@ import {
 } from '@nestjs/swagger';
 
 import {
-  AccessTokenDto,
+  LoginResult,
   Body,
   DeleteResult,
   ForgotPasswordDto,
@@ -40,15 +40,16 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @ApiOperation({ summary: 'Login with username and password' })
-  @ApiOkResponse({ type: AccessTokenDto })
+  @ApiOkResponse({ type: LoginResult })
   @ApiUnauthorizedResponse()
   @CredentialAccess()
   @Post('login')
   login(
     @Body() __: LoginDto,
-    @AuthHeaderParam() accessToken: string
-  ): AccessTokenDto {
-    return { accessToken };
+    @AuthHeaderParam() accessToken: string,
+    @SessionParam() session: Session
+  ): LoginResult {
+    return { accessToken, deviceId: session.deviceId };
   }
 
   @ApiOperation({ summary: 'Logout from the current session' })
@@ -121,7 +122,7 @@ export class AuthController {
   @PublicAccess()
   @ApiUnprocessableEntityResponse()
   @Post('signup')
-  signup(@Body() signup: CreateSubDto) {
-    return this.authService.signup(signup);
+  async signup(@Body() signup: CreateSubDto) {
+    return await this.authService.signup(signup);
   }
 }

@@ -9,6 +9,19 @@ import {
 } from '@webpackages/dto';
 import { ObjectIDDto } from '@webpackages/property';
 
+export enum OperationNames {
+  findAll = 'findAll',
+  findOneById = 'findOneById',
+  save = 'save',
+  update = 'update',
+  delete = 'delete',
+  addRelation = 'addRelation',
+  removeRelation = 'removeRelation',
+  setRelation = 'setRelation',
+  unsetRelation = 'unsetRelation',
+  count = 'count',
+}
+
 export interface IController<E, CreateDto, UpdateDto> {
   findAll(query: QueryDto<E>): Promise<E[]>;
   findOneById(query: ObjectIDDto): Promise<E>;

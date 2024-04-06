@@ -31,6 +31,8 @@ export class AuthGuard implements CanActivate {
 
     this.authService.appendSessionToRequest(ctx, session);
 
+    
+
     return true;
   }
 }

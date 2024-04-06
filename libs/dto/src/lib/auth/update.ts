@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/swagger';
+import { PartialType, PickType } from '@nestjs/swagger';
 import { Dto } from '@webpackages/property';
 import { CreateSessionDto } from './session';
 import { CreateOrganizationDto } from './organization';
@@ -20,10 +20,15 @@ export class UpdateRoleDto extends PartialType(CreateRoleDto) {}
 export class UpdatePermissionDto extends PartialType(CreatePermissionDto) {}
 @Dto()
 export class UpdateSubTypeDto extends PartialType(CreateSubTypeDto) {}
+
 @Dto()
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
+export class UpdateUserDto extends PartialType(
+  PickType(CreateUserDto, ['password'])
+) {}
+
 @Dto()
 export class UpdateSecurityCodeDto extends PartialType(CreateSecurityCodeDto) {}
+
 @Dto()
 export class UpdateSubDto extends PartialType(CreateSubDto) {}
 @Dto()

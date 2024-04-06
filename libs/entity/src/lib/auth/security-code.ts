@@ -8,6 +8,6 @@ import { Entity } from 'typeorm';
 
 @Entity()
 export class SecurityCode extends TimestampEntity implements ISecurityCode {
-  @UUIDColumn() securityCode!: string;
+  @UUIDColumn({ unique: true }) securityCode!: string;
   @NumberColumn() userId!: number;
 }

@@ -9,18 +9,8 @@ import { IID, ITimestamp } from '../../common';
  * User
  */
 export interface ISession extends IID, ITimestamp {
-  /**
-   * Generated device id
-   */
   deviceId: string;
-
-  /**
-   * A set of permission strings
-   */
   permissions: string[];
-
-  /**
-   * user id
-   */
+  roles: string[];
   userId: number;
 }

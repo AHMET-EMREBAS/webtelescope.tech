@@ -80,7 +80,7 @@ export function EmailProperty(
   return StringProperty({
     format: 'email',
     specialFormat: 'email',
-    example: 'user@domain.com',
+    example: 'root@webtelescope.tech',
     ...options,
   });
 }

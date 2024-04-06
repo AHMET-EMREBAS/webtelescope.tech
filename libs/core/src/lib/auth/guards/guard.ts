@@ -3,7 +3,7 @@ import { ApiBasicAuth, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from './auth';
 import { LocalGuard } from './local';
 import { SessionGuard } from './session';
-import { PublicAccess } from '@webpackages/core';
+import { PublicAccess } from '../policy';
 import { SecurityCodeGuard } from './security-code';
 import { UsernameGuard } from './username';
 

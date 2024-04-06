@@ -16,6 +16,7 @@ import { compareSync } from 'bcrypt';
 import {
   getRequiredPermissions,
   getRequiredRoles,
+  getResourceName,
   isPublicAccess,
 } from './policy';
 
@@ -26,7 +27,11 @@ import {
   UpdatePasswordDto,
 } from '@webpackages/dto';
 import { v4 } from 'uuid';
-import { SessionPayload } from '@webpackages/model';
+import {
+  ICreateSessionDto,
+  ICredentials,
+  SessionPayload,
+} from '@webpackages/model';
 import { AuthEnums } from './enums';
 
 @Injectable()
@@ -44,14 +49,19 @@ export class AuthService {
     @InjectRepository(SecurityCode)
     private readonly tokenRepo: Repository<SecurityCode>,
 
-    @InjectRepository(Mail) protected readonly mailRepo: Repository<Mail>,
+    @InjectRepository(Mail)
+    protected readonly mailRepo: Repository<Mail>,
 
     protected readonly reflector: Reflector,
     protected readonly jwt: JwtService
   ) {}
 
-  findUserByUsername(username: string) {
-    return this.userRepo.findOneBy({ username });
+  resourceName(ctx: ExecutionContext) {
+    return getResourceName(this.reflector, ctx);
+  }
+
+  async findUserByUsername(username: string) {
+    return await this.userRepo.findOneBy({ username });
   }
 
   async findUserByUserNameOrThrow(username: string) {
@@ -77,15 +87,11 @@ export class AuthService {
   }
 
   async findUserBySecurityCode(securityCode: string) {
-    const all = await this.tokenRepo.find();
-    console.log(all);
-    console.log(`$${securityCode}$`);
+    await this.tokenRepo.find();
     const found = await this.tokenRepo.findOneBy({ securityCode });
-    console.log(found);
 
-    if (found) {
-      return await this.userRepo.findOneBy({ id: found.userId });
-    }
+    if (found) return await this.userRepo.findOneBy({ id: found.userId });
+
     return undefined;
   }
 
@@ -126,15 +132,8 @@ export class AuthService {
     throw new UnauthorizedException('Session not found!');
   }
 
-  async createSession(user: User) {
-    const { id: userId, roles: userRoles } = user;
-
-    const roles = userRoles.map((e) => e.role);
-    const permissions = userRoles
-      .map((e) => e.permissions.map((e) => e.permission))
-      .flat();
-
-    return await this.sessionRepo.save({ userId, roles, permissions });
+  async createSession(session: ICreateSessionDto) {
+    return await this.sessionRepo.save(session);
   }
 
   async deleteSession(sessionId: number) {
@@ -190,6 +189,14 @@ export class AuthService {
     (this.request(ctx) as any)[AuthEnums.SESSION] = session;
   }
 
+  getSessionFromRequest(ctx: ExecutionContext): Session {
+    return (this.request(ctx) as any)[AuthEnums.SESSION];
+  }
+
+  getParamId(ctx: ExecutionContext): string {
+    return this.request(ctx).params['id'];
+  }
+
   /**
    * Append user to request
    * @param ctx
@@ -199,7 +206,7 @@ export class AuthService {
     (this.request(ctx) as any)[AuthEnums.USER] = user;
   }
 
-  extractUsernameFromBody(ctx: ExecutionContext) {
+  extractUsernameFromBody(ctx: ExecutionContext): string | undefined {
     const { username } = this.request(ctx).body;
     if (username) return username;
     return undefined;
@@ -211,7 +218,9 @@ export class AuthService {
     throw new UnauthorizedException('Username is not provided!');
   }
 
-  extractUsernameAndPassworFromBody(ctx: ExecutionContext) {
+  extractUsernameAndPassworFromBody(
+    ctx: ExecutionContext
+  ): ICredentials | undefined {
     const { username, password } = this.request(ctx).body;
     if (username && password) return { username, password };
     return undefined;
@@ -266,6 +275,9 @@ export class AuthService {
   }
 
   userHasPermissions(userPermissions: string[], requiredPermissions: string[]) {
+    if (userPermissions.includes('ADMIN')) {
+      return true;
+    }
     for (const rp of requiredPermissions)
       if (!userPermissions.includes(rp)) return false;
     return true;
@@ -299,7 +311,9 @@ export class AuthService {
         'The username is already in user!'
       );
     }
-    return await this.signupRepo.save(signupDto);
+    const saved = await this.signupRepo.save(signupDto);
+
+    return saved;
   }
 
   async sendEmail(mail: CreateMailDto) {

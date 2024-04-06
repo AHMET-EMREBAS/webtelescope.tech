@@ -91,6 +91,10 @@ export function StringColumn(
   return Column({ type: 'string', ...options });
 }
 
+export function UniqueNameColumn() {
+  return Column({ type: 'string', unique: true });
+}
+
 export function NumberColumn(
   options: Partial<Omit<ColumnOptions, 'type'>> = {}
 ) {

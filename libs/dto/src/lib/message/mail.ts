@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/swagger';
 import { ICreateMailDto } from '@webpackages/model';
 import {
   BooleanProperty,
@@ -13,3 +14,6 @@ export class CreateMailDto implements ICreateMailDto {
   @StringProperty() message!: string;
   @BooleanProperty() sent?: boolean;
 }
+
+@Dto()
+export class UpdateMailDto extends PartialType(CreateMailDto) {}

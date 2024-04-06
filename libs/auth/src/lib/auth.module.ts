@@ -1,40 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from './controller';
+import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {
-  Permission,
-  Role,
-  Session,
-  SecurityCode,
-  User,
-  Mail,
-  Sub,
-  SubType,
-  Organization,
-} from '@webpackages/entity';
-
 import { EventEmitterModule } from '@nestjs/event-emitter';
-
 import {
   AuthService,
   AuthGuard,
   LocalGuard,
   SessionGuard,
 } from '@webpackages/core';
-
-export const AUTH_MODULE_ENTITIES = [
-  User,
-  Role,
-  Permission,
-  Session,
-  SecurityCode,
-  Sub,
-  SubType,
-  Organization,
-  Mail,
-];
+import { AuthResourceControllers } from './resource-controllers';
+import { AuthEntities } from './auth-entities';
 
 export type AuthModuleOptions = {
   secret: string;
@@ -47,7 +24,7 @@ export class AuthModule {
       module: AuthModule,
       imports: [
         EventEmitterModule,
-        TypeOrmModule.forFeature(AUTH_MODULE_ENTITIES),
+        TypeOrmModule.forFeature(AuthEntities),
         JwtModule.register({
           global: true,
           secret: options.secret,
@@ -56,9 +33,16 @@ export class AuthModule {
           },
         }),
       ],
-      controllers: [AuthController],
+      controllers: [AuthController, ...AuthResourceControllers],
       providers: [AuthService, AuthGuard, LocalGuard, SessionGuard],
-      exports: [JwtModule, AuthService, AuthGuard, LocalGuard, SessionGuard],
+      exports: [
+        JwtModule,
+        AuthService,
+        AuthGuard,
+        LocalGuard,
+        SessionGuard,
+        TypeOrmModule.forFeature(AuthEntities),
+      ],
     };
   }
 }

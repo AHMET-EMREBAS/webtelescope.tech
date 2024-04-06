@@ -2,11 +2,11 @@ import { ICustomer } from '@webpackages/model';
 import { Organization } from '../auth';
 import { PriceLevel } from '../inventory';
 import {
-  StringColumn,
   OneRelation,
   PasswordColumn,
   TimestampEntity,
   Entity,
+  UniqueNameColumn,
 } from '@webpackages/typeorm';
 import {
   AddressEntity,
@@ -22,7 +22,7 @@ export class Customer
 {
   @OneRelation(Organization) organization!: Organization;
   @OneRelation(PriceLevel) priceLevel!: PriceLevel;
-  @StringColumn() username!: string;
+  @UniqueNameColumn() username!: string;
   @PasswordColumn() password!: string;
 }
 

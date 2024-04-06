@@ -19,7 +19,6 @@ export function ObjectProperty(
     type: 'object',
     required: true,
     description: 'Object property',
-    example: { some: 'some' },
     ...options,
   });
 }

@@ -2,12 +2,15 @@
 import { Type } from '@nestjs/common';
 import { PrimaryGeneratedColumn } from 'typeorm';
 import { IID } from './types';
+import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * @param id {@link id}
  */
 export class IDEntity implements IID {
-  @PrimaryGeneratedColumn() id!: number;
+  @ApiProperty({ type: 'number' })
+  @PrimaryGeneratedColumn()
+  id!: number;
 }
 
 /**
@@ -18,7 +21,9 @@ export function WithIDEntity<T extends Type<any>>(
   entity: T
 ): T & Type<IDEntity> {
   class ___IDEntity extends entity implements IID {
-    @PrimaryGeneratedColumn() id!: number;
+    @ApiProperty({ type: 'number' })
+    @PrimaryGeneratedColumn()
+    id!: number;
   }
 
   return ___IDEntity;

@@ -6,6 +6,7 @@ import { v4 } from 'uuid';
 export function token(prefix: string) {
   return `${prefix}_${v4()}`;
 }
+const RESOURCE_NAME = token('resource-name');
 const PUBLIC = token('public');
 const PERMISSION = token('permission');
 const ROLE = token('permission');
@@ -22,6 +23,10 @@ export function PublicAccess() {
  */
 export function Permission(permission: string) {
   return SetMetadata(PERMISSION, permission);
+}
+
+export function ResouceName(name: string) {
+  return SetMetadata(RESOURCE_NAME, name);
 }
 
 /**
@@ -82,13 +87,41 @@ export function getRequiredRoles(
   ]);
 }
 
+export function getResourceName(
+  reflector: Reflector,
+  context: ExecutionContext
+) {
+  return reflector.getAllAndOverride(RESOURCE_NAME, [
+    context.getClass(),
+    context.getHandler(),
+  ]);
+}
+
+export class PermissionActionClass {
+  readonly READ = 'READ';
+  readonly WRITE = 'WRITE';
+  readonly UPDATE = 'UPDATE';
+  readonly DELETE = 'DELETE';
+}
+
+export const PermissionAction = new PermissionActionClass();
+
+export type PermissionActionType = keyof PermissionActionClass;
+
+export const PermissionActionlist = Object.keys(
+  PermissionAction
+) as PermissionActionType[];
+
 /**
  * Convert resource name and action into permission string
  * @param action
  * @param resourceName
  * @returns
  */
-export function toPermissionString(action: string, resourceName: string) {
+export function toPermissionString(
+  action: PermissionActionType,
+  resourceName: string
+) {
   return `${action.toUpperCase()}:${resourceName.toUpperCase()}`;
 }
 
@@ -98,7 +131,7 @@ export function toPermissionString(action: string, resourceName: string) {
  * @returns
  */
 export function CanWrite(resourceName: string) {
-  return Permission(toPermissionString('write', resourceName));
+  return Permission(toPermissionString('WRITE', resourceName));
 }
 
 /**
@@ -107,7 +140,7 @@ export function CanWrite(resourceName: string) {
  * @returns
  */
 export function CanUpdate(resourceName: string) {
-  return Permission(toPermissionString('update', resourceName));
+  return Permission(toPermissionString('UPDATE', resourceName));
 }
 
 /**
@@ -116,7 +149,7 @@ export function CanUpdate(resourceName: string) {
  * @returns
  */
 export function CanDelete(resourceName: string) {
-  return Permission(toPermissionString('delete', resourceName));
+  return Permission(toPermissionString('DELETE', resourceName));
 }
 
 /**
@@ -125,7 +158,7 @@ export function CanDelete(resourceName: string) {
  * @returns
  */
 export function CanRead(resourceName: string) {
-  return Permission(toPermissionString('read', resourceName));
+  return Permission(toPermissionString('READ', resourceName));
 }
 
 /**

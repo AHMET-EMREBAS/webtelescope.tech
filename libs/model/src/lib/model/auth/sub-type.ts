@@ -12,5 +12,5 @@ import { IID, ITimestamp } from '../../common';
  */
 export interface ISubType extends ITimestamp, IID {
   subscriptionName: string;
-  description: string;
+  description?: string;
 }

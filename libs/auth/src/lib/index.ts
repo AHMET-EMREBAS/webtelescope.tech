@@ -1,4 +1,7 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './controller'
+export * from './auth-entities'
+export * from './auth.controller'
+export * from './auth.module'
 export * from './enums'
-export * from './module'
+export * from './resource-controllers'
+export * from './seeder'

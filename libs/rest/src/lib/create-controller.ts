@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Type, UnprocessableEntityException } from '@nestjs/common';
+import {
+  CanActivate,
+  Type,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { IController } from './controller';
 import {
   QueryDto,
@@ -23,6 +27,8 @@ export type CreateControllerOptions = {
   entity: Type;
   createDto: Type;
   updateDto: Type;
+  log?: boolean;
+  guards?: Type<CanActivate>[];
 };
 
 export function CreateController<
@@ -30,7 +36,7 @@ export function CreateController<
   C extends Type,
   U extends Type
 >(options: CreateControllerOptions): Type<IController<E, C, U>> {
-  const R = new RestResource(options.entity);
+  const R = new RestResource(options.entity, options.guards);
 
   @R.Controller()
   class Controller implements IController<E, C, U> {
@@ -59,7 +65,6 @@ export function CreateController<
 
     @R.FindAll()
     async findAll(@Query() query: QueryDto<E>): Promise<E[]> {
-      console.log(query);
       return await this.repo.find({ ...(query as any) });
     }
 
@@ -78,7 +83,10 @@ export function CreateController<
 
     @R.Update()
     @ApiBody({ type: options.updateDto })
-    async update(query: ObjectIDDto, entity: U): Promise<UpdateResult> {
+    async update(
+      @Param() query: ObjectIDDto,
+      @Body(options.updateDto) entity: U
+    ): Promise<UpdateResult> {
       await this.isUniqueOrThrow(entity);
       await this.findOneById(query);
       return await this.repo.update(query.id, entity as any);
@@ -92,34 +100,37 @@ export function CreateController<
 
     @R.AddRelation()
     async addRelation(@Param() relation: AddRelationDto): Promise<E> {
+      const { id, relationId, relationName } = relation;
       await this.repo
         .createQueryBuilder()
-        .relation(relation.relationName)
-        .of(relation.id)
-        .add(relation.relationId);
+        .relation(relationName)
+        .of(id)
+        .add(relationId);
 
-      return await this.findOneById(relation);
+      return await this.findOneById({ id: relation.id });
     }
 
     @R.RemoveRelation()
     async removeRelation(@Param() relation: RemoveRelationDto): Promise<E> {
+      const { id, relationId, relationName } = relation;
       await this.repo
         .createQueryBuilder()
-        .relation(relation.relationName)
-        .of(relation.id)
-        .remove(relation.relationId);
+        .relation(relationName)
+        .of(id)
+        .remove(relationId);
 
-      return await this.findOneById(relation);
+      return await this.findOneById({ id });
     }
 
     @R.SetRelation()
     async setRelation(@Param() relation: SetRelationDto): Promise<E> {
+      const { id, relationId, relationName } = relation;
       await this.repo
         .createQueryBuilder()
-        .relation(relation.relationName)
-        .of(relation.id)
-        .set(relation.relationId);
-      return await this.findOneById(relation);
+        .relation(relationName)
+        .of(id)
+        .set(relationId);
+      return await this.findOneById({ id });
     }
 
     @R.UnsetRelation()

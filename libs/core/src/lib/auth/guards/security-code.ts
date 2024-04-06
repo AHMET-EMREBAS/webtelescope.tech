@@ -1,5 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthService } from '../service';
+import { userToSession } from './user-to-session';
 
 /**
  * Extract security code from the request query object
@@ -17,7 +18,7 @@ export class SecurityCodeGuard implements CanActivate {
       securityCode
     );
 
-    const session = await this.authService.createSession(user);
+    const session = await this.authService.createSession(userToSession(user));
 
     const token = this.authService.signToken(session);
 

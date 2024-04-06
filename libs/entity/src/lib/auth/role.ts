@@ -9,6 +9,6 @@ import {
 
 @Entity()
 export class Role extends IDEntity implements IRole<Permission> {
-  @StringColumn() role!: string;
+  @StringColumn({ unique: true }) role!: string;
   @ManyRelation(Permission) permissions!: Permission[];
 }

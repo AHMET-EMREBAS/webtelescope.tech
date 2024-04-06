@@ -18,7 +18,7 @@ import {
 
 @Entity()
 export class User extends TimestampEntity implements IUser<Organization, Role> {
-  @StringColumn() username!: string;
+  @StringColumn({ unique: true }) username!: string;
   @PasswordColumn() password!: string;
   @OwnerRelation(Organization) organization!: Organization;
   @ManyRelation(Role) roles!: Role[];

@@ -1,3 +1,3 @@
 // @index('./*', f => `export * from '${f.path}'`)
-
-export * from './inventory/category';
+export * from './auth';
+export * from './inventory';

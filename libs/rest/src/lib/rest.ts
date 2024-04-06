@@ -1,16 +1,23 @@
 import {
+  CanActivate,
   Controller,
   Delete,
   Get,
   Post,
   Put,
   Type,
+  UseGuards,
   applyDecorators,
 } from '@nestjs/common';
 import { ApiPaths, NameResult, getApiPaths, names } from '@webpackages/utils';
-import { CanRead, CanUpdate, CanWrite } from '@webpackages/core';
 import {
-  ApiBearerAuth,
+  BearerAccess,
+  CanRead,
+  CanUpdate,
+  CanWrite,
+  ResouceName,
+} from '@webpackages/core';
+import {
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
@@ -147,7 +154,10 @@ export class RestResource {
   private readonly NAMES!: NameResult;
   private readonly API_PATHS!: ApiPaths;
 
-  constructor(private readonly entity: Type) {
+  constructor(
+    private readonly entity: Type,
+    private readonly guards: Type<CanActivate>[] = []
+  ) {
     this.RESOURCE_NAME = this.entity.name;
     this.NAMES = names(entity.name);
     this.API_PATHS = getApiPaths(this.NAMES.fileName);
@@ -155,9 +165,11 @@ export class RestResource {
 
   Controller() {
     return applyDecorators(
+      ApiTags(this.RESOURCE_NAME + 'Controller'),
       Controller(),
-      ApiBearerAuth('bearer'),
-      ApiTags(this.RESOURCE_NAME + 'Controller')
+      BearerAccess(),
+      ResouceName(this.entity.name),
+      UseGuards(...this.guards)
     );
   }
 

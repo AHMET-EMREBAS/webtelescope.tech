@@ -1,4 +1,5 @@
-import { ICredentials, IID } from '../../common';
+import { IID } from '../../common';
+import { ISub } from '../../model';
 
 /**
  * Users send the information to the server to create an organization.
@@ -8,16 +9,10 @@ import { ICredentials, IID } from '../../common';
  * @param username {@link ICredentials.username}
  * @param password {@link ICredentials.password}
  * @param organizationName {@link organizationName}
- * @param subscription {@link subscription}
+ * @param subType {@link subType}
  */
-export interface ICreateSubDto extends ICredentials {
-  /**
-   * Unique organization name
-   */
-  organizationName: string;
-
-  /**
-   * Subscription type
-   */
-  subscription: IID;
-}
+export interface ICreateSubDto<SubType extends IID>
+  extends Pick<
+    ISub<SubType>,
+    'username' | 'password' | 'organizationName' | 'subType'
+  > {}
