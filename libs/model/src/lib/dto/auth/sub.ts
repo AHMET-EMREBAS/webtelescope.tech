@@ -11,7 +11,7 @@ import { ISub } from '../../model';
  * @param organizationName {@link organizationName}
  * @param subType {@link subType}
  */
-export interface ICreateSubDto<SubType extends IID>
+export interface ICreateSubDto<SubType extends IID = IID>
   extends Pick<
     ISub<SubType>,
     'username' | 'password' | 'organizationName' | 'subType'

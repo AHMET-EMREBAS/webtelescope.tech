@@ -69,7 +69,6 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Has active session' })
-  @ApiOkResponse({ type: 'boolean' })
   @ApiUnauthorizedResponse()
   @SessionAccess()
   @Get('has-session')

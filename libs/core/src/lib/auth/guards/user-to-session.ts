@@ -2,6 +2,11 @@ import { User } from '@webpackages/entity';
 import { ICreateSessionDto } from '@webpackages/model';
 import { v4 } from 'uuid';
 
+/**
+ * Convert user data into session data
+ * @param user
+ * @returns
+ */
 export function userToSession(user: User): ICreateSessionDto {
   const userPermissions =
     user.roles.map((e) => e.permissions.map((p) => p.permission)).flat() || [];

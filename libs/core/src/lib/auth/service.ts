@@ -161,7 +161,8 @@ export class AuthService {
   }
 
   extractToken(ctx: ExecutionContext) {
-    const bearerToken = this.request(ctx).headers.authorization ?? undefined;
+    const headers = this.request(ctx).headers;
+    const bearerToken = headers.authorization ?? undefined;
     const [, token] = bearerToken?.split(' ') ?? [];
     return token;
   }

@@ -18,7 +18,7 @@ export class NotDeleteGuard implements CanActivate {
     const handler = ctx.getHandler().name;
     const rn = this.authService.resourceName(ctx);
 
-    if (handler === OperationNames.delete)
+    if (handler === OperationNames.delete) {
       if (rn === User.name || rn === Organization.name || rn === Session.name) {
         const session = this.authService.getSessionFromRequest(ctx);
         const paramId = this.authService.getParamId(ctx);
@@ -27,6 +27,7 @@ export class NotDeleteGuard implements CanActivate {
           throw new UnauthorizedException('You cannot delete your own data!');
         }
       }
+    }
 
     return true;
   }

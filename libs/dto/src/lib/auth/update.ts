@@ -11,9 +11,16 @@ import { CreateSubDto } from './sub';
 import { CreateRootUserDto } from './root-user';
 
 @Dto()
-export class UpdateSessionDto extends PartialType(CreateSessionDto) {}
+export class NotUpdateDto {}
+
 @Dto()
-export class UpdateOrganizationDto extends PartialType(CreateOrganizationDto) {}
+export class UpdateSessionDto extends PartialType(CreateSessionDto) {}
+
+@Dto()
+export class UpdateOrganizationDto extends PartialType(
+  PickType(CreateOrganizationDto, [])
+) {}
+
 @Dto()
 export class UpdateRoleDto extends PartialType(CreateRoleDto) {}
 @Dto()
