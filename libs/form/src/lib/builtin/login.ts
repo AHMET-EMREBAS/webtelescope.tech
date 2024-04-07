@@ -10,7 +10,7 @@ import { ILoginDto } from '@webpackages/model';
   standalone: true,
   selector: 'wt-login-form',
   template: `
-    <wt-form (formSubmit)="submit($event)" [label]="label">
+    <wt-form (submitButtonClick)="submit($event)" [label]="label">
       <wt-text-field
         inputName="username"
         [required]="true"
@@ -41,11 +41,5 @@ import { ILoginDto } from '@webpackages/model';
   ],
 })
 export class LoginFormComponent extends FormComponent {
-  /**
-   * Form submit
-   */
-  @Output()
-  override formSubmit: EventEmitter<ILoginDto> = new EventEmitter<ILoginDto>();
-
   override label: string = 'Login';
 }

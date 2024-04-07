@@ -12,7 +12,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       <mat-slide-toggle
         #input
         [formControlName]="inputName"
-        [data-testid]="inputName"
+        [attr.data-testid]="inputName"
       >
         {{ label }}
       </mat-slide-toggle>

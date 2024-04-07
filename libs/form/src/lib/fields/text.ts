@@ -22,7 +22,7 @@ import { ErrorAnimations } from './error-animations';
         [attr.aria-minlength]="minLength"
         [attr.aria-maxlength]="maxLength"
         [attr.aria-required]="required"
-        [data-testid]="inputName"
+        [attr.data-testid]="inputName"
         autocomplete="off"
       />
       <mat-icon color="primary" class="fill" matIconPrefix *ngIf="prefixIcon">{{

@@ -18,7 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       <mat-checkbox
         matInput
         [formControlName]="inputName"
-        [data-testid]="inputName"
+        [attr.data-testid]="inputName"
       >
         {{ label }}
       </mat-checkbox>

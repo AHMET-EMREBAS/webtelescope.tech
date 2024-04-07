@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   exports: [
     CommonModule,
@@ -55,10 +56,16 @@ export class CommonFormModule {}
             type="button"
             (click)="submit()"
             [disabled]="formGroup.invalid"
+            [attr.data-testid]="label"
           >
             {{ label }}
           </button>
-          <button mat-raised-button (click)="reset()" type="button">
+          <button
+            mat-raised-button
+            (click)="reset()"
+            type="button"
+            [attr.data-testid]="'Reset'"
+          >
             Reset
           </button>
         </div>
@@ -68,19 +75,20 @@ export class CommonFormModule {}
 })
 export class FormComponent<T extends IID = any> {
   @Input() label = 'Submit';
-  @Output() formSubmit = new EventEmitter<T>();
-  submitted$ = new BehaviorSubject(false);
+
+  @Output() submitButtonClick = new EventEmitter<T>();
+
+  isSubmitted$ = new BehaviorSubject(false);
 
   constructor(public readonly formGroup: FormGroup) {}
 
   submit() {
-    this.submitted$.next(true);
-    this.formSubmit.emit(this.formGroup.value);
-    console.log(this.formGroup.value);
+    this.isSubmitted$.next(true);
+    this.submitButtonClick.emit(this.formGroup.value);
   }
 
   reset() {
-    this.submitted$.next(false);
+    this.isSubmitted$.next(false);
     this.formGroup.reset();
     this.formGroup.enable({ emitEvent: true });
   }
