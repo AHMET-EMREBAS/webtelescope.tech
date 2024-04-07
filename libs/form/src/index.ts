@@ -1,1 +1,2 @@
-export * from './lib/form/form.component';
+// @index(['./*', '!./test-setup.ts'], f => `export * from '${f.path}'`)
+export * from './lib';

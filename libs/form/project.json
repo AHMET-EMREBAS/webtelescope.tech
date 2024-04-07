@@ -8,7 +8,9 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
       "options": {
         "project": "libs/form/ng-package.json"
       },
@@ -24,20 +26,91 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "libs/form/jest.config.ts"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
         "lintFilePatterns": [
           "libs/form/**/*.ts",
           "libs/form/**/*.html",
           "libs/form/package.json"
         ]
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/form/.storybook",
+        "browserTarget": "form:build-storybook",
+        "compodoc": false,
+        "compodocArgs": [
+          "-e",
+          "json",
+          "-d",
+          "libs/form/.storybook",
+          "-p",
+          "libs/form/tsconfig.json"
+        ],
+        "assets": [
+          "libs/form/src/assets",
+          "libs/form/src/favicon.svg"
+        ],
+        "styles": [
+          "libs/form/src/style.scss"
+        ]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": [
+        "{options.outputDir}"
+      ],
+      "options": {
+        "outputDir": "dist/storybook/form",
+        "configDir": "libs/form/.storybook",
+        "browserTarget": "form:build-storybook",
+        "compodoc": false,
+        "compodocArgs": [
+          "-e",
+          "json",
+          "-d",
+          "libs/form/.storybook",
+          "-p",
+          "libs/form/tsconfig.json"
+        ],
+        "assets": [
+          "libs/form/src/assets",
+          "libs/form/src/favicon.svg"
+        ],
+        "styles": [
+          "libs/form/src/style.scss"
+        ]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/form/.storybook --url=http://localhost:4400"
       }
     }
   }
