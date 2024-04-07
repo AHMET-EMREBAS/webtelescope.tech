@@ -81,4 +81,8 @@ export class BaseFieldComponent implements OnInit {
       console.error(`Controller ${this.inputName} not found!`);
     }
   }
+
+  focus() {
+    this.inputRef.focus();
+  }
 }

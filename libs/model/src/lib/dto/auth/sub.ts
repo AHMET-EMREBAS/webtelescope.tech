@@ -4,8 +4,6 @@ import { ISub } from '../../model';
 /**
  * Users send the information to the server to create an organization.
  * Organization is an entity that stores all subscription details
- *
- * @param id {@link IID.id}
  * @param username {@link ICredentials.username}
  * @param password {@link ICredentials.password}
  * @param organizationName {@link organizationName}

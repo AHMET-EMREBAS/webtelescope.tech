@@ -7,7 +7,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IID } from '@webpackages/model';
 import { BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -73,7 +72,7 @@ export class CommonFormModule {}
     </mat-card>
   `,
 })
-export class FormComponent<T extends IID = any> {
+export class FormComponent<T = any> {
   @Input() label = 'Submit';
 
   @Output() submitButtonClick = new EventEmitter<T>();
