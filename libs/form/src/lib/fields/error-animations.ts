@@ -1,3 +1,11 @@
 import { AnimationTriggerMetadata } from '@angular/animations';
 
-export const ErrorAnimations: AnimationTriggerMetadata[] = [];
+import {
+  bounceInDownOnEnterAnimation,
+  bounceOutUpOnLeaveAnimation,
+} from 'angular-animations';
+
+export const ErrorAnimations: AnimationTriggerMetadata[] = [
+  bounceInDownOnEnterAnimation({ anchor: 'enter' }),
+  bounceOutUpOnLeaveAnimation({ anchor: 'leave' }),
+];

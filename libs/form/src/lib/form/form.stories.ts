@@ -1,18 +1,18 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { FormComponent } from './form';
-
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup } from '@angular/forms';
+import { importProvidersFrom } from '@angular/core';
 
 const meta: Meta<FormComponent> = {
   component: FormComponent,
   title: 'FormComponent',
   decorators: [
-    moduleMetadata({
-      imports: [BrowserAnimationsModule],
+    applicationConfig({
       providers: [
+        importProvidersFrom(BrowserAnimationsModule),
         {
           provide: FormGroup,
           useValue: new FormGroup({

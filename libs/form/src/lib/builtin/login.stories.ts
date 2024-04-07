@@ -1,31 +1,40 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { LoginFormComponent } from './login';
-
-import { within } from '@storybook/testing-library';
+import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
 
 const meta: Meta<LoginFormComponent> = {
   component: LoginFormComponent,
   title: 'LoginFormComponent',
-
   decorators: [
-    moduleMetadata({
-      imports: [BrowserAnimationsModule],
+    applicationConfig({
+      providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
 };
+
 export default meta;
+
 type Story = StoryObj<LoginFormComponent>;
 
-export const Primary: Story = {
-  args: {},
-};
+export const Primary: Story = {};
 
 export const Heading: Story = {
-  args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/login works!/gi)).toBeTruthy();
+
+    const username = canvas.getByLabelText(/Username/gi);
+    const password = canvas.getByLabelText(/Password/gi);
+
+    expect(username).toBeTruthy();
+    expect(password).toBeTruthy();
+
+    await userEvent.clear(username);
+    await userEvent.clear(password);
+
+    await userEvent.type(username, 'user@gmail.com', { delay: 1000 });
+    await userEvent.type(password, '!Password1234.', { delay: 1000 });
   },
 };

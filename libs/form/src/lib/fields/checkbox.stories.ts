@@ -1,17 +1,22 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import {
+  applicationConfig,
+  type Meta,
+  type StoryObj,
+} from '@storybook/angular';
 import { CheckboxFieldComponent } from './checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { FormControl, FormGroup } from '@angular/forms';
+import { importProvidersFrom } from '@angular/core';
 
 const meta: Meta<CheckboxFieldComponent> = {
   component: CheckboxFieldComponent,
   title: 'CheckboxFieldComponent',
   decorators: [
-    moduleMetadata({
-      imports: [BrowserAnimationsModule],
+    applicationConfig({
       providers: [
+        importProvidersFrom(BrowserAnimationsModule),
         {
           provide: FormGroup,
           useValue: new FormGroup({

@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormComponent, InputValidator } from '../form';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TextFieldComponent } from '../fields';
 import { PasswordFieldComponent } from '../fields/password';
+import { ILoginDto } from '@webpackages/model';
 
 @Component({
   imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],
   standalone: true,
   selector: 'wt-login-form',
   template: `
-    <wt-form>
+    <wt-form (formSubmit)="submit($event)" [label]="label">
       <wt-text-field
         inputName="username"
         [required]="true"
@@ -39,4 +40,12 @@ import { PasswordFieldComponent } from '../fields/password';
     },
   ],
 })
-export class LoginFormComponent {}
+export class LoginFormComponent extends FormComponent {
+  /**
+   * Form submit
+   */
+  @Output()
+  override formSubmit: EventEmitter<ILoginDto> = new EventEmitter<ILoginDto>();
+
+  override label: string = 'Login';
+}

@@ -37,25 +37,30 @@ export class CommonFormModule {}
     >
       <ng-content></ng-content>
       <div style="display: flex; flex-direction: row; gap: 1em;">
-        <button mat-raised-button color="primary" type="submit">
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="submit()"
+        >
           {{ label }}
         </button>
-        <button mat-raised-button (click)="reset()">Reset</button>
+        <button mat-raised-button (click)="reset()" type="button">Reset</button>
       </div>
     </form>
   `,
 })
 export class FormComponent<T extends IID = any> {
   @Input() label = 'Submit';
-
   @Output() formSubmit = new EventEmitter<T>();
-
   submitted$ = new BehaviorSubject(false);
 
   constructor(public readonly formGroup: FormGroup) {}
 
   submit() {
     this.submitted$.next(true);
+    this.formSubmit.emit(this.formGroup.value);
+    console.log(this.formGroup.value);
   }
 
   reset() {

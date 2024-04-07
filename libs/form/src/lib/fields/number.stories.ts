@@ -1,18 +1,19 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { NumberFieldComponent } from './number';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup } from '@angular/forms';
+import { importProvidersFrom } from '@angular/core';
 
 const meta: Meta<NumberFieldComponent> = {
   component: NumberFieldComponent,
   title: 'NumberFieldComponent',
   decorators: [
-    moduleMetadata({
-      imports: [BrowserAnimationsModule],
+    applicationConfig({
       providers: [
+        importProvidersFrom(BrowserAnimationsModule),
         {
           provide: FormGroup,
           useValue: new FormGroup({
