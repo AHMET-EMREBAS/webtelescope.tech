@@ -29,6 +29,7 @@ export class CommonFormModule {}
   selector: 'wt-form',
   standalone: true,
   imports: [CommonFormModule],
+  styleUrl: './form.style.scss',
   template: `
     <mat-card>
       <mat-card-header>

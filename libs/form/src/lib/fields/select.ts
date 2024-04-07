@@ -34,6 +34,17 @@ import { ErrorAnimations } from './error-animations';
     <mat-icon color="primary" class="fill" matIconSuffix *ngIf="suffixIcon">
       {{ suffixIcon }}
     </mat-icon>
+
+    <button
+      matTextSuffix
+      mat-raised-button
+      color="primary"
+      (click)="updateField()"
+        *ngIf="isUpdateField"
+    >
+      <mat-icon matIconPrefix>update</mat-icon>
+      <span> Update </span>
+    </button>
     <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
     <mat-error [@enter] [@leave]>
       {{ errors$ | async }}
@@ -51,11 +62,4 @@ export class SelectFieldComponent extends BaseFieldComponent {
    * Multiple select
    */
   @Input() multiple: boolean = false;
-
-  constructor(formGroup: FormGroup) {
-    super(formGroup);
-    setTimeout(() => {
-      this.formGroup.get(this.inputName)?.valueChanges.subscribe(console.log);
-    }, 2000);
-  }
 }

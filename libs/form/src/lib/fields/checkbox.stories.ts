@@ -34,16 +34,15 @@ export const Primary: Story = {
   args: {
     label: 'Checkbox Label',
     inputName: 'active',
-    prefixIcon: 'person',
+    prefixIcon: 'info',
+    suffixIcon: '',
+    required: false,
+    isUpdateField: false,
   },
 };
 
 export const Heading: Story = {
-  args: {
-    label: 'Checkbox Label',
-    inputName: 'active',
-    prefixIcon: 'person',
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Checkbox Label/gi)).toBeTruthy();

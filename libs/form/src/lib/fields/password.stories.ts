@@ -30,14 +30,16 @@ export const Primary: Story = {
   args: {
     inputName: 'password',
     label: 'Password',
+    prefixIcon: 'password',
+    suffixIcon: '',
+    hint: 'Password Hint',
+    required: false,
+    isUpdateField: false,
   },
 };
 
 export const Heading: Story = {
-  args: {
-    inputName: 'password',
-    label: 'Password',
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const password = canvas.getByLabelText(/Password/gi);

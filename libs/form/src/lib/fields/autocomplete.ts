@@ -10,7 +10,7 @@ import { ErrorAnimations } from './error-animations';
   selector: 'wt-autocomplete-field',
   imports: [CommonFieldModule, MatAutocompleteModule],
   standalone: true,
-  template: ` <mat-form-field
+  template: `<mat-form-field
     style="width: 100%;"
     appearance="outline"
     [formGroup]="formGroup"
@@ -19,12 +19,11 @@ import { ErrorAnimations } from './error-animations';
     <input
       #input
       type="text"
-      placeholder="Pick one"
-      aria-label="Number"
       matInput
       [formControl]="formControl"
       [matAutocomplete]="auto"
       [attr.data-testid]="inputName"
+      [attr.aria-required]="required"
       [errorStateMatcher]="errorState"
     />
 
@@ -47,6 +46,18 @@ import { ErrorAnimations } from './error-animations';
     <mat-icon color="primary" class="fill" matIconSuffix *ngIf="suffixIcon">
       {{ suffixIcon }}
     </mat-icon>
+
+    <button
+      matTextSuffix
+      mat-raised-button
+      color="primary"
+      (click)="updateField()"
+      *ngIf="isUpdateField"
+    >
+      <mat-icon matIconPrefix>update</mat-icon>
+      <span> Update </span>
+    </button>
+
     <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
 
     <mat-error [@enter] [@leave]>
@@ -58,9 +69,6 @@ import { ErrorAnimations } from './error-animations';
 export class AutocompleteFieldComponent extends BaseFieldComponent {
   formControl = new FormControl();
 
-  /**
-   * Select options
-   */
   @Input() options!: IOption[];
 
   filteredOptions$: Observable<IOption[]> = this.formControl.valueChanges.pipe(

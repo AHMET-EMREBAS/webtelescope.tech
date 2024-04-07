@@ -33,18 +33,16 @@ export const Primary: Story = {
   args: {
     inputName: 'age',
     label: 'Number Label',
-    min: Number.MIN_SAFE_INTEGER,
-    max: Number.MAX_SAFE_INTEGER,
+    min: 18,
+    max: 100,
+    prefixIcon: 'info',
+    suffixIcon: '',
+    isUpdateField: false,
   },
 };
 
 export const Heading: Story = {
-  args: {
-    inputName: 'age',
-    label: 'Number Label',
-    min: Number.MIN_SAFE_INTEGER,
-    max: Number.MAX_SAFE_INTEGER,
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Number Label/gi)).toBeTruthy();

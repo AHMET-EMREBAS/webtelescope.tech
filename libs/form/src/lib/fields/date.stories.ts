@@ -3,17 +3,16 @@ import {
   type Meta,
   type StoryObj,
 } from '@storybook/angular';
-import { SelectFieldComponent } from './select';
-
+import { DateFieldComponent } from './date';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import { importProvidersFrom } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup } from '@angular/forms';
+import { importProvidersFrom } from '@angular/core';
 
-const meta: Meta<SelectFieldComponent> = {
-  component: SelectFieldComponent,
-  title: 'SelectFieldComponent',
+const meta: Meta<DateFieldComponent> = {
+  component: DateFieldComponent,
+  title: 'DateFieldComponent',
   decorators: [
     applicationConfig({
       providers: [
@@ -21,7 +20,7 @@ const meta: Meta<SelectFieldComponent> = {
         {
           provide: FormGroup,
           useValue: new FormGroup({
-            category: new FormControl('', []),
+            date: new FormControl('', []),
           }),
         },
       ],
@@ -29,20 +28,16 @@ const meta: Meta<SelectFieldComponent> = {
   ],
 };
 export default meta;
-type Story = StoryObj<SelectFieldComponent>;
+type Story = StoryObj<DateFieldComponent>;
 
 export const Primary: Story = {
   args: {
-    label: 'Select Category',
-    inputName: 'category',
+    label: 'Pick Date',
+    inputName: 'date',
     prefixIcon: 'info',
     suffixIcon: '',
+    required: false,
     isUpdateField: false,
-    options: [
-      { id: 1, label: 'First' },
-      { id: 2, label: 'Second' },
-      { id: 3, label: 'Third' },
-    ],
   },
 };
 
@@ -50,6 +45,6 @@ export const Heading: Story = {
   args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/Select Category/gi)).toBeTruthy();
+    expect(canvas.getByText(/Checkbox Label/gi)).toBeTruthy();
   },
 };

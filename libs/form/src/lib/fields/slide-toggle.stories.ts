@@ -32,14 +32,15 @@ export const Primary: Story = {
   args: {
     inputName: 'active',
     label: 'Slide Toggle',
+    prefixIcon: 'info',
+    suffixIcon: '',
+    isUpdateField: false,
+    required: false,
   },
 };
 
 export const Heading: Story = {
-  args: {
-    inputName: 'active',
-    label: 'Slide Toggle',
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Slide Toggle/gi)).toBeTruthy();

@@ -29,21 +29,17 @@ type Story = StoryObj<TextFieldComponent>;
 export const Primary: Story = {
   args: {
     inputName: 'name',
-    prefixIcon: 'person',
     label: 'Text Label',
     minLength: 0,
     maxLength: 400,
+    prefixIcon: 'info',
+    suffixIcon: '',
+    isUpdateField: false,
   },
 };
 
 export const Heading: Story = {
-  args: {
-    inputName: 'name',
-    prefixIcon: 'person',
-    label: 'Text Label',
-    minLength: 0,
-    maxLength: 400,
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Text Label/gi)).toBeTruthy();

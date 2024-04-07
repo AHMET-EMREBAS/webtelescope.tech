@@ -15,6 +15,7 @@ import { ErrorAnimations } from './error-animations';
       [formGroup]="formGroup"
     >
       <mat-label>{{ label }}</mat-label>
+
       <textarea
         style="min-height: 100px; resize: none;"
         #input
@@ -29,12 +30,26 @@ import { ErrorAnimations } from './error-animations';
         autocomplete="off"
         [errorStateMatcher]="errorState"
       ></textarea>
+
       <mat-icon color="primary" class="fill" matIconPrefix *ngIf="prefixIcon">
         {{ prefixIcon }}
       </mat-icon>
+
       <mat-icon color="primary" class="fill" matIconSuffix *ngIf="suffixIcon">
         {{ suffixIcon }}
       </mat-icon>
+
+      <button
+        matTextSuffix
+        mat-raised-button
+        color="primary"
+        (click)="updateField()"
+        *ngIf="isUpdateField"
+      >
+        <mat-icon matIconPrefix>update</mat-icon>
+        <span> Update </span>
+      </button>
+
       <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
       <mat-error [@enter] [@leave]>
         {{ errors$ | async }}

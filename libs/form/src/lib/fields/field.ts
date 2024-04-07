@@ -1,11 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, NgModule, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgModule,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormGroup,
-  FormGroupDirective,
   FormsModule,
-  NgForm,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,8 +41,10 @@ export class ErrorState implements ErrorStateMatcher {
 }
 
 @Component({ template: '' })
-export class BaseFieldComponent implements OnInit {
+export class BaseFieldComponent<T = any> implements OnInit {
   readonly errorState = new ErrorState();
+
+  @Output() updateButtonClick = new EventEmitter<T>();
   /**
    * Input referance
    */
@@ -64,7 +72,7 @@ export class BaseFieldComponent implements OnInit {
   /**
    * Prefix icon
    */
-  @Input() prefixIcon?: string;
+  @Input() prefixIcon = 'info';
   /**
    * Suffix icon
    */
@@ -74,6 +82,11 @@ export class BaseFieldComponent implements OnInit {
    * Field hint
    */
   @Input() hint?: string;
+
+  /**
+   * Is update form field
+   */
+  @Input() isUpdateField = false;
 
   /**
    * @ignore
@@ -116,5 +129,12 @@ export class BaseFieldComponent implements OnInit {
 
   focus() {
     this.inputRef.focus();
+  }
+
+  updateField() {
+    const control = this.formGroup.get(this.inputName);
+    control?.markAllAsTouched();
+    control?.markAsDirty();
+    this.updateButtonClick.emit(control?.value);
   }
 }

@@ -1,5 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 import { BaseFieldComponent, CommonFieldModule } from './field';
 import { ErrorAnimations } from './error-animations';
 
@@ -42,6 +41,19 @@ import { ErrorAnimations } from './error-animations';
       >
         {{ suffixIcon }}
       </mat-icon>
+
+      <button
+        matTextSuffix
+        mat-raised-button
+        color="primary"
+        (click)="updateField()"
+        *ngIf="isUpdateField"
+        
+      >
+        <mat-icon matIconPrefix>update</mat-icon>
+        <span> Update </span>
+      </button>
+
       <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
       <mat-error [@enter] [@leave]>
         {{ errors$ | async }}

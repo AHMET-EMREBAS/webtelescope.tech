@@ -8,21 +8,32 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   standalone: true,
   imports: [CommonFieldModule, MatSlideToggleModule],
   template: `
-    <div [formGroup]="formGroup">
+    <div
+      style="display: flex; flex-direction: row; gap: 1em;"
+      [formGroup]="formGroup"
+    >
+      <mat-label>{{ label }}</mat-label>
+      <mat-icon matIconPrefix *ngIf="prefixIcon" color="primary">
+        {{ prefixIcon }}
+      </mat-icon>
       <mat-slide-toggle
         #input
         [formControlName]="inputName"
         [attr.data-testid]="inputName"
       >
-        {{ label }}
       </mat-slide-toggle>
-      <mat-icon matIconPrefix *ngIf="prefixIcon">{{ prefixIcon }}</mat-icon>
       <mat-icon matIconSuffix *ngIf="suffixIcon">{{ suffixIcon }}</mat-icon>
+      <button
+        matTextSuffix
+        mat-raised-button
+        color="primary"
+        (click)="updateField()"
+        *ngIf="isUpdateField"
+      >
+        <mat-icon matIconPrefix>update</mat-icon>
+        <span> Update </span>
+      </button>
     </div>
   `,
 })
-export class SlideToggleComponent extends BaseFieldComponent {
-  constructor(formGroup: FormGroup) {
-    super(formGroup);
-  }
-}
+export class SlideToggleComponent extends BaseFieldComponent {}

@@ -31,6 +31,17 @@ import { ErrorAnimations } from './error-animations';
       <mat-error [@enter] [@leave]>{{ errors$ | async }}</mat-error>
 
       <button
+        matTextSuffix
+        mat-raised-button
+        color="primary"
+        (click)="updateField()"
+        *ngIf="isUpdateField"
+      >
+        <mat-icon matIconPrefix>update</mat-icon>
+        <span> Update </span>
+      </button>
+
+      <button
         mat-icon-button
         matSuffix
         color="primary"

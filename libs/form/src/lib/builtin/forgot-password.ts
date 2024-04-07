@@ -20,7 +20,6 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
       (submitButtonClick)="submit()"
       [formTitle]="formTitle"
       [submitLabel]="submitLabel"
-      ]
     >
       <wt-text-field
         #username

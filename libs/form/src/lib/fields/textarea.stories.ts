@@ -31,21 +31,19 @@ type Story = StoryObj<TextareaFieldComponent>;
 export const Primary: Story = {
   args: {
     inputName: 'name',
-    prefixIcon: 'person',
-    label: 'Text Label',
     minLength: 0,
     maxLength: 400,
+    inputType: 'text',
+    label: 'Text Label',
+    hint: 'Hint',
+    prefixIcon: '',
+    suffixIcon: '',
+    isUpdateField: false,
   },
 };
 
 export const Heading: Story = {
-  args: {
-    inputName: 'name',
-    prefixIcon: 'person',
-    label: 'Text Label',
-    minLength: 0,
-    maxLength: 400,
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/textarea works!/gi)).toBeTruthy();

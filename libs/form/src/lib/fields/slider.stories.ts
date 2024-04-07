@@ -31,20 +31,15 @@ export const Primary: Story = {
   args: {
     label: 'Slider Label',
     inputName: 'percent',
+    prefixIcon: 'numbers',
+    suffixIcon: '',
     min: 0,
     max: 100,
-    prefixIcon: 'person',
-    suffixIcon: 'home',
   },
 };
 
 export const Heading: Story = {
-  args: {
-    label: 'Slider Label',
-    inputName: 'percent',
-    min: 0,
-    max: 100,
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Slider Label/gi)).toBeTruthy();

@@ -22,12 +22,20 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       >
         {{ label }}
       </mat-checkbox>
+
+      <button
+        matTextSuffix
+        mat-raised-button
+        color="primary"
+        (click)="updateField()"
+        *ngIf="isUpdateField"
+      >
+        <mat-icon matIconPrefix>update</mat-icon>
+        <span> Update </span>
+      </button>
+
       <mat-icon matIconSuffix *ngIf="suffixIcon">{{ suffixIcon }}</mat-icon>
     </div>
   `,
 })
-export class CheckboxFieldComponent extends BaseFieldComponent {
-  constructor(formGroup: FormGroup) {
-    super(formGroup);
-  }
-}
+export class CheckboxFieldComponent extends BaseFieldComponent {}
