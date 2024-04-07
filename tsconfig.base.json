@@ -24,6 +24,7 @@
       "@webpackages/gen": ["libs/gen/src/index.ts"],
       "@webpackages/material": ["libs/material/src/index.ts"],
       "@webpackages/model": ["libs/model/src/index.ts"],
+      "@webpackages/ngrx": ["libs/ngrx/src/index.ts"],
       "@webpackages/property": ["libs/property/src/index.ts"],
       "@webpackages/rest": ["libs/rest/src/index.ts"],
       "@webpackages/rest-resource": ["libs/rest-resource/src/index.ts"],

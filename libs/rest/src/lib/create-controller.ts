@@ -2,6 +2,7 @@
 import {
   CanActivate,
   Type,
+  UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { IController } from './controller';
@@ -29,6 +30,7 @@ export type CreateControllerOptions = {
   updateDto: Type;
   log?: boolean;
   guards?: Type<CanActivate>[];
+  searchables?: string[];
 };
 
 export function CreateController<
@@ -64,8 +66,13 @@ export function CreateController<
     }
 
     @R.FindAll()
-    async findAll(@Query() query: QueryDto<E>): Promise<E[]> {
-      return await this.repo.find({ ...(query as any) });
+    async findAll(@Query() query: QueryDto): Promise<E[]> {
+      try {
+        return await this.repo.find({ ...(query as any) });
+      } catch (err) {
+        console.error(err);
+        throw new UnauthorizedException('Invalid query');
+      }
     }
 
     @R.FindOneById()

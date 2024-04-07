@@ -167,7 +167,7 @@ export class RestResource {
     return applyDecorators(
       ApiTags(this.RESOURCE_NAME + 'Controller'),
       Controller(),
-      BearerAccess(),
+      // BearerAccess(),
       ResouceName(this.entity.name),
       UseGuards(...this.guards)
     );
