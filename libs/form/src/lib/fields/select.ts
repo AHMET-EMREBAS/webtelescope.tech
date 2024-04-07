@@ -3,6 +3,7 @@ import { BaseFieldComponent, CommonFieldModule } from './field';
 import { MatSelectModule } from '@angular/material/select';
 import { IOption } from '@webpackages/model';
 import { FormGroup } from '@angular/forms';
+import { ErrorAnimations } from './error-animations';
 
 @Component({
   selector: 'wt-select-field',
@@ -21,7 +22,9 @@ import { FormGroup } from '@angular/forms';
       [attr.data-testid]="inputName"
     >
       @for (option of options; track options) {
-      <mat-option [value]="option">{{ option.label }}</mat-option>
+      <mat-option [value]="option" [attr.data-testid]="option.label">{{
+        option.label
+      }}</mat-option>
       }
     </mat-select>
     <mat-icon color="primary" class="fill" matIconPrefix *ngIf="prefixIcon">
@@ -31,7 +34,11 @@ import { FormGroup } from '@angular/forms';
       {{ suffixIcon }}
     </mat-icon>
     <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+    <mat-error [@enter] [@leave]>
+      {{ errors$ | async }}
+    </mat-error>
   </mat-form-field>`,
+  animations: [...ErrorAnimations],
 })
 export class SelectFieldComponent extends BaseFieldComponent {
   /**

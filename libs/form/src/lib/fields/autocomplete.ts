@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { BaseFieldComponent, CommonFieldModule } from './field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { IOption } from '@webpackages/model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable, debounceTime, map, startWith } from 'rxjs';
+import { ErrorAnimations } from './error-animations';
 
 @Component({
   selector: 'wt-autocomplete-field',
@@ -23,11 +24,16 @@ import { Observable, debounceTime, map, startWith } from 'rxjs';
       matInput
       [formControl]="formControl"
       [matAutocomplete]="auto"
+      [attr.data-testid]="inputName"
     />
 
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
       @for (option of filteredOptions$ | async; track option) {
-      <mat-option [value]="option.label" (onSelectionChange)="setValue(option)">
+      <mat-option
+        [value]="option.label"
+        (onSelectionChange)="setValue(option)"
+        [attr.data-testid]="option.label"
+      >
         {{ option.label }}
       </mat-option>
       }
@@ -41,7 +47,12 @@ import { Observable, debounceTime, map, startWith } from 'rxjs';
       {{ suffixIcon }}
     </mat-icon>
     <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+
+    <mat-error [@enter] [@leave]>
+      {{ errors$ | async }}
+    </mat-error>
   </mat-form-field>`,
+  animations: [...ErrorAnimations],
 })
 export class AutocompleteFieldComponent extends BaseFieldComponent {
   formControl = new FormControl();

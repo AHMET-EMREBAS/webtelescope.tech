@@ -74,6 +74,7 @@ export class BaseFieldComponent implements OnInit {
       this.errors$ = control.valueChanges.pipe(
         debounceTime(400),
         map(() => {
+          console.log(control.errors);
           return Object.values(control.errors || {}).shift();
         })
       );

@@ -1,16 +1,27 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormComponent, InputValidator } from '../form';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseFieldComponent, TextFieldComponent } from '../fields';
 import { PasswordFieldComponent } from '../fields/password';
-import { ICreateSubDto, IID } from '@webpackages/model';
+import { ICreateSubDto, IID, IOption } from '@webpackages/model';
+import { AutocompleteFieldComponent } from '../fields/autocomplete';
 
 @Component({
-  imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],
+  imports: [
+    FormComponent,
+    TextFieldComponent,
+    PasswordFieldComponent,
+    AutocompleteFieldComponent,
+  ],
   standalone: true,
   selector: 'wt-login-form',
   template: `
-    <wt-form (submitButtonClick)="submit()" [label]="label">
+    <wt-form
+      (submitButtonClick)="submit()"
+      [submitLabel]="submitLabel"
+      [formTitle]="formTitle"
+      ]
+    >
       <wt-text-field
         #username
         inputName="username"
@@ -33,8 +44,18 @@ import { ICreateSubDto, IID } from '@webpackages/model';
         inputName="organizationName"
         [required]="true"
         inputType="text"
+        prefixIcon="store"
         label="Organization Name"
       ></wt-text-field>
+
+      <wt-autocomplete-field
+        #subType
+        inputName="subType"
+        label="Subscription Type"
+        [options]="subTypes"
+        prefixIcon="category"
+      >
+      </wt-autocomplete-field>
     </wt-form>
   `,
   providers: [
@@ -59,11 +80,7 @@ import { ICreateSubDto, IID } from '@webpackages/model';
         ),
         subType: new FormControl(
           '',
-          new InputValidator('subscription type')
-            .required()
-            .minlength(3)
-            .maxlength(30)
-            .build()
+          new InputValidator('subscription type').required().build()
         ),
       }),
     },
@@ -75,7 +92,14 @@ export class SubFormComponent extends FormComponent<ICreateSubDto<IID>> {
   @ViewChild('organizationName') organizationName!: BaseFieldComponent;
   @ViewChild('subType') subType!: BaseFieldComponent;
 
-  override label: string = 'Login';
+  override formTitle: string = 'Sign Up Form';
+
+  override submitLabel: string = 'Sign Up';
+  
+  /**
+   * Subscription type options
+   */
+  @Input() subTypes!: IOption[];
 
   focusUserName() {
     this.username.focus();

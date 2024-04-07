@@ -33,7 +33,7 @@ export class CommonFormModule {}
     <mat-card>
       <mat-card-header>
         <mat-card-title>
-          <h1>{{ label }} Form</h1>
+          <h1>{{ formTitle }}</h1>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -55,9 +55,9 @@ export class CommonFormModule {}
             type="button"
             (click)="submit()"
             [disabled]="formGroup.invalid"
-            [attr.data-testid]="label"
+            [attr.data-testid]="submitLabel"
           >
-            {{ label }}
+            {{ submitLabel }}
           </button>
           <button
             mat-raised-button
@@ -73,7 +73,8 @@ export class CommonFormModule {}
   `,
 })
 export class FormComponent<T = any> {
-  @Input() label = 'Submit';
+  @Input() formTitle = 'Form Title';
+  @Input() submitLabel = 'Submit';
 
   @Output() submitButtonClick = new EventEmitter<T>();
 

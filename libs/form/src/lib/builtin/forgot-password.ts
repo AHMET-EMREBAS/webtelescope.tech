@@ -1,14 +1,20 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormComponent, InputValidator } from '../form';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseFieldComponent, TextFieldComponent } from '../fields';
 import { PasswordFieldComponent } from '../fields/password';
-import { ILoginDto } from '@webpackages/model';
+import { ICreateSubDto, IID, IOption } from '@webpackages/model';
+import { AutocompleteFieldComponent } from '../fields/autocomplete';
 
 @Component({
-  imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],
+  imports: [
+    FormComponent,
+    TextFieldComponent,
+    PasswordFieldComponent,
+    AutocompleteFieldComponent,
+  ],
   standalone: true,
-  selector: 'wt-login-form',
+  selector: 'wt-forgot-password-form',
   template: `
     <wt-form
       (submitButtonClick)="submit()"
@@ -24,13 +30,6 @@ import { ILoginDto } from '@webpackages/model';
         label="Username"
         prefixIcon="email"
       ></wt-text-field>
-      <wt-password-field
-        #password
-        inputName="password"
-        [required]="true"
-        label="Password"
-        prefixIcon="password"
-      ></wt-password-field>
     </wt-form>
   `,
   providers: [
@@ -41,25 +40,25 @@ import { ILoginDto } from '@webpackages/model';
           '',
           new InputValidator('username').required().isEmail().build()
         ),
-        password: new FormControl(
-          '',
-          new InputValidator('password').required().password().build()
-        ),
       }),
     },
   ],
 })
-export class LoginFormComponent extends FormComponent<ILoginDto> {
+export class ForgotPasswordFormComponent extends FormComponent<
+  ICreateSubDto<IID>
+> {
   @ViewChild('username') username!: BaseFieldComponent;
-  @ViewChild('password') password!: BaseFieldComponent;
 
-  override formTitle: string = 'Login Form';
+  override formTitle: string = 'Forgot Password';
 
-  override submitLabel: string = 'Login';
+  override submitLabel = 'Send Recovery Email';
+
+  /**
+   * Subscription type options
+   */
+  @Input() subTypes!: IOption[];
+
   focusUserName() {
     this.username.focus();
-  }
-  focusPassword() {
-    this.password.focus();
   }
 }

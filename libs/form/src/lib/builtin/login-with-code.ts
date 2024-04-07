@@ -3,12 +3,12 @@ import { FormComponent, InputValidator } from '../form';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseFieldComponent, TextFieldComponent } from '../fields';
 import { PasswordFieldComponent } from '../fields/password';
-import { ILoginDto } from '@webpackages/model';
+import { ILoginWithCodeDto } from '@webpackages/model';
 
 @Component({
   imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],
   standalone: true,
-  selector: 'wt-login-form',
+  selector: 'wt-login-with-code-form',
   template: `
     <wt-form
       (submitButtonClick)="submit()"
@@ -24,13 +24,13 @@ import { ILoginDto } from '@webpackages/model';
         label="Username"
         prefixIcon="email"
       ></wt-text-field>
-      <wt-password-field
-        #password
-        inputName="password"
+      <wt-text-field
+        #securityCode
+        inputName="securityCode"
         [required]="true"
-        label="Password"
-        prefixIcon="password"
-      ></wt-password-field>
+        label="Security Code"
+        prefixIcon="securityCode"
+      ></wt-text-field>
     </wt-form>
   `,
   providers: [
@@ -41,25 +41,26 @@ import { ILoginDto } from '@webpackages/model';
           '',
           new InputValidator('username').required().isEmail().build()
         ),
-        password: new FormControl(
+        securityCode: new FormControl(
           '',
-          new InputValidator('password').required().password().build()
+          new InputValidator('securityCode').required().build()
         ),
       }),
     },
   ],
 })
-export class LoginFormComponent extends FormComponent<ILoginDto> {
+export class LoginWithCodeFormComponent extends FormComponent<ILoginWithCodeDto> {
   @ViewChild('username') username!: BaseFieldComponent;
-  @ViewChild('password') password!: BaseFieldComponent;
+  @ViewChild('securityCode') securityCode!: BaseFieldComponent;
 
-  override formTitle: string = 'Login Form';
-
+  override formTitle: string = 'Login With Security Code';
   override submitLabel: string = 'Login';
+
   focusUserName() {
     this.username.focus();
   }
+
   focusPassword() {
-    this.password.focus();
+    this.securityCode.focus();
   }
 }
