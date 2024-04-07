@@ -6,31 +6,44 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { provideStore } from '@ngrx/store';
 import { provideEntityData, withEffects } from '@ngrx/data';
 import { provideEffects } from '@ngrx/effects';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
-  HttpInterceptorFn,
-  provideHttpClient,
-  withInterceptors,
-} from '@angular/common/http';
-
-const HTTP_INTERCEPTOR: HttpInterceptorFn = (req, next) => {
-  const url = req.url;
-  const cloned = req.clone({ url: `http://localhost:3000/${url}` });
-  return next(cloned);
-};
+  AuthEntityDataModuleConfig,
+  BlogEntityDataModuleConfig,
+  InventoryEntityDataModuleConfig,
+  OrderEntityDataModuleConfig,
+  PermissionService,
+  ProjectEntityDataModuleConfig,
+  UserService,
+} from '@webpackages/ngrx';
+import { createAuthInterceptor } from '@webpackages/auth-client';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    UserService,
+    PermissionService,
     provideRouter(appRoutes, withHashLocation()),
-    provideHttpClient(withInterceptors([HTTP_INTERCEPTOR])),
+    provideHttpClient(
+      withInterceptors([createAuthInterceptor('http://localhost:3000')])
+    ),
     provideStore([]),
     provideEffects([]),
     provideEntityData(
       {
         pluralNames: {
-          Sample: 'Samples',
+          ...AuthEntityDataModuleConfig.pluralNames,
+          ...BlogEntityDataModuleConfig.pluralNames,
+          ...InventoryEntityDataModuleConfig.pluralNames,
+          ...OrderEntityDataModuleConfig.pluralNames,
+          ...ProjectEntityDataModuleConfig.pluralNames,
         },
+
         entityMetadata: {
-          Sample: {},
+          ...AuthEntityDataModuleConfig.entityMetadata,
+          ...BlogEntityDataModuleConfig.entityMetadata,
+          ...InventoryEntityDataModuleConfig.entityMetadata,
+          ...OrderEntityDataModuleConfig.entityMetadata,
+          ...ProjectEntityDataModuleConfig.entityMetadata,
         },
       },
       withEffects()

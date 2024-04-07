@@ -3,41 +3,42 @@ import { Component, OnInit } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 
-import { Injectable } from '@angular/core';
-import {
-  EntityCollectionServiceBase,
-  EntityCollectionServiceElementsFactory,
-} from '@ngrx/data';
-import { IBaseEntity } from '@webpackages/common';
 import { EmailComponent } from '@webpackages/material';
-
-export interface Sample extends IBaseEntity {
-  name: string;
-}
-
-@Injectable({ providedIn: 'root' })
-export class SampleService extends EntityCollectionServiceBase<Sample> {
-  constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    super('Sample', serviceElementsFactory);
-  }
-}
+import { QueryOperator } from '@webpackages/model';
+import { PermissionService } from '@webpackages/ngrx';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, EmailComponent],
   selector: 'wt-root',
-  template: ` <wt-email></wt-email>
-    <router-outlet></router-outlet>`,
-  providers: [SampleService],
+  template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly service: SampleService) {}
+  constructor(private readonly service: PermissionService) {}
   ngOnInit(): void {
     this.service.entities$.subscribe(console.log);
-    this.service.getWithQuery({
-      take: 20,
-      where: ['name:eq:value', 'id:eq:1'],
-    });
-    this.service.getAll().subscribe(console.log);
+
+    setTimeout(() => {
+      this.service.allCount$.subscribe((value) =>
+        console.log('Count: ' + value)
+      );
+      this.service
+        .query({
+          select: ['id', 'permission'],
+          order: { permission: 'ASC' },
+          loadEagerRelations: false,
+          take: 3,
+          skip: 1,
+          withDeleted: false,
+          where: [
+            {
+              property: 'permission',
+              operator: QueryOperator.contains,
+              value: 'write',
+            },
+          ],
+        })
+        .subscribe(console.log);
+    }, 2000);
   }
 }

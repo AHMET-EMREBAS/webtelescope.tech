@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CanActivate,
+  InternalServerErrorException,
+  NotFoundException,
   Type,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -77,15 +79,25 @@ export function CreateController<
 
     @R.FindOneById()
     findOneById(@Param() query: ObjectIDDto): Promise<E> {
-      return this.repo.findOneByOrFail(query as any);
+      try {
+        return this.repo.findOneByOrFail(query as any);
+      } catch (err) {
+        console.error(err);
+        throw new NotFoundException(`Entity not found by id ${query.id}.`);
+      }
     }
 
     @R.Save()
     @ApiBody({ type: options.createDto })
     async save(@Body(options.createDto) entity: C): Promise<E> {
       await this.isUniqueOrThrow(entity);
-      const { id } = await this.repo.save(entity as any);
-      return await this.findOneById({ id });
+      try {
+        const { id } = await this.repo.save(entity as any);
+        return await this.findOneById({ id });
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
 
     @R.Update()
@@ -95,64 +107,103 @@ export function CreateController<
       @Body(options.updateDto) entity: U
     ): Promise<UpdateResult> {
       await this.isUniqueOrThrow(entity);
-      await this.findOneById(query);
-      return await this.repo.update(query.id, entity as any);
+
+      try {
+        await this.findOneById(query);
+        return await this.repo.update(query.id, entity as any);
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
 
     @R.Delete()
     async delete(@Param() query: ObjectIDDto): Promise<DeleteResult> {
       await this.findOneById(query);
-      return await this.repo.delete(query.id);
+      try {
+        return await this.repo.delete(query.id);
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
 
     @R.AddRelation()
     async addRelation(@Param() relation: AddRelationDto): Promise<E> {
       const { id, relationId, relationName } = relation;
-      await this.repo
-        .createQueryBuilder()
-        .relation(relationName)
-        .of(id)
-        .add(relationId);
 
-      return await this.findOneById({ id: relation.id });
+      try {
+        await this.repo
+          .createQueryBuilder()
+          .relation(relationName)
+          .of(id)
+          .add(relationId);
+
+        return await this.findOneById({ id: relation.id });
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
 
     @R.RemoveRelation()
     async removeRelation(@Param() relation: RemoveRelationDto): Promise<E> {
       const { id, relationId, relationName } = relation;
-      await this.repo
-        .createQueryBuilder()
-        .relation(relationName)
-        .of(id)
-        .remove(relationId);
 
-      return await this.findOneById({ id });
+      try {
+        await this.repo
+          .createQueryBuilder()
+          .relation(relationName)
+          .of(id)
+          .remove(relationId);
+
+        return await this.findOneById({ id });
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
 
     @R.SetRelation()
     async setRelation(@Param() relation: SetRelationDto): Promise<E> {
       const { id, relationId, relationName } = relation;
-      await this.repo
-        .createQueryBuilder()
-        .relation(relationName)
-        .of(id)
-        .set(relationId);
-      return await this.findOneById({ id });
+
+      try {
+        await this.repo
+          .createQueryBuilder()
+          .relation(relationName)
+          .of(id)
+          .set(relationId);
+        return await this.findOneById({ id });
+      } catch (err) {
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
 
     @R.UnsetRelation()
     async unsetRelation(@Param() relation: UnsetRelationDto): Promise<E> {
-      await this.repo
-        .createQueryBuilder()
-        .relation(relation.relationName)
-        .of(relation.id)
-        .set(null);
-      return await this.findOneById(relation);
+      const { id, relationName } = relation;
+      try {
+        await this.repo
+          .createQueryBuilder()
+          .relation(relationName)
+          .of(id)
+          .set(null);
+        return await this.findOneById(relation);
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
 
     @R.Count()
     async count(): Promise<number> {
-      return await this.repo.count();
+      try {
+        return await this.repo.count();
+      } catch (err) {
+        console.error(err);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
   }
 

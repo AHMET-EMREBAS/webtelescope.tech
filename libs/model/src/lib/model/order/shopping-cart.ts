@@ -5,7 +5,7 @@ import { IID, ITimestamp } from '../../common';
  * @param id {@link IID.id}
  * @param customer {@link customer}
  */
-export interface IShoppingCart<Customer extends IID> extends ITimestamp {
+export interface IShoppingCart<Customer extends IID> extends IID, ITimestamp {
   /**
    * Associated customer
    */

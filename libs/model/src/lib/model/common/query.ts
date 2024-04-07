@@ -19,7 +19,7 @@ export interface IQuery {
   skip?: number;
   withDeleted?: boolean;
   where?: IWhere[];
-  order?: Record<any, string>;
+  order?: Record<any, 'ASC' | 'DESC'>;
   select?: string[];
   loadEagerRelations?: boolean;
 }
