@@ -20,6 +20,7 @@ import { ErrorAnimations } from './error-animations';
         matInput
         [formControlName]="inputName"
         [attr.aria-required]="required"
+        [data-testid]="inputName"
         autocomplete="off"
       />
       <mat-icon color="primary" class="fill" matIconPrefix> password </mat-icon>

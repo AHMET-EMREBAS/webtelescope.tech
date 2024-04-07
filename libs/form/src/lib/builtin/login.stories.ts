@@ -4,6 +4,7 @@ import { within, userEvent, waitFor } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
+import { EventEmitter } from 'stream';
 
 const meta: Meta<LoginFormComponent> = {
   component: LoginFormComponent,
@@ -22,11 +23,15 @@ type Story = StoryObj<LoginFormComponent>;
 export const Primary: Story = {};
 
 export const Heading: Story = {
+  argTypes: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const username = canvas.getByLabelText(/Username/gi);
-    const password = canvas.getByLabelText(/Password/gi);
+    const username = canvas.getByTestId('username');
+    const password = canvas.getByTestId('password');
+
+    const loginButton = canvas.getByText(/Login/gi);
+    const resetButton = canvas.getByText(/Reset/gi);
 
     expect(username).toBeTruthy();
     expect(password).toBeTruthy();
@@ -34,7 +39,10 @@ export const Heading: Story = {
     await userEvent.clear(username);
     await userEvent.clear(password);
 
-    await userEvent.type(username, 'user@gmail.com', { delay: 1000 });
-    await userEvent.type(password, '!Password1234.', { delay: 1000 });
+    await userEvent.type(username, 'user@gmail.com', { delay: 100 });
+    await userEvent.type(password, '!Password1234.', { delay: 100 });
+
+    await userEvent.click(loginButton, { delay: 1000 });
+    await userEvent.click(resetButton, { delay: 1000 });
   },
 };

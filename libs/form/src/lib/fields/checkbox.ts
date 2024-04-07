@@ -15,7 +15,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       <mat-icon *ngIf="prefixIcon" color="primary" class="fill">
         {{ prefixIcon }}
       </mat-icon>
-      <mat-checkbox matInput [formControlName]="inputName">
+      <mat-checkbox
+        matInput
+        [formControlName]="inputName"
+        [data-testid]="inputName"
+      >
         {{ label }}
       </mat-checkbox>
       <mat-icon matIconSuffix *ngIf="suffixIcon">{{ suffixIcon }}</mat-icon>

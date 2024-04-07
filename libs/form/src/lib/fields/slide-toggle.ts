@@ -9,7 +9,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   imports: [CommonFieldModule, MatSlideToggleModule],
   template: `
     <div [formGroup]="formGroup">
-      <mat-slide-toggle #input [formControlName]="inputName">
+      <mat-slide-toggle
+        #input
+        [formControlName]="inputName"
+        [data-testid]="inputName"
+      >
         {{ label }}
       </mat-slide-toggle>
       <mat-icon matIconPrefix *ngIf="prefixIcon">{{ prefixIcon }}</mat-icon>

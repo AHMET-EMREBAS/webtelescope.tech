@@ -20,8 +20,10 @@ import { ErrorAnimations } from './error-animations';
         type="number"
         matInput
         [formControlName]="inputName"
+        [attr.arai-required]="required"
         [attr.aria-min]="min"
         [attr.aria-max]="max"
+        [data-testid]="inputName"
       />
       <mat-icon matIconPrefix *ngIf="prefixIcon">{{ prefixIcon }}</mat-icon>
       <mat-icon matIconSuffix *ngIf="suffixIcon">{{ suffixIcon }}</mat-icon>

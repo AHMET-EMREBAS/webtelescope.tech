@@ -21,6 +21,7 @@ import { MatSliderModule } from '@angular/material/slider';
         [min]="min"
         [max]="max"
         [showTickMarks]="true"
+        [data-testid]="inputName"
       >
         <input matSliderThumb [formControlName]="inputName" />
       </mat-slider>
