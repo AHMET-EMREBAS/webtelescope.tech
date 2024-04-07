@@ -90,6 +90,5 @@ export class FormComponent<T = any> {
   reset() {
     this.isSubmitted$.next(false);
     this.formGroup.reset();
-    this.formGroup.enable({ emitEvent: true });
   }
 }

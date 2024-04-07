@@ -1,11 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, NgModule, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  FormGroupDirective,
+  FormsModule,
+  NgForm,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInput, MatInputModule } from '@angular/material/input';
-import { Observable, debounceTime, map } from 'rxjs';
+import { Observable, debounceTime, map, startWith } from 'rxjs';
 
 @NgModule({
   exports: [
@@ -20,8 +28,15 @@ import { Observable, debounceTime, map } from 'rxjs';
 })
 export class CommonFieldModule {}
 
+export class ErrorState implements ErrorStateMatcher {
+  isErrorState(control: AbstractControl | null): boolean {
+    return control?.dirty && control.invalid ? true : false;
+  }
+}
+
 @Component({ template: '' })
 export class BaseFieldComponent implements OnInit {
+  readonly errorState = new ErrorState();
   /**
    * Input referance
    */
@@ -65,6 +80,8 @@ export class BaseFieldComponent implements OnInit {
    */
   errors$!: Observable<string[]>;
 
+  iconColor$!: Observable<'primary' | 'accent' | 'warn'>;
+
   constructor(public readonly formGroup: FormGroup) {}
 
   ngOnInit(): void {
@@ -72,10 +89,24 @@ export class BaseFieldComponent implements OnInit {
 
     if (control) {
       this.errors$ = control.valueChanges.pipe(
+        startWith(''),
         debounceTime(400),
         map(() => {
-          console.log(control.errors);
-          return Object.values(control.errors || {}).shift();
+          if (control.touched && control.dirty) {
+            return Object.values(control.errors || {}).shift();
+          }
+          return null;
+        })
+      );
+
+      this.iconColor$ = this.errors$.pipe(
+        map((e) => {
+          if (control.touched) {
+            if (e) {
+              return 'warn';
+            }
+          }
+          return 'primary';
         })
       );
     } else {

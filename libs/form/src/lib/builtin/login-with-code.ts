@@ -14,7 +14,6 @@ import { ILoginWithCodeDto } from '@webpackages/model';
       (submitButtonClick)="submit()"
       [formTitle]="formTitle"
       [submitLabel]="submitLabel"
-      ]
     >
       <wt-text-field
         #username
@@ -29,7 +28,7 @@ import { ILoginWithCodeDto } from '@webpackages/model';
         inputName="securityCode"
         [required]="true"
         label="Security Code"
-        prefixIcon="securityCode"
+        prefixIcon="security"
       ></wt-text-field>
     </wt-form>
   `,

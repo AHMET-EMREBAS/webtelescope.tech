@@ -14,7 +14,6 @@ import { ILoginDto } from '@webpackages/model';
       (submitButtonClick)="submit()"
       [formTitle]="formTitle"
       [submitLabel]="submitLabel"
-      ]
     >
       <wt-text-field
         #username

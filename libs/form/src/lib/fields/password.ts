@@ -22,8 +22,11 @@ import { ErrorAnimations } from './error-animations';
         [attr.aria-required]="required"
         [attr.data-testid]="inputName"
         autocomplete="off"
+        [errorStateMatcher]="errorState"
       />
-      <mat-icon color="primary" class="fill" matIconPrefix> password </mat-icon>
+      <mat-icon [color]="iconColor$ | async" class="fill" matIconPrefix>
+        password
+      </mat-icon>
 
       <mat-error [@enter] [@leave]>{{ errors$ | async }}</mat-error>
 

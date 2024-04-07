@@ -25,6 +25,7 @@ import { ErrorAnimations } from './error-animations';
       [formControl]="formControl"
       [matAutocomplete]="auto"
       [attr.data-testid]="inputName"
+      [errorStateMatcher]="errorState"
     />
 
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">

@@ -20,6 +20,7 @@ import { ErrorAnimations } from './error-animations';
       [formControlName]="inputName"
       [multiple]="multiple"
       [attr.data-testid]="inputName"
+      [errorStateMatcher]="errorState"
     >
       @for (option of options; track options) {
       <mat-option [value]="option" [attr.data-testid]="option.label">{{

@@ -24,10 +24,18 @@ import { ErrorAnimations } from './error-animations';
         [attr.aria-min]="min"
         [attr.aria-max]="max"
         [attr.data-testid]="inputName"
+        [errorStateMatcher]="errorState"
       />
-      <mat-icon matIconPrefix *ngIf="prefixIcon">{{ prefixIcon }}</mat-icon>
-      <mat-icon matIconSuffix *ngIf="suffixIcon">{{ suffixIcon }}</mat-icon>
+      <mat-icon [color]="iconColor$ | async" matIconPrefix *ngIf="prefixIcon">
+        {{ prefixIcon }}
+      </mat-icon>
+
+      <mat-icon [color]="iconColor$ | async" matIconSuffix *ngIf="suffixIcon">
+        {{ suffixIcon }}
+      </mat-icon>
+
       <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+
       <mat-error [@enter] [@leave]>
         {{ errors$ | async }}
       </mat-error>

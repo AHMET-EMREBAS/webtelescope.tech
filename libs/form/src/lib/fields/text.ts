@@ -24,13 +24,24 @@ import { ErrorAnimations } from './error-animations';
         [attr.aria-required]="required"
         [attr.data-testid]="inputName"
         autocomplete="off"
+        [errorStateMatcher]="errorState"
       />
-      <mat-icon color="primary" class="fill" matIconPrefix *ngIf="prefixIcon">{{
-        prefixIcon
-      }}</mat-icon>
-      <mat-icon color="primary" class="fill" matIconSuffix *ngIf="suffixIcon">{{
-        suffixIcon
-      }}</mat-icon>
+      <mat-icon
+        [color]="iconColor$ | async"
+        class="fill"
+        matIconPrefix
+        *ngIf="prefixIcon"
+      >
+        {{ prefixIcon }}
+      </mat-icon>
+      <mat-icon
+        [color]="iconColor$ | async"
+        class="fill"
+        matIconSuffix
+        *ngIf="suffixIcon"
+      >
+        {{ suffixIcon }}
+      </mat-icon>
       <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
       <mat-error [@enter] [@leave]>
         {{ errors$ | async }}
@@ -48,8 +59,4 @@ export class TextFieldComponent extends BaseFieldComponent {
    * Maximum text length
    */
   @Input() maxLength = 400;
-
-  constructor(@Inject(FormGroup) formGroup: FormGroup) {
-    super(formGroup);
-  }
 }
