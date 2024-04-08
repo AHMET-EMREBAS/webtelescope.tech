@@ -31,23 +31,15 @@ export const Primary: Story = {
     userRoles: [
       {
         id: 1,
-        label: 'User',
-        subs: [
-          { id: 1, label: 'Create' },
-          { id: 2, label: 'Read' },
-          { id: 3, label: 'Update' },
-          { id: 4, label: 'Delete' },
-        ],
+        label: 'Admin',
       },
       {
-        id: 10,
-        label: 'Organization',
-        subs: [
-          { id: 5, label: 'Create' },
-          { id: 6, label: 'Read' },
-          { id: 7, label: 'Update' },
-          { id: 8, label: 'Delete' },
-        ],
+        id: 2,
+        label: 'Editor',
+      },
+      {
+        id: 3,
+        label: 'Reader',
       },
     ],
   },
@@ -59,23 +51,13 @@ export const Heading: Story = {
     const canvas = within(canvasElement);
     const username = canvas.getByTestId('username');
     const roles = canvas.getByTestId('roles');
-    const CreateOrganization = canvas.getByTestId('CreateOrganization');
-    const UpdateOrganization = canvas.getByTestId('UpdateOrganization');
-    const DeleteOrganization = canvas.getByTestId('DeleteOrganization');
-    const ReadOrganization = canvas.getByTestId('ReadOrganization');
-    const CreateUser = canvas.getByTestId('CreateUser');
-    const UpdateUser = canvas.getByTestId('UpdateUser');
-    const DeleteUser = canvas.getByTestId('DeleteUser');
-    const ReadUser = canvas.getByTestId('ReadUser');
+    const Admin = canvas.getByTestId('Admin');
+    const Editor = canvas.getByTestId('Editor');
+    const Reader = canvas.getByTestId('Reader');
 
-    expect(CreateOrganization).toBeTruthy();
-    expect(UpdateOrganization).toBeTruthy();
-    expect(DeleteOrganization).toBeTruthy();
-    expect(ReadOrganization).toBeTruthy();
-    expect(CreateUser).toBeTruthy();
-    expect(UpdateUser).toBeTruthy();
-    expect(DeleteUser).toBeTruthy();
-    expect(ReadUser).toBeTruthy();
+    expect(Admin).toBeTruthy();
+    expect(Editor).toBeTruthy();
+    expect(Reader).toBeTruthy();
 
     expect(username).toBeTruthy();
     expect(roles).toBeTruthy();
@@ -83,14 +65,12 @@ export const Heading: Story = {
     await userEvent.clear(username);
 
     await userEvent.type(username, 'user@domain.com', { delay: 50 });
+    await userEvent.click(Admin);
+    await userEvent.click(Editor);
+    await userEvent.click(Reader);
 
     const signupButton = await canvas.findByTestId('Save User');
     const resetButton = await canvas.findByTestId('Reset');
-
-    await userEvent.click(CreateOrganization, { delay: 200 });
-    await userEvent.click(UpdateOrganization, { delay: 200 });
-    await userEvent.click(CreateUser, { delay: 200 });
-    await userEvent.click(UpdateUser, { delay: 200 });
 
     await userEvent.click(signupButton, { delay: 400 });
     await userEvent.click(resetButton, { delay: 1000 });

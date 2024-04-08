@@ -1,6 +1,5 @@
 // @index(['./*', '!./*.stories.ts'], f => `export * from '${f.path}'`)
 export * from './autocomplete'
-export * from './checkbox-group'
 export * from './checkbox'
 export * from './date'
 export * from './error-animations'

@@ -16,7 +16,7 @@ import { MatCardModule } from '@angular/material/card';
     <mat-card style="width: 100%;">
       <mat-card-header>
         <mat-card-title>
-          <h1>{{ label }}</h1>
+          <h2>{{ label }}</h2>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -39,7 +39,7 @@ import { MatCardModule } from '@angular/material/card';
               @for (item of items; track item) {
 
               <section>
-                <h1>{{ item.label }}</h1>
+                <h1 *ngIf="item.subs">{{ item.label }}</h1>
                 @if(item.subs) { @for(subItem of item.subs; track subItem){
                 <mat-list-option
                   [value]="subItem"
@@ -47,7 +47,7 @@ import { MatCardModule } from '@angular/material/card';
                   [attr.data-testid]="subItem.label + item.label"
                   [selected]="isSelected(subItem)"
                 >
-                  {{ subItem.label }}
+                  <span>{{ subItem.label }}</span>
                 </mat-list-option>
 
                 } } @else {
@@ -58,7 +58,7 @@ import { MatCardModule } from '@angular/material/card';
                   [attr.data-testid]="item.label"
                   [selected]="isSelected(item)"
                 >
-                  {{ item.label }}
+                  <span> {{ item.label }} </span>
                 </mat-list-option>
                 }
               </section>
