@@ -11,9 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 @Component({
   standalone: true,
   imports: [CommonFieldModule, MatListModule, MatCheckboxModule, MatCardModule],
-  selector: 'wt-list-select',
+  selector: 'wt-list-select-field',
   template: `
-    {{ formGroup.get(inputName)?.value | json }}
     <mat-card style="width: 100%;">
       <mat-card-header>
         <mat-card-title>
@@ -31,20 +30,34 @@ import { MatCardModule } from '@angular/material/card';
         </mat-checkbox>
 
         <div [formGroup]="formGroup">
-          <mat-selection-list #input [formControlName]="inputName">
+          <mat-selection-list
+            #input
+            [formControlName]="inputName"
+            [attr.data-testid]="inputName"
+          >
             <div style="display: flex; flex-direction: row; gap: 1em;">
               @for (item of items; track item) {
 
               <section>
                 <h1>{{ item.label }}</h1>
                 @if(item.subs) { @for(subItem of item.subs; track subItem){
-                <mat-list-option [value]="subItem" checkboxPosition="before">
+                <mat-list-option
+                  [value]="subItem"
+                  checkboxPosition="before"
+                  [attr.data-testid]="subItem.label + item.label"
+                  [selected]="isSelected(subItem)"
+                >
                   {{ subItem.label }}
                 </mat-list-option>
 
                 } } @else {
 
-                <mat-list-option [value]="item" checkboxPosition="before">
+                <mat-list-option
+                  [value]="item"
+                  checkboxPosition="before"
+                  [attr.data-testid]="item.label"
+                  [selected]="isSelected(item)"
+                >
                   {{ item.label }}
                 </mat-list-option>
                 }
@@ -54,6 +67,18 @@ import { MatCardModule } from '@angular/material/card';
           </mat-selection-list>
         </div>
       </mat-card-content>
+      <mat-card-actions>
+        <button
+          matTextSuffix
+          mat-raised-button
+          color="primary"
+          (click)="updateField()"
+          *ngIf="isUpdateField"
+        >
+          <mat-icon matIconPrefix>update</mat-icon>
+          <span> Update </span>
+        </button>
+      </mat-card-actions>
     </mat-card>
   `,
 })
@@ -61,6 +86,8 @@ export class ListSelectComponent
   extends BaseFieldComponent<any, MatSelectionList>
   implements AfterViewInit
 {
+  @Input() selectedItems?: Pick<IOption, 'id'>[];
+
   @Input() items!: IOption[];
 
   ngAfterViewInit(): void {
@@ -80,12 +107,15 @@ export class ListSelectComponent
   }
 
   itemsLength() {
-    return this.items.map((e) => e.subs?.length || 1).reduce((p, c) => p + c);
+    return (
+      this.items?.map((e) => e.subs?.length || 1).reduce((p, c) => p + c) || 0
+    );
   }
 
   valuesLength() {
     return this.getValues().length;
   }
+
   someSelect() {
     const selectedLength = this.valuesLength();
 
@@ -97,5 +127,12 @@ export class ListSelectComponent
 
   allSelected() {
     return this.itemsLength() == this.valuesLength();
+  }
+
+  isSelected(item: IOption) {
+    console.log('Is selected: ', this.selectedItems);
+
+    console.log(item);
+    return this.selectedItems?.find((e) => item.id == e.id) ? true : false;
   }
 }

@@ -76,6 +76,7 @@ export class CommonFormModule {}
 export class FormComponent<T = any> {
   @Input() formTitle = 'Form Title';
   @Input() submitLabel = 'Submit';
+  @Input() isUpdateForm: boolean = false;
 
   @Output() submitButtonClick = new EventEmitter<T>();
 
@@ -86,6 +87,7 @@ export class FormComponent<T = any> {
   submit() {
     this.isSubmitted$.next(true);
     this.submitButtonClick.emit(this.formGroup.value);
+    console.table(this.formGroup.value);
   }
 
   reset() {

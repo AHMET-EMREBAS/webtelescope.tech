@@ -20,7 +20,7 @@ const meta: Meta<ListSelectComponent> = {
         {
           provide: FormGroup,
           useValue: new FormGroup({
-            roles: new FormControl([], []),
+            permissions: new FormControl([], []),
           }),
         },
       ],
@@ -34,12 +34,14 @@ type Story = StoryObj<ListSelectComponent>;
 
 export const Primary: Story = {
   args: {
-    label: 'Roles',
-    inputName: 'roles',
+    label: 'Select Permissions',
+    inputName: 'permissions',
     prefixIcon: '',
     suffixIcon: '',
     required: false,
     isUpdateField: false,
+
+    selectedItems: [{ id: 3 }],
     items: [
       {
         id: 1,
@@ -69,5 +71,9 @@ export const Heading: Story = {
   args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+
+    const title = await canvas.findByText(/Select Permissions/gi);
+
+    expect(title).toBeTruthy();
   },
 };

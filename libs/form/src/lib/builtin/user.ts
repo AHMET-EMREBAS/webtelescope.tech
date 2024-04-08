@@ -1,15 +1,16 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { FormComponent, InputValidator } from '../form';
+import { CommonFormModule, FormComponent, InputValidator } from '../form';
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-  BaseFieldComponent,
-  ListSelectComponent,
-  TextFieldComponent,
-} from '../fields';
+import { ListSelectComponent, TextFieldComponent } from '../fields';
 import { ICreateUserDto, IID, IOption } from '@webpackages/model';
 
 @Component({
-  imports: [FormComponent, TextFieldComponent, ListSelectComponent],
+  imports: [
+    CommonFormModule,
+    FormComponent,
+    TextFieldComponent,
+    ListSelectComponent,
+  ],
   standalone: true,
   selector: 'wt-login-form',
   template: `
@@ -17,7 +18,6 @@ import { ICreateUserDto, IID, IOption } from '@webpackages/model';
       (submitButtonClick)="submit()"
       [submitLabel]="submitLabel"
       [formTitle]="formTitle"
-      ]
     >
       <wt-text-field
         #username
@@ -26,15 +26,16 @@ import { ICreateUserDto, IID, IOption } from '@webpackages/model';
         inputType="email"
         label="Username"
         prefixIcon="email"
+        [isUpdateField]="isUpdateForm"
       ></wt-text-field>
 
-      <wt-password-field
-        #password
-        inputName="password"
-        [required]="true"
-        prefixIcon="password"
-        label="Password"
-      ></wt-password-field>
+      <wt-list-select-field
+        #roles
+        inputName="roles"
+        label="Select Roles"
+        [items]="userRoles"
+        [isUpdateField]="isUpdateForm"
+      ></wt-list-select-field>
     </wt-form>
   `,
   providers: [
@@ -51,25 +52,19 @@ import { ICreateUserDto, IID, IOption } from '@webpackages/model';
   ],
 })
 export class UserFormComponent extends FormComponent<ICreateUserDto<IID, IID>> {
-  @ViewChild('username') username!: BaseFieldComponent;
-  @ViewChild('password') password!: BaseFieldComponent;
+  @Input() userRoles!: IOption[];
 
-  @ViewChild('subType') subType!: BaseFieldComponent;
+  @ViewChild('username') username!: TextFieldComponent;
+  @ViewChild('roles') roles!: ListSelectComponent;
 
-  override formTitle: string = 'Sign Up Form';
-
-  override submitLabel: string = 'Sign Up';
-
-  /**
-   * Subscription type options
-   */
-  @Input() subTypes!: IOption[];
+  @Input() override formTitle: string = 'Create User';
+  @Input() override submitLabel: string = 'Save';
 
   focusUserName() {
     this.username.focus();
   }
 
-  focusPassword() {
-    this.password.focus();
+  focusRoles() {
+    this.roles.focus();
   }
 }
