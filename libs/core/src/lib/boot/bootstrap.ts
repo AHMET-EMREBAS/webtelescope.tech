@@ -23,6 +23,7 @@ export type BootstrapOptions = {
   host: string;
   email: string;
   https?: boolean;
+  globalPrefix: string;
 };
 
 export async function bootstrap(options: BootstrapOptions) {
@@ -35,6 +36,7 @@ export async function bootstrap(options: BootstrapOptions) {
     port,
     website,
     https,
+    globalPrefix,
   } = options;
 
   const app = https
@@ -46,7 +48,7 @@ export async function bootstrap(options: BootstrapOptions) {
       })
     : await NestFactory.create(appModule);
 
-  const GLOBAL_PREFIX = 'api';
+  const GLOBAL_PREFIX = globalPrefix ? ['api', globalPrefix].join('/') : 'api';
 
   app.setGlobalPrefix(GLOBAL_PREFIX);
   app.use(helmet());
@@ -58,6 +60,13 @@ export async function bootstrap(options: BootstrapOptions) {
     .setTitle(appName)
     .setDescription(appDescription)
     .addBearerAuth({ type: 'http', scheme: 'Bearer' }, 'bearer')
+    .addGlobalParameters({
+      in: 'header',
+      name: 'x-organization',
+      description: 'Organization name',
+      example: 'main',
+    })
+
     .setContact('Contact', website, email)
     .build();
 

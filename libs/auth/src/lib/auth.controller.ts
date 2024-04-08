@@ -19,7 +19,7 @@ import {
   UpdatePasswordDto,
   UpdateResult,
 } from '@webpackages/dto';
-import { Session, User } from '@webpackages/entity';
+import { Session, Sub, User } from '@webpackages/entity';
 import {
   AuthService,
   PublicAccess,
@@ -32,6 +32,7 @@ import {
   SessionParam,
   UserParam,
 } from '@webpackages/core';
+import { createDataSource, seedNewDatabase } from './create-user-database';
 
 @ApiTags('Auth')
 @BearerAccess()
@@ -122,6 +123,13 @@ export class AuthController {
   @ApiUnprocessableEntityResponse()
   @Post('signup')
   async signup(@Body() signup: CreateSubDto) {
-    return await this.authService.signup(signup);
+    const result = await this.authService.signup(signup);
+
+    const ds = await createDataSource(result.organizationName);
+    await seedNewDatabase(ds);
+
+    const ownData = await ds.getRepository(Sub).save(signup);
+
+    return ownData;
   }
 }

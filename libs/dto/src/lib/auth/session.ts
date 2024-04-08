@@ -1,5 +1,11 @@
 import { ICreateSessionDto } from '@webpackages/model';
-import { Dto, NameProperty, ObjectIdProperty } from '@webpackages/property';
+import {
+  Dto,
+  NameProperty,
+  NumberProperty,
+  ObjectIdProperty,
+  StringProperty,
+} from '@webpackages/property';
 
 @Dto()
 export class CreateSessionDto implements ICreateSessionDto {
@@ -7,4 +13,6 @@ export class CreateSessionDto implements ICreateSessionDto {
   @NameProperty({ isArray: true }) permissions!: string[];
   @NameProperty({ isArray: true }) roles!: string[];
   @ObjectIdProperty() userId!: number;
+  @NumberProperty() organizationId!: number;
+  @StringProperty() organizationName!: string;
 }

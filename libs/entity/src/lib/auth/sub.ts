@@ -55,11 +55,11 @@ export class SubSubscriber implements EntitySubscriberInterface<Sub> {
     const foundOrg = await orgRepo.findOneBy({ organizationName });
     const foundUser = await userRepo.findOneBy({ username });
 
-    if (foundOrg && foundUser) {
-      throw new UnprocessableEntityException(
-        'Organization and User already exist!'
-      );
-    }
+    if (foundOrg)
+      throw new UnprocessableEntityException('Organization already exist!');
+
+    if (foundUser)
+      throw new UnprocessableEntityException('User already exist!');
 
     try {
       const savedOrg: Organization = await orgRepo.save({ organizationName });

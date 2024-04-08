@@ -96,6 +96,7 @@ export class QueryDto implements IQuery {
   @StringProperty({
     isArray: true,
     required: false,
+    example: undefined,
     description: 'Include relations.',
   })
   @Transform(({ value }) => {
@@ -113,7 +114,7 @@ export class QueryDto implements IQuery {
   })
   order?: any;
 
-  @ObjectProperty({ objectType: WhereDto, isArray: true })
+  @ObjectProperty({ objectType: WhereDto, isArray: true, required: false })
   @WhereTransformer()
   where?: WhereDto[];
 

@@ -13,5 +13,5 @@ export class CreateSubDto implements ICreateSubDto<ObjectIDDto> {
   @EmailProperty() username!: string;
   @PasswordProperty() password!: string;
   @NameProperty() organizationName!: string;
-  @ObjectIdProperty() subType!: ObjectIDDto;
+  @ObjectIdProperty({ required: false }) subType!: ObjectIDDto;
 }

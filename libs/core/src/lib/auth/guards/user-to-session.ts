@@ -16,5 +16,7 @@ export function userToSession(user: User): ICreateSessionDto {
     permissions: userPermissions,
     roles: userRoles,
     userId: user.id,
+    organizationId: user.organization.id,
+    organizationName: user.organization.organizationName,
   };
 }

@@ -13,4 +13,6 @@ export interface ISession extends IID, ITimestamp {
   permissions: string[];
   roles: string[];
   userId: number;
+  organizationId: number;
+  organizationName: string;
 }

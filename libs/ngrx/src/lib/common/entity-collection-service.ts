@@ -11,6 +11,7 @@ import {
   transformWhereObjectToQueryString,
 } from '@webpackages/model';
 import { names, plural } from '@webpackages/utils';
+import { map } from 'rxjs';
 
 export class EntityCollectionService<
   T extends IID
@@ -18,6 +19,19 @@ export class EntityCollectionService<
   allCount$ = this.httpClient.get<number>(
     `api/${plural(names(this.entityName).fileName)}/count`
   );
+
+
+  entitiesAsOptions$ = this.httpClient
+    .get<T[]>(`api/${plural(names(this.entityName).fileName)}`)
+    .pipe(
+      map((data) => {
+        return data.map((e) => ({
+          id: e.id,
+          label: this.pickLabel(e),
+        }));
+      })
+    );
+
   constructor(
     modelName: string,
     elementFactory: EntityCollectionServiceElementsFactory,
@@ -34,6 +48,10 @@ export class EntityCollectionService<
         .join('&'),
     } as any);
   }
+
+  pickLabel(e: T): string {
+    return JSON.stringify(e);
+  }
 }
 
 export function CollectionService<T extends IID>(
@@ -48,6 +66,5 @@ export function CollectionService<T extends IID>(
       super(entityName, factory, httpClient);
     }
   }
-
   return __CollectionService;
 }

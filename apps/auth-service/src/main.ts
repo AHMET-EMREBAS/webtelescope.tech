@@ -1,40 +1,54 @@
-import { Module, OnModuleInit } from '@nestjs/common';
+import {
+  Module,
+  OnModuleInit,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { bootstrap } from '@webpackages/core';
 import {
   AuthEntities,
   AuthModule,
-  createResoucePermissions,
-  seedPermissions,
-  seedRoles,
-  seedSubTypes,
+  seedNewDatabase,
   seedSubs,
 } from '@webpackages/auth';
-import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
+import { InjectDataSource, TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { v4 } from 'uuid';
-import {
-  LogSubscriber,
-  Permission,
-  Role,
-  Sub,
-  SubSubscriber,
-  SubType,
-} from '@webpackages/entity';
-import { Repository } from 'typeorm';
+import { LogSubscriber, Sub, SubSubscriber } from '@webpackages/entity';
+import { DataSource } from 'typeorm';
+
+import { Request } from 'express';
 
 const PUBLIC_RESOUCE_PATH = join(__dirname, 'public');
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+      name: 'main',
       type: 'better-sqlite3',
-      database: join(__dirname, 'auth.sqlite'),
+      database: join(__dirname, 'database', `auth-main.sqlite`),
       subscribers: [LogSubscriber, SubSubscriber],
       autoLoadEntities: true,
-      synchronize: true,
-      dropSchema: true,
     }),
+    TypeOrmModule.forFeature(AuthEntities, 'main'),
+    TypeOrmModule.forRootAsync({
+      inject: ['REQUEST'],
+      useFactory(req: Request) {
+        const org = req.headers['x-organization'];
+        if (!org) {
+          throw new UnprocessableEntityException(
+            'x-organization must be provided!'
+          );
+        }
+        return {
+          type: 'better-sqlite3',
+          database: join(__dirname, 'database', `auth-${org}.sqlite`),
+          subscribers: [LogSubscriber, SubSubscriber],
+          entities: AuthEntities,
+        };
+      },
+    }),
+
     ServeStaticModule.forRoot({
       rootPath: PUBLIC_RESOUCE_PATH,
       serveRoot: '',
@@ -44,48 +58,17 @@ const PUBLIC_RESOUCE_PATH = join(__dirname, 'public');
 })
 export class AppModule implements OnModuleInit {
   constructor(
-    @InjectRepository(Role) private readonly roleRepo: Repository<Role>,
-    @InjectRepository(Permission)
-    private readonly permissionRepo: Repository<Permission>,
-    @InjectRepository(Sub) private readonly subRepo: Repository<Sub>,
-    @InjectRepository(SubType) private readonly subTypeRepo: Repository<SubType>
+    @InjectDataSource('main') private readonly datasource: DataSource
   ) {}
   async onModuleInit() {
-    const ADMIN_ROLE_NAME = 'ADMIN';
-
-    await seedPermissions(this.permissionRepo, [
-      { permission: ADMIN_ROLE_NAME },
-    ]);
-
-    const ADMIN_PERMISSION = await this.permissionRepo.findOneBy({
-      permission: ADMIN_ROLE_NAME,
-    });
-
-    await seedRoles(this.roleRepo, [
-      {
-        role: ADMIN_ROLE_NAME,
-        permissions: [ADMIN_PERMISSION],
-      },
-    ]);
-
-    await seedPermissions(this.permissionRepo, [
-      ...AuthEntities.map((e) => createResoucePermissions(e.name)).flat(),
-    ]);
-
-    await seedSubTypes(this.subTypeRepo, [
-      { subscriptionName: 'default', description: 'Default sub type' },
-    ]);
-
-    const defaultSubType = await this.subTypeRepo.findOneBy({
-      subscriptionName: 'default',
-    });
-
-    await seedSubs(this.subRepo, [
+    await seedNewDatabase(this.datasource);
+    const subRepo = this.datasource.getRepository(Sub);
+    await seedSubs(subRepo, [
       {
         username: 'root@webtelescope.tech',
         password: '!Password123.',
-        organizationName: 'WebTelescope',
-        subType: defaultSubType,
+        organizationName: 'main',
+        subType: { id: 1 },
       },
     ]);
   }
@@ -97,6 +80,7 @@ bootstrap({
   appName: 'AuthService',
   email: 'auth@webtelescope.tech',
   host: 'auth.webtelescope.tech',
-  port: 3000,
+  port: 3001,
   website: 'https://webtelescope.tech',
+  globalPrefix: '',
 });

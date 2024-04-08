@@ -12,7 +12,7 @@ import { v4 } from 'uuid';
 /**
  * Create provider, inject function, and getToken function.
  * @param tokenPrefix Token prefix
- * @returns
+ * @returns [ provideFn, injectFn, getTokenFn ]
  */
 export function createProvider<T>(
   prefix: string

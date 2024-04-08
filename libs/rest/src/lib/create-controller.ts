@@ -32,7 +32,6 @@ export type CreateControllerOptions = {
   updateDto: Type;
   log?: boolean;
   guards?: Type<CanActivate>[];
-  searchables?: string[];
 };
 
 export function CreateController<
@@ -69,6 +68,7 @@ export function CreateController<
 
     @R.FindAll()
     async findAll(@Query() query: QueryDto): Promise<E[]> {
+      console.log(query);
       try {
         return await this.repo.find({ ...(query as any) });
       } catch (err) {

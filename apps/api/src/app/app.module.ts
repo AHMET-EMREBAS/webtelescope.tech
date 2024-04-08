@@ -1,5 +1,4 @@
 import { Global, Module } from '@nestjs/common';
-import { CategoryController } from '@webpackages/rest-resource';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Category } from '@webpackages/entity';
 
@@ -15,6 +14,5 @@ import { Category } from '@webpackages/entity';
     }),
     TypeOrmModule.forFeature([Category]),
   ],
-  controllers: [CategoryController],
 })
 export class AppModule {}
