@@ -15,7 +15,7 @@ import {
 import { AuthEntities } from './auth-entities';
 import { join } from 'path';
 
-export async function createDataSource(orgName: string) {
+export async function initializeDataSource(orgName: string) {
   return await new DataSource({
     type: 'better-sqlite3',
     database: join(__dirname, 'database', `auth-${orgName}.sqlite`),

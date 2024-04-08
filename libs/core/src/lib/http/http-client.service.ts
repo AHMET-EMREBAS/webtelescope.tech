@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { createProvider } from '../providers';
 import axios, { AxiosRequestConfig } from 'axios';
+import { AccessPolicies } from '../auth';
 
 export const [provideAxiosBaseURL, InjectAxiosBaseURL, getAxiosBaseURLToken] =
   createProvider('AxiosBaseURL');
@@ -9,17 +10,25 @@ export const [provideAxiosBaseURL, InjectAxiosBaseURL, getAxiosBaseURLToken] =
 export const [provideBearerToken, InjectBearerToken, getBearerToken] =
   createProvider('ApiBearerToken');
 
+export const [
+  provideOrganizationName,
+  InjectOrganizationName,
+  getOrganizationNameToken,
+] = createProvider('OrganizationName');
+
 @Injectable()
 export class HttpClientService {
   constructor(
     @InjectAxiosBaseURL() protected readonly baseURL: string,
-    @InjectBearerToken() protected readonly bearerToken: string
+    @InjectBearerToken() protected readonly bearerToken: string,
+    @InjectOrganizationName() protected readonly organizationName: string
   ) {}
 
   private httpConfig(): AxiosRequestConfig {
     return {
       headers: {
         Authorization: `Bearer ${this.bearerToken}`,
+        [AccessPolicies.X_ORGANIZATION]: this.organizationName,
       },
     };
   }

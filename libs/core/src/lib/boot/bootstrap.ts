@@ -13,6 +13,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 import favicon = require('serve-favicon');
+import { AccessPolicies } from '../auth';
 
 export type BootstrapOptions = {
   appModule: ClassConstructor<unknown>;
@@ -59,10 +60,19 @@ export async function bootstrap(options: BootstrapOptions) {
   const config = new DocumentBuilder()
     .setTitle(appName)
     .setDescription(appDescription)
-    .addBearerAuth({ type: 'http', scheme: 'Bearer' }, 'bearer')
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'Bearer',
+      name: AccessPolicies.BEARER,
+    })
     .addGlobalParameters({
       in: 'header',
-      name: 'x-organization',
+      name: AccessPolicies.X_API_KEY,
+      description: 'OAuth api key',
+    })
+    .addGlobalParameters({
+      in: 'header',
+      name: AccessPolicies.X_ORGANIZATION,
       description: 'Organization name',
       example: 'main',
     })

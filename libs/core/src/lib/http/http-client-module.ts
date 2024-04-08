@@ -3,6 +3,7 @@ import {
   HttpClientService,
   provideAxiosBaseURL,
   provideBearerToken,
+  provideOrganizationName,
 } from './http-client.service';
 
 @Module({
@@ -10,12 +11,17 @@ import {
   exports: [HttpClientService],
 })
 export class HttpClientModule {
-  static configure(baseURL: string, bearerToken: string): DynamicModule {
+  static configure(
+    baseURL: string,
+    bearerToken: string,
+    organizationName: string
+  ): DynamicModule {
     return {
       module: HttpClientModule,
       providers: [
         provideAxiosBaseURL(baseURL),
         provideBearerToken(bearerToken),
+        provideOrganizationName(organizationName),
       ],
     };
   }

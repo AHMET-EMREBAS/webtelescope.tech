@@ -4,7 +4,7 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { bootstrap } from '@webpackages/core';
+import { AccessPolicies, bootstrap } from '@webpackages/core';
 import {
   AuthEntities,
   AuthModule,
@@ -34,10 +34,10 @@ const PUBLIC_RESOUCE_PATH = join(__dirname, 'public');
     TypeOrmModule.forRootAsync({
       inject: ['REQUEST'],
       useFactory(req: Request) {
-        const org = req.headers['x-organization'];
+        const org = req.headers[AccessPolicies.X_ORGANIZATION];
         if (!org) {
           throw new UnprocessableEntityException(
-            'x-organization must be provided!'
+            `${AccessPolicies.X_ORGANIZATION} must be provided!`
           );
         }
         return {

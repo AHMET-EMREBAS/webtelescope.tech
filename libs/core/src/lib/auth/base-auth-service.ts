@@ -14,6 +14,7 @@ import {
 import { LoginWithCodeDto } from '@webpackages/dto';
 import { ICredentials } from '@webpackages/model';
 import { AuthEnums } from './enums';
+import { AccessPolicies } from './guards';
 
 export class BaseAuthService {
   constructor(protected readonly reflector: Reflector) {}
@@ -44,6 +45,15 @@ export class BaseAuthService {
     if (token) return token;
     throw new UnauthorizedException('You do not have a session!');
   }
+
+  // extractOrganizationNameFromHeader(ctx: ExecutionContext) {
+  //   return this.request(ctx).headers[AccessPolicies.X_ORGANIZATION];
+  // }
+
+  extractApiKeyFromHeader(ctx: ExecutionContext) {
+    return this.request(ctx).headers[AccessPolicies.X_API_KEY];
+  }
+
   /**
    * Append authorization token to header
    * @param ctx

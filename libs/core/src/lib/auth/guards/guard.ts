@@ -10,6 +10,8 @@ import { UsernameGuard } from './username';
 export enum AccessPolicies {
   BEARER = 'bearer',
   BASIC = 'basic',
+  X_API_KEY = 'x-apikey',
+  X_ORGANIZATION = 'x-organization',
 }
 
 /**

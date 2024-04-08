@@ -44,14 +44,8 @@ export class SubSubscriber implements EntitySubscriberInterface<Sub> {
   async beforeInsert(event: InsertEvent<Sub>) {
     const orgRepo = event.manager.getRepository(Organization);
     const userRepo = event.manager.getRepository(User);
-    const roleRepo = event.manager.getRepository(Role);
 
     const { username, password, organizationName } = event.entity;
-
-    const adminRole = await roleRepo.findOneOrFail({
-      where: { role: 'ADMIN' },
-    });
-
     const foundOrg = await orgRepo.findOneBy({ organizationName });
     const foundUser = await userRepo.findOneBy({ username });
 
@@ -66,7 +60,7 @@ export class SubSubscriber implements EntitySubscriberInterface<Sub> {
       await userRepo.save({
         username,
         password,
-        roles: [{ id: adminRole.id }],
+        roles: [],
         organization: { id: savedOrg.id },
       });
     } catch (err) {

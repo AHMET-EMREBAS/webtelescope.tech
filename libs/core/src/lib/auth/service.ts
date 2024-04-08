@@ -63,6 +63,7 @@ export class AuthService extends BaseAuthService {
       loadEagerRelations: true,
     });
   }
+
   async findUserByIdOrThrow(id: number) {
     const found = await this.findUserById(id);
     if (found) return found;
@@ -102,8 +103,8 @@ export class AuthService extends BaseAuthService {
     throw new UnauthorizedException('Could not create security code!');
   }
 
-  findSessionById(sessionId: number) {
-    return this.sessionRepo.findOneBy({ id: sessionId });
+  async findSessionById(sessionId: number) {
+    return await this.sessionRepo.findOneBy({ id: sessionId });
   }
 
   async findSessionByIdOrThrow(sessionId: number): Promise<Session> | never {

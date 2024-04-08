@@ -32,7 +32,7 @@ import {
   SessionParam,
   UserParam,
 } from '@webpackages/core';
-import { createDataSource, seedNewDatabase } from './create-user-database';
+import { initializeDataSource, seedNewDatabase } from './create-user-database';
 
 @ApiTags('Auth')
 @BearerAccess()
@@ -124,8 +124,7 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signup: CreateSubDto) {
     const result = await this.authService.signup(signup);
-
-    const ds = await createDataSource(result.organizationName);
+    const ds = await initializeDataSource(result.organizationName);
     await seedNewDatabase(ds);
 
     const ownData = await ds.getRepository(Sub).save(signup);
