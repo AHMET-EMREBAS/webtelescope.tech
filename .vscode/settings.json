@@ -1,8 +1,11 @@
 {
-  "eslint.validate": ["json"],
+  "eslint.validate": [
+    "json"
+  ],
   "yaml.schemas": {
-    "schemas/model.schema.json": ["*.model.yaml"],
-    "file:///c%3A/Users/aemre/Projects/webtelescope.tech/libs/gen/src/generators/init/files/projects/inventory/%22C%3A/Users/aemre/Projects/webtelescope.tech/libs/gen/src/generators/init/files/schemas/entity.schema.json%22": "file:///c%3A/Users/aemre/Projects/webtelescope.tech/libs/gen/src/generators/init/files/projects/inventory/product.model.yaml"
+    "schemas/model.schema.json": [
+      "*.model.yaml"
+    ],
   },
   "liveServer.settings.port": 5501
 }
