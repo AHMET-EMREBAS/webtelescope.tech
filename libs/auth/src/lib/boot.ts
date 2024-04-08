@@ -5,11 +5,7 @@ import {
 } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { AccessPolicies, BootstrapOptions, bootstrap } from '@webpackages/core';
-import {
-  InjectDataSource,
-  TypeOrmModule,
-  TypeOrmModuleOptions,
-} from '@nestjs/typeorm';
+import { InjectDataSource, TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { v4 } from 'uuid';
 import { LogSubscriber, Sub, SubSubscriber } from '@webpackages/entity';
@@ -83,7 +79,10 @@ export class AppModule implements OnModuleInit {
 export async function bootAuthModule(
   options: Omit<BootstrapOptions, 'appModule'>
 ) {
-  if (!existsSync(mainDatabasePath)) {
+  if (
+    process.env['NOD_ENV'] === 'development' ||
+    !existsSync(mainDatabasePath)
+  ) {
     await new DataSource({
       ...mainDatabaseOptions,
       synchronize: true,
