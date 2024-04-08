@@ -19,7 +19,7 @@ import {
   UpdatePasswordDto,
   UpdateResult,
 } from '@webpackages/dto';
-import { Session, Sub, User } from '@webpackages/entity';
+import { Organization, Role, Session, User } from '@webpackages/entity';
 import {
   AuthService,
   PublicAccess,
@@ -124,10 +124,26 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signup: CreateSubDto) {
     const result = await this.authService.signup(signup);
+
     const ds = await initializeDataSource(result.organizationName);
+
     await seedNewDatabase(ds);
 
-    const ownData = await ds.getRepository(Sub).save(signup);
+    const { username, password } = signup;
+
+    const adminRole = await ds.getRepository(Role).findOneBy({ role: 'ADMIN' });
+
+    await ds.getRepository(Organization).save({
+      organizationName: signup.organizationName,
+    });
+
+    const ownData = await ds.getRepository(User).save({
+      username,
+      password,
+      roles: [{ id: adminRole?.id || 1 }],
+      organization: { id: 1 },
+      active: true,
+    });
 
     return ownData;
   }

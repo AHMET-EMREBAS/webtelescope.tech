@@ -22,6 +22,7 @@ export async function initializeDataSource(orgName: string) {
     entities: AuthEntities,
     subscribers: [SubSubscriber, LogSubscriber],
     synchronize: true,
+    dropSchema: true,
   }).initialize();
 }
 export async function seedNewDatabase(ds: DataSource) {
