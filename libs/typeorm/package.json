@@ -6,7 +6,8 @@
     "@nestjs/common": "^10.0.2",
     "typeorm": "^0.3.17",
     "bcrypt": "^5.1.1",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "@nestjs/swagger": "^7.1.16"
   },
   "type": "commonjs",
   "main": "./src/index.js",

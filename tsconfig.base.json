@@ -10,29 +10,69 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@webpackages/auth": ["libs/auth/src/index.ts"],
-      "@webpackages/auth-client": ["libs/auth-client/src/index.ts"],
-      "@webpackages/auth-sdk": ["libs/auth-sdk/src/index.ts"],
-      "@webpackages/common": ["libs/common/src/index.ts"],
-      "@webpackages/core": ["libs/core/src/index.ts"],
-      "@webpackages/dto": ["libs/dto/src/index.ts"],
-      "@webpackages/entity": ["libs/entity/src/index.ts"],
-      "@webpackages/form": ["libs/form/src/index.ts"],
-      "@webpackages/gen": ["libs/gen/src/index.ts"],
-      "@webpackages/material": ["libs/material/src/index.ts"],
-      "@webpackages/model": ["libs/model/src/index.ts"],
-      "@webpackages/ngrx": ["libs/ngrx/src/index.ts"],
-      "@webpackages/property": ["libs/property/src/index.ts"],
-      "@webpackages/rest": ["libs/rest/src/index.ts"],
-      "@webpackages/rest-resource": ["libs/rest-resource/src/index.ts"],
-      "@webpackages/typeorm": ["libs/typeorm/src/index.ts"],
-      "@webpackages/utils": ["libs/utils/src/index.ts"]
+      "@webpackages/auth": [
+        "libs/auth/src/index.ts"
+      ],
+      "@webpackages/auth-client": [
+        "libs/auth-client/src/index.ts"
+      ],
+      "@webpackages/auth-sdk": [
+        "libs/auth-sdk/src/index.ts"
+      ],
+      "@webpackages/common": [
+        "libs/common/src/index.ts"
+      ],
+      "@webpackages/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@webpackages/dto": [
+        "libs/dto/src/index.ts"
+      ],
+      "@webpackages/entity": [
+        "libs/entity/src/index.ts"
+      ],
+      "@webpackages/form": [
+        "libs/form/src/index.ts"
+      ],
+      "@webpackages/gen": [
+        "libs/gen/src/index.ts"
+      ],
+      "@webpackages/material": [
+        "libs/material/src/index.ts"
+      ],
+      "@webpackages/model": [
+        "libs/model/src/index.ts"
+      ],
+      "@webpackages/ngrx": [
+        "libs/ngrx/src/index.ts"
+      ],
+      "@webpackages/property": [
+        "libs/property/src/index.ts"
+      ],
+      "@webpackages/rest": [
+        "libs/rest/src/index.ts"
+      ],
+      "@webpackages/rest-resource": [
+        "libs/rest-resource/src/index.ts"
+      ],
+      "@webpackages/typeorm": [
+        "libs/typeorm/src/index.ts"
+      ],
+      "@webpackages/utils": [
+        "libs/utils/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

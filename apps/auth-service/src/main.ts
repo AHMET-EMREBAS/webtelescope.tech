@@ -29,6 +29,7 @@ const PUBLIC_RESOUCE_PATH = join(__dirname, 'public');
       database: join(__dirname, 'database', `auth-main.sqlite`),
       subscribers: [LogSubscriber, SubSubscriber],
       autoLoadEntities: true,
+      synchronize: true,
     }),
     TypeOrmModule.forFeature(AuthEntities, 'main'),
     TypeOrmModule.forRootAsync({
