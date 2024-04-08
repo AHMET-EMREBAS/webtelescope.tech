@@ -8,6 +8,7 @@ import { importProvidersFrom } from '@angular/core';
 const meta: Meta<ForgotPasswordFormComponent> = {
   component: ForgotPasswordFormComponent,
   title: 'ForgotPasswrodComponent',
+  tags: ['Auth'],
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],

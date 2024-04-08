@@ -41,14 +41,16 @@ export class ErrorState implements ErrorStateMatcher {
 }
 
 @Component({ template: '' })
-export class BaseFieldComponent<T = any> implements OnInit {
+export class BaseFieldComponent<T = any, InputRef = MatInput>
+  implements OnInit
+{
   readonly errorState = new ErrorState();
 
   @Output() updateButtonClick = new EventEmitter<T>();
   /**
    * Input referance
    */
-  @ViewChild('input') inputRef!: MatInput;
+  @ViewChild('input') inputRef!: InputRef;
 
   /**
    * FormControl name
@@ -128,7 +130,9 @@ export class BaseFieldComponent<T = any> implements OnInit {
   }
 
   focus() {
-    this.inputRef.focus();
+    if ((this.inputRef as any)?.focus) {
+      (this.inputRef as any).focus();
+    }
   }
 
   updateField() {

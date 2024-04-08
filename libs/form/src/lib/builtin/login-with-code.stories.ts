@@ -13,15 +13,55 @@ const meta: Meta<LoginWithCodeFormComponent> = {
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
+  argTypes: {
+    focusPassword: {
+      description: 'Focus password field',
+      type: 'function',
+    },
+    focusUserName: {
+      description: 'Focus username field',
+      type: 'function',
+    },
+    formTitle: {
+      description: 'Form title',
+      type: 'string',
+    },
+    submitLabel: {
+      description: 'Submit button label',
+      type: 'string',
+    },
+    username: {
+      description: 'Username input referance',
+    },
+    securityCode: {
+      description: 'Security code input referance',
+    },
+    formGroup: {
+      description: 'FormGroup',
+      type: 'function',
+    },
+    reset: {
+      description: 'Reset form',
+    },
+    submit: {
+      description: 'Submit form',
+    },
+    submitButtonClick: {
+      description: 'On submit button click event',
+    },
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<LoginWithCodeFormComponent>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  argTypes: meta.argTypes,
+};
 
 export const Heading: Story = {
+  argTypes: meta.argTypes,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

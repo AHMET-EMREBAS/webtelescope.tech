@@ -10,7 +10,4 @@ import { IUser } from '../../model';
  * @param roles  {@link roles}
  */
 export interface ICreateUserDto<Organization extends IID, Role extends IID>
-  extends Pick<
-    IUser<Organization, Role>,
-    'username' | 'roles' | 'organization' | 'password'
-  > {}
+  extends Pick<IUser<Organization, Role>, 'username' | 'roles' | 'password'> {}
