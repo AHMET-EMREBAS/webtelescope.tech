@@ -24,7 +24,7 @@ export type BootstrapOptions = {
   host: string;
   email: string;
   https?: boolean;
-  globalPrefix: string;
+  globalPrefix?: string;
 };
 
 export async function bootstrap(options: BootstrapOptions) {

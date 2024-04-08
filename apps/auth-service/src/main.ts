@@ -82,5 +82,4 @@ bootstrap({
   host: 'auth.webtelescope.tech',
   port: 3001,
   website: 'https://webtelescope.tech',
-  globalPrefix: '',
 });
