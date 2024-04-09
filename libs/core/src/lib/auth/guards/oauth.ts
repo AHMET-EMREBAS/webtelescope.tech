@@ -24,6 +24,7 @@ export class OAuthGuard implements CanActivate {
       if (oauth.organization.organizationName == orgName) {
         return true;
       }
+      oauth.scope;
     }
     return false;
   }

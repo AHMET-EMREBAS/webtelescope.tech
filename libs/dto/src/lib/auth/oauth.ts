@@ -5,7 +5,7 @@ import { Dto, NameProperty, ObjectIdProperty } from '@webpackages/property';
 export class CreateOAuthDto implements ICreateOAuthDto {
   @NameProperty() name!: string;
   @ObjectIdProperty() organization!: IID;
-  @NameProperty() scope!: string;
+  @ObjectIdProperty() scope!: IID;
 }
 
 @Dto()

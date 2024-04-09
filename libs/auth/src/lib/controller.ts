@@ -122,6 +122,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Signup' })
   @PublicAccess()
+  @Scope('subscription')
   @ApiUnprocessableEntityResponse()
   @Post('signup')
   async signup(@Body() signup: CreateSubDto) {
