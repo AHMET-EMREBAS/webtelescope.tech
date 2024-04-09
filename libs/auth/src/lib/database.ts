@@ -13,17 +13,38 @@ import {
   SubType,
 } from '@webpackages/entity';
 import { AuthEntities } from './entities';
-import { join } from 'path';
+
+
 
 export async function initializeDataSource(orgName: string) {
-  return await new DataSource({
-    type: 'better-sqlite3',
-    database: join(__dirname, 'database', `auth-${orgName}.sqlite`),
+  const con = await new DataSource({
+    // type: 'better-sqlite3',
+    // database: join(__dirname, 'database', `auth-${orgName}.sqlite`),
+    type: 'postgres',
+    username: 'postgres',
+    password: 'password',
+    // database: orgName,
+    // entities: AuthEntities,
+    // subscribers: [SubSubscriber, LogSubscriber],
+    // synchronize: true,
+    // dropSchema: true,
+  }).initialize();
+
+  await con.query(`CREATE DATABASE "auth-${orgName}"`);
+  const ds = await new DataSource({
+    // type: 'better-sqlite3',
+    // database: join(__dirname, 'database', `auth-${orgName}.sqlite`),
+    type: 'postgres',
+    username: 'postgres',
+    password: 'password',
+    database: `auth-${orgName}`,
     entities: AuthEntities,
     subscribers: [SubSubscriber, LogSubscriber],
+
     synchronize: true,
-    dropSchema: true,
   }).initialize();
+
+  return ds;
 }
 export async function seedNewDatabase(ds: DataSource) {
   const ADMIN_ROLE_NAME = 'ADMIN';

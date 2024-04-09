@@ -34,13 +34,16 @@ import {
   Scope,
 } from '@webpackages/core';
 import { initializeDataSource, seedNewDatabase } from './database';
-
+import { DatabaseService } from '@webpackages/database';
 @ApiTags('Auth')
 @Scope('auth')
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly databaseService: DatabaseService
+  ) {}
 
   @ApiOperation({ summary: 'Login with username and password' })
   @ApiOkResponse({ type: LoginResult })
@@ -126,9 +129,12 @@ export class AuthController {
   @ApiUnprocessableEntityResponse()
   @Post('signup')
   async signup(@Body() signup: CreateSubDto) {
-    const result = await this.authService.signup(signup);
+    const { organizationName } = await this.authService.signup(signup);
 
-    const ds = await initializeDataSource(result.organizationName);
+    await this.databaseService.createDatabase(organizationName);
+
+    // const ds = await this.databaseService.initialize()
+    const ds = await initializeDataSource(organizationName);
 
     await seedNewDatabase(ds);
 

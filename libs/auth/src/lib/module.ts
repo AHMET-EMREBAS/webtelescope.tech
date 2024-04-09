@@ -3,12 +3,12 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 import {
   AuthService,
   AuthGuard,
   LocalGuard,
   SessionGuard,
+  OAuthGuard,
 } from '@webpackages/core';
 import { AuthResourceControllers } from './resource-controllers';
 import { AuthEntities } from './entities';
@@ -23,7 +23,6 @@ export class AuthModule {
     return {
       module: AuthModule,
       imports: [
-        EventEmitterModule,
         TypeOrmModule.forFeature(AuthEntities),
         JwtModule.register({
           global: true,
@@ -34,13 +33,14 @@ export class AuthModule {
         }),
       ],
       controllers: [AuthController, ...AuthResourceControllers],
-      providers: [AuthService, AuthGuard, LocalGuard, SessionGuard],
+      providers: [AuthService, AuthGuard, LocalGuard, SessionGuard, OAuthGuard],
       exports: [
         JwtModule,
         AuthService,
         AuthGuard,
         LocalGuard,
         SessionGuard,
+        OAuthGuard,
         TypeOrmModule.forFeature(AuthEntities),
       ],
     };

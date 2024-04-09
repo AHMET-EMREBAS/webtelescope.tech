@@ -8,7 +8,7 @@ import { OAuth } from '@webpackages/entity';
 export class OAuthGuard implements CanActivate {
   constructor(
     private readonly authService: AuthService,
-    @InjectRepository(OAuthGuard) private readonly oauthRepo: Repository<OAuth>
+    @InjectRepository(OAuth) private readonly oauthRepo: Repository<OAuth>
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {

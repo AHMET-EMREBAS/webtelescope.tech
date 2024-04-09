@@ -20,6 +20,7 @@
       "@webpackages/auth-sdk": ["libs/auth-sdk/src/index.ts"],
       "@webpackages/common": ["libs/common/src/index.ts"],
       "@webpackages/core": ["libs/core/src/index.ts"],
+      "@webpackages/database": ["libs/database/src/index.ts"],
       "@webpackages/dto": ["libs/dto/src/index.ts"],
       "@webpackages/entity": ["libs/entity/src/index.ts"],
       "@webpackages/form": ["libs/form/src/index.ts"],

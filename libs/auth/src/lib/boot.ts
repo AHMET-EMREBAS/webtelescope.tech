@@ -23,8 +23,11 @@ const mainDatabasePath = join(__dirname, 'database', `auth-main.sqlite`);
 
 const mainDatabaseOptions: DataSourceOptions = {
   name: 'main',
-  type: 'better-sqlite3',
-  database: mainDatabasePath,
+  // type: 'better-sqlite3',
+  type: 'postgres',
+  username: 'postgres',
+  password: 'password',
+  database: 'auth-main',
   subscribers: [LogSubscriber, SubSubscriber],
   entities: AuthEntities,
 };
@@ -43,8 +46,12 @@ const mainDatabaseOptions: DataSourceOptions = {
           );
         }
         return {
-          type: 'better-sqlite3',
-          database: join(__dirname, 'database', `auth-${org}.sqlite`),
+          // type: 'better-sqlite3',
+          // database: join(__dirname, 'database', `auth-${org}.sqlite`),
+          type: 'postgres',
+          username: 'postgres',
+          password: 'password',
+          database: `auth-${org}`,
           subscribers: [LogSubscriber, SubSubscriber],
           entities: AuthEntities,
         };
@@ -89,7 +96,7 @@ export async function bootAuthModule(
       dropSchema: true,
     }).initialize();
   }
-  
+
   await bootstrap({
     appModule: AppModule,
     ...options,
