@@ -51,6 +51,7 @@ export class AuthService {
 
     @InjectRepository(Mail)
     protected readonly mailRepo: Repository<Mail>,
+
     protected readonly jwt: JwtService,
     private readonly reflector: Reflector
   ) {}
@@ -201,28 +202,18 @@ export class AuthService {
     throw new UnauthorizedException('You do not have a session!');
   }
 
-  // extractOrganizationNameFromHeader(ctx: ExecutionContext) {
-  //   return this.request(ctx).headers[AccessPolicies.X_ORGANIZATION];
-  // }
-
-  extractApiKeyFromHeader(ctx: ExecutionContext) {
-    return this.request(ctx).headers[AccessPolicies.X_API_KEY];
+  extractOrganizationNameFromHeader(ctx: ExecutionContext) {
+    return this.request(ctx).headers[AccessPolicies.X_ORGANIZATION] as string;
   }
 
-  /**
-   * Append authorization token to header
-   * @param ctx
-   * @param token
-   */
+  extractOAuthApiKeyFromHeader(ctx: ExecutionContext) {
+    return this.request(ctx).headers[AccessPolicies.X_OAUTH_API_KEY] as string;
+  }
+
   appendAuthorizationToken(ctx: ExecutionContext, token: string) {
     this.request(ctx).headers.authorization = token;
   }
 
-  /**
-   * Append session to request
-   * @param ctx
-   * @param session
-   */
   appendSessionToRequest(ctx: ExecutionContext, session: Session) {
     (this.request(ctx) as any)[AuthEnums.SESSION] = session;
   }
@@ -235,11 +226,6 @@ export class AuthService {
     return this.request(ctx).params['id'];
   }
 
-  /**
-   * Append user to request
-   * @param ctx
-   * @param user
-   */
   appendUserToRequest(ctx: ExecutionContext, user: User) {
     (this.request(ctx) as any)[AuthEnums.USER] = user;
   }

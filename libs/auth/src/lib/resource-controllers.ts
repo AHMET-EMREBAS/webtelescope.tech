@@ -1,22 +1,28 @@
 import { CanActivate, Type } from '@nestjs/common';
 import {
+  CreateAppDto,
   CreateLogDto,
   CreateMailDto,
+  CreateOAuthDto,
   CreateOrganizationDto,
   CreatePermissionDto,
   CreateRoleDto,
   CreateRootUserDto,
+  CreateScopeDto,
   CreateSecurityCodeDto,
   CreateSessionDto,
   CreateSubDto,
   CreateSubTypeDto,
   CreateUserDto,
+  UpdateAppDto,
   UpdateLogDto,
   UpdateMailDto,
+  UpdateOAuthDto,
   UpdateOrganizationDto,
   UpdatePermissionDto,
   UpdateRoleDto,
   UpdateRootUserDto,
+  UpdateScopeDto,
   UpdateSecurityCodeDto,
   UpdateSessionDto,
   UpdateSubDto,
@@ -35,6 +41,9 @@ import {
   Sub,
   SubType,
   Log,
+  App,
+  Scope,
+  OAuth,
 } from '@webpackages/entity';
 import { CreateController } from '@webpackages/rest';
 import { NotDeleteGuard } from './not-delete.guard';
@@ -74,16 +83,18 @@ export const RootUserController = c(
   CreateRootUserDto,
   UpdateRootUserDto
 );
-
 export const MailController = c(Mail, CreateMailDto, UpdateMailDto);
-
 export const SubController = c(Sub, CreateSubDto, UpdateSubDto);
-
 export const SubTypeController = c(SubType, CreateSubTypeDto, UpdateSubTypeDto);
-
 export const LogController = c(Log, CreateLogDto, UpdateLogDto);
+export const AppController = c(App, CreateAppDto, UpdateAppDto);
+export const ScopeController = c(Scope, CreateScopeDto, UpdateScopeDto);
+export const OAuthController = c(OAuth, CreateOAuthDto, UpdateOAuthDto);
 
 export const AuthResourceControllers = [
+  AppController,
+  ScopeController,
+  OAuthController,
   UserController,
   RoleController,
   PermissionController,

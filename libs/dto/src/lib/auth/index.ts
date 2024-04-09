@@ -1,12 +1,15 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './login-result';
+export * from './app';
 export * from './forgot-password';
+export * from './login-result';
 export * from './login-with-code';
 export * from './login';
+export * from './oauth';
 export * from './organization';
 export * from './permission';
 export * from './role';
 export * from './root-user';
+export * from './scope';
 export * from './security-code';
 export * from './session';
 export * from './sub-type';

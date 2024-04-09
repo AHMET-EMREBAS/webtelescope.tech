@@ -41,7 +41,6 @@ export function Column(options: ColumnOptions) {
       type: colType,
       unique: isUnique,
       nullable: isNullable,
-
       default: defaultValue,
       transformer: {
         from(value) {

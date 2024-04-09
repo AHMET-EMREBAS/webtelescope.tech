@@ -6,21 +6,22 @@ import { v4 } from 'uuid';
 export function token(prefix: string) {
   return `${prefix}_${v4()}`;
 }
+
 const RESOURCE_NAME = token('resource-name');
 const PUBLIC = token('public');
 const PERMISSION = token('permission');
 const ROLE = token('permission');
 
+const SCOPE = token('scope');
+
+export function Scope(name: string) {
+  return SetMetadata(SCOPE, name);
+}
+
 export function PublicAccess() {
   return SetMetadata(PUBLIC, true);
 }
 
-/**
- * When resource method/controller decorated with this decorator,
- * User must have the provided permission to access this resource
- * @param permission
- * @returns
- */
 export function Permission(permission: string) {
   return SetMetadata(PERMISSION, permission);
 }
@@ -29,22 +30,17 @@ export function ResouceName(name: string) {
   return SetMetadata(RESOURCE_NAME, name);
 }
 
-/**
- * When resource method/controller decorated with this decorator,
- * User must have the provided role to access this resource
- * @param role
- * @returns
- */
 export function Role(role: string) {
   return SetMetadata(ROLE, role);
 }
 
-/**
- * Check the resouce is marked as public
- * @param reflector
- * @param context
- * @returns
- */
+export function getScope(reflector: Reflector, context: ExecutionContext) {
+  return reflector.getAllAndOverride(SCOPE, [
+    context.getClass(),
+    context.getHandler(),
+  ]);
+}
+
 export function isPublicAccess(
   reflector: Reflector,
   context: ExecutionContext
@@ -55,12 +51,6 @@ export function isPublicAccess(
   ]);
 }
 
-/**
- * Get required permission for the resource
- * @param reflector
- * @param context
- * @returns
- */
 export function getRequiredPermissions(
   reflector: Reflector,
   context: ExecutionContext
@@ -71,12 +61,6 @@ export function getRequiredPermissions(
   ]);
 }
 
-/**
- * Get required roles for the resource
- * @param reflector
- * @param context
- * @returns
- */
 export function getRequiredRoles(
   reflector: Reflector,
   context: ExecutionContext

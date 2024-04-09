@@ -1,9 +1,9 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './auth-entities';
-export * from './auth.controller';
-export * from './auth.module';
+export * from './entities';
+export * from './controller';
+export * from './module';
 export * from './boot';
-export * from './create-user-database';
+export * from './database';
 export * from './enums';
 export * from './not-delete.guard';
 export * from './resource-controllers';

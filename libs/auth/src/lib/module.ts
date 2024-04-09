@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DynamicModule, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from './auth.controller';
+import { AuthController } from './controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import {
@@ -11,7 +11,7 @@ import {
   SessionGuard,
 } from '@webpackages/core';
 import { AuthResourceControllers } from './resource-controllers';
-import { AuthEntities } from './auth-entities';
+import { AuthEntities } from './entities';
 
 export type AuthModuleOptions = {
   secret: string;

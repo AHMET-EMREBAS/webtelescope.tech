@@ -31,10 +31,12 @@ import {
   AuthHeaderParam,
   SessionParam,
   UserParam,
+  Scope,
 } from '@webpackages/core';
-import { initializeDataSource, seedNewDatabase } from './create-user-database';
+import { initializeDataSource, seedNewDatabase } from './database';
 
 @ApiTags('Auth')
+@Scope('auth')
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
@@ -46,7 +48,7 @@ export class AuthController {
   @CredentialAccess()
   @Post('login')
   login(
-    @Body() __: LoginDto,
+    @Body() loginDto: LoginDto,
     @AuthHeaderParam() accessToken: string,
     @SessionParam() session: Session
   ): LoginResult {

@@ -12,7 +12,7 @@ import {
   SubSubscriber,
   SubType,
 } from '@webpackages/entity';
-import { AuthEntities } from './auth-entities';
+import { AuthEntities } from './entities';
 import { join } from 'path';
 
 export async function initializeDataSource(orgName: string) {

@@ -12,9 +12,9 @@ import { LogSubscriber, Sub, SubSubscriber } from '@webpackages/entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
 import { Request } from 'express';
-import { AuthEntities } from './auth-entities';
-import { AuthModule } from './auth.module';
-import { seedNewDatabase } from './create-user-database';
+import { AuthEntities } from './entities';
+import { AuthModule } from './module';
+import { seedNewDatabase } from './database';
 import { seedSubs } from './seeder';
 import { existsSync } from 'fs';
 
@@ -89,6 +89,7 @@ export async function bootAuthModule(
       dropSchema: true,
     }).initialize();
   }
+  
   await bootstrap({
     appModule: AppModule,
     ...options,

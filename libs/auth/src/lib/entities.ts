@@ -10,9 +10,15 @@ import {
   Organization,
   Log,
   RootUser,
+  App,
+  Scope,
+  OAuth,
 } from '@webpackages/entity';
 
 export const AuthEntities = [
+  App,
+  Scope,
+  OAuth,
   RootUser,
   User,
   Role,

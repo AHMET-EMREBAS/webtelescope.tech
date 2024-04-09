@@ -67,7 +67,7 @@ export async function bootstrap(options: BootstrapOptions) {
     })
     .addGlobalParameters({
       in: 'header',
-      name: AccessPolicies.X_API_KEY,
+      name: AccessPolicies.X_OAUTH_API_KEY,
       description: 'OAuth api key',
     })
     .addGlobalParameters({
