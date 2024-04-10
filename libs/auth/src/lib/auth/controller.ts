@@ -34,7 +34,6 @@ import {
   Scope,
 } from '@webpackages/core';
 import { DatabaseFactory } from '../database';
-import { DatabaseSeeder } from '../database/db-seed';
 
 @ApiTags('Auth')
 @Scope('auth')
@@ -128,11 +127,16 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupDto: CreateSubDto) {
     await this.authService.signup(signupDto);
-    const { organizationName } = signupDto;
 
-    // Initialize client database
+    const { organizationName, username, password } = signupDto;
+
     await DatabaseFactory.createDatabaseIFNotExist(organizationName);
-    await DatabaseSeeder.seed(organizationName, signupDto);
+
+    await DatabaseFactory.updateAdminUserOfClientDatabase(
+      organizationName,
+      username,
+      password
+    );
 
     return { message: 'Welcome' };
   }

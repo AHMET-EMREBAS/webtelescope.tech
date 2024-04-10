@@ -34,7 +34,7 @@ export function Role(role: string) {
   return SetMetadata(ROLE, role);
 }
 
-export function getScope(reflector: Reflector, context: ExecutionContext) {
+export function getRequiredScope(reflector: Reflector, context: ExecutionContext) {
   return reflector.getAllAndOverride(SCOPE, [
     context.getClass(),
     context.getHandler(),

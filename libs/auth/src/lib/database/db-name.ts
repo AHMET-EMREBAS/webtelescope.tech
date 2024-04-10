@@ -1,5 +1,14 @@
 import { join } from 'path';
 
-export function createDatabaseName(organizationName: string) {
+/**
+ * auth-{orgname}.sqlite
+ * @param organizationName
+ * @returns
+ */
+export function getDatabaseName(organizationName: string) {
   return join(__dirname, 'database', `auth-${organizationName}.sqlite`);
+}
+
+export function getTemplateDatabaseName() {
+  return join(__dirname, 'database', '_templates', 'auth-template.sqlite');
 }

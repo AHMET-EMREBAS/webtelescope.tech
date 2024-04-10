@@ -2,10 +2,10 @@ import { IUser } from '@webpackages/model';
 import {
   ManyRelation,
   StringColumn,
-  OwnerRelation,
   PasswordColumn,
   TimestampEntity,
   Entity,
+  OwnerRelation,
 } from '@webpackages/typeorm';
 import { Organization } from './organization';
 import { Role } from './role';
