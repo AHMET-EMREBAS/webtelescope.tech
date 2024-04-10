@@ -19,7 +19,6 @@ import {
   InternalServerErrorException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { Role } from './role';
 
 /**
  * Subscription
@@ -42,27 +41,26 @@ export class SubSubscriber implements EntitySubscriberInterface<Sub> {
   }
 
   async beforeInsert(event: InsertEvent<Sub>) {
-    const orgRepo = event.manager.getRepository(Organization);
-    const userRepo = event.manager.getRepository(User);
+    const manager = event.manager;
+    const orgRepo = manager.getRepository(Organization);
+    const userRepo = manager.getRepository(User);
 
     const { username, password, organizationName } = event.entity;
-    const foundOrg = await orgRepo.findOneBy({ organizationName });
-    const foundUser = await userRepo.findOneBy({ username });
 
-    if (foundOrg)
+    const isOrgExist = await orgRepo.findOneBy({ organizationName });
+    const isUserExist = await userRepo.findOneBy({ username });
+
+    if (isOrgExist)
       throw new UnprocessableEntityException('Organization already exist!');
 
-    if (foundUser)
+    if (isUserExist)
       throw new UnprocessableEntityException('User already exist!');
 
     try {
-      const savedOrg: Organization = await orgRepo.save({ organizationName });
-      await userRepo.save({
-        username,
-        password,
-        roles: [],
-        organization: { id: savedOrg.id },
-      });
+      const organization: Organization = await manager.save(
+        orgRepo.create({ organizationName })
+      );
+      await manager.save(userRepo.create({ username, password, organization }));
     } catch (err) {
       console.error(err);
       throw new InternalServerErrorException('Something went wrong');

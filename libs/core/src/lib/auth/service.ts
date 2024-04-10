@@ -157,18 +157,13 @@ export class AuthService {
   }
 
   async signup(signupDto: CreateSubDto) {
-    const found = await this.subRepo.findOneBy({
-      username: signupDto.username,
-    });
-
-    if (found) {
-      throw new UnprocessableEntityException(
-        'The username is already in user!'
-      );
+    const { username } = signupDto;
+    try {
+      await this.subRepo.findOneByOrFail({ username });
+    } catch (err) {
+      return await this.subRepo.save(signupDto);
     }
-    const saved = await this.subRepo.save(signupDto);
-
-    return saved;
+    throw new UnprocessableEntityException('The username is already in user!');
   }
 
   async sendEmail(mail: CreateMailDto) {

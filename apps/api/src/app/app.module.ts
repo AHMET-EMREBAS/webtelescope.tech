@@ -1,18 +1,30 @@
-import { Global, Module } from '@nestjs/common';
+import { Injectable, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Category } from '@webpackages/entity';
+import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
-@Global()
+@Injectable()
+export class DatabaseFactoryService implements TypeOrmOptionsFactory {
+  constructor(private readonly config: ConfigService) {}
+  createTypeOrmOptions(
+    connectionName?: string
+  ): TypeOrmModuleOptions | Promise<TypeOrmModuleOptions> {
+    console.log(this.config.get('DB_NAME'));
+    return {
+      name: connectionName,
+      type: 'better-sqlite3',
+      database: this.config.get('DB_NAME'),
+    };
+  }
+}
+
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: './tmp/database.sqlite',
-      entities: [Category],
-      synchronize: true,
-      dropSchema: true,
+    ConfigModule.forRoot({}),
+    TypeOrmModule.forRootAsync({
+      extraProviders: [ConfigService],
+      useClass: DatabaseFactoryService,
     }),
-    TypeOrmModule.forFeature([Category]),
   ],
 })
 export class AppModule {}

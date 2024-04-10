@@ -1,48 +1,29 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { DynamicModule, Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from './controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import {
-  AuthService,
-  AuthGuard,
-  LocalGuard,
-  SessionGuard,
-  OAuthGuard,
-} from '@webpackages/core';
-import { AuthResourceControllers } from './resource-controllers';
-import { AuthEntities } from './entities';
+import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/module';
+import { DatabaseSeeder } from './database/db-seed';
+import { DatabaseFactory } from './database';
 
-export type AuthModuleOptions = {
-  secret: string;
-};
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      ignoreEnvVars: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: 'public',
+      serveRoot: '',
+    }),
+    AuthModule,
+  ],
+})
+export class AppModule {
+  constructor(private readonly configService: ConfigService) {}
+  async onModuleInit() {
+    const username = this.configService.getOrThrow('APP_USERNAME');
+    const password = this.configService.getOrThrow('APP_PASSWORD');
 
-@Module({})
-export class AuthModule {
-  static configure(options: AuthModuleOptions): DynamicModule {
-    return {
-      module: AuthModule,
-      imports: [
-        TypeOrmModule.forFeature(AuthEntities),
-        JwtModule.register({
-          global: true,
-          secret: options.secret,
-          signOptions: {
-            expiresIn: '30d',
-          },
-        }),
-      ],
-      controllers: [AuthController, ...AuthResourceControllers],
-      providers: [AuthService, AuthGuard, LocalGuard, SessionGuard, OAuthGuard],
-      exports: [
-        JwtModule,
-        AuthService,
-        AuthGuard,
-        LocalGuard,
-        SessionGuard,
-        OAuthGuard,
-        TypeOrmModule.forFeature(AuthEntities),
-      ],
-    };
+    await DatabaseFactory.createDatabaseIFNotExist('main');
+    await DatabaseSeeder.seed('main', { username, password });
   }
 }

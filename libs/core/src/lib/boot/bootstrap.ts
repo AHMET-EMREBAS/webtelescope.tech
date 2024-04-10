@@ -4,14 +4,14 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
+import { Logger, Type } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ClassConstructor } from 'class-transformer';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-
+import { ConfigService } from '@nestjs/config';
 import favicon = require('serve-favicon');
 import { AccessPolicies } from '../auth';
 
@@ -27,29 +27,26 @@ export type BootstrapOptions = {
   globalPrefix?: string;
 };
 
-export async function bootstrap(options: BootstrapOptions) {
-  const {
-    appDescription,
-    appModule,
-    appName,
-    email,
-    host,
-    port,
-    website,
-    https,
-    globalPrefix,
-  } = options;
+export async function bootstrap(appModule: Type) {
+  const app =
+    process.env['HTTPS'] === 'true'
+      ? await NestFactory.create(appModule, {
+          httpsOptions: {
+            cert: readFileSync(join(__dirname, 'cert.pem')),
+            key: readFileSync(join(__dirname, 'key.pem')),
+          },
+        })
+      : await NestFactory.create(appModule);
 
-  const app = https
-    ? await NestFactory.create(appModule, {
-        httpsOptions: {
-          cert: readFileSync(join(__dirname, 'cert.pem')),
-          key: readFileSync(join(__dirname, 'key.pem')),
-        },
-      })
-    : await NestFactory.create(appModule);
+  const config = app.get(ConfigService);
 
-  const GLOBAL_PREFIX = globalPrefix ? ['api', globalPrefix].join('/') : 'api';
+  const GLOBAL_PREFIX = config.getOrThrow('API_GLOBAL_PREFIX');
+  const APP_NAME = config.getOrThrow('APP_NAME');
+  const APP_DESCRIPTION = config.getOrThrow('APP_DESCRIPTION');
+  const EMAIL = config.getOrThrow('EMAIL');
+  const URL = config.getOrThrow('URL');
+  const HOST = config.getOrThrow('HOST');
+  const PORT = config.getOrThrow('PORT');
 
   app.setGlobalPrefix(GLOBAL_PREFIX);
   app.use(helmet());
@@ -57,9 +54,9 @@ export async function bootstrap(options: BootstrapOptions) {
 
   app.use(favicon(join(__dirname, 'public', 'favicon.ico')));
 
-  const config = new DocumentBuilder()
-    .setTitle(appName)
-    .setDescription(appDescription)
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle(APP_NAME)
+    .setDescription(APP_DESCRIPTION)
     .addBearerAuth({
       type: 'http',
       scheme: 'Bearer',
@@ -77,22 +74,21 @@ export async function bootstrap(options: BootstrapOptions) {
       example: 'main',
     })
 
-    .setContact('Contact', website, email)
+    .setContact('Contact', URL, EMAIL)
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
 
   SwaggerModule.setup('api', app, document, {
     customfavIcon: './favicon.ico',
-    customSiteTitle: appName,
+    customSiteTitle: APP_NAME,
     explorer: true,
     yamlDocumentUrl: 'api-yaml',
     jsonDocumentUrl: 'api-json',
   });
 
-  await app.listen(port);
-
+  await app.listen(PORT);
   Logger.log(
-    `🚀 ${appName} application is running on: http://${host}:${port}/${GLOBAL_PREFIX}`
+    `🚀 ${APP_NAME} application is running on: http://${HOST}:${PORT}/${GLOBAL_PREFIX}`
   );
 }

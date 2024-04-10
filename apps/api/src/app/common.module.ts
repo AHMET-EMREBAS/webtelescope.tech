@@ -11,7 +11,7 @@ import {
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { AppEventService } from './app-events.service';
+
 // Get email and password
 const [, pass] = process.env['INFO_EMAIL'].split('|||') ?? [];
 
@@ -31,7 +31,6 @@ const [, pass] = process.env['INFO_EMAIL'].split('|||') ?? [];
     EventEmitterModule.forRoot({ delimiter: '.', global: true }),
   ],
   providers: [
-    AppEventService,
     provideAppName('WebTelescope'),
     provideDomainName('webtelescope.tech'),
     provideCompanyName('Web Telescope'),

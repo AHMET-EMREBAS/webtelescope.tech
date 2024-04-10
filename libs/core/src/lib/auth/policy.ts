@@ -109,6 +109,15 @@ export function toPermissionString(
   return `${action.toUpperCase()}:${resourceName.toUpperCase()}`;
 }
 
+export function createResourcePermissions(resourceName: string) {
+  return [
+    toPermissionString('WRITE', resourceName),
+    toPermissionString('READ', resourceName),
+    toPermissionString('UPDATE', resourceName),
+    toPermissionString('DELETE', resourceName),
+  ];
+}
+
 /**
  * Write permission
  * @param resourceName
