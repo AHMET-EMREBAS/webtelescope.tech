@@ -10,6 +10,7 @@ import {
 import { IDEntity } from './id';
 import { Type } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { StringColumn } from './columns';
 
 /**
  * @param id {@link IDEntity.id}
@@ -23,6 +24,7 @@ export class TimestampEntity extends IDEntity {
   @UpdateDateColumn() updatedAt!: Date;
   @DeleteDateColumn() deletedAt!: Date;
   @Column({ type: 'boolean', default: true }) active!: boolean;
+  @StringColumn({ required: false }) description?: string;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/module';
@@ -20,18 +20,33 @@ import { DatabaseFactory } from './database';
 export class AppModule {
   constructor(private readonly configService: ConfigService) {}
   async onModuleInit() {
+    const logger = new Logger('On AppModule Init');
+
     await DatabaseFactory.createDatabaseTemplate();
+
     const username = this.configService.getOrThrow('APP_USERNAME');
     const password = this.configService.getOrThrow('APP_PASSWORD');
+    logger.log('username and password are read from configuration.');
 
     setTimeout(async () => {
       await DatabaseFactory.createDatabaseIFNotExist('main');
+      logger.log('Createad main database');
 
-      await DatabaseFactory.updateAdminUserOfClientDatabase(
-        'main',
-        username,
-        password
-      );
-    }, 4000);
+      setTimeout(async () => {
+        try {
+          await DatabaseFactory.updateTemplateDatabaseForUser(
+            'main',
+            username,
+            password
+          );
+          logger.log('Updated the user and organization in the new database');
+        } catch (err) {
+          console.error(err);
+          logger.error(
+            'Could not not update user and organization in the new database.'
+          );
+        }
+      }, 4000);
+    }, 2000);
   }
 }

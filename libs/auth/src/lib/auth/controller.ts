@@ -36,7 +36,7 @@ import {
 import { DatabaseFactory } from '../database';
 
 @ApiTags('Auth')
-@Scope('auth')
+@Scope('AUTH')
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
@@ -122,7 +122,6 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Signup' })
   @PublicAccess()
-  @Scope('subscription')
   @ApiUnprocessableEntityResponse()
   @Post('signup')
   async signup(@Body() signupDto: CreateSubDto) {
@@ -132,7 +131,7 @@ export class AuthController {
 
     await DatabaseFactory.createDatabaseIFNotExist(organizationName);
 
-    await DatabaseFactory.updateAdminUserOfClientDatabase(
+    await DatabaseFactory.updateTemplateDatabaseForUser(
       organizationName,
       username,
       password

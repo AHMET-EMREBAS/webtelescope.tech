@@ -2,9 +2,9 @@ import { IOAuth } from '@webpackages/model';
 import {
   Entity,
   ManyRelation,
-  OneRelation,
+  OAuthApiTokenColumn,
+  OwnerRelation,
   TimestampEntity,
-  UUIDColumn,
   UniqueNameColumn,
 } from '@webpackages/typeorm';
 import { Scope } from './scope';
@@ -13,7 +13,7 @@ import { App } from './app';
 @Entity()
 export class OAuth extends TimestampEntity implements IOAuth<App, Scope> {
   @UniqueNameColumn() name!: string;
-  @UUIDColumn() apiKey!: string;
-  @OneRelation(App) app!: App;
+  @OAuthApiTokenColumn() apiKey!: string;
+  @OwnerRelation(App) app!: App;
   @ManyRelation(Scope) scopes!: Scope[];
 }

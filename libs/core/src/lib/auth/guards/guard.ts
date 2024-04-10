@@ -6,13 +6,7 @@ import { SessionGuard } from './session';
 import { PublicAccess } from '../policy';
 import { SecurityCodeGuard } from './security-code';
 import { UsernameGuard } from './username';
-
-export enum AccessPolicies {
-  BEARER = 'bearer',
-  BASIC = 'basic',
-  X_OAUTH_API_KEY = 'x-oauthapikey',
-  X_ORGANIZATION = 'x-organization',
-}
+import { AuthEnums } from '../enums';
 
 /**
  * Authenticate and authorize users
@@ -22,10 +16,7 @@ export enum AccessPolicies {
  * @returns
  */
 export function BearerAccess() {
-  return applyDecorators(
-    ApiBearerAuth(AccessPolicies.BEARER),
-    UseGuards(AuthGuard)
-  );
+  return applyDecorators(ApiBearerAuth(AuthEnums.BEARER), UseGuards(AuthGuard));
 }
 
 /**
@@ -36,7 +27,7 @@ export function BearerAccess() {
 export function CredentialAccess() {
   return applyDecorators(
     PublicAccess(),
-    ApiBasicAuth(AccessPolicies.BASIC),
+    ApiBasicAuth(AuthEnums.BASIC),
     UseGuards(LocalGuard)
   );
 }
@@ -47,7 +38,7 @@ export function CredentialAccess() {
  */
 export function SessionAccess() {
   return applyDecorators(
-    ApiBearerAuth(AccessPolicies.BEARER),
+    ApiBearerAuth(AuthEnums.BEARER),
     PublicAccess(),
     UseGuards(SessionGuard)
   );

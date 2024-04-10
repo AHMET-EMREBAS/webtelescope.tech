@@ -10,10 +10,8 @@ import { Type, applyDecorators } from '@nestjs/common';
 import { hashSync, genSaltSync } from 'bcrypt';
 import { v4 } from 'uuid';
 import { IID } from './types';
-import { JwtService } from '@nestjs/jwt';
-import { ApiProperty } from '@nestjs/swagger';
 
-const jwt = new JwtService({});
+import { ApiProperty } from '@nestjs/swagger';
 
 export type ColumnOptions = {
   type: 'string' | 'number' | 'boolean' | 'date' | 'object';
@@ -138,7 +136,7 @@ export function PasswordColumn(
   });
 }
 
-export function ApiTokenColumn(
+export function OAuthApiTokenColumn(
   options: Partial<Omit<ColumnOptions, 'type'>> = {}
 ) {
   return Col({
@@ -150,7 +148,7 @@ export function ApiTokenColumn(
         return value;
       },
       to() {
-        return jwt.sign(v4());
+        return hashSync(v4(), genSaltSync(5));
       },
     },
   });

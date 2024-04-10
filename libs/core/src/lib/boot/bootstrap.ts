@@ -13,7 +13,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { ConfigService } from '@nestjs/config';
 import favicon = require('serve-favicon');
-import { AccessPolicies } from '../auth';
+import { AuthEnums } from '../auth';
 
 export type BootstrapOptions = {
   appModule: ClassConstructor<unknown>;
@@ -60,16 +60,16 @@ export async function bootstrap(appModule: Type) {
     .addBearerAuth({
       type: 'http',
       scheme: 'Bearer',
-      name: AccessPolicies.BEARER,
+      name: AuthEnums.BEARER,
     })
     .addGlobalParameters({
       in: 'header',
-      name: AccessPolicies.X_OAUTH_API_KEY,
+      name: AuthEnums.X_OAUTH_API_KEY,
       description: 'OAuth api key',
     })
     .addGlobalParameters({
       in: 'header',
-      name: AccessPolicies.X_ORGANIZATION,
+      name: AuthEnums.X_ORGANIZATION,
       description: 'Organization name',
       example: 'main',
     })

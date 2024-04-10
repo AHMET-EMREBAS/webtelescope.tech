@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
-import { Mail, SecurityCode, Session, Sub, User } from '@webpackages/entity';
+import {
+  Mail,
+  OAuth,
+  SecurityCode,
+  Session,
+  Sub,
+  User,
+} from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import {
@@ -26,13 +33,13 @@ import {
 import {
   getRequiredPermissions,
   getRequiredRoles,
+  getRequiredScope,
   getResourceName,
   isPublicAccess,
 } from './policy';
 import { compareSync } from 'bcrypt';
 import { AuthEnums } from './enums';
 import { Request } from 'express';
-import { AccessPolicies } from './guards';
 
 @Injectable()
 export class AuthService {
@@ -47,7 +54,10 @@ export class AuthService {
     protected readonly subRepo: Repository<Sub>,
 
     @InjectRepository(SecurityCode)
-    private readonly tokenRepo: Repository<SecurityCode>,
+    private readonly securityCodeRepo: Repository<SecurityCode>,
+
+    @InjectRepository(OAuth)
+    private readonly oauthRepo: Repository<OAuth>,
 
     @InjectRepository(Mail)
     protected readonly mailRepo: Repository<Mail>,
@@ -84,6 +94,10 @@ export class AuthService {
     throw new UnauthorizedException('User not found by id!');
   }
 
+  async findOAuthByApiKey(apiKey: string) {
+    return await this.oauthRepo.findOneBy({ apiKey });
+  }
+
   async updatePassword(userId: number, updatePasswordDto: UpdatePasswordDto) {
     await this.findUserByIdOrThrow(userId);
     return await this.userRepo.update(userId, {
@@ -92,8 +106,8 @@ export class AuthService {
   }
 
   async findUserBySecurityCode(securityCode: string) {
-    await this.tokenRepo.find();
-    const found = await this.tokenRepo.findOneBy({ securityCode });
+    await this.securityCodeRepo.find();
+    const found = await this.securityCodeRepo.findOneBy({ securityCode });
 
     if (found) return await this.userRepo.findOneBy({ id: found.userId });
 
@@ -107,8 +121,11 @@ export class AuthService {
   }
 
   async createSecurityCode(user: User) {
-    const { id } = await this.tokenRepo.save({ securityCode: v4(), user });
-    return await this.tokenRepo.findOneBy({ id });
+    const { id } = await this.securityCodeRepo.save({
+      securityCode: v4(),
+      user,
+    });
+    return await this.securityCodeRepo.findOneBy({ id });
   }
 
   async createSecurityCodeOrThrow(user: User) {
@@ -198,11 +215,11 @@ export class AuthService {
   }
 
   extractOrganizationNameFromHeader(ctx: ExecutionContext) {
-    return this.request(ctx).headers[AccessPolicies.X_ORGANIZATION] as string;
+    return this.request(ctx).headers[AuthEnums.X_ORGANIZATION] as string;
   }
 
   extractOAuthApiKeyFromHeader(ctx: ExecutionContext) {
-    return this.request(ctx).headers[AccessPolicies.X_OAUTH_API_KEY] as string;
+    return this.request(ctx).headers[AuthEnums.X_OAUTH_API_KEY] as string;
   }
 
   appendAuthorizationToken(ctx: ExecutionContext, token: string) {
@@ -285,6 +302,10 @@ export class AuthService {
     return isPublicAccess(this.reflector, ctx);
   }
 
+  requiredScopes(ctx: ExecutionContext) {
+    return getRequiredScope(this.reflector, ctx);
+  }
+
   requiredPermissions(ctx: ExecutionContext) {
     return getRequiredPermissions(this.reflector, ctx);
   }
@@ -311,6 +332,11 @@ export class AuthService {
 
   userHasRoles(userRoles: string[], roles: string[]) {
     for (const rr of roles) if (!userRoles.includes(rr)) return false;
+    return true;
+  }
+
+  oauthHasScopes(oauthScopes: string[], scopes: string[]): boolean {
+    for (const s of scopes) if (!oauthScopes.includes(s)) return false;
     return true;
   }
 
