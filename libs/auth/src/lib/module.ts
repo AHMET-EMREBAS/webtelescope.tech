@@ -26,27 +26,24 @@ export class AppModule {
 
     const username = this.configService.getOrThrow('APP_USERNAME');
     const password = this.configService.getOrThrow('APP_PASSWORD');
+
     logger.log('username and password are read from configuration.');
 
-    setTimeout(async () => {
-      await DatabaseFactory.createDatabaseIFNotExist('main');
-      logger.log('Createad main database');
+    await DatabaseFactory.createDatabaseIFNotExist('main');
+    logger.log('Createad main database');
 
-      setTimeout(async () => {
-        try {
-          await DatabaseFactory.updateTemplateDatabaseForUser(
-            'main',
-            username,
-            password
-          );
-          logger.log('Updated the user and organization in the new database');
-        } catch (err) {
-          console.error(err);
-          logger.error(
-            'Could not not update user and organization in the new database.'
-          );
-        }
-      }, 4000);
-    }, 2000);
+    try {
+      await DatabaseFactory.updateTemplateDatabaseForUser(
+        'main',
+        username,
+        password
+      );
+      logger.log('Updated the user and organization in the new database');
+    } catch (err) {
+      console.error(err);
+      logger.error(
+        'Could not not update user and organization in the new database.'
+      );
+    }
   }
 }

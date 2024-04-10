@@ -1,12 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { AuthEntities } from './db.entities';
-import { getDatabaseName, getTemplateDatabaseName } from './db-name';
+import {
+  getDatabaseDirectory,
+  getDatabaseName,
+  getTemplateDatabaseName,
+} from './db-name';
 import {
   App,
   LogSubscriber,
   OAuth,
-  Organization,
+  Org,
   Permission,
   Role,
   Scope,
@@ -18,7 +22,7 @@ import {
 import { DataSource } from 'typeorm';
 import { BetterSqlite3ConnectionOptions } from 'typeorm/driver/better-sqlite3/BetterSqlite3ConnectionOptions';
 import { createResourcePermissions } from '@webpackages/core';
-import { copyFileSync, existsSync } from 'fs';
+import { copyFileSync, existsSync, mkdirSync } from 'fs';
 
 @Injectable()
 export class DatabaseFactory implements TypeOrmOptionsFactory {
@@ -59,9 +63,8 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
   static async createDatabaseIFNotExist(orgname: string = 'main') {
     if (!this.isDatabaseExist(getDatabaseName(orgname))) {
       try {
-        setTimeout(() => {
-          copyFileSync(getTemplateDatabaseName(), getDatabaseName(orgname));
-        }, 1000);
+        mkdirSync(getDatabaseDirectory(orgname));
+        copyFileSync(getTemplateDatabaseName(), getDatabaseName(orgname));
       } catch (err) {
         console.error(err);
       }
@@ -73,21 +76,21 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
    */
   static async createDatabaseTemplate() {
     const logger = new Logger('Create Database Template');
-    const ds = new DataSource({
+    const ds = await new DataSource({
       ...this.options(''),
       database: getTemplateDatabaseName(),
       synchronize: true,
       dropSchema: true,
-    });
+    }).initialize();
 
     await ds.transaction(async (manager) => {
       logger.log('--------------started-------------------');
       // Seed Subscription Type
       const subTypeRepo = manager.getRepository(SubType);
-      await manager.save(subTypeRepo.create({ subscriptionName: 'Primary' }));
-      await manager.save(subTypeRepo.create({ subscriptionName: 'Basic' }));
-      await manager.save(subTypeRepo.create({ subscriptionName: 'Gold' }));
-      await manager.save(subTypeRepo.create({ subscriptionName: 'VIP' }));
+      await manager.save(subTypeRepo.create({ subname: 'Primary' }));
+      await manager.save(subTypeRepo.create({ subname: 'Basic' }));
+      await manager.save(subTypeRepo.create({ subname: 'Gold' }));
+      await manager.save(subTypeRepo.create({ subname: 'VIP' }));
 
       logger.log('created sub types...');
       // Seed Permissions
@@ -119,9 +122,9 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
 
       try {
         // Seed organization
-        const orgRepo = manager.getRepository(Organization);
-        const ORGANIZATION = await orgRepo.save({
-          organizationName: 'Organization name',
+        const orgRepo = manager.getRepository(Org);
+        const ORG = await orgRepo.save({
+          orgname: 'Organization name',
         });
 
         logger.log('created organization...');
@@ -168,12 +171,12 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     const ds = new DataSource(this.options(getDatabaseName(organizationName)));
 
     logger.log('Established database connection.');
-    const orgRepo = ds.getRepository(Organization);
+    const orgRepo = ds.getRepository(Org);
     logger.log('Got organization repository');
     const orgs = await orgRepo.find();
     logger.log('Found the default organization data');
 
-    await orgRepo.update(orgs[0].id, { organizationName });
+    await orgRepo.update(orgs[0].id, { orgname: organizationName });
     logger.log('Updated the default organization data.');
 
     logger.log('Got user repository');

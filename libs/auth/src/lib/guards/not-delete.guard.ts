@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from '@webpackages/core';
-import { Organization, Session, User } from '@webpackages/entity';
+import { Org, Session, User } from '@webpackages/entity';
 import { OperationNames } from '@webpackages/rest';
 
 /**
@@ -19,7 +19,7 @@ export class NotDeleteGuard implements CanActivate {
     const rn = this.authService.resourceName(ctx);
 
     if (handler === OperationNames.delete) {
-      if (rn === User.name || rn === Organization.name || rn === Session.name) {
+      if (rn === User.name || rn === Org.name || rn === Session.name) {
         const session = this.authService.getSessionFromRequest(ctx);
         const paramId = this.authService.getParamId(ctx);
 

@@ -1,5 +1,5 @@
 import { ICustomer } from '@webpackages/model';
-import { Organization } from '../auth';
+import { Org } from '../auth';
 import { PriceLevel } from '../inventory';
 import {
   OneRelation,
@@ -18,9 +18,9 @@ import {
 @Entity()
 export class Customer
   extends TimestampEntity
-  implements ICustomer<Organization, PriceLevel>
+  implements ICustomer<Org, PriceLevel>
 {
-  @OneRelation(Organization) organization!: Organization;
+  @OneRelation(Org) organization!: Org;
   @OneRelation(PriceLevel) priceLevel!: PriceLevel;
   @UniqueNameColumn() username!: string;
   @PasswordColumn() password!: string;

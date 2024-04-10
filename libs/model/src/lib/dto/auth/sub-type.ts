@@ -1,4 +1,4 @@
 import { ISubType } from '../../model';
 
 export interface ICreateSubTypeDto
-  extends Pick<ISubType, 'subscriptionName' | 'description'> {}
+  extends Pick<ISubType, 'subname' | 'description'> {}

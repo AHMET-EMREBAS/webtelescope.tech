@@ -7,19 +7,18 @@ import {
   Mail,
   Sub,
   SubType,
-  Organization,
+  Org,
   Log,
-  RootUser,
   App,
   Scope,
   OAuth,
 } from '@webpackages/entity';
 
 export const AuthEntities = [
+  Org,
   App,
   Scope,
   OAuth,
-  RootUser,
   User,
   Role,
   Permission,
@@ -27,7 +26,6 @@ export const AuthEntities = [
   SecurityCode,
   Sub,
   SubType,
-  Organization,
   Mail,
   Log,
 ];

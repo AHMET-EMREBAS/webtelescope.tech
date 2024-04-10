@@ -9,10 +9,10 @@ import { IID, ITimestamp } from '../../common';
  * User
  */
 export interface ISession extends IID, ITimestamp {
-  deviceId: string;
   permissions: string[];
   roles: string[];
+  deviceId: string;
   userId: number;
-  organizationId: number;
-  organizationName: string;
+  orgId: number;
+  orgname: string;
 }

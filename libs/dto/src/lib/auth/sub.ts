@@ -26,7 +26,7 @@ export class CreateSubDto implements ICreateSubDto<ObjectIDDto> {
   @IsNotIn(['main'])
   @NameProperty()
   @Transform(({ value }) => (value as string)?.toLowerCase())
-  organizationName!: string;
+  orgname!: string;
 
-  @ObjectIdProperty({ required: false }) subType!: ObjectIDDto;
+  @ObjectIdProperty({ required: false }) subtype!: ObjectIDDto;
 }

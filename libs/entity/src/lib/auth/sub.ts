@@ -13,12 +13,6 @@ import {
   EntitySubscriberInterface,
   InsertEvent,
 } from 'typeorm';
-import { User } from './user';
-import { Organization } from './organization';
-import {
-  InternalServerErrorException,
-  UnprocessableEntityException,
-} from '@nestjs/common';
 
 /**
  * Subscription
@@ -27,8 +21,8 @@ import {
 export class Sub extends TimestampEntity implements ISub<SubType> {
   @UniqueNameColumn() username!: string;
   @PasswordColumn() password!: string;
-  @StringColumn({ unique: true }) organizationName!: string;
-  @OneRelation(SubType) subType!: SubType;
+  @StringColumn({ unique: true }) orgname!: string;
+  @OneRelation(SubType) subtype!: SubType;
 }
 
 /**

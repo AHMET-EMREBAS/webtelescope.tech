@@ -127,7 +127,7 @@ export class AuthController {
   async signup(@Body() signupDto: CreateSubDto) {
     await this.authService.signup(signupDto);
 
-    const { organizationName, username, password } = signupDto;
+    const { orgname: organizationName, username, password } = signupDto;
 
     await DatabaseFactory.createDatabaseIFNotExist(organizationName);
 

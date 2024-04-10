@@ -13,6 +13,6 @@ export class CreateSessionDto implements ICreateSessionDto {
   @NameProperty({ isArray: true }) permissions!: string[];
   @NameProperty({ isArray: true }) roles!: string[];
   @ObjectIdProperty() userId!: number;
-  @NumberProperty() organizationId!: number;
-  @StringProperty() organizationName!: string;
+  @NumberProperty() orgId!: number;
+  @StringProperty() orgname!: string;
 }

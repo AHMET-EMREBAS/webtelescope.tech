@@ -7,7 +7,7 @@ import {
   Entity,
   OwnerRelation,
 } from '@webpackages/typeorm';
-import { Organization } from './organization';
+import { Org } from './org';
 import { Role } from './role';
 import {
   AddressEntity,
@@ -17,10 +17,10 @@ import {
 } from '../common';
 
 @Entity()
-export class User extends TimestampEntity implements IUser<Organization, Role> {
+export class User extends TimestampEntity implements IUser<Org, Role> {
   @StringColumn({ unique: true }) username!: string;
   @PasswordColumn() password!: string;
-  @OwnerRelation(Organization) organization!: Organization;
+  @OwnerRelation(Org) organization!: Org;
   @ManyRelation(Role) roles!: Role[];
 }
 

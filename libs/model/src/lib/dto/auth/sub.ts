@@ -6,11 +6,11 @@ import { ISub } from '../../model';
  * Organization is an entity that stores all subscription details
  * @param username {@link ICredentials.username}
  * @param password {@link ICredentials.password}
- * @param organizationName {@link organizationName}
- * @param subType {@link subType}
+ * @param organizationName {@link orgname}
+ * @param subType {@link subtype}
  */
 export interface ICreateSubDto<SubType extends IID = IID>
   extends Pick<
     ISub<SubType>,
-    'username' | 'password' | 'organizationName' | 'subType'
+    'username' | 'password' | 'orgname' | 'subtype'
   > {}

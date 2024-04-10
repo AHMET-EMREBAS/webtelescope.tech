@@ -7,7 +7,6 @@ import {
   CreateOrganizationDto,
   CreatePermissionDto,
   CreateRoleDto,
-  CreateRootUserDto,
   CreateScopeDto,
   CreateSecurityCodeDto,
   CreateSessionDto,
@@ -21,7 +20,6 @@ import {
   UpdateOrganizationDto,
   UpdatePermissionDto,
   UpdateRoleDto,
-  UpdateRootUserDto,
   UpdateScopeDto,
   UpdateSecurityCodeDto,
   UpdateSessionDto,
@@ -35,8 +33,7 @@ import {
   Permission,
   Session,
   SecurityCode,
-  Organization,
-  RootUser,
+  Org,
   Mail,
   Sub,
   SubType,
@@ -73,16 +70,11 @@ export const SecurityCodeController = c(
 );
 
 export const OrganizationController = c(
-  Organization,
+  Org,
   CreateOrganizationDto,
   UpdateOrganizationDto
 );
 
-export const RootUserController = c(
-  RootUser,
-  CreateRootUserDto,
-  UpdateRootUserDto
-);
 export const MailController = c(Mail, CreateMailDto, UpdateMailDto);
 export const SubController = c(Sub, CreateSubDto, UpdateSubDto);
 export const SubTypeController = c(SubType, CreateSubTypeDto, UpdateSubTypeDto);
