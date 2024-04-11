@@ -161,7 +161,12 @@ export function __commonProperty(options: ApiPropertyOptions) {
 }
 
 export function __commonStringProperty(options: ApiPropertyOptions) {
-  const des: PropertyDecorator[] = [];
+  const des: PropertyDecorator[] = [
+    Transform(({ value }) => {
+      if (value) value.trim();
+      return value;
+    }),
+  ];
 
   const { isArray: __isArray, minLength, maxLength } = options;
   const vo: ValidationOptions = { each: __isArray };

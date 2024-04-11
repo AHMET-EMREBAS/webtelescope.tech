@@ -3,7 +3,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/module';
 
-import { DatabaseFactory } from './database';
+import { DatabaseFactory, getDatabaseName } from './database';
+import { DataSource } from 'typeorm';
+import { User } from '@webpackages/entity';
 
 @Module({
   imports: [

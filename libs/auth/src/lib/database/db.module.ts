@@ -6,6 +6,7 @@ import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
 import { extractOrgnameFromHeader } from '../common';
 import { ConfigModule } from '@nestjs/config';
+import { getDatabaseName } from './db-name';
 
 @Module({
   imports: [
@@ -16,11 +17,12 @@ import { ConfigModule } from '@nestjs/config';
       async useFactory(req: Request, factory: TypeOrmOptionsFactory) {
         try {
           const orgname = extractOrgnameFromHeader(req);
+          const database = getDatabaseName(orgname);
           if (orgname === 'main') {
-            await DatabaseFactory.createDatabaseIFNotExist(orgname);
-            return DatabaseFactory.options(orgname);
+            await DatabaseFactory.createDatabaseIFNotExist(database);
+            return DatabaseFactory.options(database);
           }
-          return await factory.createTypeOrmOptions(orgname);
+          return await factory.createTypeOrmOptions(database);
         } catch (err) {
           throw new BadRequestException(
             'Something went wrong while creating your database!'

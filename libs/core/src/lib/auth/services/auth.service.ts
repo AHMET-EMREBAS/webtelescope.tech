@@ -225,20 +225,11 @@ export class AuthService {
 
   comparePassword(password: string, hashPassword: string) {
     this.logger.debug('Comparing passwords');
-
-    return new Promise((res, rej) => {
-      compare(password, hashPassword, (err, same) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(same);
-        }
-      });
-    });
+    return compareSync(password, hashPassword);
   }
 
   async comparePasswordOrThrow(password: string, hashPassword: string) {
-    if (await this.comparePassword(password, hashPassword)) {
+    if (this.comparePassword(password, hashPassword)) {
       this.logger.debug(`Passwords match`);
       return true;
     }

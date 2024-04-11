@@ -11,7 +11,7 @@ import { Session, User } from '@webpackages/entity';
 
 @Injectable()
 export class AuthExtractService {
-  private readonly logger!: Logger;
+  private logger!: Logger;
 
   constructor() {
     this.logger = new Logger(AuthExtractService.name);

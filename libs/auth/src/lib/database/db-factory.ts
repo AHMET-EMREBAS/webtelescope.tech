@@ -33,6 +33,7 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     this.logger = new Logger(DatabaseFactory.name);
     DatabaseFactory.logger = this.logger;
   }
+
   static options(database: string): BetterSqlite3ConnectionOptions {
     const result: BetterSqlite3ConnectionOptions = {
       type: 'better-sqlite3',
@@ -42,7 +43,9 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     };
 
     this.logger.debug(
-      `Got Database Options : Scyn: ${result.synchronize}  database: ${database}`
+      `Got Database Options : Scyn: ${result.synchronize}, Drop: ${
+        result.dropSchema
+      },database: ${database.split('/').pop()}`
     );
 
     return result;
@@ -56,22 +59,23 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     return DatabaseFactory.isDatabaseExist(database);
   }
 
-  createTypeOrmOptions(orgname = 'main'): BetterSqlite3ConnectionOptions {
-    let result: BetterSqlite3ConnectionOptions;
-
+  createTypeOrmOptions(orgname: string): BetterSqlite3ConnectionOptions {
     if (this.isDatabaseExist(getDatabaseName(orgname))) {
-      result = {
-        ...this.options(getDatabaseName(orgname)),
+      this.logger.debug(`Database ${orgname} exists`);
+      const result: BetterSqlite3ConnectionOptions = this.options(
+        getDatabaseName(orgname)
+      );
+      console.log(result);
+      return result;
+    } else {
+      this.logger.debug(`Database ${orgname} does not exist`);
+      const result: BetterSqlite3ConnectionOptions = {
+        ...this.options(getDatabaseName('ingore')),
+        synchronize: true,
       };
+      console.log(result);
+      return result;
     }
-
-    result = {
-      ...this.options(getDatabaseName('ingore')),
-      synchronize: true,
-      dropSchema: true,
-    };
-
-    return result;
   }
 
   static isDatabaseExist(database: string) {
@@ -82,14 +86,17 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
 
   static async createDatabaseIFNotExist(orgname: string = 'main') {
     const logger = new Logger('Create Database IF Not Exist');
-    if (!this.isDatabaseExist(getDatabaseName(orgname))) {
-      try {
-        mkdirSync(getDatabaseDirectory(orgname));
-        copyFileSync(getTemplateDatabaseName(), getDatabaseName(orgname));
-        logger.debug(`Created database for ${orgname}`);
-      } catch (err) {
-        logger.error(`Could not create the database for ${orgname}`);
-      }
+    if (this.isDatabaseExist(getDatabaseName(orgname))) {
+      logger.debug(`Database ${orgname} exits`);
+      return;
+    }
+
+    try {
+      mkdirSync(getDatabaseDirectory(orgname));
+      copyFileSync(getTemplateDatabaseName(), getDatabaseName(orgname));
+      logger.debug(`Created database for ${orgname}`);
+    } catch (err) {
+      logger.error(`Could not create the database for ${orgname}`);
     }
   }
 
@@ -98,8 +105,10 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
    */
   static async createDatabaseTemplate() {
     const ds = await new DataSource({
-      ...this.options(''),
+      ...this.options('not-required'),
       database: getTemplateDatabaseName(),
+      entities: AuthEntities,
+      subscribers: [LogSubscriber, SubSubscriber],
       synchronize: true,
       dropSchema: true,
     }).initialize();
@@ -181,6 +190,8 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       this.logger.debug('Created a sample OAuth item');
       this.logger.debug('Ended transaction');
     });
+
+    await ds.destroy();
   }
 
   static async updateTemplateDatabaseForUser(
@@ -216,5 +227,7 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     } else {
       this.logger.error('Cound not update the template username and password!');
     }
+
+    await ds.destroy();
   }
 }

@@ -62,7 +62,7 @@ export class AuthController {
     const result = { accessToken, deviceId: session.deviceId };
 
     this.logger.debug(
-      `User session is created  acccessToken:${accessToken} , deviceId: ${devicePixelRatio}`
+      `User session is created  acccessToken:${accessToken} , deviceId: ${session.deviceId}`
     );
     return result;
   }
