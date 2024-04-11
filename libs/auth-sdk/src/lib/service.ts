@@ -4,12 +4,13 @@ import {
   ILoginDto,
   IUpdatePasswordDto,
 } from '@webpackages/model';
-import { HttpClientService } from '@webpackages/core';
+
 import { LoginResult, LoginWithCodeDto, LogoutResult } from '@webpackages/dto';
+import { AuthHttpClientService } from './http-client';
 
 @Injectable()
 export class AuthClientService {
-  constructor(private readonly httpClient: HttpClientService) {}
+  constructor(private readonly httpClient: AuthHttpClientService) {}
 
   async login(loginDto: ILoginDto) {
     return await this.httpClient.post<LoginResult>('api/auth/login', loginDto);

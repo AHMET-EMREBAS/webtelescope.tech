@@ -16,7 +16,7 @@ import { v4 } from 'uuid';
  */
 export function createProvider<T>(
   prefix: string
-): [(value: T) => Provider<T>, () => ParameterDecorator, () => string] {
+): [(value?: T) => Provider<T>, () => ParameterDecorator, () => string] {
   const token = prefix + v4();
 
   return [

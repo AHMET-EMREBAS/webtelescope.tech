@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { AuthClientService } from '../auth-service';
+import { AuthClientService } from '../service';
 
 @Injectable()
 export class LocalGuard implements CanActivate {

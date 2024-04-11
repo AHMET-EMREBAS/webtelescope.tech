@@ -1,7 +1,5 @@
-export interface HttpClientModuleOptions {
-  baseURL: string;
-  bearerToken?: string;
-  appname?: string;
-  orgname?: string;
-  oauthApiKey?: string;
-}
+import { OptionsFactory } from '../factory';
+import { AxiosRequestConfig } from 'axios';
+
+export interface HttpRequestConfigFactory
+  extends OptionsFactory<AxiosRequestConfig> {}

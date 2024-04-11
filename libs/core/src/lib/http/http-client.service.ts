@@ -1,61 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Injectable } from '@nestjs/common';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { AuthEnums } from '../auth';
-import { InjectHttpClientOptions } from './http-config.providers';
-import { HttpClientModuleOptions } from './http-client-options';
 
-@Injectable()
+import axios, { AxiosResponse as AxRes, AxiosRequestConfig } from 'axios';
+
+import { HttpRequestConfigFactory } from './http-client-options';
+
 export class HttpClientService {
-  constructor(
-    @InjectHttpClientOptions()
-    private readonly httpClientModuleOptions: HttpClientModuleOptions
-  ) {}
+  private readonly options: AxiosRequestConfig;
 
-  private httpConfig(): AxiosRequestConfig {
-    const { appname, bearerToken, oauthApiKey, orgname } =
-      this.httpClientModuleOptions;
-    return {
-      headers: {
-        Authorization: `Bearer ${bearerToken}`,
-        [AuthEnums.X_APP_NAME]: appname,
-        [AuthEnums.X_ORGNAME]: orgname,
-        [AuthEnums.X_OAUTH_API_KEY]: oauthApiKey,
-      },
-    };
+  constructor(protected readonly optionsFactory?: HttpRequestConfigFactory) {
+    this.options = this.optionsFactory?.options() ?? {};
   }
 
-  private resolveURL(fragment: string) {
-    return new URL(fragment, this.httpClientModuleOptions.baseURL).toString();
+  async post<Body>(url: string, body: any) {
+    return await axios.post<any, AxRes<Body>>(url, body, this.options);
   }
 
-  async post<Body>(fragment: string, body: any) {
-    return await axios.post<any, AxiosResponse<Body>>(
-      this.resolveURL(fragment),
-      body,
-      this.httpConfig()
-    );
+  async get<Body>(url: string) {
+    return await axios.get<any, AxRes<Body>>(url, this.options);
   }
 
-  async get<Body>(fragment: string) {
-    return await axios.get<any, AxiosResponse<Body>>(
-      this.resolveURL(fragment),
-      this.httpConfig()
-    );
+  async put<Body>(url: string, body: any) {
+    return await axios.put<any, AxRes<Body>>(url, body, this.options);
   }
 
-  async put<Body>(fragment: string, body: any) {
-    return await axios.put<any, AxiosResponse<Body>>(
-      this.resolveURL(fragment),
-      body,
-      this.httpConfig()
-    );
-  }
-
-  async delete<Body>(fragment: string) {
-    return await axios.delete<any, AxiosResponse<Body>>(
-      this.resolveURL(fragment),
-      this.httpConfig()
-    );
+  async delete<Body>(url: string) {
+    return await axios.delete<any, AxRes<Body>>(url, this.options);
   }
 }
