@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 export class UsernameGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
   async canActivate(ctx: ExecutionContext) {
-    this.authService.verifyUsernameOrThrow(ctx);
+    await this.authService.verifyUsernameOrThrow(ctx);
     return true;
   }
 }

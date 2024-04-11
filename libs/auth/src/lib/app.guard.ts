@@ -5,6 +5,8 @@ import { ByPassAuthGuard } from '@webpackages/core';
 import {
   AuthGuard,
   LocalGuard,
+  LogoutAllGuard,
+  LogoutGuard,
   SecurityCodeGuard,
   SessionGuard,
   UsernameGuard,
@@ -35,6 +37,13 @@ export function CredentialAccess() {
   );
 }
 
+export function LogoutAccess() {
+  return applyDecorators(UseGuards(LogoutGuard));
+}
+
+export function LogoutAllAccess() {
+  return applyDecorators(UseGuards(LogoutAllGuard));
+}
 /**
  * Session auth
  * - Check user has a valid session

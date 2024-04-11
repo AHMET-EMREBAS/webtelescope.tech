@@ -1,11 +1,12 @@
 import { Test } from '@nestjs/testing';
 
-import { AuthClientService } from './service';
-import { AuthClientModule } from './module';
+import { AuthClientService } from './auth.service';
+
 import { AxiosError } from 'axios';
 import { HttpExceptionBody } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
 import { ErrrorResponse } from '@webpackages/model';
+import { AuthClientModule } from './auth-client.module';
 
 describe('AuthService', () => {
   let authService: AuthClientService;

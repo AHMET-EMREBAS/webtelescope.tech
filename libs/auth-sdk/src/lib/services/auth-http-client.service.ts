@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpClientService } from '@webpackages/http-client';
 
-import { AuthModuleHttpClientOptionsFactory } from './options.factory';
+import { AuthModuleHttpClientOptionsFactory } from '../common';
 
 @Injectable()
 export class AuthHttpClientService extends HttpClientService {

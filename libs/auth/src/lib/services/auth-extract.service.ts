@@ -16,7 +16,7 @@ export class AuthExtractService {
   constructor() {
     this.logger = new Logger(AuthExtractService.name);
   }
-  request(ctx: ExecutionContext): IRequest {
+  request<Q, B>(ctx: ExecutionContext): IRequest<Q, B> {
     return ctx.switchToHttp().getRequest();
   }
   /**
@@ -114,7 +114,7 @@ export class AuthExtractService {
   extractUsernameAndPassworFromBody(
     ctx: ExecutionContext
   ): ICredentials | undefined {
-    const body = this.request(ctx).body;
+    const body = this.request<unknown, ICredentials>(ctx).body;
     const { username, password } = body;
     if (username && password) {
       this.logger.debug(`username: ${username}, password: ${password}`);
@@ -143,5 +143,9 @@ export class AuthExtractService {
     const securityCode = this.extractSecurityCodeFromQuery(ctx);
     if (securityCode) return securityCode;
     throw new UnauthorizedException('Security code is not provided!');
+  }
+
+  extractRequestBody<T>(ctx: ExecutionContext): T {
+    return this.request<unknown, T>(ctx).body;
   }
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
-import { Mail, OAuth, SecurityCode, Session, Sub } from '@webpackages/entity';
+import { Mail, OAuth, SecurityCode, Sub } from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import {
   ExecutionContext,
@@ -14,25 +14,25 @@ import {
   CreateMailDto,
   CreateSubDto,
   UpdatePasswordDto,
+  UpdateResult,
 } from '@webpackages/dto';
 import { v4 } from 'uuid';
-import { ICreateSessionDto, IUser, SessionPayload } from '@webpackages/model';
+import { IUser, MessageResponse, SessionPayload } from '@webpackages/model';
 import { compareSync } from 'bcrypt';
 import {
   AuthExtractService,
   AuthJwtService,
   AuthMetaService,
+  AuthSessionService,
   AuthUserService,
 } from './services';
 import { userToSession } from './common';
+import { DatabaseFactory } from './database';
 
 @Injectable()
 export class AuthService {
   private readonly logger!: Logger;
   constructor(
-    @InjectRepository(Session)
-    protected readonly sessionRepo: Repository<Session>,
-
     @InjectRepository(Sub)
     protected readonly subRepo: Repository<Sub>,
 
@@ -47,7 +47,8 @@ export class AuthService {
     protected readonly extractService: AuthExtractService,
     protected readonly jwtService: AuthJwtService,
     protected readonly metaService: AuthMetaService,
-    protected readonly userService: AuthUserService
+    protected readonly userService: AuthUserService,
+    protected readonly sessionService: AuthSessionService
   ) {
     this.logger = new Logger(AuthService.name);
   }
@@ -60,7 +61,9 @@ export class AuthService {
   async hasValidSessionOrThrow(ctx: ExecutionContext) {
     const token = this.extractService.extractTokenOrThrow(ctx);
     const payload: SessionPayload = this.jwtService.verifyToken(token);
-    const session = await this.findSessionByIdOrThrow(payload.sub);
+    const session = await this.sessionService.findSessionByIdOrThrow(
+      payload.sub
+    );
     this.logger.debug(`User has a valid session : ${session}`);
     return session;
   }
@@ -144,7 +147,7 @@ export class AuthService {
     await this.comparePasswordOrThrow(password, user.password);
 
     const newSession = userToSession(user);
-    const session = await this.createSession(newSession);
+    const session = await this.sessionService.createSession(newSession);
     this.extractService.appendSessionToRequest(ctx, session);
     const token = this.jwtService.signToken(session);
     this.extractService.appendAuthorizationToken(ctx, token);
@@ -158,7 +161,9 @@ export class AuthService {
       securityCode
     );
 
-    const session = await this.createSession(userToSession(user));
+    const session = await this.sessionService.createSession(
+      userToSession(user)
+    );
 
     const token = this.jwtService.signToken(session);
 
@@ -183,34 +188,10 @@ export class AuthService {
     throw new UnauthorizedException('Could not create security code!');
   }
 
-  async findSessionById(sessionId: number) {
-    return await this.sessionRepo.findOneBy({ id: sessionId });
-  }
-
-  async findSessionByIdOrThrow(sessionId: number): Promise<Session> | never {
-    const found = await this.findSessionById(sessionId);
-    if (found) return found;
-
-    throw new UnauthorizedException('Session not found!');
-  }
-
-  async createSession(session: ICreateSessionDto) {
-    return await this.sessionRepo.save(session);
-  }
-
-  async deleteSession(sessionId: number) {
-    return await this.sessionRepo.delete(sessionId);
-  }
-
-  async findSessionsByUserId(userId: number) {
-    return await this.sessionRepo.find({ where: { userId } });
-  }
-
-  async deleteAllSessionsByUserId(userId: number) {
-    return await this.sessionRepo.delete({ userId });
-  }
-
-  async signup(signupDto: CreateSubDto) {
+  async signup(
+    targetOrgname: string,
+    signupDto: CreateSubDto
+  ): Promise<MessageResponse> {
     this.logger.debug(
       `Trying to sign up the user ${signupDto.username} - ${signupDto.orgname}`
     );
@@ -226,7 +207,18 @@ export class AuthService {
         const saved = await this.subRepo.save(signupDto);
 
         this.logger.error(`Saved ${saved.username}`);
-        return saved;
+
+        const { orgname, username, password } = signupDto;
+
+        await DatabaseFactory.createDatabaseIFNotExist(orgname);
+
+        await DatabaseFactory.updateTemplateDatabaseForUser(
+          orgname,
+          username,
+          password
+        );
+
+        return { message: `Welcome to ${targetOrgname}.` };
       } catch (err) {
         this.logger.debug('Could not create the subscription user');
         console.error(err);
@@ -256,7 +248,10 @@ export class AuthService {
     throw new UnauthorizedException('Wrong password');
   }
 
-  updatePassword(userId: number, updatePasswordDto: UpdatePasswordDto) {
-    this.userService.updatePassword(userId, updatePasswordDto);
+  async updatePassword(
+    userId: number,
+    updatePasswordDto: UpdatePasswordDto
+  ): Promise<UpdateResult> {
+    return await this.userService.updatePassword(userId, updatePasswordDto);
   }
 }

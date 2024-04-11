@@ -1,9 +1,9 @@
 // @index(['./*', '!./*.spec.ts'], f => `export * from '${f.path}'`)
-export * from './auth.controller'
-export * from './guards'
-export * from './http-client'
-export * from './module'
-export * from './options.factory'
-export * from './providers'
-export * from './service'
-export * from './types'
+export * from './common/auth-client-options.factory';
+export * from './common/auth-client-options.ts';
+export * from './auth-client.module';
+export * from './services/auth-http-client.service';
+export * from './common/auth.providers';
+export * from './auth.service';
+export * from './guards';
+

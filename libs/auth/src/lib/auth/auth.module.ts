@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthController } from './controller';
+import { AuthController } from './auth.controller';
 import {
   AuthUserService,
   AuthExtractService,
   AuthJwtService,
   AuthMetaService,
-} from './../services';
+  AuthSessionService,
+} from '../services';
 import { AuthService } from '../auth.service';
 import {
   AuthGuard,
@@ -16,15 +17,18 @@ import {
   NotDeleteGuard,
   SecurityCodeGuard,
   UsernameGuard,
+  LogoutGuard,
+  LogoutAllGuard,
 } from '../guards';
-import { ResourceControllers } from '../__controllers';
+import { ResourceControllers } from '../app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JtwOptionsFactory } from './jwt-options';
+import { JtwOptionsFactory } from './jwt-options.factory';
 import { AuthDatabaseModule } from '../database';
 
 const providers = [
   AuthService,
   AuthUserService,
+  AuthSessionService,
   AuthExtractService,
   AuthJwtService,
   AuthMetaService,
@@ -34,6 +38,8 @@ const providers = [
   NotDeleteGuard,
   SecurityCodeGuard,
   UsernameGuard,
+  LogoutGuard,
+  LogoutAllGuard,
 ];
 
 @Module({

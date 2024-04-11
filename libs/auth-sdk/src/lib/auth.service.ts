@@ -7,31 +7,33 @@ import {
   LoginWithCodeDto,
   UpdatePasswordDto,
 } from '@webpackages/dto';
-import { AuthHttpClientService } from './http-client';
+import { AuthHttpClientService } from './services';
 
 @Injectable()
 export class AuthClientService {
-  constructor(private readonly httpClient: AuthHttpClientService) {}
+  constructor(private readonly authHttpClientService: AuthHttpClientService) {}
 
   async login(loginDto: ILoginDto) {
-    return await this.httpClient.post<LoginResponse>(
+    return await this.authHttpClientService.post<LoginResponse>(
       'api/auth/login',
       loginDto
     );
   }
 
   async logout() {
-    return await this.httpClient.get<MessageResponse>('api/auth/logout');
+    return await this.authHttpClientService.get<MessageResponse>(
+      'api/auth/logout'
+    );
   }
 
   async logoutAllDevices() {
-    return await this.httpClient.get<MessageResponse>(
+    return await this.authHttpClientService.get<MessageResponse>(
       'api/auth/logout-all-devices'
     );
   }
 
   async hasSession() {
-    return await this.httpClient.get('api/auth/has-session');
+    return await this.authHttpClientService.get('api/auth/has-session');
   }
 
   /**
@@ -40,7 +42,7 @@ export class AuthClientService {
    * @returns message {@link MessageResponse}
    */
   async updatePassword(body: UpdatePasswordDto) {
-    return await this.httpClient.post<MessageResponse>(
+    return await this.authHttpClientService.post<MessageResponse>(
       'api/auth/update-password',
       body
     );
@@ -52,7 +54,10 @@ export class AuthClientService {
    * @returns message {@link MessageResponse}
    */
   async forgotPassword(body: ForgotPasswordDto) {
-    return await this.httpClient.post('api/auth/forgot-password', body);
+    return await this.authHttpClientService.post(
+      'api/auth/forgot-password',
+      body
+    );
   }
 
   /**
@@ -61,7 +66,7 @@ export class AuthClientService {
    * @returns LoginResponse {@link LoginResponse}
    */
   async loginWithCode(body: LoginWithCodeDto) {
-    return await this.httpClient.get(
+    return await this.authHttpClientService.get(
       `api/auth/login-with-code/?securityCode=${body.securityCode}&username=${body.username}`
     );
   }
@@ -72,6 +77,9 @@ export class AuthClientService {
    * @returns
    */
   async signup(body: CreateSubDto) {
-    return await this.httpClient.post<LoginResponse>('api/auth/signup', body);
+    return await this.authHttpClientService.post<LoginResponse>(
+      'api/auth/signup',
+      body
+    );
   }
 }

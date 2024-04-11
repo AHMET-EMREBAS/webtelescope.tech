@@ -1,19 +1,22 @@
 import {
-  CanActivate,
   Controller,
-  CustomDecorator,
   Delete,
   Get,
-  NestInterceptor,
   Post,
   Put,
   Type,
-  UseGuards,
-  UseInterceptors,
   applyDecorators,
 } from '@nestjs/common';
 import { ApiPaths, NameResult, getApiPaths, names } from '@webpackages/utils';
-import { CanRead, CanUpdate, CanWrite, ResouceName } from '@webpackages/core';
+import {
+  CanRead,
+  CanUpdate,
+  CanWrite,
+  IRestResourceBuilder,
+  ResouceName,
+  ControllerConfiguration,
+  ConfigureResource,
+} from '@webpackages/core';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
   AddRelationResponse,
@@ -28,51 +31,14 @@ import {
   UpdateResponse,
 } from './api-responses';
 
-export interface IRestResource {
-  Controller(): PropertyDecorator;
-  FindAll(): PropertyDecorator;
-  FindOneById(): PropertyDecorator;
-  Save(): PropertyDecorator;
-  Update(): PropertyDecorator;
-  Delete(): PropertyDecorator;
-  AddRelation(): PropertyDecorator;
-  RemoveRelation(): PropertyDecorator;
-  SetRelation(): PropertyDecorator;
-  UnsetRelation(): PropertyDecorator;
-  Count(): PropertyDecorator;
-}
-
-export type ControllerConfig = {
-  guards?: Type<CanActivate>[];
-  interceptors?: Type<NestInterceptor>[];
-  decorators?: CustomDecorator[];
-  medatadata?: CustomDecorator[];
-};
-
-export type ControllerConfiguration = Partial<
-  Record<keyof IRestResource, ControllerConfig>
->;
-
-export function ConfigureResource(options?: ControllerConfig) {
-  if (options) {
-    return applyDecorators(
-      UseGuards(...(options.guards ?? [])),
-      UseInterceptors(...(options.interceptors ?? [])),
-      applyDecorators(...(options.medatadata ?? [])),
-      applyDecorators(...(options.decorators ?? []))
-    );
-  }
-  return applyDecorators();
-}
-
-export class RestResource implements IRestResource {
-  private readonly RESOURCE_NAME!: string;
-  private readonly NAMES!: NameResult;
-  private readonly API_PATHS!: ApiPaths;
+export class RestResourceBuilder implements IRestResourceBuilder {
+  public readonly RESOURCE_NAME!: string;
+  public readonly NAMES!: NameResult;
+  public readonly API_PATHS!: ApiPaths;
 
   constructor(
-    private readonly entity: Type,
-    private readonly config?: ControllerConfiguration
+    public readonly entity: Type,
+    public readonly config?: ControllerConfiguration<IRestResourceBuilder>
   ) {
     this.NAMES = names(this.entity.name);
     this.RESOURCE_NAME = this.NAMES.className;

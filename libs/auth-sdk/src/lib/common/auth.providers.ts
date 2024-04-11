@@ -1,5 +1,5 @@
 import { createProvider } from '@webpackages/core';
-import { AuthClientModuleOptions } from './types';
+import { AuthClientModuleOptions } from './auth-client-options.ts.js';
 import { HttpRequestConfigFactory } from '@webpackages/http-client';
 
 export const [provideHttpOptions, InjectHttpOptions, getHttpOptionsToken] =

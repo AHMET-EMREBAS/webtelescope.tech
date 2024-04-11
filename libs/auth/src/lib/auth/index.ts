@@ -1,4 +1,4 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './controller'
-export * from './jwt-options'
-export * from './module'
+export * from './auth.controller'
+export * from './auth.module'
+export * from './jwt-options.factory'

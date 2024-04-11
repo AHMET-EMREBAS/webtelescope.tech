@@ -1,43 +1,37 @@
 import {
-  LoginDto,
   LoginResponse,
   UpdatePasswordDto,
-  ForgotPasswordDto,
   LoginWithCodeDto,
   CreateSubDto,
+  UpdateResult,
+  LoginDto,
+  ForgotPasswordDto,
 } from '@webpackages/dto';
-import {
-  IOrg,
-  IPermission,
-  IRole,
-  ISession,
-  IUser,
-  MessageResponse,
-} from '@webpackages/model';
+import { ISession, IUser, MessageResponse } from '@webpackages/model';
 
 export interface IAuthController {
   login(
-    _loginDto: LoginDto,
+    loginDto: LoginDto,
     accessToken: string,
     session: ISession
   ): Promise<LoginResponse>;
-
-  logout(session: ISession): Promise<MessageResponse>;
-
-  logoutAllDevices(session: ISession): Promise<MessageResponse>;
-
+  loginWithCode(
+    loginWithCodeDto: LoginWithCodeDto,
+    accessToken: string,
+    session: ISession
+  ): Promise<LoginResponse>;
+  logout(): Promise<MessageResponse>;
+  logoutAll(): Promise<MessageResponse>;
   hasSession(): Promise<MessageResponse>;
   updatePassword(
     session: ISession,
     passwordDto: UpdatePasswordDto
-  ): Promise<void>;
+  ): Promise<UpdateResult>;
+
   forgotPassword(
-    __: ForgotPasswordDto,
-    user: IUser<IOrg, IRole<IPermission>>
-  ): Promise<void>;
-  loginWithCode(
-    __: LoginWithCodeDto,
-    accessToken: string
-  ): { accessToken: string };
-  signup(signupDto: CreateSubDto): Promise<{ message: string }>;
+    forgotPasswordDto: ForgotPasswordDto,
+    user: IUser
+  ): Promise<MessageResponse>;
+
+  signup(orgname: string, signupDto: CreateSubDto): Promise<MessageResponse>;
 }

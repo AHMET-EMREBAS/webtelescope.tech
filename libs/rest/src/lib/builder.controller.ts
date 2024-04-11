@@ -21,9 +21,13 @@ import {
 } from '@webpackages/dto';
 import { ObjectIDDto } from '@webpackages/property';
 import { ApiBody } from '@nestjs/swagger';
-import { RestResource, ControllerConfiguration } from './builder.decorator';
+import { RestResourceBuilder } from './rest-resource.builder';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
+import {
+  ControllerConfiguration,
+  IRestResourceBuilder,
+} from '@webpackages/core';
 
 export type CreateControllerOptions = {
   entity: Type;
@@ -37,9 +41,9 @@ export function CreateController<
   U extends Type
 >(
   options: CreateControllerOptions,
-  config?: ControllerConfiguration
+  config?: ControllerConfiguration<IRestResourceBuilder>
 ): Type<IController<E, C, U>> {
-  const R = new RestResource(options.entity, config);
+  const R = new RestResourceBuilder(options.entity, config);
 
   @R.Controller()
   class Controller implements IController<E, C, U> {

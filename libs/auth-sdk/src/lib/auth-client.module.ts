@@ -1,14 +1,15 @@
-import { DynamicModule, Module } from '@nestjs/common';
-import { AuthClientService } from './service';
-import { LocalGuard } from './guards';
 import { AuthMetaService, AuthExtractService } from '@webpackages/auth';
-import { AuthHttpClientService } from './http-client';
+import { DynamicModule, Module } from '@nestjs/common';
+import { AuthClientService } from './auth.service';
+import { AuthHttpClientService } from './services';
+import { LocalGuard } from './guards';
 import {
+  AuthClientModuleOptions,
+  AuthModuleHttpClientOptionsFactory,
   provideAuthClientModuleOptions,
   provideHttpOptions,
-} from './providers';
-import { AuthClientModuleOptions } from './types';
-import { AuthModuleHttpClientOptionsFactory } from './options.factory';
+} from './common';
+
 import { HttpRequestConfigFactory } from '@webpackages/http-client';
 
 const providers = [

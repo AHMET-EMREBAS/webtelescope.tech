@@ -1,3 +1,5 @@
+import { Controller } from '@nestjs/common';
+import { IAuthController } from '@webpackages/common';
 import {
   LoginDto,
   LoginResponse,
@@ -5,39 +7,62 @@ import {
   ForgotPasswordDto,
   LoginWithCodeDto,
   CreateSubDto,
+  UpdateResult,
+  Body,
 } from '@webpackages/dto';
 import {
-  IOrg,
-  IPermission,
-  IRole,
   ISession,
-  IUser,
   MessageResponse,
+  IUser,
+  IOrg,
+  IRole,
+  IPermission,
 } from '@webpackages/model';
+import { AuthClientService } from './auth.service';
+import {} from '@webpackages/common';
+import { AuthorizationParam, SessionParam } from '@webpackages/auth';
+import { Query } from '@webpackages/dto';
 
-export interface IAuthController {
-  login(
-    _loginDto: LoginDto,
-    accessToken: string,
-    session: ISession
-  ): Promise<LoginResponse>;
+@Controller()
+export class AuthController implements IAuthController {
+  constructor(private readonly authService: AuthClientService) {}
 
-  logout(session: ISession): Promise<MessageResponse>;
+  async login(
+    @Query() loginDto: LoginDto,
+    @AuthorizationParam() accessToken: string,
+    @SessionParam() session: ISession
+  ): Promise<LoginResponse> {
+    return {
+      accessToken,
+      deviceId: session.deviceId,
+    };
+  }
 
-  logoutAllDevices(session: ISession): Promise<MessageResponse>;
-
-  hasSession(): Promise<MessageResponse>;
+  async logout(session: ISession): Promise<MessageResponse> | never {
+    return { message: 'Deleted the current session.' };
+  }
+  logoutAllDevices(session: ISession): Promise<MessageResponse> {
+    throw new Error('Method not implemented.');
+  }
+  hasSession(): Promise<MessageResponse> {
+    throw new Error('Method not implemented.');
+  }
   updatePassword(
-    session: ISession,
-    passwordDto: UpdatePasswordDto
-  ): Promise<void>;
+    @SessionParam() session: ISession,
+    @Body() passwordDto: UpdatePasswordDto
+  ): Promise<UpdateResult> {
+    throw new Error('Method not implemented.');
+  }
   forgotPassword(
-    __: ForgotPasswordDto,
+    forgotPasswordDto: ForgotPasswordDto,
     user: IUser<IOrg, IRole<IPermission>>
-  ): Promise<void>;
-  loginWithCode(
-    __: LoginWithCodeDto,
-    accessToken: string
-  ): { accessToken: string };
-  signup(signupDto: CreateSubDto): Promise<{ message: string }>;
+  ): Promise<MessageResponse> {
+    throw new Error('Method not implemented.');
+  }
+  loginWithCode(__: LoginWithCodeDto, accessToken: string): LoginResponse {
+    throw new Error('Method not implemented.');
+  }
+  signup(signupDto: CreateSubDto): Promise<MessageResponse> {
+    throw new Error('Method not implemented.');
+  }
 }
