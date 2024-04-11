@@ -3,20 +3,19 @@ import { TypeOrmModule, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { DatabaseFactory } from './db-factory';
 import { AuthEntities } from './db.entities';
 import { REQUEST } from '@nestjs/core';
-import { Request } from 'express';
-
 import { ConfigModule } from '@nestjs/config';
 import { getDatabaseName } from './db-name';
-import { extractOrgnameFromHeader } from '../common';
-
+import { AuthExtractService } from '../services';
+import { IRequest } from '@webpackages/model';
 @Module({
   imports: [
     ConfigModule.forFeature(() => ({})),
     TypeOrmModule.forRootAsync({
       inject: [REQUEST, DatabaseFactory],
       extraProviders: [DatabaseFactory],
-      async useFactory(req: Request, factory: TypeOrmOptionsFactory) {
-        const orgname = extractOrgnameFromHeader(req);
+      async useFactory(req: IRequest, factory: TypeOrmOptionsFactory) {
+        const orgname =
+          AuthExtractService.extractOrganizationNameFromHeader(req);
         const database = getDatabaseName(orgname);
 
         if (DatabaseFactory.isDatabaseExist(database)) {

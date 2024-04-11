@@ -1,5 +1,4 @@
-import { User } from '@webpackages/entity';
-import { ICreateSessionDto } from '@webpackages/model';
+import { ICreateSessionDto, IUser } from '@webpackages/model';
 import { v4 } from 'uuid';
 
 /**
@@ -7,7 +6,7 @@ import { v4 } from 'uuid';
  * @param user
  * @returns
  */
-export function convertUserToSession(user: User): ICreateSessionDto {
+export function userToSession(user: IUser): ICreateSessionDto {
   const userPermissions =
     user.roles.map((e) => e.permissions.map((p) => p.permission)).flat() || [];
   const userRoles = user.roles.map((e) => e.role);

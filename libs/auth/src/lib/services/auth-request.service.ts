@@ -47,6 +47,13 @@ export class AuthExtractService {
     this.logger.debug(`Extracted Orgname : ${result}`);
     return result;
   }
+  static extractOrganizationNameFromHeader(req: IRequest) {
+    const logger = new Logger(AuthExtractService.name);
+
+    const result = (req as IRequest).headers['x-orgname'];
+    logger.debug(`Extracted Orgname : ${result}`);
+    return result;
+  }
 
   extractOAuthApiKeyFromHeader(ctx: ExecutionContext) {
     const result = this.request(ctx).headers[

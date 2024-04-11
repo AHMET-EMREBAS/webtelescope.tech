@@ -24,7 +24,7 @@ import {
   AuthMetaService,
   AuthUserService,
 } from './services';
-import { convertUserToSession } from './common';
+import { userToSession } from './common';
 
 @Injectable()
 export class AuthService {
@@ -143,7 +143,7 @@ export class AuthService {
     const user = await this.userService.findUserByUserNameOrThrow(username);
     await this.comparePasswordOrThrow(password, user.password);
 
-    const newSession = convertUserToSession(user);
+    const newSession = userToSession(user);
     const session = await this.createSession(newSession);
     this.extractService.appendSessionToRequest(ctx, session);
     const token = this.jwtService.signToken(session);
@@ -158,7 +158,7 @@ export class AuthService {
       securityCode
     );
 
-    const session = await this.createSession(convertUserToSession(user));
+    const session = await this.createSession(userToSession(user));
 
     const token = this.jwtService.signToken(session);
 
