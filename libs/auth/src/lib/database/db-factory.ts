@@ -21,8 +21,8 @@ import {
 
 import { DataSource } from 'typeorm';
 import { BetterSqlite3ConnectionOptions } from 'typeorm/driver/better-sqlite3/BetterSqlite3ConnectionOptions';
-import { createResourcePermissions } from '@webpackages/core';
 import { copyFileSync, existsSync, mkdirSync } from 'fs';
+import { createResourcePermissions } from '@webpackages/core';
 
 @Injectable()
 export class DatabaseFactory implements TypeOrmOptionsFactory {

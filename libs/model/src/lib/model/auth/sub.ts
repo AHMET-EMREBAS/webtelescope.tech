@@ -8,6 +8,6 @@ import { ICredentials, IID } from '../../common';
  * @param organizationName {@link orgname}
  */
 export interface ISub<SubType extends IID> extends IID, ICredentials {
-  subtype: SubType;
   orgname: string;
+  subtype?: SubType;
 }

@@ -3,16 +3,21 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './controller';
 import {
-  AuthService,
-  AuthGuard,
-  LocalGuard,
-  SessionGuard,
   AuthUserService,
   AuthExtractService,
   AuthJwtService,
   AuthMetaService,
-} from '@webpackages/core';
-import { ResourceControllers } from '../controller';
+} from './../services';
+import { AuthService } from '../auth.service';
+import {
+  AuthGuard,
+  LocalGuard,
+  SessionGuard,
+  NotDeleteGuard,
+  SecurityCodeGuard,
+  UsernameGuard,
+} from '../guards';
+import { ResourceControllers } from '../__controllers';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JtwOptionsFactory } from './jwt-options';
 import { AuthDatabaseModule } from '../database';
@@ -26,6 +31,9 @@ const providers = [
   AuthGuard,
   LocalGuard,
   SessionGuard,
+  NotDeleteGuard,
+  SecurityCodeGuard,
+  UsernameGuard,
 ];
 
 @Module({

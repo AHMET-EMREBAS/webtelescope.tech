@@ -4,9 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { AuthExtractService, AuthMetaService } from '@webpackages/core';
-import { Org, Session, User } from '@webpackages/entity';
-import { OperationNames } from '@webpackages/rest';
+import { AuthExtractService, AuthMetaService } from './../services';
 
 /**
  * Prevent user from deleting his own data
@@ -22,8 +20,8 @@ export class NotDeleteGuard implements CanActivate {
     const handler = ctx.getHandler().name;
     const rn = this.metaService.resourceName(ctx);
 
-    if (handler === OperationNames.delete) {
-      if (rn === User.name || rn === Org.name || rn === Session.name) {
+    if (handler === 'delete') {
+      if (rn === 'User' || rn === 'Org' || rn === 'Session') {
         const session = this.extractService.getSessionFromRequest(ctx);
         const paramId = this.extractService.getParamId(ctx);
 

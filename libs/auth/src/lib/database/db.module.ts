@@ -4,9 +4,10 @@ import { DatabaseFactory } from './db-factory';
 import { AuthEntities } from './db.entities';
 import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
-import { extractOrgnameFromHeader } from '../common';
+
 import { ConfigModule } from '@nestjs/config';
 import { getDatabaseName } from './db-name';
+import { extractOrgnameFromHeader } from '../common';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { getDatabaseName } from './db-name';
       async useFactory(req: Request, factory: TypeOrmOptionsFactory) {
         const orgname = extractOrgnameFromHeader(req);
         const database = getDatabaseName(orgname);
-        
+
         if (DatabaseFactory.isDatabaseExist(database)) {
           return factory.createTypeOrmOptions(database);
         }

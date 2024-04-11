@@ -1,1 +1,2 @@
-export const ___________COmmon___ = '';
+// @index('./*', f => `export * from '${f.path}'`)
+export * from './auth';

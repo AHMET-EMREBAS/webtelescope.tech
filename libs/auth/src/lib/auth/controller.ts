@@ -8,7 +8,7 @@ import {
 } from '@nestjs/swagger';
 
 import {
-  LoginResult,
+  LoginResponse,
   Body,
   DeleteResult,
   ForgotPasswordDto,
@@ -19,22 +19,20 @@ import {
   UpdatePasswordDto,
   UpdateResult,
 } from '@webpackages/dto';
-import { Session, User } from '@webpackages/entity';
 import {
-  AuthService,
-  PublicAccess,
   BearerAccess,
   CredentialAccess,
   SecurityCodeAccess,
   SessionAccess,
   UsernameAccess,
-  AuthHeaderParam,
-  SessionParam,
-  UserParam,
-  Scope,
-  AuthUserService,
-} from '@webpackages/core';
+} from '../__guards';
+
 import { DatabaseFactory } from '../database';
+import { ISession, IUser, MessageResponse } from '@webpackages/model';
+import { summaryObject } from '@webpackages/utils';
+import { AuthService } from '../auth.service';
+import { PublicAccess, Scope } from '@webpackages/core';
+import { AuthHeaderParam, SessionParam, UserParam } from '../common';
 
 @ApiTags('Auth')
 @Scope('AUTH')
@@ -42,28 +40,33 @@ import { DatabaseFactory } from '../database';
 @Controller('auth')
 export class AuthController {
   logger!: Logger;
-  constructor(
-    private readonly authService: AuthService,
-    private readonly authUserService: AuthUserService
-  ) {
+  constructor(private readonly authService: AuthService) {
     this.logger = new Logger(AuthController.name);
   }
 
   @ApiOperation({ summary: 'Login with username and password' })
-  @ApiOkResponse({ type: LoginResult })
+  @ApiOkResponse({ type: LoginResponse })
   @ApiUnauthorizedResponse()
   @CredentialAccess()
   @Post('login')
-  login(
-    @Body() loginDto: LoginDto,
+  async login(
+    @Body() _loginDto: LoginDto,
     @AuthHeaderParam() accessToken: string,
-    @SessionParam() session: Session
-  ): LoginResult {
-    const result = { accessToken, deviceId: session.deviceId };
+    @SessionParam() session: ISession
+  ): Promise<LoginResponse> {
+    const { id, deviceId, orgId, orgname, userId } = session;
+    const result: LoginResponse = { accessToken, deviceId };
 
     this.logger.debug(
-      `User session is created  acccessToken:${accessToken} , deviceId: ${session.deviceId}`
+      `Created session ${summaryObject({
+        id,
+        userId,
+        orgId,
+        orgname,
+        deviceId,
+      })}`
     );
+    this.logger.debug(`Returning ${summaryObject(result)}`);
     return result;
   }
 
@@ -71,24 +74,28 @@ export class AuthController {
   @ApiUnauthorizedResponse()
   @ApiOkResponse({ type: DeleteResult })
   @Get('logout')
-  async logout(@SessionParam() session: Session) {
-    return await this.authService.deleteSession(session.id);
+  async logout(@SessionParam() session: ISession): Promise<MessageResponse> {
+    await this.authService.deleteSession(session.id);
+    return { message: 'Current session is deleted.' };
   }
 
   @ApiOperation({ summary: 'Logout from the current session' })
   @ApiUnauthorizedResponse()
   @ApiOkResponse({ type: DeleteResult, isArray: true })
   @Get('logout-all-devices')
-  async logoutAllDevices(@SessionParam() session: Session) {
-    return await this.authService.deleteAllSessionsByUserId(session.userId);
+  async logoutAllDevices(
+    @SessionParam() session: ISession
+  ): Promise<MessageResponse> {
+    await this.authService.deleteAllSessionsByUserId(session.userId);
+    return { message: 'All sessions are deleted.' };
   }
 
   @ApiOperation({ summary: 'Has active session' })
   @ApiUnauthorizedResponse()
   @SessionAccess()
   @Get('has-session')
-  hasSession() {
-    return true;
+  async hasSession(): Promise<MessageResponse> {
+    return { message: 'You have a session!' };
   }
 
   @ApiOperation({ summary: 'Update password' })
@@ -96,10 +103,10 @@ export class AuthController {
   @ApiUnauthorizedResponse()
   @Post('update-password')
   async updatePassword(
-    @SessionParam() session: Session,
+    @SessionParam() session: ISession,
     @Body() passwordDto: UpdatePasswordDto
   ) {
-    await this.authUserService.updatePassword(session.userId, passwordDto);
+    await this.authService.updatePassword(session.userId, passwordDto);
   }
 
   @ApiOperation({ summary: 'Forgot password' })
@@ -107,7 +114,10 @@ export class AuthController {
   @ApiOkResponse({ type: UpdateResult })
   @ApiUnauthorizedResponse()
   @Post('forgot-password')
-  async forgotPassword(@Body() __: ForgotPasswordDto, @UserParam() user: User) {
+  async forgotPassword(
+    @Body() __: ForgotPasswordDto,
+    @UserParam() user: IUser
+  ) {
     const { securityCode } = await this.authService.createSecurityCodeOrThrow(
       user
     );

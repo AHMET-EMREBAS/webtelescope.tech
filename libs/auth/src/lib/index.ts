@@ -1,8 +1,10 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './auth';
-export * from './boot';
-export * from './common';
-export * from './controller';
-export * from './database';
-export * from './guards';
-export * from './module';
+export * from './__controllers'
+export * from './__guards'
+export * from './app.module'
+export * from './auth'
+export * from './auth.service'
+export * from './common'
+export * from './database'
+export * from './guards'
+export * from './services'

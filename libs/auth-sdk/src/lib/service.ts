@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { ILoginDto, MessageResponse } from '@webpackages/model';
 import {
-  IForgotPasswordDto,
-  ILoginDto,
-  IUpdatePasswordDto,
-} from '@webpackages/model';
-
-import { LoginResult, LoginWithCodeDto, LogoutResult } from '@webpackages/dto';
+  CreateSubDto,
+  ForgotPasswordDto,
+  LoginResponse,
+  LoginWithCodeDto,
+  UpdatePasswordDto,
+} from '@webpackages/dto';
 import { AuthHttpClientService } from './http-client';
 
 @Injectable()
@@ -13,32 +14,64 @@ export class AuthClientService {
   constructor(private readonly httpClient: AuthHttpClientService) {}
 
   async login(loginDto: ILoginDto) {
-    return await this.httpClient.post<LoginResult>('api/auth/login', loginDto);
+    return await this.httpClient.post<LoginResponse>(
+      'api/auth/login',
+      loginDto
+    );
   }
 
   async logout() {
-    return await this.httpClient.get<LogoutResult>('api/auth/logout');
+    return await this.httpClient.get<MessageResponse>('api/auth/logout');
   }
 
   async logoutAllDevices() {
-    return await this.httpClient.get('api/auth/logout-all-devices');
+    return await this.httpClient.get<MessageResponse>(
+      'api/auth/logout-all-devices'
+    );
   }
 
   async hasSession() {
     return await this.httpClient.get('api/auth/has-session');
   }
 
-  async updatePassword(body: IUpdatePasswordDto) {
-    return await this.httpClient.post('api/auth/update-password', body);
+  /**
+   * Update password
+   * @param body
+   * @returns message {@link MessageResponse}
+   */
+  async updatePassword(body: UpdatePasswordDto) {
+    return await this.httpClient.post<MessageResponse>(
+      'api/auth/update-password',
+      body
+    );
   }
 
-  async forgotPassword(body: IForgotPasswordDto) {
+  /**
+   * Send password-reset-link via email
+   * @param body
+   * @returns message {@link MessageResponse}
+   */
+  async forgotPassword(body: ForgotPasswordDto) {
     return await this.httpClient.post('api/auth/forgot-password', body);
   }
 
+  /**
+   * Login with security code
+   * @param body
+   * @returns LoginResponse {@link LoginResponse}
+   */
   async loginWithCode(body: LoginWithCodeDto) {
     return await this.httpClient.get(
       `api/auth/login-with-code/?securityCode=${body.securityCode}&username=${body.username}`
     );
+  }
+
+  /**
+   * Signup
+   * @param body
+   * @returns
+   */
+  async signup(body: CreateSubDto) {
+    return await this.httpClient.post<LoginResponse>('api/auth/signup', body);
   }
 }

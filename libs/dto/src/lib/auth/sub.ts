@@ -28,5 +28,5 @@ export class CreateSubDto implements ICreateSubDto<ObjectIDDto> {
   @Transform(({ value }) => (value as string)?.toLowerCase())
   orgname!: string;
 
-  @ObjectIdProperty({ required: false }) subtype!: ObjectIDDto;
+  @ObjectIdProperty({ required: false }) subtype?: ObjectIDDto;
 }
