@@ -2,8 +2,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { AuthEntities } from './db.entities';
 import {
-  getDatabaseDirectory,
   getDatabaseName,
+  getDatabaseDirectory,
   getTemplateDatabaseName,
 } from './db-name';
 import {
@@ -59,21 +59,19 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     return DatabaseFactory.isDatabaseExist(database);
   }
 
-  createTypeOrmOptions(orgname: string): BetterSqlite3ConnectionOptions {
-    if (this.isDatabaseExist(getDatabaseName(orgname))) {
-      this.logger.debug(`Database ${orgname} exists`);
-      const result: BetterSqlite3ConnectionOptions = this.options(
-        getDatabaseName(orgname)
-      );
-      console.log(result);
+  createTypeOrmOptions(database: string): BetterSqlite3ConnectionOptions {
+    if (this.isDatabaseExist(database)) {
+      this.logger.debug(`Database ${database} exists`);
+      const result: BetterSqlite3ConnectionOptions = this.options(database);
+
       return result;
     } else {
-      this.logger.debug(`Database ${orgname} does not exist`);
+      this.logger.debug(`Database ${database} does not exist`);
       const result: BetterSqlite3ConnectionOptions = {
         ...this.options(getDatabaseName('ingore')),
         synchronize: true,
       };
-      console.log(result);
+
       return result;
     }
   }
@@ -84,7 +82,12 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     return result;
   }
 
-  static async createDatabaseIFNotExist(orgname: string = 'main') {
+  /**
+   * Create database by organization name
+   * @param orgname
+   * @returns
+   */
+  static async createDatabaseIFNotExist(orgname: string) {
     const logger = new Logger('Create Database IF Not Exist');
     if (this.isDatabaseExist(getDatabaseName(orgname))) {
       logger.debug(`Database ${orgname} exits`);
@@ -121,6 +124,8 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       await manager.save(subTypeRepo.create({ subtype: 'Basic' }));
       await manager.save(subTypeRepo.create({ subtype: 'Gold' }));
       await manager.save(subTypeRepo.create({ subtype: 'VIP' }));
+
+      console.log(await subTypeRepo.find());
 
       this.logger.debug('Created default SubType items');
       // Seed Permissions
@@ -194,14 +199,19 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     await ds.destroy();
   }
 
+  /**
+   * Update the template database for the organization.
+   * @param orgname
+   * @param username
+   * @param password
+   */
   static async updateTemplateDatabaseForUser(
     orgname: string,
     username: string,
     password: string
   ) {
-    const ds = await new DataSource(
-      this.options(getDatabaseName(orgname))
-    ).initialize();
+    const database = getDatabaseName(orgname);
+    const ds = await new DataSource(this.options(database)).initialize();
 
     this.logger.debug('Established database connection.');
     const orgRepo = ds.getRepository(Org);

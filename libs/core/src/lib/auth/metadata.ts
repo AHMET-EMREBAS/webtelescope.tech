@@ -52,17 +52,23 @@ export function isPublicAccess(
   reflector: Reflector,
   context: ExecutionContext
 ) {
-  return reflector.getAllAndOverride(PUBLIC, [
-    context.getHandler(),
-    context.getClass(),
-  ]);
+  return (
+    reflector.getAllAndOverride(PUBLIC, [
+      context.getHandler(),
+      context.getClass(),
+    ]) == true
+  );
 }
 
 export function isAuthGuardByPassed(
   reflector: Reflector,
   context: ExecutionContext
 ) {
-  return reflector.getAllAndOverride(BY_PASS_AUTHGUARD, [context.getHandler()]);
+  const result = reflector.getAllAndOverride(BY_PASS_AUTHGUARD, [
+    context.getHandler(),
+  ]);
+
+  return result == true;
 }
 
 export function getRequiredPermissions(

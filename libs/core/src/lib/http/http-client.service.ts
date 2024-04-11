@@ -5,8 +5,6 @@ import { AuthEnums } from '../auth';
 import { InjectHttpClientOptions } from './http-config.providers';
 import { HttpClientModuleOptions } from './http-client-options';
 
-import { HttpClientServiceResponse as HttpResponse } from './http-response';
-
 @Injectable()
 export class HttpClientService {
   constructor(
@@ -24,13 +22,6 @@ export class HttpClientService {
         [AuthEnums.X_ORGNAME]: orgname,
         [AuthEnums.X_OAUTH_API_KEY]: oauthApiKey,
       },
-      transformResponse: (res: AxiosResponse) => {
-        return {
-          status: res.status,
-          body: res.data,
-          message: res.statusText,
-        };
-      },
     };
   }
 
@@ -39,7 +30,7 @@ export class HttpClientService {
   }
 
   async post<Body>(fragment: string, body: any) {
-    return await axios.post<any, HttpResponse<Body>>(
+    return await axios.post<any, AxiosResponse<Body>>(
       this.resolveURL(fragment),
       body,
       this.httpConfig()
@@ -47,14 +38,14 @@ export class HttpClientService {
   }
 
   async get<Body>(fragment: string) {
-    return await axios.get<any, HttpResponse<Body>>(
+    return await axios.get<any, AxiosResponse<Body>>(
       this.resolveURL(fragment),
       this.httpConfig()
     );
   }
 
   async put<Body>(fragment: string, body: any) {
-    return await axios.put<any, HttpResponse<Body>>(
+    return await axios.put<any, AxiosResponse<Body>>(
       this.resolveURL(fragment),
       body,
       this.httpConfig()
@@ -62,7 +53,7 @@ export class HttpClientService {
   }
 
   async delete<Body>(fragment: string) {
-    return await axios.delete<any, HttpResponse<Body>>(
+    return await axios.delete<any, AxiosResponse<Body>>(
       this.resolveURL(fragment),
       this.httpConfig()
     );

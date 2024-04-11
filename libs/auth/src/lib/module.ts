@@ -4,8 +4,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/module';
 
 import { DatabaseFactory, getDatabaseName } from './database';
-import { DataSource } from 'typeorm';
-import { User } from '@webpackages/entity';
 
 @Module({
   imports: [
@@ -30,19 +28,20 @@ export class AppModule implements OnModuleInit {
     const username = this.configService.getOrThrow('APP_USERNAME');
     const password = this.configService.getOrThrow('APP_PASSWORD');
 
-    await DatabaseFactory.createDatabaseIFNotExist('main');
+    if (!DatabaseFactory.isDatabaseExist(getDatabaseName('main'))) {
+      await DatabaseFactory.createDatabaseIFNotExist('main');
 
-    try {
-      await DatabaseFactory.updateTemplateDatabaseForUser(
-        'main',
-        username,
-        password
-      );
-    } catch (err) {
-      console.error(err);
-      this.logger.debug(
-        'Could not not update user and organization in the new database.'
-      );
+      try {
+        await DatabaseFactory.updateTemplateDatabaseForUser(
+          'main',
+          username,
+          password
+        );
+      } catch (err) {
+        this.logger.debug(
+          'Could not not update user and organization in the new database.'
+        );
+      }
     }
   }
 }

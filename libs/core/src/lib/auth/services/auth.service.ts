@@ -20,7 +20,7 @@ import {
 import { CreateMailDto, CreateSubDto } from '@webpackages/dto';
 import { v4 } from 'uuid';
 import { ICreateSessionDto, SessionPayload } from '@webpackages/model';
-import { compare, compareSync } from 'bcrypt';
+import { compareSync } from 'bcrypt';
 import { AuthExtractService } from './auth-request.service';
 import { AuthJwtService } from './auth-jwt.service';
 import { AuthMetaService } from './auth-meta.service';
@@ -83,15 +83,17 @@ export class AuthService {
     const requiredPermissions = this.metaService.getRequiredPermissions(ctx);
     const requiredRoles = this.metaService.getRequiredRoles(ctx);
 
-    this.metaService.userHasPermissionsContainRequiredPermissionsOrThrow(
-      session.permissions,
-      requiredPermissions
-    );
+    if (requiredPermissions)
+      this.metaService.userHasPermissionsContainRequiredPermissionsOrThrow(
+        session.permissions,
+        requiredPermissions
+      );
 
-    this.metaService.userRolesContainsRequiredRolesOrThrow(
-      session.roles,
-      requiredRoles
-    );
+    if (requiredRoles)
+      this.metaService.userRolesContainsRequiredRolesOrThrow(
+        session.roles,
+        requiredRoles
+      );
 
     this.extractService.appendSessionToRequest(ctx, session);
 
@@ -110,10 +112,6 @@ export class AuthService {
   }
 
   async isAuthorizedOAuthClient(ctx: ExecutionContext) {
-    if (await this.isMainOrganizationAccess(ctx)) {
-      return true;
-    }
-
     const apiKey = this.extractService.extractOAuthApiKeyFromHeader(ctx);
     const oauth = await this.findOAuthByApiKey(apiKey);
 
@@ -127,11 +125,16 @@ export class AuthService {
         );
         if (hasRequiredScopes) {
           return true;
+        } else {
+          return false;
         }
       }
 
+      this.logger.debug('There is no scope restriction for the resource!');
+
       return true;
     }
+    this.logger.debug('OAuth key not provided!');
     return false;
   }
 
@@ -209,11 +212,26 @@ export class AuthService {
   }
 
   async signup(signupDto: CreateSubDto) {
+    this.logger.debug(
+      `Trying to sign up the user ${signupDto.username} - ${signupDto.orgname}`
+    );
+
     const { username } = signupDto;
+
     try {
       await this.subRepo.findOneByOrFail({ username });
+      this.logger.error(`${username} already exists!`);
     } catch (err) {
-      return await this.subRepo.save(signupDto);
+      try {
+        this.logger.debug('Trying to create subscription user');
+        const saved = await this.subRepo.save(signupDto);
+
+        this.logger.error(`Saved ${saved.username}`);
+        return saved;
+      } catch (err) {
+        this.logger.debug('Could not create the subscription user');
+        console.error(err);
+      }
     }
     throw new UnprocessableEntityException('The username is already in user!');
   }

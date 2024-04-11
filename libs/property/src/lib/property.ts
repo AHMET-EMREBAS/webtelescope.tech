@@ -161,15 +161,21 @@ export function __commonProperty(options: ApiPropertyOptions) {
 }
 
 export function __commonStringProperty(options: ApiPropertyOptions) {
-  const des: PropertyDecorator[] = [
-    Transform(({ value }) => {
-      if (value) value.trim();
-      return value;
-    }),
-  ];
+  const des: PropertyDecorator[] = [];
 
-  const { isArray: __isArray, minLength, maxLength } = options;
+  const { type, isArray: __isArray, minLength, maxLength } = options;
   const vo: ValidationOptions = { each: __isArray };
+
+  if (type === 'string') {
+    des.push(
+      Transform(({ value }) => {
+        if (typeof value === 'string') {
+          return value.trim();
+        }
+        return value;
+      })
+    );
+  }
 
   if (minLength != undefined) des.push(MinLength(minLength, vo));
   if (maxLength != undefined) des.push(MaxLength(maxLength, vo));

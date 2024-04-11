@@ -36,19 +36,18 @@ export class SubSubscriber implements EntitySubscriberInterface<Sub> {
 
   async beforeInsert(event: InsertEvent<Sub>) {
     // const manager = event.manager;
-    // const orgRepo = manager.getRepository(Organization);
+    // console.log(await manager.getRepository(SubType).find());
+    // const orgRepo = manager.getRepository(Org);
     // const userRepo = manager.getRepository(User);
-    // const { username, password, organizationName } = event.entity;
-    // const isOrgExist = await orgRepo.findOneBy({ organizationName });
+    // const { username, password, orgname, subtype } = event.entity;
+    // const isOrgExist = await orgRepo.findOneBy({ orgname });
     // const isUserExist = await userRepo.findOneBy({ username });
     // if (isOrgExist)
     //   throw new UnprocessableEntityException('Organization already exist!');
     // if (isUserExist)
     //   throw new UnprocessableEntityException('User already exist!');
     // try {
-    //   const organization = await manager.save(
-    //     orgRepo.create({ organizationName })
-    //   );
+    //   const organization = await manager.save(orgRepo.create({ orgname }));
     //   await manager.save(userRepo.create({ username, password, organization }));
     // } catch (err) {
     //   console.error(err);

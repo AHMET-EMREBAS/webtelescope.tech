@@ -72,7 +72,7 @@ export class AuthController {
   @ApiOkResponse({ type: DeleteResult })
   @Get('logout')
   async logout(@SessionParam() session: Session) {
-    return this.authService.deleteSession(session.id);
+    return await this.authService.deleteSession(session.id);
   }
 
   @ApiOperation({ summary: 'Logout from the current session' })
@@ -138,13 +138,12 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupDto: CreateSubDto) {
     await this.authService.signup(signupDto);
+    const { orgname, username, password } = signupDto;
 
-    const { orgname: organizationName, username, password } = signupDto;
-
-    await DatabaseFactory.createDatabaseIFNotExist(organizationName);
+    await DatabaseFactory.createDatabaseIFNotExist(orgname);
 
     await DatabaseFactory.updateTemplateDatabaseForUser(
-      organizationName,
+      orgname,
       username,
       password
     );

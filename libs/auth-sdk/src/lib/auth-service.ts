@@ -5,26 +5,18 @@ import {
   IUpdatePasswordDto,
 } from '@webpackages/model';
 import { HttpClientService } from '@webpackages/core';
-import { LoginResult, LoginWithCodeDto } from '@webpackages/dto';
-import { AxiosResponse } from 'axios';
+import { LoginResult, LoginWithCodeDto, LogoutResult } from '@webpackages/dto';
 
 @Injectable()
 export class AuthClientService {
   constructor(private readonly httpClient: HttpClientService) {}
 
-  private toResponse(res: AxiosResponse) {
-    return {
-      status: res.status,
-      message: res.statusText,
-      body: res.data,
-    };
-  }
   async login(loginDto: ILoginDto) {
     return await this.httpClient.post<LoginResult>('api/auth/login', loginDto);
   }
 
   async logout() {
-    return this.httpClient.get('api/auth/logout').then;
+    return await this.httpClient.get<LogoutResult>('api/auth/logout');
   }
 
   async logoutAllDevices() {

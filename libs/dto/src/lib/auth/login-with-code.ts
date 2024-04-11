@@ -10,3 +10,4 @@ export class LoginWithCodeDto implements ILoginWithCodeDto {
   @UUID4Property() securityCode!: string;
   @EmailProperty() username!: string;
 }
+
