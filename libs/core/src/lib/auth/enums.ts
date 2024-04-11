@@ -1,7 +1,6 @@
 export enum AuthEnums {
   USER = 'user',
   SESSION = 'session',
-
   BEARER = 'bearer',
   BASIC = 'basic',
   X_APP_NAME = 'x-appname',
