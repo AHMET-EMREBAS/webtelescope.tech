@@ -1,12 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 
-import { convertUserToSession } from './user-to-session';
-import {
-  AuthExtractService,
-  AuthJwtService,
-  AuthUserService,
-  AuthService,
-} from '../services';
+import { AuthService } from '../services';
 
 /**
  * Extract username and password from the request body,
@@ -15,23 +9,10 @@ import {
  */
 @Injectable()
 export class LocalGuard implements CanActivate {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly userService: AuthUserService,
-    private readonly extractService: AuthExtractService,
-    private readonly jwtService: AuthJwtService
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   async canActivate(ctx: ExecutionContext) {
-    const { username, password } =
-      this.extractService.extractUsernameAndPassworFromBodyThrow(ctx);
-    const user = await this.userService.findUserByUserNameOrThrow(username);
-    this.authService.comparePasswordOrThrow(password, user.password);
-    const newSession = convertUserToSession(user);
-    const session = await this.authService.createSession(newSession);
-    this.extractService.appendSessionToRequest(ctx, session);
-    const token = this.jwtService.signToken(session);
-    this.extractService.appendAuthorizationToken(ctx, token);
+    await this.authService.verifyCredentialsAndCreateSessionOrThrow(ctx);
     return true;
   }
 }

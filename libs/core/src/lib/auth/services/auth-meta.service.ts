@@ -46,19 +46,22 @@ export class AuthMetaService {
     return isAuthGuardByPassed(this.reflector, ctx);
   }
 
-  requiredScopes(ctx: ExecutionContext) {
+  getRequiredScopes(ctx: ExecutionContext) {
     return getRequiredScope(this.reflector, ctx);
   }
 
-  requiredPermissions(ctx: ExecutionContext) {
+  getRequiredPermissions(ctx: ExecutionContext) {
     return getRequiredPermissions(this.reflector, ctx);
   }
 
-  requiredRoles(ctx: ExecutionContext) {
+  getRequiredRoles(ctx: ExecutionContext) {
     return getRequiredRoles(this.reflector, ctx);
   }
 
-  userHasPermissions(userPermissions: string[], requiredPermissions: string[]) {
+  userPermissionsContainsRequiredPermissions(
+    userPermissions: string[],
+    requiredPermissions: string[]
+  ) {
     if (userPermissions.includes('ADMIN')) {
       return true;
     }
@@ -67,25 +70,33 @@ export class AuthMetaService {
     return true;
   }
 
-  userHasPermissionsOrThrow(userPermissions: string[], permissions: string[]) {
-    if (this.userHasPermissions(userPermissions, permissions)) {
+  userHasPermissionsContainRequiredPermissionsOrThrow(
+    userPermissions: string[],
+    permissions: string[]
+  ) {
+    if (
+      this.userPermissionsContainsRequiredPermissions(
+        userPermissions,
+        permissions
+      )
+    ) {
       return true;
     }
     throw new UnauthorizedException('You do not have required permissions!');
   }
 
-  userHasRoles(userRoles: string[], roles: string[]) {
+  userRolesContainRequiredRoles(userRoles: string[], roles: string[]) {
     for (const rr of roles) if (!userRoles.includes(rr)) return false;
     return true;
   }
 
-  oauthHasScopes(oauthScopes: string[], scopes: string[]): boolean {
-    for (const s of scopes) if (!oauthScopes.includes(s)) return false;
-    return true;
+  userRolesContainsRequiredRolesOrThrow(userRoles: string[], roles: string[]) {
+    if (this.userRolesContainRequiredRoles(userRoles, roles)) return true;
+    throw new UnauthorizedException('You do not have required role!');
   }
 
-  userHasRolesOrThrow(userRoles: string[], roles: string[]) {
-    if (this.userHasRoles(userRoles, roles)) return true;
-    throw new UnauthorizedException('You do not have required role!');
+  oAuthHasRequiredScopes(oauthScopes: string[], scopes: string[]): boolean {
+    for (const s of scopes) if (!oauthScopes.includes(s)) return false;
+    return true;
   }
 }

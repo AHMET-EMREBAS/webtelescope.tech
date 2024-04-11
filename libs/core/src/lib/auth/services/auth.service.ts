@@ -10,6 +10,7 @@ import {
 } from '@webpackages/entity';
 import { Repository } from 'typeorm';
 import {
+  ExecutionContext,
   Injectable,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -17,8 +18,13 @@ import {
 
 import { CreateMailDto, CreateSubDto } from '@webpackages/dto';
 import { v4 } from 'uuid';
-import { ICreateSessionDto } from '@webpackages/model';
+import { ICreateSessionDto, SessionPayload } from '@webpackages/model';
 import { compareSync } from 'bcrypt';
+import { AuthExtractService } from './auth-request.service';
+import { AuthJwtService } from './auth-jwt.service';
+import { AuthMetaService } from './auth-meta.service';
+import { convertUserToSession } from '../guards';
+import { AuthUserService } from './auth-user.service';
 
 @Injectable()
 export class AuthService {
@@ -36,8 +42,120 @@ export class AuthService {
     private readonly oauthRepo: Repository<OAuth>,
 
     @InjectRepository(Mail)
-    protected readonly mailRepo: Repository<Mail>
+    protected readonly mailRepo: Repository<Mail>,
+    protected readonly extractService: AuthExtractService,
+    protected readonly jwtService: AuthJwtService,
+    protected readonly metaService: AuthMetaService,
+    protected readonly userService: AuthUserService
   ) {}
+
+  /**
+   * Extract and verify token, return session or throw session-not-found error
+   * @param ctx
+   * @returns
+   */
+  async hasValidaSessionOrThrow(ctx: ExecutionContext) {
+    const token = this.extractService.extractTokenOrThrow(ctx);
+    const payload: SessionPayload = this.jwtService.verifyToken(token);
+    const session = await this.findSessionByIdOrThrow(payload.sub);
+    return session;
+  }
+
+  async verifyUsernameOrThrow(ctx: ExecutionContext) {
+    const username = this.extractService.extractUsernameFromBodyOrThrow(ctx);
+    const found = await this.userService.findUserByUserNameOrThrow(username);
+    this.extractService.appendUserToRequest(ctx, found);
+  }
+
+  /**
+   * Check user has required permissions and roles or throw user-not-autorized error
+   * @param ctx
+   * @param session
+   * @returns
+   */
+  async isAuthorizedOrThrow(ctx: ExecutionContext) {
+    const session = await this.hasValidaSessionOrThrow(ctx);
+    const requiredPermissions = this.metaService.getRequiredPermissions(ctx);
+    const requiredRoles = this.metaService.getRequiredRoles(ctx);
+
+    this.metaService.userHasPermissionsContainRequiredPermissionsOrThrow(
+      session.permissions,
+      requiredPermissions
+    );
+
+    this.metaService.userRolesContainsRequiredRolesOrThrow(
+      session.roles,
+      requiredRoles
+    );
+
+    this.extractService.appendSessionToRequest(ctx, session);
+
+    return true;
+  }
+
+  protected async isMainOrganizationAccess(ctx: ExecutionContext) {
+    const orgName = this.extractService.extractOrganizationNameFromHeader(ctx);
+    // If request made from the client of this application, then return true
+    // Else if the request made from 3rd party application to the subscriber organization, then check the OAuth api key.
+    if (!orgName || orgName === 'main') {
+      return true;
+    }
+    return false;
+  }
+
+  async isAuthorizedOAuthClient(ctx: ExecutionContext) {
+    if (await this.isMainOrganizationAccess(ctx)) {
+      return true;
+    }
+
+    const apiKey = this.extractService.extractOAuthApiKeyFromHeader(ctx);
+    const oauth = await this.findOAuthByApiKey(apiKey);
+
+    if (oauth) {
+      const requiredScopes = this.metaService.getRequiredScopes(ctx);
+
+      if (requiredScopes) {
+        const hasRequiredScopes = this.metaService.oAuthHasRequiredScopes(
+          oauth.scopes.map((e) => e.scope),
+          requiredScopes
+        );
+        if (hasRequiredScopes) {
+          return true;
+        }
+      }
+
+      return true;
+    }
+    return false;
+  }
+
+  async verifyCredentialsAndCreateSessionOrThrow(ctx: ExecutionContext) {
+    const { username, password } =
+      this.extractService.extractUsernameAndPassworFromBodyThrow(ctx);
+    const user = await this.userService.findUserByUserNameOrThrow(username);
+    this.comparePasswordOrThrow(password, user.password);
+
+    const newSession = convertUserToSession(user);
+    const session = await this.createSession(newSession);
+    this.extractService.appendSessionToRequest(ctx, session);
+    const token = this.jwtService.signToken(session);
+    this.extractService.appendAuthorizationToken(ctx, token);
+  }
+
+  async verifySecurityCodeAndCreateSessionOrThrow(ctx: ExecutionContext) {
+    const securityCode =
+      this.extractService.extractSecurityCodeFromQueryOrThrow(ctx);
+
+    const user = await this.userService.findUserBySecurityCodeOrThrow(
+      securityCode
+    );
+
+    const session = await this.createSession(convertUserToSession(user));
+
+    const token = this.jwtService.signToken(session);
+
+    this.extractService.appendAuthorizationToken(ctx, token);
+  }
 
   async findOAuthByApiKey(apiKey: string) {
     return await this.oauthRepo.findOneBy({ apiKey });

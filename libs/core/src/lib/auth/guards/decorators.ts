@@ -13,6 +13,7 @@ import { AuthEnums } from '../enums';
  * - Check user session is valid
  * - Check user has required permissions
  * - Check user has required roles
+ * Use {@link ByPassAuthGuard} to bypass bearer guard
  * @returns
  */
 export function BearerAccess() {
