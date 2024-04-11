@@ -1,6 +1,11 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { AuthService } from '../service';
-import { userToSession } from './user-to-session';
+import { convertUserToSession } from './user-to-session';
+import {
+  AuthExtractService,
+  AuthJwtService,
+  AuthService,
+  AuthUserService,
+} from '../services';
 
 /**
  * Extract security code from the request query object
@@ -9,20 +14,27 @@ import { userToSession } from './user-to-session';
  */
 @Injectable()
 export class SecurityCodeGuard implements CanActivate {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly extractService: AuthExtractService,
+    private readonly userService: AuthUserService,
+    private readonly jwtService: AuthJwtService
+  ) {}
   async canActivate(ctx: ExecutionContext) {
     const securityCode =
-      this.authService.extractSecurityCodeFromQueryOrThrow(ctx);
+      this.extractService.extractSecurityCodeFromQueryOrThrow(ctx);
 
-    const user = await this.authService.findUserBySecurityCodeOrThrow(
+    const user = await this.userService.findUserBySecurityCodeOrThrow(
       securityCode
     );
 
-    const session = await this.authService.createSession(userToSession(user));
+    const session = await this.authService.createSession(
+      convertUserToSession(user)
+    );
 
-    const token = this.authService.signToken(session);
+    const token = this.jwtService.signToken(session);
 
-    this.authService.appendAuthorizationToken(ctx, token);
+    this.extractService.appendAuthorizationToken(ctx, token);
 
     return true;
   }

@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
  * @param user
  * @returns
  */
-export function userToSession(user: User): ICreateSessionDto {
+export function convertUserToSession(user: User): ICreateSessionDto {
   const userPermissions =
     user.roles.map((e) => e.permissions.map((p) => p.permission)).flat() || [];
   const userRoles = user.roles.map((e) => e.role);

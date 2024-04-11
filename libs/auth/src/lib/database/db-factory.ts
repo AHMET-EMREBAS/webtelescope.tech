@@ -84,13 +84,13 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     }).initialize();
 
     await ds.transaction(async (manager) => {
-      logger.log('--------------started-------------------');
+      logger.log('--------------START-------------------');
       // Seed Subscription Type
       const subTypeRepo = manager.getRepository(SubType);
-      await manager.save(subTypeRepo.create({ subname: 'Primary' }));
-      await manager.save(subTypeRepo.create({ subname: 'Basic' }));
-      await manager.save(subTypeRepo.create({ subname: 'Gold' }));
-      await manager.save(subTypeRepo.create({ subname: 'VIP' }));
+      await manager.save(subTypeRepo.create({ subtype: 'Primary' }));
+      await manager.save(subTypeRepo.create({ subtype: 'Basic' }));
+      await manager.save(subTypeRepo.create({ subtype: 'Gold' }));
+      await manager.save(subTypeRepo.create({ subtype: 'VIP' }));
 
       logger.log('created sub types...');
       // Seed Permissions
@@ -123,7 +123,7 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       try {
         // Seed organization
         const orgRepo = manager.getRepository(Org);
-        const ORG = await orgRepo.save({
+        await orgRepo.save({
           orgname: 'Organization name',
         });
 
@@ -156,7 +156,7 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
         scopes: [SCOPE],
       });
       logger.log('created sample oauth key...');
-      logger.log('----------------ended-------------------');
+      logger.log('----------------END-------------------');
     });
   }
 
@@ -165,18 +165,22 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     username: string,
     password: string
   ) {
-    const logger = new Logger('Update User Database');
+    const logger = new Logger('Update Template Database');
 
+    logger.log('-------------START--------------');
     logger.log(`Updating ${organizationName}, ${username},${password}`);
-    const ds = new DataSource(this.options(getDatabaseName(organizationName)));
+    const ds = await new DataSource(
+      this.options(getDatabaseName(organizationName))
+    ).initialize();
 
     logger.log('Established database connection.');
     const orgRepo = ds.getRepository(Org);
     logger.log('Got organization repository');
+
     const orgs = await orgRepo.find();
+    await orgRepo.update(orgs[0].id, { orgname: organizationName });
     logger.log('Found the default organization data');
 
-    await orgRepo.update(orgs[0].id, { orgname: organizationName });
     logger.log('Updated the default organization data.');
 
     logger.log('Got user repository');
@@ -185,5 +189,6 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     logger.log('Found the default user data');
     await userRepo.update(users[0].id, { username, password });
     logger.log('Updated user data.');
+    logger.log('--------------END---------------');
   }
 }

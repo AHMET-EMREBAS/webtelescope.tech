@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  CanActivate,
   InternalServerErrorException,
   NotFoundException,
   Type,
@@ -22,7 +21,7 @@ import {
 } from '@webpackages/dto';
 import { ObjectIDDto } from '@webpackages/property';
 import { ApiBody } from '@nestjs/swagger';
-import { RestResource } from './rest';
+import { RestResource, ControllerConfiguration } from './rest';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 
@@ -30,16 +29,17 @@ export type CreateControllerOptions = {
   entity: Type;
   createDto: Type;
   updateDto: Type;
-  log?: boolean;
-  guards?: Type<CanActivate>[];
 };
 
 export function CreateController<
   E extends Type,
   C extends Type,
   U extends Type
->(options: CreateControllerOptions): Type<IController<E, C, U>> {
-  const R = new RestResource(options.entity, options.guards);
+>(
+  options: CreateControllerOptions,
+  config?: ControllerConfiguration
+): Type<IController<E, C, U>> {
+  const R = new RestResource(options.entity, config);
 
   @R.Controller()
   class Controller implements IController<E, C, U> {

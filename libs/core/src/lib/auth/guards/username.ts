@@ -1,19 +1,22 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { AuthService } from '../service';
+import { AuthExtractService, AuthUserService } from '../services';
 
 /**
  * Extract username from the request body
  * And append user to the request
- * 
+ *
  */
 @Injectable()
 export class UsernameGuard implements CanActivate {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthUserService,
+    private readonly extractService: AuthExtractService
+  ) {}
   async canActivate(ctx: ExecutionContext) {
-    const username = this.authService.extractUsernameFromBodyOrThrow(ctx);
+    const username = this.extractService.extractUsernameFromBodyOrThrow(ctx);
 
     const found = await this.authService.findUserByUserNameOrThrow(username);
-    this.authService.appendUserToRequest(ctx, found);
+    this.extractService.appendUserToRequest(ctx, found);
 
     return true;
   }

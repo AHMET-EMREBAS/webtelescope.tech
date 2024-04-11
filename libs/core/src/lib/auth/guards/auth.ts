@@ -1,6 +1,11 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { AuthService } from '../service';
 import { SessionPayload } from '@webpackages/model';
+import {
+  AuthExtractService,
+  AuthJwtService,
+  AuthMetaService,
+  AuthService,
+} from '../services';
 
 /**
  * Check the resource is public
@@ -10,26 +15,31 @@ import { SessionPayload } from '@webpackages/model';
  */
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(protected readonly authService: AuthService) {}
+  constructor(
+    protected readonly authService: AuthService,
+    protected readonly metaService: AuthMetaService,
+    protected readonly extractService: AuthExtractService,
+    protected readonly jwtService: AuthJwtService
+  ) {}
 
   async hasOAuthApiKey(ctx: ExecutionContext) {
-    if (this.authService.isPublic(ctx)) return true;
+    if (this.metaService.isPublic(ctx)) return true;
 
-    const orgName = this.authService.extractOrganizationNameFromHeader(ctx);
+    const orgName = this.extractService.extractOrganizationNameFromHeader(ctx);
     // If request made from the client of this application, then return true
     // Else if the request made from 3rd party application to the subscriber organization, then check the OAuth api key.
     if (!orgName || orgName === 'main') {
       return true;
     }
 
-    const apiKey = this.authService.extractOAuthApiKeyFromHeader(ctx);
+    const apiKey = this.extractService.extractOAuthApiKeyFromHeader(ctx);
     const oauth = await this.authService.findOAuthByApiKey(apiKey);
 
     if (oauth) {
-      const requiredScopes = this.authService.requiredScopes(ctx);
+      const requiredScopes = this.metaService.requiredScopes(ctx);
 
       if (requiredScopes) {
-        const hasRequiredScopes = this.authService.oauthHasScopes(
+        const hasRequiredScopes = this.metaService.oauthHasScopes(
           oauth.scopes.map((e) => e.scope),
           requiredScopes
         );
@@ -47,21 +57,21 @@ export class AuthGuard implements CanActivate {
     if (await this.hasOAuthApiKey(ctx)) {
       return true;
     }
-    const token = this.authService.extractTokenOrThrow(ctx);
-    const payload: SessionPayload = this.authService.verifyToken(token);
+    const token = this.extractService.extractTokenOrThrow(ctx);
+    const payload: SessionPayload = this.jwtService.verifyToken(token);
     const session = await this.authService.findSessionByIdOrThrow(payload.sub);
 
-    const requiredPermissions = this.authService.requiredPermissions(ctx);
-    const requiredRoles = this.authService.requiredRoles(ctx);
+    const requiredPermissions = this.metaService.requiredPermissions(ctx);
+    const requiredRoles = this.metaService.requiredRoles(ctx);
 
-    this.authService.userHasPermissionsOrThrow(
+    this.metaService.userHasPermissionsOrThrow(
       session.permissions,
       requiredPermissions
     );
 
-    this.authService.userHasRolesOrThrow(session.roles, requiredRoles);
+    this.metaService.userHasRolesOrThrow(session.roles, requiredRoles);
 
-    this.authService.appendSessionToRequest(ctx, session);
+    this.extractService.appendSessionToRequest(ctx, session);
 
     return true;
   }

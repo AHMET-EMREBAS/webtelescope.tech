@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { AuthService } from '../service';
 import { SessionPayload } from '@webpackages/model';
+import { AuthExtractService, AuthJwtService, AuthService } from '../services';
 
 /**
  * Check user has session
@@ -8,10 +8,14 @@ import { SessionPayload } from '@webpackages/model';
  */
 @Injectable()
 export class SessionGuard implements CanActivate {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly extractService: AuthExtractService,
+    private readonly jwtService: AuthJwtService
+  ) {}
   async canActivate(ctx: ExecutionContext) {
-    const token = this.authService.extractTokenOrThrow(ctx);
-    const payload: SessionPayload = this.authService.verifyToken(token);
+    const token = this.extractService.extractTokenOrThrow(ctx);
+    const payload: SessionPayload = this.jwtService.verifyToken(token);
     await this.authService.findSessionByIdOrThrow(payload.sub);
     return true;
   }

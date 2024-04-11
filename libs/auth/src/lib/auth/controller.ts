@@ -32,6 +32,7 @@ import {
   SessionParam,
   UserParam,
   Scope,
+  AuthUserService,
 } from '@webpackages/core';
 import { DatabaseFactory } from '../database';
 
@@ -40,7 +41,10 @@ import { DatabaseFactory } from '../database';
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly authUserService: AuthUserService
+  ) {}
 
   @ApiOperation({ summary: 'Login with username and password' })
   @ApiOkResponse({ type: LoginResult })
@@ -87,7 +91,7 @@ export class AuthController {
     @SessionParam() session: Session,
     @Body() passwordDto: UpdatePasswordDto
   ) {
-    this.authService.updatePassword(session.userId, passwordDto);
+    await this.authUserService.updatePassword(session.userId, passwordDto);
   }
 
   @ApiOperation({ summary: 'Forgot password' })

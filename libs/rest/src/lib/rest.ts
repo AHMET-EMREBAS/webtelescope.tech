@@ -1,12 +1,15 @@
 import {
   CanActivate,
   Controller,
+  CustomDecorator,
   Delete,
   Get,
+  NestInterceptor,
   Post,
   Put,
   Type,
   UseGuards,
+  UseInterceptors,
   applyDecorators,
 } from '@nestjs/common';
 import { ApiPaths, NameResult, getApiPaths, names } from '@webpackages/utils';
@@ -17,159 +20,78 @@ import {
   CanWrite,
   ResouceName,
 } from '@webpackages/core';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import {
-  ApiCreatedResponse,
-  ApiInternalServerErrorResponse,
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiTags,
-  ApiUnauthorizedResponse,
-  ApiUnprocessableEntityResponse,
-} from '@nestjs/swagger';
-import { DeleteResult, UpdateResult } from '@webpackages/dto';
+  AddRelationResponse,
+  CountResponse,
+  DeleteResponse,
+  FindAllResponse,
+  FindOneByIdResponse,
+  RemoveRelationResponse,
+  SaveResponse,
+  SetRelationResponse,
+  UnsetRelationResponse,
+  UpdateResponse,
+} from './response';
 
-export function __commonApiResponses() {
-  return applyDecorators(
-    ApiInternalServerErrorResponse({
-      description: 'Something went wrong, please try again later!',
-    }),
-    ApiUnauthorizedResponse({
-      description: 'User does not have required permissions!',
-    })
-  );
+export interface IRestResource {
+  Controller(): PropertyDecorator;
+  FindAll(): PropertyDecorator;
+  FindOneById(): PropertyDecorator;
+  Save(): PropertyDecorator;
+  Update(): PropertyDecorator;
+  Delete(): PropertyDecorator;
+  AddRelation(): PropertyDecorator;
+  RemoveRelation(): PropertyDecorator;
+  SetRelation(): PropertyDecorator;
+  UnsetRelation(): PropertyDecorator;
+  Count(): PropertyDecorator;
 }
 
-export function FindAllResponse(entity: Type) {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiNotFoundResponse({
-      description: 'There is no entity matched with the provided query!',
-    }),
-    ApiOkResponse({
-      description: 'Found entities',
-      type: entity,
-      isArray: true,
-    })
-  );
+export type ControllerConfig = {
+  guards?: Type<CanActivate>[];
+  interceptors?: Type<NestInterceptor>[];
+  decorators?: CustomDecorator[];
+  medatadata?: CustomDecorator[];
+};
+
+export type ControllerConfiguration = Partial<
+  Record<keyof IRestResource, ControllerConfig>
+>;
+
+export function ConfigureResource(options?: ControllerConfig) {
+  if (options) {
+    return applyDecorators(
+      UseGuards(...(options.guards ?? [])),
+      UseInterceptors(...(options.interceptors ?? [])),
+      applyDecorators(...(options.medatadata ?? [])),
+      applyDecorators(...(options.decorators ?? []))
+    );
+  }
+  return applyDecorators();
 }
 
-export function SaveResponse(entity: Type) {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiUnprocessableEntityResponse({
-      description: 'Input validation error',
-    }),
-    ApiCreatedResponse({
-      description: 'Saved entity',
-      type: entity,
-    })
-  );
-}
-
-export function FindOneByIdResponse(entity: Type) {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiNotFoundResponse({
-      description: 'There is no entity matched with the provided query!',
-    }),
-    ApiOkResponse({
-      description: 'Found entities',
-      type: entity,
-    })
-  );
-}
-
-export function DeleteResponse() {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiNotFoundResponse({
-      description: 'There is no entity matched with the provided query!',
-    }),
-    ApiOkResponse({
-      description: 'Deleted entity',
-      type: DeleteResult,
-    })
-  );
-}
-
-export function UpdateResponse() {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiNotFoundResponse({
-      description: 'There is no entity matched with the provided query!',
-    }),
-    ApiUnprocessableEntityResponse({
-      description: 'Input validation error',
-    }),
-    ApiOkResponse({
-      description: 'Updated entity',
-      type: UpdateResult,
-    })
-  );
-}
-
-export function AddRelationResponse(entity: Type) {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiOkResponse({
-      description: 'Added relation',
-      type: entity,
-    })
-  );
-}
-
-export function RemoveRelationResponse(entity: Type) {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiOkResponse({
-      description: 'Removed relation',
-      type: entity,
-    })
-  );
-}
-
-export function SetRelationResponse(entity: Type) {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiOkResponse({
-      description: 'Set relation',
-      type: entity,
-    })
-  );
-}
-
-export function UnsetRelationResponse(entity: Type) {
-  return applyDecorators(
-    __commonApiResponses(),
-    ApiOkResponse({
-      description: 'Unset relation',
-      type: entity,
-    })
-  );
-}
-
-export class RestResource {
+export class RestResource implements IRestResource {
   private readonly RESOURCE_NAME!: string;
   private readonly NAMES!: NameResult;
   private readonly API_PATHS!: ApiPaths;
 
   constructor(
     private readonly entity: Type,
-    private readonly guards: Type<CanActivate>[] = []
+    private readonly config?: ControllerConfiguration
   ) {
-    this.RESOURCE_NAME = this.entity.name;
-    this.NAMES = names(entity.name);
+    this.NAMES = names(this.entity.name);
+    this.RESOURCE_NAME = this.NAMES.className;
     this.API_PATHS = getApiPaths(this.NAMES.fileName);
   }
 
   Controller() {
     return applyDecorators(
       ApiTags(this.RESOURCE_NAME + 'Controller'),
-      Controller(),
+      ResouceName(this.NAMES.constName),
       BearerAccess(),
-      ResouceName(this.entity.name),
-      UseGuards(...this.guards)
+      ConfigureResource(this.config?.Controller),
+      Controller()
     );
   }
 
@@ -178,6 +100,7 @@ export class RestResource {
       FindAllResponse(this.entity),
       ApiOperation({ summary: `Find all ${this.RESOURCE_NAME} by query` }),
       CanRead(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.FindAll),
       Get(this.API_PATHS.PLURAL_PATH)
     );
   }
@@ -187,6 +110,7 @@ export class RestResource {
       FindOneByIdResponse(this.entity),
       ApiOperation({ summary: `Find all ${this.RESOURCE_NAME} by id` }),
       CanRead(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.FindOneById),
       Get(this.API_PATHS.BY_ID_PATH)
     );
   }
@@ -196,6 +120,7 @@ export class RestResource {
       SaveResponse(this.entity),
       ApiOperation({ summary: `Save ${this.RESOURCE_NAME}` }),
       CanWrite(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.Save),
       Post(this.API_PATHS.SINGULAR_PATH)
     );
   }
@@ -205,6 +130,7 @@ export class RestResource {
       UpdateResponse(),
       ApiOperation({ summary: `Update ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.Update),
       Put(this.API_PATHS.BY_ID_PATH)
     );
   }
@@ -214,6 +140,7 @@ export class RestResource {
       DeleteResponse(),
       ApiOperation({ summary: `Delete ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.Delete),
       Delete(this.API_PATHS.BY_ID_PATH)
     );
   }
@@ -223,6 +150,7 @@ export class RestResource {
       AddRelationResponse(this.entity),
       ApiOperation({ summary: `Add relation to ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.AddRelation),
       Put(this.API_PATHS.RELATION_NAME_AND_ID_PATH)
     );
   }
@@ -232,6 +160,7 @@ export class RestResource {
       RemoveRelationResponse(this.entity),
       ApiOperation({ summary: `Remove relation from ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.RemoveRelation),
       Delete(this.API_PATHS.RELATION_NAME_AND_ID_PATH)
     );
   }
@@ -241,6 +170,7 @@ export class RestResource {
       SetRelationResponse(this.entity),
       ApiOperation({ summary: `Set relation to ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.SetRelation),
       Post(this.API_PATHS.RELATION_NAME_AND_ID_PATH)
     );
   }
@@ -250,14 +180,17 @@ export class RestResource {
       UnsetRelationResponse(this.entity),
       ApiOperation({ summary: `Unset relation from ${this.RESOURCE_NAME}` }),
       CanUpdate(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.UnsetRelation),
       Delete(this.API_PATHS.RELATION_NAME_PATH)
     );
   }
 
   Count() {
     return applyDecorators(
+      CountResponse(),
       ApiOperation({ summary: `Count of ${this.RESOURCE_NAME}` }),
       CanRead(this.RESOURCE_NAME),
+      ConfigureResource(this.config?.Count),
       Get(this.API_PATHS.COUNT_PATH)
     );
   }

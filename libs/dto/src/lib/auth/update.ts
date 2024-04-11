@@ -16,9 +16,7 @@ export class NotUpdateDto {}
 export class UpdateSessionDto extends PartialType(CreateSessionDto) {}
 
 @Dto()
-export class UpdateOrganizationDto extends PartialType(
-  PickType(CreateOrgDto, [])
-) {}
+export class UpdateOrgDto extends PartialType(PickType(CreateOrgDto, [])) {}
 
 @Dto()
 export class UpdateRoleDto extends PartialType(CreateRoleDto) {}

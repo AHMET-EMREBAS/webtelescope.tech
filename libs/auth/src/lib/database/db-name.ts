@@ -6,7 +6,11 @@ import { join } from 'path';
  * @returns
  */
 export function getDatabaseName(orgname: string) {
-  return join(__dirname, 'database', orgname, orgname);
+  return join(__dirname, 'database', orgname, `${orgname}.sqlite`);
+}
+
+export function getAppDatabaseName(orgname: string, appName: string) {
+  return join(__dirname, 'database', orgname, `${appName}.sqlite`);
 }
 
 export function getDatabaseDirectory(orgname: string) {
@@ -14,5 +18,5 @@ export function getDatabaseDirectory(orgname: string) {
 }
 
 export function getTemplateDatabaseName() {
-  return join(__dirname, 'database', 'templates', 'template');
+  return join(__dirname, 'database', '__templates', 'template.sqlite');
 }

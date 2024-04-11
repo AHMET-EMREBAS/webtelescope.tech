@@ -1,10 +1,10 @@
-import { CanActivate, Type } from '@nestjs/common';
+import { Type } from '@nestjs/common';
 import {
   CreateAppDto,
   CreateLogDto,
   CreateMailDto,
   CreateOAuthDto,
-  CreateOrganizationDto,
+  CreateOrgDto,
   CreatePermissionDto,
   CreateRoleDto,
   CreateScopeDto,
@@ -17,7 +17,7 @@ import {
   UpdateLogDto,
   UpdateMailDto,
   UpdateOAuthDto,
-  UpdateOrganizationDto,
+  UpdateOrgDto,
   UpdatePermissionDto,
   UpdateRoleDto,
   UpdateScopeDto,
@@ -42,16 +42,18 @@ import {
   Scope,
   OAuth,
 } from '@webpackages/entity';
-import { CreateController } from '@webpackages/rest';
+import { CreateController, ControllerConfiguration } from '@webpackages/rest';
 import { NotDeleteGuard } from './guards/not-delete.guard';
 
-function c(e: Type, c: Type, u: Type, guards: Type<CanActivate>[] = []) {
-  return CreateController({ entity: e, createDto: c, updateDto: u, guards });
+function c(e: Type, c: Type, u: Type, config?: ControllerConfiguration) {
+  return CreateController({ entity: e, createDto: c, updateDto: u }, config);
 }
 
-export const UserController = c(User, CreateUserDto, UpdateUserDto, [
-  NotDeleteGuard,
-]);
+export const UserController = c(User, CreateUserDto, UpdateUserDto, {
+  Delete: {
+    guards: [NotDeleteGuard],
+  },
+});
 
 export const RoleController = c(Role, CreateRoleDto, UpdateRoleDto);
 
@@ -69,11 +71,7 @@ export const SecurityCodeController = c(
   UpdateSecurityCodeDto
 );
 
-export const OrganizationController = c(
-  Org,
-  CreateOrganizationDto,
-  UpdateOrganizationDto
-);
+export const OrganizationController = c(Org, CreateOrgDto, UpdateOrgDto);
 
 export const MailController = c(Mail, CreateMailDto, UpdateMailDto);
 export const SubController = c(Sub, CreateSubDto, UpdateSubDto);

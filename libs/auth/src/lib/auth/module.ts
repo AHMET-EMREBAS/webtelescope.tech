@@ -7,13 +7,26 @@ import {
   AuthGuard,
   LocalGuard,
   SessionGuard,
+  AuthUserService,
+  AuthExtractService,
+  AuthJwtService,
+  AuthMetaService,
 } from '@webpackages/core';
 import { ResourceControllers } from '../controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JtwOptionsFactory } from './jwt-options';
 import { AuthDatabaseModule } from '../database';
 
-const providers = [AuthService, AuthGuard, LocalGuard, SessionGuard];
+const providers = [
+  AuthService,
+  AuthUserService,
+  AuthExtractService,
+  AuthJwtService,
+  AuthMetaService,
+  AuthGuard,
+  LocalGuard,
+  SessionGuard,
+];
 
 @Module({
   imports: [

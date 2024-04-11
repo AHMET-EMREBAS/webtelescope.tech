@@ -1,3 +1,4 @@
+import { ICount } from '@webpackages/model';
 import { Dto, NumberProperty, ObjectProperty } from '@webpackages/property';
 import {
   ObjectLiteral,
@@ -16,4 +17,9 @@ export class UpdateResult implements RUpdate {
 export class DeleteResult implements RDelete {
   @ObjectProperty() raw: unknown;
   @NumberProperty() affected?: number | null | undefined;
+}
+
+@Dto()
+export class CountResult implements ICount {
+  @NumberProperty() count!: number;
 }

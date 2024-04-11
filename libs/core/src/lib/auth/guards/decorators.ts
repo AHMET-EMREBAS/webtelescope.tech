@@ -3,7 +3,7 @@ import { ApiBasicAuth, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from './auth';
 import { LocalGuard } from './local';
 import { SessionGuard } from './session';
-import { PublicAccess } from '../policy';
+import { ByPassAuthGuard, PublicAccess } from '../metadata';
 import { SecurityCodeGuard } from './security-code';
 import { UsernameGuard } from './username';
 import { AuthEnums } from '../enums';
@@ -26,7 +26,7 @@ export function BearerAccess() {
  */
 export function CredentialAccess() {
   return applyDecorators(
-    PublicAccess(),
+    ByPassAuthGuard(),
     ApiBasicAuth(AuthEnums.BASIC),
     UseGuards(LocalGuard)
   );

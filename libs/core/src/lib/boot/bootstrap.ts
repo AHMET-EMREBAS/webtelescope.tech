@@ -69,7 +69,7 @@ export async function bootstrap(appModule: Type) {
     })
     .addGlobalParameters({
       in: 'header',
-      name: AuthEnums.X_ORGANIZATION,
+      name: AuthEnums.X_ORGNAME,
       description: 'Organization name',
       example: 'main',
     })

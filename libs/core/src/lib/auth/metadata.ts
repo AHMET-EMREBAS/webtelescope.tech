@@ -11,7 +11,7 @@ const RESOURCE_NAME = token('resource-name');
 const PUBLIC = token('public');
 const PERMISSION = token('permission');
 const ROLE = token('permission');
-
+const BY_PASS_AUTHGUARD = token('BY_PASS_AUTHGUARD');
 const SCOPE = token('scope');
 
 export function Scope(name: string) {
@@ -20,6 +20,10 @@ export function Scope(name: string) {
 
 export function PublicAccess() {
   return SetMetadata(PUBLIC, true);
+}
+
+export function ByPassAuthGuard() {
+  return SetMetadata(BY_PASS_AUTHGUARD, true);
 }
 
 export function Permission(permission: string) {
@@ -52,6 +56,13 @@ export function isPublicAccess(
     context.getHandler(),
     context.getClass(),
   ]);
+}
+
+export function isAuthGuardByPassed(
+  reflector: Reflector,
+  context: ExecutionContext
+) {
+  return reflector.getAllAndOverride(BY_PASS_AUTHGUARD, [context.getHandler()]);
 }
 
 export function getRequiredPermissions(

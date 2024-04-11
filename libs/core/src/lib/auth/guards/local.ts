@@ -1,7 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { AuthService } from '../service';
 
-import { userToSession } from './user-to-session';
+import { convertUserToSession } from './user-to-session';
+import {
+  AuthExtractService,
+  AuthJwtService,
+  AuthUserService,
+  AuthService,
+} from '../services';
 
 /**
  * Extract username and password from the request body,
@@ -10,18 +15,23 @@ import { userToSession } from './user-to-session';
  */
 @Injectable()
 export class LocalGuard implements CanActivate {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: AuthUserService,
+    private readonly extractService: AuthExtractService,
+    private readonly jwtService: AuthJwtService
+  ) {}
 
   async canActivate(ctx: ExecutionContext) {
     const { username, password } =
-      this.authService.extractUsernameAndPassworFromBodyThrow(ctx);
-    const user = await this.authService.findUserByUserNameOrThrow(username);
+      this.extractService.extractUsernameAndPassworFromBodyThrow(ctx);
+    const user = await this.userService.findUserByUserNameOrThrow(username);
     this.authService.comparePasswordOrThrow(password, user.password);
-    const newSession = userToSession(user);
+    const newSession = convertUserToSession(user);
     const session = await this.authService.createSession(newSession);
-    this.authService.appendSessionToRequest(ctx, session);
-    const token = this.authService.signToken(session);
-    this.authService.appendAuthorizationToken(ctx, token);
+    this.extractService.appendSessionToRequest(ctx, session);
+    const token = this.jwtService.signToken(session);
+    this.extractService.appendAuthorizationToken(ctx, token);
     return true;
   }
 }

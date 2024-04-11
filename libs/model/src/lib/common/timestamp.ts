@@ -17,4 +17,6 @@ export interface ITimestamp {
    * Generated property on soft-delete
    */
   deletedAt: Date;
+
+  active: boolean;
 }

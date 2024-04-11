@@ -28,7 +28,7 @@ export class HttpClientService {
     return {
       headers: {
         Authorization: `Bearer ${this.bearerToken}`,
-        [AuthEnums.X_ORGANIZATION]: this.organizationName,
+        [AuthEnums.X_ORGNAME]: this.organizationName,
       },
     };
   }
