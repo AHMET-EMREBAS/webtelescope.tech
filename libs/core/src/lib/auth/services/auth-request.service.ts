@@ -36,7 +36,9 @@ export class AuthExtractService {
 
   extractTokenOrThrow(ctx: ExecutionContext) {
     const token = this.extractAuthorizationToken(ctx);
-    if (token) return token;
+    if (token) {
+      return token;
+    }
     throw new UnauthorizedException('You do not have a session!');
   }
 
