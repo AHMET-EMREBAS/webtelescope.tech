@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing';
 import { AuthClientService } from './service';
 import { AuthClientModule } from './module';
 import { AxiosError } from 'axios';
-import { HttpException, HttpExceptionBody } from '@nestjs/common';
+import { HttpExceptionBody } from '@nestjs/common';
 
 describe('AuthService', () => {
   let authService: AuthClientService;
