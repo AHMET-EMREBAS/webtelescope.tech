@@ -33,12 +33,13 @@ import { summaryObject } from '@webpackages/utils';
 import { AuthService } from '../auth.service';
 import { PublicAccess, Scope } from '@webpackages/core';
 import { AuthHeaderParam, SessionParam, UserParam } from '../common';
+import { IAuthController } from '@webpackages/common';
 
 @ApiTags('Auth')
 @Scope('AUTH')
 @BearerAccess()
 @Controller('auth')
-export class AuthController {
+export class AuthController implements IAuthController {
   logger!: Logger;
   constructor(private readonly authService: AuthService) {
     this.logger = new Logger(AuthController.name);

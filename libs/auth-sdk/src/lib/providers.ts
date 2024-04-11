@@ -1,5 +1,6 @@
-import { HttpRequestConfigFactory, createProvider } from '@webpackages/core';
+import { createProvider } from '@webpackages/core';
 import { AuthClientModuleOptions } from './types';
+import { HttpRequestConfigFactory } from '@webpackages/http-client';
 
 export const [provideHttpOptions, InjectHttpOptions, getHttpOptionsToken] =
   createProvider<HttpRequestConfigFactory>('AuthHttpClientOptions');

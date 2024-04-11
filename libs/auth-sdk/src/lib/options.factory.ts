@@ -1,12 +1,11 @@
-import {
-  AuthEnums,
-  HttpRequestConfigFactory,
-  isDevelopment,
-} from '@webpackages/core';
+import { AuthEnums } from '@webpackages/common';
+
 import { InjectAuthClientModuleOptions, InjectHttpOptions } from './providers';
 import { Injectable, Optional } from '@nestjs/common';
 import { AxiosRequestConfig } from 'axios';
 import { AuthClientModuleOptions } from './types';
+import { HttpRequestConfigFactory } from '@webpackages/http-client';
+import { isDevelopment } from '@webpackages/core';
 
 @Injectable()
 export class AuthModuleHttpClientOptionsFactory
