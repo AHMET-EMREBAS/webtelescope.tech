@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Logger, Post } from '@nestjs/common';
 import {
   ApiOkResponse,
   ApiOperation,
@@ -41,10 +41,13 @@ import { DatabaseFactory } from '../database';
 @BearerAccess()
 @Controller('auth')
 export class AuthController {
+  logger!: Logger;
   constructor(
     private readonly authService: AuthService,
     private readonly authUserService: AuthUserService
-  ) {}
+  ) {
+    this.logger = new Logger(AuthController.name);
+  }
 
   @ApiOperation({ summary: 'Login with username and password' })
   @ApiOkResponse({ type: LoginResult })
@@ -56,7 +59,12 @@ export class AuthController {
     @AuthHeaderParam() accessToken: string,
     @SessionParam() session: Session
   ): LoginResult {
-    return { accessToken, deviceId: session.deviceId };
+    const result = { accessToken, deviceId: session.deviceId };
+
+    this.logger.debug(
+      `User session is created  acccessToken:${accessToken} , deviceId: ${devicePixelRatio}`
+    );
+    return result;
   }
 
   @ApiOperation({ summary: 'Logout from the current session' })

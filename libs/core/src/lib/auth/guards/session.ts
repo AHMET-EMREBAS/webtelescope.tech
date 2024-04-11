@@ -5,7 +5,7 @@ import { AuthService } from '../services';
 export class SessionGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
   async canActivate(ctx: ExecutionContext) {
-    await this.authService.hasValidaSessionOrThrow(ctx);
+    await this.authService.hasValidSessionOrThrow(ctx);
     return true;
   }
 }

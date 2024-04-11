@@ -26,13 +26,26 @@ import { copyFileSync, existsSync, mkdirSync } from 'fs';
 
 @Injectable()
 export class DatabaseFactory implements TypeOrmOptionsFactory {
+  private logger: Logger;
+  private static logger: Logger;
+
+  constructor() {
+    this.logger = new Logger(DatabaseFactory.name);
+    DatabaseFactory.logger = this.logger;
+  }
   static options(database: string): BetterSqlite3ConnectionOptions {
-    return {
+    const result: BetterSqlite3ConnectionOptions = {
       type: 'better-sqlite3',
       database,
       entities: [...AuthEntities],
       subscribers: [SubSubscriber, LogSubscriber],
     };
+
+    this.logger.debug(
+      `Got Database Options : Scyn: ${result.synchronize}  database: ${database}`
+    );
+
+    return result;
   }
 
   options(database: string): BetterSqlite3ConnectionOptions {
@@ -44,29 +57,38 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
   }
 
   createTypeOrmOptions(orgname = 'main'): BetterSqlite3ConnectionOptions {
+    let result: BetterSqlite3ConnectionOptions;
+
     if (this.isDatabaseExist(getDatabaseName(orgname))) {
-      return {
+      result = {
         ...this.options(getDatabaseName(orgname)),
       };
     }
-    return {
+
+    result = {
       ...this.options(getDatabaseName('ingore')),
       synchronize: true,
       dropSchema: true,
     };
+
+    return result;
   }
 
   static isDatabaseExist(database: string) {
-    return existsSync(database);
+    const result = existsSync(database);
+    this.logger.debug(`Is database exist : ${result}`);
+    return result;
   }
 
   static async createDatabaseIFNotExist(orgname: string = 'main') {
+    const logger = new Logger('Create Database IF Not Exist');
     if (!this.isDatabaseExist(getDatabaseName(orgname))) {
       try {
         mkdirSync(getDatabaseDirectory(orgname));
         copyFileSync(getTemplateDatabaseName(), getDatabaseName(orgname));
+        logger.debug(`Created database for ${orgname}`);
       } catch (err) {
-        console.error(err);
+        logger.error(`Could not create the database for ${orgname}`);
       }
     }
   }
@@ -75,7 +97,6 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
    * Create template database that contains required data
    */
   static async createDatabaseTemplate() {
-    const logger = new Logger('Create Database Template');
     const ds = await new DataSource({
       ...this.options(''),
       database: getTemplateDatabaseName(),
@@ -84,7 +105,7 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
     }).initialize();
 
     await ds.transaction(async (manager) => {
-      logger.log('--------------START-------------------');
+      this.logger.debug('Started transaction');
       // Seed Subscription Type
       const subTypeRepo = manager.getRepository(SubType);
       await manager.save(subTypeRepo.create({ subtype: 'Primary' }));
@@ -92,14 +113,13 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       await manager.save(subTypeRepo.create({ subtype: 'Gold' }));
       await manager.save(subTypeRepo.create({ subtype: 'VIP' }));
 
-      logger.log('created sub types...');
+      this.logger.debug('Created default SubType items');
       // Seed Permissions
       const permissionRepo = manager.getRepository(Permission);
       const ADMIN_PERMISSION = await manager.save(
         permissionRepo.create({ permission: 'ADMIN' })
       );
-      logger.log('created admin permission...');
-
+      this.logger.debug('Created Admin Permission');
       const builtinPermissions = [...AuthEntities]
         .map((e) => {
           return createResourcePermissions(e.name);
@@ -111,14 +131,14 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
           permissionRepo.create({ permission })
         )
       );
-      logger.log('created built-in permissions...');
+      this.logger.debug('Created default Permission items');
 
       // Seed role
       const roleRepo = manager.getRepository(Role);
       const ADMIN_ROLE = await manager.save(
         roleRepo.create({ role: 'ADMIN', permissions: [ADMIN_PERMISSION] })
       );
-      logger.log('created admin role...');
+      this.logger.debug('Created Admin role');
 
       try {
         // Seed organization
@@ -127,9 +147,9 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
           orgname: 'Organization name',
         });
 
-        logger.log('created organization...');
+        this.logger.debug('Created the default Organization');
       } catch (err) {
-        logger.error('could not create the organization!');
+        this.logger.debug(`Could not create the default Organization`);
       }
 
       // Seed User
@@ -140,55 +160,61 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
         organization: { id: 1 },
         roles: [ADMIN_ROLE],
       });
-      logger.log('created admin user...');
+      this.logger.debug('Created the default Admin User');
 
       const appRepo = manager.getRepository(App);
       const APP = await appRepo.save({ appName: 'auth' });
-      logger.log('created app...');
+      this.logger.debug('Created default App');
       const scopeRepo = manager.getRepository(Scope);
+
       const SCOPE = await scopeRepo.save({ scope: 'AUTH' });
-      logger.log('created scope...');
+
+      this.logger.debug('Created default AUTH scope');
 
       const oauthRepo = manager.getRepository(OAuth);
+
       await oauthRepo.save({
         name: 'Auth application api key',
         app: APP,
         scopes: [SCOPE],
       });
-      logger.log('created sample oauth key...');
-      logger.log('----------------END-------------------');
+      this.logger.debug('Created a sample OAuth item');
+      this.logger.debug('Ended transaction');
     });
   }
 
   static async updateTemplateDatabaseForUser(
-    organizationName: string,
+    orgname: string,
     username: string,
     password: string
   ) {
-    const logger = new Logger('Update Template Database');
-
-    logger.log('-------------START--------------');
-    logger.log(`Updating ${organizationName}, ${username},${password}`);
     const ds = await new DataSource(
-      this.options(getDatabaseName(organizationName))
+      this.options(getDatabaseName(orgname))
     ).initialize();
 
-    logger.log('Established database connection.');
+    this.logger.debug('Established database connection.');
     const orgRepo = ds.getRepository(Org);
-    logger.log('Got organization repository');
+    this.logger.debug('Got organization repository');
 
-    const orgs = await orgRepo.find();
-    await orgRepo.update(orgs[0].id, { orgname: organizationName });
-    logger.log('Found the default organization data');
+    const foundOrg = await orgRepo.findOneByOrFail({ id: 1 });
+    await orgRepo.update(foundOrg.id, { orgname: orgname });
+    this.logger.debug(`Found the default organization data ${foundOrg.id}`);
 
-    logger.log('Updated the default organization data.');
+    this.logger.debug('Updated the default organization data.');
 
-    logger.log('Got user repository');
+    this.logger.debug('Got user repository');
     const userRepo = ds.getRepository(User);
-    const users = await userRepo.find();
-    logger.log('Found the default user data');
-    await userRepo.update(users[0].id, { username, password });
-    logger.log('Updated user data.');
-    logger.log('--------------END---------------');
+    const foundUser = await userRepo.findOneByOrFail({ id: 1 });
+    this.logger.debug('Found the default user data');
+
+    const result = await userRepo.update(foundUser.id, { username, password });
+
+    if (result.affected) {
+      this.logger.debug(
+        `Updated username ${username} and password ${password}. `
+      );
+    } else {
+      this.logger.error('Cound not update the template username and password!');
+    }
   }
 }

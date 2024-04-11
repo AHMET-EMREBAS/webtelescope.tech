@@ -1,4 +1,4 @@
-import { BadRequestException, Logger, Module } from '@nestjs/common';
+import { BadRequestException, Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { DatabaseFactory } from './db-factory';
 import { AuthEntities } from './db.entities';
@@ -14,25 +14,17 @@ import { ConfigModule } from '@nestjs/config';
       inject: [REQUEST, DatabaseFactory],
       extraProviders: [DatabaseFactory],
       async useFactory(req: Request, factory: TypeOrmOptionsFactory) {
-        const logger = new Logger('TypeOrmModule.forRoot');
-
         try {
           const orgname = extractOrgnameFromHeader(req);
-          logger.log(`Got organization name from header ${orgname}`);
           if (orgname === 'main') {
             await DatabaseFactory.createDatabaseIFNotExist(orgname);
+            return DatabaseFactory.options(orgname);
           }
-
-          const options = await factory.createTypeOrmOptions(orgname);
-          logger.log('Created database options.');
-
-          return options;
+          return await factory.createTypeOrmOptions(orgname);
         } catch (err) {
-          console.error(err);
-          const errorMessage =
-            'Something went wrong while creating your database!';
-          logger.error(errorMessage);
-          throw new BadRequestException(errorMessage);
+          throw new BadRequestException(
+            'Something went wrong while creating your database!'
+          );
         }
       },
     }),

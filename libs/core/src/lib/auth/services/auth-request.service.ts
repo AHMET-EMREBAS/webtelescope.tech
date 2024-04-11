@@ -1,6 +1,7 @@
 import {
   ExecutionContext,
   Injectable,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthEnums } from '../enums';
@@ -10,10 +11,14 @@ import { Session, User } from '@webpackages/entity';
 
 @Injectable()
 export class AuthExtractService {
+  private readonly logger!: Logger;
+
+  constructor() {
+    this.logger = new Logger(AuthExtractService.name);
+  }
   request(ctx: ExecutionContext): IRequest {
     return ctx.switchToHttp().getRequest();
   }
-
   /**
    * Get the authorization property from headers
    * @param ctx
@@ -23,6 +28,9 @@ export class AuthExtractService {
     const headers = this.request(ctx).headers;
     const bearerToken = headers.authorization ?? undefined;
     const [, token] = bearerToken?.split(' ') ?? [];
+
+    this.logger.debug(`Extracted Bearer Authorization Token : ${bearerToken}`);
+    this.logger.debug(`Extracted Authorization Token : ${token}`);
     return token;
   }
 
@@ -33,36 +41,58 @@ export class AuthExtractService {
   }
 
   extractOrganizationNameFromHeader(ctx: ExecutionContext) {
-    return this.request(ctx).headers[AuthEnums.X_ORGNAME] as string;
+    const result = this.request(ctx).headers[AuthEnums.X_ORGNAME] as string;
+    this.logger.debug(`Extracted Orgname : ${result}`);
+    return result;
   }
 
   extractOAuthApiKeyFromHeader(ctx: ExecutionContext) {
-    return this.request(ctx).headers[AuthEnums.X_OAUTH_API_KEY] as string;
+    const result = this.request(ctx).headers[
+      AuthEnums.X_OAUTH_API_KEY
+    ] as string;
+
+    this.logger.debug(`Extracted OAuth API Key : ${result}`);
+    return result;
   }
 
   appendAuthorizationToken(ctx: ExecutionContext, token: string) {
     this.request(ctx).headers.authorization = token;
+    this.logger.debug(`Appended the token ${token} to authorization header`);
   }
 
   appendSessionToRequest(ctx: ExecutionContext, session: Session) {
     this.request(ctx)[AuthEnums.SESSION] = session;
+    this.logger.debug(
+      `Appended the session ${session} to authorization header`
+    );
   }
 
   getSessionFromRequest(ctx: ExecutionContext): Session {
-    return this.request(ctx)[AuthEnums.SESSION];
+    const result = this.request(ctx)[AuthEnums.SESSION];
+    this.logger.debug(`Extracted Session From Request : ${result}`);
+    return result;
   }
 
   getParamId(ctx: ExecutionContext): string {
-    return this.request(ctx).params['id'];
+    const result = this.request(ctx).params['id'];
+    this.logger.debug(`Extracted Id Param From Request: ${result}`);
+    return result;
   }
 
   appendUserToRequest(ctx: ExecutionContext, user: User) {
     this.request(ctx)[AuthEnums.USER] = user;
+    this.logger.debug(`Appnded user data to request : ${user}`);
   }
 
   extractUsernameFromBody(ctx: ExecutionContext): string | undefined {
-    const { username } = this.request(ctx).body;
-    if (username) return username;
+    const body = this.request(ctx);
+    const { username } = body.user;
+    if (username) {
+      this.logger.debug(`Extracted username from request : ${username}`);
+      return username;
+    }
+    this.logger.debug(`Request Body: ${body}`);
+    this.logger.debug(`Username cound not found in request body! `);
     return undefined;
   }
 
@@ -75,8 +105,15 @@ export class AuthExtractService {
   extractUsernameAndPassworFromBody(
     ctx: ExecutionContext
   ): ICredentials | undefined {
-    const { username, password } = this.request(ctx).body;
-    if (username && password) return { username, password };
+    const body = this.request(ctx).body;
+    const { username, password } = body;
+    if (username && password) {
+      this.logger.debug(`username: ${username}, password: ${password}`);
+      this.logger.debug(`Extracted username and passwor from request body.`);
+      return { username, password };
+    }
+    this.logger.debug(`Request Body : ${body}`);
+    this.logger.debug(`Username or password are not in request body!`);
     return undefined;
   }
 
@@ -87,13 +124,14 @@ export class AuthExtractService {
   }
 
   extractSecurityCodeFromQuery(ctx: ExecutionContext) {
-    const { securityCode } = this.request(ctx).query as LoginWithCodeDto;
+    const query = this.request(ctx).query;
+    const { securityCode } = query as LoginWithCodeDto;
+    this.logger.debug(`Extracted security code from query ${securityCode}`);
     return securityCode;
   }
 
   extractSecurityCodeFromQueryOrThrow(ctx: ExecutionContext) {
     const securityCode = this.extractSecurityCodeFromQuery(ctx);
-
     if (securityCode) return securityCode;
     throw new UnauthorizedException('Security code is not provided!');
   }

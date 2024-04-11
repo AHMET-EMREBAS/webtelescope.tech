@@ -1,6 +1,7 @@
 import {
   ExecutionContext,
   Injectable,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -18,44 +19,45 @@ import {
  */
 @Injectable()
 export class AuthMetaService {
-  constructor(private readonly reflector: Reflector) {}
+  protected readonly logger!: Logger;
+  constructor(private readonly reflector: Reflector) {
+    this.logger = new Logger(AuthMetaService.name);
+  }
 
   resourceName(ctx: ExecutionContext) {
-    return getResourceName(this.reflector, ctx);
-  }
-
-  getAllAndOverride(ctx: ExecutionContext, key: string | symbol) {
-    return this.reflector.getAllAndOverride(key, [
-      ctx.getClass(),
-      ctx.getHandler(),
-    ]);
-  }
-
-  getAllAndMerge(ctx: ExecutionContext, key: string | symbol) {
-    return this.reflector.getAllAndMerge(key, [
-      ctx.getClass(),
-      ctx.getHandler(),
-    ]);
+    const result = getResourceName(this.reflector, ctx);
+    this.logger.debug(`Resource Name : ${result}`);
+    return result;
   }
 
   isPublic(ctx: ExecutionContext) {
-    return isPublicAccess(this.reflector, ctx);
+    const result = isPublicAccess(this.reflector, ctx);
+    this.logger.debug(`Is Public Access : ${result}`);
+    return result;
   }
 
   isAuthGuardByPassed(ctx: ExecutionContext) {
-    return isAuthGuardByPassed(this.reflector, ctx);
+    const result = isAuthGuardByPassed(this.reflector, ctx);
+    this.logger.debug(`Is AuthGuard Bypassed : ${result}`);
+    return result;
   }
 
   getRequiredScopes(ctx: ExecutionContext) {
-    return getRequiredScope(this.reflector, ctx);
+    const result = getRequiredScope(this.reflector, ctx);
+    this.logger.debug(`Required Scopes : ${result}`);
+    return result;
   }
 
   getRequiredPermissions(ctx: ExecutionContext) {
-    return getRequiredPermissions(this.reflector, ctx);
+    const result = getRequiredPermissions(this.reflector, ctx);
+    this.logger.debug(`Required Permissions : ${result}`);
+    return result;
   }
 
   getRequiredRoles(ctx: ExecutionContext) {
-    return getRequiredRoles(this.reflector, ctx);
+    const result = getRequiredRoles(this.reflector, ctx);
+    this.logger.debug(`Required Permissions : ${result}`);
+    return result;
   }
 
   userPermissionsContainsRequiredPermissions(
@@ -63,10 +65,16 @@ export class AuthMetaService {
     requiredPermissions: string[]
   ) {
     if (userPermissions.includes('ADMIN')) {
+      this.logger.debug('User has ADMIN role');
       return true;
     }
     for (const rp of requiredPermissions)
-      if (!userPermissions.includes(rp)) return false;
+      if (!userPermissions.includes(rp)) {
+        this.logger.debug(`User does not have the permission ${rp}`);
+        return false;
+      }
+
+    this.logger.debug(`User has all permissions ${requiredPermissions}`);
     return true;
   }
 
@@ -86,7 +94,13 @@ export class AuthMetaService {
   }
 
   userRolesContainRequiredRoles(userRoles: string[], roles: string[]) {
-    for (const rr of roles) if (!userRoles.includes(rr)) return false;
+    for (const rr of roles)
+      if (!userRoles.includes(rr)) {
+        this.logger.debug(`User does not have the role ${rr}`);
+        return false;
+      }
+
+    this.logger.debug(`User have all the roles ${roles}`);
     return true;
   }
 
@@ -96,7 +110,13 @@ export class AuthMetaService {
   }
 
   oAuthHasRequiredScopes(oauthScopes: string[], scopes: string[]): boolean {
-    for (const s of scopes) if (!oauthScopes.includes(s)) return false;
+    for (const s of scopes)
+      if (!oauthScopes.includes(s)) {
+        this.logger.debug(`OAuth does not have required scopes ${scopes}`);
+        return false;
+      }
+
+    this.logger.debug(`OAuth has all required scopes ${scopes}`);
     return true;
   }
 }

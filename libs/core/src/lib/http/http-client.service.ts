@@ -1,71 +1,70 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@nestjs/common';
-import { createProvider } from '../providers';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AuthEnums } from '../auth';
+import { InjectHttpClientOptions } from './http-config.providers';
+import { HttpClientModuleOptions } from './http-client-options';
 
-export const [provideAxiosBaseURL, InjectAxiosBaseURL, getAxiosBaseURLToken] =
-  createProvider('AxiosBaseURL');
-
-export const [provideBearerToken, InjectBearerToken, getBearerToken] =
-  createProvider('ApiBearerToken');
-
-export const [
-  provideOrganizationName,
-  InjectOrganizationName,
-  getOrganizationNameToken,
-] = createProvider('OrganizationName');
+import { HttpClientServiceResponse as HttpResponse } from './http-response';
 
 @Injectable()
 export class HttpClientService {
   constructor(
-    @InjectAxiosBaseURL() protected readonly baseURL: string,
-    @InjectBearerToken() protected readonly bearerToken: string,
-    @InjectOrganizationName() protected readonly organizationName: string
+    @InjectHttpClientOptions()
+    private readonly httpClientModuleOptions: HttpClientModuleOptions
   ) {}
 
   private httpConfig(): AxiosRequestConfig {
+    const { appname, bearerToken, oauthApiKey, orgname } =
+      this.httpClientModuleOptions;
     return {
       headers: {
-        Authorization: `Bearer ${this.bearerToken}`,
-        [AuthEnums.X_ORGNAME]: this.organizationName,
+        Authorization: `Bearer ${bearerToken}`,
+        [AuthEnums.X_APP_NAME]: appname,
+        [AuthEnums.X_ORGNAME]: orgname,
+        [AuthEnums.X_OAUTH_API_KEY]: oauthApiKey,
+      },
+      transformResponse: (res: AxiosResponse) => {
+        return {
+          status: res.status,
+          body: res.data,
+          message: res.statusText,
+        };
       },
     };
   }
 
   private resolveURL(fragment: string) {
-    return new URL(fragment, this.baseURL).toString();
+    return new URL(fragment, this.httpClientModuleOptions.baseURL).toString();
   }
 
-  async post(fragment: string, body: any) {
-    return await axios
-      .post(this.resolveURL(fragment), body, this.httpConfig())
-      .then((response) => {
-        return response.data;
-      });
+  async post<Body>(fragment: string, body: any) {
+    return await axios.post<any, HttpResponse<Body>>(
+      this.resolveURL(fragment),
+      body,
+      this.httpConfig()
+    );
   }
 
-  async get(fragment: string) {
-    return await axios
-      .get(this.resolveURL(fragment), this.httpConfig())
-      .then((response) => {
-        return response.data;
-      });
+  async get<Body>(fragment: string) {
+    return await axios.get<any, HttpResponse<Body>>(
+      this.resolveURL(fragment),
+      this.httpConfig()
+    );
   }
 
-  async put(fragment: string, body: any) {
-    return await axios
-      .put(this.resolveURL(fragment), body, this.httpConfig())
-      .then((response) => {
-        return response.data;
-      });
+  async put<Body>(fragment: string, body: any) {
+    return await axios.put<any, HttpResponse<Body>>(
+      this.resolveURL(fragment),
+      body,
+      this.httpConfig()
+    );
   }
 
-  async delete(fragment: string) {
-    return await axios
-      .delete(this.resolveURL(fragment), this.httpConfig())
-      .then((response) => {
-        return response.data;
-      });
+  async delete<Body>(fragment: string) {
+    return await axios.delete<any, HttpResponse<Body>>(
+      this.resolveURL(fragment),
+      this.httpConfig()
+    );
   }
 }

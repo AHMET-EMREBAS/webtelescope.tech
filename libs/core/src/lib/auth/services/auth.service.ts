@@ -12,6 +12,7 @@ import { Repository } from 'typeorm';
 import {
   ExecutionContext,
   Injectable,
+  Logger,
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
@@ -19,7 +20,7 @@ import {
 import { CreateMailDto, CreateSubDto } from '@webpackages/dto';
 import { v4 } from 'uuid';
 import { ICreateSessionDto, SessionPayload } from '@webpackages/model';
-import { compareSync } from 'bcrypt';
+import { compare, compareSync } from 'bcrypt';
 import { AuthExtractService } from './auth-request.service';
 import { AuthJwtService } from './auth-jwt.service';
 import { AuthMetaService } from './auth-meta.service';
@@ -28,6 +29,7 @@ import { AuthUserService } from './auth-user.service';
 
 @Injectable()
 export class AuthService {
+  private readonly logger!: Logger;
   constructor(
     @InjectRepository(Session)
     protected readonly sessionRepo: Repository<Session>,
@@ -47,17 +49,20 @@ export class AuthService {
     protected readonly jwtService: AuthJwtService,
     protected readonly metaService: AuthMetaService,
     protected readonly userService: AuthUserService
-  ) {}
+  ) {
+    this.logger = new Logger(AuthService.name);
+  }
 
   /**
    * Extract and verify token, return session or throw session-not-found error
    * @param ctx
    * @returns
    */
-  async hasValidaSessionOrThrow(ctx: ExecutionContext) {
+  async hasValidSessionOrThrow(ctx: ExecutionContext) {
     const token = this.extractService.extractTokenOrThrow(ctx);
     const payload: SessionPayload = this.jwtService.verifyToken(token);
     const session = await this.findSessionByIdOrThrow(payload.sub);
+    this.logger.debug(`User has a valid session : ${session}`);
     return session;
   }
 
@@ -74,7 +79,7 @@ export class AuthService {
    * @returns
    */
   async isAuthorizedOrThrow(ctx: ExecutionContext) {
-    const session = await this.hasValidaSessionOrThrow(ctx);
+    const session = await this.hasValidSessionOrThrow(ctx);
     const requiredPermissions = this.metaService.getRequiredPermissions(ctx);
     const requiredRoles = this.metaService.getRequiredRoles(ctx);
 
@@ -100,6 +105,7 @@ export class AuthService {
     if (!orgName || orgName === 'main') {
       return true;
     }
+    this.logger.debug(`Organization Name : ${orgName}`);
     return false;
   }
 
@@ -133,7 +139,7 @@ export class AuthService {
     const { username, password } =
       this.extractService.extractUsernameAndPassworFromBodyThrow(ctx);
     const user = await this.userService.findUserByUserNameOrThrow(username);
-    this.comparePasswordOrThrow(password, user.password);
+    await this.comparePasswordOrThrow(password, user.password);
 
     const newSession = convertUserToSession(user);
     const session = await this.createSession(newSession);
@@ -213,15 +219,31 @@ export class AuthService {
   }
 
   async sendEmail(mail: CreateMailDto) {
+    this.logger.debug(`Sending email ${mail}`);
     return await this.mailRepo.save(mail);
   }
 
   comparePassword(password: string, hashPassword: string) {
-    return compareSync(password, hashPassword);
+    this.logger.debug('Comparing passwords');
+
+    return new Promise((res, rej) => {
+      compare(password, hashPassword, (err, same) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(same);
+        }
+      });
+    });
   }
 
-  comparePasswordOrThrow(password: string, hashPassword: string) {
-    if (this.comparePassword(password, hashPassword)) return true;
+  async comparePasswordOrThrow(password: string, hashPassword: string) {
+    if (await this.comparePassword(password, hashPassword)) {
+      this.logger.debug(`Passwords match`);
+      return true;
+    }
+
+    this.logger.error('Wrong password');
 
     throw new UnauthorizedException('Wrong password');
   }
