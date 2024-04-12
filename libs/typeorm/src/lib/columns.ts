@@ -182,6 +182,7 @@ export function UUIDColumn(options: Partial<Omit<ColumnOptions, 'type'>> = {}) {
  */
 export function OwnerRelation<T extends IID>(target: Type<T>) {
   return applyDecorators(
+    ApiProperty({ type: 'object' }),
     ManyToOne(
       () => target,
       (t) => t.id,

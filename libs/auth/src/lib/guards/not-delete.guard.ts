@@ -19,13 +19,16 @@ export class NotDeleteGuard implements CanActivate {
   canActivate(ctx: ExecutionContext) {
     const handler = ctx.getHandler().name;
     const rn = this.metaService.resourceName(ctx);
+    const session = this.extractService.getSessionFromRequest(ctx);
+    const paramId = this.extractService.getParamId(ctx);
 
     if (handler === 'delete') {
-      if (rn === 'User' || rn === 'Org' || rn === 'Session') {
-        const session = this.extractService.getSessionFromRequest(ctx);
-        const paramId = this.extractService.getParamId(ctx);
-
+      if (rn === 'User') {
         if (session.userId + '' == paramId) {
+          throw new UnauthorizedException('You cannot delete your own data!');
+        }
+      } else if (rn === 'Org') {
+        if (session.orgId + '' === paramId) {
           throw new UnauthorizedException('You cannot delete your own data!');
         }
       }
