@@ -1,4 +1,4 @@
-import { Logger, Type } from '@nestjs/common';
+import { Logger, NestApplicationOptions, Type } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ClassConstructor } from 'class-transformer';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { ConfigService } from '@nestjs/config';
-import { AuthEnums } from '@webpackages/common';
+import { AuthEnums, ConfigKeyFactory } from '@webpackages/common';
 
 import favicon = require('serve-favicon');
 
@@ -14,6 +14,7 @@ export type BootstrapOptions = {
   appModule: ClassConstructor<unknown>;
   port: number;
   appName: string;
+  appShortName: string;
   appDescription: string;
   website: string;
   host: string;
@@ -22,26 +23,35 @@ export type BootstrapOptions = {
   globalPrefix?: string;
 };
 
-export async function bootNestApplication(appModule: Type) {
-  const app =
-    process.env['HTTPS'] === 'true'
-      ? await NestFactory.create(appModule, {
-          httpsOptions: {
-            cert: readFileSync(join(__dirname, 'cert.pem')),
-            key: readFileSync(join(__dirname, 'key.pem')),
-          },
-        })
-      : await NestFactory.create(appModule);
+export function createHttpsConfiguration(): NestApplicationOptions {
+  return {
+    httpsOptions: {
+      cert: readFileSync(join(__dirname, 'cert.pem')),
+      key: readFileSync(join(__dirname, 'key.pem')),
+    },
+  };
+}
+export async function bootNestApplication(appModule: Type, appName: string) {
+  const createApp = async (https = false) =>
+    await NestFactory.create(
+      appModule,
+      https ? createHttpsConfiguration() : undefined
+    );
 
-  const config = app.get(ConfigService);
+  const context = await createApp();
+  const config = context.get(ConfigService);
+  const cf = new ConfigKeyFactory(appName);
 
-  const GLOBAL_PREFIX = config.getOrThrow('API_GLOBAL_PREFIX');
-  const APP_NAME = config.getOrThrow('APP_NAME');
-  const APP_DESCRIPTION = config.getOrThrow('APP_DESCRIPTION');
-  const EMAIL = config.getOrThrow('EMAIL');
-  const URL = config.getOrThrow('URL');
-  const HOST = config.getOrThrow('HOST');
-  const PORT = config.getOrThrow('PORT');
+  const HTTPS = config.getOrThrow(cf.key('HTTPS'));
+  const GLOBAL_PREFIX = config.getOrThrow(cf.key('API_GLOBAL_PREFIX'));
+  const NAME = config.getOrThrow(cf.key('NAME'));
+  const DESCRIPTION = config.getOrThrow(cf.key('DESCRIPTION'));
+  const EMAIL = config.getOrThrow(cf.key('EMAIL'));
+  const URL = config.getOrThrow(cf.key('URL'));
+  const HOST = config.getOrThrow(cf.key('HOST'));
+  const PORT = config.getOrThrow(cf.key('PORT'));
+
+  const app = await createApp(HTTPS === 'true');
 
   app.setGlobalPrefix(GLOBAL_PREFIX);
   app.use(helmet());
@@ -50,8 +60,8 @@ export async function bootNestApplication(appModule: Type) {
   app.use(favicon(join(__dirname, 'public', 'favicon.ico')));
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle(APP_NAME)
-    .setDescription(APP_DESCRIPTION)
+    .setTitle(NAME)
+    .setDescription(DESCRIPTION)
     .addBearerAuth({
       type: 'http',
       scheme: 'Bearer',
@@ -76,7 +86,7 @@ export async function bootNestApplication(appModule: Type) {
 
   SwaggerModule.setup('api', app, document, {
     customfavIcon: './favicon.ico',
-    customSiteTitle: APP_NAME,
+    customSiteTitle: NAME,
     explorer: true,
     yamlDocumentUrl: 'api-yaml',
     jsonDocumentUrl: 'api-json',
@@ -84,6 +94,6 @@ export async function bootNestApplication(appModule: Type) {
 
   await app.listen(PORT);
   Logger.log(
-    `🚀 ${APP_NAME} application is running on: http://${HOST}:${PORT}/${GLOBAL_PREFIX}`
+    `🚀 ${NAME} application is running on: http://${HOST}:${PORT}/${GLOBAL_PREFIX}`
   );
 }

@@ -102,14 +102,17 @@ export class AuthService {
     return true;
   }
 
+  /**
+   * Check the request made to the main organization
+   * @param ctx
+   * @returns
+   */
   protected async isMainOrganizationAccess(ctx: ExecutionContext) {
     const orgName = this.extractService.extractOrganizationNameFromHeader(ctx);
-    // If request made from the client of this application, then return true
-    // Else if the request made from 3rd party application to the subscriber organization, then check the OAuth api key.
+    this.logger.debug(`Organization Name : ${orgName}`);
     if (!orgName || orgName === 'main') {
       return true;
     }
-    this.logger.debug(`Organization Name : ${orgName}`);
     return false;
   }
 

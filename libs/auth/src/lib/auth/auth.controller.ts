@@ -19,7 +19,6 @@ import {
   SessionAccess,
   UsernameAccess,
 } from '../app.guard';
-
 import {
   AuthorizationParam,
   OrgnameParam,
@@ -28,10 +27,9 @@ import {
 } from '../common';
 import { AuthResourceBuilder } from './auth-controller.builder';
 import { AuthService } from '../auth.service';
-import { DatabaseFactory } from '../database';
 import { IAuthController } from '@webpackages/common';
 import { ISession, IUser, MessageResponse } from '@webpackages/model';
-import { PublicAccess } from '@webpackages/core';
+import { ByPassAuthGuard } from '@webpackages/core';
 import { summaryObject } from '@webpackages/utils';
 
 const R = new AuthResourceBuilder({
@@ -42,7 +40,7 @@ const R = new AuthResourceBuilder({
   LogoutAll: { decorators: [LogoutAllAccess()] },
   HasSession: { decorators: [SessionAccess()] },
   ForgotPassword: { decorators: [UsernameAccess()] },
-  SignUp: { decorators: [PublicAccess()] },
+  SignUp: { decorators: [ByPassAuthGuard()] },
 });
 
 @R.Controller()

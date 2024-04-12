@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { DatabaseFactory, getDatabaseName } from './database';
 import { AuthModule } from './auth';
+import { key } from './common';
 
 @Module({
   imports: [
@@ -25,15 +26,17 @@ export class AppModule implements OnModuleInit {
   async onModuleInit() {
     await DatabaseFactory.createDatabaseTemplate();
 
-    const username = this.configService.getOrThrow('APP_USERNAME');
-    const password = this.configService.getOrThrow('APP_PASSWORD');
+    const username = this.configService.getOrThrow(key('USERNAME'));
+    const password = this.configService.getOrThrow(key('PASSWORD'));
 
-    if (!DatabaseFactory.isDatabaseExist(getDatabaseName('main'))) {
-      await DatabaseFactory.createDatabaseIFNotExist('main');
+    const dbname = this.configService.getOrThrow(key('DATABASE_NAME'));
+
+    if (!DatabaseFactory.isDatabaseExist(getDatabaseName(dbname))) {
+      await DatabaseFactory.createDatabaseIFNotExist(dbname);
 
       try {
         await DatabaseFactory.updateTemplateDatabaseForUser(
-          'main',
+          dbname,
           username,
           password
         );

@@ -1,3 +1,4 @@
 import { bootNestApplication } from '@webpackages/boot';
-import { AppModule } from '@webpackages/auth';
-bootNestApplication(AppModule);
+import { AUTH_MODULE_NAME, AppModule } from '@webpackages/auth';
+
+bootNestApplication(AppModule, AUTH_MODULE_NAME);

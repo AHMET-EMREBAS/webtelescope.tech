@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { getDatabaseName } from './db-name';
 import { AuthExtractService } from '../services';
 import { IRequest } from '@webpackages/model';
+
 @Module({
   imports: [
     ConfigModule.forFeature(() => ({})),

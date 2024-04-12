@@ -81,7 +81,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
     return applyDecorators(
       ApiOperation({ summary: 'Request password reset link' }),
       Post('forgot-password'),
-      ConfigureResource(this.config?.HasSession)
+      ConfigureResource(this.config?.ForgotPassword)
     );
   }
 
@@ -94,7 +94,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
       }),
       ApiUnauthorizedResponse({ description: 'There is no valid session' }),
       Post('update-password'),
-      ConfigureResource(this.config?.HasSession)
+      ConfigureResource(this.config?.UpdatePassword)
     );
   }
 
@@ -102,7 +102,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
     return applyDecorators(
       ApiOperation({ summary: 'Signup' }),
       Post('signup'),
-      ConfigureResource(this.config?.HasSession)
+      ConfigureResource(this.config?.SignUp)
     );
   }
 }
