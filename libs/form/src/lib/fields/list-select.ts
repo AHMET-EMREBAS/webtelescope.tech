@@ -8,6 +8,7 @@ import {
 } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButton } from '@angular/material/button';
 @Component({
   standalone: true,
   imports: [
@@ -19,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   selector: 'wt-list-select-field',
   template: `
+    <input type="text" matInput [formControlName]="inputName" hidden />
     <mat-card style="width: 100%;">
       <mat-card-header>
         <mat-card-title>
@@ -36,32 +38,36 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         </mat-checkbox>
 
         <div [formGroup]="formGroup">
-          <mat-selection-list
-            #input
-            [formControlName]="inputName"
-            [attr.data-testid]="inputName"
-          >
-            <div style="display: flex; flex-direction: row; gap: 1em;">
-              @for (item of items; track item) {
+          <div style="display: flex; flex-direction: row; gap: 1em;">
+            @for (item of items; track item) {
 
-              <mat-card style="min-width: 200px;">
-                <mat-card-header>
-                  <div
-                    style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; align-items: center;"
+            <mat-card style="min-width: 200px;">
+              <mat-card-header>
+                <div
+                  style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; align-items: center;"
+                >
+                  <h3 *ngIf="item.subs">{{ item.label }}</h3>
+                  <button
+                    #button
+                    mat-icon-button
+                    matTooltip="Select All"
+                    matTooltipPosition="above"
+                    color="primary"
+                    (click)="selectGroup(button, listRef)"
                   >
-                    <h3 *ngIf="item.subs">{{ item.label }}</h3>
-                    <button
-                      mat-icon-button
-                      matTooltip="Select All"
-                      matTooltipPosition="above"
-                      (click)="selectItem(item)"
-                    >
-                      <mat-icon>select_all</mat-icon>
-                    </button>
-                  </div>
-                </mat-card-header>
+                    <mat-icon>
+                      {{
+                        button.color === 'primary'
+                          ? 'select_all'
+                          : 'deselect_all'
+                      }}
+                    </mat-icon>
+                  </button>
+                </div>
+              </mat-card-header>
 
-                <mat-card-content>
+              <mat-card-content>
+                <mat-selection-list #listRef [attr.data-testid]="inputName">
                   @if(item.subs) { @for(subItem of item.subs; track subItem){
                   <mat-list-option
                     [value]="subItem"
@@ -83,11 +89,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
                     <span> {{ item.label }} </span>
                   </mat-list-option>
                   }
-                </mat-card-content>
-              </mat-card>
-              }
-            </div>
-          </mat-selection-list>
+                </mat-selection-list>
+              </mat-card-content>
+            </mat-card>
+            }
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions>
@@ -161,6 +167,16 @@ export class ListSelectComponent
       item.subs.forEach((e) => this.selectedItems?.push(e));
     } else {
       this.selectedItems?.push(item);
+    }
+  }
+
+  selectGroup(button: MatButton, list: MatSelectionList) {
+    if (button.color === 'primary') {
+      list.selectAll();
+      button.color = 'accent';
+    } else {
+      list.deselectAll();
+      button.color = 'primary';
     }
   }
 }
