@@ -1,1 +1,66 @@
-<p>navigation works!</p>
+<div class="root-navigation-container">
+  <mat-toolbar color="primary">
+    <div class="row space-between full">
+      <div class="row">
+        <button mat-icon-button (click)="sidenavLeft.toggle()">
+          <mat-icon>{{ sidenavLeft.opened ? 'menu_open' : 'menu' }}</mat-icon>
+        </button>
+        <ng-content select="[wtToolbar]"></ng-content>
+      </div>
+      <div class="row">
+        <ng-content select="[wtToolbarRight]"></ng-content>
+        <div class="row">
+          <button mat-icon-button (click)="emitProfileClickEvent()">
+            <mat-icon [matBadge]="profileBadge" matBadgeColor="accent">
+              person
+            </mat-icon>
+          </button>
+          <button mat-icon-button (click)="emitSettingClickEvent()">
+            <mat-icon [matBadge]="settingBadge" matBadgeColor="accent">
+              settings
+            </mat-icon>
+          </button>
+          <button mat-icon-button (click)="sidenavRight.toggle()">
+            <mat-icon>
+              {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenavLeft position="start">
+      <ng-content select="[wtLeftPanel]"></ng-content>
+    </mat-sidenav>
+    <mat-sidenav #sidenavRight position="end">
+      <ng-content select="[wtRightPanel]"></ng-content>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content select="[wtMainContent]"></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Status bar -->
+  <mat-toolbar color="primary">
+    <div class="row space-between full">
+      <div class="row">
+        <ng-content select="[wtStatusBar]"></ng-content>
+      </div>
+      <div class="row">
+        <ng-content select="[wtStatusBarRight]"></ng-content>
+
+        <button mat-icon-button (click)="emitNotificationClickEvent()">
+          <mat-icon
+            class="fill"
+            [matBadge]="notificationBadge"
+            matBadgeColor="accent"
+          >
+            notifications
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>

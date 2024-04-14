@@ -15,7 +15,8 @@
   "scripts": {
     "stories": "npx nx g @nx/angular:stories --project=material",
     "storybook": "npx nx run material:storybook",
-    "build-storybook": "npx nx run material:build-storybook"
+    "build-storybook": "npx nx run material:build-storybook",
+    "angular": "node ./tools/scripts/angular.js"
   },
   "private": true,
   "devDependencies": {

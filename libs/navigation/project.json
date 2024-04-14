@@ -57,16 +57,16 @@
           "-e",
           "json",
           "-d",
-          "libs/form/.storybook",
+          "libs/navigation/.storybook",
           "-p",
-          "libs/form/tsconfig.json"
+          "libs/navigation/tsconfig.json"
         ],
         "assets": [
-          "libs/form/src/assets",
-          "libs/form/src/favicon.svg"
+          "libs/navigation/src/assets",
+          "libs/navigation/src/favicon.svg"
         ],
         "styles": [
-          "libs/form/src/style.scss"
+          "libs/navigation/src/style.scss"
         ]
       },
       "configurations": {
@@ -89,16 +89,16 @@
           "-e",
           "json",
           "-d",
-          "libs/form/.storybook",
+          "libs/navigation/.storybook",
           "-p",
-          "libs/form/tsconfig.json"
+          "libs/navigation/tsconfig.json"
         ],
         "assets": [
-          "libs/form/src/assets",
-          "libs/form/src/favicon.svg"
+          "libs/navigation/src/assets",
+          "libs/navigation/src/favicon.svg"
         ],
         "styles": [
-          "libs/form/src/style.scss"
+          "libs/navigation/src/style.scss"
         ]
       },
       "configurations": {
