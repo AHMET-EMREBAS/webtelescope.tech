@@ -30,6 +30,7 @@
       "@webpackages/mail": ["libs/mail/src/index.ts"],
       "@webpackages/material": ["libs/material/src/index.ts"],
       "@webpackages/model": ["libs/model/src/index.ts"],
+      "@webpackages/navigation": ["libs/navigation/src/index.ts"],
       "@webpackages/ngrx": ["libs/ngrx/src/index.ts"],
       "@webpackages/property": ["libs/property/src/index.ts"],
       "@webpackages/rest": ["libs/rest/src/index.ts"],
