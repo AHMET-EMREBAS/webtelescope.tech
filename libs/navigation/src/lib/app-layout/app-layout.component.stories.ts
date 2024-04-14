@@ -3,16 +3,17 @@ import {
   type Meta,
   type StoryObj,
 } from '@storybook/angular';
-import { NavigationComponent } from './navigation.component';
+import { AppLayoutComponent } from './app-layout.component';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-const meta: Meta<NavigationComponent> = {
-  component: NavigationComponent,
-  title: 'NavigationComponent',
+const meta: Meta<AppLayoutComponent> = {
+  component: AppLayoutComponent,
+  title: 'AppLayoutComponent',
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
@@ -20,7 +21,7 @@ const meta: Meta<NavigationComponent> = {
   ],
 };
 export default meta;
-type Story = StoryObj<NavigationComponent>;
+type Story = StoryObj<AppLayoutComponent>;
 
 export const Primary: Story = {
   args: {},
@@ -30,5 +31,6 @@ export const Heading: Story = {
   args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    expect(canvas.getByText(/app-layout works!/gi)).toBeTruthy();
   },
 };
