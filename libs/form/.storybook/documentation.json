@@ -1472,8 +1472,8 @@
         },
         {
             "name": "ForgotPasswordFormComponent",
-            "id": "component-ForgotPasswordFormComponent-568b05954257053eb74c2f91175d09348a7343f57f7c7be0fea9fa9c39fc6b792ee2310323d73d5902b367a7d94920b1c900342ea679125215c1d53976bd8f88",
-            "file": "libs/form/src/lib/builtin/forgot-password.ts",
+            "id": "component-ForgotPasswordFormComponent-849c640b5feb0123a4f114b583dc43d82faac8a110e926294f9616ba0a5b92259585c7044d139e33786d948d5d20da266f22ac51346663a5ac3e341459bf7210",
+            "file": "libs/form/src/lib/auth/forgot-password.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -1487,7 +1487,7 @@
             "selector": "wt-forgot-password-form",
             "styleUrls": [],
             "styles": [],
-            "template": "<wt-form\n  (submitButtonClick)=\"submitForm()\"\n  [formTitle]=\"formTitle\"\n  [submitLabel]=\"submitLabel\"\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    [required]=\"true\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n  ></wt-text-field>\n</wt-form>\n",
+            "template": "<wt-form\n  (submitEvent)=\"submitForm()\"\n  [formTitle]=\"formTitle\"\n  [submitLabel]=\"submitLabel\"\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    [required]=\"true\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n  ></wt-text-field>\n</wt-form>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -1649,7 +1649,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -1658,13 +1658,33 @@
                 },
                 {
                     "name": "submitForm",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -1696,7 +1716,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ICreateSubDto, IID, IOption } from '@webpackages/model';\r\nimport { AutocompleteFieldComponent } from '../fields/autocomplete';\r\n\r\n@Component({\r\n  imports: [\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    PasswordFieldComponent,\r\n    AutocompleteFieldComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-forgot-password-form',\r\n  template: `\r\n    <wt-form\r\n      (submitButtonClick)=\"submitForm()\"\r\n      [formTitle]=\"formTitle\"\r\n      [submitLabel]=\"submitLabel\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n      ></wt-text-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class ForgotPasswordFormComponent extends FormComponent<\r\n  ICreateSubDto<IID>\r\n> {\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n\r\n  override formTitle: string = 'Forgot Password';\r\n\r\n  override submitLabel = 'Send Recovery Email';\r\n\r\n  /**\r\n   * Subscription type options\r\n   */\r\n  @Input() subTypes!: IOption[];\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ICreateSubDto, IID, IOption } from '@webpackages/model';\r\nimport { AutocompleteFieldComponent } from '../fields/autocomplete';\r\n\r\n@Component({\r\n  imports: [\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    PasswordFieldComponent,\r\n    AutocompleteFieldComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-forgot-password-form',\r\n  template: `\r\n    <wt-form\r\n      (submitEvent)=\"submitForm()\"\r\n      [formTitle]=\"formTitle\"\r\n      [submitLabel]=\"submitLabel\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n      ></wt-text-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class ForgotPasswordFormComponent extends FormComponent<\r\n  ICreateSubDto<IID>\r\n> {\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n\r\n  override formTitle: string = 'Forgot Password';\r\n\r\n  override submitLabel = 'Send Recovery Email';\r\n\r\n  /**\r\n   * Subscription type options\r\n   */\r\n  @Input() subTypes!: IOption[];\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1706,7 +1726,7 @@
         },
         {
             "name": "FormComponent",
-            "id": "component-FormComponent-a5680a8c466a3e27c8c9c5577ebf71fea6203f71270eb372a89aa5d8c7687a94d53141eb9fea7f56f3d18c94caad25c2a406dd0562f27ca449f2284a2c271f08",
+            "id": "component-FormComponent-8361297838ce9730a76ba6b8fa77d26017cd53d7270d0cc60d72e98cc2689681fd8a726d1ac1b7c84516e77097ff3fe990ad49c6ec8dea4e0ff4a82fe7c6f4cf",
             "file": "libs/form/src/lib/form/form.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1796,19 +1816,39 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
                     "name": "submitForm",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -1825,7 +1865,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  NgModule,\r\n  Output,\r\n} from '@angular/core';\r\nimport { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { BehaviorSubject } from 'rxjs';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatCardModule } from '@angular/material/card';\r\n\r\n@NgModule({\r\n  exports: [\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatIconModule,\r\n    MatButtonModule,\r\n    MatCardModule,\r\n  ],\r\n})\r\nexport class CommonFormModule {}\r\n\r\n@Component({\r\n  selector: 'wt-form',\r\n  standalone: true,\r\n  imports: [CommonFormModule],\r\n  styleUrl: './form.style.scss',\r\n  template: `\r\n    <mat-card>\r\n      <mat-card-header>\r\n        <mat-card-title>\r\n          <h1>{{ formTitle }}</h1>\r\n        </mat-card-title>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <form\r\n          style=\"display: flex; flex-direction: column; gap: 1em;  width: 100%;\"\r\n          #form=\"ngForm\"\r\n          novalidate\r\n          [formGroup]=\"formGroup\"\r\n        >\r\n          <ng-content></ng-content>\r\n        </form>\r\n      </mat-card-content>\r\n\r\n      <mat-card-actions>\r\n        <div style=\"display: flex; flex-direction: row; gap: 1em;\">\r\n          <button\r\n            mat-raised-button\r\n            color=\"primary\"\r\n            type=\"button\"\r\n            (click)=\"submitForm()\"\r\n            [disabled]=\"formGroup.invalid\"\r\n            [attr.data-testid]=\"submitLabel\"\r\n          >\r\n            {{ submitLabel }}\r\n          </button>\r\n          <button\r\n            mat-raised-button\r\n            (click)=\"resetForm()\"\r\n            type=\"button\"\r\n            [attr.data-testid]=\"'Reset'\"\r\n          >\r\n            Reset\r\n          </button>\r\n        </div>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  `,\r\n})\r\nexport class FormComponent<T = any> {\r\n  /**\r\n   * Form title\r\n   */\r\n  @Input() formTitle = 'Form Title';\r\n\r\n  /**\r\n   * Submit button label\r\n   */\r\n  @Input() submitLabel = 'Submit';\r\n\r\n  /**\r\n   * Is update form? If it is an update form, an update button is placed next to each input element.\r\n   */\r\n  @Input() isUpdateForm: boolean = false;\r\n\r\n  /**\r\n   * Emit when user click submit button\r\n   */\r\n  @Output() submitEvent = new EventEmitter<T>();\r\n\r\n  isSubmitted$ = new BehaviorSubject(false);\r\n\r\n  /**\r\n   * Form group\r\n   */\r\n  formGroup!: FormGroup;\r\n  constructor(formGroup: FormGroup) {\r\n    this.formGroup = formGroup;\r\n  }\r\n\r\n  submitForm() {\r\n    this.isSubmitted$.next(true);\r\n    this.submitEvent.emit(this.formGroup.value);\r\n  }\r\n\r\n  resetForm() {\r\n    this.isSubmitted$.next(false);\r\n    this.formGroup.reset();\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  NgModule,\r\n  Output,\r\n} from '@angular/core';\r\nimport { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { BehaviorSubject } from 'rxjs';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatCardModule } from '@angular/material/card';\r\n\r\n@NgModule({\r\n  exports: [\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatIconModule,\r\n    MatButtonModule,\r\n    MatCardModule,\r\n  ],\r\n})\r\nexport class CommonFormModule {}\r\n\r\n@Component({\r\n  selector: 'wt-form',\r\n  standalone: true,\r\n  imports: [CommonFormModule],\r\n  styleUrl: './form.style.scss',\r\n  template: `\r\n    <mat-card>\r\n      <mat-card-header>\r\n        <mat-card-title>\r\n          <h1>{{ formTitle }}</h1>\r\n        </mat-card-title>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <form\r\n          style=\"display: flex; flex-direction: column; gap: 1em;  width: 100%;\"\r\n          #form=\"ngForm\"\r\n          novalidate\r\n          [formGroup]=\"formGroup\"\r\n        >\r\n          <ng-content></ng-content>\r\n        </form>\r\n      </mat-card-content>\r\n\r\n      <mat-card-actions>\r\n        <div style=\"display: flex; flex-direction: row; gap: 1em;\">\r\n          <button\r\n            mat-raised-button\r\n            color=\"primary\"\r\n            type=\"button\"\r\n            (click)=\"submitForm()\"\r\n            [disabled]=\"formGroup.invalid\"\r\n            [attr.data-testid]=\"submitLabel\"\r\n          >\r\n            {{ submitLabel }}\r\n          </button>\r\n          <button\r\n            mat-raised-button\r\n            (click)=\"resetForm()\"\r\n            type=\"button\"\r\n            [attr.data-testid]=\"'Reset'\"\r\n          >\r\n            Reset\r\n          </button>\r\n        </div>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  `,\r\n})\r\nexport class FormComponent<T = any> {\r\n  /**\r\n   * Form title\r\n   */\r\n  @Input() formTitle = 'Form Title';\r\n\r\n  /**\r\n   * Submit button label\r\n   */\r\n  @Input() submitLabel = 'Submit';\r\n\r\n  /**\r\n   * Is update form? If it is an update form, an update button is placed next to each input element.\r\n   */\r\n  @Input() isUpdateForm: boolean = false;\r\n\r\n  /**\r\n   * Emit when user click submit button\r\n   */\r\n  @Output() submitEvent = new EventEmitter<T>();\r\n\r\n  isSubmitted$ = new BehaviorSubject(false);\r\n\r\n  /**\r\n   * Form group\r\n   */\r\n  formGroup!: FormGroup;\r\n\r\n  constructor(formGroup: FormGroup) {\r\n    this.formGroup = formGroup;\r\n  }\r\n\r\n  submitForm(value?: T) {\r\n    this.isSubmitted$.next(true);\r\n    this.submitEvent.emit(value ?? this.formGroup.value);\r\n  }\r\n\r\n  resetForm() {\r\n    this.isSubmitted$.next(false);\r\n    this.formGroup.reset();\r\n  }\r\n}\r\n",
             "styleUrl": "./form.style.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -2277,16 +2317,15 @@
         },
         {
             "name": "LoginFormComponent",
-            "id": "component-LoginFormComponent-e253063ae9462e9be023322e16c5a091cc34feab3d22e6a2585bf94120a66244bb78bcdb0e7019d15039c6e9b1a1cb30561ee4821c2be824c61a918b3b43522e",
-            "file": "libs/form/src/lib/builtin/login.ts",
+            "id": "component-LoginFormComponent-9ce52bc45b81b55bf85060a91ce1da8b7ac303a889bc93cf7fc79dc47fa9cbd8fd3adafa8b7d3e7b2000f20987d8d709edfd499f4462a804ab0227f24baf9a9e",
+            "file": "libs/form/src/lib/auth/login.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [
                 {
-                    "name": "{\n    provide: FormGroup, useValue: new FormGroup({\n        username: new FormControl(, new InputValidator().required().isEmail().build()), password: new FormControl(, new InputValidator().required().password().build()),\n    }),\n}",
-                    "ns": "{\n    provide: FormGroup, useValue: new FormGroup({\n        username: new FormControl(, new InputValidator()"
+                    "name": "{\n    provide: FormGroup, useValue: LoginFormGroup,\n}"
                 }
             ],
             "selector": "wt-login-form",
@@ -2390,7 +2429,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 82,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFocus the element\n",
@@ -2402,7 +2441,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 74,
+                    "line": 76,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFocus the element\n",
@@ -2414,7 +2453,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2423,13 +2462,33 @@
                 },
                 {
                     "name": "submitForm",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -2457,7 +2516,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ILoginDto } from '@webpackages/model';\r\n\r\n@Component({\r\n  imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],\r\n  standalone: true,\r\n  selector: 'wt-login-form',\r\n  template: `\r\n    <wt-form\r\n      [formTitle]=\"formTitle\"\r\n      [submitLabel]=\"submitLabel\"\r\n      (submitEvent)=\"submitForm()\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n      ></wt-text-field>\r\n      <wt-password-field\r\n        #password\r\n        inputName=\"password\"\r\n        [required]=\"true\"\r\n        label=\"Password\"\r\n        prefixIcon=\"password\"\r\n      ></wt-password-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n        password: new FormControl(\r\n          '',\r\n          new InputValidator('password').required().password().build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class LoginFormComponent extends FormComponent<ILoginDto> {\r\n  /**\r\n   * @ignore\r\n   */\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n\r\n  /**\r\n   * @ignore\r\n   */\r\n  @ViewChild('password') password!: BaseFieldComponent;\r\n\r\n  /**\r\n   * @ignore\r\n   */\r\n  override formTitle: string = 'Login Form';\r\n  /**\r\n   * @ignore\r\n   */\r\n  override submitLabel: string = 'Login';\r\n\r\n  /**\r\n   * Focus the element\r\n   */\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n  /**\r\n   * Focus the element\r\n   */\r\n  focusPassword() {\r\n    this.password.focus();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ILoginDto } from '@webpackages/model';\r\n\r\nexport const LoginFormGroup = new FormGroup({\r\n  username: new FormControl(\r\n    '',\r\n    new InputValidator('username').required().isEmail().build()\r\n  ),\r\n  password: new FormControl(\r\n    '',\r\n    new InputValidator('password').required().password().build()\r\n  ),\r\n});\r\n\r\n@Component({\r\n  imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],\r\n  standalone: true,\r\n  selector: 'wt-login-form',\r\n  template: `\r\n    <wt-form\r\n      [formTitle]=\"formTitle\"\r\n      [submitLabel]=\"submitLabel\"\r\n      (submitEvent)=\"submitForm()\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n      ></wt-text-field>\r\n      <wt-password-field\r\n        #password\r\n        inputName=\"password\"\r\n        [required]=\"true\"\r\n        label=\"Password\"\r\n        prefixIcon=\"password\"\r\n      ></wt-password-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: LoginFormGroup,\r\n    },\r\n  ],\r\n})\r\nexport class LoginFormComponent extends FormComponent<ILoginDto> {\r\n  /**\r\n   * @ignore\r\n   */\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n\r\n  /**\r\n   * @ignore\r\n   */\r\n  @ViewChild('password') password!: BaseFieldComponent;\r\n\r\n  /**\r\n   * @ignore\r\n   */\r\n  override formTitle: string = 'Login Form';\r\n  /**\r\n   * @ignore\r\n   */\r\n  override submitLabel: string = 'Login';\r\n\r\n  /**\r\n   * Focus the element\r\n   */\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n  /**\r\n   * Focus the element\r\n   */\r\n  focusPassword() {\r\n    this.password.focus();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2467,8 +2526,8 @@
         },
         {
             "name": "LoginWithCodeFormComponent",
-            "id": "component-LoginWithCodeFormComponent-ce378bf41370ca516fd2a8125bd88714c2aa6bfd003f9dea175fd64f1e4c59106d08d3617e55711a11688f7f81c322c9bf27638fca7f7542dcff421800461b80",
-            "file": "libs/form/src/lib/builtin/login-with-code.ts",
+            "id": "component-LoginWithCodeFormComponent-62c793a44c7a0297f1bb15d0d12eb8253920d9f24df5c983415485549bf8fe9f9f4d59bd4babe983f4e5ac36f0ab366e4cea4842106bfdbf5fcb25e97ef0d016",
+            "file": "libs/form/src/lib/auth/login-with-code.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -2482,7 +2541,7 @@
             "selector": "wt-login-with-code-form",
             "styleUrls": [],
             "styles": [],
-            "template": "<wt-form\n  (submitButtonClick)=\"submitForm()\"\n  [formTitle]=\"formTitle\"\n  [submitLabel]=\"submitLabel\"\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    [required]=\"true\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n  ></wt-text-field>\n  <wt-text-field\n    #securityCode\n    inputName=\"securityCode\"\n    [required]=\"true\"\n    label=\"Security Code\"\n    prefixIcon=\"security\"\n  ></wt-text-field>\n</wt-form>\n",
+            "template": "<wt-form\n  (submitEvent)=\"submitForm()\"\n  [formTitle]=\"formTitle\"\n  [submitLabel]=\"submitLabel\"\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    [required]=\"true\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n  ></wt-text-field>\n  <wt-text-field\n    #securityCode\n    inputName=\"securityCode\"\n    [required]=\"true\"\n    label=\"Security Code\"\n    prefixIcon=\"security\"\n  ></wt-text-field>\n</wt-form>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -2662,7 +2721,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -2671,13 +2730,33 @@
                 },
                 {
                     "name": "submitForm",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -2705,7 +2784,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ILoginWithCodeDto } from '@webpackages/model';\r\n\r\n@Component({\r\n  imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],\r\n  standalone: true,\r\n  selector: 'wt-login-with-code-form',\r\n  template: `\r\n    <wt-form\r\n      (submitButtonClick)=\"submitForm()\"\r\n      [formTitle]=\"formTitle\"\r\n      [submitLabel]=\"submitLabel\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n      ></wt-text-field>\r\n      <wt-text-field\r\n        #securityCode\r\n        inputName=\"securityCode\"\r\n        [required]=\"true\"\r\n        label=\"Security Code\"\r\n        prefixIcon=\"security\"\r\n      ></wt-text-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n        securityCode: new FormControl(\r\n          '',\r\n          new InputValidator('securityCode').required().build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class LoginWithCodeFormComponent extends FormComponent<ILoginWithCodeDto> {\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n  @ViewChild('securityCode') securityCode!: BaseFieldComponent;\r\n\r\n  override formTitle: string = 'Login With Security Code';\r\n  override submitLabel: string = 'Login';\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n\r\n  focusPassword() {\r\n    this.securityCode.focus();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ILoginWithCodeDto } from '@webpackages/model';\r\n\r\n@Component({\r\n  imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],\r\n  standalone: true,\r\n  selector: 'wt-login-with-code-form',\r\n  template: `\r\n    <wt-form\r\n      (submitEvent)=\"submitForm()\"\r\n      [formTitle]=\"formTitle\"\r\n      [submitLabel]=\"submitLabel\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n      ></wt-text-field>\r\n      <wt-text-field\r\n        #securityCode\r\n        inputName=\"securityCode\"\r\n        [required]=\"true\"\r\n        label=\"Security Code\"\r\n        prefixIcon=\"security\"\r\n      ></wt-text-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n        securityCode: new FormControl(\r\n          '',\r\n          new InputValidator('securityCode').required().build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class LoginWithCodeFormComponent extends FormComponent<ILoginWithCodeDto> {\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n  @ViewChild('securityCode') securityCode!: BaseFieldComponent;\r\n\r\n  override formTitle: string = 'Login With Security Code';\r\n  override submitLabel: string = 'Login';\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n\r\n  focusPassword() {\r\n    this.securityCode.focus();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -3344,6 +3423,470 @@
             },
             "extends": [
                 "BaseFieldComponent"
+            ]
+        },
+        {
+            "name": "PermissionFormComponent",
+            "id": "component-PermissionFormComponent-3d370784dda331be4f9d448047f514da8d88453408da0c770d74db18ea21d54aeb8a4bcd9bc4babae4f46c4c8a8e75a6a4ca2a956d227a3e6d682a468aa5eacd",
+            "file": "libs/form/src/lib/auth/permission.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: FormGroup, useValue: new FormGroup<Record<keyof ICreatePermissionDto, FormControl>>({\n        permission: new FormControl(, new InputValidator().required().minlength().maxlength().build()),\n    }),\n}",
+                    "ns": "{\n    provide: FormGroup, useValue: new FormGroup<Record<keyof ICreatePermissionDto, FormControl>>({\n        permission: new FormControl(, new InputValidator()"
+                }
+            ],
+            "selector": "wt-permission-form",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<wt-form\n  (submitEvent)=\"submitForm()\"\n  [submitLabel]=\"submitLabel\"\n  [formTitle]=\"formTitle\"\n>\n  <wt-text-field\n    #permission\n    inputName=\"permission\"\n    inputType=\"text\"\n    label=\"Permission Name\"\n    prefixIcon=\"security\"\n    [required]=\"true\"\n    [minLength]=\"3\"\n    [maxLength]=\"30\"\n    [isUpdateField]=\"isUpdateForm\"\n  ></wt-text-field>\n</wt-form>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "formTitle",
+                    "defaultValue": "'Create New Permission'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 55,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "submitLabel",
+                    "defaultValue": "'Save'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 56,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "isUpdateForm",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nIs update form? If it is an update form, an update button is placed next to each input element.\n",
+                    "description": "<p>Is update form? If it is an update form, an update button is placed next to each input element.</p>\n",
+                    "line": 90,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "submitEvent",
+                    "defaultValue": "new EventEmitter<T>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nEmit when user click submit button\n",
+                    "description": "<p>Emit when user click submit button</p>\n",
+                    "line": 95,
+                    "type": "EventEmitter",
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "permission",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TextFieldComponent",
+                    "optional": false,
+                    "description": "",
+                    "line": 54,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'permission'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                },
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "<p>Form group</p>\n",
+                    "line": 102,
+                    "rawdescription": "\n\nForm group\n",
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "isSubmitted$",
+                    "defaultValue": "new BehaviorSubject(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 97,
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "focusPermission",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 58,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "resetForm",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 113,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "submitForm",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 108,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonFormModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TextFieldComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "ListSelectComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { CommonFormModule, FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { ListSelectComponent, TextFieldComponent } from '../fields';\r\nimport { ICreatePermissionDto, ICreateUserDto, IID } from '@webpackages/model';\r\n\r\n@Component({\r\n  imports: [\r\n    CommonFormModule,\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    ListSelectComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-permission-form',\r\n  template: `\r\n    <wt-form\r\n      (submitEvent)=\"submitForm()\"\r\n      [submitLabel]=\"submitLabel\"\r\n      [formTitle]=\"formTitle\"\r\n    >\r\n      <wt-text-field\r\n        #permission\r\n        inputName=\"permission\"\r\n        inputType=\"text\"\r\n        label=\"Permission Name\"\r\n        prefixIcon=\"security\"\r\n        [required]=\"true\"\r\n        [minLength]=\"3\"\r\n        [maxLength]=\"30\"\r\n        [isUpdateField]=\"isUpdateForm\"\r\n      ></wt-text-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup<Record<keyof ICreatePermissionDto, FormControl>>({\r\n        permission: new FormControl(\r\n          '',\r\n          new InputValidator('permission')\r\n            .required()\r\n            .minlength(3)\r\n            .maxlength(30)\r\n            .build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class PermissionFormComponent extends FormComponent<\r\n  ICreateUserDto<IID, IID>\r\n> {\r\n  @ViewChild('permission') permission!: TextFieldComponent;\r\n  @Input() override formTitle: string = 'Create New Permission';\r\n  @Input() override submitLabel: string = 'Save';\r\n\r\n  focusPermission() {\r\n    this.permission.focus();\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [
+                "FormComponent"
+            ]
+        },
+        {
+            "name": "RoleFormComponent",
+            "id": "component-RoleFormComponent-a62390bd83164f17a8bdd59b2a62e252347ab7e0ba556e68f9186fc5b88f388fe60a8f66ae13bdac6a8ce061e19c05481f01fa8caa2d5c0940703a39ca257c4f",
+            "file": "libs/form/src/lib/auth/role.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: FormGroup, useValue: new FormGroup<Record<keyof ICreateRoleDto, FormControl>>({\n        role: new FormControl(, new InputValidator().build()), permissions: new FormControl([], new InputValidator().build()),\n    }),\n}",
+                    "ns": "{\n    provide: FormGroup, useValue: new FormGroup<Record<keyof ICreateRoleDto, FormControl>>({\n        role: new FormControl(, new InputValidator()"
+                }
+            ],
+            "selector": "wt-role-form",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<wt-form\n  (submitEvent)=\"submitForm()\"\n  [submitLabel]=\"submitLabel\"\n  [formTitle]=\"formTitle\"\n>\n  <wt-text-field\n    #role\n    inputName=\"role\"\n    inputType=\"text\"\n    label=\"Role Name\"\n    prefixIcon=\"security\"\n    [isUpdateField]=\"isUpdateForm\"\n    [required]=\"true\"\n    [minLength]=\"3\"\n    [maxLength]=\"30\"\n  ></wt-text-field>\n\n  <wt-list-select-field\n    #permissions\n    inputName=\"permissions\"\n    label=\"Select Permissions\"\n    [items]=\"permissionList\"\n    [isUpdateField]=\"isUpdateForm\"\n  ></wt-list-select-field>\n</wt-form>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "formTitle",
+                    "defaultValue": "'Create New Role'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 66,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "permissionList",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 65,
+                    "type": "IOption[]",
+                    "decorators": []
+                },
+                {
+                    "name": "submitLabel",
+                    "defaultValue": "'Save'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 67,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "isUpdateForm",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nIs update form? If it is an update form, an update button is placed next to each input element.\n",
+                    "description": "<p>Is update form? If it is an update form, an update button is placed next to each input element.</p>\n",
+                    "line": 90,
+                    "type": "boolean",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "submitEvent",
+                    "defaultValue": "new EventEmitter<T>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nEmit when user click submit button\n",
+                    "description": "<p>Emit when user click submit button</p>\n",
+                    "line": 95,
+                    "type": "EventEmitter",
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "permissions",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ListSelectComponent",
+                    "optional": false,
+                    "description": "",
+                    "line": 63,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'permissions'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                },
+                {
+                    "name": "role",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TextFieldComponent",
+                    "optional": false,
+                    "description": "",
+                    "line": 62,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'role'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                },
+                {
+                    "name": "formGroup",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "<p>Form group</p>\n",
+                    "line": 102,
+                    "rawdescription": "\n\nForm group\n",
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "isSubmitted$",
+                    "defaultValue": "new BehaviorSubject(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 97,
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "focusPermissions",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 73,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "focusRole",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 69,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "resetForm",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 113,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "submitForm",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 108,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonFormModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "TextFieldComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "ListSelectComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { CommonFormModule, FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { ListSelectComponent, TextFieldComponent } from '../fields';\r\nimport {\r\n  ICreateRoleDto,\r\n  ICreateUserDto,\r\n  IID,\r\n  IOption,\r\n} from '@webpackages/model';\r\n\r\n@Component({\r\n  imports: [\r\n    CommonFormModule,\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    ListSelectComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-role-form',\r\n  template: `\r\n    <wt-form\r\n      (submitEvent)=\"submitForm()\"\r\n      [submitLabel]=\"submitLabel\"\r\n      [formTitle]=\"formTitle\"\r\n    >\r\n      <wt-text-field\r\n        #role\r\n        inputName=\"role\"\r\n        inputType=\"text\"\r\n        label=\"Role Name\"\r\n        prefixIcon=\"security\"\r\n        [isUpdateField]=\"isUpdateForm\"\r\n        [required]=\"true\"\r\n        [minLength]=\"3\"\r\n        [maxLength]=\"30\"\r\n      ></wt-text-field>\r\n\r\n      <wt-list-select-field\r\n        #permissions\r\n        inputName=\"permissions\"\r\n        label=\"Select Permissions\"\r\n        [items]=\"permissionList\"\r\n        [isUpdateField]=\"isUpdateForm\"\r\n      ></wt-list-select-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup<Record<keyof ICreateRoleDto, FormControl>>({\r\n        role: new FormControl('', new InputValidator('Role').build()),\r\n        permissions: new FormControl(\r\n          [],\r\n          new InputValidator('Permissions').build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class RoleFormComponent extends FormComponent<ICreateUserDto<IID, IID>> {\r\n  @ViewChild('role') role!: TextFieldComponent;\r\n  @ViewChild('permissions') permissions!: ListSelectComponent;\r\n\r\n  @Input() permissionList!: IOption[];\r\n  @Input() override formTitle: string = 'Create New Role';\r\n  @Input() override submitLabel: string = 'Save';\r\n\r\n  focusRole() {\r\n    this.role.focus();\r\n  }\r\n\r\n  focusPermissions() {\r\n    this.permissions.focus();\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [
+                "FormComponent"
             ]
         },
         {
@@ -4209,33 +4752,33 @@
         },
         {
             "name": "SubFormComponent",
-            "id": "component-SubFormComponent-742581e7601c2567684786da3f4d75149a5794f47f319812df771817b017a4b1b96c0b93307a0587961ccbac03b935797cd963769aefe0f138b4dc1cac84eeaf",
-            "file": "libs/form/src/lib/builtin/sub.ts",
+            "id": "component-SubFormComponent-7b238781bd9f7b52f06f589f782a0556ef5a38047f186dbb60005597197f66d81bd52a5d5cb58909b23f45697eaf5aeb489d747fc7bce66d5fd7c81926582257",
+            "file": "libs/form/src/lib/auth/sub.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [
                 {
-                    "name": "{\n    provide: FormGroup, useValue: new FormGroup({\n        username: new FormControl(, new InputValidator().required().isEmail().build()), password: new FormControl(, new InputValidator().required().password().build()), organizationName: new FormControl(, new InputValidator().required().minlength().maxlength().build()), subType: new FormControl(, new InputValidator().required().build()),\n    }),\n}",
-                    "ns": "{\n    provide: FormGroup, useValue: new FormGroup({\n        username: new FormControl(, new InputValidator()"
+                    "name": "{\n    provide: FormGroup, useValue: new FormGroup<Record<keyof ICreateSubDto, FormControl>>({\n        username: new FormControl(, new InputValidator().required().isEmail().build()), password: new FormControl(, new InputValidator().required().password().build()), orgname: new FormControl(, new InputValidator().required().minlength().maxlength().build()), subtype: new FormControl(, new InputValidator().required().build()),\n    }),\n}",
+                    "ns": "{\n    provide: FormGroup, useValue: new FormGroup<Record<keyof ICreateSubDto, FormControl>>({\n        username: new FormControl(, new InputValidator()"
                 }
             ],
-            "selector": "wt-login-form",
+            "selector": "wt-sub-form",
             "styleUrls": [],
             "styles": [],
-            "template": "<wt-form\n  (submitButtonClick)=\"submitForm()\"\n  [submitLabel]=\"submitLabel\"\n  [formTitle]=\"formTitle\"\n  ]\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    [required]=\"true\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n  ></wt-text-field>\n\n  <wt-password-field\n    #password\n    inputName=\"password\"\n    [required]=\"true\"\n    prefixIcon=\"password\"\n    label=\"Password\"\n  ></wt-password-field>\n\n  <wt-text-field\n    #organizationName\n    inputName=\"organizationName\"\n    [required]=\"true\"\n    inputType=\"text\"\n    prefixIcon=\"store\"\n    label=\"Organization Name\"\n  ></wt-text-field>\n\n  <wt-autocomplete-field\n    #subType\n    inputName=\"subType\"\n    label=\"Subscription Type\"\n    [options]=\"subTypes\"\n    prefixIcon=\"category\"\n  >\n  </wt-autocomplete-field>\n</wt-form>\n",
+            "template": "<wt-form\n  (submitEvent)=\"submitForm()\"\n  [submitLabel]=\"submitLabel\"\n  [formTitle]=\"formTitle\"\n  ]\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n    [required]=\"true\"\n  ></wt-text-field>\n\n  <wt-password-field\n    #password\n    inputName=\"password\"\n    prefixIcon=\"password\"\n    label=\"Password\"\n    [required]=\"true\"\n  ></wt-password-field>\n\n  <wt-text-field\n    #orgname\n    inputName=\"orgname\"\n    inputType=\"text\"\n    prefixIcon=\"store\"\n    label=\"Organization Name\"\n    [required]=\"true\"\n    [minLength]=\"3\"\n    [maxLength]=\"30\"\n  ></wt-text-field>\n\n  <wt-autocomplete-field\n    #subtype\n    inputName=\"subtype\"\n    label=\"Subscription Type\"\n    prefixIcon=\"category\"\n    [options]=\"subtypeList\"\n    [required]=\"true\"\n  >\n  </wt-autocomplete-field>\n</wt-form>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "subTypes",
+                    "name": "subtypeList",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSubscription type options\n",
                     "description": "<p>Subscription type options</p>\n",
-                    "line": 102,
+                    "line": 105,
                     "type": "IOption[]",
                     "decorators": []
                 },
@@ -4306,23 +4849,23 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 95,
+                    "line": 98,
                     "modifierKind": [
                         164
                     ]
                 },
                 {
-                    "name": "organizationName",
+                    "name": "orgname",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "BaseFieldComponent",
                     "optional": false,
                     "description": "",
-                    "line": 92,
+                    "line": 95,
                     "decorators": [
                         {
                             "name": "ViewChild",
-                            "stringifiedArguments": "'organizationName'"
+                            "stringifiedArguments": "'orgname'"
                         }
                     ],
                     "modifierKind": [
@@ -4336,7 +4879,7 @@
                     "type": "BaseFieldComponent",
                     "optional": false,
                     "description": "",
-                    "line": 91,
+                    "line": 94,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -4355,23 +4898,23 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 97,
+                    "line": 100,
                     "modifierKind": [
                         164
                     ]
                 },
                 {
-                    "name": "subType",
+                    "name": "subtype",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "BaseFieldComponent",
                     "optional": false,
                     "description": "",
-                    "line": 93,
+                    "line": 96,
                     "decorators": [
                         {
                             "name": "ViewChild",
-                            "stringifiedArguments": "'subType'"
+                            "stringifiedArguments": "'subtype'"
                         }
                     ],
                     "modifierKind": [
@@ -4385,7 +4928,7 @@
                     "type": "BaseFieldComponent",
                     "optional": false,
                     "description": "",
-                    "line": 90,
+                    "line": 93,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -4425,12 +4968,12 @@
             ],
             "methodsClass": [
                 {
-                    "name": "focusOrganizationName",
+                    "name": "focusOrgname",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4440,7 +4983,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 108,
+                    "line": 111,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4450,7 +4993,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 116,
+                    "line": 119,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4460,7 +5003,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 104,
+                    "line": 107,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4470,7 +5013,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -4479,13 +5022,33 @@
                 },
                 {
                     "name": "submitForm",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -4517,7 +5080,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ICreateSubDto, IID, IOption } from '@webpackages/model';\r\nimport { AutocompleteFieldComponent } from '../fields/autocomplete';\r\n\r\n@Component({\r\n  imports: [\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    PasswordFieldComponent,\r\n    AutocompleteFieldComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-login-form',\r\n  template: `\r\n    <wt-form\r\n      (submitButtonClick)=\"submitForm()\"\r\n      [submitLabel]=\"submitLabel\"\r\n      [formTitle]=\"formTitle\"\r\n      ]\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n      ></wt-text-field>\r\n\r\n      <wt-password-field\r\n        #password\r\n        inputName=\"password\"\r\n        [required]=\"true\"\r\n        prefixIcon=\"password\"\r\n        label=\"Password\"\r\n      ></wt-password-field>\r\n\r\n      <wt-text-field\r\n        #organizationName\r\n        inputName=\"organizationName\"\r\n        [required]=\"true\"\r\n        inputType=\"text\"\r\n        prefixIcon=\"store\"\r\n        label=\"Organization Name\"\r\n      ></wt-text-field>\r\n\r\n      <wt-autocomplete-field\r\n        #subType\r\n        inputName=\"subType\"\r\n        label=\"Subscription Type\"\r\n        [options]=\"subTypes\"\r\n        prefixIcon=\"category\"\r\n      >\r\n      </wt-autocomplete-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n        password: new FormControl(\r\n          '',\r\n          new InputValidator('password').required().password().build()\r\n        ),\r\n        organizationName: new FormControl(\r\n          '',\r\n          new InputValidator('organization name')\r\n            .required()\r\n            .minlength(3)\r\n            .maxlength(30)\r\n            .build()\r\n        ),\r\n        subType: new FormControl(\r\n          '',\r\n          new InputValidator('subscription type').required().build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class SubFormComponent extends FormComponent<ICreateSubDto<IID>> {\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n  @ViewChild('password') password!: BaseFieldComponent;\r\n  @ViewChild('organizationName') organizationName!: BaseFieldComponent;\r\n  @ViewChild('subType') subType!: BaseFieldComponent;\r\n\r\n  override formTitle: string = 'Sign Up Form';\r\n\r\n  override submitLabel: string = 'Sign Up';\r\n  \r\n  /**\r\n   * Subscription type options\r\n   */\r\n  @Input() subTypes!: IOption[];\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n\r\n  focusPassword() {\r\n    this.password.focus();\r\n  }\r\n\r\n  focusOrganizationName() {\r\n    this.organizationName.focus();\r\n  }\r\n\r\n  focusSubType() {\r\n    this.subType.focus();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { BaseFieldComponent, TextFieldComponent } from '../fields';\r\nimport { PasswordFieldComponent } from '../fields/password';\r\nimport { ICreateSubDto, IID, IOption } from '@webpackages/model';\r\nimport { AutocompleteFieldComponent } from '../fields/autocomplete';\r\n\r\n@Component({\r\n  imports: [\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    PasswordFieldComponent,\r\n    AutocompleteFieldComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-sub-form',\r\n  template: `\r\n    <wt-form\r\n      (submitEvent)=\"submitForm()\"\r\n      [submitLabel]=\"submitLabel\"\r\n      [formTitle]=\"formTitle\"\r\n      ]\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n        [required]=\"true\"\r\n      ></wt-text-field>\r\n\r\n      <wt-password-field\r\n        #password\r\n        inputName=\"password\"\r\n        prefixIcon=\"password\"\r\n        label=\"Password\"\r\n        [required]=\"true\"\r\n      ></wt-password-field>\r\n\r\n      <wt-text-field\r\n        #orgname\r\n        inputName=\"orgname\"\r\n        inputType=\"text\"\r\n        prefixIcon=\"store\"\r\n        label=\"Organization Name\"\r\n        [required]=\"true\"\r\n        [minLength]=\"3\"\r\n        [maxLength]=\"30\"\r\n      ></wt-text-field>\r\n\r\n      <wt-autocomplete-field\r\n        #subtype\r\n        inputName=\"subtype\"\r\n        label=\"Subscription Type\"\r\n        prefixIcon=\"category\"\r\n        [options]=\"subtypeList\"\r\n        [required]=\"true\"\r\n      >\r\n      </wt-autocomplete-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup<Record<keyof ICreateSubDto, FormControl>>({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n        password: new FormControl(\r\n          '',\r\n          new InputValidator('password').required().password().build()\r\n        ),\r\n        orgname: new FormControl(\r\n          '',\r\n          new InputValidator('organization name')\r\n            .required()\r\n            .minlength(3)\r\n            .maxlength(30)\r\n            .build()\r\n        ),\r\n        subtype: new FormControl(\r\n          '',\r\n          new InputValidator('subscription type').required().build()\r\n        ),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class SubFormComponent extends FormComponent<ICreateSubDto<IID>> {\r\n  @ViewChild('username') username!: BaseFieldComponent;\r\n  @ViewChild('password') password!: BaseFieldComponent;\r\n  @ViewChild('orgname') orgname!: BaseFieldComponent;\r\n  @ViewChild('subtype') subtype!: BaseFieldComponent;\r\n\r\n  override formTitle: string = 'Sign Up Form';\r\n\r\n  override submitLabel: string = 'Sign Up';\r\n\r\n  /**\r\n   * Subscription type options\r\n   */\r\n  @Input() subtypeList!: IOption[];\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n\r\n  focusPassword() {\r\n    this.password.focus();\r\n  }\r\n\r\n  focusOrgname() {\r\n    this.orgname.focus();\r\n  }\r\n\r\n  focusSubType() {\r\n    this.subtype.focus();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5117,8 +5680,8 @@
         },
         {
             "name": "UserFormComponent",
-            "id": "component-UserFormComponent-9f16947250150c484da8a63eccf412ae5d808aa6a342981704d3f3ada2c8303869573b437dfeae8b9d9d2c9a9c8e117bc68a68978c14cefd9cced082faec5005",
-            "file": "libs/form/src/lib/builtin/user.ts",
+            "id": "component-UserFormComponent-ab7c3b25e990d49026725e1eec6f0b4444d3070eeb2193966a6d8155e46fe6cb458136776b1d283539c9a5f84557107161ef27e63340cc70a143172717ba69f6",
+            "file": "libs/form/src/lib/auth/user.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -5129,10 +5692,10 @@
                     "ns": "{\n    provide: FormGroup, useValue: new FormGroup({\n        username: new FormControl(, new InputValidator()"
                 }
             ],
-            "selector": "wt-login-form",
+            "selector": "wt-user-form",
             "styleUrls": [],
             "styles": [],
-            "template": "<wt-form\n  (submitButtonClick)=\"submit()\"\n  [submitLabel]=\"submitLabel\"\n  [formTitle]=\"formTitle\"\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    [required]=\"true\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n    [isUpdateField]=\"isUpdateForm\"\n  ></wt-text-field>\n\n  <wt-list-select-field\n    #roles\n    inputName=\"roles\"\n    label=\"Select Roles\"\n    [items]=\"userRoles\"\n    [isUpdateField]=\"isUpdateForm\"\n  ></wt-list-select-field>\n</wt-form>\n",
+            "template": "<wt-form\n  (submitEvent)=\"submitForm()\"\n  [submitLabel]=\"submitLabel\"\n  [formTitle]=\"formTitle\"\n>\n  <wt-text-field\n    #username\n    inputName=\"username\"\n    inputType=\"email\"\n    label=\"Username\"\n    prefixIcon=\"email\"\n    [required]=\"true\"\n    [isUpdateField]=\"isUpdateForm\"\n  ></wt-text-field>\n\n  <wt-list-select-field\n    #roles\n    inputName=\"roles\"\n    label=\"Select Roles\"\n    [items]=\"userRoles\"\n    [isUpdateField]=\"isUpdateForm\"\n  ></wt-list-select-field>\n</wt-form>\n",
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
@@ -5142,7 +5705,7 @@
                     "defaultValue": "'Create User'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 60,
+                    "line": 59,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5154,7 +5717,7 @@
                     "defaultValue": "'Save'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 61,
+                    "line": 60,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -5270,7 +5833,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 67,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -5280,7 +5843,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 63,
+                    "line": 62,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -5290,7 +5853,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 113,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -5299,13 +5862,33 @@
                 },
                 {
                     "name": "submitForm",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -5337,7 +5920,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { CommonFormModule, FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { ListSelectComponent, TextFieldComponent } from '../fields';\r\nimport { ICreateUserDto, IID, IOption } from '@webpackages/model';\r\n\r\n@Component({\r\n  imports: [\r\n    CommonFormModule,\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    ListSelectComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-login-form',\r\n  template: `\r\n    <wt-form\r\n      (submitButtonClick)=\"submit()\"\r\n      [submitLabel]=\"submitLabel\"\r\n      [formTitle]=\"formTitle\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        [required]=\"true\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n        [isUpdateField]=\"isUpdateForm\"\r\n      ></wt-text-field>\r\n\r\n      <wt-list-select-field\r\n        #roles\r\n        inputName=\"roles\"\r\n        label=\"Select Roles\"\r\n        [items]=\"userRoles\"\r\n        [isUpdateField]=\"isUpdateForm\"\r\n      ></wt-list-select-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n        roles: new FormControl('', new InputValidator('Roles').build()),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class UserFormComponent extends FormComponent<ICreateUserDto<IID, IID>> {\r\n  @Input() userRoles!: IOption[];\r\n\r\n  @ViewChild('username') username!: TextFieldComponent;\r\n  @ViewChild('roles') roles!: ListSelectComponent;\r\n\r\n  @Input() override formTitle: string = 'Create User';\r\n  @Input() override submitLabel: string = 'Save';\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n\r\n  focusRoles() {\r\n    this.roles.focus();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, ViewChild } from '@angular/core';\r\nimport { CommonFormModule, FormComponent, InputValidator } from '../form';\r\nimport { FormControl, FormGroup } from '@angular/forms';\r\nimport { ListSelectComponent, TextFieldComponent } from '../fields';\r\nimport { ICreateUserDto, IID, IOption } from '@webpackages/model';\r\n\r\n@Component({\r\n  imports: [\r\n    CommonFormModule,\r\n    FormComponent,\r\n    TextFieldComponent,\r\n    ListSelectComponent,\r\n  ],\r\n  standalone: true,\r\n  selector: 'wt-user-form',\r\n  template: `\r\n    <wt-form\r\n      (submitEvent)=\"submitForm()\"\r\n      [submitLabel]=\"submitLabel\"\r\n      [formTitle]=\"formTitle\"\r\n    >\r\n      <wt-text-field\r\n        #username\r\n        inputName=\"username\"\r\n        inputType=\"email\"\r\n        label=\"Username\"\r\n        prefixIcon=\"email\"\r\n        [required]=\"true\"\r\n        [isUpdateField]=\"isUpdateForm\"\r\n      ></wt-text-field>\r\n\r\n      <wt-list-select-field\r\n        #roles\r\n        inputName=\"roles\"\r\n        label=\"Select Roles\"\r\n        [items]=\"userRoles\"\r\n        [isUpdateField]=\"isUpdateForm\"\r\n      ></wt-list-select-field>\r\n    </wt-form>\r\n  `,\r\n  providers: [\r\n    {\r\n      provide: FormGroup,\r\n      useValue: new FormGroup({\r\n        username: new FormControl(\r\n          '',\r\n          new InputValidator('username').required().isEmail().build()\r\n        ),\r\n        roles: new FormControl('', new InputValidator('Roles').build()),\r\n      }),\r\n    },\r\n  ],\r\n})\r\nexport class UserFormComponent extends FormComponent<ICreateUserDto<IID, IID>> {\r\n  @Input() userRoles!: IOption[];\r\n\r\n  @ViewChild('username') username!: TextFieldComponent;\r\n  @ViewChild('roles') roles!: ListSelectComponent;\r\n  @Input() override formTitle: string = 'Create User';\r\n  @Input() override submitLabel: string = 'Save';\r\n\r\n  focusUserName() {\r\n    this.username.focus();\r\n  }\r\n\r\n  focusRoles() {\r\n    this.roles.focus();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -5385,13 +5968,13 @@
         },
         {
             "name": "CommonFormModule",
-            "id": "module-CommonFormModule-a5680a8c466a3e27c8c9c5577ebf71fea6203f71270eb372a89aa5d8c7687a94d53141eb9fea7f56f3d18c94caad25c2a406dd0562f27ca449f2284a2c271f08",
+            "id": "module-CommonFormModule-8361297838ce9730a76ba6b8fa77d26017cd53d7270d0cc60d72e98cc2689681fd8a726d1ac1b7c84516e77097ff3fe990ad49c6ec8dea4e0ff4a82fe7c6f4cf",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "libs/form/src/lib/form/form.ts",
             "methods": [],
-            "sourceCode": "/* eslint-disable @typescript-eslint/no-explicit-any */\r\nimport {\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  NgModule,\r\n  Output,\r\n} from '@angular/core';\r\nimport { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { BehaviorSubject } from 'rxjs';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatCardModule } from '@angular/material/card';\r\n\r\n@NgModule({\r\n  exports: [\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatIconModule,\r\n    MatButtonModule,\r\n    MatCardModule,\r\n  ],\r\n})\r\nexport class CommonFormModule {}\r\n\r\n@Component({\r\n  selector: 'wt-form',\r\n  standalone: true,\r\n  imports: [CommonFormModule],\r\n  styleUrl: './form.style.scss',\r\n  template: `\r\n    <mat-card>\r\n      <mat-card-header>\r\n        <mat-card-title>\r\n          <h1>{{ formTitle }}</h1>\r\n        </mat-card-title>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <form\r\n          style=\"display: flex; flex-direction: column; gap: 1em;  width: 100%;\"\r\n          #form=\"ngForm\"\r\n          novalidate\r\n          [formGroup]=\"formGroup\"\r\n        >\r\n          <ng-content></ng-content>\r\n        </form>\r\n      </mat-card-content>\r\n\r\n      <mat-card-actions>\r\n        <div style=\"display: flex; flex-direction: row; gap: 1em;\">\r\n          <button\r\n            mat-raised-button\r\n            color=\"primary\"\r\n            type=\"button\"\r\n            (click)=\"submitForm()\"\r\n            [disabled]=\"formGroup.invalid\"\r\n            [attr.data-testid]=\"submitLabel\"\r\n          >\r\n            {{ submitLabel }}\r\n          </button>\r\n          <button\r\n            mat-raised-button\r\n            (click)=\"resetForm()\"\r\n            type=\"button\"\r\n            [attr.data-testid]=\"'Reset'\"\r\n          >\r\n            Reset\r\n          </button>\r\n        </div>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  `,\r\n})\r\nexport class FormComponent<T = any> {\r\n  /**\r\n   * Form title\r\n   */\r\n  @Input() formTitle = 'Form Title';\r\n\r\n  /**\r\n   * Submit button label\r\n   */\r\n  @Input() submitLabel = 'Submit';\r\n\r\n  /**\r\n   * Is update form? If it is an update form, an update button is placed next to each input element.\r\n   */\r\n  @Input() isUpdateForm: boolean = false;\r\n\r\n  /**\r\n   * Emit when user click submit button\r\n   */\r\n  @Output() submitEvent = new EventEmitter<T>();\r\n\r\n  isSubmitted$ = new BehaviorSubject(false);\r\n\r\n  /**\r\n   * Form group\r\n   */\r\n  formGroup!: FormGroup;\r\n  constructor(formGroup: FormGroup) {\r\n    this.formGroup = formGroup;\r\n  }\r\n\r\n  submitForm() {\r\n    this.isSubmitted$.next(true);\r\n    this.submitEvent.emit(this.formGroup.value);\r\n  }\r\n\r\n  resetForm() {\r\n    this.isSubmitted$.next(false);\r\n    this.formGroup.reset();\r\n  }\r\n}\r\n",
+            "sourceCode": "/* eslint-disable @typescript-eslint/no-explicit-any */\r\nimport {\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  NgModule,\r\n  Output,\r\n} from '@angular/core';\r\nimport { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { BehaviorSubject } from 'rxjs';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatCardModule } from '@angular/material/card';\r\n\r\n@NgModule({\r\n  exports: [\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatIconModule,\r\n    MatButtonModule,\r\n    MatCardModule,\r\n  ],\r\n})\r\nexport class CommonFormModule {}\r\n\r\n@Component({\r\n  selector: 'wt-form',\r\n  standalone: true,\r\n  imports: [CommonFormModule],\r\n  styleUrl: './form.style.scss',\r\n  template: `\r\n    <mat-card>\r\n      <mat-card-header>\r\n        <mat-card-title>\r\n          <h1>{{ formTitle }}</h1>\r\n        </mat-card-title>\r\n      </mat-card-header>\r\n      <mat-card-content>\r\n        <form\r\n          style=\"display: flex; flex-direction: column; gap: 1em;  width: 100%;\"\r\n          #form=\"ngForm\"\r\n          novalidate\r\n          [formGroup]=\"formGroup\"\r\n        >\r\n          <ng-content></ng-content>\r\n        </form>\r\n      </mat-card-content>\r\n\r\n      <mat-card-actions>\r\n        <div style=\"display: flex; flex-direction: row; gap: 1em;\">\r\n          <button\r\n            mat-raised-button\r\n            color=\"primary\"\r\n            type=\"button\"\r\n            (click)=\"submitForm()\"\r\n            [disabled]=\"formGroup.invalid\"\r\n            [attr.data-testid]=\"submitLabel\"\r\n          >\r\n            {{ submitLabel }}\r\n          </button>\r\n          <button\r\n            mat-raised-button\r\n            (click)=\"resetForm()\"\r\n            type=\"button\"\r\n            [attr.data-testid]=\"'Reset'\"\r\n          >\r\n            Reset\r\n          </button>\r\n        </div>\r\n      </mat-card-actions>\r\n    </mat-card>\r\n  `,\r\n})\r\nexport class FormComponent<T = any> {\r\n  /**\r\n   * Form title\r\n   */\r\n  @Input() formTitle = 'Form Title';\r\n\r\n  /**\r\n   * Submit button label\r\n   */\r\n  @Input() submitLabel = 'Submit';\r\n\r\n  /**\r\n   * Is update form? If it is an update form, an update button is placed next to each input element.\r\n   */\r\n  @Input() isUpdateForm: boolean = false;\r\n\r\n  /**\r\n   * Emit when user click submit button\r\n   */\r\n  @Output() submitEvent = new EventEmitter<T>();\r\n\r\n  isSubmitted$ = new BehaviorSubject(false);\r\n\r\n  /**\r\n   * Form group\r\n   */\r\n  formGroup!: FormGroup;\r\n\r\n  constructor(formGroup: FormGroup) {\r\n    this.formGroup = formGroup;\r\n  }\r\n\r\n  submitForm(value?: T) {\r\n    this.isSubmitted$.next(true);\r\n    this.submitEvent.emit(value ?? this.formGroup.value);\r\n  }\r\n\r\n  resetForm() {\r\n    this.isSubmitted$.next(false);\r\n    this.formGroup.reset();\r\n  }\r\n}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -5431,66 +6014,6 @@
                 "deprecationMessage": "",
                 "type": "AnimationTriggerMetadata[]",
                 "defaultValue": "[\r\n  bounceInDownOnEnterAnimation({ anchor: 'enter' }),\r\n  bounceOutUpOnLeaveAnimation({ anchor: 'leave' }),\r\n]"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const forgotPasswordButton = canvas.getByTestId(/Forgot Password/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n\r\n    await userEvent.click(forgotPasswordButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const securityCode = canvas.getByTestId('securityCode');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(securityCode).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(securityCode);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n    await userEvent.type(securityCode, 'oauoo-982749-asjdf-aerqw', {\r\n      delay: 100,\r\n    });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/login.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  play: async (args) => {\r\n    const { canvasElement } = args;\r\n    console.log(args);\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n\r\n    await userEvent.type(username, loginDto.username, { delay: 100 });\r\n    await userEvent.type(password, loginDto.password, { delay: 100 });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n\r\n    // expect(formGroup.value.username).toBe(loginDto.username);\r\n    // expect(formGroup.value.pasword).toBe('some');\r\n\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/sub.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    subTypes: [\r\n      { id: 1, label: 'Premium' },\r\n      { id: 2, label: 'Gold' },\r\n      { id: 3, label: 'Economy' },\r\n      { id: 4, label: 'Basic' },\r\n    ],\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n    const organizationName = canvas.getByTestId('organizationName');\r\n    const subType = canvas.getByTestId('subType');\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n    expect(organizationName).toBeTruthy();\r\n    expect(subType).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n    await userEvent.clear(organizationName);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.type(password, '!Password1234.', { delay: 50 });\r\n    await userEvent.type(organizationName, 'Web Telescope', { delay: 50 });\r\n    await userEvent.type(subType, 'Gold', { delay: 50 });\r\n\r\n    const option = document.querySelector('[data-testid=\"Gold\"]');\r\n    await userEvent.click(option!);\r\n\r\n    const signupButton = await canvas.findByTestId('Sign Up');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/user.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const roles = canvas.getByTestId('roles');\r\n    const Admin = canvas.getByTestId('Admin');\r\n    const Editor = canvas.getByTestId('Editor');\r\n    const Reader = canvas.getByTestId('Reader');\r\n\r\n    expect(Admin).toBeTruthy();\r\n    expect(Editor).toBeTruthy();\r\n    expect(Reader).toBeTruthy();\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(roles).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.click(Admin);\r\n    await userEvent.click(Editor);\r\n    await userEvent.click(Reader);\r\n\r\n    const signupButton = await canvas.findByTestId('Save User');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/form/form.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByTestId('Submit')).toBeTruthy();\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -5603,74 +6126,104 @@
                 "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/textarea works!/gi)).toBeTruthy();\r\n  },\r\n}"
             },
             {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const forgotPasswordButton = canvas.getByTestId(/Forgot Password/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n\r\n    await userEvent.click(forgotPasswordButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const securityCode = canvas.getByTestId('securityCode');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(securityCode).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(securityCode);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n    await userEvent.type(securityCode, 'oauoo-982749-asjdf-aerqw', {\r\n      delay: 100,\r\n    });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/login.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  play: async (args) => {\r\n    const { canvasElement } = args;\r\n    console.log(args);\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n\r\n    await userEvent.type(username, loginDto.username, { delay: 100 });\r\n    await userEvent.type(password, loginDto.password, { delay: 100 });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n\r\n    expect(LoginFormGroup.value.username).toBe(loginDto.username);\r\n    expect(LoginFormGroup.value.password).toBe(loginDto.password);\r\n\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/permission.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    formTitle: 'Create New Permission',\n    submitLabel: 'Save',\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/Create New Permission/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/role.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    formTitle: 'Create New Role',\n    submitLabel: 'Save',\n    permissionList: [\n      {\n        id: 1,\n        label: 'User',\n        subs: [\n          { id: 2, label: 'Read' },\n          { id: 3, label: 'Create' },\n          { id: 4, label: 'Update' },\n          { id: 5, label: 'Delete' },\n        ],\n      },\n      {\n        id: 6,\n        label: 'User',\n        subs: [\n          { id: 7, label: 'Read' },\n          { id: 8, label: 'Create' },\n          { id: 9, label: 'Update' },\n          { id: 10, label: 'Delete' },\n        ],\n      },\n    ],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/Create New Role/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/sub.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    subtypeList: [\r\n      { id: 1, label: 'Premium' },\r\n      { id: 2, label: 'Gold' },\r\n      { id: 3, label: 'Economy' },\r\n      { id: 4, label: 'Basic' },\r\n    ],\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n    const organizationName = canvas.getByTestId('organizationName');\r\n    const subType = canvas.getByTestId('subType');\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n    expect(organizationName).toBeTruthy();\r\n    expect(subType).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n    await userEvent.clear(organizationName);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.type(password, '!Password1234.', { delay: 50 });\r\n    await userEvent.type(organizationName, 'Web Telescope', { delay: 50 });\r\n    await userEvent.type(subType, 'Gold', { delay: 50 });\r\n\r\n    const option = document.querySelector('[data-testid=\"Gold\"]');\r\n    await userEvent.click(option!);\r\n\r\n    const signupButton = await canvas.findByTestId('Sign Up');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/user.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const roles = canvas.getByTestId('roles');\r\n    const Admin = canvas.getByTestId('Admin');\r\n    const Editor = canvas.getByTestId('Editor');\r\n    const Reader = canvas.getByTestId('Reader');\r\n\r\n    expect(Admin).toBeTruthy();\r\n    expect(Editor).toBeTruthy();\r\n    expect(Reader).toBeTruthy();\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(roles).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.click(Admin);\r\n    await userEvent.click(Editor);\r\n    await userEvent.click(Reader);\r\n\r\n    const signupButton = await canvas.findByTestId('Save User');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/form/form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByTestId('Submit')).toBeTruthy();\r\n  },\r\n}"
+            },
+            {
                 "name": "loginDto",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/login.stories.ts",
+                "file": "libs/form/src/lib/auth/login.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ILoginDto",
                 "defaultValue": "{\r\n  username: 'user@gmail.com',\r\n  password: '!Password1234.',\r\n}"
             },
             {
-                "name": "meta",
+                "name": "LoginFormGroup",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
+                "file": "libs/form/src/lib/auth/login.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ForgotPasswordFormComponent>",
-                "defaultValue": "{\r\n  component: ForgotPasswordFormComponent,\r\n  title: 'ForgotPasswrodComponent',\r\n  tags: ['Auth'],\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<LoginWithCodeFormComponent>",
-                "defaultValue": "{\r\n  component: LoginWithCodeFormComponent,\r\n  title: 'LoginWithCodeFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/login.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<LoginFormComponent>",
-                "defaultValue": "{\r\n  component: LoginFormComponent,\r\n  title: 'LoginFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/sub.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<SubFormComponent>",
-                "defaultValue": "{\r\n  component: SubFormComponent,\r\n  title: 'SubFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/user.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<UserFormComponent>",
-                "defaultValue": "{\r\n  component: UserFormComponent,\r\n  title: 'UserFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/form/src/lib/form/form.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<FormComponent>",
-                "defaultValue": "{\r\n  component: FormComponent,\r\n  title: 'FormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        importProvidersFrom(BrowserAnimationsModule),\r\n        {\r\n          provide: FormGroup,\r\n          useValue: new FormGroup({\r\n            name: new FormControl('', []),\r\n          }),\r\n        },\r\n      ],\r\n    }),\r\n  ],\r\n}"
+                "type": "",
+                "defaultValue": "new FormGroup({\r\n  username: new FormControl(\r\n    '',\r\n    new InputValidator('username').required().isEmail().build()\r\n  ),\r\n  password: new FormControl(\r\n    '',\r\n    new InputValidator('password').required().password().build()\r\n  ),\r\n})"
             },
             {
                 "name": "meta",
@@ -5783,64 +6336,84 @@
                 "defaultValue": "{\r\n  component: TextareaFieldComponent,\r\n  title: 'TextareaFieldComponent',\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [BrowserAnimationsModule],\r\n      providers: [\r\n        {\r\n          provide: FormGroup,\r\n          useValue: new FormGroup({\r\n            name: new FormControl('', []),\r\n          }),\r\n        },\r\n      ],\r\n    }),\r\n  ],\r\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
+                "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
+                "type": "Meta<ForgotPasswordFormComponent>",
+                "defaultValue": "{\r\n  component: ForgotPasswordFormComponent,\r\n  title: 'ForgotPasswrodComponent',\r\n  tags: ['Auth'],\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
+                "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n}"
+                "type": "Meta<LoginWithCodeFormComponent>",
+                "defaultValue": "{\r\n  component: LoginWithCodeFormComponent,\r\n  title: 'LoginWithCodeFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/login.stories.ts",
+                "file": "libs/form/src/lib/auth/login.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
+                "type": "Meta<LoginFormComponent>",
+                "defaultValue": "{\r\n  component: LoginFormComponent,\r\n  title: 'LoginFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/sub.stories.ts",
+                "file": "libs/form/src/lib/auth/permission.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n}"
+                "type": "Meta<PermissionFormComponent>",
+                "defaultValue": "{\n  component: PermissionFormComponent,\n  title: 'PermissionFormComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/form/src/lib/builtin/user.stories.ts",
+                "file": "libs/form/src/lib/auth/role.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    formTitle: 'Create User Form',\r\n    submitLabel: 'Save User',\r\n    isUpdateForm: false,\r\n    userRoles: [\r\n      {\r\n        id: 1,\r\n        label: 'Admin',\r\n      },\r\n      {\r\n        id: 2,\r\n        label: 'Editor',\r\n      },\r\n      {\r\n        id: 3,\r\n        label: 'Reader',\r\n      },\r\n    ],\r\n  },\r\n}"
+                "type": "Meta<RoleFormComponent>",
+                "defaultValue": "{\n  component: RoleFormComponent,\n  title: 'RoleFormComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
             },
             {
-                "name": "Primary",
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/sub.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SubFormComponent>",
+                "defaultValue": "{\r\n  component: SubFormComponent,\r\n  title: 'SubFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/user.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<UserFormComponent>",
+                "defaultValue": "{\r\n  component: UserFormComponent,\r\n  title: 'UserFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "libs/form/src/lib/form/form.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n}"
+                "type": "Meta<FormComponent>",
+                "defaultValue": "{\r\n  component: FormComponent,\r\n  title: 'FormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        importProvidersFrom(BrowserAnimationsModule),\r\n        {\r\n          provide: FormGroup,\r\n          useValue: new FormGroup({\r\n            name: new FormControl('', []),\r\n          }),\r\n        },\r\n      ],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "Primary",
@@ -5951,76 +6524,90 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    inputName: 'name',\r\n    minLength: 0,\r\n    maxLength: 400,\r\n    inputType: 'text',\r\n    label: 'Text Label',\r\n    hint: 'Hint',\r\n    prefixIcon: '',\r\n    suffixIcon: '',\r\n    isUpdateField: false,\r\n  },\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/login.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/permission.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    formTitle: 'Create New Permission',\n    submitLabel: 'Save',\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/role.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    formTitle: 'Create New Role',\n    submitLabel: 'Save',\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/sub.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/auth/user.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    formTitle: 'Create User Form',\r\n    submitLabel: 'Save User',\r\n    isUpdateForm: false,\r\n    userRoles: [\r\n      {\r\n        id: 1,\r\n        label: 'Admin',\r\n      },\r\n      {\r\n        id: 2,\r\n        label: 'Editor',\r\n      },\r\n      {\r\n        id: 3,\r\n        label: 'Reader',\r\n      },\r\n    ],\r\n  },\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/form/src/lib/form/form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
             }
         ],
         "functions": [],
         "typealiases": [
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<ForgotPasswordFormComponent>",
-                "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<LoginWithCodeFormComponent>",
-                "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<LoginFormComponent>",
-                "file": "libs/form/src/lib/builtin/login.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<SubFormComponent>",
-                "file": "libs/form/src/lib/builtin/sub.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<UserFormComponent>",
-                "file": "libs/form/src/lib/builtin/user.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<FormComponent>",
-                "file": "libs/form/src/lib/form/form.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
@@ -6141,6 +6728,94 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ForgotPasswordFormComponent>",
+                "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<LoginWithCodeFormComponent>",
+                "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<LoginFormComponent>",
+                "file": "libs/form/src/lib/auth/login.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<PermissionFormComponent>",
+                "file": "libs/form/src/lib/auth/permission.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<RoleFormComponent>",
+                "file": "libs/form/src/lib/auth/role.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SubFormComponent>",
+                "file": "libs/form/src/lib/auth/sub.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<UserFormComponent>",
+                "file": "libs/form/src/lib/auth/user.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FormComponent>",
+                "file": "libs/form/src/lib/form/form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
             }
         ],
         "enumerations": [],
@@ -6155,208 +6830,6 @@
                     "deprecationMessage": "",
                     "type": "AnimationTriggerMetadata[]",
                     "defaultValue": "[\r\n  bounceInDownOnEnterAnimation({ anchor: 'enter' }),\r\n  bounceOutUpOnLeaveAnimation({ anchor: 'leave' }),\r\n]"
-                }
-            ],
-            "libs/form/src/lib/builtin/forgot-password.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const forgotPasswordButton = canvas.getByTestId(/Forgot Password/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n\r\n    await userEvent.click(forgotPasswordButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<ForgotPasswordFormComponent>",
-                    "defaultValue": "{\r\n  component: ForgotPasswordFormComponent,\r\n  title: 'ForgotPasswrodComponent',\r\n  tags: ['Auth'],\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                }
-            ],
-            "libs/form/src/lib/builtin/login-with-code.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const securityCode = canvas.getByTestId('securityCode');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(securityCode).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(securityCode);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n    await userEvent.type(securityCode, 'oauoo-982749-asjdf-aerqw', {\r\n      delay: 100,\r\n    });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<LoginWithCodeFormComponent>",
-                    "defaultValue": "{\r\n  component: LoginWithCodeFormComponent,\r\n  title: 'LoginWithCodeFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n}"
-                }
-            ],
-            "libs/form/src/lib/builtin/login.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/login.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  play: async (args) => {\r\n    const { canvasElement } = args;\r\n    console.log(args);\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n\r\n    await userEvent.type(username, loginDto.username, { delay: 100 });\r\n    await userEvent.type(password, loginDto.password, { delay: 100 });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n\r\n    // expect(formGroup.value.username).toBe(loginDto.username);\r\n    // expect(formGroup.value.pasword).toBe('some');\r\n\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-                },
-                {
-                    "name": "loginDto",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/login.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "ILoginDto",
-                    "defaultValue": "{\r\n  username: 'user@gmail.com',\r\n  password: '!Password1234.',\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/login.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<LoginFormComponent>",
-                    "defaultValue": "{\r\n  component: LoginFormComponent,\r\n  title: 'LoginFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/login.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                }
-            ],
-            "libs/form/src/lib/builtin/sub.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/sub.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    subTypes: [\r\n      { id: 1, label: 'Premium' },\r\n      { id: 2, label: 'Gold' },\r\n      { id: 3, label: 'Economy' },\r\n      { id: 4, label: 'Basic' },\r\n    ],\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n    const organizationName = canvas.getByTestId('organizationName');\r\n    const subType = canvas.getByTestId('subType');\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n    expect(organizationName).toBeTruthy();\r\n    expect(subType).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n    await userEvent.clear(organizationName);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.type(password, '!Password1234.', { delay: 50 });\r\n    await userEvent.type(organizationName, 'Web Telescope', { delay: 50 });\r\n    await userEvent.type(subType, 'Gold', { delay: 50 });\r\n\r\n    const option = document.querySelector('[data-testid=\"Gold\"]');\r\n    await userEvent.click(option!);\r\n\r\n    const signupButton = await canvas.findByTestId('Sign Up');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/sub.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<SubFormComponent>",
-                    "defaultValue": "{\r\n  component: SubFormComponent,\r\n  title: 'SubFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/sub.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n}"
-                }
-            ],
-            "libs/form/src/lib/builtin/user.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/user.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const roles = canvas.getByTestId('roles');\r\n    const Admin = canvas.getByTestId('Admin');\r\n    const Editor = canvas.getByTestId('Editor');\r\n    const Reader = canvas.getByTestId('Reader');\r\n\r\n    expect(Admin).toBeTruthy();\r\n    expect(Editor).toBeTruthy();\r\n    expect(Reader).toBeTruthy();\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(roles).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.click(Admin);\r\n    await userEvent.click(Editor);\r\n    await userEvent.click(Reader);\r\n\r\n    const signupButton = await canvas.findByTestId('Save User');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/user.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<UserFormComponent>",
-                    "defaultValue": "{\r\n  component: UserFormComponent,\r\n  title: 'UserFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/builtin/user.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    formTitle: 'Create User Form',\r\n    submitLabel: 'Save User',\r\n    isUpdateForm: false,\r\n    userRoles: [\r\n      {\r\n        id: 1,\r\n        label: 'Admin',\r\n      },\r\n      {\r\n        id: 2,\r\n        label: 'Editor',\r\n      },\r\n      {\r\n        id: 3,\r\n        label: 'Reader',\r\n      },\r\n    ],\r\n  },\r\n}"
-                }
-            ],
-            "libs/form/src/lib/form/form.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/form/form.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByTestId('Submit')).toBeTruthy();\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/form/form.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<FormComponent>",
-                    "defaultValue": "{\r\n  component: FormComponent,\r\n  title: 'FormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        importProvidersFrom(BrowserAnimationsModule),\r\n        {\r\n          provide: FormGroup,\r\n          useValue: new FormGroup({\r\n            name: new FormControl('', []),\r\n          }),\r\n        },\r\n      ],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/form/src/lib/form/form.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n}"
                 }
             ],
             "libs/form/src/lib/fields/autocomplete.stories.ts": [
@@ -6710,89 +7183,289 @@
                     "type": "Story",
                     "defaultValue": "{\r\n  args: {\r\n    inputName: 'name',\r\n    minLength: 0,\r\n    maxLength: 400,\r\n    inputType: 'text',\r\n    label: 'Text Label',\r\n    hint: 'Hint',\r\n    prefixIcon: '',\r\n    suffixIcon: '',\r\n    isUpdateField: false,\r\n  },\r\n}"
                 }
+            ],
+            "libs/form/src/lib/auth/forgot-password.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const forgotPasswordButton = canvas.getByTestId(/Forgot Password/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n\r\n    await userEvent.click(forgotPasswordButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ForgotPasswordFormComponent>",
+                    "defaultValue": "{\r\n  component: ForgotPasswordFormComponent,\r\n  title: 'ForgotPasswrodComponent',\r\n  tags: ['Auth'],\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                }
+            ],
+            "libs/form/src/lib/auth/login-with-code.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const securityCode = canvas.getByTestId('securityCode');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(securityCode).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(securityCode);\r\n\r\n    await userEvent.type(username, 'user@gmail.com', { delay: 100 });\r\n    await userEvent.type(securityCode, 'oauoo-982749-asjdf-aerqw', {\r\n      delay: 100,\r\n    });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<LoginWithCodeFormComponent>",
+                    "defaultValue": "{\r\n  component: LoginWithCodeFormComponent,\r\n  title: 'LoginWithCodeFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  argTypes: meta.argTypes,\r\n}"
+                }
+            ],
+            "libs/form/src/lib/auth/login.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  play: async (args) => {\r\n    const { canvasElement } = args;\r\n    console.log(args);\r\n    const canvas = within(canvasElement);\r\n\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n\r\n    const loginButton = canvas.getByTestId(/Login/);\r\n    const resetButton = canvas.getByTestId(/Reset/);\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n\r\n    await userEvent.type(username, loginDto.username, { delay: 100 });\r\n    await userEvent.type(password, loginDto.password, { delay: 100 });\r\n\r\n    await userEvent.click(loginButton, { delay: 1000 });\r\n\r\n    expect(LoginFormGroup.value.username).toBe(loginDto.username);\r\n    expect(LoginFormGroup.value.password).toBe(loginDto.password);\r\n\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+                },
+                {
+                    "name": "loginDto",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ILoginDto",
+                    "defaultValue": "{\r\n  username: 'user@gmail.com',\r\n  password: '!Password1234.',\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<LoginFormComponent>",
+                    "defaultValue": "{\r\n  component: LoginFormComponent,\r\n  title: 'LoginFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                }
+            ],
+            "libs/form/src/lib/auth/permission.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/permission.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    formTitle: 'Create New Permission',\n    submitLabel: 'Save',\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/Create New Permission/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/permission.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<PermissionFormComponent>",
+                    "defaultValue": "{\n  component: PermissionFormComponent,\n  title: 'PermissionFormComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/permission.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    formTitle: 'Create New Permission',\n    submitLabel: 'Save',\n  },\n}"
+                }
+            ],
+            "libs/form/src/lib/auth/role.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/role.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    formTitle: 'Create New Role',\n    submitLabel: 'Save',\n    permissionList: [\n      {\n        id: 1,\n        label: 'User',\n        subs: [\n          { id: 2, label: 'Read' },\n          { id: 3, label: 'Create' },\n          { id: 4, label: 'Update' },\n          { id: 5, label: 'Delete' },\n        ],\n      },\n      {\n        id: 6,\n        label: 'User',\n        subs: [\n          { id: 7, label: 'Read' },\n          { id: 8, label: 'Create' },\n          { id: 9, label: 'Update' },\n          { id: 10, label: 'Delete' },\n        ],\n      },\n    ],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/Create New Role/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/role.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<RoleFormComponent>",
+                    "defaultValue": "{\n  component: RoleFormComponent,\n  title: 'RoleFormComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/role.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    formTitle: 'Create New Role',\n    submitLabel: 'Save',\n  },\n}"
+                }
+            ],
+            "libs/form/src/lib/auth/sub.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/sub.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    subtypeList: [\r\n      { id: 1, label: 'Premium' },\r\n      { id: 2, label: 'Gold' },\r\n      { id: 3, label: 'Economy' },\r\n      { id: 4, label: 'Basic' },\r\n    ],\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const password = canvas.getByTestId('password');\r\n    const organizationName = canvas.getByTestId('organizationName');\r\n    const subType = canvas.getByTestId('subType');\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(password).toBeTruthy();\r\n    expect(organizationName).toBeTruthy();\r\n    expect(subType).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n    await userEvent.clear(password);\r\n    await userEvent.clear(organizationName);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.type(password, '!Password1234.', { delay: 50 });\r\n    await userEvent.type(organizationName, 'Web Telescope', { delay: 50 });\r\n    await userEvent.type(subType, 'Gold', { delay: 50 });\r\n\r\n    const option = document.querySelector('[data-testid=\"Gold\"]');\r\n    await userEvent.click(option!);\r\n\r\n    const signupButton = await canvas.findByTestId('Sign Up');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/sub.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SubFormComponent>",
+                    "defaultValue": "{\r\n  component: SubFormComponent,\r\n  title: 'SubFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/sub.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
+            "libs/form/src/lib/auth/user.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/user.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const username = canvas.getByTestId('username');\r\n    const roles = canvas.getByTestId('roles');\r\n    const Admin = canvas.getByTestId('Admin');\r\n    const Editor = canvas.getByTestId('Editor');\r\n    const Reader = canvas.getByTestId('Reader');\r\n\r\n    expect(Admin).toBeTruthy();\r\n    expect(Editor).toBeTruthy();\r\n    expect(Reader).toBeTruthy();\r\n\r\n    expect(username).toBeTruthy();\r\n    expect(roles).toBeTruthy();\r\n\r\n    await userEvent.clear(username);\r\n\r\n    await userEvent.type(username, 'user@domain.com', { delay: 50 });\r\n    await userEvent.click(Admin);\r\n    await userEvent.click(Editor);\r\n    await userEvent.click(Reader);\r\n\r\n    const signupButton = await canvas.findByTestId('Save User');\r\n    const resetButton = await canvas.findByTestId('Reset');\r\n\r\n    await userEvent.click(signupButton, { delay: 400 });\r\n    await userEvent.click(resetButton, { delay: 1000 });\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/user.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<UserFormComponent>",
+                    "defaultValue": "{\r\n  component: UserFormComponent,\r\n  title: 'UserFormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/user.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    formTitle: 'Create User Form',\r\n    submitLabel: 'Save User',\r\n    isUpdateForm: false,\r\n    userRoles: [\r\n      {\r\n        id: 1,\r\n        label: 'Admin',\r\n      },\r\n      {\r\n        id: 2,\r\n        label: 'Editor',\r\n      },\r\n      {\r\n        id: 3,\r\n        label: 'Reader',\r\n      },\r\n    ],\r\n  },\r\n}"
+                }
+            ],
+            "libs/form/src/lib/form/form.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/form/form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByTestId('Submit')).toBeTruthy();\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/form/form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FormComponent>",
+                    "defaultValue": "{\r\n  component: FormComponent,\r\n  title: 'FormComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [\r\n        importProvidersFrom(BrowserAnimationsModule),\r\n        {\r\n          provide: FormGroup,\r\n          useValue: new FormGroup({\r\n            name: new FormControl('', []),\r\n          }),\r\n        },\r\n      ],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/form/form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
+            "libs/form/src/lib/auth/login.ts": [
+                {
+                    "name": "LoginFormGroup",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/form/src/lib/auth/login.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new FormGroup({\r\n  username: new FormControl(\r\n    '',\r\n    new InputValidator('username').required().isEmail().build()\r\n  ),\r\n  password: new FormControl(\r\n    '',\r\n    new InputValidator('password').required().password().build()\r\n  ),\r\n})"
+                }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "libs/form/src/lib/builtin/forgot-password.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ForgotPasswordFormComponent>",
-                    "file": "libs/form/src/lib/builtin/forgot-password.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/form/src/lib/builtin/login-with-code.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<LoginWithCodeFormComponent>",
-                    "file": "libs/form/src/lib/builtin/login-with-code.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/form/src/lib/builtin/login.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<LoginFormComponent>",
-                    "file": "libs/form/src/lib/builtin/login.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/form/src/lib/builtin/sub.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<SubFormComponent>",
-                    "file": "libs/form/src/lib/builtin/sub.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/form/src/lib/builtin/user.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<UserFormComponent>",
-                    "file": "libs/form/src/lib/builtin/user.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/form/src/lib/form/form.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<FormComponent>",
-                    "file": "libs/form/src/lib/form/form.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "libs/form/src/lib/fields/autocomplete.stories.ts": [
                 {
                     "name": "Story",
@@ -6935,16 +7608,120 @@
                     "description": "",
                     "kind": 183
                 }
+            ],
+            "libs/form/src/lib/auth/forgot-password.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ForgotPasswordFormComponent>",
+                    "file": "libs/form/src/lib/auth/forgot-password.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/form/src/lib/auth/login-with-code.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<LoginWithCodeFormComponent>",
+                    "file": "libs/form/src/lib/auth/login-with-code.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/form/src/lib/auth/login.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<LoginFormComponent>",
+                    "file": "libs/form/src/lib/auth/login.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/form/src/lib/auth/permission.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<PermissionFormComponent>",
+                    "file": "libs/form/src/lib/auth/permission.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/form/src/lib/auth/role.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<RoleFormComponent>",
+                    "file": "libs/form/src/lib/auth/role.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/form/src/lib/auth/sub.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SubFormComponent>",
+                    "file": "libs/form/src/lib/auth/sub.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/form/src/lib/auth/user.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<UserFormComponent>",
+                    "file": "libs/form/src/lib/auth/user.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/form/src/lib/form/form.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FormComponent>",
+                    "file": "libs/form/src/lib/form/form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
             ]
         }
     },
     "routes": [],
     "coverage": {
-        "count": 11,
+        "count": 10,
         "status": "low",
         "files": [
             {
-                "filePath": "libs/form/src/lib/builtin/forgot-password.stories.ts",
+                "filePath": "libs/form/src/lib/auth/forgot-password.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -6954,7 +7731,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/forgot-password.stories.ts",
+                "filePath": "libs/form/src/lib/auth/forgot-password.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -6964,7 +7741,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/forgot-password.stories.ts",
+                "filePath": "libs/form/src/lib/auth/forgot-password.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -6974,7 +7751,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/forgot-password.ts",
+                "filePath": "libs/form/src/lib/auth/forgot-password.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "ForgotPasswordFormComponent",
@@ -6983,7 +7760,7 @@
                 "status": "medium"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login-with-code.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login-with-code.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -6993,7 +7770,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login-with-code.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login-with-code.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7003,7 +7780,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login-with-code.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login-with-code.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7013,7 +7790,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login-with-code.ts",
+                "filePath": "libs/form/src/lib/auth/login-with-code.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "LoginWithCodeFormComponent",
@@ -7022,7 +7799,7 @@
                 "status": "medium"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7032,7 +7809,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7042,7 +7819,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7052,7 +7829,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7062,7 +7839,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/login.ts",
+                "filePath": "libs/form/src/lib/auth/login.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "LoginFormComponent",
@@ -7071,7 +7848,17 @@
                 "status": "good"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/sub.stories.ts",
+                "filePath": "libs/form/src/lib/auth/login.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoginFormGroup",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/permission.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7081,7 +7868,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/sub.stories.ts",
+                "filePath": "libs/form/src/lib/auth/permission.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7091,7 +7878,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/sub.stories.ts",
+                "filePath": "libs/form/src/lib/auth/permission.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7101,7 +7888,85 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/sub.ts",
+                "filePath": "libs/form/src/lib/auth/permission.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PermissionFormComponent",
+                "coveragePercent": 27,
+                "coverageCount": "3/11",
+                "status": "medium"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/role.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/role.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/role.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/role.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RoleFormComponent",
+                "coveragePercent": 21,
+                "coverageCount": "3/14",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/sub.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/sub.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/sub.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/form/src/lib/auth/sub.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "SubFormComponent",
@@ -7110,7 +7975,7 @@
                 "status": "medium"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/user.stories.ts",
+                "filePath": "libs/form/src/lib/auth/user.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7120,7 +7985,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/user.stories.ts",
+                "filePath": "libs/form/src/lib/auth/user.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7130,7 +7995,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/user.stories.ts",
+                "filePath": "libs/form/src/lib/auth/user.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -7140,7 +8005,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/form/src/lib/builtin/user.ts",
+                "filePath": "libs/form/src/lib/auth/user.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "UserFormComponent",

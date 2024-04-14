@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -46,7 +47,10 @@ export class BaseFieldComponent<T = any, InputRef = MatInput>
 {
   readonly errorState = new ErrorState();
 
-  @Output() updateButtonClick = new EventEmitter<T>();
+  /**
+   * Emits the input value when the update button is clicked.
+   */
+  @Output() updateEvent = new EventEmitter<T>();
   /**
    * Input referance
    */
@@ -139,6 +143,6 @@ export class BaseFieldComponent<T = any, InputRef = MatInput>
     const control = this.formGroup.get(this.inputName);
     control?.markAllAsTouched();
     control?.markAsDirty();
-    this.updateButtonClick.emit(control?.value);
+    this.updateEvent.emit(control?.value);
   }
 }

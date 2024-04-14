@@ -1,16 +1,22 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { BaseFieldComponent, CommonFieldModule } from './field';
 import { MatListModule, MatSelectionList } from '@angular/material/list';
-import { IOption } from '@webpackages/model';
+import { IID, IOption } from '@webpackages/model';
 import {
   MatCheckboxChange,
   MatCheckboxModule,
 } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   standalone: true,
-  imports: [CommonFieldModule, MatListModule, MatCheckboxModule, MatCardModule],
+  imports: [
+    CommonFieldModule,
+    MatListModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatTooltipModule,
+  ],
   selector: 'wt-list-select-field',
   template: `
     <mat-card style="width: 100%;">
@@ -38,30 +44,47 @@ import { MatCardModule } from '@angular/material/card';
             <div style="display: flex; flex-direction: row; gap: 1em;">
               @for (item of items; track item) {
 
-              <section>
-                <h1 *ngIf="item.subs">{{ item.label }}</h1>
-                @if(item.subs) { @for(subItem of item.subs; track subItem){
-                <mat-list-option
-                  [value]="subItem"
-                  checkboxPosition="before"
-                  [attr.data-testid]="subItem.label + item.label"
-                  [selected]="isSelected(subItem)"
-                >
-                  <span>{{ subItem.label }}</span>
-                </mat-list-option>
+              <mat-card style="min-width: 200px;">
+                <mat-card-header>
+                  <div
+                    style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; align-items: center;"
+                  >
+                    <h3 *ngIf="item.subs">{{ item.label }}</h3>
+                    <button
+                      mat-icon-button
+                      matTooltip="Select All"
+                      matTooltipPosition="above"
+                      (click)="selectItem(item)"
+                    >
+                      <mat-icon>select_all</mat-icon>
+                    </button>
+                  </div>
+                </mat-card-header>
 
-                } } @else {
+                <mat-card-content>
+                  @if(item.subs) { @for(subItem of item.subs; track subItem){
+                  <mat-list-option
+                    [value]="subItem"
+                    checkboxPosition="before"
+                    [attr.data-testid]="subItem.label + item.label"
+                    [selected]="isSelected(subItem)"
+                  >
+                    <span>{{ subItem.label }}</span>
+                  </mat-list-option>
 
-                <mat-list-option
-                  [value]="item"
-                  checkboxPosition="before"
-                  [attr.data-testid]="item.label"
-                  [selected]="isSelected(item)"
-                >
-                  <span> {{ item.label }} </span>
-                </mat-list-option>
-                }
-              </section>
+                  } } @else {
+
+                  <mat-list-option
+                    [value]="item"
+                    checkboxPosition="before"
+                    [attr.data-testid]="item.label"
+                    [selected]="isSelected(item)"
+                  >
+                    <span> {{ item.label }} </span>
+                  </mat-list-option>
+                  }
+                </mat-card-content>
+              </mat-card>
               }
             </div>
           </mat-selection-list>
@@ -83,7 +106,7 @@ import { MatCardModule } from '@angular/material/card';
   `,
 })
 export class ListSelectComponent
-  extends BaseFieldComponent<any, MatSelectionList>
+  extends BaseFieldComponent<IID[], MatSelectionList>
   implements AfterViewInit
 {
   @Input() selectedItems?: Pick<IOption, 'id'>[];
@@ -130,9 +153,14 @@ export class ListSelectComponent
   }
 
   isSelected(item: IOption) {
-    console.log('Is selected: ', this.selectedItems);
-
-    console.log(item);
     return this.selectedItems?.find((e) => item.id == e.id) ? true : false;
+  }
+
+  selectItem(item: IOption) {
+    if (item.subs) {
+      item.subs.forEach((e) => this.selectedItems?.push(e));
+    } else {
+      this.selectedItems?.push(item);
+    }
   }
 }

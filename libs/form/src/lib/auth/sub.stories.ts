@@ -29,7 +29,7 @@ export const Primary: Story = {
 
 export const Heading: Story = {
   args: {
-    subTypes: [
+    subtypeList: [
       { id: 1, label: 'Premium' },
       { id: 2, label: 'Gold' },
       { id: 3, label: 'Economy' },

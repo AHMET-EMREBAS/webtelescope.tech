@@ -1,12 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  applicationConfig,
+  type Meta,
+  type StoryObj,
+} from '@storybook/angular';
 import { RoleFormComponent } from './role';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { importProvidersFrom } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const meta: Meta<RoleFormComponent> = {
   component: RoleFormComponent,
   title: 'RoleFormComponent',
+  decorators: [
+    applicationConfig({
+      providers: [importProvidersFrom(BrowserAnimationsModule)],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<RoleFormComponent>;
@@ -35,7 +46,7 @@ export const Heading: Story = {
       },
       {
         id: 6,
-        label: 'User',
+        label: 'Store',
         subs: [
           { id: 7, label: 'Read' },
           { id: 8, label: 'Create' },

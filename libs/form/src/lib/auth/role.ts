@@ -27,11 +27,13 @@ import {
       <wt-text-field
         #role
         inputName="role"
-        [required]="true"
-        inputType="email"
+        inputType="text"
         label="Role Name"
-        prefixIcon="email"
+        prefixIcon="security"
         [isUpdateField]="isUpdateForm"
+        [required]="true"
+        [minLength]="3"
+        [maxLength]="30"
       ></wt-text-field>
 
       <wt-list-select-field

@@ -1,12 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  applicationConfig,
+  type Meta,
+  type StoryObj,
+} from '@storybook/angular';
 import { PermissionFormComponent } from './permission';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { importProvidersFrom } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const meta: Meta<PermissionFormComponent> = {
   component: PermissionFormComponent,
   title: 'PermissionFormComponent',
+  decorators: [
+    applicationConfig({
+      providers: [importProvidersFrom(BrowserAnimationsModule)],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<PermissionFormComponent>;
