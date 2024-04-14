@@ -54,7 +54,7 @@ export class CommonFormModule {}
             mat-raised-button
             color="primary"
             type="button"
-            (click)="submit()"
+            (click)="submitForm()"
             [disabled]="formGroup.invalid"
             [attr.data-testid]="submitLabel"
           >
@@ -62,7 +62,7 @@ export class CommonFormModule {}
           </button>
           <button
             mat-raised-button
-            (click)="reset()"
+            (click)="resetForm()"
             type="button"
             [attr.data-testid]="'Reset'"
           >
@@ -74,23 +74,43 @@ export class CommonFormModule {}
   `,
 })
 export class FormComponent<T = any> {
+  /**
+   * Form title
+   */
   @Input() formTitle = 'Form Title';
+
+  /**
+   * Submit button label
+   */
   @Input() submitLabel = 'Submit';
+
+  /**
+   * Is update form? If it is an update form, an update button is placed next to each input element.
+   */
   @Input() isUpdateForm: boolean = false;
 
-  @Output() submitButtonClick = new EventEmitter<T>();
+  /**
+   * Emit when user click submit button
+   */
+  @Output() submitEvent = new EventEmitter<T>();
 
   isSubmitted$ = new BehaviorSubject(false);
 
-  constructor(public readonly formGroup: FormGroup) {}
+  /**
+   * Form group
+   */
+  formGroup!: FormGroup;
 
-  submit() {
-    this.isSubmitted$.next(true);
-    this.submitButtonClick.emit(this.formGroup.value);
-    console.table(this.formGroup.value);
+  constructor(formGroup: FormGroup) {
+    this.formGroup = formGroup;
   }
 
-  reset() {
+  submitForm(value?: T) {
+    this.isSubmitted$.next(true);
+    this.submitEvent.emit(value ?? this.formGroup.value);
+  }
+
+  resetForm() {
     this.isSubmitted$.next(false);
     this.formGroup.reset();
   }

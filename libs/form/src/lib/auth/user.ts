@@ -12,20 +12,20 @@ import { ICreateUserDto, IID, IOption } from '@webpackages/model';
     ListSelectComponent,
   ],
   standalone: true,
-  selector: 'wt-login-form',
+  selector: 'wt-user-form',
   template: `
     <wt-form
-      (submitButtonClick)="submit()"
+      (submitEvent)="submitForm()"
       [submitLabel]="submitLabel"
       [formTitle]="formTitle"
     >
       <wt-text-field
         #username
         inputName="username"
-        [required]="true"
         inputType="email"
         label="Username"
         prefixIcon="email"
+        [required]="true"
         [isUpdateField]="isUpdateForm"
       ></wt-text-field>
 
@@ -56,7 +56,6 @@ export class UserFormComponent extends FormComponent<ICreateUserDto<IID, IID>> {
 
   @ViewChild('username') username!: TextFieldComponent;
   @ViewChild('roles') roles!: ListSelectComponent;
-
   @Input() override formTitle: string = 'Create User';
   @Input() override submitLabel: string = 'Save';
 

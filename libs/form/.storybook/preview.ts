@@ -7,6 +7,7 @@ const preview: Preview = {
   parameters: {
     options: {
       storySort: {
+        actions: { argTypesRegex: '^.*Event' },
         method: 'alphabetical',
       },
     },

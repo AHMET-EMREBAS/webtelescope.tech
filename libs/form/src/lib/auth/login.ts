@@ -3,17 +3,28 @@ import { FormComponent, InputValidator } from '../form';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseFieldComponent, TextFieldComponent } from '../fields';
 import { PasswordFieldComponent } from '../fields/password';
-import { ILoginWithCodeDto } from '@webpackages/model';
+import { ILoginDto } from '@webpackages/model';
+
+export const LoginFormGroup = new FormGroup({
+  username: new FormControl(
+    '',
+    new InputValidator('username').required().isEmail().build()
+  ),
+  password: new FormControl(
+    '',
+    new InputValidator('password').required().password().build()
+  ),
+});
 
 @Component({
   imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],
   standalone: true,
-  selector: 'wt-login-with-code-form',
+  selector: 'wt-login-form',
   template: `
     <wt-form
-      (submitButtonClick)="submit()"
       [formTitle]="formTitle"
       [submitLabel]="submitLabel"
+      (submitEvent)="submitForm()"
     >
       <wt-text-field
         #username
@@ -23,43 +34,52 @@ import { ILoginWithCodeDto } from '@webpackages/model';
         label="Username"
         prefixIcon="email"
       ></wt-text-field>
-      <wt-text-field
-        #securityCode
-        inputName="securityCode"
+      <wt-password-field
+        #password
+        inputName="password"
         [required]="true"
-        label="Security Code"
-        prefixIcon="security"
-      ></wt-text-field>
+        label="Password"
+        prefixIcon="password"
+      ></wt-password-field>
     </wt-form>
   `,
   providers: [
     {
       provide: FormGroup,
-      useValue: new FormGroup({
-        username: new FormControl(
-          '',
-          new InputValidator('username').required().isEmail().build()
-        ),
-        securityCode: new FormControl(
-          '',
-          new InputValidator('securityCode').required().build()
-        ),
-      }),
+      useValue: LoginFormGroup,
     },
   ],
 })
-export class LoginWithCodeFormComponent extends FormComponent<ILoginWithCodeDto> {
+export class LoginFormComponent extends FormComponent<ILoginDto> {
+  /**
+   * @ignore
+   */
   @ViewChild('username') username!: BaseFieldComponent;
-  @ViewChild('securityCode') securityCode!: BaseFieldComponent;
 
-  override formTitle: string = 'Login With Security Code';
+  /**
+   * @ignore
+   */
+  @ViewChild('password') password!: BaseFieldComponent;
+
+  /**
+   * @ignore
+   */
+  override formTitle: string = 'Login Form';
+  /**
+   * @ignore
+   */
   override submitLabel: string = 'Login';
 
+  /**
+   * Focus the element
+   */
   focusUserName() {
     this.username.focus();
   }
-
+  /**
+   * Focus the element
+   */
   focusPassword() {
-    this.securityCode.focus();
+    this.password.focus();
   }
 }

@@ -14,10 +14,10 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
     AutocompleteFieldComponent,
   ],
   standalone: true,
-  selector: 'wt-login-form',
+  selector: 'wt-sub-form',
   template: `
     <wt-form
-      (submitButtonClick)="submit()"
+      (submitEvent)="submitForm()"
       [submitLabel]="submitLabel"
       [formTitle]="formTitle"
       ]
@@ -25,35 +25,38 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
       <wt-text-field
         #username
         inputName="username"
-        [required]="true"
         inputType="email"
         label="Username"
         prefixIcon="email"
+        [required]="true"
       ></wt-text-field>
 
       <wt-password-field
         #password
         inputName="password"
-        [required]="true"
         prefixIcon="password"
         label="Password"
+        [required]="true"
       ></wt-password-field>
 
       <wt-text-field
-        #organizationName
-        inputName="organizationName"
-        [required]="true"
+        #orgname
+        inputName="orgname"
         inputType="text"
         prefixIcon="store"
         label="Organization Name"
+        [required]="true"
+        [minLength]="3"
+        [maxLength]="30"
       ></wt-text-field>
 
       <wt-autocomplete-field
-        #subType
-        inputName="subType"
+        #subtype
+        inputName="subtype"
         label="Subscription Type"
-        [options]="subTypes"
         prefixIcon="category"
+        [options]="subtypeList"
+        [required]="true"
       >
       </wt-autocomplete-field>
     </wt-form>
@@ -61,7 +64,7 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
   providers: [
     {
       provide: FormGroup,
-      useValue: new FormGroup({
+      useValue: new FormGroup<Record<keyof ICreateSubDto, FormControl>>({
         username: new FormControl(
           '',
           new InputValidator('username').required().isEmail().build()
@@ -70,7 +73,7 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
           '',
           new InputValidator('password').required().password().build()
         ),
-        organizationName: new FormControl(
+        orgname: new FormControl(
           '',
           new InputValidator('organization name')
             .required()
@@ -78,7 +81,7 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
             .maxlength(30)
             .build()
         ),
-        subType: new FormControl(
+        subtype: new FormControl(
           '',
           new InputValidator('subscription type').required().build()
         ),
@@ -89,17 +92,17 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
 export class SubFormComponent extends FormComponent<ICreateSubDto<IID>> {
   @ViewChild('username') username!: BaseFieldComponent;
   @ViewChild('password') password!: BaseFieldComponent;
-  @ViewChild('organizationName') organizationName!: BaseFieldComponent;
-  @ViewChild('subType') subType!: BaseFieldComponent;
+  @ViewChild('orgname') orgname!: BaseFieldComponent;
+  @ViewChild('subtype') subtype!: BaseFieldComponent;
 
   override formTitle: string = 'Sign Up Form';
 
   override submitLabel: string = 'Sign Up';
-  
+
   /**
    * Subscription type options
    */
-  @Input() subTypes!: IOption[];
+  @Input() subtypeList!: IOption[];
 
   focusUserName() {
     this.username.focus();
@@ -109,11 +112,11 @@ export class SubFormComponent extends FormComponent<ICreateSubDto<IID>> {
     this.password.focus();
   }
 
-  focusOrganizationName() {
-    this.organizationName.focus();
+  focusOrgname() {
+    this.orgname.focus();
   }
 
   focusSubType() {
-    this.subType.focus();
+    this.subtype.focus();
   }
 }

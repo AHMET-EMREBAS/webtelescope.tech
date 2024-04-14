@@ -1,23 +1,17 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormComponent, InputValidator } from '../form';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BaseFieldComponent, TextFieldComponent } from '../fields';
 import { PasswordFieldComponent } from '../fields/password';
-import { ICreateSubDto, IID, IOption } from '@webpackages/model';
-import { AutocompleteFieldComponent } from '../fields/autocomplete';
+import { ILoginWithCodeDto } from '@webpackages/model';
 
 @Component({
-  imports: [
-    FormComponent,
-    TextFieldComponent,
-    PasswordFieldComponent,
-    AutocompleteFieldComponent,
-  ],
+  imports: [FormComponent, TextFieldComponent, PasswordFieldComponent],
   standalone: true,
-  selector: 'wt-forgot-password-form',
+  selector: 'wt-login-with-code-form',
   template: `
     <wt-form
-      (submitButtonClick)="submit()"
+      (submitEvent)="submitForm()"
       [formTitle]="formTitle"
       [submitLabel]="submitLabel"
     >
@@ -29,6 +23,13 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
         label="Username"
         prefixIcon="email"
       ></wt-text-field>
+      <wt-text-field
+        #securityCode
+        inputName="securityCode"
+        [required]="true"
+        label="Security Code"
+        prefixIcon="security"
+      ></wt-text-field>
     </wt-form>
   `,
   providers: [
@@ -39,25 +40,26 @@ import { AutocompleteFieldComponent } from '../fields/autocomplete';
           '',
           new InputValidator('username').required().isEmail().build()
         ),
+        securityCode: new FormControl(
+          '',
+          new InputValidator('securityCode').required().build()
+        ),
       }),
     },
   ],
 })
-export class ForgotPasswordFormComponent extends FormComponent<
-  ICreateSubDto<IID>
-> {
+export class LoginWithCodeFormComponent extends FormComponent<ILoginWithCodeDto> {
   @ViewChild('username') username!: BaseFieldComponent;
+  @ViewChild('securityCode') securityCode!: BaseFieldComponent;
 
-  override formTitle: string = 'Forgot Password';
-
-  override submitLabel = 'Send Recovery Email';
-
-  /**
-   * Subscription type options
-   */
-  @Input() subTypes!: IOption[];
+  override formTitle: string = 'Login With Security Code';
+  override submitLabel: string = 'Login';
 
   focusUserName() {
     this.username.focus();
+  }
+
+  focusPassword() {
+    this.securityCode.focus();
   }
 }

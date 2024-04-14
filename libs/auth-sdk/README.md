@@ -1,3 +1,9 @@
-# auth-sdk
+# Auhentication and Authorization SDK
 
-Client sdk for `auth-service` library
+## Introduction
+
+Software development kit for `auth.webtelescope.tech` service.
+
+## Sign Up
+
+<https://auth.webtelescope.tech/api/signup>

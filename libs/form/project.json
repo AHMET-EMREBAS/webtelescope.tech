@@ -52,7 +52,7 @@
         "port": 4400,
         "configDir": "libs/form/.storybook",
         "browserTarget": "form:build-storybook",
-        "compodoc": false,
+        "compodoc": true,
         "compodocArgs": [
           "-e",
           "json",
@@ -84,7 +84,7 @@
         "outputDir": "dist/storybook/form",
         "configDir": "libs/form/.storybook",
         "browserTarget": "form:build-storybook",
-        "compodoc": false,
+        "compodoc": true,
         "compodocArgs": [
           "-e",
           "json",
