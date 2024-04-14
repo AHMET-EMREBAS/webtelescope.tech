@@ -44,7 +44,6 @@
         "styles": [
           "apps/client/src/styles.scss"
         ],
-        "scripts": [],
         "serviceWorker": true,
         "ngswConfigPath": "apps/client/ngsw-config.json"
       },
@@ -63,7 +62,12 @@
             }
           ],
           "outputHashing": "all",
-          "localize": true
+          "localize": true,
+          "optimization": true,
+          "buildOptimizer": true,
+          "vendorChunk": false,
+          "extractLicenses": true,
+          "sourceMap": false
         },
         "development": {
           "buildOptimizer": false,

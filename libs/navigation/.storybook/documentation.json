@@ -5,22 +5,513 @@
     "guards": [],
     "interceptors": [],
     "classes": [],
-    "directives": [],
+    "directives": [
+        {
+            "name": "FloatingDirective",
+            "id": "directive-FloatingDirective-0bace62aa8ec9db1440a816e177f4e6b4d509aab63731391b396bb0c5848f5b69df1dc00e0c4f88734641ec67eecb6c17915140dc91608764fed69f6566cd3cf",
+            "file": "libs/navigation/src/lib/navigation/directives/floating.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtFloating]',\n  standalone: true,\n})\nexport class FloatingDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtFloating]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 7
+            }
+        },
+        {
+            "name": "LeftPanelDirective",
+            "id": "directive-LeftPanelDirective-fa09b95097a2cbd94eefe74af1e3585d9d355526bfefc55e78bd5a7f6510ff42d07d55b6c63b79ee73eae1f84a10e5970bc924de0e3f278705d5710c37fb2032",
+            "file": "libs/navigation/src/lib/navigation/directives/left-panel.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtLeftPanel]',\n  standalone: true,\n})\nexport class LeftPanelDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtLeftPanel]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 7
+            }
+        },
+        {
+            "name": "MainPanelDirective",
+            "id": "directive-MainPanelDirective-ba1f977d12c2100cfd9b0472705342fef38b3bcd5152152933e040d86d40253737a6c4ee9ee314c5e6817b0760941c7af092165fd9ef3e4fb201c3bac41b2141",
+            "file": "libs/navigation/src/lib/navigation/directives/main-panel.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtMainPanel]',\n  standalone: true,\n})\nexport class MainPanelDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtMainPanel]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 7
+            }
+        },
+        {
+            "name": "RightPanelDirective",
+            "id": "directive-RightPanelDirective-681340356f4e14d0605b3ccea6c05bc3e8992f4ac998a79a83f1708082a8e59d6e3489b01f043388fe496c87a72803183969c931c96af3b75e921eb43e0b5b08",
+            "file": "libs/navigation/src/lib/navigation/directives/right-panel.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtRightPanel]',\n  standalone: true,\n  exportAs: 'wtRightPanel',\n})\nexport class RightPanelDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtRightPanel]",
+            "providers": [],
+            "exportAs": "wtRightPanel",
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 8
+            }
+        },
+        {
+            "name": "StatusBarDirective",
+            "id": "directive-StatusBarDirective-ba16fcdb3cb14ebc359f13f345ab0b6b4201eeee2a69c86a0945de31c1400f74eefaf027c71cc3ffd60baf62c38db2d09941fe8ea78ea6872e90d27d4c4762d2",
+            "file": "libs/navigation/src/lib/navigation/directives/status-bar.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtStatusBar]',\n  standalone: true,\n})\nexport class StatusBarDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtStatusBar]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 7
+            }
+        },
+        {
+            "name": "StatusBarRightDirective",
+            "id": "directive-StatusBarRightDirective-b48c41935e0528be012521b13d564b2a35c1e5373eb328946df81dbd8d8313d88571ebd8ad0e5b64b6d73abd88ab4408bfc594b6a5549f7c45641baf7860c150",
+            "file": "libs/navigation/src/lib/navigation/directives/status-bar-right.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtStatusBarRight]',\n  standalone: true,\n})\nexport class StatusBarRightDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtStatusBarRight]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 7
+            }
+        },
+        {
+            "name": "ToolbarDirective",
+            "id": "directive-ToolbarDirective-01dba90cdbc02f8650daa0d3ce985c937705d782ef76543e496c352ac6b3c159df3e53c57690680e3e9fc2f3ef53f2d87533aa8bbee02694f9999fbf1ef90034",
+            "file": "libs/navigation/src/lib/navigation/directives/toolbar.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtToolbar]',\n  standalone: true,\n})\nexport class ToolbarDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtToolbar]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 7
+            }
+        },
+        {
+            "name": "ToolbarRightDirective",
+            "id": "directive-ToolbarRightDirective-84590a1c91249e0571b1df3a3b57a52c9a42b943768317751052a358b4dd7636fe6f15ecc60514fb7c4be1322ee617397ca34b0224e16645e2409e8949fc853e",
+            "file": "libs/navigation/src/lib/navigation/directives/toolbar-right.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtToolbarRight]',\n  standalone: true,\n})\nexport class ToolbarRightDirective {\n  constructor() {}\n}\n",
+            "selector": "[wtToolbarRight]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 7
+            }
+        }
+    ],
     "components": [
         {
+            "name": "AppLayoutComponent",
+            "id": "component-AppLayoutComponent-a8f01516aa45852cc749c40f35fef3414c2bb08840481e2976538b08e8affa2671852d88a017b6ad69afd45b566c7e0390ff9e8cf0fe5178af9101f0f3c1b0dd",
+            "file": "libs/navigation/src/lib/app-layout/app-layout.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-app-layout",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./app-layout.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "notificationBadge",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 7,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "profileBadge",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 8,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "settingBadge",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "$isHandset",
+                    "defaultValue": "this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "isDarkMode",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6,
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "toggleDarkMode",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NavigationModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationComponent, NavigationModule } from '../navigation';\n\n@Component({\n  selector: 'wt-app-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './app-layout.component.html',\n  styleUrl: './app-layout.component.scss',\n})\nexport class AppLayoutComponent extends NavigationComponent {}\n",
+            "styleUrl": "./app-layout.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [
+                "NavigationComponent"
+            ],
+            "templateData": "<div class=\"root-layout-container\" [class.dark-theme]=\"isDarkMode\">\n  <mat-toolbar color=\"primary\">\n    <div>\n      <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n        <mat-icon>\n          {{ sidenavLeft.opened ? 'menu_open' : 'menu' }}\n        </mat-icon>\n      </button>\n      <ng-content select=\"[wtToolbar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtToolbarRight]\"></ng-content>\n      <div>\n        <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n          <mat-icon>\n            {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n          </mat-icon>\n        </button>\n      </div>\n    </div>\n  </mat-toolbar>\n\n  <mat-sidenav-container>\n    <mat-sidenav\n      #sidenavLeft\n      position=\"start\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n      [opened]=\"($isHandset | async) === false\"\n    >\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <ng-content select=\"[wtLeftPanel]\"></ng-content>\n    </mat-sidenav>\n    <mat-sidenav #sidenavRight position=\"end\">\n      <h1>RightPanel</h1>\n      <ng-content select=\"[wtRightPanel]\"></ng-content>\n    </mat-sidenav>\n    <mat-sidenav-content>\n      <h1>MainContent</h1>\n      <ng-content select=\"[wtMainContent]\"></ng-content>\n    </mat-sidenav-content>\n  </mat-sidenav-container>\n\n  <!-- Status bar -->\n  <mat-toolbar color=\"primary\">\n    <div>\n      <ng-content select=\"[wtStatusBar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtStatusBarRight]\"></ng-content>\n    </div>\n  </mat-toolbar>\n</div>\n"
+        },
+        {
             "name": "NavigationComponent",
-            "id": "component-NavigationComponent-2e33486d378ea20581c85eff0806c12232799f83eef9b12fdb4f4f04170e9891f3818dd52cad1ab3519d64f5917b32c92b21140e042b28a354e608eac5a07ad9",
+            "id": "component-NavigationComponent-56345e651634971699fca0a9b9398652fc9c4ff840a2b880ad4bb1f8fd1cd663c0c5d4dea1541e89be1b5b9581c41e7d2be422074ea167badff992e11754eef9",
             "file": "libs/navigation/src/lib/navigation/navigation.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "webpackages-navigation",
+            "styleUrls": [],
+            "styles": [],
+            "template": "",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "notificationBadge",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 7,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "profileBadge",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 8,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "settingBadge",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "$isHandset",
+                    "defaultValue": "this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "isDarkMode",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "toggleDarkMode",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { debounceTime, map } from 'rxjs';\n@Component({ template: '' })\nexport abstract class NavigationComponent {\n  isDarkMode = false;\n  @Input() notificationBadge = '';\n  @Input() profileBadge = '';\n  @Input() settingBadge = '';\n\n  readonly $isHandset = this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    );\n\n  constructor(protected readonly breakPointObserver: BreakpointObserver) {}\n\n  toggleDarkMode() {\n    this.isDarkMode = !this.isDarkMode;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "breakPointObserver",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 18,
+                "jsdoctags": [
+                    {
+                        "name": "breakPointObserver",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": []
+        },
+        {
+            "name": "WebLayoutComponent",
+            "id": "component-WebLayoutComponent-92a70033e72cbf9a4769b9f22f67656cdd0232282ddc4a827b27d73b01b7d3224ac4019f46b8b9bfdbf0529a34cd81556869087a410d39c14b4f72c49e8c23b4",
+            "file": "libs/navigation/src/lib/web-layout/web-layout.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-web-layout",
             "styleUrls": [],
             "styles": [],
             "templateUrl": [
-                "./navigation.component.html"
+                "./web-layout.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
@@ -35,50 +526,187 @@
             "standalone": true,
             "imports": [
                 {
-                    "name": "CommonModule",
+                    "name": "NavigationModule",
                     "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'webpackages-navigation',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './navigation.component.html',\n  styleUrl: './navigation.component.css',\n})\nexport class NavigationComponent {}\n",
-            "styleUrl": "./navigation.component.css",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation';\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent {}\n",
+            "styleUrl": "./web-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>navigation works!</p>\n"
+            "templateData": "<div class=\"root-navigation-container\">\n    <mat-toolbar color=\"primary\">\n      <div class=\"row space-between full\">\n        <div class=\"row\">\n          <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n            <mat-icon>{{ sidenavLeft.opened ? 'menu_open' : 'menu' }}</mat-icon>\n          </button>\n          <ng-content select=\"[wtToolbar]\"></ng-content>\n        </div>\n        <div class=\"row\">\n          <ng-content select=\"[wtToolbarRight]\"></ng-content>\n          <div class=\"row\">\n            <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n              <mat-icon>\n                {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n              </mat-icon>\n            </button>\n          </div>\n        </div>\n      </div>\n    </mat-toolbar>\n  \n    <mat-sidenav-container>\n      <mat-sidenav #sidenavLeft position=\"start\">\n        <ng-content select=\"[wtLeftPanel]\"></ng-content>\n      </mat-sidenav>\n      <mat-sidenav #sidenavRight position=\"end\">\n        <ng-content select=\"[wtRightPanel]\"></ng-content>\n      </mat-sidenav>\n      <mat-sidenav-content>\n        <ng-content select=\"[wtMainContent]\"></ng-content>\n      </mat-sidenav-content>\n    </mat-sidenav-container>\n  \n    <!-- Status bar -->\n    <mat-toolbar color=\"primary\">\n      <div class=\"row space-between full\">\n        <div class=\"row\">\n          <ng-content select=\"[wtStatusBar]\"></ng-content>\n        </div>\n        <div class=\"row\">\n          <ng-content select=\"[wtStatusBarRight]\"></ng-content>\n        </div>\n      </div>\n    </mat-toolbar>\n  </div>\n  "
         }
     ],
-    "modules": [],
+    "modules": [
+        {
+            "name": "NavigationModule",
+            "id": "module-NavigationModule-f92f63ebd1747580972434e62ca2ab819d9dce5414d8ace92fff03c9fc6f49b5ea676911160c144711e40bae9b679eda51921aaedbc77beddc486658b14cdb03",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "libs/navigation/src/lib/navigation/navigation.module.ts",
+            "methods": [],
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatListModule } from '@angular/material/list';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\n\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport {\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n} from './directives';\r\nimport { NgModule } from '@angular/core';\r\n\r\nconst directives = [\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n];\r\n\r\nconst modules = [\r\n  CommonModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  MatListModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatBadgeModule,\r\n];\r\n\r\n@NgModule({\r\n  imports: [...modules, ...directives],\r\n  exports: [...modules, ...directives],\r\n})\r\nexport class NavigationModule {}\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "FloatingDirective"
+                        },
+                        {
+                            "name": "LeftPanelDirective"
+                        },
+                        {
+                            "name": "MainPanelDirective"
+                        },
+                        {
+                            "name": "RightPanelDirective"
+                        },
+                        {
+                            "name": "StatusBarDirective"
+                        },
+                        {
+                            "name": "StatusBarRightDirective"
+                        },
+                        {
+                            "name": "ToolbarDirective"
+                        },
+                        {
+                            "name": "ToolbarRightDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "FloatingDirective"
+                        },
+                        {
+                            "name": "LeftPanelDirective"
+                        },
+                        {
+                            "name": "MainPanelDirective"
+                        },
+                        {
+                            "name": "RightPanelDirective"
+                        },
+                        {
+                            "name": "StatusBarDirective"
+                        },
+                        {
+                            "name": "StatusBarRightDirective"
+                        },
+                        {
+                            "name": "ToolbarDirective"
+                        },
+                        {
+                            "name": "ToolbarRightDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
     "miscellaneous": {
         "variables": [
+            {
+                "name": "directives",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/navigation.module.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n]"
+            },
             {
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/navigation works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
             },
             {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<NavigationComponent>",
-                "defaultValue": "{\n  component: NavigationComponent,\n  title: 'NavigationComponent',\n}"
+                "type": "Meta<AppLayoutComponent>",
+                "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<WebLayoutComponent>",
+                "defaultValue": "{\n  component: WebLayoutComponent,\n  title: 'WebLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "modules",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/navigation.module.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  MatListModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatBadgeModule,\r\n]"
             },
             {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -91,8 +719,19 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<NavigationComponent>",
-                "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                "rawtype": "StoryObj<AppLayoutComponent>",
+                "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<WebLayoutComponent>",
+                "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -101,32 +740,86 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "libs/navigation/src/lib/navigation/navigation.component.stories.ts": [
+            "libs/navigation/src/lib/navigation/navigation.module.ts": [
+                {
+                    "name": "directives",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/navigation.module.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n]"
+                },
+                {
+                    "name": "modules",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/navigation.module.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  MatListModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatBadgeModule,\r\n]"
+                }
+            ],
+            "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts": [
                 {
                     "name": "Heading",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                    "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/navigation works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                    "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<NavigationComponent>",
-                    "defaultValue": "{\n  component: NavigationComponent,\n  title: 'NavigationComponent',\n}"
+                    "type": "Meta<AppLayoutComponent>",
+                    "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                    "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<WebLayoutComponent>",
+                    "defaultValue": "{\n  component: WebLayoutComponent,\n  title: 'WebLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -137,13 +830,26 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "libs/navigation/src/lib/navigation/navigation.component.stories.ts": [
+            "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<NavigationComponent>",
-                    "file": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                    "rawtype": "StoryObj<AppLayoutComponent>",
+                    "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<WebLayoutComponent>",
+                    "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -158,7 +864,7 @@
         "status": "low",
         "files": [
             {
-                "filePath": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                "filePath": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -168,7 +874,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                "filePath": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -178,7 +884,7 @@
                 "status": "low"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/navigation.component.stories.ts",
+                "filePath": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -188,10 +894,150 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/navigation/src/lib/app-layout/app-layout.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppLayoutComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/floating.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "FloatingDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/left-panel.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "LeftPanelDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/main-panel.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "MainPanelDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/right-panel.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "RightPanelDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/status-bar-right.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "StatusBarRightDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/status-bar.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "StatusBarDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/toolbar-right.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "ToolbarRightDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/toolbar.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "ToolbarDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/navigation/src/lib/navigation/navigation.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "NavigationComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/navigation.module.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "directives",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/navigation.module.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "modules",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/web-layout/web-layout.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "WebLayoutComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -1,33 +1,48 @@
-<div class="root-navigation-container">
+<div class="root-layout-container" [class.dark-theme]="isDarkMode">
   <mat-toolbar color="primary">
-    <div class="row space-between full">
-      HandSet: {{ $isHandset | async }}
-      <div class="row">
-        <button mat-icon-button (click)="sidenavLeft.toggle()">
-          <mat-icon>{{ sidenavLeft.opened ? 'menu_open' : 'menu' }}</mat-icon>
+    <div>
+      <button mat-icon-button (click)="sidenavLeft.toggle()">
+        <mat-icon>
+          {{ sidenavLeft.opened ? 'menu_open' : 'menu' }}
+        </mat-icon>
+      </button>
+      <ng-content select="[wtToolbar]"></ng-content>
+    </div>
+    <div>
+      <ng-content select="[wtToolbarRight]"></ng-content>
+      <div>
+        <button mat-icon-button (click)="sidenavRight.toggle()">
+          <mat-icon>
+            {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}
+          </mat-icon>
         </button>
-        <ng-content select="[wtToolbar]"></ng-content>
-      </div>
-      <div class="row">
-        <ng-content select="[wtToolbarRight]"></ng-content>
-        <div class="row">
-          <button mat-icon-button (click)="sidenavRight.toggle()">
-            <mat-icon>
-              {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}
-            </mat-icon>
-          </button>
-        </div>
       </div>
     </div>
   </mat-toolbar>
 
   <mat-sidenav-container>
-    <mat-sidenav #sidenavLeft position="start">
+    <!-- Left sidenav -->
+    <mat-sidenav
+      #sidenavLeft
+      position="start"
+      [mode]="($isHandset | async) === false ? 'side' : 'over'"
+      [opened]="($isHandset | async) === false"
+    >
+      <!-- Left sidenav content -->
       <ng-content select="[wtLeftPanel]"></ng-content>
     </mat-sidenav>
-    <mat-sidenav #sidenavRight position="end">
+
+    <!-- Right sidenav -->
+    <mat-sidenav
+      #sidenavRight
+      position="end"
+      [mode]="($isHandset | async) === false ? 'side' : 'over'"
+    >
+      <!-- Right sidenav content -->
       <ng-content select="[wtRightPanel]"></ng-content>
     </mat-sidenav>
+
+    <!-- Main content -->
     <mat-sidenav-content>
       <ng-content select="[wtMainContent]"></ng-content>
     </mat-sidenav-content>
@@ -35,13 +50,11 @@
 
   <!-- Status bar -->
   <mat-toolbar color="primary">
-    <div class="row space-between full">
-      <div class="row">
-        <ng-content select="[wtStatusBar]"></ng-content>
-      </div>
-      <div class="row">
-        <ng-content select="[wtStatusBarRight]"></ng-content>
-      </div>
+    <div>
+      <ng-content select="[wtStatusBar]"></ng-content>
+    </div>
+    <div>
+      <ng-content select="[wtStatusBarRight]"></ng-content>
     </div>
   </mat-toolbar>
 </div>

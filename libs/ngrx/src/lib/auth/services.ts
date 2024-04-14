@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { EntityCollectionService } from '../common';
 import {
   IID,
-  IOrganization,
+  IOrg,
   IPermission,
   IRole,
   ISession,
@@ -21,6 +21,7 @@ export const AuthEntityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {
     User: 'Users',
     Role: 'Roles',
+    
     Permission: 'Permissions',
     Session: 'Sessions',
     Organization: 'Organizations',
@@ -77,7 +78,7 @@ export class SessionService extends EntityCollectionService<ISession> {
   }
 }
 @Injectable()
-export class OrganizationService extends EntityCollectionService<IOrganization> {
+export class OrganizationService extends EntityCollectionService<IOrg> {
   constructor(
     factory: EntityCollectionServiceElementsFactory,
     httpClient: HttpClient

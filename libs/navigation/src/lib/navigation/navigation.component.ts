@@ -3,12 +3,13 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { debounceTime, map } from 'rxjs';
 @Component({ template: '' })
 export abstract class NavigationComponent {
+  isDarkMode = false;
   @Input() notificationBadge = '';
   @Input() profileBadge = '';
   @Input() settingBadge = '';
 
   readonly $isHandset = this.breakPointObserver
-    .observe([Breakpoints.Handset])
+    .observe([Breakpoints.XSmall])
     .pipe(
       debounceTime(200),
       map((e) => {
@@ -17,4 +18,8 @@ export abstract class NavigationComponent {
     );
 
   constructor(protected readonly breakPointObserver: BreakpointObserver) {}
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+  }
 }
