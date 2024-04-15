@@ -1,0 +1,26 @@
+<mat-nav-list>
+  <div mat-subheader>
+    <h3>{{ title }}</h3>
+  </div>
+  @for( item of listItems; track item){
+  <mat-list-item
+    class="mat-nav-list-item"
+    (click)="handleClickEvent(item)"
+    [class.active]="activeItem === item.label"
+    [routerLink]="item.route"
+    routerLinkActive="active"
+  >
+    <div matListItemLine>{{ item.label }}</div>
+    <span matListItemIcon>
+      <mat-icon
+        class="fill"
+        [color]="item.iconColor"
+        [matBadge]="item.badge"
+        [matBadgeColor]="item.badgeColor"
+      >
+        {{ item.icon }}
+      </mat-icon>
+    </span>
+  </mat-list-item>
+  }
+</mat-nav-list>

@@ -1,13 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { debounceTime, map } from 'rxjs';
 @Component({ template: '' })
 export abstract class NavigationComponent {
+  /**
+   * @internal Is dark mode
+   */
   isDarkMode = false;
-  @Input() notificationBadge = '';
-  @Input() profileBadge = '';
-  @Input() settingBadge = '';
 
+  /**
+   * @internal Is the viewport handset
+   */
   readonly $isHandset = this.breakPointObserver
     .observe([Breakpoints.XSmall])
     .pipe(
@@ -19,6 +22,9 @@ export abstract class NavigationComponent {
 
   constructor(protected readonly breakPointObserver: BreakpointObserver) {}
 
+  /**
+   * @internal Toggle darkmode
+   */
   toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
   }

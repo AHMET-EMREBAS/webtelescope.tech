@@ -4,7 +4,80 @@
     "injectables": [],
     "guards": [],
     "interceptors": [],
-    "classes": [],
+    "classes": [
+        {
+            "name": "NavListItem",
+            "id": "class-NavListItem-7b7c50123a618d897da1eaf9b085f6ff0890520b0961e6ff71b3145d8b2c108b4e5ac9ee4cba22f476e52242162ac06495297d6aab15684d54ed15372f25a9e6",
+            "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\n\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter();\n}\n",
+            "properties": [
+                {
+                    "name": "badge",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "badgeColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"primary\" | \"accent\" | \"warn\"",
+                    "optional": true,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "iconColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"primary\" | \"accent\" | \"warn\"",
+                    "optional": true,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "subLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
     "directives": [
         {
             "name": "FloatingDirective",
@@ -266,44 +339,7 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "notificationBadge",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 7,
-                    "type": "string",
-                    "decorators": [],
-                    "inheritance": {
-                        "file": "NavigationComponent"
-                    }
-                },
-                {
-                    "name": "profileBadge",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 8,
-                    "type": "string",
-                    "decorators": [],
-                    "inheritance": {
-                        "file": "NavigationComponent"
-                    }
-                },
-                {
-                    "name": "settingBadge",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 9,
-                    "type": "string",
-                    "decorators": [],
-                    "inheritance": {
-                        "file": "NavigationComponent"
-                    }
-                }
-            ],
+            "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
                 {
@@ -314,9 +350,30 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 11,
+                    "line": 14,
+                    "rawdescription": "\n\n",
                     "modifierKind": [
                         148
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 303,
+                            "end": 340,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 304,
+                                "end": 312,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "internal"
+                            },
+                            "comment": "<p>Is the viewport handset</p>\n"
+                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -330,7 +387,28 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 6,
+                    "line": 9,
+                    "rawdescription": "\n\n",
+                    "jsdoctags": [
+                        {
+                            "pos": 240,
+                            "end": 266,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 241,
+                                "end": 249,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "internal"
+                            },
+                            "comment": "<p>Is dark mode</p>\n"
+                        }
+                    ],
                     "inheritance": {
                         "file": "NavigationComponent"
                     }
@@ -343,9 +421,12 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 28,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "jsdoctags": [],
                     "inheritance": {
                         "file": "NavigationComponent"
                     }
@@ -373,11 +454,11 @@
             "extends": [
                 "NavigationComponent"
             ],
-            "templateData": "<div class=\"root-layout-container\" [class.dark-theme]=\"isDarkMode\">\n  <mat-toolbar color=\"primary\">\n    <div>\n      <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n        <mat-icon>\n          {{ sidenavLeft.opened ? 'menu_open' : 'menu' }}\n        </mat-icon>\n      </button>\n      <ng-content select=\"[wtToolbar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtToolbarRight]\"></ng-content>\n      <div>\n        <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n          <mat-icon>\n            {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n          </mat-icon>\n        </button>\n      </div>\n    </div>\n  </mat-toolbar>\n\n  <mat-sidenav-container>\n    <mat-sidenav\n      #sidenavLeft\n      position=\"start\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n      [opened]=\"($isHandset | async) === false\"\n    >\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <h1>Left Panel</h1>\n      <ng-content select=\"[wtLeftPanel]\"></ng-content>\n    </mat-sidenav>\n    <mat-sidenav #sidenavRight position=\"end\">\n      <h1>RightPanel</h1>\n      <ng-content select=\"[wtRightPanel]\"></ng-content>\n    </mat-sidenav>\n    <mat-sidenav-content>\n      <h1>MainContent</h1>\n      <ng-content select=\"[wtMainContent]\"></ng-content>\n    </mat-sidenav-content>\n  </mat-sidenav-container>\n\n  <!-- Status bar -->\n  <mat-toolbar color=\"primary\">\n    <div>\n      <ng-content select=\"[wtStatusBar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtStatusBarRight]\"></ng-content>\n    </div>\n  </mat-toolbar>\n</div>\n"
+            "templateData": "<div class=\"root-layout-container\" [class.dark-theme]=\"isDarkMode\">\n  <mat-toolbar color=\"primary\">\n    <div>\n      <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n        <mat-icon>\n          {{ sidenavLeft.opened ? 'menu_open' : 'menu' }}\n        </mat-icon>\n      </button>\n      <ng-content select=\"[wtToolbar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtToolbarRight]\"></ng-content>\n      <div>\n        <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n          <mat-icon>\n            {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n          </mat-icon>\n        </button>\n      </div>\n    </div>\n  </mat-toolbar>\n\n  <mat-sidenav-container>\n    <!-- Left sidenav -->\n    <mat-sidenav\n      #sidenavLeft\n      position=\"start\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n      [opened]=\"($isHandset | async) === false\"\n    >\n      <!-- Left sidenav content -->\n      <ng-content select=\"[wtLeftPanel]\"></ng-content>\n    </mat-sidenav>\n\n    <!-- Right sidenav -->\n    <mat-sidenav\n      #sidenavRight\n      position=\"end\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n    >\n      <!-- Right sidenav content -->\n      <ng-content select=\"[wtRightPanel]\"></ng-content>\n    </mat-sidenav>\n\n    <!-- Main content -->\n    <mat-sidenav-content>\n      <ng-content select=\"[wtMainContent]\"></ng-content>\n    </mat-sidenav-content>\n  </mat-sidenav-container>\n\n  <!-- Status bar -->\n  <mat-toolbar color=\"primary\">\n    <div>\n      <ng-content select=\"[wtStatusBar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtStatusBarRight]\"></ng-content>\n    </div>\n  </mat-toolbar>\n</div>\n"
         },
         {
             "name": "NavigationComponent",
-            "id": "component-NavigationComponent-56345e651634971699fca0a9b9398652fc9c4ff840a2b880ad4bb1f8fd1cd663c0c5d4dea1541e89be1b5b9581c41e7d2be422074ea167badff992e11754eef9",
+            "id": "component-NavigationComponent-a4bb01040d29ec356c1869e6317131bc7bce9fe313486be442fa4700c923d2d10a035ce18e2999caf3f9d046857e447199f5fdb8232ea5e07c598e7d42b340d5",
             "file": "libs/navigation/src/lib/navigation/navigation.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -390,35 +471,7 @@
             "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "notificationBadge",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 7,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "profileBadge",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 8,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "settingBadge",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 9,
-                    "type": "string",
-                    "decorators": []
-                }
-            ],
+            "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
                 {
@@ -429,9 +482,30 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 11,
+                    "line": 14,
+                    "rawdescription": "\n\n",
                     "modifierKind": [
                         148
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 303,
+                            "end": 340,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 304,
+                                "end": 312,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "internal"
+                            },
+                            "comment": "<p>Is the viewport handset</p>\n"
+                        }
                     ]
                 },
                 {
@@ -442,7 +516,28 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 6
+                    "line": 9,
+                    "rawdescription": "\n\n",
+                    "jsdoctags": [
+                        {
+                            "pos": 240,
+                            "end": 266,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 241,
+                                "end": 249,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "internal"
+                            },
+                            "comment": "<p>Is dark mode</p>\n"
+                        }
+                    ]
                 }
             ],
             "methodsClass": [
@@ -452,9 +547,12 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 28,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "jsdoctags": []
                 }
             ],
             "deprecated": false,
@@ -466,7 +564,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { debounceTime, map } from 'rxjs';\n@Component({ template: '' })\nexport abstract class NavigationComponent {\n  isDarkMode = false;\n  @Input() notificationBadge = '';\n  @Input() profileBadge = '';\n  @Input() settingBadge = '';\n\n  readonly $isHandset = this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    );\n\n  constructor(protected readonly breakPointObserver: BreakpointObserver) {}\n\n  toggleDarkMode() {\n    this.isDarkMode = !this.isDarkMode;\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { debounceTime, map } from 'rxjs';\n@Component({ template: '' })\nexport abstract class NavigationComponent {\n  /**\n   * @internal Is dark mode\n   */\n  isDarkMode = false;\n\n  /**\n   * @internal Is the viewport handset\n   */\n  readonly $isHandset = this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    );\n\n  constructor(protected readonly breakPointObserver: BreakpointObserver) {}\n\n  /**\n   * @internal Toggle darkmode\n   */\n  toggleDarkMode() {\n    this.isDarkMode = !this.isDarkMode;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -483,7 +581,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 18,
+                "line": 21,
                 "jsdoctags": [
                     {
                         "name": "breakPointObserver",
@@ -497,6 +595,75 @@
                 ]
             },
             "extends": []
+        },
+        {
+            "name": "NavListComponent",
+            "id": "component-NavListComponent-7b7c50123a618d897da1eaf9b085f6ff0890520b0961e6ff71b3145d8b2c108b4e5ac9ee4cba22f476e52242162ac06495297d6aab15684d54ed15372f25a9e6",
+            "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-nav-list",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./nav-list.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "listItems",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "NavListItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "clickEvent",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "modules",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\n\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter();\n}\n",
+            "styleUrl": "./nav-list.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<mat-nav-list>\n  <div mat-subheader>{{ title }}</div>\n  @for( item of listItems; track item){\n\n  <mat-list-item (click)=\"clickEvent.emit(item.label)\">\n    <div matListItemTitle>{{ item.label }}</div>\n    <div matListItemLine>{{ item.subLabel }}</div>\n\n    <span matListItemIcon>\n      <mat-icon class=\"fill\" [color]=\"item.iconColor\" [matBadge]=\"item.badge\" [matBadgeColor]=\"item.badgeColor\">\n        {{ item.icon }}\n      </mat-icon>\n    </span>\n  </mat-list-item>\n  }\n</mat-nav-list>\n"
         },
         {
             "name": "WebLayoutComponent",
@@ -663,6 +830,16 @@
                 "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
             },
             {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    listItems: [{ label: 'Home', icon: 'home' }],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+            },
+            {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -683,6 +860,16 @@
                 "defaultValue": "{\n  component: WebLayoutComponent,\n  title: 'WebLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
             },
             {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<NavListComponent>",
+                "defaultValue": "{\n  title: 'NavListComponent',\n  component: NavListComponent,\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+            },
+            {
                 "name": "modules",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -691,6 +878,16 @@
                 "deprecationMessage": "",
                 "type": "[]",
                 "defaultValue": "[\r\n  CommonModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  MatListModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatBadgeModule,\r\n]"
+            },
+            {
+                "name": "modules",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n]"
             },
             {
                 "name": "Primary",
@@ -711,6 +908,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    listItems: [\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"accent\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"primary\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"warn\"},\n\n\n    ],\n  },\n}"
             }
         ],
         "functions": [],
@@ -732,6 +939,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<WebLayoutComponent>",
                 "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<NavListComponent>",
+                "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -825,6 +1043,50 @@
                     "type": "Story",
                     "defaultValue": "{\n  args: {},\n}"
                 }
+            ],
+            "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    listItems: [{ label: 'Home', icon: 'home' }],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<NavListComponent>",
+                    "defaultValue": "{\n  title: 'NavListComponent',\n  component: NavListComponent,\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    listItems: [\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"accent\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"primary\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"warn\"},\n\n\n    ],\n  },\n}"
+                }
+            ],
+            "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts": [
+                {
+                    "name": "modules",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n]"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -850,6 +1112,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<WebLayoutComponent>",
                     "file": "libs/navigation/src/lib/web-layout/web-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<NavListComponent>",
+                    "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -899,7 +1174,7 @@
                 "linktype": "component",
                 "name": "AppLayoutComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -975,12 +1250,70 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NavListComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "NavListItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "modules",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/navigation/src/lib/navigation/navigation.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "NavigationComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
