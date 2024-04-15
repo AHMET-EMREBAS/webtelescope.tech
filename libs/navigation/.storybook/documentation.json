@@ -342,7 +342,7 @@
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-a8f01516aa45852cc749c40f35fef3414c2bb08840481e2976538b08e8affa2671852d88a017b6ad69afd45b566c7e0390ff9e8cf0fe5178af9101f0f3c1b0dd",
+            "id": "component-AppLayoutComponent-04e9e081e5ef2520d6ea8e0dffb13590d7a5c99056dc26b7d39f7dacd10afbace56fbc5423191d046933ce1dbc105cc5118f3df4c0bf7c2f1adef7498cedbfd7",
             "file": "libs/navigation/src/lib/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -464,7 +464,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationComponent, NavigationModule } from '../navigation';\n\n@Component({\n  selector: 'wt-app-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './app-layout.component.html',\n  styleUrl: './app-layout.component.scss',\n})\nexport class AppLayoutComponent extends NavigationComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation/navigation.module';\nimport { NavigationComponent } from '../navigation/navigation.component';\n\n\n@Component({\n  selector: 'wt-app-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './app-layout.component.html',\n  styleUrl: './app-layout.component.scss',\n})\nexport class AppLayoutComponent extends NavigationComponent {}\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
