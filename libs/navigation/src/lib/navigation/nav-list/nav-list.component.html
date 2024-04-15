@@ -7,10 +7,10 @@
     class="mat-nav-list-item"
     (click)="handleClickEvent(item)"
     [class.active]="activeItem === item.label"
-    [routerLink]="item.route"
+    [routerLink]="[item.route ?? item.label]"
     routerLinkActive="active"
   >
-    <div matListItemLine>{{ item.label }}</div>
+    <div matListItemLine>{{ item.label | titlecase }}</div>
     <span matListItemIcon>
       <mat-icon
         class="fill"
