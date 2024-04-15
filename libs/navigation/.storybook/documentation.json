@@ -7,12 +7,12 @@
     "classes": [
         {
             "name": "NavListItem",
-            "id": "class-NavListItem-7b7c50123a618d897da1eaf9b085f6ff0890520b0961e6ff71b3145d8b2c108b4e5ac9ee4cba22f476e52242162ac06495297d6aab15684d54ed15372f25a9e6",
+            "id": "class-NavListItem-1f5673430fb7bda949384815953e653237f6cac35d07641d9f5504ecfe027c05fb3f512ad1eb87267a91c6ef365c40bc1fe6d04547cb603acde50cda3ce0ad3b",
             "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\n\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter();\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
             "properties": [
                 {
                     "name": "badge",
@@ -21,7 +21,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 22
+                    "line": 24
                 },
                 {
                     "name": "badgeColor",
@@ -30,7 +30,7 @@
                     "type": "\"primary\" | \"accent\" | \"warn\"",
                     "optional": true,
                     "description": "",
-                    "line": 23
+                    "line": 25
                 },
                 {
                     "name": "icon",
@@ -39,7 +39,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 20
+                    "line": 22
                 },
                 {
                     "name": "iconColor",
@@ -48,7 +48,16 @@
                     "type": "\"primary\" | \"accent\" | \"warn\"",
                     "optional": true,
                     "description": "",
-                    "line": 21
+                    "line": 23
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 20
                 },
                 {
                     "name": "label",
@@ -57,7 +66,16 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 19
+                },
+                {
+                    "name": "route",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 26
                 },
                 {
                     "name": "subLabel",
@@ -66,7 +84,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 19
+                    "line": 21
                 }
             ],
             "methods": [],
@@ -598,7 +616,7 @@
         },
         {
             "name": "NavListComponent",
-            "id": "component-NavListComponent-7b7c50123a618d897da1eaf9b085f6ff0890520b0961e6ff71b3145d8b2c108b4e5ac9ee4cba22f476e52242162ac06495297d6aab15684d54ed15372f25a9e6",
+            "id": "component-NavListComponent-1f5673430fb7bda949384815953e653237f6cac35d07641d9f5504ecfe027c05fb3f512ad1eb87267a91c6ef365c40bc1fe6d04547cb603acde50cda3ce0ad3b",
             "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -618,7 +636,7 @@
                     "name": "listItems",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 34,
+                    "line": 38,
                     "type": "NavListItem[]",
                     "decorators": []
                 },
@@ -626,7 +644,7 @@
                     "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 33,
+                    "line": 37,
                     "type": "string",
                     "decorators": []
                 }
@@ -634,15 +652,55 @@
             "outputsClass": [
                 {
                     "name": "clickEvent",
-                    "defaultValue": "new EventEmitter()",
+                    "defaultValue": "new EventEmitter<NavListItem>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 35,
+                    "line": 39,
                     "type": "EventEmitter"
                 }
             ],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "activeItem",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "handleClickEvent",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "NavListItem",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 41,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "NavListItem",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -657,17 +715,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\n\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter();\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
             "styleUrl": "./nav-list.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<mat-nav-list>\n  <div mat-subheader>{{ title }}</div>\n  @for( item of listItems; track item){\n\n  <mat-list-item (click)=\"clickEvent.emit(item.label)\">\n    <div matListItemTitle>{{ item.label }}</div>\n    <div matListItemLine>{{ item.subLabel }}</div>\n\n    <span matListItemIcon>\n      <mat-icon class=\"fill\" [color]=\"item.iconColor\" [matBadge]=\"item.badge\" [matBadgeColor]=\"item.badgeColor\">\n        {{ item.icon }}\n      </mat-icon>\n    </span>\n  </mat-list-item>\n  }\n</mat-nav-list>\n"
+            "templateData": "<mat-nav-list>\n  <div mat-subheader>\n    <h3>{{ title }}</h3>\n  </div>\n  @for( item of listItems; track item){\n  <mat-list-item\n    class=\"mat-nav-list-item\"\n    (click)=\"handleClickEvent(item)\"\n    [class.active]=\"activeItem === item.label\"\n    [routerLink]=\"item.route\"\n    routerLinkActive=\"active\"\n  >\n    <div matListItemLine>{{ item.label }}</div>\n    <span matListItemIcon>\n      <mat-icon\n        class=\"fill\"\n        [color]=\"item.iconColor\"\n        [matBadge]=\"item.badge\"\n        [matBadgeColor]=\"item.badgeColor\"\n      >\n        {{ item.icon }}\n      </mat-icon>\n    </span>\n  </mat-list-item>\n  }\n</mat-nav-list>\n"
         },
         {
             "name": "WebLayoutComponent",
-            "id": "component-WebLayoutComponent-92a70033e72cbf9a4769b9f22f67656cdd0232282ddc4a827b27d73b01b7d3224ac4019f46b8b9bfdbf0529a34cd81556869087a410d39c14b4f72c49e8c23b4",
+            "id": "component-WebLayoutComponent-15b70f88a2a672bd186ef6ec9429964ceb4c66144856773559b2ec68f2421189cd69aed9ee77f1e498f575fc03d12a13f3e26f342abf6fbbebdac62f9ee8ad11",
             "file": "libs/navigation/src/lib/web-layout/web-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -700,7 +758,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation';\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation/navigation.module';\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent {}\n",
             "styleUrl": "./web-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -867,7 +925,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<NavListComponent>",
-                "defaultValue": "{\n  title: 'NavListComponent',\n  component: NavListComponent,\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                "defaultValue": "{\n  title: 'NavListComponent',\n  component: NavListComponent,\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
             },
             {
                 "name": "modules",
@@ -887,7 +945,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n]"
+                "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n]"
             },
             {
                 "name": "Primary",
@@ -917,7 +975,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    listItems: [\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"accent\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"primary\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"warn\"},\n\n\n    ],\n  },\n}"
+                "defaultValue": "{\n  args: {\n    title: 'Nav List Title',\n    listItems: [\n      {\n        label: 'Home',\n        icon: 'home',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'About',\n        icon: 'info',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'Services',\n        icon: 'apps',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n    ],\n  },\n}"
             }
         ],
         "functions": [],
@@ -1063,7 +1121,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<NavListComponent>",
-                    "defaultValue": "{\n  title: 'NavListComponent',\n  component: NavListComponent,\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                    "defaultValue": "{\n  title: 'NavListComponent',\n  component: NavListComponent,\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
@@ -1073,7 +1131,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    listItems: [\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"accent\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"primary\"},\n      { label: 'Home', icon: 'home' , badge:\"12\", iconColor:\"warn\"},\n\n\n    ],\n  },\n}"
+                    "defaultValue": "{\n  args: {\n    title: 'Nav List Title',\n    listItems: [\n      {\n        label: 'Home',\n        icon: 'home',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'About',\n        icon: 'info',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'Services',\n        icon: 'apps',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n    ],\n  },\n}"
                 }
             ],
             "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts": [
@@ -1085,7 +1143,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n]"
+                    "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n]"
                 }
             ]
         },
@@ -1285,7 +1343,7 @@
                 "linktype": "component",
                 "name": "NavListComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -1294,7 +1352,7 @@
                 "linktype": "classe",
                 "name": "NavListItem",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavigationComponent, NavigationModule } from '../navigation';
+import { NavigationModule } from '../navigation/navigation.module';
+import { NavigationComponent } from '../navigation/navigation.component';
+
 
 @Component({
   selector: 'wt-app-layout',
