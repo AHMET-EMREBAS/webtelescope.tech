@@ -1517,14 +1517,13 @@
         },
         {
             "name": "SampleAppLayoutComponent",
-            "id": "component-SampleAppLayoutComponent-8d80b7762b3f920e092dd3d6ede0a84cebe768d21b9f8ed62219bb31f2ffc4d0c378bd936ec18074d4e5e65db6a1f9dbcc23d93a64dd817d435c6c7df7685dfc",
+            "id": "component-SampleAppLayoutComponent-2013ca87d35745bc6274723db1f7c00b929ff58357ed27e58eebd4ac9770434ee3cb1836b5110ee909e52019a4a79e0b3a36480d6076792b503a72e836bd03a2",
             "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "wt-sample-app-layout",
             "styleUrls": [],
             "styles": [],
             "templateUrl": [
@@ -1543,7 +1542,7 @@
                     "type": "NavListItem[]",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 14
                 }
             ],
             "methodsClass": [],
@@ -1569,7 +1568,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AppLayoutComponent } from '../app-layout/app-layout.component';\nimport { NavigationModule } from '../navigation/navigation.module';\nimport { NavListItem } from '../navigation/nav-list/nav-list.component';\n\n@Component({\n  selector: 'wt-sample-app-layout',\n  standalone: true,\n  imports: [CommonModule, NavigationModule, AppLayoutComponent],\n  templateUrl: './sample-app-layout.component.html',\n  styleUrl: './sample-app-layout.component.scss',\n})\nexport class SampleAppLayoutComponent {\n  sampleListItems: NavListItem[] = ' '\n    .repeat(4)\n    .split('')\n    .map((e) => ({\n      label: 'Label',\n      icon: 'info',\n    }));\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AppLayoutComponent } from '../app-layout/app-layout.component';\nimport { NavigationModule } from '../navigation/navigation.module';\nimport { NavListItem } from '../navigation/nav-list/nav-list.component';\n\n@Component({\n  standalone: true,\n  imports: [CommonModule, NavigationModule, AppLayoutComponent],\n  templateUrl: './sample-app-layout.component.html',\n  styleUrl: './sample-app-layout.component.scss',\n})\nexport class SampleAppLayoutComponent {\n  sampleListItems: NavListItem[] = ' '\n    .repeat(4)\n    .split('')\n    .map((e) => ({\n      label: 'Label',\n      icon: 'info',\n    }));\n}\n",
             "styleUrl": "./sample-app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -2187,7 +2186,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<SampleAppLayoutComponent>",
-                "defaultValue": "{\n  component: SampleAppLayoutComponent,\n  title: 'SampleAppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
+                "defaultValue": "{\n  component: SampleAppLayoutComponent,\n  title: 'SampleAppLayoutComponent',\n\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
             },
             {
                 "name": "meta",
@@ -2464,7 +2463,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<SampleAppLayoutComponent>",
-                    "defaultValue": "{\n  component: SampleAppLayoutComponent,\n  title: 'SampleAppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
+                    "defaultValue": "{\n  component: SampleAppLayoutComponent,\n  title: 'SampleAppLayoutComponent',\n\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
