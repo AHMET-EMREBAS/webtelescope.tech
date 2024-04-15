@@ -1,79 +1,21 @@
 <wt-app-layout>
   <ng-template wtLeftPanel>
-    <wt-nav-list
-      title="Nav List"
-      [listItems]="[
-        { label: 'item 1', icon: 'info', iconColor: 'primary' },
-        { label: 'item 2', icon: 'info', iconColor: 'primary' },
-        { label: 'item 3', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' }
-      ]"
-    ></wt-nav-list>
+    <wt-nav-list title="Group 1" [listItems]="sampleListItems"></wt-nav-list>
+    <wt-nav-list title="Group 2" [listItems]="sampleListItems"></wt-nav-list>
   </ng-template>
 
   <ng-template wtRightPanel>
-    <wt-nav-list
-      title="Administration"
-      [listItems]="[
-        { label: 'item 1', icon: 'info', iconColor: 'primary' },
-        { label: 'item 2', icon: 'info', iconColor: 'accent' },
-        { label: 'item 3', icon: 'info', iconColor: 'warn' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' },
-        { label: 'item 4', icon: 'info', iconColor: 'primary' }
-      ]"
-    ></wt-nav-list>
+    <wt-nav-list title="Group 1" [listItems]="sampleListItems"></wt-nav-list>
+    <wt-nav-list title="Group 2" [listItems]="sampleListItems"></wt-nav-list>
   </ng-template>
 
-  <ng-template wtMainPanel> <h1>Mian Content 1</h1> </ng-template>
-  <ng-template wtMainPanel> <h1>Mian Content 2</h1> </ng-template>
+  <ng-template wtMainPanel>
+    <h1>Start</h1>
+    @for(item of ' '.repeat(50).split(''); track item){
+    <h1>Placeholder</h1>
+    }
+    <h1>End</h1>
+  </ng-template>
 
   <ng-template wtToolbarLeft>
     <button mat-icon-button><mat-icon>home</mat-icon></button>

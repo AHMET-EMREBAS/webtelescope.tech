@@ -604,33 +604,13 @@
                     "defaultValue": "this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    )",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "Observable<boolean>",
                     "optional": false,
-                    "description": "",
-                    "line": 65,
-                    "rawdescription": "\n\n",
+                    "description": "<p>Is the viewport handset</p>\n",
+                    "line": 66,
+                    "rawdescription": "\n\nIs the viewport handset\n",
                     "modifierKind": [
                         148
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1964,
-                            "end": 2004,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1965,
-                                "end": 1976,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p>Is the viewport handset</p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -641,31 +621,11 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "boolean",
                     "optional": false,
-                    "description": "",
-                    "line": 60,
-                    "rawdescription": "\n\n",
-                    "jsdoctags": [
-                        {
-                            "pos": 1901,
-                            "end": 1927,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1902,
-                                "end": 1910,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "internal"
-                            },
-                            "comment": "<p>Is dark mode</p>\n"
-                        }
-                    ],
+                    "description": "<p>Is dark mode</p>\n",
+                    "line": 61,
+                    "rawdescription": "\n\nIs dark mode\n",
                     "inheritance": {
                         "file": "NavigationComponent"
                     }
@@ -676,9 +636,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<FloatingPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 55,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtFloating&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 56,
+                    "rawdescription": "\n\n`<ng-template wtFloating> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -687,26 +647,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1729,
-                            "end": 1793,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1730,
-                                "end": 1741,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtFloating> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -718,9 +658,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<LeftPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 25,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtLeftPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\n`<ng-template wtLeftPanel> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -729,26 +669,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 679,
-                            "end": 744,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 680,
-                                "end": 691,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtLeftPanel> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -760,9 +680,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<MainPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 20,
-                    "rawdescription": "\n\n",
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtMainPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtMainPanel> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -771,26 +691,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 514,
-                            "end": 579,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 515,
-                                "end": 526,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtMainPanel> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -802,9 +702,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<RightPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 30,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtRightPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 31,
+                    "rawdescription": "\n\n`<ng-template wtRightPanel> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -813,26 +713,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 844,
-                            "end": 910,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 845,
-                                "end": 856,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtRightPanel> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -844,9 +724,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<StatusbarLeftDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 45,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtStatusbarLeft&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 46,
+                    "rawdescription": "\n\n`<ng-template wtStatusbarLeft> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -855,26 +735,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1363,
-                            "end": 1432,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1364,
-                                "end": 1375,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtStatusbarLeft> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -886,9 +746,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<StatusbarRightDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 50,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtStatusbarRight&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 51,
+                    "rawdescription": "\n\n`<ng-template wtStatusbarRight> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -897,26 +757,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1544,
-                            "end": 1614,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1545,
-                                "end": 1556,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtStatusbarRight> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -928,9 +768,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<ToolbarLeftDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 35,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtToolbarLeft&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 36,
+                    "rawdescription": "\n\n`<ng-template wtToolbarLeft> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -939,26 +779,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1013,
-                            "end": 1080,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1014,
-                                "end": 1025,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtToolbarLeft> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -970,9 +790,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<ToolbarRightDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 40,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtToolbarRight&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 41,
+                    "rawdescription": "\n\n`<ng-template wtToolbarRight> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -981,26 +801,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1186,
-                            "end": 1254,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1187,
-                                "end": 1198,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtToolbarRight> Content </ng-template></p>\n"
-                        }
                     ],
                     "inheritance": {
                         "file": "NavigationComponent"
@@ -1014,12 +814,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 80,
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\n",
-                    "description": "",
-                    "jsdoctags": [],
+                    "rawdescription": "\n\nToggle darkmode\n",
+                    "description": "<p>Toggle darkmode</p>\n",
                     "inheritance": {
                         "file": "NavigationComponent"
                     }
@@ -1051,7 +850,7 @@
         },
         {
             "name": "NavigationComponent",
-            "id": "component-NavigationComponent-4355dbe00c0d7dbb0a928b151effc386031776d0da5efa98b6318312a6ddb9f262823928602819c5766168fe125e16f24c8479ac9ad7cb739a14e860e04313b8",
+            "id": "component-NavigationComponent-3f0529095059aa3858950570d8c6282edd21cf9f7b99a3485c98237eb617cd1bcccbc801bd912fcd8beddf59b8d21ae65f5ede9aeac76a4fa0b955d82ccb4fc2",
             "file": "libs/navigation/src/lib/navigation/navigation.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1072,33 +871,13 @@
                     "defaultValue": "this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    )",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "Observable<boolean>",
                     "optional": false,
-                    "description": "",
-                    "line": 65,
-                    "rawdescription": "\n\n",
+                    "description": "<p>Is the viewport handset</p>\n",
+                    "line": 66,
+                    "rawdescription": "\n\nIs the viewport handset\n",
                     "modifierKind": [
                         148
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1964,
-                            "end": 2004,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1965,
-                                "end": 1976,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p>Is the viewport handset</p>\n"
-                        }
                     ]
                 },
                 {
@@ -1106,31 +885,11 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "boolean",
                     "optional": false,
-                    "description": "",
-                    "line": 60,
-                    "rawdescription": "\n\n",
-                    "jsdoctags": [
-                        {
-                            "pos": 1901,
-                            "end": 1927,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1902,
-                                "end": 1910,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "internal"
-                            },
-                            "comment": "<p>Is dark mode</p>\n"
-                        }
-                    ]
+                    "description": "<p>Is dark mode</p>\n",
+                    "line": 61,
+                    "rawdescription": "\n\nIs dark mode\n"
                 },
                 {
                     "name": "wtFloating",
@@ -1138,9 +897,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<FloatingPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 55,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtFloating&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 56,
+                    "rawdescription": "\n\n`<ng-template wtFloating> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1149,26 +908,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1729,
-                            "end": 1793,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1730,
-                                "end": 1741,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtFloating> Content </ng-template></p>\n"
-                        }
                     ]
                 },
                 {
@@ -1177,9 +916,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<LeftPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 25,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtLeftPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\n`<ng-template wtLeftPanel> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1188,26 +927,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 679,
-                            "end": 744,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 680,
-                                "end": 691,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtLeftPanel> Content </ng-template></p>\n"
-                        }
                     ]
                 },
                 {
@@ -1216,9 +935,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<MainPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 20,
-                    "rawdescription": "\n\n",
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtMainPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtMainPanel> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1227,26 +946,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 514,
-                            "end": 579,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 515,
-                                "end": 526,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtMainPanel> Content </ng-template></p>\n"
-                        }
                     ]
                 },
                 {
@@ -1255,9 +954,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<RightPanelDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 30,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtRightPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 31,
+                    "rawdescription": "\n\n`<ng-template wtRightPanel> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1266,26 +965,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 844,
-                            "end": 910,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 845,
-                                "end": 856,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtRightPanel> Content </ng-template></p>\n"
-                        }
                     ]
                 },
                 {
@@ -1294,9 +973,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<StatusbarLeftDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 45,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtStatusbarLeft&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 46,
+                    "rawdescription": "\n\n`<ng-template wtStatusbarLeft> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1305,26 +984,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1363,
-                            "end": 1432,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1364,
-                                "end": 1375,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtStatusbarLeft> Content </ng-template></p>\n"
-                        }
                     ]
                 },
                 {
@@ -1333,9 +992,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<StatusbarRightDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 50,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtStatusbarRight&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 51,
+                    "rawdescription": "\n\n`<ng-template wtStatusbarRight> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1344,26 +1003,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1544,
-                            "end": 1614,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1545,
-                                "end": 1556,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtStatusbarRight> Content </ng-template></p>\n"
-                        }
                     ]
                 },
                 {
@@ -1372,9 +1011,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<ToolbarLeftDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 35,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtToolbarLeft&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 36,
+                    "rawdescription": "\n\n`<ng-template wtToolbarLeft> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1383,26 +1022,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1013,
-                            "end": 1080,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1014,
-                                "end": 1025,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtToolbarLeft> Content </ng-template></p>\n"
-                        }
                     ]
                 },
                 {
@@ -1411,9 +1030,9 @@
                     "deprecationMessage": "",
                     "type": "QueryList<ToolbarRightDirective>",
                     "optional": true,
-                    "description": "",
-                    "line": 40,
-                    "rawdescription": "\n\n",
+                    "description": "<p><code>&lt;ng-template wtToolbarRight&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 41,
+                    "rawdescription": "\n\n`<ng-template wtToolbarRight> Content </ng-template>`\n",
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1422,26 +1041,6 @@
                     ],
                     "modifierKind": [
                         170
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1186,
-                            "end": 1254,
-                            "flags": 16842752,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 334,
-                            "tagName": {
-                                "pos": 1187,
-                                "end": 1198,
-                                "flags": 16842752,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 80,
-                                "escapedText": "description"
-                            },
-                            "comment": "<p><ng-template wtToolbarRight> Content </ng-template></p>\n"
-                        }
                     ]
                 }
             ],
@@ -1452,12 +1051,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 80,
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\n",
-                    "description": "",
-                    "jsdoctags": []
+                    "rawdescription": "\n\nToggle darkmode\n",
+                    "description": "<p>Toggle darkmode</p>\n"
                 }
             ],
             "deprecated": false,
@@ -1469,7 +1067,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ContentChildren, QueryList } from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { debounceTime, map } from 'rxjs';\nimport {\n  FloatingPanelDirective,\n  LeftPanelDirective,\n  MainPanelDirective,\n  RightPanelDirective,\n  StatusbarLeftDirective,\n  StatusbarRightDirective,\n  ToolbarLeftDirective,\n  ToolbarRightDirective,\n} from './directives/template.directive';\n@Component({ template: '' })\nexport abstract class NavigationComponent {\n  /**\n   * @description <ng-template wtMainPanel> Content </ng-template>\n   */\n  @ContentChildren(MainPanelDirective)\n  wtMainPanel?: QueryList<MainPanelDirective>;\n  /**\n   * @description <ng-template wtLeftPanel> Content </ng-template>\n   */\n  @ContentChildren(LeftPanelDirective)\n  wtLeftPanel?: QueryList<LeftPanelDirective>;\n  /**\n   * @description <ng-template wtRightPanel> Content </ng-template>\n   */\n  @ContentChildren(RightPanelDirective)\n  wtRightPanel?: QueryList<RightPanelDirective>;\n  /**\n   * @description <ng-template wtToolbarLeft> Content </ng-template>\n   */\n  @ContentChildren(ToolbarLeftDirective)\n  wtToolbarLeft?: QueryList<ToolbarLeftDirective>;\n  /**\n   * @description <ng-template wtToolbarRight> Content </ng-template>\n   */\n  @ContentChildren(ToolbarRightDirective)\n  wtToolbarRight?: QueryList<ToolbarRightDirective>;\n  /**\n   * @description <ng-template wtStatusbarLeft> Content </ng-template>\n   */\n  @ContentChildren(StatusbarLeftDirective)\n  wtStatusbarLeft?: QueryList<StatusbarLeftDirective>;\n  /**\n   * @description <ng-template wtStatusbarRight> Content </ng-template>\n   */\n  @ContentChildren(StatusbarRightDirective)\n  wtStatusbarRight?: QueryList<StatusbarRightDirective>;\n  /**\n   * @description <ng-template wtFloating> Content </ng-template>\n   */\n  @ContentChildren(FloatingPanelDirective)\n  wtFloating?: QueryList<FloatingPanelDirective>;\n\n  /**\n   * @internal Is dark mode\n   */\n  isDarkMode = false;\n\n  /**\n   * @description Is the viewport handset\n   */\n  readonly $isHandset = this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    );\n\n  constructor(protected readonly breakPointObserver: BreakpointObserver) {}\n\n  /**\n   * @description Toggle darkmode\n   */\n  toggleDarkMode() {\n    this.isDarkMode = !this.isDarkMode;\n  }\n}\n",
+            "sourceCode": "import { Component, ContentChildren, QueryList } from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { Observable, debounceTime, map } from 'rxjs';\nimport {\n  FloatingPanelDirective,\n  LeftPanelDirective,\n  MainPanelDirective,\n  RightPanelDirective,\n  StatusbarLeftDirective,\n  StatusbarRightDirective,\n  ToolbarLeftDirective,\n  ToolbarRightDirective,\n} from './directives/template.directive';\n@Component({ template: '' })\nexport abstract class NavigationComponent {\n  /**\n   * Inject template into navigation layout\n   * `<ng-template wtMainPanel> Content </ng-template>`\n   */\n  @ContentChildren(MainPanelDirective)\n  wtMainPanel?: QueryList<MainPanelDirective>;\n  /**\n   * `<ng-template wtLeftPanel> Content </ng-template>`\n   */\n  @ContentChildren(LeftPanelDirective)\n  wtLeftPanel?: QueryList<LeftPanelDirective>;\n  /**\n   * `<ng-template wtRightPanel> Content </ng-template>`\n   */\n  @ContentChildren(RightPanelDirective)\n  wtRightPanel?: QueryList<RightPanelDirective>;\n  /**\n   * `<ng-template wtToolbarLeft> Content </ng-template>`\n   */\n  @ContentChildren(ToolbarLeftDirective)\n  wtToolbarLeft?: QueryList<ToolbarLeftDirective>;\n  /**\n   * `<ng-template wtToolbarRight> Content </ng-template>`\n   */\n  @ContentChildren(ToolbarRightDirective)\n  wtToolbarRight?: QueryList<ToolbarRightDirective>;\n  /**\n   * `<ng-template wtStatusbarLeft> Content </ng-template>`\n   */\n  @ContentChildren(StatusbarLeftDirective)\n  wtStatusbarLeft?: QueryList<StatusbarLeftDirective>;\n  /**\n   * `<ng-template wtStatusbarRight> Content </ng-template>`\n   */\n  @ContentChildren(StatusbarRightDirective)\n  wtStatusbarRight?: QueryList<StatusbarRightDirective>;\n  /**\n   * `<ng-template wtFloating> Content </ng-template>`\n   */\n  @ContentChildren(FloatingPanelDirective)\n  wtFloating?: QueryList<FloatingPanelDirective>;\n\n  /**\n   * Is dark mode\n   */\n  isDarkMode: boolean = false;\n\n  /**\n   * Is the viewport handset\n   */\n  readonly $isHandset: Observable<boolean> = this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    );\n\n  constructor(protected readonly breakPointObserver: BreakpointObserver) {}\n\n  /**\n   * Toggle darkmode\n   */\n  toggleDarkMode() {\n    this.isDarkMode = !this.isDarkMode;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1486,7 +1084,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 72,
+                "line": 73,
                 "jsdoctags": [
                     {
                         "name": "breakPointObserver",
@@ -2580,7 +2178,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 10,
+        "count": 14,
         "status": "low",
         "files": [
             {
@@ -2618,9 +2216,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AppLayoutComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/12",
-                "status": "low"
+                "coveragePercent": 91,
+                "coverageCount": "11/12",
+                "status": "very-good"
             },
             {
                 "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
@@ -2824,9 +2422,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "NavigationComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
+                "coveragePercent": 84,
+                "coverageCount": "11/13",
+                "status": "very-good"
             },
             {
                 "filePath": "libs/navigation/src/lib/navigation/navigation.module.ts",
