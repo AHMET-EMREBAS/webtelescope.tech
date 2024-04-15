@@ -6,13 +6,103 @@
     "interceptors": [],
     "classes": [
         {
+            "name": "MenuItem",
+            "id": "class-MenuItem-8fb81cfe72111ddb07cc8c7da4aebd17b90be2d46af64e1352ed5b73e18b92df47d2179eadf2beda06dbbde542143033b1dc0aa404adc627a04c8d94cfc288ce",
+            "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { RouterModule } from '@angular/router';\n\nconst modules = [\n  CommonModule,\n  RouterModule,\n  MatMenuModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  MatTooltipModule,\n];\n\nexport class MenuItem {\n  label!: string;\n  id?: number;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n  subs?: MenuItem[];\n}\n\n@Component({\n  selector: 'wt-nav-menu',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-menu.component.html',\n  styleUrl: './nav-menu.component.scss',\n})\nexport class NavMenuComponent {\n  @Input() trigerIconColor?: string;\n  @Input() trigerIcon?: string;\n  @Input() trigerLabel?: string;\n  @Input() menuItems?: MenuItem[];\n\n  /**\n   * @ignore internal input\n   */\n  @Input() isSubmenu = false;\n\n  @Output() menuClickEvent = new EventEmitter<MenuItem>();\n\n  handleClickEvent(event: MenuItem) {\n    this.menuClickEvent.emit(event);\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "badge",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "badgeColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"primary\" | \"accent\" | \"warn\"",
+                    "optional": true,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "iconColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"primary\" | \"accent\" | \"warn\"",
+                    "optional": true,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "route",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 27
+                },
+                {
+                    "name": "subs",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MenuItem[]",
+                    "optional": true,
+                    "description": "",
+                    "line": 28
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
             "name": "NavListItem",
-            "id": "class-NavListItem-1f5673430fb7bda949384815953e653237f6cac35d07641d9f5504ecfe027c05fb3f512ad1eb87267a91c6ef365c40bc1fe6d04547cb603acde50cda3ce0ad3b",
+            "id": "class-NavListItem-bd830cefb7f606c0f6956ad89f4ad23d3b00f4d89c8c4f96487ab89f3964f37853696ee04c9069b020fe248d69452977385c54aa0f518d5c43ea5d93b5bf2600",
             "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
             "properties": [
                 {
                     "name": "badge",
@@ -98,14 +188,14 @@
     ],
     "directives": [
         {
-            "name": "FloatingDirective",
-            "id": "directive-FloatingDirective-0bace62aa8ec9db1440a816e177f4e6b4d509aab63731391b396bb0c5848f5b69df1dc00e0c4f88734641ec67eecb6c17915140dc91608764fed69f6566cd3cf",
-            "file": "libs/navigation/src/lib/navigation/directives/floating.directive.ts",
+            "name": "FloatingPanelDirective",
+            "id": "directive-FloatingPanelDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtFloating]',\n  standalone: true,\n})\nexport class FloatingDirective {\n  constructor() {}\n}\n",
-            "selector": "[wtFloating]",
+            "description": "<p>wtFloatingPanel</p>\n",
+            "rawdescription": "\n\nwtFloatingPanel\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
+            "selector": "[wtFloatingPanel]",
             "providers": [],
             "hostDirectives": [],
             "standalone": true,
@@ -115,26 +205,37 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
             "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 7
-            }
+            "extends": [
+                "TemplateDirective"
+            ]
         },
         {
             "name": "LeftPanelDirective",
-            "id": "directive-LeftPanelDirective-fa09b95097a2cbd94eefe74af1e3585d9d355526bfefc55e78bd5a7f6510ff42d07d55b6c63b79ee73eae1f84a10e5970bc924de0e3f278705d5710c37fb2032",
-            "file": "libs/navigation/src/lib/navigation/directives/left-panel.directive.ts",
+            "id": "directive-LeftPanelDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtLeftPanel]',\n  standalone: true,\n})\nexport class LeftPanelDirective {\n  constructor() {}\n}\n",
+            "description": "<p>wtLeftPanel</p>\n",
+            "rawdescription": "\n\nwtLeftPanel\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
             "selector": "[wtLeftPanel]",
             "providers": [],
             "hostDirectives": [],
@@ -145,26 +246,37 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
             "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 7
-            }
+            "extends": [
+                "TemplateDirective"
+            ]
         },
         {
             "name": "MainPanelDirective",
-            "id": "directive-MainPanelDirective-ba1f977d12c2100cfd9b0472705342fef38b3bcd5152152933e040d86d40253737a6c4ee9ee314c5e6817b0760941c7af092165fd9ef3e4fb201c3bac41b2141",
-            "file": "libs/navigation/src/lib/navigation/directives/main-panel.directive.ts",
+            "id": "directive-MainPanelDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtMainPanel]',\n  standalone: true,\n})\nexport class MainPanelDirective {\n  constructor() {}\n}\n",
+            "description": "<p>wtMainPanel</p>\n",
+            "rawdescription": "\n\nwtMainPanel\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
             "selector": "[wtMainPanel]",
             "providers": [],
             "hostDirectives": [],
@@ -175,29 +287,39 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
             "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 7
-            }
+            "extends": [
+                "TemplateDirective"
+            ]
         },
         {
             "name": "RightPanelDirective",
-            "id": "directive-RightPanelDirective-681340356f4e14d0605b3ccea6c05bc3e8992f4ac998a79a83f1708082a8e59d6e3489b01f043388fe496c87a72803183969c931c96af3b75e921eb43e0b5b08",
-            "file": "libs/navigation/src/lib/navigation/directives/right-panel.directive.ts",
+            "id": "directive-RightPanelDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtRightPanel]',\n  standalone: true,\n  exportAs: 'wtRightPanel',\n})\nexport class RightPanelDirective {\n  constructor() {}\n}\n",
+            "description": "<p>wtRightPanel</p>\n",
+            "rawdescription": "\n\nwtRightPanel\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
             "selector": "[wtRightPanel]",
             "providers": [],
-            "exportAs": "wtRightPanel",
             "hostDirectives": [],
             "standalone": true,
             "inputsClass": [],
@@ -206,27 +328,38 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
             "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 8
-            }
+            "extends": [
+                "TemplateDirective"
+            ]
         },
         {
-            "name": "StatusBarDirective",
-            "id": "directive-StatusBarDirective-ba16fcdb3cb14ebc359f13f345ab0b6b4201eeee2a69c86a0945de31c1400f74eefaf027c71cc3ffd60baf62c38db2d09941fe8ea78ea6872e90d27d4c4762d2",
-            "file": "libs/navigation/src/lib/navigation/directives/status-bar.directive.ts",
+            "name": "StatusbarLeftDirective",
+            "id": "directive-StatusbarLeftDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtStatusBar]',\n  standalone: true,\n})\nexport class StatusBarDirective {\n  constructor() {}\n}\n",
-            "selector": "[wtStatusBar]",
+            "description": "<p>wtStatusbarLeft</p>\n",
+            "rawdescription": "\n\nwtStatusbarLeft\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
+            "selector": "[wtStatusbarLeft]",
             "providers": [],
             "hostDirectives": [],
             "standalone": true,
@@ -236,27 +369,38 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
             "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 7
-            }
+            "extends": [
+                "TemplateDirective"
+            ]
         },
         {
-            "name": "StatusBarRightDirective",
-            "id": "directive-StatusBarRightDirective-b48c41935e0528be012521b13d564b2a35c1e5373eb328946df81dbd8d8313d88571ebd8ad0e5b64b6d73abd88ab4408bfc594b6a5549f7c45641baf7860c150",
-            "file": "libs/navigation/src/lib/navigation/directives/status-bar-right.directive.ts",
+            "name": "StatusbarRightDirective",
+            "id": "directive-StatusbarRightDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtStatusBarRight]',\n  standalone: true,\n})\nexport class StatusBarRightDirective {\n  constructor() {}\n}\n",
-            "selector": "[wtStatusBarRight]",
+            "description": "<p>wtStatusbarRight</p>\n",
+            "rawdescription": "\n\nwtStatusbarRight\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
+            "selector": "[wtStatusbarRight]",
             "providers": [],
             "hostDirectives": [],
             "standalone": true,
@@ -266,7 +410,62 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
+            "methodsClass": [],
+            "extends": [
+                "TemplateDirective"
+            ]
+        },
+        {
+            "name": "TemplateDirective",
+            "id": "directive-TemplateDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n\n\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
+            "selector": "[wtTemplate]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": false,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ]
+                }
+            ],
             "methodsClass": [],
             "extends": [],
             "constructorObj": {
@@ -274,19 +473,37 @@
                 "description": "",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "args": [],
-                "line": 7
+                "args": [
+                    {
+                        "name": "templateRef",
+                        "type": "TemplateRef<T>",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 7,
+                "jsdoctags": [
+                    {
+                        "name": "templateRef",
+                        "type": "TemplateRef<T>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             }
         },
         {
-            "name": "ToolbarDirective",
-            "id": "directive-ToolbarDirective-01dba90cdbc02f8650daa0d3ce985c937705d782ef76543e496c352ac6b3c159df3e53c57690680e3e9fc2f3ef53f2d87533aa8bbee02694f9999fbf1ef90034",
-            "file": "libs/navigation/src/lib/navigation/directives/toolbar.directive.ts",
+            "name": "ToolbarLeftDirective",
+            "id": "directive-ToolbarLeftDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtToolbar]',\n  standalone: true,\n})\nexport class ToolbarDirective {\n  constructor() {}\n}\n",
-            "selector": "[wtToolbar]",
+            "description": "<p>wtToolbarLeft</p>\n",
+            "rawdescription": "\n\nwtToolbarLeft\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
+            "selector": "[wtToolbarLeft]",
             "providers": [],
             "hostDirectives": [],
             "standalone": true,
@@ -296,26 +513,37 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
             "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 7
-            }
+            "extends": [
+                "TemplateDirective"
+            ]
         },
         {
             "name": "ToolbarRightDirective",
-            "id": "directive-ToolbarRightDirective-84590a1c91249e0571b1df3a3b57a52c9a42b943768317751052a358b4dd7636fe6f15ecc60514fb7c4be1322ee617397ca34b0224e16645e2409e8949fc853e",
-            "file": "libs/navigation/src/lib/navigation/directives/toolbar-right.directive.ts",
+            "id": "directive-ToolbarRightDirective-ceaf8e487dae05046743b1247c49049f0ece042551b442bfca2147fad07397b3d858690303b52ef206a8f09515c25e68bf8aa4abd86497cb08b674d0b695123a",
+            "file": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\n\n@Directive({\n  selector: '[wtToolbarRight]',\n  standalone: true,\n})\nexport class ToolbarRightDirective {\n  constructor() {}\n}\n",
+            "description": "<p>wtToolbarRight</p>\n",
+            "rawdescription": "\n\nwtToolbarRight\n",
+            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n/**\r\n *\r\n */\r\n@Directive({ selector: '[wtTemplate]' })\r\nexport class TemplateDirective<T = unknown> {\r\n  constructor(public readonly templateRef: TemplateRef<T>) {}\r\n}\r\n\r\n/**\r\n * wtFloatingPanel\r\n */\r\n@Directive({ selector: '[wtFloatingPanel]', standalone: true })\r\nexport class FloatingPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtMainPanel\r\n */\r\n@Directive({ selector: '[wtMainPanel]', standalone: true })\r\nexport class MainPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtLeftPanel\r\n */\r\n@Directive({ selector: '[wtLeftPanel]', standalone: true })\r\nexport class LeftPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtRightPanel\r\n */\r\n@Directive({ selector: '[wtRightPanel]', standalone: true })\r\nexport class RightPanelDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarLeft\r\n */\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtToolbarRight\r\n */\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarLeft\r\n */\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective extends TemplateDirective {}\r\n/**\r\n * wtStatusbarRight\r\n */\r\n@Directive({ selector: '[wtStatusbarRight]', standalone: true })\r\nexport class StatusbarRightDirective extends TemplateDirective {}\r\n",
             "selector": "[wtToolbarRight]",
             "providers": [],
             "hostDirectives": [],
@@ -326,23 +554,34 @@
             "deprecationMessage": "",
             "hostBindings": [],
             "hostListeners": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8,
+                    "modifierKind": [
+                        125,
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "TemplateDirective"
+                    }
+                }
+            ],
             "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 7
-            }
+            "extends": [
+                "TemplateDirective"
+            ]
         }
     ],
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-04e9e081e5ef2520d6ea8e0dffb13590d7a5c99056dc26b7d39f7dacd10afbace56fbc5423191d046933ce1dbc105cc5118f3df4c0bf7c2f1adef7498cedbfd7",
+            "id": "component-AppLayoutComponent-cd84b39c6f40f9802c4e68efab85b2c14d6e5e896a700767d33c4dfa8dd78ced699295024121695627bc01d031e315eb46bd2d031387cf669d8cfb5ba8a33c90",
             "file": "libs/navigation/src/lib/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -368,27 +607,27 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 14,
+                    "line": 65,
                     "rawdescription": "\n\n",
                     "modifierKind": [
                         148
                     ],
                     "jsdoctags": [
                         {
-                            "pos": 303,
-                            "end": 340,
+                            "pos": 1964,
+                            "end": 2004,
                             "flags": 16842752,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 334,
                             "tagName": {
-                                "pos": 304,
-                                "end": 312,
+                                "pos": 1965,
+                                "end": 1976,
                                 "flags": 16842752,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
                                 "kind": 80,
-                                "escapedText": "internal"
+                                "escapedText": "description"
                             },
                             "comment": "<p>Is the viewport handset</p>\n"
                         }
@@ -405,19 +644,19 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 9,
+                    "line": 60,
                     "rawdescription": "\n\n",
                     "jsdoctags": [
                         {
-                            "pos": 240,
-                            "end": 266,
+                            "pos": 1901,
+                            "end": 1927,
                             "flags": 16842752,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 334,
                             "tagName": {
-                                "pos": 241,
-                                "end": 249,
+                                "pos": 1902,
+                                "end": 1910,
                                 "flags": 16842752,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -425,6 +664,342 @@
                                 "escapedText": "internal"
                             },
                             "comment": "<p>Is dark mode</p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtFloating",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<FloatingPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 55,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "FloatingPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1729,
+                            "end": 1793,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1730,
+                                "end": 1741,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtFloating> Content </ng-template></p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtLeftPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<LeftPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 25,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "LeftPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 679,
+                            "end": 744,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 680,
+                                "end": 691,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtLeftPanel> Content </ng-template></p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtMainPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<MainPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 20,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "MainPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 514,
+                            "end": 579,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 515,
+                                "end": 526,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtMainPanel> Content </ng-template></p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtRightPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<RightPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 30,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "RightPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 844,
+                            "end": 910,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 845,
+                                "end": 856,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtRightPanel> Content </ng-template></p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtStatusbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 45,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1363,
+                            "end": 1432,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1364,
+                                "end": 1375,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtStatusbarLeft> Content </ng-template></p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtStatusbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 50,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1544,
+                            "end": 1614,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1545,
+                                "end": 1556,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtStatusbarRight> Content </ng-template></p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtToolbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 35,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1013,
+                            "end": 1080,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1014,
+                                "end": 1025,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtToolbarLeft> Content </ng-template></p>\n"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtToolbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 40,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1186,
+                            "end": 1254,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1187,
+                                "end": 1198,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtToolbarRight> Content </ng-template></p>\n"
                         }
                     ],
                     "inheritance": {
@@ -439,7 +1014,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -464,7 +1039,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation/navigation.module';\nimport { NavigationComponent } from '../navigation/navigation.component';\n\n\n@Component({\n  selector: 'wt-app-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './app-layout.component.html',\n  styleUrl: './app-layout.component.scss',\n})\nexport class AppLayoutComponent extends NavigationComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation/navigation.module';\nimport { NavigationComponent } from '../navigation/navigation.component';\n\n@Component({\n  selector: 'wt-app-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './app-layout.component.html',\n  styleUrl: './app-layout.component.scss',\n})\nexport class AppLayoutComponent extends NavigationComponent {}\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -472,11 +1047,11 @@
             "extends": [
                 "NavigationComponent"
             ],
-            "templateData": "<div class=\"root-layout-container\" [class.dark-theme]=\"isDarkMode\">\n  <mat-toolbar color=\"primary\">\n    <div>\n      <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n        <mat-icon>\n          {{ sidenavLeft.opened ? 'menu_open' : 'menu' }}\n        </mat-icon>\n      </button>\n      <ng-content select=\"[wtToolbar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtToolbarRight]\"></ng-content>\n      <div>\n        <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n          <mat-icon>\n            {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n          </mat-icon>\n        </button>\n      </div>\n    </div>\n  </mat-toolbar>\n\n  <mat-sidenav-container>\n    <!-- Left sidenav -->\n    <mat-sidenav\n      #sidenavLeft\n      position=\"start\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n      [opened]=\"($isHandset | async) === false\"\n    >\n      <!-- Left sidenav content -->\n      <ng-content select=\"[wtLeftPanel]\"></ng-content>\n    </mat-sidenav>\n\n    <!-- Right sidenav -->\n    <mat-sidenav\n      #sidenavRight\n      position=\"end\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n    >\n      <!-- Right sidenav content -->\n      <ng-content select=\"[wtRightPanel]\"></ng-content>\n    </mat-sidenav>\n\n    <!-- Main content -->\n    <mat-sidenav-content>\n      <ng-content select=\"[wtMainContent]\"></ng-content>\n    </mat-sidenav-content>\n  </mat-sidenav-container>\n\n  <!-- Status bar -->\n  <mat-toolbar color=\"primary\">\n    <div>\n      <ng-content select=\"[wtStatusBar]\"></ng-content>\n    </div>\n    <div>\n      <ng-content select=\"[wtStatusBarRight]\"></ng-content>\n    </div>\n  </mat-toolbar>\n</div>\n"
+            "templateData": "<ng-template #renderTemplates let-templates=\"templates\">\n  <!-- Right sidenav content -->\n  @for(ref of templates; track ref){\n  <ng-container *ngTemplateOutlet=\"ref.templateRef\"></ng-container>\n  }\n</ng-template>\n\n<div class=\"root-layout-container\" [class.dark-theme]=\"isDarkMode\">\n  <mat-toolbar color=\"primary\">\n    <div>\n      <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n        <mat-icon>\n          {{ sidenavLeft.opened ? 'menu_open' : 'menu' }}\n        </mat-icon>\n      </button>\n      <ng-container\n        *ngTemplateOutlet=\"\n          renderTemplates;\n          context: { templates: wtToolbarLeft }\n        \"\n      ></ng-container>\n    </div>\n    <div>\n      <ng-container\n        *ngTemplateOutlet=\"\n          renderTemplates;\n          context: { templates: wtToolbarRight }\n        \"\n      ></ng-container>\n      <div>\n        <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n          <mat-icon>\n            {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n          </mat-icon>\n        </button>\n      </div>\n    </div>\n  </mat-toolbar>\n\n  <mat-sidenav-container>\n    <!-- Left sidenav -->\n    <mat-sidenav\n      #sidenavLeft\n      position=\"start\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n      [opened]=\"($isHandset | async) === false\"\n    >\n      <ng-container\n        *ngTemplateOutlet=\"renderTemplates; context: { templates: wtLeftPanel }\"\n      ></ng-container>\n    </mat-sidenav>\n\n    <!-- Right sidenav -->\n    <mat-sidenav\n      #sidenavRight\n      position=\"end\"\n      [mode]=\"($isHandset | async) === false ? 'side' : 'over'\"\n    >\n      <!-- Right sidenav content -->\n      <ng-container\n        *ngTemplateOutlet=\"\n          renderTemplates;\n          context: { templates: wtRightPanel }\n        \"\n      ></ng-container>\n    </mat-sidenav>\n\n    <!-- Main content -->\n    <mat-sidenav-content>\n      <ng-container\n        *ngTemplateOutlet=\"renderTemplates; context: { templates: wtMainPanel }\"\n      ></ng-container>\n    </mat-sidenav-content>\n  </mat-sidenav-container>\n\n  <!-- Status bar -->\n  <mat-toolbar color=\"primary\">\n    <div>\n      <ng-container\n        *ngTemplateOutlet=\"\n          renderTemplates;\n          context: { templates: wtStatusbarLeft }\n        \"\n      ></ng-container>\n    </div>\n    <div>\n      <ng-container\n        *ngTemplateOutlet=\"\n          renderTemplates;\n          context: { templates: wtStatusbarRight }\n        \"\n      ></ng-container>\n    </div>\n  </mat-toolbar>\n\n  <div class=\"floating-panel\" *ngIf=\"wtFloating.length > 0\">\n    <ng-container\n      *ngTemplateOutlet=\"renderTemplates; context: { templates: wtFloating }\"\n    ></ng-container>\n  </div>\n</div>\n"
         },
         {
             "name": "NavigationComponent",
-            "id": "component-NavigationComponent-a4bb01040d29ec356c1869e6317131bc7bce9fe313486be442fa4700c923d2d10a035ce18e2999caf3f9d046857e447199f5fdb8232ea5e07c598e7d42b340d5",
+            "id": "component-NavigationComponent-4355dbe00c0d7dbb0a928b151effc386031776d0da5efa98b6318312a6ddb9f262823928602819c5766168fe125e16f24c8479ac9ad7cb739a14e860e04313b8",
             "file": "libs/navigation/src/lib/navigation/navigation.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -500,27 +1075,27 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 14,
+                    "line": 65,
                     "rawdescription": "\n\n",
                     "modifierKind": [
                         148
                     ],
                     "jsdoctags": [
                         {
-                            "pos": 303,
-                            "end": 340,
+                            "pos": 1964,
+                            "end": 2004,
                             "flags": 16842752,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 334,
                             "tagName": {
-                                "pos": 304,
-                                "end": 312,
+                                "pos": 1965,
+                                "end": 1976,
                                 "flags": 16842752,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
                                 "kind": 80,
-                                "escapedText": "internal"
+                                "escapedText": "description"
                             },
                             "comment": "<p>Is the viewport handset</p>\n"
                         }
@@ -534,19 +1109,19 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 9,
+                    "line": 60,
                     "rawdescription": "\n\n",
                     "jsdoctags": [
                         {
-                            "pos": 240,
-                            "end": 266,
+                            "pos": 1901,
+                            "end": 1927,
                             "flags": 16842752,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 334,
                             "tagName": {
-                                "pos": 241,
-                                "end": 249,
+                                "pos": 1902,
+                                "end": 1910,
                                 "flags": 16842752,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -554,6 +1129,318 @@
                                 "escapedText": "internal"
                             },
                             "comment": "<p>Is dark mode</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtFloating",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<FloatingPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 55,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "FloatingPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1729,
+                            "end": 1793,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1730,
+                                "end": 1741,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtFloating> Content </ng-template></p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtLeftPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<LeftPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 25,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "LeftPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 679,
+                            "end": 744,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 680,
+                                "end": 691,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtLeftPanel> Content </ng-template></p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtMainPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<MainPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 20,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "MainPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 514,
+                            "end": 579,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 515,
+                                "end": 526,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtMainPanel> Content </ng-template></p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtRightPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<RightPanelDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 30,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "RightPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 844,
+                            "end": 910,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 845,
+                                "end": 856,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtRightPanel> Content </ng-template></p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtStatusbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 45,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1363,
+                            "end": 1432,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1364,
+                                "end": 1375,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtStatusbarLeft> Content </ng-template></p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtStatusbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 50,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1544,
+                            "end": 1614,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1545,
+                                "end": 1556,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtStatusbarRight> Content </ng-template></p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtToolbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 35,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1013,
+                            "end": 1080,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1014,
+                                "end": 1025,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtToolbarLeft> Content </ng-template></p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "wtToolbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 40,
+                    "rawdescription": "\n\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1186,
+                            "end": 1254,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 1187,
+                                "end": 1198,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "description"
+                            },
+                            "comment": "<p><ng-template wtToolbarRight> Content </ng-template></p>\n"
                         }
                     ]
                 }
@@ -565,7 +1452,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -582,7 +1469,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { debounceTime, map } from 'rxjs';\n@Component({ template: '' })\nexport abstract class NavigationComponent {\n  /**\n   * @internal Is dark mode\n   */\n  isDarkMode = false;\n\n  /**\n   * @internal Is the viewport handset\n   */\n  readonly $isHandset = this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    );\n\n  constructor(protected readonly breakPointObserver: BreakpointObserver) {}\n\n  /**\n   * @internal Toggle darkmode\n   */\n  toggleDarkMode() {\n    this.isDarkMode = !this.isDarkMode;\n  }\n}\n",
+            "sourceCode": "import { Component, ContentChildren, QueryList } from '@angular/core';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { debounceTime, map } from 'rxjs';\nimport {\n  FloatingPanelDirective,\n  LeftPanelDirective,\n  MainPanelDirective,\n  RightPanelDirective,\n  StatusbarLeftDirective,\n  StatusbarRightDirective,\n  ToolbarLeftDirective,\n  ToolbarRightDirective,\n} from './directives/template.directive';\n@Component({ template: '' })\nexport abstract class NavigationComponent {\n  /**\n   * @description <ng-template wtMainPanel> Content </ng-template>\n   */\n  @ContentChildren(MainPanelDirective)\n  wtMainPanel?: QueryList<MainPanelDirective>;\n  /**\n   * @description <ng-template wtLeftPanel> Content </ng-template>\n   */\n  @ContentChildren(LeftPanelDirective)\n  wtLeftPanel?: QueryList<LeftPanelDirective>;\n  /**\n   * @description <ng-template wtRightPanel> Content </ng-template>\n   */\n  @ContentChildren(RightPanelDirective)\n  wtRightPanel?: QueryList<RightPanelDirective>;\n  /**\n   * @description <ng-template wtToolbarLeft> Content </ng-template>\n   */\n  @ContentChildren(ToolbarLeftDirective)\n  wtToolbarLeft?: QueryList<ToolbarLeftDirective>;\n  /**\n   * @description <ng-template wtToolbarRight> Content </ng-template>\n   */\n  @ContentChildren(ToolbarRightDirective)\n  wtToolbarRight?: QueryList<ToolbarRightDirective>;\n  /**\n   * @description <ng-template wtStatusbarLeft> Content </ng-template>\n   */\n  @ContentChildren(StatusbarLeftDirective)\n  wtStatusbarLeft?: QueryList<StatusbarLeftDirective>;\n  /**\n   * @description <ng-template wtStatusbarRight> Content </ng-template>\n   */\n  @ContentChildren(StatusbarRightDirective)\n  wtStatusbarRight?: QueryList<StatusbarRightDirective>;\n  /**\n   * @description <ng-template wtFloating> Content </ng-template>\n   */\n  @ContentChildren(FloatingPanelDirective)\n  wtFloating?: QueryList<FloatingPanelDirective>;\n\n  /**\n   * @internal Is dark mode\n   */\n  isDarkMode = false;\n\n  /**\n   * @description Is the viewport handset\n   */\n  readonly $isHandset = this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    );\n\n  constructor(protected readonly breakPointObserver: BreakpointObserver) {}\n\n  /**\n   * @description Toggle darkmode\n   */\n  toggleDarkMode() {\n    this.isDarkMode = !this.isDarkMode;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -599,7 +1486,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 21,
+                "line": 72,
                 "jsdoctags": [
                     {
                         "name": "breakPointObserver",
@@ -616,7 +1503,7 @@
         },
         {
             "name": "NavListComponent",
-            "id": "component-NavListComponent-1f5673430fb7bda949384815953e653237f6cac35d07641d9f5504ecfe027c05fb3f512ad1eb87267a91c6ef365c40bc1fe6d04547cb603acde50cda3ce0ad3b",
+            "id": "component-NavListComponent-bd830cefb7f606c0f6956ad89f4ad23d3b00f4d89c8c4f96487ab89f3964f37853696ee04c9069b020fe248d69452977385c54aa0f518d5c43ea5d93b5bf2600",
             "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -636,7 +1523,7 @@
                     "name": "listItems",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 39,
                     "type": "NavListItem[]",
                     "decorators": []
                 },
@@ -644,7 +1531,7 @@
                     "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 38,
                     "type": "string",
                     "decorators": []
                 }
@@ -655,7 +1542,7 @@
                     "defaultValue": "new EventEmitter<NavListItem>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 40,
                     "type": "EventEmitter"
                 }
             ],
@@ -668,7 +1555,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 36
+                    "line": 37
                 }
             ],
             "methodsClass": [
@@ -685,7 +1572,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 42,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -715,13 +1602,221 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
             "styleUrl": "./nav-list.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<mat-nav-list>\n  <div mat-subheader>\n    <h3>{{ title }}</h3>\n  </div>\n  @for( item of listItems; track item){\n  <mat-list-item\n    class=\"mat-nav-list-item\"\n    (click)=\"handleClickEvent(item)\"\n    [class.active]=\"activeItem === item.label\"\n    [routerLink]=\"item.route\"\n    routerLinkActive=\"active\"\n  >\n    <div matListItemLine>{{ item.label }}</div>\n    <span matListItemIcon>\n      <mat-icon\n        class=\"fill\"\n        [color]=\"item.iconColor\"\n        [matBadge]=\"item.badge\"\n        [matBadgeColor]=\"item.badgeColor\"\n      >\n        {{ item.icon }}\n      </mat-icon>\n    </span>\n  </mat-list-item>\n  }\n</mat-nav-list>\n"
+            "templateData": "<mat-nav-list>\n  <div mat-subheader>\n    <h3>{{ title }}</h3>\n  </div>\n  @for( item of listItems; track item){\n  <mat-list-item\n    class=\"mat-nav-list-item\"\n    (click)=\"handleClickEvent(item)\"\n    [class.active]=\"activeItem === item.label\"\n    [routerLink]=\"[item.route ?? item.label]\"\n    routerLinkActive=\"active\"\n  >\n    <div matListItemLine>{{ item.label | titlecase }}</div>\n    <span matListItemIcon>\n      <mat-icon\n        class=\"fill\"\n        [color]=\"item.iconColor\"\n        [matBadge]=\"item.badge\"\n        [matBadgeColor]=\"item.badgeColor\"\n      >\n        {{ item.icon }}\n      </mat-icon>\n    </span>\n  </mat-list-item>\n  }\n</mat-nav-list>\n"
+        },
+        {
+            "name": "NavMenuComponent",
+            "id": "component-NavMenuComponent-8fb81cfe72111ddb07cc8c7da4aebd17b90be2d46af64e1352ed5b73e18b92df47d2179eadf2beda06dbbde542143033b1dc0aa404adc627a04c8d94cfc288ce",
+            "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-nav-menu",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./nav-menu.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "menuItems",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "MenuItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "trigerIcon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "trigerIconColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "trigerLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "menuClickEvent",
+                    "defaultValue": "new EventEmitter<MenuItem>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 49,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "handleClickEvent",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "modules",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { RouterModule } from '@angular/router';\n\nconst modules = [\n  CommonModule,\n  RouterModule,\n  MatMenuModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  MatTooltipModule,\n];\n\nexport class MenuItem {\n  label!: string;\n  id?: number;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n  subs?: MenuItem[];\n}\n\n@Component({\n  selector: 'wt-nav-menu',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-menu.component.html',\n  styleUrl: './nav-menu.component.scss',\n})\nexport class NavMenuComponent {\n  @Input() trigerIconColor?: string;\n  @Input() trigerIcon?: string;\n  @Input() trigerLabel?: string;\n  @Input() menuItems?: MenuItem[];\n\n  /**\n   * @ignore internal input\n   */\n  @Input() isSubmenu = false;\n\n  @Output() menuClickEvent = new EventEmitter<MenuItem>();\n\n  handleClickEvent(event: MenuItem) {\n    this.menuClickEvent.emit(event);\n  }\n}\n",
+            "styleUrl": "./nav-menu.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<button\n  mat-icon-button\n  [matMenuTriggerFor]=\"menuRef\"\n  [attr.aria-label]=\"trigerLabel\"\n  *ngIf=\"!isSubmenu\"\n  [matTooltip]=\"trigerLabel ?? ''\"\n  [matTooltipPosition]=\"'below'\"\n>\n  <mat-icon class=\"fill\" [color]=\"trigerIconColor\">{{ trigerIcon }}</mat-icon>\n</button>\n\n<button\n  mat-menu-item\n  [matMenuTriggerFor]=\"menuRef\"\n  [attr.aria-label]=\"trigerLabel\"\n  *ngIf=\"isSubmenu\"\n>\n  <mat-icon class=\"fill\" [color]=\"trigerIconColor\">{{ trigerIcon }}</mat-icon>\n  <span>{{ trigerLabel }}</span>\n</button>\n\n<mat-menu #menuRef=\"matMenu\">\n  @for(item of menuItems; track item){ @if(item.subs){\n  <wt-nav-menu\n    [trigerIcon]=\"item.icon\"\n    [trigerLabel]=\"item.label\"\n    [menuItems]=\"item.subs\"\n    [isSubmenu]=\"true\"\n    (menuClickEvent)=\"handleClickEvent($event)\"\n  ></wt-nav-menu>\n  } @else {\n  <button\n    mat-menu-item\n    [routerLink]=\"item.route || item.label\"\n    (click)=\"handleClickEvent(item)\"\n  >\n    <mat-icon class=\"fill\" [color]=\"item.iconColor\">{{ item.icon }}</mat-icon>\n    <span>{{ item.label }}</span>\n  </button>\n  } }\n</mat-menu>\n"
+        },
+        {
+            "name": "SampleAppLayoutComponent",
+            "id": "component-SampleAppLayoutComponent-2ace0e2ff3cd979bd2c7871d59dcf8bcc894c7f5d17b391d1455efb902b7e3f0780995e938fe90b336054248537b7e9971b64238eaa4464ab532ac38f7d27432",
+            "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-sample-app-layout",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./sample-app-layout.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "NavigationModule",
+                    "type": "module"
+                },
+                {
+                    "name": "AppLayoutComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AppLayoutComponent } from '../app-layout/app-layout.component';\nimport { NavigationModule } from '../navigation/navigation.module';\n\n@Component({\n  selector: 'wt-sample-app-layout',\n  standalone: true,\n  imports: [CommonModule, NavigationModule, AppLayoutComponent],\n  templateUrl: './sample-app-layout.component.html',\n  styleUrl: './sample-app-layout.component.scss',\n})\nexport class SampleAppLayoutComponent {}\n",
+            "styleUrl": "./sample-app-layout.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<wt-app-layout>\n  <ng-template wtLeftPanel>\n    <wt-nav-list\n      title=\"Nav List\"\n      [listItems]=\"[\n        { label: 'item 1', icon: 'info', iconColor: 'primary' },\n        { label: 'item 2', icon: 'info', iconColor: 'primary' },\n        { label: 'item 3', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' }\n      ]\"\n    ></wt-nav-list>\n  </ng-template>\n\n  <ng-template wtRightPanel>\n    <wt-nav-list\n      title=\"Administration\"\n      [listItems]=\"[\n        { label: 'item 1', icon: 'info', iconColor: 'primary' },\n        { label: 'item 2', icon: 'info', iconColor: 'accent' },\n        { label: 'item 3', icon: 'info', iconColor: 'warn' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' },\n        { label: 'item 4', icon: 'info', iconColor: 'primary' }\n      ]\"\n    ></wt-nav-list>\n  </ng-template>\n\n  <ng-template wtMainPanel> <h1>Mian Content 1</h1> </ng-template>\n  <ng-template wtMainPanel> <h1>Mian Content 2</h1> </ng-template>\n\n  <ng-template wtToolbarLeft>\n    <button mat-icon-button><mat-icon>home</mat-icon></button>\n  </ng-template>\n  <ng-template wtToolbarRight>\n    <button mat-icon-button><mat-icon>info</mat-icon></button>\n    <button mat-icon-button><mat-icon>person</mat-icon></button>\n    <button mat-icon-button><mat-icon>settings</mat-icon></button>\n  </ng-template>\n\n  <ng-template wtStatusbarLeft>\n    <button mat-icon-button><mat-icon>category</mat-icon></button>\n  </ng-template>\n  <ng-template wtStatusbarRight>\n    <button mat-icon-button>\n      <mat-icon class=\"fill\" matBadge=\"3\" matBadgeColor=\"warn\"\n        >notifications</mat-icon\n      >\n    </button>\n  </ng-template>\n\n  <ng-template wtFloatingPanel>\n    <button mat-mini-fab color=\"accent\">\n      <mat-icon class=\"fill\">message</mat-icon>\n    </button>\n  </ng-template>\n</wt-app-layout>\n"
+        },
+        {
+            "name": "SampleWebLayoutComponent",
+            "id": "component-SampleWebLayoutComponent-ac47499aa247ecad825a1131ac7baef0b2975af68415802c4afb1e0d553c23f6fe552ec5232d0dd942667fdd147e5cc63eefd1adcef0700250dccd9b86be458e",
+            "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-sample-web-layout",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./sample-web-layout.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-sample-web-layout',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './sample-web-layout.component.html',\n  styleUrl: './sample-web-layout.component.scss',\n})\nexport class SampleWebLayoutComponent {}\n",
+            "styleUrl": "./sample-web-layout.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>sample-web-layout works!</p>\n"
         },
         {
             "name": "WebLayoutComponent",
@@ -770,13 +1865,13 @@
     "modules": [
         {
             "name": "NavigationModule",
-            "id": "module-NavigationModule-f92f63ebd1747580972434e62ca2ab819d9dce5414d8ace92fff03c9fc6f49b5ea676911160c144711e40bae9b679eda51921aaedbc77beddc486658b14cdb03",
+            "id": "module-NavigationModule-a12bb341361baf608150e7f4a0649e05b344b797b04699975ac27917384cbad4c87e0f9a558526e9109651b2c71313f2e49813360a4a3be6f9a63048009ad029",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "libs/navigation/src/lib/navigation/navigation.module.ts",
             "methods": [],
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatListModule } from '@angular/material/list';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\n\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport {\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n} from './directives';\r\nimport { NgModule } from '@angular/core';\r\n\r\nconst directives = [\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n];\r\n\r\nconst modules = [\r\n  CommonModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  MatListModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatBadgeModule,\r\n];\r\n\r\n@NgModule({\r\n  imports: [...modules, ...directives],\r\n  exports: [...modules, ...directives],\r\n})\r\nexport class NavigationModule {}\r\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { NavMenuComponent } from './nav-menu/nav-menu.component';\r\nimport {\r\n  FloatingPanelDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  ToolbarRightDirective,\r\n} from './directives/template.directive';\r\nimport { NavListComponent } from './nav-list/nav-list.component';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatTooltipModule } from '@angular/material/tooltip';\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\n\r\nconst directives = [\r\n  FloatingPanelDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  ToolbarRightDirective,\r\n];\r\n\r\nconst modules = [\r\n  CommonModule,\r\n  MatIconModule,\r\n  MatButtonModule,\r\n  MatTooltipModule,\r\n  MatBadgeModule,\r\n  MatToolbarModule,\r\n  NavMenuComponent,\r\n  NavListComponent,\r\n  MatSidenavModule,\r\n];\r\n\r\n@NgModule({\r\n  imports: [...modules, ...directives],\r\n  exports: [...modules, ...directives],\r\n})\r\nexport class NavigationModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -790,7 +1885,7 @@
                     "type": "imports",
                     "elements": [
                         {
-                            "name": "FloatingDirective"
+                            "name": "FloatingPanelDirective"
                         },
                         {
                             "name": "LeftPanelDirective"
@@ -799,16 +1894,22 @@
                             "name": "MainPanelDirective"
                         },
                         {
+                            "name": "NavListComponent"
+                        },
+                        {
+                            "name": "NavMenuComponent"
+                        },
+                        {
                             "name": "RightPanelDirective"
                         },
                         {
-                            "name": "StatusBarDirective"
+                            "name": "StatusbarLeftDirective"
                         },
                         {
-                            "name": "StatusBarRightDirective"
+                            "name": "StatusbarRightDirective"
                         },
                         {
-                            "name": "ToolbarDirective"
+                            "name": "ToolbarLeftDirective"
                         },
                         {
                             "name": "ToolbarRightDirective"
@@ -819,7 +1920,7 @@
                     "type": "exports",
                     "elements": [
                         {
-                            "name": "FloatingDirective"
+                            "name": "FloatingPanelDirective"
                         },
                         {
                             "name": "LeftPanelDirective"
@@ -828,16 +1929,22 @@
                             "name": "MainPanelDirective"
                         },
                         {
+                            "name": "NavListComponent"
+                        },
+                        {
+                            "name": "NavMenuComponent"
+                        },
+                        {
                             "name": "RightPanelDirective"
                         },
                         {
-                            "name": "StatusBarDirective"
+                            "name": "StatusbarLeftDirective"
                         },
                         {
-                            "name": "StatusBarRightDirective"
+                            "name": "StatusbarRightDirective"
                         },
                         {
-                            "name": "ToolbarDirective"
+                            "name": "ToolbarLeftDirective"
                         },
                         {
                             "name": "ToolbarRightDirective"
@@ -865,7 +1972,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n]"
+                "defaultValue": "[\r\n  FloatingPanelDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  ToolbarRightDirective,\r\n]"
             },
             {
                 "name": "Heading",
@@ -876,6 +1983,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/sample-web-layout works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -885,7 +2012,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -895,7 +2022,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    listItems: [{ label: 'Home', icon: 'home' }],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
             },
             {
                 "name": "meta",
@@ -905,7 +2042,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppLayoutComponent>",
-                "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n\n  decorators: [\n    applicationConfig({\n      providers: [\n        importProvidersFrom(BrowserAnimationsModule, NavigationModule),\n      ],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SampleAppLayoutComponent>",
+                "defaultValue": "{\n  component: SampleAppLayoutComponent,\n  title: 'SampleAppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<SampleWebLayoutComponent>",
+                "defaultValue": "{\n  component: SampleWebLayoutComponent,\n  title: 'SampleWebLayoutComponent',\n}"
             },
             {
                 "name": "meta",
@@ -928,6 +2085,16 @@
                 "defaultValue": "{\n  title: 'NavListComponent',\n  component: NavListComponent,\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
             },
             {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<NavMenuComponent>",
+                "defaultValue": "{\n  component: NavMenuComponent,\n  title: 'NavMenuComponent',\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
+            },
+            {
                 "name": "modules",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -935,7 +2102,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\r\n  CommonModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  MatListModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatBadgeModule,\r\n]"
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatIconModule,\r\n  MatButtonModule,\r\n  MatTooltipModule,\r\n  MatBadgeModule,\r\n  MatToolbarModule,\r\n  NavMenuComponent,\r\n  NavListComponent,\r\n  MatSidenavModule,\r\n]"
             },
             {
                 "name": "modules",
@@ -948,10 +2115,40 @@
                 "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n]"
             },
             {
+                "name": "modules",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n  CommonModule,\n  RouterModule,\n  MatMenuModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  MatTooltipModule,\n]"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -976,6 +2173,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    title: 'Nav List Title',\n    listItems: [\n      {\n        label: 'Home',\n        icon: 'home',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'About',\n        icon: 'info',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'Services',\n        icon: 'apps',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n    ],\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    trigerIcon: 'settings',\n    trigerLabel: 'Settings',\n    trigerIconColor: 'primary',\n    menuItems: [\n      {\n        label: 'Common',\n        icon: 'info',\n        subs: [\n          { label: 'Sub 1', icon: 'info', iconColor: 'primary' },\n          { label: 'Sub 2', icon: 'info', iconColor: 'accent' },\n          { label: 'Sub 3', icon: 'info', iconColor: 'warn' },\n          { label: 'Sub 4', icon: 'info', iconColor: 'primary' },\n          { label: 'Sub 5', icon: 'info', iconColor: 'accent' },\n        ],\n      },\n    ],\n  },\n}"
             }
         ],
         "functions": [],
@@ -986,6 +2193,28 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<AppLayoutComponent>",
                 "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SampleAppLayoutComponent>",
+                "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<SampleWebLayoutComponent>",
+                "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1012,6 +2241,17 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<NavMenuComponent>",
+                "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
             }
         ],
         "enumerations": [],
@@ -1025,7 +2265,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\r\n  FloatingDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusBarDirective,\r\n  StatusBarRightDirective,\r\n  ToolbarDirective,\r\n  ToolbarRightDirective,\r\n]"
+                    "defaultValue": "[\r\n  FloatingPanelDirective,\r\n  LeftPanelDirective,\r\n  MainPanelDirective,\r\n  RightPanelDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  ToolbarRightDirective,\r\n]"
                 },
                 {
                     "name": "modules",
@@ -1035,7 +2275,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\r\n  CommonModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  MatListModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatBadgeModule,\r\n]"
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatIconModule,\r\n  MatButtonModule,\r\n  MatTooltipModule,\r\n  MatBadgeModule,\r\n  MatToolbarModule,\r\n  NavMenuComponent,\r\n  NavListComponent,\r\n  MatSidenavModule,\r\n]"
                 }
             ],
             "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts": [
@@ -1057,13 +2297,77 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AppLayoutComponent>",
-                    "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [importProvidersFrom(BrowserAnimationsModule)],\n    }),\n  ],\n}"
+                    "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n\n  decorators: [\n    applicationConfig({\n      providers: [\n        importProvidersFrom(BrowserAnimationsModule, NavigationModule),\n      ],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SampleAppLayoutComponent>",
+                    "defaultValue": "{\n  component: SampleAppLayoutComponent,\n  title: 'SampleAppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/sample-web-layout works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<SampleWebLayoutComponent>",
+                    "defaultValue": "{\n  component: SampleWebLayoutComponent,\n  title: 'SampleWebLayoutComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -1079,7 +2383,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -1111,7 +2415,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    listItems: [{ label: 'Home', icon: 'home' }],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -1134,6 +2438,38 @@
                     "defaultValue": "{\n  args: {\n    title: 'Nav List Title',\n    listItems: [\n      {\n        label: 'Home',\n        icon: 'home',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'About',\n        icon: 'info',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n      {\n        label: 'Services',\n        icon: 'apps',\n        iconColor: 'primary',\n        badge: '1',\n        badgeColor: 'accent',\n      },\n    ],\n  },\n}"
                 }
             ],
+            "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<NavMenuComponent>",
+                    "defaultValue": "{\n  component: NavMenuComponent,\n  title: 'NavMenuComponent',\n  decorators: [\n    applicationConfig({\n      providers: [\n        provideRouter([]),\n        importProvidersFrom(BrowserAnimationsModule),\n      ],\n    }),\n  ],\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    trigerIcon: 'settings',\n    trigerLabel: 'Settings',\n    trigerIconColor: 'primary',\n    menuItems: [\n      {\n        label: 'Common',\n        icon: 'info',\n        subs: [\n          { label: 'Sub 1', icon: 'info', iconColor: 'primary' },\n          { label: 'Sub 2', icon: 'info', iconColor: 'accent' },\n          { label: 'Sub 3', icon: 'info', iconColor: 'warn' },\n          { label: 'Sub 4', icon: 'info', iconColor: 'primary' },\n          { label: 'Sub 5', icon: 'info', iconColor: 'accent' },\n        ],\n      },\n    ],\n  },\n}"
+                }
+            ],
             "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts": [
                 {
                     "name": "modules",
@@ -1144,6 +2480,18 @@
                     "deprecationMessage": "",
                     "type": "[]",
                     "defaultValue": "[\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n]"
+                }
+            ],
+            "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts": [
+                {
+                    "name": "modules",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n  CommonModule,\n  RouterModule,\n  MatMenuModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  MatTooltipModule,\n]"
                 }
             ]
         },
@@ -1157,6 +2505,32 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<AppLayoutComponent>",
                     "file": "libs/navigation/src/lib/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SampleAppLayoutComponent>",
+                    "file": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<SampleWebLayoutComponent>",
+                    "file": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -1188,12 +2562,25 @@
                     "description": "",
                     "kind": 183
                 }
+            ],
+            "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<NavMenuComponent>",
+                    "file": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
             ]
         }
     },
     "routes": [],
     "coverage": {
-        "count": 0,
+        "count": 10,
         "status": "low",
         "files": [
             {
@@ -1232,80 +2619,89 @@
                 "linktype": "component",
                 "name": "AppLayoutComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/directives/floating.directive.ts",
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
-                "name": "FloatingDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
+                "name": "FloatingPanelDirective",
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/directives/left-panel.directive.ts",
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
                 "name": "LeftPanelDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/directives/main-panel.directive.ts",
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
                 "name": "MainPanelDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/directives/right-panel.directive.ts",
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
                 "name": "RightPanelDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/directives/status-bar-right.directive.ts",
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
-                "name": "StatusBarRightDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
+                "name": "StatusbarLeftDirective",
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/directives/status-bar.directive.ts",
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
-                "name": "StatusBarDirective",
+                "name": "StatusbarRightDirective",
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "TemplateDirective",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
-                "filePath": "libs/navigation/src/lib/navigation/directives/toolbar-right.directive.ts",
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "ToolbarLeftDirective",
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/directives/template.directive.ts",
                 "type": "directive",
                 "linktype": "directive",
                 "name": "ToolbarRightDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
-            },
-            {
-                "filePath": "libs/navigation/src/lib/navigation/directives/toolbar.directive.ts",
-                "type": "directive",
-                "linktype": "directive",
-                "name": "ToolbarDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
+                "coveragePercent": 50,
+                "coverageCount": "1/2",
+                "status": "medium"
             },
             {
                 "filePath": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.stories.ts",
@@ -1366,12 +2762,70 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NavMenuComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/navigation/nav-menu/nav-menu.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "modules",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/navigation/src/lib/navigation/navigation.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "NavigationComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -1390,6 +2844,84 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "modules",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-app-layout/sample-app-layout.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SampleAppLayoutComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/navigation/src/lib/sample-web-layout/sample-web-layout.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SampleWebLayoutComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

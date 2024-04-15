@@ -55,9 +55,7 @@ export const Primary: Story = {
 };
 
 export const Heading: Story = {
-  args: {
-    listItems: [{ label: 'Home', icon: 'home' }],
-  },
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
   },

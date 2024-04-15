@@ -25,6 +25,7 @@ export class NavListItem {
   badgeColor?: 'primary' | 'accent' | 'warn';
   route?: string;
 }
+
 @Component({
   selector: 'wt-nav-list',
   standalone: true,

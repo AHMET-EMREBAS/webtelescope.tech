@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavigationModule } from '../navigation/navigation.module';
 import { NavigationComponent } from '../navigation/navigation.component';
 
-
 @Component({
   selector: 'wt-app-layout',
   standalone: true,

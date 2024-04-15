@@ -1,7 +1,7 @@
 # form
 
-This library was generated with [Nx](https://nx.dev).
+Angular form and form field components
 
-## Running unit tests
+## Install
 
-Run `nx test form` to execute the unit tests.
+`pnpm add @webpackages/form`

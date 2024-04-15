@@ -27,7 +27,7 @@ export const Primary: Story = {
 };
 
 export const Heading: Story = {
-  args: {},
+  args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
   },

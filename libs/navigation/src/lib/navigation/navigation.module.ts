@@ -1,42 +1,45 @@
-import { CommonModule } from '@angular/common';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatToolbarModule } from '@angular/material/toolbar';
-
-import { MatBadgeModule } from '@angular/material/badge';
+import { NgModule } from '@angular/core';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import {
-  FloatingDirective,
+  FloatingPanelDirective,
   LeftPanelDirective,
   MainPanelDirective,
   RightPanelDirective,
-  StatusBarDirective,
-  StatusBarRightDirective,
-  ToolbarDirective,
+  StatusbarLeftDirective,
+  StatusbarRightDirective,
+  ToolbarLeftDirective,
   ToolbarRightDirective,
-} from './directives';
-import { NgModule } from '@angular/core';
+} from './directives/template.directive';
+import { NavListComponent } from './nav-list/nav-list.component';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const directives = [
-  FloatingDirective,
+  FloatingPanelDirective,
   LeftPanelDirective,
   MainPanelDirective,
   RightPanelDirective,
-  StatusBarDirective,
-  StatusBarRightDirective,
-  ToolbarDirective,
+  StatusbarLeftDirective,
+  StatusbarRightDirective,
+  ToolbarLeftDirective,
   ToolbarRightDirective,
 ];
 
 const modules = [
   CommonModule,
-  MatButtonModule,
   MatIconModule,
-  MatListModule,
-  MatSidenavModule,
-  MatToolbarModule,
+  MatButtonModule,
+  MatTooltipModule,
   MatBadgeModule,
+  MatToolbarModule,
+  NavMenuComponent,
+  NavListComponent,
+  MatSidenavModule,
 ];
 
 @NgModule({

@@ -1,3 +1,10 @@
+<ng-template #renderTemplates let-templates="templates">
+  <!-- Right sidenav content -->
+  @for(ref of templates; track ref){
+  <ng-container *ngTemplateOutlet="ref.templateRef"></ng-container>
+  }
+</ng-template>
+
 <div class="root-layout-container" [class.dark-theme]="isDarkMode">
   <mat-toolbar color="primary">
     <div>
@@ -6,10 +13,20 @@
           {{ sidenavLeft.opened ? 'menu_open' : 'menu' }}
         </mat-icon>
       </button>
-      <ng-content select="[wtToolbar]"></ng-content>
+      <ng-container
+        *ngTemplateOutlet="
+          renderTemplates;
+          context: { templates: wtToolbarLeft }
+        "
+      ></ng-container>
     </div>
     <div>
-      <ng-content select="[wtToolbarRight]"></ng-content>
+      <ng-container
+        *ngTemplateOutlet="
+          renderTemplates;
+          context: { templates: wtToolbarRight }
+        "
+      ></ng-container>
       <div>
         <button mat-icon-button (click)="sidenavRight.toggle()">
           <mat-icon>
@@ -28,8 +45,9 @@
       [mode]="($isHandset | async) === false ? 'side' : 'over'"
       [opened]="($isHandset | async) === false"
     >
-      <!-- Left sidenav content -->
-      <ng-content select="[wtLeftPanel]"></ng-content>
+      <ng-container
+        *ngTemplateOutlet="renderTemplates; context: { templates: wtLeftPanel }"
+      ></ng-container>
     </mat-sidenav>
 
     <!-- Right sidenav -->
@@ -39,22 +57,45 @@
       [mode]="($isHandset | async) === false ? 'side' : 'over'"
     >
       <!-- Right sidenav content -->
-      <ng-content select="[wtRightPanel]"></ng-content>
+      <ng-container
+        *ngTemplateOutlet="
+          renderTemplates;
+          context: { templates: wtRightPanel }
+        "
+      ></ng-container>
     </mat-sidenav>
 
     <!-- Main content -->
     <mat-sidenav-content>
-      <ng-content select="[wtMainContent]"></ng-content>
+      <ng-container
+        *ngTemplateOutlet="renderTemplates; context: { templates: wtMainPanel }"
+      ></ng-container>
     </mat-sidenav-content>
   </mat-sidenav-container>
 
   <!-- Status bar -->
   <mat-toolbar color="primary">
     <div>
-      <ng-content select="[wtStatusBar]"></ng-content>
+      <ng-container
+        *ngTemplateOutlet="
+          renderTemplates;
+          context: { templates: wtStatusbarLeft }
+        "
+      ></ng-container>
     </div>
     <div>
-      <ng-content select="[wtStatusBarRight]"></ng-content>
+      <ng-container
+        *ngTemplateOutlet="
+          renderTemplates;
+          context: { templates: wtStatusbarRight }
+        "
+      ></ng-container>
     </div>
   </mat-toolbar>
+
+  <div class="floating-panel" *ngIf="wtFloating.length > 0">
+    <ng-container
+      *ngTemplateOutlet="renderTemplates; context: { templates: wtFloating }"
+    ></ng-container>
+  </div>
 </div>
