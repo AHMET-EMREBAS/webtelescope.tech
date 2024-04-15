@@ -7,8 +7,6 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Type, applyDecorators } from '@nestjs/common';
-import { hashSync, genSaltSync } from 'bcrypt';
-import { v4 } from 'uuid';
 import { IID } from './types';
 
 import { ApiProperty } from '@nestjs/swagger';
@@ -125,14 +123,6 @@ export function PasswordColumn(
   return Col({
     type: 'varchar',
     ...options,
-    transformer: {
-      to(value) {
-        return value && hashSync(value, genSaltSync(8));
-      },
-      from(value) {
-        return value;
-      },
-    },
   });
 }
 
@@ -143,14 +133,6 @@ export function OAuthApiTokenColumn(
     type: 'varchar',
     unique: true,
     ...options,
-    transformer: {
-      from(value) {
-        return value;
-      },
-      to() {
-        return v4();
-      },
-    },
   });
 }
 
@@ -162,14 +144,6 @@ export function UUIDColumn(options: Partial<Omit<ColumnOptions, 'type'>> = {}) {
   return Col({
     type: 'varchar',
     ...options,
-    transformer: {
-      to() {
-        return v4();
-      },
-      from(value) {
-        return value;
-      },
-    },
   });
 }
 

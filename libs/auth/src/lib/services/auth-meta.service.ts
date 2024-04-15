@@ -44,20 +44,33 @@ export class AuthMetaService {
 
   getRequiredScopes(ctx: ExecutionContext) {
     const result = getRequiredScope(this.reflector, ctx);
-    this.logger.debug(`Required Scopes : ${result}`);
-    return result;
+
+    if (result && result.length > 0) {
+      this.logger.debug(`Required Scopes : ${result}`);
+      return result;
+    }
+    this.logger.debug('The resource does not have a scope');
+    return null;
   }
 
   getRequiredPermissions(ctx: ExecutionContext) {
     const result = getRequiredPermissions(this.reflector, ctx);
-    this.logger.debug(`Required Permissions : ${result}`);
-    return result;
+    if (result && result.length > 0) {
+      this.logger.debug(`Required Permissions : ${result}`);
+      return result;
+    }
+    this.logger.debug(`There is no required permission!`);
+    return null;
   }
 
   getRequiredRoles(ctx: ExecutionContext) {
     const result = getRequiredRoles(this.reflector, ctx);
-    this.logger.debug(`Required Permissions : ${result}`);
-    return result;
+    if (result && result.length > 0) {
+      this.logger.debug(`Required roles : ${result}`);
+      return result;
+    }
+    this.logger.debug(`There is no required role!`);
+    return null;
   }
 
   userPermissionsContainsRequiredPermissions(

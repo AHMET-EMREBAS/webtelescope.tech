@@ -191,8 +191,10 @@ export function __commonFormatProperty(options: ApiPropertyOptions) {
 
   if (specialFormat) {
     if (specialFormat === 'email') des.push(IsEmail({}, vo));
-    else if (specialFormat === 'password') des.push(IsStrongPassword({}, vo));
-    else if (specialFormat === 'phone') des.push(IsPhoneNumber(undefined, vo));
+    else if (specialFormat === 'password') {
+      des.push(IsStrongPassword({}, vo));
+    } else if (specialFormat === 'phone')
+      des.push(IsPhoneNumber(undefined, vo));
     else if (specialFormat === 'credit-card') des.push(IsCreditCard(vo));
     else if (specialFormat === 'ip4') des.push(IsIP('4', vo));
     else if (specialFormat === 'ip6') des.push(IsIP('6', vo));

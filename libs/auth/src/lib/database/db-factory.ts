@@ -8,13 +8,11 @@ import {
 } from './db-name';
 import {
   App,
-  LogSubscriber,
   OAuth,
   Org,
   Permission,
   Role,
   Scope,
-  SubSubscriber,
   SubType,
   User,
 } from '@webpackages/entity';
@@ -23,6 +21,8 @@ import { DataSource } from 'typeorm';
 import { BetterSqlite3ConnectionOptions } from 'typeorm/driver/better-sqlite3/BetterSqlite3ConnectionOptions';
 import { copyFileSync, existsSync, mkdirSync } from 'fs';
 import { createResourcePermissions } from '@webpackages/core';
+import { genSaltSync, hashSync } from 'bcrypt';
+import { v4 } from 'uuid';
 
 @Injectable()
 export class DatabaseFactory implements TypeOrmOptionsFactory {
@@ -39,7 +39,6 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       type: 'better-sqlite3',
       database,
       entities: [...AuthEntities],
-      subscribers: [SubSubscriber, LogSubscriber],
     };
 
     this.logger.debug(
@@ -111,7 +110,6 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       ...this.options('not-required'),
       database: getTemplateDatabaseName(),
       entities: AuthEntities,
-      subscribers: [LogSubscriber, SubSubscriber],
       synchronize: true,
       dropSchema: true,
     }).initialize();
@@ -124,8 +122,6 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       await manager.save(subTypeRepo.create({ subtype: 'Basic' }));
       await manager.save(subTypeRepo.create({ subtype: 'Gold' }));
       await manager.save(subTypeRepo.create({ subtype: 'VIP' }));
-
-      console.log(await subTypeRepo.find());
 
       this.logger.debug('Created default SubType items');
       // Seed Permissions
@@ -170,7 +166,7 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       const userRepo = manager.getRepository(User);
       await userRepo.save({
         username: 'user@domain.com',
-        password: '!Password123.',
+        password: hashSync('!Password123.', genSaltSync(8)),
         organization: { id: 1 },
         roles: [ADMIN_ROLE],
       });
@@ -190,6 +186,7 @@ export class DatabaseFactory implements TypeOrmOptionsFactory {
       await oauthRepo.save({
         name: 'Auth application api key',
         app: APP,
+        apiKey: v4(),
         scopes: [SCOPE],
       });
       this.logger.debug('Created a sample OAuth item');

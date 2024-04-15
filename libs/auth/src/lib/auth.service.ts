@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
 import { Mail, OAuth, SecurityCode, Sub } from '@webpackages/entity';
-import { ILike, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import {
   BadRequestException,
   ExecutionContext,
@@ -130,6 +130,7 @@ export class AuthService {
     const requiredScopes = this.metaService.getRequiredScopes(ctx);
 
     if (!requiredScopes) return false;
+    if (requiredScopes.length === 0) return false;
 
     const hasRequiredScopes = this.metaService.oAuthHasRequiredScopes(
       oauth.scopes.map((e) => e.scope),
@@ -172,9 +173,13 @@ export class AuthService {
   }
 
   async findOAuthByApiKey(apiKey: string) {
-    const found = await this.oauthRepo.findOneBy({ apiKey: ILike(apiKey) });
-    this.logger.debug(`Found Oauth Key ${found?.id} by ${apiKey}`);
-    return found;
+    const found = await this.oauthRepo.findOneBy({ apiKey });
+    if (found) {
+      this.logger.debug(`Found Oauth Key ${found?.id} by ${apiKey}`);
+      return found;
+    }
+    this.logger.debug(`Could not find OAuth Key by ${apiKey}`);
+    return null;
   }
 
   async createSecurityCode(user: IUser) {
@@ -182,7 +187,7 @@ export class AuthService {
       securityCode: v4(),
       user,
     });
-    return await this.securityCodeRepo.findOneBy({ id: ILike(id) });
+    return await this.securityCodeRepo.findOneBy({ id });
   }
 
   async createSecurityCodeOrThrow(user: IUser) {
@@ -207,7 +212,7 @@ export class AuthService {
       `Trying to sign up the user ${username} - ${targetOrgname}`
     );
 
-    const found = await this.subRepo.findOneBy({ username: ILike(username) });
+    const found = await this.subRepo.findOneBy({ username });
     this.logger.debug(`Is user exist : ${!!found}`);
 
     if (found) {

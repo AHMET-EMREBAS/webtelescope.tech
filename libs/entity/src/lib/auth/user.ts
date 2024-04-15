@@ -2,7 +2,6 @@ import { IUser } from '@webpackages/model';
 import {
   ManyRelation,
   StringColumn,
-  PasswordColumn,
   TimestampEntity,
   Entity,
   OwnerRelation,
@@ -19,7 +18,7 @@ import {
 @Entity()
 export class User extends TimestampEntity implements IUser<Org, Role> {
   @StringColumn({ unique: true }) username!: string;
-  @PasswordColumn() password!: string;
+  @StringColumn() password!: string;
   @OwnerRelation(Org) organization!: Org;
   @ManyRelation(Role) roles!: Role[];
 }
