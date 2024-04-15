@@ -81,7 +81,7 @@
         "{options.outputDir}"
       ],
       "options": {
-        "outputDir": "dist/storybook/form",
+        "outputDir": "docs/form",
         "configDir": "libs/form/.storybook",
         "browserTarget": "form:build-storybook",
         "compodoc": true,

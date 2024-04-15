@@ -5,7 +5,6 @@ import { NavigationModule } from '../navigation/navigation.module';
 import { NavListItem } from '../navigation/nav-list/nav-list.component';
 
 @Component({
-  selector: 'wt-sample-app-layout',
   standalone: true,
   imports: [CommonModule, NavigationModule, AppLayoutComponent],
   templateUrl: './sample-app-layout.component.html',

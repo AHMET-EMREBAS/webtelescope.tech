@@ -97,12 +97,12 @@
         },
         {
             "name": "NavListItem",
-            "id": "class-NavListItem-bd830cefb7f606c0f6956ad89f4ad23d3b00f4d89c8c4f96487ab89f3964f37853696ee04c9069b020fe248d69452977385c54aa0f518d5c43ea5d93b5bf2600",
+            "id": "class-NavListItem-84baa0656f101ea67c37ddbc6f8577a815d034f50c7191ea791765e2f66a589f9af39d62e23d65b937f50b1f9195610540968d871c6c517579fb5be27c9617b0",
             "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
             "properties": [
                 {
                     "name": "badge",
@@ -1294,7 +1294,7 @@
         },
         {
             "name": "NavListComponent",
-            "id": "component-NavListComponent-bd830cefb7f606c0f6956ad89f4ad23d3b00f4d89c8c4f96487ab89f3964f37853696ee04c9069b020fe248d69452977385c54aa0f518d5c43ea5d93b5bf2600",
+            "id": "component-NavListComponent-84baa0656f101ea67c37ddbc6f8577a815d034f50c7191ea791765e2f66a589f9af39d62e23d65b937f50b1f9195610540968d871c6c517579fb5be27c9617b0",
             "file": "libs/navigation/src/lib/navigation/nav-list/nav-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1314,7 +1314,7 @@
                     "name": "listItems",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 40,
                     "type": "NavListItem[]",
                     "decorators": []
                 },
@@ -1322,7 +1322,7 @@
                     "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 39,
                     "type": "string",
                     "decorators": []
                 }
@@ -1333,7 +1333,7 @@
                     "defaultValue": "new EventEmitter<NavListItem>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 41,
                     "type": "EventEmitter"
                 }
             ],
@@ -1363,7 +1363,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 42,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1393,7 +1393,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\n\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { RouterModule } from '@angular/router';\nconst modules = [\n  CommonModule,\n  MatListModule,\n  MatIconModule,\n  MatButtonModule,\n  MatBadgeModule,\n  RouterModule,\n];\n\nexport class NavListItem {\n  label!: string;\n  id?: number;\n  subLabel?: string;\n  icon?: string;\n  iconColor?: 'primary' | 'accent' | 'warn';\n  badge?: string;\n  badgeColor?: 'primary' | 'accent' | 'warn';\n  route?: string;\n}\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [...modules],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  activeItem = '';\n\n  @Input() title?: string;\n  @Input() listItems?: NavListItem[];\n  @Output() clickEvent = new EventEmitter<NavListItem>();\n\n  handleClickEvent(item: NavListItem) {\n    this.activeItem = item.label;\n    this.clickEvent.emit(item);\n  }\n}\n",
             "styleUrl": "./nav-list.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -1622,7 +1622,7 @@
         },
         {
             "name": "WebLayoutComponent",
-            "id": "component-WebLayoutComponent-15b70f88a2a672bd186ef6ec9429964ceb4c66144856773559b2ec68f2421189cd69aed9ee77f1e498f575fc03d12a13f3e26f342abf6fbbebdac62f9ee8ad11",
+            "id": "component-WebLayoutComponent-2e8a2e4ea78c68352ab0bbb5abd1007f3e2b7dfb1173d30fe6cee985a3341b6d79a458b8827554d8d1bde44e112c887c0fa80f4adf9faef9b7d0093894aba75b",
             "file": "libs/navigation/src/lib/web-layout/web-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1639,8 +1639,339 @@
             "hostDirectives": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "$isHandset",
+                    "defaultValue": "this.breakPointObserver\n    .observe([Breakpoints.XSmall])\n    .pipe(\n      debounceTime(200),\n      map((e) => {\n        return e.matches;\n      })\n    )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<boolean>",
+                    "optional": false,
+                    "description": "<p>Is viewport matches handset layout size.</p>\n",
+                    "line": 82,
+                    "rawdescription": "\n\nIs viewport matches handset layout size.\n",
+                    "modifierKind": [
+                        148
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "isDarkMode",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "<p>Is dark mode</p>\n",
+                    "line": 77,
+                    "rawdescription": "\n\nIs dark mode\n",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "sidenavLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MatSidenav",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'sidenavLeft'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "sidenavRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MatSidenav",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'sidenavRight'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtFloating",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<FloatingPanelDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtFloating&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 72,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtFloating> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "FloatingPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtLeftPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<LeftPanelDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtLeftPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 36,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtLeftPanel> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "LeftPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtMainPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<MainPanelDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtMainPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 30,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtMainPanel> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "MainPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtRightPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<RightPanelDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtRightPanel&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 42,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtRightPanel> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "RightPanelDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtStatusbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarLeftDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtStatusbarLeft&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 60,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtStatusbarLeft> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtStatusbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarRightDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtStatusbarRight&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 66,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtStatusbarRight> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtToolbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarLeftDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtToolbarLeft&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 48,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtToolbarLeft> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "wtToolbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarRightDirective>",
+                    "optional": true,
+                    "description": "<p>Inject template into navigation layout\n<code>&lt;ng-template wtToolbarRight&gt; Content &lt;/ng-template&gt;</code></p>\n",
+                    "line": 54,
+                    "rawdescription": "\n\nInject template into navigation layout\n`<ng-template wtToolbarRight> Content </ng-template>`\n",
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "closeSidenavLeft",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 100,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "closeSidenavRight",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 104,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "closeSidenavs",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 108,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "toggleDarkMode",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 96,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nToggle darkmode\n",
+                    "description": "<p>Toggle darkmode</p>\n",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "toggleSidenavLeft",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 112,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                },
+                {
+                    "name": "toggleSidenavRight",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 116,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "NavigationComponent"
+                    }
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -1655,13 +1986,15 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation/navigation.module';\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { NavigationModule } from '../navigation/navigation.module';\nimport { NavigationComponent } from '../navigation/navigation.component';\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [NavigationModule],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent extends NavigationComponent {}\n",
             "styleUrl": "./web-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "extends": [],
-            "templateData": "<div class=\"root-navigation-container\">\n    <mat-toolbar color=\"primary\">\n      <div class=\"row space-between full\">\n        <div class=\"row\">\n          <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n            <mat-icon>{{ sidenavLeft.opened ? 'menu_open' : 'menu' }}</mat-icon>\n          </button>\n          <ng-content select=\"[wtToolbar]\"></ng-content>\n        </div>\n        <div class=\"row\">\n          <ng-content select=\"[wtToolbarRight]\"></ng-content>\n          <div class=\"row\">\n            <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n              <mat-icon>\n                {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n              </mat-icon>\n            </button>\n          </div>\n        </div>\n      </div>\n    </mat-toolbar>\n  \n    <mat-sidenav-container>\n      <mat-sidenav #sidenavLeft position=\"start\">\n        <ng-content select=\"[wtLeftPanel]\"></ng-content>\n      </mat-sidenav>\n      <mat-sidenav #sidenavRight position=\"end\">\n        <ng-content select=\"[wtRightPanel]\"></ng-content>\n      </mat-sidenav>\n      <mat-sidenav-content>\n        <ng-content select=\"[wtMainContent]\"></ng-content>\n      </mat-sidenav-content>\n    </mat-sidenav-container>\n  \n    <!-- Status bar -->\n    <mat-toolbar color=\"primary\">\n      <div class=\"row space-between full\">\n        <div class=\"row\">\n          <ng-content select=\"[wtStatusBar]\"></ng-content>\n        </div>\n        <div class=\"row\">\n          <ng-content select=\"[wtStatusBarRight]\"></ng-content>\n        </div>\n      </div>\n    </mat-toolbar>\n  </div>\n  "
+            "extends": [
+                "NavigationComponent"
+            ],
+            "templateData": "<ng-template #renderTemplates let-templates=\"templates\">\n  <!-- Right sidenav content -->\n  @for(ref of templates; track ref){\n  <ng-container *ngTemplateOutlet=\"ref.templateRef\"></ng-container>\n  }\n</ng-template>\n\n<div class=\"root-navigation-container\">\n  <mat-toolbar color=\"primary\">\n    <div class=\"row space-between full\">\n      <div class=\"row\">\n        <button mat-icon-button (click)=\"sidenavLeft.toggle()\">\n          <mat-icon>{{ sidenavLeft.opened ? 'menu_open' : 'menu' }}</mat-icon>\n        </button>\n        <ng-container\n          *ngTemplateOutlet=\"\n            renderTemplates;\n            context: { templates: wtToolbarLeft }\n          \"\n        ></ng-container>\n      </div>\n      <div class=\"row\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            renderTemplates;\n            context: { templates: wtToolbarLeft }\n          \"\n        ></ng-container>\n        <div class=\"row\">\n          <button mat-icon-button (click)=\"sidenavRight.toggle()\">\n            <mat-icon>\n              {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}\n            </mat-icon>\n          </button>\n        </div>\n      </div>\n    </div>\n  </mat-toolbar>\n\n  <mat-sidenav-container>\n    <mat-sidenav #sidenavLeft position=\"start\">\n      <ng-container\n        *ngTemplateOutlet=\"renderTemplates; context: { templates: wtLeftPanel }\"\n      ></ng-container>\n    </mat-sidenav>\n    <mat-sidenav #sidenavRight position=\"end\">\n      <ng-container\n        *ngTemplateOutlet=\"\n          renderTemplates;\n          context: { templates: wtRightPanel }\n        \"\n      ></ng-container>\n    </mat-sidenav>\n    <mat-sidenav-content>\n      <ng-container\n        *ngTemplateOutlet=\"renderTemplates; context: { templates: wtMainPanel }\"\n      ></ng-container>\n    </mat-sidenav-content>\n  </mat-sidenav-container>\n\n  <!-- Status bar -->\n  <mat-toolbar color=\"primary\">\n    <div class=\"row space-between full\">\n      <div class=\"row\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            renderTemplates;\n            context: { templates: wtStatusbarLeft }\n          \"\n        ></ng-container>\n      </div>\n      <div class=\"row\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            renderTemplates;\n            context: { templates: wtStatusbarRight }\n          \"\n        ></ng-container>\n      </div>\n    </div>\n  </mat-toolbar>\n</div>\n"
         }
     ],
     "modules": [
@@ -2382,7 +2715,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 12,
+        "count": 14,
         "status": "low",
         "files": [
             {
@@ -2763,9 +3096,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "WebLayoutComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
+                "coveragePercent": 57,
+                "coverageCount": "11/19",
+                "status": "good"
             }
         ]
     }

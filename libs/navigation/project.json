@@ -81,7 +81,7 @@
         "{options.outputDir}"
       ],
       "options": {
-        "outputDir": "dist/storybook/navigation",
+        "outputDir": "docs/navigation",
         "configDir": "libs/navigation/.storybook",
         "browserTarget": "navigation:build-storybook",
         "compodoc": true,

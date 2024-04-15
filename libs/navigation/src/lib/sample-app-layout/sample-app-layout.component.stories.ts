@@ -1,5 +1,6 @@
 import {
   applicationConfig,
+  componentWrapperDecorator,
   type Meta,
   type StoryObj,
 } from '@storybook/angular';
@@ -13,6 +14,7 @@ import { provideRouter } from '@angular/router';
 const meta: Meta<SampleAppLayoutComponent> = {
   component: SampleAppLayoutComponent,
   title: 'SampleAppLayoutComponent',
+
   decorators: [
     applicationConfig({
       providers: [
