@@ -1,7 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationModule } from '../navigation/navigation.module';
 import { NavigationComponent } from '../navigation/navigation.component';
-import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'wt-app-layout',

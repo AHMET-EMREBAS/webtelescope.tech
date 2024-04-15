@@ -35,6 +35,7 @@ export class NavListItem {
 })
 export class NavListComponent {
   activeItem = '';
+
   @Input() title?: string;
   @Input() listItems?: NavListItem[];
   @Output() clickEvent = new EventEmitter<NavListItem>();

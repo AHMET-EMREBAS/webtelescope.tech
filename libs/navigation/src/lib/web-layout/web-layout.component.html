@@ -1,47 +1,82 @@
+<ng-template #renderTemplates let-templates="templates">
+  <!-- Right sidenav content -->
+  @for(ref of templates; track ref){
+  <ng-container *ngTemplateOutlet="ref.templateRef"></ng-container>
+  }
+</ng-template>
+
 <div class="root-navigation-container">
-    <mat-toolbar color="primary">
-      <div class="row space-between full">
+  <mat-toolbar color="primary">
+    <div class="row space-between full">
+      <div class="row">
+        <button mat-icon-button (click)="sidenavLeft.toggle()">
+          <mat-icon>{{ sidenavLeft.opened ? 'menu_open' : 'menu' }}</mat-icon>
+        </button>
+        <ng-container
+          *ngTemplateOutlet="
+            renderTemplates;
+            context: { templates: wtToolbarLeft }
+          "
+        ></ng-container>
+      </div>
+      <div class="row">
+        <ng-container
+          *ngTemplateOutlet="
+            renderTemplates;
+            context: { templates: wtToolbarLeft }
+          "
+        ></ng-container>
         <div class="row">
-          <button mat-icon-button (click)="sidenavLeft.toggle()">
-            <mat-icon>{{ sidenavLeft.opened ? 'menu_open' : 'menu' }}</mat-icon>
+          <button mat-icon-button (click)="sidenavRight.toggle()">
+            <mat-icon>
+              {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}
+            </mat-icon>
           </button>
-          <ng-content select="[wtToolbar]"></ng-content>
-        </div>
-        <div class="row">
-          <ng-content select="[wtToolbarRight]"></ng-content>
-          <div class="row">
-            <button mat-icon-button (click)="sidenavRight.toggle()">
-              <mat-icon>
-                {{ sidenavRight.opened ? 'chevron_right' : 'chevron_left' }}
-              </mat-icon>
-            </button>
-          </div>
         </div>
       </div>
-    </mat-toolbar>
-  
-    <mat-sidenav-container>
-      <mat-sidenav #sidenavLeft position="start">
-        <ng-content select="[wtLeftPanel]"></ng-content>
-      </mat-sidenav>
-      <mat-sidenav #sidenavRight position="end">
-        <ng-content select="[wtRightPanel]"></ng-content>
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <ng-content select="[wtMainContent]"></ng-content>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  
-    <!-- Status bar -->
-    <mat-toolbar color="primary">
-      <div class="row space-between full">
-        <div class="row">
-          <ng-content select="[wtStatusBar]"></ng-content>
-        </div>
-        <div class="row">
-          <ng-content select="[wtStatusBarRight]"></ng-content>
-        </div>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenavLeft position="start">
+      <ng-container
+        *ngTemplateOutlet="renderTemplates; context: { templates: wtLeftPanel }"
+      ></ng-container>
+    </mat-sidenav>
+    <mat-sidenav #sidenavRight position="end">
+      <ng-container
+        *ngTemplateOutlet="
+          renderTemplates;
+          context: { templates: wtRightPanel }
+        "
+      ></ng-container>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-container
+        *ngTemplateOutlet="renderTemplates; context: { templates: wtMainPanel }"
+      ></ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Status bar -->
+  <mat-toolbar color="primary">
+    <div class="row space-between full">
+      <div class="row">
+        <ng-container
+          *ngTemplateOutlet="
+            renderTemplates;
+            context: { templates: wtStatusbarLeft }
+          "
+        ></ng-container>
       </div>
-    </mat-toolbar>
-  </div>
-  
+      <div class="row">
+        <ng-container
+          *ngTemplateOutlet="
+            renderTemplates;
+            context: { templates: wtStatusbarRight }
+          "
+        ></ng-container>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>
