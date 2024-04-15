@@ -1,7 +1,3 @@
 # auth-client
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test auth-client` to execute the unit tests.
+Access auth-service from the frontend project

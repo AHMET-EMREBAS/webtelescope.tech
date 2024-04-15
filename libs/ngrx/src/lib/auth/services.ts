@@ -21,7 +21,6 @@ export const AuthEntityDataModuleConfig: EntityDataModuleConfig = {
   pluralNames: {
     User: 'Users',
     Role: 'Roles',
-    
     Permission: 'Permissions',
     Session: 'Sessions',
     Organization: 'Organizations',

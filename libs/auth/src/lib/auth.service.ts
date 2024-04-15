@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectRepository } from '@nestjs/typeorm';
 import { Mail, OAuth, SecurityCode, Sub } from '@webpackages/entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import {
+  BadRequestException,
   ExecutionContext,
   Injectable,
+  InternalServerErrorException,
   Logger,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -27,7 +29,7 @@ import {
   AuthUserService,
 } from './services';
 import { userToSession } from './common';
-import { DatabaseFactory } from './database';
+import { DatabaseFactory, getDatabaseName } from './database';
 
 @Injectable()
 export class AuthService {
@@ -118,28 +120,24 @@ export class AuthService {
 
   async isAuthorizedOAuthClient(ctx: ExecutionContext) {
     const apiKey = this.extractService.extractOAuthApiKeyFromHeader(ctx);
+
+    if (!apiKey) return false;
+
     const oauth = await this.findOAuthByApiKey(apiKey);
 
-    if (oauth) {
-      const requiredScopes = this.metaService.getRequiredScopes(ctx);
+    if (!oauth) return false;
 
-      if (requiredScopes) {
-        const hasRequiredScopes = this.metaService.oAuthHasRequiredScopes(
-          oauth.scopes.map((e) => e.scope),
-          requiredScopes
-        );
-        if (hasRequiredScopes) {
-          return true;
-        } else {
-          return false;
-        }
-      }
+    const requiredScopes = this.metaService.getRequiredScopes(ctx);
 
-      this.logger.debug('There is no scope restriction for the resource!');
+    if (!requiredScopes) return false;
 
-      return true;
-    }
-    this.logger.debug('OAuth key not provided!');
+    const hasRequiredScopes = this.metaService.oAuthHasRequiredScopes(
+      oauth.scopes.map((e) => e.scope),
+      requiredScopes
+    );
+
+    if (hasRequiredScopes) return true;
+
     return false;
   }
 
@@ -174,7 +172,9 @@ export class AuthService {
   }
 
   async findOAuthByApiKey(apiKey: string) {
-    return await this.oauthRepo.findOneBy({ apiKey });
+    const found = await this.oauthRepo.findOneBy({ apiKey: ILike(apiKey) });
+    this.logger.debug(`Found Oauth Key ${found?.id} by ${apiKey}`);
+    return found;
   }
 
   async createSecurityCode(user: IUser) {
@@ -182,7 +182,7 @@ export class AuthService {
       securityCode: v4(),
       user,
     });
-    return await this.securityCodeRepo.findOneBy({ id });
+    return await this.securityCodeRepo.findOneBy({ id: ILike(id) });
   }
 
   async createSecurityCodeOrThrow(user: IUser) {
@@ -195,39 +195,54 @@ export class AuthService {
     targetOrgname: string,
     signupDto: CreateSubDto
   ): Promise<MessageResponse> {
+    const { orgname, username } = signupDto;
+
+    if (!DatabaseFactory.isDatabaseExist(getDatabaseName(targetOrgname))) {
+      throw new BadRequestException(
+        `You are trying to subscribe to the organization ${targetOrgname} which does not exist!`
+      );
+    }
+
     this.logger.debug(
-      `Trying to sign up the user ${signupDto.username} - ${signupDto.orgname}`
+      `Trying to sign up the user ${username} - ${targetOrgname}`
     );
 
-    const { username } = signupDto;
+    const found = await this.subRepo.findOneBy({ username: ILike(username) });
+    this.logger.debug(`Is user exist : ${!!found}`);
+
+    if (found) {
+      this.logger.debug('User already exist!');
+      throw new UnprocessableEntityException(
+        `User already exist in the org ${orgname}!`
+      );
+    }
+
+    this.logger.debug('Trying to create subscription user');
 
     try {
-      await this.subRepo.findOneByOrFail({ username });
-      this.logger.error(`${username} already exists!`);
+      const saved = await this.subRepo.save(signupDto);
+      this.logger.error(`Saved ${saved.username}`);
     } catch (err) {
-      try {
-        this.logger.debug('Trying to create subscription user');
-        const saved = await this.subRepo.save(signupDto);
-
-        this.logger.error(`Saved ${saved.username}`);
-
-        const { orgname, username, password } = signupDto;
-
-        await DatabaseFactory.createDatabaseIFNotExist(orgname);
-
-        await DatabaseFactory.updateTemplateDatabaseForUser(
-          orgname,
-          username,
-          password
-        );
-
-        return { message: `Welcome to ${targetOrgname}.` };
-      } catch (err) {
-        this.logger.debug('Could not create the subscription user');
-        console.error(err);
-      }
+      throw new UnprocessableEntityException('Could not signup! ');
     }
-    throw new UnprocessableEntityException('The username is already in user!');
+
+    const { password } = signupDto;
+
+    try {
+      await DatabaseFactory.createDatabaseIFNotExist(orgname);
+
+      await DatabaseFactory.updateTemplateDatabaseForUser(
+        orgname,
+        username,
+        password
+      );
+    } catch (err) {
+      this.logger.debug(err);
+      throw new InternalServerErrorException(
+        'Something went wrong creating the subscription!'
+      );
+    }
+    return { message: `Welcome to ${targetOrgname}.` };
   }
 
   async sendEmail(mail: CreateMailDto) {

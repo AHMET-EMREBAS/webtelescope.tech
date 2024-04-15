@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
   }
 
   async canActivate(ctx: ExecutionContext) {
-    this.logger.debug('Start');
+    this.logger.debug('Auth Guard Start');
     if (this.metaService.isPublic(ctx)) return true;
     if (this.metaService.isAuthGuardByPassed(ctx)) return true;
     if (await this.authService.isAuthorizedOAuthClient(ctx)) return true;

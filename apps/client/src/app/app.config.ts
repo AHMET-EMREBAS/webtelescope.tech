@@ -8,46 +8,27 @@ import { provideEntityData, withEffects } from '@ngrx/data';
 import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
-  AuthEntityDataModuleConfig,
-  BlogEntityDataModuleConfig,
-  InventoryEntityDataModuleConfig,
-  OrderEntityDataModuleConfig,
-  PermissionService,
-  ProjectEntityDataModuleConfig,
-  UserService,
-} from '@webpackages/ngrx';
-import { createAuthInterceptor } from '@webpackages/auth-client';
+  AuthClientService,
+  createClientAuthServiceHttpInterceptor,
+} from '@webpackages/auth-client';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    UserService,
-    PermissionService,
+    AuthClientService,
     provideRouter(appRoutes, withHashLocation()),
     provideHttpClient(
-      withInterceptors([createAuthInterceptor('http://localhost:3000')])
+      withInterceptors([
+        createClientAuthServiceHttpInterceptor({
+          baseURL: 'http://localhost:3001',
+          appName: 'main',
+          oauthApiKey: '',
+          orgname: 'main',
+        }),
+      ])
     ),
     provideStore([]),
     provideEffects([]),
-    provideEntityData(
-      {
-        pluralNames: {
-          ...AuthEntityDataModuleConfig.pluralNames,
-          ...BlogEntityDataModuleConfig.pluralNames,
-          ...InventoryEntityDataModuleConfig.pluralNames,
-          ...OrderEntityDataModuleConfig.pluralNames,
-          ...ProjectEntityDataModuleConfig.pluralNames,
-        },
-
-        entityMetadata: {
-          ...AuthEntityDataModuleConfig.entityMetadata,
-          ...BlogEntityDataModuleConfig.entityMetadata,
-          ...InventoryEntityDataModuleConfig.entityMetadata,
-          ...OrderEntityDataModuleConfig.entityMetadata,
-          ...ProjectEntityDataModuleConfig.entityMetadata,
-        },
-      },
-      withEffects()
-    ),
+    provideEntityData({}, withEffects()),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

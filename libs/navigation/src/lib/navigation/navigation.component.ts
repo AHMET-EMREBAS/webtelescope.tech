@@ -3,6 +3,8 @@ import {
   ContentChildren,
   QueryList,
   ViewChild,
+  WritableSignal,
+  signal,
 } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, debounceTime, map } from 'rxjs';
@@ -74,7 +76,7 @@ export abstract class NavigationComponent {
   /**
    * Is dark mode
    */
-  isDarkMode: boolean = false;
+  isDarkMode: WritableSignal<boolean> = signal(false);
 
   /**
    * Is viewport matches handset layout size.
@@ -94,7 +96,7 @@ export abstract class NavigationComponent {
    * Toggle darkmode
    */
   toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
+    this.isDarkMode.set(!this.isDarkMode());
   }
 
   closeSidenavLeft() {

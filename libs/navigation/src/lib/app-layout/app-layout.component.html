@@ -93,7 +93,7 @@
     </div>
   </mat-toolbar>
 
-  <div class="floating-panel" *ngIf="wtFloating.length > 0">
+  <div class="floating-panel" *ngIf="wtFloating && wtFloating.length > 0">
     <ng-container
       *ngTemplateOutlet="renderTemplates; context: { templates: wtFloating }"
     ></ng-container>

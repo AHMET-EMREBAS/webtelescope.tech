@@ -14,7 +14,9 @@ import {
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 import { ControllerConfiguration } from '@webpackages/core';
+import { AuthPath } from '@webpackages/common';
 
+const AP = new AuthPath();
 export class AuthResourceBuilder implements IAuthResourceBuilder {
   constructor(
     public readonly config?: ControllerConfiguration<IAuthResourceBuilder>
@@ -35,7 +37,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
       ApiOperation({
         summary: 'Login with credentials, username and password',
       }),
-      Post('login'),
+      Post(AP.Login),
       ApiInternalServerErrorResponse(),
       ApiUnauthorizedResponse({
         description: 'Username or password is wrong!',
@@ -48,7 +50,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
   LoginWithCode(): PropertyDecorator {
     return applyDecorators(
       ApiOperation({ summary: 'Login with securityCode and useranme' }),
-      Get('login-with-code'),
+      Get(AP.LoginWithCode),
       ConfigureResource(this.config?.LoginWithCode)
     );
   }
@@ -56,7 +58,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
   Logout(): PropertyDecorator {
     return applyDecorators(
       ApiOperation({ summary: 'Logout | Delete the current session' }),
-      Get('logout'),
+      Get(AP.Logout),
       ConfigureResource(this.config?.Logout)
     );
   }
@@ -64,7 +66,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
   LogoutAll(): PropertyDecorator {
     return applyDecorators(
       ApiOperation({ summary: 'Logout All Devices | Delete all sessions' }),
-      Get('logout-all-devices'),
+      Get(AP.LogoutAll),
       ConfigureResource(this.config?.LogoutAll)
     );
   }
@@ -72,7 +74,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
   HasSession(): PropertyDecorator {
     return applyDecorators(
       ApiOperation({ summary: 'Check the user has a session or not' }),
-      Get('has-session'),
+      Get(AP.HasPermission),
       ConfigureResource(this.config?.HasSession)
     );
   }
@@ -80,7 +82,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
   ForgotPassword(): PropertyDecorator {
     return applyDecorators(
       ApiOperation({ summary: 'Request password reset link' }),
-      Post('forgot-password'),
+      Post(AP.ForgotPassWord),
       ConfigureResource(this.config?.ForgotPassword)
     );
   }
@@ -93,7 +95,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
         description: 'Password is not strong enough',
       }),
       ApiUnauthorizedResponse({ description: 'There is no valid session' }),
-      Post('update-password'),
+      Post(AP.UpdatePassword),
       ConfigureResource(this.config?.UpdatePassword)
     );
   }
@@ -101,7 +103,7 @@ export class AuthResourceBuilder implements IAuthResourceBuilder {
   SignUp(): PropertyDecorator {
     return applyDecorators(
       ApiOperation({ summary: 'Signup' }),
-      Post('signup'),
+      Post(AP.Signup),
       ConfigureResource(this.config?.SignUp)
     );
   }

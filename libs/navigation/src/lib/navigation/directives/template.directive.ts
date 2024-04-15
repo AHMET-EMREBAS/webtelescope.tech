@@ -1,11 +1,11 @@
-import { Directive, TemplateRef } from '@angular/core';
+import { Directive, Optional, TemplateRef } from '@angular/core';
 
 /**
  *
  */
 @Directive({ selector: '[wtTemplate]' })
 export class TemplateDirective<T = unknown> {
-  constructor(public readonly templateRef: TemplateRef<T>) {}
+  constructor(@Optional() public readonly templateRef?: TemplateRef<T>) {}
 }
 
 /**

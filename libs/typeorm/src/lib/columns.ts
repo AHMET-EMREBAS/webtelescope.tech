@@ -148,7 +148,7 @@ export function OAuthApiTokenColumn(
         return value;
       },
       to() {
-        return hashSync(v4(), genSaltSync(5));
+        return v4();
       },
     },
   });
