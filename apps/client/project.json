@@ -78,7 +78,9 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "client:build"
+        "buildTarget": "client:build",
+        "outputPath": "apps/client/src/locale",
+        "format": "xlf"
       }
     },
     "lint": {
