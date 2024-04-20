@@ -23,6 +23,9 @@ export type PropertyOptions = Omit<
   'nullable'
 >;
 
+/**
+ * By default, each property is marked as optional. To make them requried, set required argument true.
+ */
 export function Property(options: PropertyOptions = {}) {
   const decorators: PropertyDecorator[] = [];
 

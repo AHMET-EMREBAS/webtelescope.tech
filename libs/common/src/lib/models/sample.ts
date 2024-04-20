@@ -1,4 +1,4 @@
-import { IID } from './_id';
+import { IID } from '../types';
 
 export interface ISample extends IID {
   name: string;
