@@ -121,14 +121,11 @@
     },
     "@nx/nest:application": {
       "strict": true,
-      "directory": "apis",
-      "frontendProject": "client",
       "projectNameAndRootFormat": "derived"
     },
     "@nx/js:library": {
       "strict": true,
       "publishable": true,
-      "importPath": "@webpackages/{projectName}",
       "unitTestRunner": "jest",
       "bundler": "swc",
       "projectNameAndRootFormat": "derived"

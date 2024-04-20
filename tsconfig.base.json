@@ -17,11 +17,26 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@webpackages/browser": [
+        "libs/browser/src/index.ts"
+      ],
+      "@webpackages/common": [
+        "libs/common/src/index.ts"
+      ],
+      "@webpackages/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@webpackages/utils": [
+        "libs/utils/src/index.ts"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
     "tmp",
-    "docs"
+    "docs",
+    "assets",
+    "tasks"
   ]
 }
