@@ -1,2 +1,4 @@
 export * from './boot';
-export * from './exports';
+export * from './typeorm';
+export * from './property';
+export * from './swagger';

@@ -1,0 +1,7 @@
+import { Entity, Column, IDEntity } from '@webpackages/core';
+import { I<%- className %> } from '@webpackages/common';
+
+@Entity()
+export class <%- className %> extends IDEntity implements I<%- className %> {
+  @Column({ type: 'string', unique: true }) name!: string;
+}
