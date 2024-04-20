@@ -1,9 +1,6 @@
 import { IID } from './_id';
 
 export interface ISample extends IID {
-  /**
-   * Required unique name
-   */
   name: string;
 }
 

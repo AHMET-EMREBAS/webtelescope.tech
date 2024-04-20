@@ -1,8 +1,7 @@
 import { EnumFactory } from '../utils';
 
 /**
- * @goal Establish a convinient and consistent query operations from client to server
- * @example `.../?name=sw:<search-string>&name=co:<search-string>&name=sw:<search-string>`
+ * Establish a convinient and consistent query communication from client to server
  */
 enum QueryOperator {
   EQUAL = 'eq',

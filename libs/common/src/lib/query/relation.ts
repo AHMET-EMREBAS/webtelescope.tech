@@ -1,6 +1,7 @@
 /**
- * @goal create, update, and delete relations of an entity
- * @example considering the product and category table, entityId is the product id, relationName is category, and relationId is the category id.
+ * Create, update, and delete relations of an entity. 
+ * Considering the product and category table, entityId is the product id, 
+ * relationName is category, and relationId is the category id.
  */
 export interface IRelationDto {
   /**

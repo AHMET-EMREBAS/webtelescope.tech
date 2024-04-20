@@ -1,3 +1,4 @@
 # Frontend Tasks
 
-> [ ? ] Create a client app generator that contains common project configurations.
+> [ done ] Create a client app generator that contains common project configurations.
+> [ ? ] next?

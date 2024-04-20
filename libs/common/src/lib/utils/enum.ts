@@ -11,9 +11,7 @@ export class EnumFactory<T> {
   }
 
   /**
-   * The vale to match with enum values
-   * @param value
-   * @returns
+   * Create a Match class for the enum {@link Match}
    */
   matcher<R>(value: string | number): Omit<Match<T, R>, 'done'> {
     return Match.start<T, R>(this.enumClass, value);
