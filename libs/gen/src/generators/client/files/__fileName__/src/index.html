@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title><%- name %></title>
+    <base href="./" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.svg" />
+
+    <!-- Metadata start -->
+    <meta name="name" content="<%- name %>" />
+    <meta name="description" content="<%- description %>" />
+    <meta name="author" content="<%- author %>" />
+
+    <meta property="og:title" content="<%- name %>" />
+    <meta property="og:description" content="<%- description %>" />
+    <meta
+      property="og:image"
+      content="https://<%- domain %>/assets/icons/icon-350x150.png"
+    />
+    <meta property="og:url" content="https://<%- domain %>" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%- name %>" />
+    <meta name="twitter:description" content="<%- description %>" />
+    <meta name="twitter:site" content="@<%- twitter %>" />
+    <meta
+      name="twitter:image"
+      content="https://<%- domain %>/assets/icons/icon-350x150.png"
+    />
+    <!-- Metadata End -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#1976d2" />
+  </head>
+  <body class="mat-typography">
+    <wt-root></wt-root>
+    <noscript>
+      Please enable JavaScript to continue using this application.
+    </noscript>
+  </body>
+</html>

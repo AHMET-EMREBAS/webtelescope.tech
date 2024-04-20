@@ -6,13 +6,45 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "",
+      "description": "Project name",
       "$default": {
         "$source": "argv",
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
+    },
+    "description": {
+      "type": "string",
+      "description": "description",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "How do you describe the project with a sentence?"
+    },
+    "domain": {
+      "type": "string",
+      "description": "domain",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-prompt": "What is the domain name? Ex. 'domain.com' "
+    },
+    "author": {
+      "type": "string",
+      "description": "author",
+      "$default": {
+        "$source": "argv",
+        "index": 3
+      },
+      "x-prompt": "What is your name?"
     }
   },
-  "required": ["name"]
+  "required": [
+    "name",
+    "description",
+    "domain",
+    "author"
+  ]
 }
