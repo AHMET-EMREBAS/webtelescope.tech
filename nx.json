@@ -1,9 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "workspaceLayout": {
-    "appsDir": "apps",
-    "libsDir": "libs"
-  },
   "targetDefaults": {
     "build": {
       "cache": true,
@@ -76,12 +72,16 @@
       "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress",
+      "directory": "clients",
       "standalone": true,
       "backendProject": "api",
       "inlineTemplate": true,
       "minimal": true,
       "prefix": "wt",
-      "ssr": false
+      "routing": true,
+      "ssr": false,
+      "bundler": "webpack",
+      "projectNameAndRootFormat": "derived"
     },
     "@nx/angular:library": {
       "linter": "eslint",
