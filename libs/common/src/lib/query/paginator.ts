@@ -1,6 +1,5 @@
 /**
  * @goal paginate query results
- * @param {number} take
  */
 export interface IPaginatorDto {
   /**

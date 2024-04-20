@@ -14,9 +14,8 @@ export class EnumFactory<T> {
    * The vale to match with enum values
    * @param value
    * @returns
-  */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  matcher<R>(value: any): Omit<Match<T, R>, 'done'> {
+   */
+  matcher<R>(value: string | number): Omit<Match<T, R>, 'done'> {
     return Match.start<T, R>(this.enumClass, value);
   }
 }

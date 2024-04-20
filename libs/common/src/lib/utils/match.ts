@@ -16,6 +16,9 @@ export class Match<E, R> {
 
   private resultFn?: () => R;
 
+  /**
+   * If value matches with the enum value, then set this handler as a result value.
+   */
   is<K extends keyof E>(
     enumKey: K,
     handler: Some<() => R>
@@ -28,15 +31,23 @@ export class Match<E, R> {
     return this as OmitUsedKeys<E, R, K>;
   }
 
+  /**
+   * Verify that you are done with matching enums,
+   * if there are more enum keys to match, they will appear as an option
+   * @param verify
+   */
   done<K extends keyof E>(verify: K | 'DONE'): Pick<Match<E, R>, 'get'> {
     if (verify === 'DONE') {
       return this;
     }
     throw new Error(
-      'You must verify, you are done with matcher by passing DONE!'
+      'You must explicitly verify that you are DONE by passing DONE!'
     );
   }
 
+  /**
+   * Get the result or undefined
+   */
   get(): Some<R> {
     return this.resultFn ? this.resultFn() : undefined;
   }
