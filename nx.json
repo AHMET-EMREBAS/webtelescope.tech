@@ -129,6 +129,13 @@
       "unitTestRunner": "jest",
       "bundler": "swc",
       "projectNameAndRootFormat": "derived"
+    },
+    "@x/plugin:plugin": {
+      "strict": true,
+      "publishable": true,
+      "projectNameAndRootFormat": "derived",
+      "unitTestRunner": "jest",
+      "bundler": "swc"
     }
   },
   "tasksRunnerOptions": {
