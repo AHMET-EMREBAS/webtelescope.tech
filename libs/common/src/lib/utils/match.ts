@@ -32,9 +32,7 @@ export class Match<E, R> {
   }
 
   /**
-   * Verify that you are done with matching enums,
-   * if there are more enum keys to match, they will appear as an option
-   * @param verify
+   * Verify that you are done with matching enums, if there are more enum keys to match, they will appear as an option
    */
   done<K extends keyof E>(verify: K | 'DONE'): Pick<Match<E, R>, 'get'> {
     if (verify === 'DONE') {
