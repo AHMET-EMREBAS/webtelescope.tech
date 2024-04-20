@@ -1,9 +1,9 @@
 import { IQuerySampleDto } from '@webpackages/common';
-import { Dto, Property, SearchTransformer } from '@webpackages/core';
+import { Dto, Property, QueryProperty } from '@webpackages/core';
 
 @Dto()
 export class QuerySampleDto implements IQuerySampleDto {
   @Property({ type: 'string' })
-  @SearchTransformer()
+  @QueryProperty()
   name?: string;
 }
