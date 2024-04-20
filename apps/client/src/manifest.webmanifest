@@ -6,6 +6,25 @@
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "screenshots": [
+    {
+      "src": "assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "label": "Wonder Widgets",
+      "name": "<%- name %>",
+      "description": "<%- description %>"
+    },
+    {
+      "name": "<%- name %>",
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Wonder Widgets",
+      "description": "<%- description %>"
+    }
+  ],
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

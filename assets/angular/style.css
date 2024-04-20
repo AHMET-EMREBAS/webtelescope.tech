@@ -8,11 +8,11 @@ html {
 
 html,
 body {
-  padding: 0px !important;
-  margin: 0px !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  border: none !important;
+  padding: 0px;
+  margin: 0px;
+  width: 100vw;
+  height: 100vh;
+  border: none;
 }
 
 body {
@@ -36,15 +36,11 @@ body.debug *:nth-child(even) {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  border-top: 2px dashed orangered;
-  border-bottom: 2px dashed orangered;
 }
 
 .container-list {
   gap: 1em;
   padding: 1em;
-  border-top: 1px dashed orange;
-  border-bottom: 1px dashed orange;
 }
 
 wt-root {
