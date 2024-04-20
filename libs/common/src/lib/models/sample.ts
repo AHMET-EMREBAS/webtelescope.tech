@@ -1,1 +1,4 @@
-export interface ISample {}
+export interface ISample {
+  id: number;
+  name: string;
+}
