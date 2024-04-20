@@ -1,0 +1,19 @@
+{
+  "generators": {
+    "api": {
+      "factory": "./src/generators/api/generator",
+      "schema": "./src/generators/api/schema.json",
+      "description": "api generator"
+    },
+    "client": {
+      "factory": "./src/generators/client/generator",
+      "schema": "./src/generators/client/schema.json",
+      "description": "client generator"
+    },
+    "entity": {
+      "factory": "./src/generators/entity/generator",
+      "schema": "./src/generators/entity/schema.json",
+      "description": "entity generator"
+    }
+  }
+}

@@ -7,13 +7,8 @@
   "targetDefaults": {
     "build": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "lint": {
       "cache": true,
@@ -26,18 +21,11 @@
     },
     "e2e": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production"]
     },
     "@nx/jest:jest": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ],
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "options": {
         "passWithNoTests": true
       },
@@ -62,17 +50,11 @@
     },
     "@nx/vite:test": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -106,7 +88,11 @@
     },
     "@nx/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "prefix": "wt",
+      "strict": true,
+      "publishable": true,
+      "projectNameAndRootFormat": "derived"
     },
     "@nx/angular:component": {
       "style": "scss",
@@ -126,9 +112,9 @@
     "@nx/js:library": {
       "strict": true,
       "publishable": true,
+      "projectNameAndRootFormat": "derived",
       "unitTestRunner": "jest",
-      "bundler": "swc",
-      "projectNameAndRootFormat": "derived"
+      "bundler": "swc"
     },
     "@x/plugin:plugin": {
       "strict": true,
@@ -141,12 +127,9 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheableOperations": [
-          "build-storybook",
-          "server"
-        ]
+        "cacheableOperations": ["build-storybook", "server"]
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "material"
 }
