@@ -1,5 +1,9 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
+  },
   "targetDefaults": {
     "build": {
       "cache": true,
@@ -98,7 +102,7 @@
       "routing": true,
       "ssr": false,
       "bundler": "webpack",
-      "projectNameAndRootFormat": "as-provided"
+      "projectNameAndRootFormat": "derived"
     },
     "@nx/angular:library": {
       "linter": "eslint",
@@ -118,8 +122,16 @@
     "@nx/nest:application": {
       "strict": true,
       "directory": "apis",
-      "frontendProject": "todo",
-      "projectNameAndRootFormat": "as-provided"
+      "frontendProject": "client",
+      "projectNameAndRootFormat": "derived"
+    },
+    "@nx/js:library": {
+      "strict": true,
+      "publishable": true,
+      "importPath": "@webpackages/{projectName}",
+      "unitTestRunner": "jest",
+      "bundler": "swc",
+      "projectNameAndRootFormat": "derived"
     }
   },
   "tasksRunnerOptions": {
