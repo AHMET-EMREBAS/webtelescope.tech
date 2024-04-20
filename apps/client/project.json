@@ -63,7 +63,13 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "localize": true,
+          "optimization": true,
+          "buildOptimizer": true,
+          "vendorChunk": false,
+          "extractLicenses": true,
+          "sourceMap": false
         },
         "development": {
           "buildOptimizer": false,
