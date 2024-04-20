@@ -1,0 +1,126 @@
+{
+  "name": "todo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "wt",
+  "sourceRoot": "apps/todo/src",
+  "tags": [],
+  "i18n": {
+    "sourceLocale": "en",
+    "locales": {
+      "": {
+        "translation": "apps/todo/src/locale/messages.xlf",
+        "baseHref": ""
+      },
+      "es": {
+        "translation": "apps/todo/src/locale/messages.es.xlf",
+        "baseHref": ""
+      },
+      "tr": {
+        "translation": "apps/todo/src/locale/messages.tr.xlf",
+        "baseHref": ""
+      }
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/todo",
+        "index": "apps/todo/src/index.html",
+        "main": "apps/todo/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/todo/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/todo/src/favicon.svg",
+          "apps/todo/src/assets",
+          "apps/todo/src/manifest.webmanifest"
+        ],
+        "styles": [
+          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "apps/todo/src/styles.scss"
+        ],
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/todo/ngsw-config.json"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "localize": true,
+          "optimization": true,
+          "buildOptimizer": true,
+          "vendorChunk": false,
+          "extractLicenses": true,
+          "sourceMap": false
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "todo:build:production"
+        },
+        "development": {
+          "buildTarget": "todo:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/todo/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "todo:build",
+        "outputPath": "apps/todo/src/locale",
+        "format": "xlf"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/todo/**/*.ts", "apps/todo/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/todo/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "todo:build"
+      }
+    }
+  }
+}
