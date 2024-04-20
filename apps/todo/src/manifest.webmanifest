@@ -1,6 +1,6 @@
 {
-  "name": "<%- name %>",
-  "short_name": "<%- name %>",
+  "name": "todo",
+  "short_name": "todo",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
@@ -12,17 +12,17 @@
       "sizes": "384x384",
       "type": "image/png",
       "label": "Wonder Widgets",
-      "name": "<%- name %>",
-      "description": "<%- description %>"
+      "name": "todo",
+      "description": "somedescription"
     },
     {
-      "name": "<%- name %>",
+      "name": "todo",
       "src": "assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Wonder Widgets",
-      "description": "<%- description %>"
+      "description": "somedescription"
     }
   ],
   "icons": [
