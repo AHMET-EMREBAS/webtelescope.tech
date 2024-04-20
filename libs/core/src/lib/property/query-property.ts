@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { QueryOperator } from '@webpackages/common';
+import { QueryOperatorMatcher } from '@webpackages/common';
 import { Transform } from 'class-transformer';
 import { FindOperator, ILike, LessThan, MoreThan } from 'typeorm';
 
@@ -16,8 +16,7 @@ export function QueryProperty() {
         if (op && va) {
           if (op.length > 0 && va.length > 0) {
             const search = va.trim();
-
-            QueryOperator.matcher<FindOperator<string>>(op)
+            QueryOperatorMatcher.matcher<FindOperator<string>>(op)
               .is('AFTER', () => MoreThan(search))
               .is('BEFORE', () => LessThan(search))
               .is('MORE_THAN', () => MoreThan(search))
@@ -25,8 +24,7 @@ export function QueryProperty() {
               .is('CONTAINS', () => ILike(`%${search}%`))
               .is('STARTS_WITH', () => LessThan(`${search}%`))
               .is('ENDS_WITH', () => LessThan(`%${search}`))
-              .is('EQUAL', () => ILike(search))
-
+              .is('EQUAL', () => ILike(`${search}`))
               .done();
           }
         } else {

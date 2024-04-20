@@ -4,7 +4,7 @@ import { EnumFactory } from '../utils';
  * @goal Establish a convinient and consistent query operations from client to server
  * @example `.../?name=sw:<search-string>&name=co:<search-string>&name=sw:<search-string>`
  */
-enum QueryOperatorEnum {
+enum QueryOperator {
   EQUAL = 'eq',
   CONTAINS = 'co',
   STARTS_WITH = 'sw',
@@ -15,4 +15,4 @@ enum QueryOperatorEnum {
   AFTER = 'af',
 }
 
-export const QueryOperator = EnumFactory.create(QueryOperatorEnum);
+export const QueryOperatorMatcher = EnumFactory.create(QueryOperator);
