@@ -6,10 +6,11 @@
   "sourceRoot": "apps/client/src",
   "tags": [],
   "i18n": {
-    "sourceLocale": "en-US",
+    "sourceLocale": "en",
     "locales": {
       "": {
-        "translation": "apps/client/src/locale/messages.xlf"
+        "translation": "apps/client/src/locale/messages.xlf",
+        "baseHref": ""
       },
       "es": {
         "translation": "apps/client/src/locale/messages.es.xlf",
