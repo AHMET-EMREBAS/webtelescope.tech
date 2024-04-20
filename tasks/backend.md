@@ -2,4 +2,4 @@
 
 List of backend tasks
 
-- Create bootstrap function that includes common server configurations
+> [ ? ] Create bootstrap function that includes common server configurations.
