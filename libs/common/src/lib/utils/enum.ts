@@ -10,8 +10,13 @@ export class EnumFactory<T> {
     return new EnumFactory<T>(enumClass);
   }
 
+  /**
+   * The vale to match with enum values
+   * @param value
+   * @returns
+  */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  matcher<R>(value: any) {
+  matcher<R>(value: any): Omit<Match<T, R>, 'done'> {
     return Match.start<T, R>(this.enumClass, value);
   }
 }
