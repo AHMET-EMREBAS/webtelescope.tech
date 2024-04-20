@@ -10,23 +10,23 @@
     <!-- Metadata start -->
     <meta name="name" content="<%- name %>" />
     <meta name="description" content="<%- description %>" />
-    <meta name="author" content="AUTHOR" />
+    <meta name="author" content="<%- author %>" />
 
     <meta property="og:title" content="<%- name %>" />
     <meta property="og:description" content="<%- description %>" />
     <meta
       property="og:image"
-      content="http://localhost:4200/assets/icons/icon-350x150.png"
+      content="https://<%- domain %>/assets/icons/icon-350x150.png"
     />
-    <meta property="og:url" content="WEBSITE" />
+    <meta property="og:url" content="https://<%- domain %>" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="<%- name %>" />
     <meta name="twitter:description" content="<%- description %>" />
-    <meta name="twitter:site" content="@HASHTAG" />
+    <meta name="twitter:site" content="@<%- twitter %>" />
     <meta
       name="twitter:image"
-      content="http://<%- domain %>/assets/icons/icon-350x150.png"
+      content="https://<%- domain %>/assets/icons/icon-350x150.png"
     />
     <!-- Metadata End -->
     <link rel="manifest" href="manifest.webmanifest" />
@@ -34,8 +34,8 @@
   </head>
   <body class="mat-typography">
     <wt-root></wt-root>
-    <noscript
-      >Please enable JavaScript to continue using this application.</noscript
-    >
+    <noscript>
+      Please enable JavaScript to continue using this application.
+    </noscript>
   </body>
 </html>

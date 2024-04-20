@@ -5,6 +5,22 @@
   "prefix": "wt",
   "sourceRoot": "apps/client/src",
   "tags": [],
+  "i18n": {
+    "sourceLocale": "en-US",
+    "locales": {
+      "": {
+        "translation": "apps/client/src/locale/messages.xlf"
+      },
+      "es": {
+        "translation": "apps/client/src/locale/messages.es.xlf",
+        "baseHref": ""
+      },
+      "tr": {
+        "translation": "apps/client/src/locale/messages.tr.xlf",
+        "baseHref": ""
+      }
+    }
+  },
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
