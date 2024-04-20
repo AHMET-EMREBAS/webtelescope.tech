@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use 'sass:math';
-$_fontsRoot: '.';
+
+$_fontsRoot: 'assets/fonts';
 
 @font-face {
   font-family: Material Icons;
@@ -105,7 +106,7 @@ $fontList: (
 }
 
 @each $key, $value in $fontList {
-  .font-#{$key} {
+  .ff-#{$key} {
     font-family: #{$value};
   }
 }
