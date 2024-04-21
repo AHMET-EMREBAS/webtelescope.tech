@@ -1,0 +1,27 @@
+<mat-nav-list #navList>
+  @for(item of items ; track item){
+  <mat-list-item
+    #menuItem
+    [lines]="2"
+    [activated]="item.id === activeItem"
+    [routerLink]="[item.route]"
+    [class.router-link-active]="item.id === activeItem"
+    (click)="clickHandler(item)"
+  >
+    <span matListItemTitle>{{ item.title }}</span>
+    <span matListItemLine>{{ item.subTitle }}</span>
+
+    <mat-icon
+      matListItemIcon
+      [matBadge]="item.badge"
+      [matBadgeColor]="item.badgeColor"
+      [color]="item.iconColor"
+      aria-hidden="false"
+      class="fill"
+    >
+      {{ item.icon }}
+    </mat-icon>
+    <span matListItemMeta>{{ item.meta }}</span>
+  </mat-list-item>
+  }
+</mat-nav-list>

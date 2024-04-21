@@ -7,7 +7,6 @@ import {
 } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import {
   MainContentDirective,
@@ -21,8 +20,6 @@ import {
 } from './app-layout.directive';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatListModule } from '@angular/material/list';
 
 const AppLayoutDirectives = [
   MainContentDirective,
@@ -40,10 +37,7 @@ export const AppLayoutModules = [
   MatSidenavModule,
   MatToolbarModule,
   MatButtonModule,
-  MatButtonToggleModule,
   MatIconModule,
-  MatMenuModule,
-  MatListModule,
 ];
 
 @Component({

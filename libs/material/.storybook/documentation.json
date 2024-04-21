@@ -506,7 +506,7 @@
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-76cb447d1ff048360f213507b5651b0861747f0683f2c6f5de9f29b10f7cedb8054ae23b8778be42af323bf4f76620b61dc3acc4befe5fd22d8fcb91536302e3",
+            "id": "component-AppLayoutComponent-2ca134ac4af4c42fc27c3e66b8a85d2bec473fe960a795aaa67e746464006ce00cba90e1f06de1850e657b64e90ce03ca0895efebb76eb6bf0e7452296ac5b34",
             "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -529,12 +529,12 @@
             "inputsClass": [
                 {
                     "name": "testing",
-                    "defaultValue": "true",
+                    "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTest the app layout without pushing the content\n",
                     "description": "<p>Test the app layout without pushing the content</p>\n",
-                    "line": 79,
+                    "line": 72,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -548,7 +548,7 @@
                     "type": "QueryList<FloatingItemsDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 62,
+                    "line": 55,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -560,13 +560,43 @@
                     ]
                 },
                 {
+                    "name": "fullscreenButtonIcon",
+                    "defaultValue": "'fullscreen'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"fullscreen_exit\" | \"fullscreen\"",
+                    "optional": false,
+                    "description": "",
+                    "line": 129
+                },
+                {
+                    "name": "fullscreenTooltip",
+                    "defaultValue": "'Fullscreen'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"Fullscreen\" | \"Exit Fullscreen\"",
+                    "optional": false,
+                    "description": "",
+                    "line": 130
+                },
+                {
+                    "name": "isFullscreen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 128
+                },
+                {
                     "name": "mainContent",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "QueryList<MainContentDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 60,
+                    "line": 53,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -578,13 +608,23 @@
                     ]
                 },
                 {
+                    "name": "rightSidenavToggleIcon",
+                    "defaultValue": "'settings'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 84
+                },
+                {
                     "name": "sidenavLeft",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "QueryList<SidenavLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 68,
+                    "line": 61,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -602,7 +642,7 @@
                     "type": "QueryList<SidenavRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 70,
+                    "line": 63,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -620,7 +660,7 @@
                     "type": "QueryList<StatusbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 72,
+                    "line": 65,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -638,7 +678,7 @@
                     "type": "QueryList<StatusbarRighttDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 74,
+                    "line": 67,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -656,7 +696,7 @@
                     "type": "QueryList<ToolbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 66,
+                    "line": 59,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -674,7 +714,7 @@
                     "type": "QueryList<ToolbarRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 64,
+                    "line": 57,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -686,7 +726,36 @@
                     ]
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "fullscreenToggle",
+                    "args": [
+                        {
+                            "name": "element",
+                            "type": "HTMLDivElement",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 132,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "element",
+                            "type": "HTMLDivElement",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -705,7 +774,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  Component,\r\n  ContentChildren,\r\n  Input,\r\n  OnInit,\r\n  QueryList,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport {\r\n  MatDrawerMode,\r\n  MatSidenav,\r\n  MatSidenavModule,\r\n} from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatButtonToggleModule } from '@angular/material/button-toggle';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n} from './app-layout.directive';\r\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\r\nimport { Observable, map } from 'rxjs';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatButtonToggleModule,\r\n  MatIconModule,\r\n];\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRighttDirective)\r\n  statusbarRightt?: QueryList<StatusbarRighttDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = true;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  mode: MatDrawerMode = 'side';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isLeftSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isRightSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isHandset = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  $isHandset: Observable<boolean> = this.media\r\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\r\n    .pipe(\r\n      map((e) => {\r\n        if (e.matches) {\r\n          this.isHandset = true;\r\n          this.mode = 'over';\r\n          this.isLeftSidenavOpen = false;\r\n          return true;\r\n        } else {\r\n          this.isHandset = false;\r\n          this.mode = 'side';\r\n          this.isLeftSidenavOpen = true;\r\n          return false;\r\n        }\r\n      })\r\n    );\r\n\r\n  constructor(private readonly media: BreakpointObserver) {}\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  sideNavClick(sidenav: MatSidenav) {\r\n    if (this.isHandset) {\r\n      sidenav.toggle();\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, ContentChildren, Input, QueryList } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport {\r\n  MatDrawerMode,\r\n  MatSidenav,\r\n  MatSidenavModule,\r\n} from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n} from './app-layout.directive';\r\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\r\nimport { Observable, map } from 'rxjs';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRighttDirective)\r\n  statusbarRightt?: QueryList<StatusbarRighttDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  mode: MatDrawerMode = 'side';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isLeftSidenavOpen = false;\r\n\r\n  rightSidenavToggleIcon = 'settings';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isRightSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isHandset = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  $isHandset: Observable<boolean> = this.media\r\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\r\n    .pipe(\r\n      map((e) => {\r\n        if (e.matches) {\r\n          this.isHandset = true;\r\n          this.mode = 'over';\r\n          this.isLeftSidenavOpen = false;\r\n          return true;\r\n        } else {\r\n          this.isHandset = false;\r\n          this.mode = 'side';\r\n          this.isLeftSidenavOpen = true;\r\n          return false;\r\n        }\r\n      })\r\n    );\r\n\r\n  constructor(private readonly media: BreakpointObserver) {}\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  sideNavClick(sidenav: MatSidenav) {\r\n    if (this.isHandset) {\r\n      sidenav.toggle();\r\n    }\r\n  }\r\n\r\n  isFullscreen = false;\r\n  fullscreenButtonIcon: 'fullscreen_exit' | 'fullscreen' = 'fullscreen';\r\n  fullscreenTooltip: 'Fullscreen' | 'Exit Fullscreen' = 'Fullscreen';\r\n\r\n  fullscreenToggle(element: HTMLDivElement) {\r\n    this.isFullscreen = !this.isFullscreen;\r\n\r\n    if (this.isFullscreen) {\r\n      element.requestFullscreen();\r\n      this.fullscreenTooltip = 'Exit Fullscreen';\r\n      this.fullscreenButtonIcon = 'fullscreen_exit';\r\n    } else {\r\n      document.exitFullscreen();\r\n      this.fullscreenTooltip = 'Fullscreen';\r\n      this.fullscreenButtonIcon = 'fullscreen';\r\n    }\r\n  }\r\n}\r\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -723,7 +792,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 120,
+                "line": 115,
                 "jsdoctags": [
                     {
                         "name": "media",
@@ -737,7 +806,7 @@
                 ]
             },
             "extends": [],
-            "templateData": "<!-- Subscribers  -->\r\n<ng-container *ngIf=\"$isHandset | async\"></ng-container>\r\n\r\n<!-- General -->\r\n<ng-template #queryListTemplate let-items=\"items\" let-testName=\"testName\">\r\n  <span *ngIf=\"testing === true\">{{ testName || 'NO test name' }}</span>\r\n\r\n  @if(items){ @for(item of items; track item){\r\n  <ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\r\n  } }\r\n</ng-template>\r\n\r\n<!-- \r\n    <ng-container *ngTemplateOutlet=\"queryListTemplate; context: { items:items }\"></ng-container>\r\n-->\r\n\r\n<!-- Toolbar like -->\r\n\r\n<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"space-around-row-container\">\r\n    <div class=\"row-container-gap-1 row-flex-start\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: left, testName: testName + '-left' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n    <div class=\"row-container-gap-1 row-flex-end\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: right, testName: testName + '-right' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"isLeftSidenavOpen\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(leftSidenav)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavLeft, testName: 'Left sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(rightSidenav)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavRight, testName: 'Right sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <mat-sidenav-content>\r\n    <!-- --Start of the content -->\r\n\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img\r\n        class=\"app-logo\"\r\n        src=\"assets/icons/icon-72x72.png\"\r\n        alt=\"App Logo\"\r\n        data-testid=\"app-logo\"\r\n        *ngIf=\"!isHandset\"\r\n      />\r\n\r\n      <button\r\n        class=\"left-menu-toggle\"\r\n        mat-mini-fab\r\n        (click)=\"leftSidenav.toggle()\"\r\n      >\r\n        <mat-icon>{{ leftSidenav.opened ? 'menu_opened' : 'menu' }}</mat-icon>\r\n      </button>\r\n\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <button\r\n        class=\"right-menu-toggle\"\r\n        mat-mini-fab\r\n        (click)=\"rightSidenav.toggle()\"\r\n      >\r\n        <mat-icon>settings</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div class=\"main-content-container\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: {\r\n            items: mainContent,\r\n            testName: 'Main Content'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRightt,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container\r\n    ></mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+            "templateData": "<!-- Subscribers  -->\r\n<ng-container *ngIf=\"$isHandset | async\"></ng-container>\r\n\r\n<!-- General -->\r\n<ng-template #queryListTemplate let-items=\"items\" let-testName=\"testName\">\r\n  <span *ngIf=\"testing === true\">{{ testName || 'No test name' }}</span>\r\n\r\n  @if(items){ @for(item of items; track item){\r\n  <ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\r\n  } }\r\n</ng-template>\r\n\r\n<!-- Example \r\n\r\n  <ng-container *ngTemplateOutlet=\"queryListTemplate; context: { items:items }\"></ng-container>\r\n-->\r\n\r\n<!-- Toolbar like -->\r\n\r\n<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"space-around-row-container\">\r\n    <div class=\"row-container-gap-1 row-flex-start\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: left, testName: testName + '-left' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n    <div class=\"row-container-gap-1 row-flex-end\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: right, testName: testName + '-right' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"isLeftSidenavOpen\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(leftSidenav)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavLeft, testName: 'Left sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(rightSidenav)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavRight, testName: 'Right sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <mat-sidenav-content>\r\n    <!-- --Start of the content -->\r\n\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img\r\n        class=\"app-logo\"\r\n        src=\"assets/icons/icon-72x72.png\"\r\n        alt=\"App Logo\"\r\n        *ngIf=\"!isHandset\"\r\n      />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        class=\"left-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        class=\"right-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        (click)=\"fullscreenToggle(mainContentContainer)\"\r\n        aria-label=\"Toggle Fullscreen\"\r\n      >\r\n        <mat-icon> {{ fullscreenButtonIcon }}</mat-icon>\r\n      </button>\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: {\r\n            items: mainContent,\r\n            testName: 'Main Content'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRightt,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
         },
         {
             "name": "HelloComponent",
@@ -828,6 +897,91 @@
             "stylesData": "",
             "extends": [],
             "templateData": "<button (click)=\"sendMessage()\" data-testid=\"hello-button\" class=\"ff-handjet fs3\">Hello There</button>\r\n\r\n<ul>\r\n  @for( m of messages; track m){\r\n\r\n  <li class=\"ff-comfortaa\">{{ m }}</li>\r\n  }\r\n</ul>\r\n"
+        },
+        {
+            "name": "NavListComponent",
+            "id": "component-NavListComponent-d94999e903274aa8b345e6fe88b923e8422cba415dba667bdb1054d4a80162e499f8cd99d9af0f1c776312561ee82348a748160e8e1e216cfae90725693c513a",
+            "file": "libs/material/src/lib/nav-list/nav-list.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-nav-list",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./nav-list.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nNav list items\n",
+                    "description": "<p>Nav list items</p>\n",
+                    "line": 23,
+                    "type": "MenuItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "'List title'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nNav list title\n",
+                    "description": "<p>Nav list title</p>\n",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "clickEvent",
+                    "defaultValue": "new EventEmitter<MenuItem>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nEmit the nav item meta data when it is clicked\n",
+                    "description": "<p>Emit the nav item meta data when it is clicked</p>\n",
+                    "line": 28,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatListModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MenuItem } from '../common';\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [CommonModule, MatListModule, MatIconModule],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  /**\n   * Nav list title\n   */\n  @Input() title: string = 'List title';\n\n  /**\n   * Nav list items\n   */\n  @Input() items: MenuItem[] = [];\n\n  /**\n   * Emit the nav item meta data when it is clicked\n   */\n  @Output() clickEvent = new EventEmitter<MenuItem>();\n\n}\n",
+            "styleUrl": "./nav-list.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<mat-nav-list>\n  <a mat-list-item>\n    <div matListItemTitle>Title</div>\n    <div matListItemMeta>Meta</div>\n    <div matListItemIcon>\n      <mat-icon>info</mat-icon>\n    </div>\n  </a>\n</mat-nav-list>\n"
         }
     ],
     "modules": [],
@@ -851,7 +1005,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatButtonToggleModule,\r\n  MatIconModule,\r\n]"
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n]"
             },
             {
                 "name": "commonProviders",
@@ -871,7 +1025,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const logo = canvas.queryByTestId('app-logo');\n    expect(logo).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n\n    const logo = canvas.queryByAltText('App Logo');\n    expect(logo).toBeTruthy();\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\n    expect(fullscreen).toBeTruthy();\n\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\n    expect(toggleLeftSidenav).toBeTruthy();\n\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\n    expect(toggleRightSidenav).toBeTruthy();\n\n    const delay = 400;\n\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -882,6 +1036,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const helloButton = canvas.queryByTestId('hello-button');\r\n\r\n    if (!helloButton) fail('Hello button is not found!');\r\n\r\n    await userEvent.click(helloButton, { delay: 1000 });\r\n    await userEvent.click(helloButton, { delay: 1000 });\r\n    await userEvent.click(helloButton, { delay: 1000 });\r\n    await userEvent.click(helloButton, { delay: 1000 });\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    title: 'List title',\n    items: [],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/nav-list works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "meta",
@@ -904,6 +1068,16 @@
                 "defaultValue": "{\r\n  component: HelloComponent,\r\n  title: 'HelloComponent',\r\n  tags: ['Just a sample'],\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
             },
             {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<NavListComponent>",
+                "defaultValue": "{\n  component: NavListComponent,\n  title: 'NavListComponent',\n}"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -922,6 +1096,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    title: 'List title',\n    items: [],\n  },\n}"
             }
         ],
         "functions": [],
@@ -969,6 +1153,17 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<NavListComponent>",
+                "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
             }
         ],
         "enumerations": [],
@@ -992,7 +1187,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatButtonToggleModule,\r\n  MatIconModule,\r\n]"
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n]"
                 }
             ],
             "libs/material/src/lib/_story/common-providers.ts": [
@@ -1016,7 +1211,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const logo = canvas.queryByTestId('app-logo');\n    expect(logo).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n\n    const logo = canvas.queryByAltText('App Logo');\n    expect(logo).toBeTruthy();\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\n    expect(fullscreen).toBeTruthy();\n\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\n    expect(toggleLeftSidenav).toBeTruthy();\n\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\n    expect(toggleRightSidenav).toBeTruthy();\n\n    const delay = 400;\n\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -1069,6 +1264,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
+            "libs/material/src/lib/nav-list/nav-list.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    title: 'List title',\n    items: [],\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/nav-list works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<NavListComponent>",
+                    "defaultValue": "{\n  component: NavListComponent,\n  title: 'NavListComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    title: 'List title',\n    items: [],\n  },\n}"
                 }
             ]
         },
@@ -1126,12 +1353,25 @@
                     "description": "",
                     "kind": 183
                 }
+            ],
+            "libs/material/src/lib/nav-list/nav-list.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<NavListComponent>",
+                    "file": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
             ]
         }
     },
     "routes": [],
     "coverage": {
-        "count": 3,
+        "count": 6,
         "status": "low",
         "files": [
             {
@@ -1179,8 +1419,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AppLayoutComponent",
-                "coveragePercent": 9,
-                "coverageCount": "1/11",
+                "coveragePercent": 6,
+                "coverageCount": "1/16",
                 "status": "low"
             },
             {
@@ -1312,6 +1552,45 @@
                 "name": "HelloComponent",
                 "coveragePercent": 60,
                 "coverageCount": "3/5",
+                "status": "good"
+            },
+            {
+                "filePath": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/nav-list/nav-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/nav-list/nav-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NavListComponent",
+                "coveragePercent": 75,
+                "coverageCount": "3/4",
                 "status": "good"
             }
         ]

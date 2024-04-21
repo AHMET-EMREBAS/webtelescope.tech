@@ -5,7 +5,7 @@ import {
 } from '@storybook/angular';
 import { AppLayoutComponent } from './app-layout.component';
 
-import { userEvent, waitFor, within } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { commonProviders } from '../_story';
 
@@ -44,7 +44,7 @@ export const Heading: Story = {
     expect(toggleRightSidenav).toBeTruthy();
 
     const delay = 400;
-    
+
     await userEvent.click(toggleLeftSidenav!, { delay });
     await userEvent.click(toggleLeftSidenav!, { delay });
     await userEvent.click(toggleLeftSidenav!, { delay });
