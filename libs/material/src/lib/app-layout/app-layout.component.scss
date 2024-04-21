@@ -1,0 +1,92 @@
+$commonPadding: 1em;
+
+.box-shadow {
+  box-shadow: 0px 0px 4px black;
+}
+
+.app-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 1em;
+  box-sizing: 0px 0px 4px rgb(127, 127, 127);
+}
+
+.grow-1 {
+  flex-grow: 1;
+}
+
+.space-around-row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  gap: 1em;
+}
+
+.row-container-gap-1 {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  width: 100%;
+}
+
+.row-flex-end {
+  justify-content: flex-end;
+}
+.row-flex-start {
+  justify-content: flex-start;
+}
+
+mat-sidenav-container {
+  height: 100vh;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0px;
+  padding-left: $commonPadding;
+  padding-right: $commonPadding;
+  overflow: hidden;
+}
+
+.main-content-container {
+  overflow: hidden;
+  overflow-y: auto;
+  flex-grow: 1;
+  max-height: 78%;
+  padding-top: $commonPadding;
+  padding-bottom: $commonPadding;
+}
+
+mat-sidenav {
+  @extend .box-shadow;
+  min-width: 200px;
+  padding: $commonPadding;
+  max-height: 80%;
+  margin: auto;
+}
+
+mat-sidenav.right {
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+mat-sidenav.left {
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+mat-toolbar {
+  @extend.box-shadow;
+}
+
+mat-toolbar.toolbar {
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+mat-toolbar.statusbar {
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}

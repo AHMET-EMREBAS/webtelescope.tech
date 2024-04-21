@@ -1,1 +1,127 @@
-<p>app-layout works!</p>
+<!-- General -->
+<ng-template #queryListTemplate let-items="items" let-testName="testName">
+  <span *ngIf="testing === true">{{ testName || 'NO test name' }}</span>
+
+  @if(items){ @for(item of items; track item){
+  <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+  } }
+</ng-template>
+
+<!-- 
+    <ng-container *ngTemplateOutlet="queryListTemplate; context: { items:items }"></ng-container>
+-->
+
+<!-- Toolbar like -->
+
+<ng-template
+  #toolbarTemplate
+  let-left="left"
+  let-right="right"
+  let-testName="testName"
+>
+  <div class="space-around-row-container">
+    <div class="row-container-gap-1 row-flex-start">
+      <ng-container
+        *ngTemplateOutlet="
+          queryListTemplate;
+          context: { items: left, testName: testName + '-left' }
+        "
+      ></ng-container>
+    </div>
+    <div class="row-container-gap-1 row-flex-end">
+      <ng-container
+        *ngTemplateOutlet="
+          queryListTemplate;
+          context: { items: right, testName: testName + '-right' }
+        "
+      ></ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<mat-sidenav-container>
+  <!-- Sidenav Left -->
+  <mat-sidenav
+    #leftSidenav
+    class="left"
+    position="start"
+    [opened]="true"
+    mode="side"
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        queryListTemplate;
+        context: { items: sidenavLeft, testName: 'Left sidenav' }
+      "
+    ></ng-container>
+  </mat-sidenav>
+
+  <!-- Sidenav Right -->
+  <mat-sidenav
+    #rightSidenav
+    class="right"
+    position="end"
+    [opened]="true"
+    mode="side"
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        queryListTemplate;
+        context: { items: sidenavRight, testName: 'Right sidenav' }
+      "
+    ></ng-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- --Start of the content -->
+
+    <!-- Main toolbar -->
+    <mat-toolbar class="toolbar" color="primary">
+      <img
+        src="assets/icons/icon-72x72.png"
+        alt="App Logo"
+        data-testid="app-logo"
+        class="app-logo"
+      />
+      <ng-container
+        *ngTemplateOutlet="
+          toolbarTemplate;
+          context: {
+            left: toolbarLeft,
+            right: toolbarRight,
+            testName: 'toolbar'
+          }
+        "
+      ></ng-container>
+    </mat-toolbar>
+
+    <!-- Main Content  -->
+
+    <div class="main-content-container">
+      <ng-container
+        *ngTemplateOutlet="
+          queryListTemplate;
+          context: {
+            items: mainContent,
+            testName: 'Main Content'
+          }
+        "
+      ></ng-container>
+    </div>
+
+    <!-- Statusbar -->
+    <mat-toolbar class="statusbar" color="primary">
+      <ng-container
+        *ngTemplateOutlet="
+          toolbarTemplate;
+          context: {
+            left: statusbarLeft,
+            right: statusbarRightt,
+            testName: 'statusbar'
+          }
+        "
+      ></ng-container
+    ></mat-toolbar>
+    <!-- --Endof the content -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

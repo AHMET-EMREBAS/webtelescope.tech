@@ -1,10 +1,9 @@
 import {
   Component,
+  ContentChildren,
+  Input,
   OnInit,
   QueryList,
-  TemplateRef,
-  ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,29 +22,55 @@ import {
   StatusbarRighttDirective,
 } from './app-layout.directive';
 
+const AppLayoutDirectives = [
+  MainContentDirective,
+  FloatingItemsDirective,
+  ToolbarRightDirective,
+  ToolbarLeftDirective,
+  SidenavLeftDirective,
+  SidenavRightDirective,
+  StatusbarLeftDirective,
+  StatusbarRighttDirective,
+];
+
+export const AppLayoutModules = [
+  CommonModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatIconModule,
+];
 @Component({
   selector: 'wt-app-layout',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatIconModule,
-  ],
+  imports: [...AppLayoutModules, ...AppLayoutDirectives],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
+  providers: [...AppLayoutDirectives],
 })
 export class AppLayoutComponent implements OnInit {
-  @ViewChildren(MainContentDirective) mainContent?: any;
-  @ViewChildren(FloatingItemsDirective) floatingItems?: any;
-  @ViewChildren(ToolbarRightDirective) toolbarRight?: any;
-  @ViewChildren(ToolbarLeftDirective) toolbarLeft?: any;
-  @ViewChildren(SidenavLeftDirective) sidenavLeft?: any;
-  @ViewChildren(SidenavRightDirective) sidenavRight?: any;
-  @ViewChildren(StatusbarLeftDirective) statusbarLeft?: any;
-  @ViewChildren(StatusbarRighttDirective) statusbarRightt?: any;
+  @ContentChildren(MainContentDirective)
+  mainContent?: QueryList<MainContentDirective>;
+  @ContentChildren(FloatingItemsDirective)
+  floatingItems?: QueryList<FloatingItemsDirective>;
+  @ContentChildren(ToolbarRightDirective)
+  toolbarRight?: QueryList<ToolbarRightDirective>;
+  @ContentChildren(ToolbarLeftDirective)
+  toolbarLeft?: QueryList<ToolbarLeftDirective>;
+  @ContentChildren(SidenavLeftDirective)
+  sidenavLeft?: QueryList<SidenavLeftDirective>;
+  @ContentChildren(SidenavRightDirective)
+  sidenavRight?: QueryList<SidenavRightDirective>;
+  @ContentChildren(StatusbarLeftDirective)
+  statusbarLeft?: QueryList<StatusbarLeftDirective>;
+  @ContentChildren(StatusbarRighttDirective)
+  statusbarRightt?: QueryList<StatusbarRighttDirective>;
+
+  /**
+   * Test the app layout without pushing the content
+   */
+  @Input() testing = true;
 
   ngOnInit(): void {
     console.log(this.mainContent);
