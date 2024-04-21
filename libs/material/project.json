@@ -60,6 +60,13 @@
           "libs/material/.storybook",
           "-p",
           "libs/material/tsconfig.json"
+        ],
+        "assets": [
+          "libs/material/src/assets",
+          "libs/material/src/favicon.svg"
+        ],
+        "styles": [
+          "libs/material/src/style.css"
         ]
       },
       "configurations": {
@@ -85,6 +92,13 @@
           "libs/material/.storybook",
           "-p",
           "libs/material/tsconfig.json"
+        ],
+        "assets": [
+          "libs/material/src/assets",
+          "libs/material/src/favicon.svg"
+        ],
+        "styles": [
+          "libs/material/src/style.css"
         ]
       },
       "configurations": {
