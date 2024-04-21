@@ -9,14 +9,14 @@
       <wt-template-outlet
         [items]="left"
         [testing]="testing"
-        [testName]="testName + '-left'"
+        testName="left"
       ></wt-template-outlet>
     </div>
     <div class="row-container-right">
       <wt-template-outlet
         [items]="right"
         [testing]="testing"
-        [testName]="testName + '-right'"
+        testName="right"
       ></wt-template-outlet>
     </div>
   </div>
@@ -62,7 +62,6 @@
 
       <!-- Left Sidenav Toggle -->
       <button
-        class="left-sidenav-toggle"
         mat-icon-button
         (click)="leftSidenav.toggle()"
         aria-label="Toggle Left Sidenav"
@@ -86,7 +85,6 @@
 
       <!-- Right Sidenav Toggle -->
       <button
-        class="right-sidenav-toggle"
         mat-icon-button
         (click)="rightSidenav.toggle()"
         aria-label="Toggle Right Sidenav"
