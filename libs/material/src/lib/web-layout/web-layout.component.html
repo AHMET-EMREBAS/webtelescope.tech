@@ -1,29 +1,81 @@
-<!-- Subscribers  -->
-<!-- <ng-container *ngIf="$isHandset | async"></ng-container> -->
-
-<!-- General -->
-<ng-template #queryListTemplate let-items="items" let-testName="testName">
-  <span *ngIf="testing === true">{{ testName || 'No test name' }}</span>
-
-  @if(items){ @for(item of items; track item){
-  <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
-  } }
+<ng-template
+  #rowContainerTemplate
+  let-left="left"
+  let-right="right"
+  let-testName="testName"
+>
+  <div class="row-container">
+    <div class="row-container">
+      <wt-template-outlet
+        [items]="left"
+        [testing]="testing"
+        testName="left"
+      ></wt-template-outlet>
+    </div>
+    <div class="row-container-right">
+      <wt-template-outlet
+        [items]="right"
+        [testing]="testing"
+        testName="right"
+      ></wt-template-outlet>
+    </div>
+  </div>
 </ng-template>
 
 <div class="column-container">
-  <mat-toolbar class="main-toolbar" color="primary"></mat-toolbar>
+  <mat-toolbar class="main-toolbar" color="primary">
+    <!-- Toolbar Items -->
+    <ng-container
+      *ngTemplateOutlet="
+        rowContainerTemplate;
+        context: {
+          left: toolbarLeft,
+          right: toolbarRight,
+          testName: 'toolbar'
+        }
+      "
+    ></ng-container>
+  </mat-toolbar>
 
   <div class="row-container">
     <!-- Left content  -->
-    <div class="column-container">Left content</div>
+    <div class="row-container-left">
+      <wt-template-outlet
+        [items]="contentLeft"
+        [testing]="testing"
+        testName="Left content"
+      ></wt-template-outlet>
+    </div>
 
-    <div class="column-container">Main Content</div>
+    <div class="row-container">
+      <wt-template-outlet
+        [items]="mainContent"
+        [testing]="testing"
+        testName="main content"
+      ></wt-template-outlet>
+    </div>
 
     <!-- Right content -->
-    <div class="column-container">Right content</div>
+    <div class="row-container-right">
+      <wt-template-outlet
+        [items]="contentRight"
+        [testing]="testing"
+        testName="Right content"
+      ></wt-template-outlet>
+    </div>
   </div>
 
-  <div class="row-container">
-    
-  </div>
+  <!-- Footer -->
+  <mat-toolbar class="footer-toolbar" color="accent">
+    <ng-container
+      *ngTemplateOutlet="
+        rowContainerTemplate;
+        context: {
+          left: footerLeft,
+          right: footerRight,
+          testName: 'footer'
+        }
+      "
+    ></ng-container>
+  </mat-toolbar>
 </div>

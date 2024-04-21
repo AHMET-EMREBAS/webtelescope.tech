@@ -4,6 +4,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { BaseLayoutComponent, TemplateOutletComponent } from '../common';
 
 @Component({
   selector: 'wt-web-layout',
@@ -14,10 +15,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    TemplateOutletComponent,
   ],
   templateUrl: './web-layout.component.html',
   styleUrl: './web-layout.component.scss',
 })
-export class WebLayoutComponent {
+export class WebLayoutComponent extends BaseLayoutComponent {
   @Input() testing = true;
 }
