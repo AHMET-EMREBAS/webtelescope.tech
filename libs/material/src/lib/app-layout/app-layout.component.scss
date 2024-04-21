@@ -7,8 +7,33 @@ $commonPadding: 1em;
 .app-logo {
   width: 50px;
   height: 50px;
-  border-radius: 1em;
-  box-sizing: 0px 0px 4px rgb(127, 127, 127);
+  margin-right: 1em;
+  animation-name: appLogo;
+  animation-duration: 3000ms;
+  transform-origin: center center;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-direction: normal;
+  animation-iteration-count: 1;
+}
+
+.right-menu-toggle,
+.left-menu-toggle {
+}
+.right-menu-toggle{ 
+  margin-right: 1em;
+}
+
+.left-menu-toggle{ 
+  margin-left: 1em;
+}
+
+@keyframes appLogo {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .grow-1 {
@@ -32,9 +57,11 @@ $commonPadding: 1em;
 
 .row-flex-end {
   justify-content: flex-end;
+  margin-right: 1em;
 }
 .row-flex-start {
   justify-content: flex-start;
+  margin-left: 1em;
 }
 
 mat-sidenav-container {
@@ -61,7 +88,7 @@ mat-sidenav-content {
 }
 
 mat-sidenav {
-  @extend .box-shadow;
+  box-shadow: inset -3px 0px 10px rgb(153, 153, 153);
   min-width: 200px;
   padding: $commonPadding;
   max-height: 80%;

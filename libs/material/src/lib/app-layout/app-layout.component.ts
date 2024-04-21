@@ -6,7 +6,11 @@ import {
   QueryList,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import {
+  MatDrawerMode,
+  MatSidenav,
+  MatSidenavModule,
+} from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -21,6 +25,8 @@ import {
   StatusbarLeftDirective,
   StatusbarRighttDirective,
 } from './app-layout.directive';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable, map } from 'rxjs';
 
 const AppLayoutDirectives = [
   MainContentDirective,
@@ -72,7 +78,38 @@ export class AppLayoutComponent implements OnInit {
    */
   @Input() testing = true;
 
+  mode: MatDrawerMode = 'side';
+
+  isLeftSidenavOpen = false;
+  isRightSidenavOpen = false;
+  __isHandset = false;
+
+  $isHandset: Observable<boolean> = this.media
+    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])
+    .pipe(
+      map((e) => {
+        if (e.matches) {
+          this.__isHandset = true;
+          this.mode = 'over';
+          this.isLeftSidenavOpen = false;
+          return true;
+        } else {
+          this.mode = 'side';
+          this.isLeftSidenavOpen = true;
+          this.__isHandset = false;
+          return false;
+        }
+      })
+    );
+
+  constructor(private readonly media: BreakpointObserver) {}
   ngOnInit(): void {
     console.log(this.mainContent);
+  }
+
+  sideNavClick(sidenav: MatSidenav) {
+    if (this.__isHandset) {
+      sidenav.toggle();
+    }
   }
 }

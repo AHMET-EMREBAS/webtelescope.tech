@@ -1,3 +1,6 @@
+<!-- Subscribers  -->
+<ng-container *ngIf="$isHandset | async"></ng-container>
+
 <!-- General -->
 <ng-template #queryListTemplate let-items="items" let-testName="testName">
   <span *ngIf="testing === true">{{ testName || 'NO test name' }}</span>
@@ -45,8 +48,9 @@
     #leftSidenav
     class="left"
     position="start"
-    [opened]="true"
-    mode="side"
+    [opened]="isLeftSidenavOpen"
+    [mode]="mode"
+    (click)="sideNavClick(leftSidenav)"
   >
     <ng-container
       *ngTemplateOutlet="
@@ -61,8 +65,8 @@
     #rightSidenav
     class="right"
     position="end"
-    [opened]="true"
-    mode="side"
+    [mode]="mode"
+    (click)="sideNavClick(rightSidenav)"
   >
     <ng-container
       *ngTemplateOutlet="
@@ -78,11 +82,21 @@
     <!-- Main toolbar -->
     <mat-toolbar class="toolbar" color="primary">
       <img
+        class="app-logo"
         src="assets/icons/icon-72x72.png"
         alt="App Logo"
         data-testid="app-logo"
-        class="app-logo"
+        *ngIf="($isHandset | async) === false"
       />
+
+      <button
+        class="left-menu-toggle"
+        mat-mini-fab
+        (click)="leftSidenav.toggle()"
+      >
+        <mat-icon>{{ leftSidenav.opened ? 'menu_opened' : 'menu' }}</mat-icon>
+      </button>
+
       <ng-container
         *ngTemplateOutlet="
           toolbarTemplate;
@@ -93,6 +107,14 @@
           }
         "
       ></ng-container>
+
+      <button
+        class="right-menu-toggle"
+        mat-mini-fab
+        (click)="rightSidenav.toggle()"
+      >
+        <mat-icon>settings</mat-icon>
+      </button>
     </mat-toolbar>
 
     <!-- Main Content  -->
