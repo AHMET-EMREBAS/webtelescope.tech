@@ -86,7 +86,7 @@
         src="assets/icons/icon-72x72.png"
         alt="App Logo"
         data-testid="app-logo"
-        *ngIf="($isHandset | async) === false"
+        *ngIf="!isHandset"
       />
 
       <button

@@ -82,21 +82,21 @@ export class AppLayoutComponent implements OnInit {
 
   isLeftSidenavOpen = false;
   isRightSidenavOpen = false;
-  __isHandset = false;
+  isHandset = false;
 
   $isHandset: Observable<boolean> = this.media
     .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])
     .pipe(
       map((e) => {
         if (e.matches) {
-          this.__isHandset = true;
+          this.isHandset = true;
           this.mode = 'over';
           this.isLeftSidenavOpen = false;
           return true;
         } else {
+          this.isHandset = false;
           this.mode = 'side';
           this.isLeftSidenavOpen = true;
-          this.__isHandset = false;
           return false;
         }
       })
@@ -108,7 +108,7 @@ export class AppLayoutComponent implements OnInit {
   }
 
   sideNavClick(sidenav: MatSidenav) {
-    if (this.__isHandset) {
+    if (this.isHandset) {
       sidenav.toggle();
     }
   }
