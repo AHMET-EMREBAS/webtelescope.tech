@@ -2,6 +2,54 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "IElementRef",
+            "id": "interface-IElementRef-62cd471cbc9bbbe57c58689b4026c8acfb7182cd75c15be2b8df94f695a511bf9c775fb564c1db8154e9475aaf6a76d4d434b798790fd247ca4e630d2e258dd6",
+            "file": "libs/material/src/lib/common/types/element-ref.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ElementRef } from '@angular/core';\r\n\r\nexport interface IElementRef<T> {\r\n  elementRef: ElementRef<T>;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "elementRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "ITemplateRef",
+            "id": "interface-ITemplateRef-4e3d17c38f71b0e19a21ce45d10211ffc3d5d8634d4fb43dbd4c134597aa3f098f6281dd19e8b1debbe85432105af982387eb0d1184412447a0d20134986be30",
+            "file": "libs/material/src/lib/common/types/template-ref.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { TemplateRef } from '@angular/core';\r\n\r\nexport interface ITemplateRef<T> {\r\n  templateRef: TemplateRef<T>;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<T>",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "IToggle",
             "id": "interface-IToggle-fb9c9560012b72552865a0b6466f02662e25c49e4da1049119ef67e800b6922b823be680c3cf9aca2f2e704facb0e55a3096079bd1f56afd2297cf88a72d1981",
             "file": "libs/material/src/lib/common/types/toggle.ts",
@@ -194,13 +242,154 @@
     "classes": [],
     "directives": [
         {
+            "name": "AppLogoDirective",
+            "id": "directive-AppLogoDirective-acc8b6064aa401689bf25b8d88a89c44dd88721386d9663242ceca42238096198c74f63d6b0185dd2a8b2e54980082a640ec30d78fc17649d457acd6f52bd5e9",
+            "file": "libs/material/src/lib/common/app-logo/app-logo.directive.ts",
+            "type": "directive",
+            "description": "<p>You can style the app-logo using app-logo class</p>\n",
+            "rawdescription": "\n\nYou can style the app-logo using app-logo class\n",
+            "sourceCode": "import { Directive, ElementRef, OnInit } from '@angular/core';\nimport { IElementRef } from '../types';\n\n/**\n * You can style the app-logo using app-logo class\n */\n@Directive({\n  selector: '[wtAppLogo]',\n  standalone: true,\n})\nexport class AppLogoDirective implements IElementRef<HTMLImageElement>, OnInit {\n  constructor(public elementRef: ElementRef<HTMLImageElement>) {}\n\n  ngOnInit(): void {\n    this.elementRef.nativeElement.classList.add('app-logo');\n\n    this.elementRef.nativeElement.setAttribute(\n      'src',\n      'assets/icons/icon-72x72.png'\n    );\n\n    this.elementRef.nativeElement.setAttribute('alt', 'App Logo');\n  }\n}\n",
+            "selector": "[wtAppLogo]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "elementRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef<HTMLImageElement>",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        125
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "extends": [],
+            "implements": [
+                "IElementRef",
+                "OnInit"
+            ],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef<HTMLImageElement>",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef<HTMLImageElement>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "ContainerContentDirective",
+            "id": "directive-ContainerContentDirective-4507a6b9d8f60a98a94dadbab8c7f38addd1d22c1203f78dce58fe15d1d2100359e409601b99f4fd63e3760aa176cf0c4facc7a91c3ef040acfd0591ed548f32",
+            "file": "libs/material/src/lib/common/container/container.component.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {\n  Component,\n  ContentChildren,\n  Directive,\n  Input,\n  QueryList,\n  TemplateRef,\n} from '@angular/core';\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\nimport { TemplateOutletComponent } from '../template-outlet/template-outlet.component';\nimport { ITemplateRef } from '../types';\n\nexport type ContainerType =\n  | 'row'\n  | 'column'\n  | 'right'\n  | 'left'\n  | 'top'\n  | 'bottom';\n\nexport type Direction = 'row' | 'column';\nexport type JustifyContent =\n  | 'baseline'\n  | 'center'\n  | 'end'\n  | 'flex-end'\n  | 'flex-start'\n  | 'left'\n  | 'right'\n  | 'safe'\n  | 'space-around'\n  | 'space-between'\n  | 'space-evenly'\n  | 'start'\n  | 'stretch'\n  | '';\n\ntype AlignItems =\n  | 'baseline'\n  | 'center'\n  | 'end'\n  | 'flex-end'\n  | 'flex-start'\n  | 'start'\n  | 'stretch'\n  | '';\n\nexport type Gap =\n  | 1\n  | 2\n  | 3\n  | 4\n  | 5\n  | 6\n  | '1'\n  | '2'\n  | '3'\n  | '4'\n  | '5'\n  | '6'\n  | '';\n\n@Directive({ selector: '[wtContainerContent]', standalone: true })\nexport class ContainerContentDirective\n  implements ITemplateRef<NgTemplateOutlet>\n{\n  constructor(\n    public readonly templateRef: TemplateRef<NgTemplateOutlet<unknown>>\n  ) {}\n}\n\n@Component({\n  selector: 'wt-container',\n  standalone: true,\n  imports: [CommonModule, TemplateOutletComponent, ContainerComponent],\n  templateUrl: './container.component.html',\n  styleUrl: './container.component.scss',\n})\nexport class ContainerComponent {\n  @Input() containerType: ContainerType = 'row';\n\n  @ContentChildren(ContainerContentDirective)\n  items?: QueryList<ContainerContentDirective>;\n\n  @Input() flexDirection?: Direction;\n  @Input() justifyContent?: JustifyContent;\n  @Input() alignItems?: AlignItems;\n  @Input() alignContent?: AlignItems;\n  @Input() gap?: Gap;\n  @Input() wrap?: 'wrap' | 'wrap-reverse' = 'wrap';\n\n  @Input() isScrollable = false;\n}\n",
+            "selector": "[wtContainerContent]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<NgTemplateOutlet<>>",
+                    "optional": false,
+                    "description": "",
+                    "line": 68,
+                    "modifierKind": [
+                        125,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "templateRef",
+                        "type": "TemplateRef<NgTemplateOutlet<>>",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 66,
+                "jsdoctags": [
+                    {
+                        "name": "templateRef",
+                        "type": "TemplateRef<NgTemplateOutlet<>>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        },
+        {
             "name": "FloatingItemsDirective",
-            "id": "directive-FloatingItemsDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-FloatingItemsDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtFloatingItems]",
             "providers": [],
             "hostDirectives": [],
@@ -219,7 +408,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 11,
+                    "line": 12,
                     "modifierKind": [
                         125,
                         148
@@ -228,6 +417,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -241,7 +433,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 10,
+                "line": 11,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -429,12 +621,12 @@
         },
         {
             "name": "MainContentDirective",
-            "id": "directive-MainContentDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-MainContentDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtMainContent]",
             "providers": [],
             "hostDirectives": [],
@@ -453,7 +645,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 6,
+                    "line": 7,
                     "modifierKind": [
                         125,
                         148
@@ -462,6 +654,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -475,7 +670,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 5,
+                "line": 6,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -491,12 +686,12 @@
         },
         {
             "name": "SidenavLeftDirective",
-            "id": "directive-SidenavLeftDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-SidenavLeftDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtSidenavLeft]",
             "providers": [],
             "hostDirectives": [],
@@ -515,7 +710,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 26,
+                    "line": 27,
                     "modifierKind": [
                         125,
                         148
@@ -524,6 +719,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -537,7 +735,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 25,
+                "line": 26,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -553,12 +751,12 @@
         },
         {
             "name": "SidenavRightDirective",
-            "id": "directive-SidenavRightDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-SidenavRightDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtSidenavRight]",
             "providers": [],
             "hostDirectives": [],
@@ -577,7 +775,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 31,
+                    "line": 32,
                     "modifierKind": [
                         125,
                         148
@@ -586,6 +784,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -599,7 +800,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 30,
+                "line": 31,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -615,12 +816,12 @@
         },
         {
             "name": "StatusbarLeftDirective",
-            "id": "directive-StatusbarLeftDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-StatusbarLeftDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtStatusbarLeft]",
             "providers": [],
             "hostDirectives": [],
@@ -639,7 +840,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 36,
+                    "line": 37,
                     "modifierKind": [
                         125,
                         148
@@ -648,6 +849,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -661,7 +865,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 35,
+                "line": 36,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -677,12 +881,12 @@
         },
         {
             "name": "StatusbarRighttDirective",
-            "id": "directive-StatusbarRighttDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-StatusbarRighttDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtStatusbarRightt]",
             "providers": [],
             "hostDirectives": [],
@@ -701,7 +905,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 41,
+                    "line": 44,
                     "modifierKind": [
                         125,
                         148
@@ -710,6 +914,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -723,7 +930,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 40,
+                "line": 43,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -739,12 +946,12 @@
         },
         {
             "name": "ToolbarLeftDirective",
-            "id": "directive-ToolbarLeftDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-ToolbarLeftDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtToolbarLeft]",
             "providers": [],
             "hostDirectives": [],
@@ -763,7 +970,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 22,
                     "modifierKind": [
                         125,
                         148
@@ -772,6 +979,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -785,7 +995,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 20,
+                "line": 21,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -801,12 +1011,12 @@
         },
         {
             "name": "ToolbarRightDirective",
-            "id": "directive-ToolbarRightDirective-24ddfae6a67d282b2bb940018ec6309b9c8fe8cef0c2c54d84546aab519145df5325fcbd02add2e7e2fcea32e36816c79ecb04c93b328a240dbb93eafb33311e",
+            "id": "directive-ToolbarRightDirective-d4ffad464403446bc3cddbc16cf0ccfa2787dff030ed925dc6ef458ee3b5eae23578e79e262b965b907ba628b3738ed19202c325fe0b348edcbd22fb2449643b",
             "file": "libs/material/src/lib/app-layout/app-layout.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
+            "sourceCode": "import { NgTemplateOutlet } from '@angular/common';\r\nimport { Directive, TemplateRef } from '@angular/core';\r\nimport { ITemplateRef } from '../common/types';\r\n\r\n@Directive({ selector: '[wtMainContent]', standalone: true })\r\nexport class MainContentDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtFloatingItems]', standalone: true })\r\nexport class FloatingItemsDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarRight]', standalone: true })\r\nexport class ToolbarRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtToolbarLeft]', standalone: true })\r\nexport class ToolbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavLeft]', standalone: true })\r\nexport class SidenavLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtSidenavRight]', standalone: true })\r\nexport class SidenavRightDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarLeft]', standalone: true })\r\nexport class StatusbarLeftDirective implements ITemplateRef<NgTemplateOutlet> {\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n\r\n@Directive({ selector: '[wtStatusbarRightt]', standalone: true })\r\nexport class StatusbarRighttDirective\r\n  implements ITemplateRef<NgTemplateOutlet>\r\n{\r\n  constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}\r\n}\r\n",
             "selector": "[wtToolbarRight]",
             "providers": [],
             "hostDirectives": [],
@@ -825,7 +1035,7 @@
                     "type": "TemplateRef<NgTemplateOutlet>",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 17,
                     "modifierKind": [
                         125,
                         148
@@ -834,6 +1044,9 @@
             ],
             "methodsClass": [],
             "extends": [],
+            "implements": [
+                "ITemplateRef"
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -847,7 +1060,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 15,
+                "line": 16,
                 "jsdoctags": [
                     {
                         "name": "templateRef",
@@ -863,12 +1076,12 @@
         },
         {
             "name": "ViewportDirective",
-            "id": "directive-ViewportDirective-f8fffdc5b3b6755ad3c5292a222b0cfbc72cf3bc3e3a54f9e81744661fd415bba684af82872a6ce389d1a1dcaf8b6b56867c25866a93fbf54e55eccacb1eb394",
+            "id": "directive-ViewportDirective-06dbf1345e03f2442911103338d0f452d6c62782c233c38d96a75bb0071fb4b7fafab86470bdf5496475424b3181d561740295f721fb010fb2c0756f0972cd28",
             "file": "libs/material/src/lib/common/viewport/viewport.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';\nimport { Observable, Subscription, map } from 'rxjs';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { IToggleValue } from '../types';\n\n@Directive({\n  selector: '[wtViewport]',\n  standalone: true,\n  exportAs: 'wtViewport',\n})\nexport class ViewportDirective implements IToggleValue, OnInit, OnDestroy {\n  isHandset?: boolean;\n\n  /**\n   * @ignore internal\n   */\n  $isHandset: Observable<boolean> = this.media\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\n    .pipe(\n      map((e) => {\n        const result = e.matches;\n        this.isHandset = result;\n        return result;\n      })\n    );\n\n  constructor(\n    public readonly elementRef: ElementRef<HTMLElement>,\n    private readonly media: BreakpointObserver\n  ) {}\n\n  viewportSubscription!: Subscription;\n\n  ngOnInit(): void {\n    this.viewportSubscription = this.$isHandset.subscribe();\n  }\n\n  ngOnDestroy(): void {\n    this.viewportSubscription.unsubscribe();\n  }\n\n  toggle(actual: string, handset: string) {\n    return this.isHandset ? handset : actual;\n  }\n\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\n    return this.isHandset ? conditionalValue : actualValue;\n  }\n}\n",
+            "sourceCode": "import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';\nimport { Observable, Subscription, map } from 'rxjs';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { IToggleValue } from '../types';\n\n@Directive({\n  selector: '[wtViewport]',\n  standalone: true,\n  exportAs: 'wtViewport',\n})\nexport class ViewportDirective implements IToggleValue, OnInit, OnDestroy {\n  isHandset?: boolean;\n  isNotHandset?: boolean;\n\n  /**\n   * @ignore internal\n   */\n  $isHandset: Observable<boolean> = this.media\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\n    .pipe(\n      map((e) => {\n        const result = e.matches;\n        this.isHandset = result;\n        this.isNotHandset = !this.isHandset;\n        return result;\n      })\n    );\n\n  constructor(\n    public readonly elementRef: ElementRef<HTMLElement>,\n    private readonly media: BreakpointObserver\n  ) {}\n\n  viewportSubscription!: Subscription;\n\n  ngOnInit(): void {\n    this.viewportSubscription = this.$isHandset.subscribe();\n  }\n\n  ngOnDestroy(): void {\n    this.viewportSubscription.unsubscribe();\n  }\n\n  toggle(actual: string, handset: string) {\n    return this.isHandset ? handset : actual;\n  }\n\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\n    return this.isHandset ? conditionalValue : actualValue;\n  }\n}\n",
             "selector": "[wtViewport]",
             "providers": [],
             "exportAs": "wtViewport",
@@ -888,7 +1101,7 @@
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         125,
                         148
@@ -904,13 +1117,22 @@
                     "line": 12
                 },
                 {
+                    "name": "isNotHandset",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": true,
+                    "description": "",
+                    "line": 13
+                },
+                {
                     "name": "viewportSubscription",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Subscription",
                     "optional": false,
                     "description": "",
-                    "line": 32
+                    "line": 34
                 }
             ],
             "methodsClass": [
@@ -920,7 +1142,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -930,7 +1152,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34,
+                    "line": 36,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -953,7 +1175,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 42,
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -998,7 +1220,7 @@
                     "typeParameters": [
                         "T"
                     ],
-                    "line": 46,
+                    "line": 48,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1048,7 +1270,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 25,
+                "line": 27,
                 "jsdoctags": [
                     {
                         "name": "elementRef",
@@ -1075,7 +1297,7 @@
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-36f28984ded4bc83d28239e1d5e1f901aa134cfd77eeb6b1c615c7c3f0eeaa4771aed323c655617f713e02eaa094953f94ad7d8dcc689cd2beaf0d7ac9c1faca",
+            "id": "component-AppLayoutComponent-ccec32aae248546998759a748cbf682a9db30dfeb7f633d5a59798d8526f753caf38063fceb504739bbe290f18d194bdad95e968856b67923a01c3a091185b2c",
             "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1101,7 +1323,7 @@
                     "defaultValue": "'settings'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 76,
+                    "line": 80,
                     "type": "string",
                     "decorators": []
                 },
@@ -1112,7 +1334,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTest the app layout without pushing the content\n",
                     "description": "<p>Test the app layout without pushing the content</p>\n",
-                    "line": 74,
+                    "line": 78,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -1126,7 +1348,7 @@
                     "type": "QueryList<FloatingItemsDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 57,
+                    "line": 61,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1144,7 +1366,7 @@
                     "type": "QueryList<MainContentDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 55,
+                    "line": 59,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1162,7 +1384,7 @@
                     "type": "QueryList<SidenavLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 63,
+                    "line": 67,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1180,7 +1402,7 @@
                     "type": "QueryList<SidenavRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 65,
+                    "line": 69,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1198,7 +1420,7 @@
                     "type": "QueryList<StatusbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 67,
+                    "line": 71,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1216,7 +1438,7 @@
                     "type": "QueryList<StatusbarRighttDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 69,
+                    "line": 73,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1234,7 +1456,7 @@
                     "type": "QueryList<ToolbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 61,
+                    "line": 65,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1252,7 +1474,7 @@
                     "type": "QueryList<ToolbarRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 59,
+                    "line": 63,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1283,13 +1505,151 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ContentChildren, Input, QueryList } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport {\r\n  MatDrawerMode,\r\n  MatSidenav,\r\n  MatSidenavModule,\r\n} from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n} from './app-layout.directive';\r\nimport { ViewportDirective } from '../common/viewport/viewport.directive';\r\nimport { FullscreenDirective } from '../common/fullscreen/fullscreen.directive';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRighttDirective)\r\n  statusbarRightt?: QueryList<StatusbarRighttDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  mode: MatDrawerMode = 'side';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isLeftSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isRightSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  sideNavClick(sidenav: MatSidenav, isHandset?: boolean) {\r\n    if (isHandset) sidenav.toggle();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, ContentChildren, Input, QueryList } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport {\r\n  MatDrawerMode,\r\n  MatSidenav,\r\n  MatSidenavModule,\r\n} from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n} from './app-layout.directive';\r\nimport { ViewportDirective } from '../common/viewport/viewport.directive';\r\nimport { FullscreenDirective } from '../common/fullscreen/fullscreen.directive';\r\nimport { AppLogoDirective } from '../common/app-logo/app-logo.directive';\r\nimport { TemplateOutletComponent } from '../common/template-outlet/template-outlet.component';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRighttDirective)\r\n  statusbarRightt?: QueryList<StatusbarRighttDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  mode: MatDrawerMode = 'side';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isLeftSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isRightSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  sideNavClick(sidenav: MatSidenav, isHandset?: boolean) {\r\n    if (isHandset) sidenav.toggle();\r\n  }\r\n}\r\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<ng-container #viewPort=\"wtViewport\" wtViewport></ng-container>\r\n<ng-container #screen=\"wtFullscreen\" wtFullscreen></ng-container>\r\n\r\n<!-- General -->\r\n<ng-template #queryListTemplate let-items=\"items\" let-testName=\"testName\">\r\n  <span *ngIf=\"testing === true\">{{ testName || 'No test name' }}</span>\r\n\r\n  @if(items){ @for(item of items; track item){\r\n  <ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\r\n  } }\r\n</ng-template>\r\n\r\n<!-- Example \r\n\r\n  <ng-container *ngTemplateOutlet=\"queryListTemplate; context: { items:items }\"></ng-container>\r\n-->\r\n\r\n<!-- Toolbar like -->\r\n\r\n<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"space-around-row-container\">\r\n    <div class=\"row-container-gap-1 row-flex-start\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: left, testName: testName + '-left' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n    <div class=\"row-container-gap-1 row-flex-end\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: right, testName: testName + '-right' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"isLeftSidenavOpen\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(leftSidenav, viewPort.isHandset)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavLeft, testName: 'Left sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(rightSidenav)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavRight, testName: 'Right sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <mat-sidenav-content>\r\n    <!-- --Start of the content -->\r\n\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img\r\n        class=\"app-logo\"\r\n        src=\"assets/icons/icon-72x72.png\"\r\n        alt=\"App Logo\"\r\n        *ngIf=\"!viewPort.isHandset\"\r\n      />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        class=\"left-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        class=\"right-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        (click)=\"screen.toggle(mainContentContainer)\"\r\n        aria-label=\"Toggle Fullscreen\"\r\n      >\r\n        <mat-icon>\r\n          {{ screen.toggleValue('fullscreen', 'fullscreen_exit') }}</mat-icon\r\n        >\r\n      </button>\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: {\r\n            items: mainContent,\r\n            testName: 'Main Content'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRightt,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+            "templateData": "<ng-container #viewport=\"wtViewport\" wtViewport></ng-container>\r\n<ng-container #fullscreen=\"wtFullscreen\" wtFullscreen></ng-container>\r\n\r\n<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        [testName]=\"testName + '-left'\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        [testName]=\"testName + '-right'\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"isLeftSidenavOpen\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(leftSidenav, viewport.isHandset)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavLeft\"\r\n      [testing]=\"testing\"\r\n      testName=\"Left sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(rightSidenav)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavRight\"\r\n      [testing]=\"testing\"\r\n      testName=\"Right sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- --Start of the content -->\r\n  <mat-sidenav-content>\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img wtAppLogo *ngIf=\"viewport.isNotHandset\" />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        class=\"left-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        class=\"right-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"column-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        (click)=\"fullscreen.toggle(mainContentContainer)\"\r\n        [attr.aria-label]=\"\r\n          fullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')\r\n        \"\r\n      >\r\n        <mat-icon>\r\n          {{ fullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"Main Content\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRightt,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+        },
+        {
+            "name": "ContainerComponent",
+            "id": "component-ContainerComponent-4507a6b9d8f60a98a94dadbab8c7f38addd1d22c1203f78dce58fe15d1d2100359e409601b99f4fd63e3760aa176cf0c4facc7a91c3ef040acfd0591ed548f32",
+            "file": "libs/material/src/lib/common/container/container.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-container",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./container.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "alignContent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 88,
+                    "type": "AlignItems",
+                    "decorators": []
+                },
+                {
+                    "name": "alignItems",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 87,
+                    "type": "AlignItems",
+                    "decorators": []
+                },
+                {
+                    "name": "containerType",
+                    "defaultValue": "'row'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 80,
+                    "type": "ContainerType",
+                    "decorators": []
+                },
+                {
+                    "name": "flexDirection",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 85,
+                    "type": "Direction",
+                    "decorators": []
+                },
+                {
+                    "name": "gap",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 89,
+                    "type": "Gap",
+                    "decorators": []
+                },
+                {
+                    "name": "isScrollable",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 92,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "justifyContent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 86,
+                    "type": "JustifyContent",
+                    "decorators": []
+                },
+                {
+                    "name": "wrap",
+                    "defaultValue": "'wrap'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 90,
+                    "type": "\"wrap\" | \"wrap-reverse\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "items",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ContainerContentDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 83,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ContainerContentDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TemplateOutletComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "ContainerComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\n  Component,\n  ContentChildren,\n  Directive,\n  Input,\n  QueryList,\n  TemplateRef,\n} from '@angular/core';\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\nimport { TemplateOutletComponent } from '../template-outlet/template-outlet.component';\nimport { ITemplateRef } from '../types';\n\nexport type ContainerType =\n  | 'row'\n  | 'column'\n  | 'right'\n  | 'left'\n  | 'top'\n  | 'bottom';\n\nexport type Direction = 'row' | 'column';\nexport type JustifyContent =\n  | 'baseline'\n  | 'center'\n  | 'end'\n  | 'flex-end'\n  | 'flex-start'\n  | 'left'\n  | 'right'\n  | 'safe'\n  | 'space-around'\n  | 'space-between'\n  | 'space-evenly'\n  | 'start'\n  | 'stretch'\n  | '';\n\ntype AlignItems =\n  | 'baseline'\n  | 'center'\n  | 'end'\n  | 'flex-end'\n  | 'flex-start'\n  | 'start'\n  | 'stretch'\n  | '';\n\nexport type Gap =\n  | 1\n  | 2\n  | 3\n  | 4\n  | 5\n  | 6\n  | '1'\n  | '2'\n  | '3'\n  | '4'\n  | '5'\n  | '6'\n  | '';\n\n@Directive({ selector: '[wtContainerContent]', standalone: true })\nexport class ContainerContentDirective\n  implements ITemplateRef<NgTemplateOutlet>\n{\n  constructor(\n    public readonly templateRef: TemplateRef<NgTemplateOutlet<unknown>>\n  ) {}\n}\n\n@Component({\n  selector: 'wt-container',\n  standalone: true,\n  imports: [CommonModule, TemplateOutletComponent, ContainerComponent],\n  templateUrl: './container.component.html',\n  styleUrl: './container.component.scss',\n})\nexport class ContainerComponent {\n  @Input() containerType: ContainerType = 'row';\n\n  @ContentChildren(ContainerContentDirective)\n  items?: QueryList<ContainerContentDirective>;\n\n  @Input() flexDirection?: Direction;\n  @Input() justifyContent?: JustifyContent;\n  @Input() alignItems?: AlignItems;\n  @Input() alignContent?: AlignItems;\n  @Input() gap?: Gap;\n  @Input() wrap?: 'wrap' | 'wrap-reverse' = 'wrap';\n\n  @Input() isScrollable = false;\n}\n",
+            "styleUrl": "./container.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<!-- <div [class]=\"containerType + '-container'\" [class.scrollable]=\"isScrollable\">\n  <wt-template-outlet [items]=\"items\"></wt-template-outlet>\n</div> -->\n\n<!-- <h1>Row Container</h1> -->\n<!-- <div class=\"row-container\">\n  <div\n    class=\"row-container-item\"\n    *ngFor=\"let i of ' '.repeat(45).split(''); let index = index\"\n  >\n    Item-{{ index }}\n  </div>\n</div> -->\n<!-- \n\n<div class=\"column-container\">\n  <div\n    class=\"row-container-item\"\n    *ngFor=\"let i of ' '.repeat(45).split(''); let index = index\"\n  >\n    Item-{{ index }}\n  </div>\n</div> -->\n\n<div class=\"column-container-top\">\n  <div\n    class=\"row-container-item\"\n    *ngFor=\"let i of ' '.repeat(3).split(''); let index = index\"\n  >\n    Item-{{ index }}\n  </div>\n<div style=\"flex-grow: 1;\"></div>\n  <div style=\"justify-self: end\">Last Item</div>\n</div>\n"
         },
         {
             "name": "FullscreenComponent",
@@ -1563,6 +1923,75 @@
             "templateData": "<mat-nav-list #navList>\n  @for(item of items ; track item){\n  <mat-list-item\n    #menuItem\n    [lines]=\"2\"\n    [activated]=\"item.id === activeItem\"\n    [routerLink]=\"[item.route]\"\n    [class.router-link-active]=\"item.id === activeItem\"\n    (click)=\"clickHandler(item)\"\n  >\n    <span matListItemTitle>{{ item.title }}</span>\n    <span matListItemLine>{{ item.subTitle }}</span>\n\n    <mat-icon\n      matListItemIcon\n      [matBadge]=\"item.badge\"\n      [matBadgeColor]=\"item.badgeColor\"\n      [color]=\"item.iconColor\"\n      aria-hidden=\"false\"\n      class=\"fill\"\n    >\n      {{ item.icon }}\n    </mat-icon>\n    <span matListItemMeta>{{ item.meta }}</span>\n  </mat-list-item>\n  }\n</mat-nav-list>\n"
         },
         {
+            "name": "TemplateOutletComponent",
+            "id": "component-TemplateOutletComponent-8042ad53e08303cb836f7e4782ec0c3c239efafdf3729b26689a4a7460d6a61c00253485314508eed5188fdd41e32756603d447f3284af864306eb35914c965e",
+            "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-template-outlet",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./template-outlet.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "QueryList<ITemplateRef<NgTemplateOutlet>>",
+                    "decorators": []
+                },
+                {
+                    "name": "testing",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "testName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, QueryList } from '@angular/core';\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\n\nimport { ITemplateRef } from '../types';\n\n@Component({\n  selector: 'wt-template-outlet',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './template-outlet.component.html',\n  styleUrl: './template-outlet.component.scss',\n})\nexport class TemplateOutletComponent {\n  @Input() testing = false;\n  @Input() testName?: string;\n  @Input() items?: QueryList<ITemplateRef<NgTemplateOutlet>>;\n}\n",
+            "styleUrl": "./template-outlet.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<span *ngIf=\"testing === true\">{{ testName }}</span>\n\n@if(items){ @for(item of items; track item){\n<ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\n} }\n"
+        },
+        {
             "name": "ViewportComponent",
             "id": "component-ViewportComponent-a5b1a1fdd2db6c032743eb8fd5277986dcb11ed9e360a3cb2e2900e3989c255e4c3e4021203e7b7250561b1cfb93186ad493384c4eddfcc67697f12198b3cf2b",
             "file": "libs/material/src/lib/common/viewport/viewport.component.ts",
@@ -1700,7 +2129,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n]"
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent\r\n]"
             },
             {
                 "name": "commonProviders",
@@ -1756,11 +2185,31 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/container works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/fullscreen works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/template-outlet works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -1816,11 +2265,31 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ContainerComponent>",
+                "defaultValue": "{\n  component: ContainerComponent,\n  title: 'ContainerComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FullscreenComponent>",
                 "defaultValue": "{\n  component: FullscreenComponent,\n  title: 'FullscreenComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<TemplateOutletComponent>",
+                "defaultValue": "{\n  component: TemplateOutletComponent,\n  title: 'TemplateOutletComponent',\n}"
             },
             {
                 "name": "meta",
@@ -1876,11 +2345,31 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    containerType: 'row',\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n}"
             },
             {
                 "name": "Primary",
@@ -1896,11 +2385,66 @@
         "functions": [],
         "typealiases": [
             {
+                "name": "AlignItems",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"stretch\" | string",
+                "file": "libs/material/src/lib/common/container/container.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 192
+            },
+            {
                 "name": "Color",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "\"primary\" | \"accent\" | \"warn\"",
                 "file": "libs/material/src/lib/common/types/color.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 192
+            },
+            {
+                "name": "ContainerType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"row\" | \"column\" | \"right\" | \"left\" | \"top\" | \"bottom\"",
+                "file": "libs/material/src/lib/common/container/container.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 192
+            },
+            {
+                "name": "Direction",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"row\" | \"column\"",
+                "file": "libs/material/src/lib/common/container/container.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 192
+            },
+            {
+                "name": "Gap",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | string",
+                "file": "libs/material/src/lib/common/container/container.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 192
+            },
+            {
+                "name": "JustifyContent",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"left\" | \"right\" | \"safe\" | \"space-around\" | \"space-between\" | \"space-evenly\" | \"start\" | \"stretch\" | string",
+                "file": "libs/material/src/lib/common/container/container.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1965,8 +2509,30 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<ContainerComponent>",
+                "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<FullscreenComponent>",
                 "file": "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<TemplateOutletComponent>",
+                "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -2005,7 +2571,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n]"
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent\r\n]"
                 }
             ],
             "libs/material/src/lib/_story/common-providers.ts": [
@@ -2148,6 +2714,38 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
+            "libs/material/src/lib/common/container/container.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/container works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ContainerComponent>",
+                    "defaultValue": "{\n  component: ContainerComponent,\n  title: 'ContainerComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    containerType: 'row',\n  },\n}"
+                }
+            ],
             "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -2178,6 +2776,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/template-outlet works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<TemplateOutletComponent>",
+                    "defaultValue": "{\n  component: TemplateOutletComponent,\n  title: 'TemplateOutletComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n}"
                 }
             ],
             "libs/material/src/lib/common/viewport/viewport.component.stories.ts": [
@@ -2216,6 +2846,63 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "libs/material/src/lib/common/container/container.component.ts": [
+                {
+                    "name": "AlignItems",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"start\" | \"stretch\" | string",
+                    "file": "libs/material/src/lib/common/container/container.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 192
+                },
+                {
+                    "name": "ContainerType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"row\" | \"column\" | \"right\" | \"left\" | \"top\" | \"bottom\"",
+                    "file": "libs/material/src/lib/common/container/container.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 192
+                },
+                {
+                    "name": "Direction",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"row\" | \"column\"",
+                    "file": "libs/material/src/lib/common/container/container.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 192
+                },
+                {
+                    "name": "Gap",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | \"1\" | \"2\" | \"3\" | \"4\" | \"5\" | \"6\" | string",
+                    "file": "libs/material/src/lib/common/container/container.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 192
+                },
+                {
+                    "name": "JustifyContent",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"left\" | \"right\" | \"safe\" | \"space-around\" | \"space-between\" | \"space-evenly\" | \"start\" | \"stretch\" | string",
+                    "file": "libs/material/src/lib/common/container/container.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 192
+                }
+            ],
             "libs/material/src/lib/common/types/color.ts": [
                 {
                     "name": "Color",
@@ -2294,6 +2981,19 @@
                     "kind": 183
                 }
             ],
+            "libs/material/src/lib/common/container/container.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ContainerComponent>",
+                    "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts": [
                 {
                     "name": "Story",
@@ -2301,6 +3001,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<FullscreenComponent>",
                     "file": "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<TemplateOutletComponent>",
+                    "file": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2469,6 +3182,63 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/material/src/lib/common/app-logo/app-logo.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "AppLogoDirective",
+                "coveragePercent": 25,
+                "coverageCount": "1/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/container/container.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ContainerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/container/container.component.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "ContainerContentDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -2514,6 +3284,63 @@
                 "name": "FullscreenDirective",
                 "coveragePercent": 16,
                 "coverageCount": "1/6",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/template-outlet/template-outlet.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/template-outlet/template-outlet.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TemplateOutletComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/types/element-ref.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "IElementRef",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/types/template-ref.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ITemplateRef",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -2579,7 +3406,7 @@
                 "linktype": "directive",
                 "name": "ViewportDirective",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {

@@ -7,15 +7,15 @@
   let-right="right"
   let-testName="testName"
 >
-  <div class="space-around-row-container">
-    <div class="row-container-gap-1 row-flex-start">
+  <div class="row-container">
+    <div class="row-container">
       <wt-template-outlet
         [items]="left"
         [testing]="testing"
         [testName]="testName + '-left'"
       ></wt-template-outlet>
     </div>
-    <div class="row-container-gap-1 row-flex-end">
+    <div class="row-container-right">
       <wt-template-outlet
         [items]="right"
         [testing]="testing"
@@ -100,7 +100,7 @@
 
     <!-- Main Content  -->
 
-    <div #mainContentContainer class="main-content-container">
+    <div #mainContentContainer class="main-content-container column-container">
       <!-- Full Screen Button -->
       <button
         class="fullscreen-button"

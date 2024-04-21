@@ -1,0 +1,153 @@
+$display: (row, column, row-reverse, column-reverse);
+$justify: (
+  baseline,
+  center,
+  end,
+  flex-end,
+  flex-start,
+  left,
+  right,
+  space-around,
+  space-between,
+  space-evenly,
+  start,
+  stretch
+);
+$align: (baseline, center, end, flex-end, flex-start, normal, start, stretch);
+$alignContent: $align;
+$range: (1, 2, 3, 4, 5, 6);
+
+@each $i in $display {
+  .#{$i} {
+    display: flex;
+    flex-direction: #{$i};
+  }
+}
+
+@each $i in $justify {
+  .row.#{$i},
+  .column.#{$i},
+  .row-reverse.#{$i},
+  .column-reverse.#{$i} {
+    justify-content: #{$i};
+  }
+}
+
+@each $i in $align {
+  .row.al-#{$i},
+  .column.al-#{$i},
+  .row-reverse.al-#{$i},
+  .column-reverse.al-#{$i} {
+    align-items: #{$i};
+  }
+}
+
+@each $i in $align {
+  .row.al-content-#{$i},
+  .column.al-content-#{$i},
+  .row-reverse.al-content-#{$i},
+  .column-reverse.al-content-#{$i} {
+    align-content: #{$i};
+  }
+}
+
+@each $i in $range {
+  .gap-#{$i} {
+    gap: #{$i}em;
+  }
+  .p-#{$i} {
+    padding: #{$i}em;
+  }
+  @each $key, $value in (l: left, r: right, b: bottom, t: top) {
+    .p#{$key}-#{$i} {
+      padding-#{$value}: #{$i}em;
+    }
+  }
+}
+
+.border {
+  border: 3px solid crimson;
+}
+
+.row.wrap,
+.column.wrap,
+.row-reverse.wrap,
+.column-reverse.wrap {
+  flex-wrap: wrap;
+}
+
+.row.wrap-reverse,
+.column.wrap-reverse,
+.row-reverse.wrap-reverse,
+.column-reverse.wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.scrollable {
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sub-scrollbar-thumb-color, purple);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--sub-scrollbar-track-color, gray);
+}
+
+$columnTypes: (row, column, right, left, top, bottom);
+
+.row-container-item {
+  border: 1px solid orange;
+  padding: 1em;
+  min-width: 150px;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: start;
+  gap: 1em;
+}
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+  justify-content: stretch;
+  gap: 1em;
+}
+
+.column-container-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: stretch;
+  gap: 1em;
+}
+.column-container-top {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1em;
+}
+
+.row-container-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
+}
+
+.row-container-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
