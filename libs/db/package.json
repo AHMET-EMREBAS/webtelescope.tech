@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "@swc/helpers": "~0.5.2",
+    "@webpackages/common": "*",
+    "@webpackages/core": "*"
   },
   "type": "commonjs",
   "main": "./src/index.js",
