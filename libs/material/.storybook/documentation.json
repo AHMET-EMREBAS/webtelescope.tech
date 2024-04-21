@@ -506,7 +506,7 @@
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-da8ad5485c30fddabf2ea7f324087884b24ad4dd0e88bc7c29d001a1eb3709b3f106349825c4742d28bee2c2490a71b721a8716d8976629aaf4a141e7732bdf7",
+            "id": "component-AppLayoutComponent-76cb447d1ff048360f213507b5651b0861747f0683f2c6f5de9f29b10f7cedb8054ae23b8778be42af323bf4f76620b61dc3acc4befe5fd22d8fcb91536302e3",
             "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -514,7 +514,7 @@
             "outputs": [],
             "providers": [
                 {
-                    "name": "directives",
+                    "name": "AppLayoutDirectives",
                     "type": "directive"
                 }
             ],
@@ -534,7 +534,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTest the app layout without pushing the content\n",
                     "description": "<p>Test the app layout without pushing the content</p>\n",
-                    "line": 72,
+                    "line": 79,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -548,7 +548,7 @@
                     "type": "QueryList<FloatingItemsDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 55,
+                    "line": 62,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -566,7 +566,7 @@
                     "type": "QueryList<MainContentDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 53,
+                    "line": 60,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -584,7 +584,7 @@
                     "type": "QueryList<SidenavLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 61,
+                    "line": 68,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -602,7 +602,7 @@
                     "type": "QueryList<SidenavRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 63,
+                    "line": 70,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -620,7 +620,7 @@
                     "type": "QueryList<StatusbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 65,
+                    "line": 72,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -638,7 +638,7 @@
                     "type": "QueryList<StatusbarRighttDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 67,
+                    "line": 74,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -656,7 +656,7 @@
                     "type": "QueryList<ToolbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 59,
+                    "line": 66,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -674,7 +674,7 @@
                     "type": "QueryList<ToolbarRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 57,
+                    "line": 64,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -686,18 +686,7 @@
                     ]
                 }
             ],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 74,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -705,47 +694,50 @@
             "standalone": true,
             "imports": [
                 {
-                    "name": "CommonModule",
+                    "name": "AppLayoutModules",
                     "type": "module"
                 },
                 {
-                    "name": "MatSidenavModule",
-                    "type": "module"
-                },
-                {
-                    "name": "MatToolbarModule",
-                    "type": "module"
-                },
-                {
-                    "name": "MatButtonModule",
-                    "type": "module"
-                },
-                {
-                    "name": "MatButtonToggleModule",
-                    "type": "module"
-                },
-                {
-                    "name": "MatIconModule",
-                    "type": "module"
-                },
-                {
-                    "name": "directives",
+                    "name": "AppLayoutDirectives",
                     "type": "directive"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  Component,\r\n  ContentChildren,\r\n  Input,\r\n  OnInit,\r\n  QueryList,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatButtonToggleModule } from '@angular/material/button-toggle';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n} from './app-layout.directive';\r\n\r\nconst directives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n];\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [\r\n    CommonModule,\r\n    MatSidenavModule,\r\n    MatToolbarModule,\r\n    MatButtonModule,\r\n    MatButtonToggleModule,\r\n    MatIconModule,\r\n    ...directives,\r\n  ],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...directives],\r\n})\r\nexport class AppLayoutComponent implements OnInit {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRighttDirective)\r\n  statusbarRightt?: QueryList<StatusbarRighttDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = true;\r\n\r\n  ngOnInit(): void {\r\n    console.log(this.mainContent);\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  Component,\r\n  ContentChildren,\r\n  Input,\r\n  OnInit,\r\n  QueryList,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport {\r\n  MatDrawerMode,\r\n  MatSidenav,\r\n  MatSidenavModule,\r\n} from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatButtonToggleModule } from '@angular/material/button-toggle';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n} from './app-layout.directive';\r\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\r\nimport { Observable, map } from 'rxjs';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatButtonToggleModule,\r\n  MatIconModule,\r\n];\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRighttDirective)\r\n  statusbarRightt?: QueryList<StatusbarRighttDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = true;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  mode: MatDrawerMode = 'side';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isLeftSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isRightSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isHandset = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  $isHandset: Observable<boolean> = this.media\r\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\r\n    .pipe(\r\n      map((e) => {\r\n        if (e.matches) {\r\n          this.isHandset = true;\r\n          this.mode = 'over';\r\n          this.isLeftSidenavOpen = false;\r\n          return true;\r\n        } else {\r\n          this.isHandset = false;\r\n          this.mode = 'side';\r\n          this.isLeftSidenavOpen = true;\r\n          return false;\r\n        }\r\n      })\r\n    );\r\n\r\n  constructor(private readonly media: BreakpointObserver) {}\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  sideNavClick(sidenav: MatSidenav) {\r\n    if (this.isHandset) {\r\n      sidenav.toggle();\r\n    }\r\n  }\r\n}\r\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "media",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 120,
+                "jsdoctags": [
+                    {
+                        "name": "media",
+                        "type": "BreakpointObserver",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "extends": [],
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<!-- General -->\r\n<ng-template #queryListTemplate let-items=\"items\" let-name=\"name\">\r\n  @if( items){\r\n\r\n  <span *ngIf=\"testing\">{{ name }}</span>\r\n  @for(item of items; track item){\r\n  <ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\r\n  } } @else {\r\n  <span *ngIf=\"testing\">No templates passed!</span>\r\n\r\n  }\r\n</ng-template>\r\n\r\n<!-- \r\n    <ng-container *ngTemplateOutlet=\"queryListTemplate; context: { items:items }\"></ng-container>\r\n-->\r\n\r\n<!-- Toolbar like -->\r\n\r\n<ng-template #toolbarTemplate let-left=\"left\" let-right=\"right\">\r\n  <div class=\"space-around-row-container\">\r\n    <div class=\"row-container-gap-1 row-flex-start\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: left, name: 'toolbar-left' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n    <div class=\"row-container-gap-1 row-flex-end\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: right, name: 'toolbar-right' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container>\r\n  <!-- Main toolbar -->\r\n  <mat-toolbar>\r\n    <img\r\n      src=\"assets/icons/icon-72x72.png\"\r\n      alt=\"App Logo\"\r\n      data-testid=\"app-logo\"\r\n    />\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        toolbarTemplate;\r\n        context: { left: toolbarLeft, right: toolbarRight }\r\n      \"\r\n    ></ng-container>\r\n  </mat-toolbar>\r\n\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav #leftSidenav position=\"start\">\r\n    <ng-container\r\n      *ngTemplateOutlet=\"queryListTemplate; context: { items: sidenavLeft }\"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav #rightSidenav position=\"end\">\r\n    <ng-container\r\n      *ngTemplateOutlet=\"queryListTemplate; context: { items: sidenavRight }\"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <mat-sidenav-content>\r\n    <ng-container\r\n      *ngTemplateOutlet=\"queryListTemplate; context: { items: mainContent }\"\r\n    ></ng-container>\r\n  </mat-sidenav-content>\r\n\r\n  <mat-toolbar>\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        toolbarTemplate;\r\n        context: { left: statusbarLeft, right: statusbarRightt }\r\n      \"\r\n    ></ng-container\r\n  ></mat-toolbar>\r\n</mat-sidenav-container>\r\n"
+            "templateData": "<!-- Subscribers  -->\r\n<ng-container *ngIf=\"$isHandset | async\"></ng-container>\r\n\r\n<!-- General -->\r\n<ng-template #queryListTemplate let-items=\"items\" let-testName=\"testName\">\r\n  <span *ngIf=\"testing === true\">{{ testName || 'NO test name' }}</span>\r\n\r\n  @if(items){ @for(item of items; track item){\r\n  <ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\r\n  } }\r\n</ng-template>\r\n\r\n<!-- \r\n    <ng-container *ngTemplateOutlet=\"queryListTemplate; context: { items:items }\"></ng-container>\r\n-->\r\n\r\n<!-- Toolbar like -->\r\n\r\n<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"space-around-row-container\">\r\n    <div class=\"row-container-gap-1 row-flex-start\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: left, testName: testName + '-left' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n    <div class=\"row-container-gap-1 row-flex-end\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: { items: right, testName: testName + '-right' }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"isLeftSidenavOpen\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(leftSidenav)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavLeft, testName: 'Left sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(rightSidenav)\"\r\n  >\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        queryListTemplate;\r\n        context: { items: sidenavRight, testName: 'Right sidenav' }\r\n      \"\r\n    ></ng-container>\r\n  </mat-sidenav>\r\n\r\n  <mat-sidenav-content>\r\n    <!-- --Start of the content -->\r\n\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img\r\n        class=\"app-logo\"\r\n        src=\"assets/icons/icon-72x72.png\"\r\n        alt=\"App Logo\"\r\n        data-testid=\"app-logo\"\r\n        *ngIf=\"!isHandset\"\r\n      />\r\n\r\n      <button\r\n        class=\"left-menu-toggle\"\r\n        mat-mini-fab\r\n        (click)=\"leftSidenav.toggle()\"\r\n      >\r\n        <mat-icon>{{ leftSidenav.opened ? 'menu_opened' : 'menu' }}</mat-icon>\r\n      </button>\r\n\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <button\r\n        class=\"right-menu-toggle\"\r\n        mat-mini-fab\r\n        (click)=\"rightSidenav.toggle()\"\r\n      >\r\n        <mat-icon>settings</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div class=\"main-content-container\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          queryListTemplate;\r\n          context: {\r\n            items: mainContent,\r\n            testName: 'Main Content'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRightt,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container\r\n    ></mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
         },
         {
             "name": "HelloComponent",
@@ -842,6 +834,26 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "AppLayoutDirectives",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n]"
+            },
+            {
+                "name": "AppLayoutModules",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatButtonToggleModule,\r\n  MatIconModule,\r\n]"
+            },
+            {
                 "name": "commonProviders",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -852,16 +864,6 @@
                 "defaultValue": "[\r\n  importProvidersFrom([BrowserAnimationsModule, RouterTestingModule]),\r\n]"
             },
             {
-                "name": "directives",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "[]",
-                "defaultValue": "[\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n]"
-            },
-            {
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -869,7 +871,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const logo = canvas.queryByTestId('app-logo');\n\n    expect(logo).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const logo = canvas.queryByTestId('app-logo');\n    expect(logo).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -909,7 +911,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n}"
+                "defaultValue": "{\n  args: {\n    testing: true,\n  },\n}"
             },
             {
                 "name": "Primary",
@@ -971,6 +973,28 @@
         ],
         "enumerations": [],
         "groupedVariables": {
+            "libs/material/src/lib/app-layout/app-layout.component.ts": [
+                {
+                    "name": "AppLayoutDirectives",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n]"
+                },
+                {
+                    "name": "AppLayoutModules",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatButtonToggleModule,\r\n  MatIconModule,\r\n]"
+                }
+            ],
             "libs/material/src/lib/_story/common-providers.ts": [
                 {
                     "name": "commonProviders",
@@ -983,18 +1007,6 @@
                     "defaultValue": "[\r\n  importProvidersFrom([BrowserAnimationsModule, RouterTestingModule]),\r\n]"
                 }
             ],
-            "libs/material/src/lib/app-layout/app-layout.component.ts": [
-                {
-                    "name": "directives",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "[]",
-                    "defaultValue": "[\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRighttDirective,\r\n]"
-                }
-            ],
             "libs/material/src/lib/app-layout/app-layout.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -1004,7 +1016,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const logo = canvas.queryByTestId('app-logo');\n\n    expect(logo).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const logo = canvas.queryByTestId('app-logo');\n    expect(logo).toBeTruthy();\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -1024,7 +1036,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n}"
+                    "defaultValue": "{\n  args: {\n    testing: true,\n  },\n}"
                 }
             ],
             "libs/material/src/lib/hello/hello.component.stories.ts": [
@@ -1176,7 +1188,17 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "directives",
+                "name": "AppLayoutDirectives",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/app-layout/app-layout.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AppLayoutModules",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

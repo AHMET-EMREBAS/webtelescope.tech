@@ -1,10 +1,4 @@
-import {
-  Component,
-  ContentChildren,
-  Input,
-  OnInit,
-  QueryList,
-} from '@angular/core';
+import { Component, ContentChildren, Input, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatDrawerMode,
@@ -27,6 +21,8 @@ import {
 } from './app-layout.directive';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, map } from 'rxjs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 const AppLayoutDirectives = [
   MainContentDirective,
@@ -46,7 +42,10 @@ export const AppLayoutModules = [
   MatButtonModule,
   MatButtonToggleModule,
   MatIconModule,
+  MatMenuModule,
+  MatListModule,
 ];
+
 @Component({
   selector: 'wt-app-layout',
   standalone: true,
@@ -55,7 +54,7 @@ export const AppLayoutModules = [
   styleUrl: './app-layout.component.scss',
   providers: [...AppLayoutDirectives],
 })
-export class AppLayoutComponent implements OnInit {
+export class AppLayoutComponent {
   @ContentChildren(MainContentDirective)
   mainContent?: QueryList<MainContentDirective>;
   @ContentChildren(FloatingItemsDirective)
@@ -76,14 +75,33 @@ export class AppLayoutComponent implements OnInit {
   /**
    * Test the app layout without pushing the content
    */
-  @Input() testing = true;
+  @Input() testing = false;
 
+  /**
+   * @ignore internal
+   */
   mode: MatDrawerMode = 'side';
 
+  /**
+   * @ignore internal
+   */
   isLeftSidenavOpen = false;
+
+  rightSidenavToggleIcon = 'settings';
+
+  /**
+   * @ignore internal
+   */
   isRightSidenavOpen = false;
+
+  /**
+   * @ignore internal
+   */
   isHandset = false;
 
+  /**
+   * @ignore internal
+   */
   $isHandset: Observable<boolean> = this.media
     .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])
     .pipe(
@@ -103,13 +121,31 @@ export class AppLayoutComponent implements OnInit {
     );
 
   constructor(private readonly media: BreakpointObserver) {}
-  ngOnInit(): void {
-    console.log(this.mainContent);
-  }
 
+  /**
+   * @ignore internal
+   */
   sideNavClick(sidenav: MatSidenav) {
     if (this.isHandset) {
       sidenav.toggle();
+    }
+  }
+
+  isFullscreen = false;
+  fullscreenButtonIcon: 'fullscreen_exit' | 'fullscreen' = 'fullscreen';
+  fullscreenTooltip: 'Fullscreen' | 'Exit Fullscreen' = 'Fullscreen';
+
+  fullscreenToggle(element: HTMLDivElement) {
+    this.isFullscreen = !this.isFullscreen;
+
+    if (this.isFullscreen) {
+      element.requestFullscreen();
+      this.fullscreenTooltip = 'Exit Fullscreen';
+      this.fullscreenButtonIcon = 'fullscreen_exit';
+    } else {
+      document.exitFullscreen();
+      this.fullscreenTooltip = 'Fullscreen';
+      this.fullscreenButtonIcon = 'fullscreen';
     }
   }
 }

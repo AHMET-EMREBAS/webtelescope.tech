@@ -5,7 +5,7 @@ import {
 } from '@storybook/angular';
 import { AppLayoutComponent } from './app-layout.component';
 
-import { within } from '@storybook/testing-library';
+import { userEvent, waitFor, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { commonProviders } from '../_story';
 
@@ -31,7 +31,28 @@ export const Heading: Story = {
   args: Primary.args,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const logo = canvas.queryByTestId('app-logo');
+
+    const logo = canvas.queryByAltText('App Logo');
     expect(logo).toBeTruthy();
+    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');
+    expect(fullscreen).toBeTruthy();
+
+    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');
+    expect(toggleLeftSidenav).toBeTruthy();
+
+    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');
+    expect(toggleRightSidenav).toBeTruthy();
+
+    const delay = 400;
+    
+    await userEvent.click(toggleLeftSidenav!, { delay });
+    await userEvent.click(toggleLeftSidenav!, { delay });
+    await userEvent.click(toggleLeftSidenav!, { delay });
+    await userEvent.click(toggleLeftSidenav!, { delay });
+
+    await userEvent.click(toggleRightSidenav!, { delay });
+    await userEvent.click(toggleRightSidenav!, { delay });
+    await userEvent.click(toggleRightSidenav!, { delay });
+    await userEvent.click(toggleRightSidenav!, { delay });
   },
 };

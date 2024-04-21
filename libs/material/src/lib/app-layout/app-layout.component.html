@@ -3,15 +3,16 @@
 
 <!-- General -->
 <ng-template #queryListTemplate let-items="items" let-testName="testName">
-  <span *ngIf="testing === true">{{ testName || 'NO test name' }}</span>
+  <span *ngIf="testing === true">{{ testName || 'No test name' }}</span>
 
   @if(items){ @for(item of items; track item){
   <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
   } }
 </ng-template>
 
-<!-- 
-    <ng-container *ngTemplateOutlet="queryListTemplate; context: { items:items }"></ng-container>
+<!-- Example 
+
+  <ng-container *ngTemplateOutlet="queryListTemplate; context: { items:items }"></ng-container>
 -->
 
 <!-- Toolbar like -->
@@ -85,18 +86,22 @@
         class="app-logo"
         src="assets/icons/icon-72x72.png"
         alt="App Logo"
-        data-testid="app-logo"
         *ngIf="!isHandset"
       />
 
+      <!-- Left Sidenav Toggle -->
       <button
-        class="left-menu-toggle"
-        mat-mini-fab
+        class="left-sidenav-toggle"
+        mat-icon-button
         (click)="leftSidenav.toggle()"
+        aria-label="Toggle Left Sidenav"
       >
-        <mat-icon>{{ leftSidenav.opened ? 'menu_opened' : 'menu' }}</mat-icon>
+        <mat-icon class="fill">{{
+          leftSidenav.opened ? 'menu_opened' : 'menu'
+        }}</mat-icon>
       </button>
 
+      <!-- Toolbar Items -->
       <ng-container
         *ngTemplateOutlet="
           toolbarTemplate;
@@ -108,18 +113,29 @@
         "
       ></ng-container>
 
+      <!-- Right Sidenav Toggle -->
       <button
-        class="right-menu-toggle"
-        mat-mini-fab
+        class="right-sidenav-toggle"
+        mat-icon-button
         (click)="rightSidenav.toggle()"
+        aria-label="Toggle Right Sidenav"
       >
-        <mat-icon>settings</mat-icon>
+        <mat-icon class="fill">{{ rightSidenavToggleIcon }}</mat-icon>
       </button>
     </mat-toolbar>
 
     <!-- Main Content  -->
 
-    <div class="main-content-container">
+    <div #mainContentContainer class="main-content-container">
+      <!-- Full Screen Button -->
+      <button
+        class="fullscreen-button"
+        mat-icon-button
+        (click)="fullscreenToggle(mainContentContainer)"
+        aria-label="Toggle Fullscreen"
+      >
+        <mat-icon> {{ fullscreenButtonIcon }}</mat-icon>
+      </button>
       <ng-container
         *ngTemplateOutlet="
           queryListTemplate;
@@ -142,8 +158,8 @@
             testName: 'statusbar'
           }
         "
-      ></ng-container
-    ></mat-toolbar>
+      ></ng-container>
+    </mat-toolbar>
     <!-- --Endof the content -->
   </mat-sidenav-content>
 </mat-sidenav-container>
