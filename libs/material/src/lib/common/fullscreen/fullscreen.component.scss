@@ -1,0 +1,19 @@
+*:fullscreen {
+  background-color: orange;
+  border: 10px solid green;
+}
+
+button {
+  margin: auto;
+  min-width: 200px;
+  min-height: 50px;
+  font-size: 3em;
+}
+
+.fullscreeen-container{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}

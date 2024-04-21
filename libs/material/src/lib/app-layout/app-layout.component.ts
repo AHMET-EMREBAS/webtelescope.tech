@@ -18,8 +18,10 @@ import {
   StatusbarLeftDirective,
   StatusbarRighttDirective,
 } from './app-layout.directive';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, map } from 'rxjs';
+import { ViewportDirective } from '../common/viewport/viewport.directive';
+import { FullscreenDirective } from '../common/fullscreen/fullscreen.directive';
+import { AppLogoDirective } from '../common/app-logo/app-logo.directive';
+import { TemplateOutletComponent } from '../common/template-outlet/template-outlet.component';
 
 const AppLayoutDirectives = [
   MainContentDirective,
@@ -38,6 +40,10 @@ export const AppLayoutModules = [
   MatToolbarModule,
   MatButtonModule,
   MatIconModule,
+  ViewportDirective,
+  FullscreenDirective,
+  AppLogoDirective,
+  TemplateOutletComponent
 ];
 
 @Component({
@@ -71,6 +77,8 @@ export class AppLayoutComponent {
    */
   @Input() testing = false;
 
+  @Input() rightSidenavToggleIcon = 'settings';
+
   /**
    * @ignore internal
    */
@@ -81,8 +89,6 @@ export class AppLayoutComponent {
    */
   isLeftSidenavOpen = false;
 
-  rightSidenavToggleIcon = 'settings';
-
   /**
    * @ignore internal
    */
@@ -91,55 +97,7 @@ export class AppLayoutComponent {
   /**
    * @ignore internal
    */
-  isHandset = false;
-
-  /**
-   * @ignore internal
-   */
-  $isHandset: Observable<boolean> = this.media
-    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])
-    .pipe(
-      map((e) => {
-        if (e.matches) {
-          this.isHandset = true;
-          this.mode = 'over';
-          this.isLeftSidenavOpen = false;
-          return true;
-        } else {
-          this.isHandset = false;
-          this.mode = 'side';
-          this.isLeftSidenavOpen = true;
-          return false;
-        }
-      })
-    );
-
-  constructor(private readonly media: BreakpointObserver) {}
-
-  /**
-   * @ignore internal
-   */
-  sideNavClick(sidenav: MatSidenav) {
-    if (this.isHandset) {
-      sidenav.toggle();
-    }
-  }
-
-  isFullscreen = false;
-  fullscreenButtonIcon: 'fullscreen_exit' | 'fullscreen' = 'fullscreen';
-  fullscreenTooltip: 'Fullscreen' | 'Exit Fullscreen' = 'Fullscreen';
-
-  fullscreenToggle(element: HTMLDivElement) {
-    this.isFullscreen = !this.isFullscreen;
-
-    if (this.isFullscreen) {
-      element.requestFullscreen();
-      this.fullscreenTooltip = 'Exit Fullscreen';
-      this.fullscreenButtonIcon = 'fullscreen_exit';
-    } else {
-      document.exitFullscreen();
-      this.fullscreenTooltip = 'Fullscreen';
-      this.fullscreenButtonIcon = 'fullscreen';
-    }
+  sideNavClick(sidenav: MatSidenav, isHandset?: boolean) {
+    if (isHandset) sidenav.toggle();
   }
 }

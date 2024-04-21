@@ -14,14 +14,6 @@
   animation-iteration-count: 1;
 }
 
-.right-sidenav-toggle {
-  margin-right: 1em;
-}
-
-.left-sidenav-toggle {
-  margin-left: 1em;
-}
-
 @keyframes appLogo {
   0% {
     transform: rotate(0deg);
@@ -29,6 +21,14 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.right-sidenav-toggle {
+  margin-right: 1em;
+}
+
+.left-sidenav-toggle {
+  margin-left: 1em;
 }
 
 .grow-1 {

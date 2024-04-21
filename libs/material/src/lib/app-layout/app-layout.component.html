@@ -1,21 +1,5 @@
-<!-- Subscribers  -->
-<ng-container *ngIf="$isHandset | async"></ng-container>
-
-<!-- General -->
-<ng-template #queryListTemplate let-items="items" let-testName="testName">
-  <span *ngIf="testing === true">{{ testName || 'No test name' }}</span>
-
-  @if(items){ @for(item of items; track item){
-  <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
-  } }
-</ng-template>
-
-<!-- Example 
-
-  <ng-container *ngTemplateOutlet="queryListTemplate; context: { items:items }"></ng-container>
--->
-
-<!-- Toolbar like -->
+<ng-container #viewport="wtViewport" wtViewport></ng-container>
+<ng-container #fullscreen="wtFullscreen" wtFullscreen></ng-container>
 
 <ng-template
   #toolbarTemplate
@@ -25,20 +9,18 @@
 >
   <div class="space-around-row-container">
     <div class="row-container-gap-1 row-flex-start">
-      <ng-container
-        *ngTemplateOutlet="
-          queryListTemplate;
-          context: { items: left, testName: testName + '-left' }
-        "
-      ></ng-container>
+      <wt-template-outlet
+        [items]="left"
+        [testing]="testing"
+        [testName]="testName + '-left'"
+      ></wt-template-outlet>
     </div>
     <div class="row-container-gap-1 row-flex-end">
-      <ng-container
-        *ngTemplateOutlet="
-          queryListTemplate;
-          context: { items: right, testName: testName + '-right' }
-        "
-      ></ng-container>
+      <wt-template-outlet
+        [items]="right"
+        [testing]="testing"
+        [testName]="testName + '-right'"
+      ></wt-template-outlet>
     </div>
   </div>
 </ng-template>
@@ -51,14 +33,13 @@
     position="start"
     [opened]="isLeftSidenavOpen"
     [mode]="mode"
-    (click)="sideNavClick(leftSidenav)"
+    (click)="sideNavClick(leftSidenav, viewport.isHandset)"
   >
-    <ng-container
-      *ngTemplateOutlet="
-        queryListTemplate;
-        context: { items: sidenavLeft, testName: 'Left sidenav' }
-      "
-    ></ng-container>
+    <wt-template-outlet
+      [items]="sidenavLeft"
+      [testing]="testing"
+      testName="Left sidenav"
+    ></wt-template-outlet>
   </mat-sidenav>
 
   <!-- Sidenav Right -->
@@ -69,25 +50,18 @@
     [mode]="mode"
     (click)="sideNavClick(rightSidenav)"
   >
-    <ng-container
-      *ngTemplateOutlet="
-        queryListTemplate;
-        context: { items: sidenavRight, testName: 'Right sidenav' }
-      "
-    ></ng-container>
+    <wt-template-outlet
+      [items]="sidenavRight"
+      [testing]="testing"
+      testName="Right sidenav"
+    ></wt-template-outlet>
   </mat-sidenav>
 
+  <!-- --Start of the content -->
   <mat-sidenav-content>
-    <!-- --Start of the content -->
-
     <!-- Main toolbar -->
     <mat-toolbar class="toolbar" color="primary">
-      <img
-        class="app-logo"
-        src="assets/icons/icon-72x72.png"
-        alt="App Logo"
-        *ngIf="!isHandset"
-      />
+      <img wtAppLogo *ngIf="viewport.isNotHandset" />
 
       <!-- Left Sidenav Toggle -->
       <button
@@ -131,20 +105,21 @@
       <button
         class="fullscreen-button"
         mat-icon-button
-        (click)="fullscreenToggle(mainContentContainer)"
-        aria-label="Toggle Fullscreen"
-      >
-        <mat-icon> {{ fullscreenButtonIcon }}</mat-icon>
-      </button>
-      <ng-container
-        *ngTemplateOutlet="
-          queryListTemplate;
-          context: {
-            items: mainContent,
-            testName: 'Main Content'
-          }
+        (click)="fullscreen.toggle(mainContentContainer)"
+        [attr.aria-label]="
+          fullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')
         "
-      ></ng-container>
+      >
+        <mat-icon>
+          {{ fullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}
+        </mat-icon>
+      </button>
+
+      <wt-template-outlet
+        [items]="mainContent"
+        [testing]="testing"
+        testName="Main Content"
+      ></wt-template-outlet>
     </div>
 
     <!-- Statusbar -->
