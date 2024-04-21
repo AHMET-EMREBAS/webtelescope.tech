@@ -9,7 +9,7 @@
     "components": [
         {
             "name": "HelloComponent",
-            "id": "component-HelloComponent-daf96029a5dbe710606eccaffd3134444b915926d48de88af8b1a4a71f61530cd20640b37a450d8929d6a500fe3dbe9744e90a74ec223716e145693ba7ba013d",
+            "id": "component-HelloComponent-dce0920e36e7a1595cd00b3d5e7cac144a0ffe3247eb3bbb1be8bbefe6996b2c049d47d25461516f8678b1514543ef68812baba485694cadb7142546597279ec",
             "file": "libs/material/src/lib/hello/hello.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -32,7 +32,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInput property description\n",
                     "description": "<p>Input property description</p>\n",
-                    "line": 15,
+                    "line": 16,
                     "type": "string",
                     "decorators": []
                 }
@@ -45,11 +45,22 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOutput property description\n",
                     "description": "<p>Output property description</p>\n",
-                    "line": 20,
+                    "line": 21,
                     "type": "EventEmitter"
                 }
             ],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "messages",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "sendMessage",
@@ -57,7 +68,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 26,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFunction description\n",
@@ -78,13 +89,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-hello',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './hello.component.html',\n  styleUrl: './hello.component.scss',\n})\nexport class HelloComponent {\n  /**\n   * Input property description\n   */\n  @Input() message = 'Sample Message';\n\n  /**\n   * Output property description\n   */\n  @Output() messageEvent = new EventEmitter<string>();\n\n  /**\n   * Function description\n   */\n  sendMessage() {\n    this.messageEvent.emit('This is how events work!');\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-hello',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './hello.component.html',\n  styleUrl: './hello.component.scss',\n})\nexport class HelloComponent {\n  messages: string[] = [];\n  /**\n   * Input property description\n   */\n  @Input() message = 'Sample Message';\n\n  /**\n   * Output property description\n   */\n  @Output() messageEvent = new EventEmitter<string>();\n\n  /**\n   * Function description\n   */\n  sendMessage() {\n    const msg = 'This is how events work!';\n    this.messages.push(`messageEvent : ${msg}`);\n    this.messageEvent.emit(msg);\n  }\n}\n",
             "styleUrl": "./hello.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<button (click)=\"sendMessage()\" data-testid=\"hello-button\">Hello There</button>\n"
+            "templateData": "<button (click)=\"sendMessage()\" data-testid=\"hello-button\">Hello There</button>\n\n<ul>\n  @for( m of messages; track m){\n\n  <li>{{ m }}</li>\n  }\n</ul>\n"
         }
     ],
     "modules": [],
@@ -108,7 +119,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const helloButton = canvas.queryByTestId('hello-button');\n    expect(helloButton).toBeDefined();\n  },\n}"
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const helloButton = canvas.queryByTestId('hello-button');\n\n    if (!helloButton) fail('Hello button is not found!');\n\n    await userEvent.click(helloButton, { delay: 1000 });\n    await userEvent.click(helloButton, { delay: 1000 });\n    await userEvent.click(helloButton, { delay: 1000 });\n    await userEvent.click(helloButton, { delay: 1000 });\n  },\n}"
             },
             {
                 "name": "meta",
@@ -118,7 +129,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<HelloComponent>",
-                "defaultValue": "{\n  component: HelloComponent,\n  title: 'HelloComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                "defaultValue": "{\n  component: HelloComponent,\n  title: 'HelloComponent',\n  tags: ['Just a sample'],\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
             },
             {
                 "name": "Primary",
@@ -168,7 +179,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const helloButton = canvas.queryByTestId('hello-button');\n    expect(helloButton).toBeDefined();\n  },\n}"
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const helloButton = canvas.queryByTestId('hello-button');\n\n    if (!helloButton) fail('Hello button is not found!');\n\n    await userEvent.click(helloButton, { delay: 1000 });\n    await userEvent.click(helloButton, { delay: 1000 });\n    await userEvent.click(helloButton, { delay: 1000 });\n    await userEvent.click(helloButton, { delay: 1000 });\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -178,7 +189,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<HelloComponent>",
-                    "defaultValue": "{\n  component: HelloComponent,\n  title: 'HelloComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                    "defaultValue": "{\n  component: HelloComponent,\n  title: 'HelloComponent',\n  tags: ['Just a sample'],\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
@@ -212,7 +223,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 15,
+        "count": 12,
         "status": "low",
         "files": [
             {
@@ -260,8 +271,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "HelloComponent",
-                "coveragePercent": 75,
-                "coverageCount": "3/4",
+                "coveragePercent": 60,
+                "coverageCount": "3/5",
                 "status": "good"
             }
         ]
