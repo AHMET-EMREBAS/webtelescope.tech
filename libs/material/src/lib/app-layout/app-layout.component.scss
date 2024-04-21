@@ -1,5 +1,9 @@
+$blackColor: rgb(53, 46, 46);
+$grayColor: gray;
+$whiteColor: white;
+
 .box-shadow {
-  box-shadow: 0px 0px 4px black;
+  box-shadow: 0px 0px 4px $blackColor;
 }
 
 .app-logo {
@@ -53,7 +57,6 @@ mat-sidenav-content {
 }
 
 mat-sidenav {
-  box-shadow: inset -3px 0px 10px black;
   min-width: 200px;
   padding: 1em;
   max-height: 80%;
@@ -63,8 +66,10 @@ mat-sidenav {
 mat-sidenav.right {
   border-top-left-radius: 1em;
   border-bottom-left-radius: 1em;
+  box-shadow: inset 3px 0px 10px $blackColor;
 }
 mat-sidenav.left {
+  box-shadow: inset -3px 0px 10px $blackColor;
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
 }
@@ -91,22 +96,22 @@ mat-toolbar.statusbar {
 
 .main-content-container:fullscreen {
   position: relative;
-  background-color: white;
+  background-color: $whiteColor;
 }
 
-button:focus {
-  box-shadow: 0px 0px 4px black;
-}
-button[class^='left']:focus {
-  border-top: 1px dashed rgba(64, 64, 64);
-  border-right: 2px dashed rgba(64, 64, 64);
-  border-bottom: 3px dashed rgba(64, 64, 64);
-  border-left: 3px solid black;
+// mat-toolbar button:focus {
+//   box-shadow: 0px 0px 4px $blackColor;
+// }
+mat-toolbar button[class^='left']:focus {
+  border-top: 1px dashed $grayColor;
+  border-right: 2px dashed $grayColor;
+  border-bottom: 3px dashed $grayColor;
+  border-left: 3px solid $blackColor;
 }
 
-button[class^='right']:focus {
-  border-top: 1px dashed rgb(64, 64, 64);
-  border-left: 2px dashed rgb(64, 64, 64);
-  border-bottom: 3px dashed rgb(64, 64, 64);
-  border-right: 3px solid black;
+mat-toolbar button[class^='right']:focus {
+  border-top: 1px dashed $grayColor;
+  border-left: 2px dashed $grayColor;
+  border-bottom: 3px dashed $grayColor;
+  border-right: 3px solid $blackColor;
 }

@@ -1,6 +1,3 @@
-<ng-container #viewport="wtViewport" wtViewport></ng-container>
-<ng-container #fullscreen="wtFullscreen" wtFullscreen></ng-container>
-
 <ng-template
   #toolbarTemplate
   let-left="left"
@@ -25,14 +22,14 @@
   </div>
 </ng-template>
 
-<mat-sidenav-container>
+<mat-sidenav-container #viewport="wtViewport" wtViewport>
   <!-- Sidenav Left -->
   <mat-sidenav
     #leftSidenav
     class="left"
     position="start"
-    [opened]="isLeftSidenavOpen"
-    [mode]="mode"
+    [opened]="viewport.toggleValue(true, false)"
+    [mode]="viewport.toggleValue('side', 'over')"
     (click)="sideNavClick(leftSidenav, viewport.isHandset)"
   >
     <wt-template-outlet
@@ -47,7 +44,7 @@
     #rightSidenav
     class="right"
     position="end"
-    [mode]="mode"
+    [mode]="viewport.toggleValue('side', 'over')"
     (click)="sideNavClick(rightSidenav)"
   >
     <wt-template-outlet
@@ -105,13 +102,15 @@
       <button
         class="fullscreen-button"
         mat-icon-button
-        (click)="fullscreen.toggle(mainContentContainer)"
+        #mainFullscreen="wtFullscreen"
+        wtFullscreen
+        [targetElement]="mainContentContainer"
         [attr.aria-label]="
-          fullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')
+          mainFullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')
         "
       >
         <mat-icon>
-          {{ fullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}
+          {{ mainFullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}
         </mat-icon>
       </button>
 
@@ -129,7 +128,7 @@
           toolbarTemplate;
           context: {
             left: statusbarLeft,
-            right: statusbarRightt,
+            right: statusbarRight,
             testName: 'statusbar'
           }
         "

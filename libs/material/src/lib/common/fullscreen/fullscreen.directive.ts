@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core';
 import { IToggle, IToggleValue } from '../types';
 
 @Directive({
@@ -7,7 +7,18 @@ import { IToggle, IToggleValue } from '../types';
   exportAs: 'wtFullscreen',
 })
 export class FullscreenDirective implements IToggleValue, IToggle {
+  @Input() targetElement?: HTMLElement;
+  @HostListener('click')
+  clickHander() {
+    if (this.targetElement) {
+      this.toggle(this.targetElement);
+    } else {
+      console.warn('targetElement is not provided to the fullscreen directive');
+    }
+  }
+
   isFullscreen?: boolean;
+
   private open(element: HTMLElement) {
     this.isFullscreen = true;
     element.requestFullscreen();

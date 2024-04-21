@@ -1,8 +1,10 @@
-<ng-container #screen="wtFullscreen" wtFullscreen></ng-container>
-
 <div class="fullscreeen-container" #fullscreenContainer>
   <div>
-    <button (click)="screen.toggle(fullscreenContainer)">
+    <button
+      #screen="wtFullscreen"
+      wtFullscreen
+      [targetElement]="fullscreenContainer"
+    >
       {{ screen.toggleValue('Open Fullscreen', 'Close Fullscreen') }}
     </button>
   </div>
@@ -14,4 +16,6 @@
   </p>
 </div>
 
-<h1>This text will not be shown in fullscreen because it is outside of the element</h1>
+<h1>
+  This text will not be shown in fullscreen because it is outside of the element
+</h1>
