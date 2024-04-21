@@ -1,0 +1,27 @@
+<!-- Subscribers  -->
+<!-- <ng-container *ngIf="$isHandset | async"></ng-container> -->
+
+<!-- General -->
+<ng-template #queryListTemplate let-items="items" let-testName="testName">
+  <span *ngIf="testing === true">{{ testName || 'No test name' }}</span>
+
+  @if(items){ @for(item of items; track item){
+  <ng-container *ngTemplateOutlet="item.templateRef"></ng-container>
+  } }
+</ng-template>
+
+<div class="web-layout-container">
+  <mat-toolbar class="main-toolbar" color="primary"></mat-toolbar>
+
+  <div class="-web-layout-content">
+    <!-- Left content  -->
+    <div class="web-layout-left-content">Left content</div>
+
+    <div class="web-layout-center-content"></div>
+
+    <!-- Right content -->
+    <div class="web-layout-right-content">Right content</div>
+  </div>
+
+  <div class="web-layout-footer"></div>
+</div>
