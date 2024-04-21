@@ -1,5 +1,11 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Directive, TemplateRef } from '@angular/core';
+import {
+  Component,
+  ContentChildren,
+  Directive,
+  QueryList,
+  TemplateRef,
+} from '@angular/core';
 import { ITemplateRef } from '../types';
 
 @Directive({ selector: '[wtMainContent]', standalone: true })
@@ -60,4 +66,43 @@ export class ContentLeftDirective implements ITemplateRef<NgTemplateOutlet> {
 @Directive({ selector: '[wtContentRight]', standalone: true })
 export class ContentRightDirective implements ITemplateRef<NgTemplateOutlet> {
   constructor(public readonly templateRef: TemplateRef<NgTemplateOutlet>) {}
+}
+
+@Component({ template: '' })
+export class BaseLayoutComponent {
+  @ContentChildren(MainContentDirective)
+  mainContent?: QueryList<MainContentDirective>;
+
+  @ContentChildren(FloatingItemsDirective)
+  floatingItems?: QueryList<FloatingItemsDirective>;
+
+  @ContentChildren(ToolbarRightDirective)
+  toolbarRight?: QueryList<ToolbarRightDirective>;
+
+  @ContentChildren(ToolbarLeftDirective)
+  toolbarLeft?: QueryList<ToolbarLeftDirective>;
+
+  @ContentChildren(SidenavLeftDirective)
+  sidenavLeft?: QueryList<SidenavLeftDirective>;
+
+  @ContentChildren(SidenavRightDirective)
+  sidenavRight?: QueryList<SidenavRightDirective>;
+
+  @ContentChildren(StatusbarLeftDirective)
+  statusbarLeft?: QueryList<StatusbarLeftDirective>;
+
+  @ContentChildren(StatusbarRightDirective)
+  statusbarRight?: QueryList<StatusbarRightDirective>;
+
+  @ContentChildren(FooterRightDirective)
+  footerRight?: QueryList<FooterRightDirective>;
+
+  @ContentChildren(FooterLeftDirective)
+  footerLeft?: QueryList<FooterLeftDirective>;
+
+  @ContentChildren(ContentLeftDirective)
+  contentLeft?: QueryList<ContentLeftDirective>;
+
+  @ContentChildren(ContentRightDirective)
+  contentRight?: QueryList<ContentRightDirective>;
 }

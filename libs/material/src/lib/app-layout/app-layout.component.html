@@ -119,6 +119,16 @@
         [testing]="testing"
         testName="Main Content"
       ></wt-template-outlet>
+
+      <div class="fixed-right-container">
+        <div class="floating-content">
+          <wt-template-outlet
+            [items]="floatingItems"
+            [testing]="testing"
+            testName="Floating Buttons "
+          ></wt-template-outlet>
+        </div>
+      </div>
     </div>
 
     <!-- Statusbar -->
