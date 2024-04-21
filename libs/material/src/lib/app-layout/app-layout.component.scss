@@ -1,5 +1,5 @@
 .box-shadow {
-  box-shadow: 0px 0px 4px var(--shadow-color);
+  box-shadow: 0px 0px 4px black;
 }
 
 .app-logo {
@@ -68,8 +68,8 @@ mat-sidenav-content {
   flex-direction: column;
   justify-content: space-between;
   margin: 0px;
-  padding-left: var(--common-padding);
-  padding-right: var(--common-padding);
+  padding-left: 1em;
+  padding-right: 1em;
   overflow: hidden;
 }
 
@@ -79,14 +79,14 @@ mat-sidenav-content {
   overflow-y: auto;
   flex-grow: 1;
   max-height: 78%;
-  padding-top: var(--common-padding);
-  padding-bottom: var(--common-padding);
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 mat-sidenav {
-  box-shadow: inset -3px 0px 10px var(--shadow-color);
+  box-shadow: inset -3px 0px 10px black;
   min-width: 200px;
-  padding: var(--common-padding);
+  padding: 1em;
   max-height: 80%;
   margin: auto;
 }
@@ -127,7 +127,7 @@ mat-toolbar.statusbar {
 }
 
 button:focus {
-  box-shadow: 0px 0px 4px var(--shadow-color);
+  box-shadow: 0px 0px 4px black;
 }
 button[class^='left']:focus {
   border-top: 1px dashed rgba(64, 64, 64);

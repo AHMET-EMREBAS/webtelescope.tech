@@ -2676,8 +2676,3 @@ body {
   margin: 0px !important;
   padding: 0px !important;
 }
-
-:root {
-  --common-padding: 1em;
-  --shadow-color: gray;
-}
