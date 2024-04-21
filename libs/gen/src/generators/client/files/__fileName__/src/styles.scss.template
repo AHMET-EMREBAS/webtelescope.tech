@@ -2,17 +2,10 @@
   box-sizing: border-box;
 }
 
-html {
-  overflow: hidden;
-}
-
 html,
 body {
   padding: 0px;
   margin: 0px;
-  width: 100vw;
-  height: 100vh;
-  border: none;
 }
 
 body {
@@ -54,35 +47,20 @@ wt-root {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-dark);
+  background: var(--scrollbar-thumb-color);
   border-radius: 6px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-darker);
-}
-
-/* Style the scrollbar thumb when it's in an active state (e.g., when scrolling) */
-::-webkit-scrollbar-thumb:active {
-  background: var(--accent-dark);
-}
-
 ::-webkit-scrollbar-track {
-  background-color: var(--primary);
+  background-color: var(--scrollbar-track-color);
 }
 
-::-webkit-scrollbar-track:active {
-  background: var(--primary-dark);
+
+:root{ 
+  --scrollbar-thumb-color: crimson; 
+  --scrollbar-track-color: gray; 
 }
 
-::-webkit-scrollbar-track:hover {
-  background: var(--primary-light);
-}
-
-/* Style the scrollbar corner (the intersection between the horizontal and vertical scrollbars) */
-::-webkit-scrollbar-corner {
-  background: var(--primary-dark);
-}
 
 @font-face {
   font-family: Material Icons;
