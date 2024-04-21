@@ -1,6 +1,6 @@
-import { Component, ContentChildren, Input, QueryList } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,7 @@ import {
   SidenavRightDirective,
   StatusbarLeftDirective,
   StatusbarRightDirective,
+  BaseLayoutComponent,
 } from '../common/';
 
 const AppLayoutDirectives = [
@@ -50,35 +51,11 @@ export const AppLayoutModules = [
   styleUrl: './app-layout.component.scss',
   providers: [...AppLayoutDirectives],
 })
-export class AppLayoutComponent {
-  @ContentChildren(MainContentDirective)
-  mainContent?: QueryList<MainContentDirective>;
-  @ContentChildren(FloatingItemsDirective)
-  floatingItems?: QueryList<FloatingItemsDirective>;
-  @ContentChildren(ToolbarRightDirective)
-  toolbarRight?: QueryList<ToolbarRightDirective>;
-  @ContentChildren(ToolbarLeftDirective)
-  toolbarLeft?: QueryList<ToolbarLeftDirective>;
-  @ContentChildren(SidenavLeftDirective)
-  sidenavLeft?: QueryList<SidenavLeftDirective>;
-  @ContentChildren(SidenavRightDirective)
-  sidenavRight?: QueryList<SidenavRightDirective>;
-  @ContentChildren(StatusbarLeftDirective)
-  statusbarLeft?: QueryList<StatusbarLeftDirective>;
-  @ContentChildren(StatusbarRightDirective)
-  statusbarRight?: QueryList<StatusbarRightDirective>;
-
+export class AppLayoutComponent extends BaseLayoutComponent {
   /**
    * Test the app layout without pushing the content
    */
   @Input() testing = false;
 
   @Input() rightSidenavToggleIcon = 'settings';
-
-  /**
-   * @ignore internal
-   */
-  sideNavClick(sidenav: MatSidenav, isHandset?: boolean) {
-    if (isHandset) sidenav.toggle();
-  }
 }
