@@ -1594,7 +1594,7 @@
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-c61a1215bbf9cd02aa71b971250338118eea69c1451d154c7c03299c677cab3e9e4ef5a545d2f8b0e69aed4222fdc95558466106dcabeb06679c7534b5f9dadc",
+            "id": "component-AppLayoutComponent-8d57151e90e08ccc281717b01374252edd8a4d2ffb9e9f9739796adf4cf7c3d5f187182553e3ca710434e52a6537b360c5f69e1fcfa9629585616eca495890bd",
             "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1620,7 +1620,7 @@
                     "defaultValue": "'settings'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 80,
+                    "line": 76,
                     "type": "string",
                     "decorators": []
                 },
@@ -1631,7 +1631,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTest the app layout without pushing the content\n",
                     "description": "<p>Test the app layout without pushing the content</p>\n",
-                    "line": 78,
+                    "line": 74,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -1645,7 +1645,7 @@
                     "type": "QueryList<FloatingItemsDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 61,
+                    "line": 57,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1663,7 +1663,7 @@
                     "type": "QueryList<MainContentDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 59,
+                    "line": 55,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1681,7 +1681,7 @@
                     "type": "QueryList<SidenavLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 67,
+                    "line": 63,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1699,7 +1699,7 @@
                     "type": "QueryList<SidenavRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 69,
+                    "line": 65,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1717,7 +1717,7 @@
                     "type": "QueryList<StatusbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 71,
+                    "line": 67,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1735,7 +1735,7 @@
                     "type": "QueryList<StatusbarRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 73,
+                    "line": 69,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1753,7 +1753,7 @@
                     "type": "QueryList<ToolbarLeftDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 65,
+                    "line": 61,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1771,7 +1771,7 @@
                     "type": "QueryList<ToolbarRightDirective>",
                     "optional": true,
                     "description": "",
-                    "line": 63,
+                    "line": 59,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -1802,13 +1802,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ContentChildren, Input, QueryList } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport {\r\n  MatDrawerMode,\r\n  MatSidenav,\r\n  MatSidenavModule,\r\n} from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n} from '../common/';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRightDirective)\r\n  statusbarRight?: QueryList<StatusbarRightDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  mode: MatDrawerMode = 'side';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isLeftSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  isRightSidenavOpen = false;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  sideNavClick(sidenav: MatSidenav, isHandset?: boolean) {\r\n    if (isHandset) sidenav.toggle();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, ContentChildren, Input, QueryList } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n} from '../common/';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent {\r\n  @ContentChildren(MainContentDirective)\r\n  mainContent?: QueryList<MainContentDirective>;\r\n  @ContentChildren(FloatingItemsDirective)\r\n  floatingItems?: QueryList<FloatingItemsDirective>;\r\n  @ContentChildren(ToolbarRightDirective)\r\n  toolbarRight?: QueryList<ToolbarRightDirective>;\r\n  @ContentChildren(ToolbarLeftDirective)\r\n  toolbarLeft?: QueryList<ToolbarLeftDirective>;\r\n  @ContentChildren(SidenavLeftDirective)\r\n  sidenavLeft?: QueryList<SidenavLeftDirective>;\r\n  @ContentChildren(SidenavRightDirective)\r\n  sidenavRight?: QueryList<SidenavRightDirective>;\r\n  @ContentChildren(StatusbarLeftDirective)\r\n  statusbarLeft?: QueryList<StatusbarLeftDirective>;\r\n  @ContentChildren(StatusbarRightDirective)\r\n  statusbarRight?: QueryList<StatusbarRightDirective>;\r\n\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  sideNavClick(sidenav: MatSidenav, isHandset?: boolean) {\r\n    if (isHandset) sidenav.toggle();\r\n  }\r\n}\r\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<ng-container #viewport=\"wtViewport\" wtViewport></ng-container>\r\n\r\n<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        [testName]=\"testName + '-left'\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        [testName]=\"testName + '-right'\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"isLeftSidenavOpen\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(leftSidenav, viewport.isHandset)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavLeft\"\r\n      [testing]=\"testing\"\r\n      testName=\"Left sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"mode\"\r\n    (click)=\"sideNavClick(rightSidenav)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavRight\"\r\n      [testing]=\"testing\"\r\n      testName=\"Right sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- --Start of the content -->\r\n  <mat-sidenav-content>\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img wtAppLogo *ngIf=\"viewport.isNotHandset\" />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        class=\"left-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        class=\"right-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container column-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        #mainFullscreen=\"wtFullscreen\"\r\n        wtFullscreen\r\n        [targetElement]=\"mainContentContainer\"\r\n        [attr.aria-label]=\"\r\n          mainFullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')\r\n        \"\r\n      >\r\n        <mat-icon>\r\n          {{ mainFullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"Main Content\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRight,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+            "templateData": "<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        [testName]=\"testName + '-left'\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        [testName]=\"testName + '-right'\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container #viewport=\"wtViewport\" wtViewport>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"viewport.toggleValue(true, false)\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"sideNavClick(leftSidenav, viewport.isHandset)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavLeft\"\r\n      [testing]=\"testing\"\r\n      testName=\"Left sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"sideNavClick(rightSidenav)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavRight\"\r\n      [testing]=\"testing\"\r\n      testName=\"Right sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- --Start of the content -->\r\n  <mat-sidenav-content>\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img wtAppLogo *ngIf=\"viewport.isNotHandset\" />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        class=\"left-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        class=\"right-sidenav-toggle\"\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container column-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        #mainFullscreen=\"wtFullscreen\"\r\n        wtFullscreen\r\n        [targetElement]=\"mainContentContainer\"\r\n        [attr.aria-label]=\"\r\n          mainFullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')\r\n        \"\r\n      >\r\n        <mat-icon>\r\n          {{ mainFullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"Main Content\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRight,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
         },
         {
             "name": "ContainerComponent",
