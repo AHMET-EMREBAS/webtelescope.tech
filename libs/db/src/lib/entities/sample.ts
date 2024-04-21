@@ -2,6 +2,7 @@ import {
   ICreateSampleDto,
   IQuerySampleDto,
   ISample,
+  ISampleView,
 } from '@webpackages/common';
 
 import {
@@ -11,12 +12,28 @@ import {
   Dto,
   Property,
   QueryProperty,
+  PickType,
+  ViewColumn,
+  ViewEntity,
 } from '@webpackages/core';
-import { PickType } from '@nestjs/swagger';
 
 @Entity()
 export class Sample extends IDEntity implements ISample {
   @Column({ type: 'string', unique: true }) name!: string;
+}
+
+@ViewEntity({
+  expression(ds) {
+    return ds
+      .createQueryBuilder()
+      .select('m.id', 'sampleId')
+      .addSelect('m.name', 'sampleName')
+      .from(Sample, 'm');
+  },
+})
+export class SampleView implements ISampleView {
+  @ViewColumn() sampleId!: number;
+  @ViewColumn() sampleName!: string;
 }
 
 @Dto()
@@ -27,8 +44,6 @@ export class CreateSampleDto implements ICreateSampleDto {
 
 @Dto()
 export class UpdateSampleDto extends PickType(CreateSampleDto, ['name']) {}
-
-
 
 @Dto()
 export class QuerySampleDto implements IQuerySampleDto {

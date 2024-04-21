@@ -1,1 +1,12 @@
-export { ApiBearerAuth, ApiBasicAuth, ApiCookieAuth } from '@nestjs/swagger';
+export {
+  ApiBearerAuth,
+  ApiBasicAuth,
+  ApiCookieAuth,
+  PickType,
+  PartialType,
+  OmitType,
+  IntersectionType,
+  DocumentBuilder,
+  SwaggerModule,
+  SwaggerDocumentOptions,
+} from '@nestjs/swagger';
