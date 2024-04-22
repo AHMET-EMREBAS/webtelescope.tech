@@ -1,0 +1,126 @@
+{
+  "name": "office",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "wt",
+  "sourceRoot": "apps/office/src",
+  "tags": [],
+  "i18n": {
+    "sourceLocale": "en",
+    "locales": {
+      "": {
+        "translation": "apps/office/src/locale/messages.xlf",
+        "baseHref": ""
+      },
+      "es": {
+        "translation": "apps/office/src/locale/messages.es.xlf",
+        "baseHref": ""
+      },
+      "tr": {
+        "translation": "apps/office/src/locale/messages.tr.xlf",
+        "baseHref": ""
+      }
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/office",
+        "index": "apps/office/src/index.html",
+        "main": "apps/office/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/office/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/office/src/favicon.svg",
+          "apps/office/src/assets",
+          "apps/office/src/manifest.webmanifest"
+        ],
+        "styles": [
+          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "apps/office/src/styles.scss"
+        ],
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/office/ngsw-config.json"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "localize": true,
+          "optimization": true,
+          "buildOptimizer": true,
+          "vendorChunk": false,
+          "extractLicenses": true,
+          "sourceMap": false
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "office:build:production"
+        },
+        "development": {
+          "buildTarget": "office:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/office/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "office:build",
+        "outputPath": "apps/office/src/locale",
+        "format": "xlf"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/office/**/*.ts", "apps/office/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/office/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "office:build"
+      }
+    }
+  }
+}

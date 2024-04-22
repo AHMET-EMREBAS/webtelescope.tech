@@ -2,7 +2,7 @@ import { Component, Input, QueryList } from '@angular/core';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { TemplateOutletComponent } from '../template-outlet/template-outlet.component';
 import { ITemplateRef } from '../types';
-import { FullscreenDirective } from '../fullscreen/fullscreen.directive';
+import { FullscreenDirective } from '../directives';
 
 @Component({
   selector: 'wt-floating-container',

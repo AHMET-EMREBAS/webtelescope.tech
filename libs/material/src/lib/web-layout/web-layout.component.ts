@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {
+  AppLogoDirective,
   BaseLayoutComponent,
   FloatingContainerComponent,
   FullscreenDirective,
@@ -13,14 +14,14 @@ import {
   ViewportDirective,
 } from '../common';
 
-export const WebLayoutModules = [
+export const __WebLayoutModules = [
   CommonModule,
   MatSidenavModule,
-  MatButtonModule,
-  MatIconModule,
   MatToolbarModule,
   TemplateOutletComponent,
   FloatingContainerComponent,
+  MatButtonModule,
+  MatIconModule,
   ViewportDirective,
   FullscreenDirective,
   ...LayoutDirectives,
@@ -29,11 +30,28 @@ export const WebLayoutModules = [
 @Component({
   selector: 'wt-web-layout',
   standalone: true,
-  imports: [...WebLayoutModules],
+  imports: [...__WebLayoutModules],
   templateUrl: './web-layout.component.html',
   styleUrl: './web-layout.component.scss',
-  providers: [...LayoutDirectives],
 })
 export class WebLayoutComponent extends BaseLayoutComponent {
-  @Input() testing = true;
+  @Input() testing = false;
 }
+
+@NgModule({
+  imports: [
+    WebLayoutComponent,
+    ...LayoutDirectives,
+    AppLogoDirective,
+    ViewportDirective,
+    FullscreenDirective,
+  ],
+  exports: [
+    WebLayoutComponent,
+    ...LayoutDirectives,
+    AppLogoDirective,
+    ViewportDirective,
+    FullscreenDirective,
+  ],
+})
+export class WebLayoutModule {}

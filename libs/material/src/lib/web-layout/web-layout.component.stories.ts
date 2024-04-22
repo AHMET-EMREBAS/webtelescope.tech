@@ -22,7 +22,9 @@ export default meta;
 type Story = StoryObj<WebLayoutComponent>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    testing: true,
+  },
 };
 
 export const Heading: Story = {

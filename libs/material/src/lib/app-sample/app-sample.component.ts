@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppLayoutModule } from '../app-layout/app-layout.component';
 import { RouterModule } from '@angular/router';
-import { NavListComponent } from '../nav-list/nav-list.component';
+import { NavListComponent } from '../nav-list';
 
 @Component({
   selector: 'wt-app-sample',
