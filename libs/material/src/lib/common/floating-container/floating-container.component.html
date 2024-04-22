@@ -1,0 +1,9 @@
+<div class="fixed-right-container" #screen="wtFullscreen" wtFullscreen>
+  <div class="floating-content" *ngIf="!screen.hasFullscreenElement()">
+    <wt-template-outlet
+      [items]="items"
+      [testing]="testing"
+      testName="Floating Buttons"
+    ></wt-template-outlet>
+  </div>
+</div>

@@ -43,4 +43,8 @@ export class FullscreenDirective implements IToggleValue, IToggle {
   toggleValue<T>(actualValue: T, conditionalValue: T): T {
     return this.isFullscreen ? conditionalValue : actualValue;
   }
+
+  hasFullscreenElement() {
+    return document.fullscreenElement;
+  }
 }

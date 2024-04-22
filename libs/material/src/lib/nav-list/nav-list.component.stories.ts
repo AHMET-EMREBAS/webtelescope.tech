@@ -27,7 +27,7 @@ export const Primary: Story = {
       {
         id: 1,
         title: 'First title',
-        subTitle: 'First subtitle',
+        subtitle: 'First subtitle',
         icon: 'info',
         iconColor: 'accent',
         badge: '100',
@@ -38,7 +38,7 @@ export const Primary: Story = {
       {
         id: 2,
         title: 'First title',
-        subTitle: 'First subtitle',
+        subtitle: 'First subtitle',
         icon: 'info',
         iconColor: 'accent',
         badge: '100',

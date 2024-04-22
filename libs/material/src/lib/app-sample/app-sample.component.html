@@ -1,1 +1,174 @@
-<p>app-sample works!</p>
+<wt-app-layout [rightSidenavToggleIcon]="'settings'">
+  <ng-template wtToolbarRight>
+    <button mat-icon-button><mat-icon>person</mat-icon></button>
+  </ng-template>
+
+  <ng-template wtToolbarLeft>
+    <button mat-icon-button><mat-icon>home</mat-icon></button>
+  </ng-template>
+
+  <ng-template wtMainContent>
+    <div class="column-container">
+      <img
+        src="./assets/imgs/clock.svg"
+        alt="Time"
+        style="width: 100px; margin: auto"
+      />
+
+      <div class="ff-comfortaa" style="text-align: center">
+        <h1 style="color: green">Good News</h1>
+        <p>Hey, how you doing today. I got some good news for you!</p>
+        <p>Are you ready?</p>
+        <p>
+          You got <strong> 100 sales in 3 hours</strong>! Not me! People love
+          your products!
+        </p>
+        <p>Have a look at the <a href="#sales-report">sales' report </a></p>
+        <hr />
+        <h1 style="color: crimson">Bad News</h1>
+        <p>Unfortunately, we go some bad news!</p>
+        <p>
+          We have 11 product 2 employee related issues! Please have a look at
+          your <a href="#inbox">inbox </a>
+        </p>
+      </div>
+      <div class="ff-comfortaa" style="text-align: center">
+        <h1 style="color: green">Good News</h1>
+        <p>Hey, how you doing today. I got some good news for you!</p>
+        <p>Are you ready?</p>
+        <p>
+          You got <strong> 100 sales in 3 hours</strong>! Not me! People love
+          your products!
+        </p>
+        <p>Have a look at the <a href="#sales-report">sales' report </a></p>
+        <hr />
+        <h1 style="color: crimson">Bad News</h1>
+        <p>Unfortunately, we go some bad news!</p>
+        <p>
+          We have 11 product 2 employee related issues! Please have a look at
+          your <a href="#inbox">inbox </a>
+        </p>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template wtSidenavLeft>
+    <wt-nav-list
+      title="Inventory"
+      [items]="[
+        { id: 1, icon: 'apps', title: 'Products', route: 'some' },
+        { id: 2, icon: 'numbers', title: 'Counter', route: 'some' }
+      ]"
+    ></wt-nav-list>
+  </ng-template>
+
+  <ng-template wtSidenavLeft>
+    <wt-nav-list
+      title="Promotions"
+      [items]="[
+        { id: 3, icon: 'money', title: 'Prices', route: 'some' },
+        { id: 4, icon: 'arrow_right', title: 'Discounts', route: 'some' },
+        { id: 4, icon: 'money', title: 'Promoted Items', route: 'some' }
+      ]"
+    ></wt-nav-list>
+  </ng-template>
+
+  <ng-template wtSidenavLeft>
+    <wt-nav-list
+      title="Meta"
+      [items]="[
+        { id: 3, icon: 'category', title: 'Categories', route: 'some' },
+        { id: 4, icon: 'business', title: 'Departments', route: 'some' }
+      ]"
+    ></wt-nav-list>
+  </ng-template>
+  <ng-template wtSidenavRight>
+    <wt-nav-list
+      title="Administrative"
+      [items]="[
+        {
+          id: 5,
+          icon: 'group',
+          title: 'Employees',
+          route: 'some',
+          
+        },
+        {
+          id: 5,
+          icon: 'add',
+          title: 'New Employee',
+          route: 'some',
+          
+        },
+      ]"
+    ></wt-nav-list>
+  </ng-template>
+
+  <ng-template wtSidenavRight>
+    <wt-nav-list
+      title="Store Management"
+      [items]="[
+        {
+          id: 6,
+          icon: 'store',
+          title: 'Stores',
+          route: 'some',
+          
+        },
+        {
+          id: 6,
+          icon: 'add',
+          title: 'New Store',
+          route: 'some',
+          
+        }
+      ]"
+    ></wt-nav-list>
+  </ng-template>
+
+  <ng-template wtSidenavRight>
+    <wt-nav-list
+      title="Customer Management"
+      [items]="[
+        {
+          id: 6,
+          icon: 'group',
+          title: 'Customers',
+          route: 'some',
+          
+        }
+      ]"
+    ></wt-nav-list>
+
+    <ng-template wtStatusbarLeft>
+      <button
+        mat-icon-button
+        color="accent"
+        matBadgeColor="warn"
+        matBadge="100"
+      >
+        <mat-icon>light</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" matBadgeColor="warn" matBadge="5">
+        <mat-icon>reports</mat-icon>
+      </button>
+    </ng-template>
+
+    <ng-template wtStatusbarRight>
+      <button mat-icon-button matBadge="3" matBadgeColor="warn" color="accent">
+        <mat-icon class="fill"> mail </mat-icon>
+      </button>
+      <button mat-icon-button matBadge="12" matBadgeColor="warn" color="accent">
+        <mat-icon class="fill">notifications</mat-icon>
+      </button>
+    </ng-template>
+  </ng-template>
+
+  <ng-template wtFloatingItems>
+    <div class="column-container">
+      <button mat-mini-fab color="primary"><mat-icon>chat</mat-icon></button>
+      <button mat-mini-fab color="accent"><mat-icon>info</mat-icon></button>
+      <button mat-mini-fab color="warn"><mat-icon>phone</mat-icon></button>
+    </div>
+  </ng-template>
+</wt-app-layout>

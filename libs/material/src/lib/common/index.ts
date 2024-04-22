@@ -7,3 +7,5 @@ export * from './template-outlet/template-outlet.component';
 export * from './types';
 export * from './viewport/viewport.component';
 export * from './viewport/viewport.directive';
+export * from './floating-container/floating-container.component';
+export * from './local-storeage';

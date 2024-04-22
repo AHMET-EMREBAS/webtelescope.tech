@@ -1,35 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   ViewportDirective,
   FullscreenDirective,
   AppLogoDirective,
   TemplateOutletComponent,
-  MainContentDirective,
-  FloatingItemsDirective,
-  ToolbarRightDirective,
-  ToolbarLeftDirective,
-  SidenavLeftDirective,
-  SidenavRightDirective,
-  StatusbarLeftDirective,
-  StatusbarRightDirective,
   BaseLayoutComponent,
+  FloatingContainerComponent,
+  LayoutDirectives,
 } from '../common/';
-
-const AppLayoutDirectives = [
-  MainContentDirective,
-  FloatingItemsDirective,
-  ToolbarRightDirective,
-  ToolbarLeftDirective,
-  SidenavLeftDirective,
-  SidenavRightDirective,
-  StatusbarLeftDirective,
-  StatusbarRightDirective,
-];
 
 export const AppLayoutModules = [
   CommonModule,
@@ -41,15 +26,17 @@ export const AppLayoutModules = [
   FullscreenDirective,
   AppLogoDirective,
   TemplateOutletComponent,
+  FloatingContainerComponent,
+  MatBadgeModule,
+  MatTooltipModule,
 ];
 
 @Component({
   selector: 'wt-app-layout',
   standalone: true,
-  imports: [...AppLayoutModules, ...AppLayoutDirectives],
+  imports: [...AppLayoutModules, ...LayoutDirectives],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
-  providers: [...AppLayoutDirectives],
 })
 export class AppLayoutComponent extends BaseLayoutComponent {
   /**
@@ -59,3 +46,9 @@ export class AppLayoutComponent extends BaseLayoutComponent {
 
   @Input() rightSidenavToggleIcon = 'settings';
 }
+
+@NgModule({
+  imports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],
+  exports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],
+})
+export class AppLayoutModule {}

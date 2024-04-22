@@ -22,8 +22,8 @@
   </div>
 </ng-template>
 
-<div class="column-container">
-  <mat-toolbar class="main-toolbar" color="primary">
+<div #viewport="wtViewport" wtViewport class="main-container column-container">
+  <mat-toolbar class="toolbar" color="primary">
     <!-- Toolbar Items -->
     <ng-container
       *ngTemplateOutlet="
@@ -37,9 +37,12 @@
     ></ng-container>
   </mat-toolbar>
 
-  <div class="row-container">
+  <div class="content-container row-container">
     <!-- Left content  -->
-    <div class="row-container-left">
+    <div
+      class="content-container-left row-container-left"
+      *ngIf="viewport.isNotHandset"
+    >
       <wt-template-outlet
         [items]="contentLeft"
         [testing]="testing"
@@ -47,7 +50,8 @@
       ></wt-template-outlet>
     </div>
 
-    <div class="row-container">
+    <!-- Main Content -->
+    <div class="content-container-main row-container">
       <wt-template-outlet
         [items]="mainContent"
         [testing]="testing"
@@ -56,7 +60,10 @@
     </div>
 
     <!-- Right content -->
-    <div class="row-container-right">
+    <div
+      class="content-container-right row-container-right"
+      *ngIf="viewport.isNotHandset"
+    >
       <wt-template-outlet
         [items]="contentRight"
         [testing]="testing"
@@ -64,6 +71,11 @@
       ></wt-template-outlet>
     </div>
   </div>
+
+  <wt-floating-container
+    [items]="floatingItems"
+    [testing]="testing"
+  ></wt-floating-container>
 
   <!-- Footer -->
   <mat-toolbar class="footer-toolbar" color="accent">

@@ -1,17 +1,15 @@
 mat-list-item {
-  border-radius: 1em !important;
-  transition: padding-left ease-in-out 400ms;
+  border-left: 3px solid transparent;
+  border-radius: 0.3em !important;
+  overflow: hidden;
 }
 
 mat-nav-list {
   display: flex;
   flex-direction: column;
   gap: 0.3em;
-  border-radius: 1em;
-  padding: 1em;
-  box-shadow: 0px 0px 2px black;
 }
-.router-link-active {
-  padding-left: 1em !important;
-  box-shadow: 0px 0px 4px black;
+
+.list-item-active {
+  color: purple !important;
 }

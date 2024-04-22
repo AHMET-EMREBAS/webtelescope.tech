@@ -106,3 +106,18 @@ export class BaseLayoutComponent {
   @ContentChildren(ContentRightDirective)
   contentRight?: QueryList<ContentRightDirective>;
 }
+
+export const LayoutDirectives = [
+  MainContentDirective,
+  FloatingItemsDirective,
+  ToolbarRightDirective,
+  ToolbarLeftDirective,
+  SidenavLeftDirective,
+  SidenavRightDirective,
+  StatusbarLeftDirective,
+  StatusbarRightDirective,
+  FooterRightDirective,
+  FooterLeftDirective,
+  ContentLeftDirective,
+  ContentRightDirective,
+];

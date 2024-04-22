@@ -25,7 +25,6 @@ $__boxshadowSize: 5px;
   }
 }
 
-
 mat-sidenav-container {
   height: 100vh;
 }
@@ -84,6 +83,7 @@ mat-toolbar.statusbar {
   position: absolute;
   top: 0.5em;
   right: 0.5em;
+  z-index: 1;
 }
 
 .main-content-container:fullscreen {
@@ -103,29 +103,4 @@ mat-toolbar button[class^='right']:focus {
   border-left: 2px dashed $__grayColor;
   border-bottom: 3px dashed $__grayColor;
   border-right: 3px solid $__blackColor;
-}
-
-.fixed-right-container {
-  position: fixed;
-  overflow: visible;
-  top: 0px;
-  right: 0px;
-  width: 0px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.floating-content {
-  z-index: 1;
-  width: fit-content;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1em;
-  transform: translateX(-100%);
-
-  padding: 1em;
 }

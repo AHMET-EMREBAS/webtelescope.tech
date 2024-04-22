@@ -4,7 +4,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BaseLayoutComponent, TemplateOutletComponent } from '../common';
+import {
+  BaseLayoutComponent,
+  FloatingContainerComponent,
+  FullscreenDirective,
+  LayoutDirectives,
+  TemplateOutletComponent,
+  ViewportDirective,
+} from '../common';
 
 @Component({
   selector: 'wt-web-layout',
@@ -16,9 +23,14 @@ import { BaseLayoutComponent, TemplateOutletComponent } from '../common';
     MatIconModule,
     MatToolbarModule,
     TemplateOutletComponent,
+    FloatingContainerComponent,
+    ViewportDirective,
+    FullscreenDirective,
+    ...LayoutDirectives,
   ],
   templateUrl: './web-layout.component.html',
   styleUrl: './web-layout.component.scss',
+  providers: [...LayoutDirectives],
 })
 export class WebLayoutComponent extends BaseLayoutComponent {
   @Input() testing = true;

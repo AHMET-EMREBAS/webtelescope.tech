@@ -1373,12 +1373,12 @@
         },
         {
             "name": "ViewportDirective",
-            "id": "directive-ViewportDirective-06dbf1345e03f2442911103338d0f452d6c62782c233c38d96a75bb0071fb4b7fafab86470bdf5496475424b3181d561740295f721fb010fb2c0756f0972cd28",
+            "id": "directive-ViewportDirective-c416869c68e8b2c7c4a24c054967b9f42a887f3bca57ffd4ffad123f1625f449dfbe8f8b68c3e537bcef12bae0b60ab3a7c47447dba465f2b4b385012798acc1",
             "file": "libs/material/src/lib/common/viewport/viewport.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';\nimport { Observable, Subscription, map } from 'rxjs';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { IToggleValue } from '../types';\n\n@Directive({\n  selector: '[wtViewport]',\n  standalone: true,\n  exportAs: 'wtViewport',\n})\nexport class ViewportDirective implements IToggleValue, OnInit, OnDestroy {\n  isHandset?: boolean;\n  isNotHandset?: boolean;\n\n  /**\n   * @ignore internal\n   */\n  $isHandset: Observable<boolean> = this.media\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\n    .pipe(\n      map((e) => {\n        const result = e.matches;\n        this.isHandset = result;\n        this.isNotHandset = !this.isHandset;\n        return result;\n      })\n    );\n\n  constructor(\n    public readonly elementRef: ElementRef<HTMLElement>,\n    private readonly media: BreakpointObserver\n  ) {}\n\n  viewportSubscription!: Subscription;\n\n  ngOnInit(): void {\n    this.viewportSubscription = this.$isHandset.subscribe();\n  }\n\n  ngOnDestroy(): void {\n    this.viewportSubscription.unsubscribe();\n  }\n\n  toggle(actual: string, handset: string) {\n    return this.isHandset ? handset : actual;\n  }\n\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\n    return this.isHandset ? conditionalValue : actualValue;\n  }\n}\n",
+            "sourceCode": "import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';\nimport { Observable, Subscription, map } from 'rxjs';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { IToggleValue } from '../types';\n\n@Directive({\n  selector: '[wtViewport]',\n  standalone: true,\n  exportAs: 'wtViewport',\n})\nexport class ViewportDirective implements IToggleValue, OnInit, OnDestroy {\n  isHandset?: boolean;\n  isNotHandset?: boolean;\n\n  /**\n   * @ignore internal\n   */\n  $isHandset: Observable<boolean> = this.media\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\n    .pipe(\n      map((e) => {\n        const result = e.matches;\n        this.isHandset = result;\n        this.isNotHandset = !this.isHandset;\n        return result;\n      })\n    );\n\n  constructor(\n    public readonly elementRef: ElementRef<HTMLElement>,\n    private readonly media: BreakpointObserver\n  ) {}\n\n  viewportSubscription!: Subscription;\n\n  ngOnInit(): void {\n    this.viewportSubscription = this.$isHandset.subscribe();\n  }\n\n  ngOnDestroy(): void {\n    this.viewportSubscription.unsubscribe();\n  }\n\n  toggle(actual: string, handset: string) {\n    return this.isHandset ? handset : actual;\n  }\n\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\n    if (this.isHandset) {\n      if (typeof conditionalValue == 'function') {\n        return conditionalValue();\n      }\n      return conditionalValue;\n    }\n    if (typeof actualValue === 'function') {\n      return actualValue();\n    }\n    return actualValue;\n  }\n}\n",
             "selector": "[wtViewport]",
             "providers": [],
             "exportAs": "wtViewport",
@@ -1594,7 +1594,7 @@
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-a2d2b5ef0458acd7d152cf4522391d592a0109941ba20ad24746e65dfa222e89d9fc3732f101893b5d7e339d48e5a2451b7534ea102cf7dc38581391ec6cabcf",
+            "id": "component-AppLayoutComponent-1b2639dc991ea0f93582188633e3d408662048a45b36b66b24330a7aa63ee4c23d7a45bf4ad5d64a880b6cb6ac1588addd57028a2f6e16843bc34f50e81f017f",
             "file": "libs/material/src/lib/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1620,7 +1620,7 @@
                     "defaultValue": "'settings'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 60,
+                    "line": 62,
                     "type": "string",
                     "decorators": []
                 },
@@ -1631,7 +1631,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTest the app layout without pushing the content\n",
                     "description": "<p>Test the app layout without pushing the content</p>\n",
-                    "line": 58,
+                    "line": 60,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -1910,7 +1910,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ContentChildren, Input, QueryList } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n  BaseLayoutComponent,\r\n} from '../common/';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent extends BaseLayoutComponent {\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n\r\n  // /**\r\n  //  * @ignore internal\r\n  //  */\r\n  // sideNavClick(sidenav: MatSidenav, isHandset?: boolean) {\r\n  //   if (isHandset) sidenav.toggle();\r\n  // }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport {\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n  BaseLayoutComponent,\r\n  FloatingContainerComponent\r\n} from '../common/';\r\n\r\nconst AppLayoutDirectives = [\r\n  MainContentDirective,\r\n  FloatingItemsDirective,\r\n  ToolbarRightDirective,\r\n  ToolbarLeftDirective,\r\n  SidenavLeftDirective,\r\n  SidenavRightDirective,\r\n  StatusbarLeftDirective,\r\n  StatusbarRightDirective,\r\n];\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...AppLayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n  providers: [...AppLayoutDirectives],\r\n})\r\nexport class AppLayoutComponent extends BaseLayoutComponent {\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n}\r\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -1918,11 +1918,11 @@
             "extends": [
                 "BaseLayoutComponent"
             ],
-            "templateData": "<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        testName=\"left\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        testName=\"right\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container #viewport=\"wtViewport\" wtViewport>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"viewport.toggleValue(true, false)\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.toggleValue(leftSidenav.close(), null)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavLeft\"\r\n      [testing]=\"testing\"\r\n      testName=\"Left sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.toggleValue(rightSidenav.close(), null)\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavRight\"\r\n      [testing]=\"testing\"\r\n      testName=\"Right sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- --Start of the content -->\r\n  <mat-sidenav-content>\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img wtAppLogo *ngIf=\"viewport.isNotHandset\" />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container column-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        #mainFullscreen=\"wtFullscreen\"\r\n        wtFullscreen\r\n        [targetElement]=\"mainContentContainer\"\r\n        [attr.aria-label]=\"\r\n          mainFullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')\r\n        \"\r\n      >\r\n        <mat-icon>\r\n          {{ mainFullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"Main Content\"\r\n      ></wt-template-outlet>\r\n\r\n      <div class=\"fixed-right-container\">\r\n        <div class=\"floating-content\">\r\n          <wt-template-outlet\r\n            [items]=\"floatingItems\"\r\n            [testing]=\"testing\"\r\n            testName=\"Floating Buttons \"\r\n          ></wt-template-outlet>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRight,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+            "templateData": "<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        testName=\"left\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        testName=\"right\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container #viewport=\"wtViewport\" wtViewport>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"viewport.toggleValue(true, false)\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.isHandset ? leftSidenav.close() : null\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavLeft\"\r\n      [testing]=\"testing\"\r\n      testName=\"Left sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.isHandset ? rightSidenav.close() : null\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavRight\"\r\n      [testing]=\"testing\"\r\n      testName=\"Right sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- --Start of the content -->\r\n  <mat-sidenav-content>\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img wtAppLogo *ngIf=\"viewport.isNotHandset\" />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container column-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        #mainFullscreen=\"wtFullscreen\"\r\n        wtFullscreen\r\n        [targetElement]=\"mainContentContainer\"\r\n        [attr.aria-label]=\"\r\n          mainFullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')\r\n        \"\r\n      >\r\n        <mat-icon>\r\n          {{ mainFullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"Main Content\"\r\n      ></wt-template-outlet>\r\n\r\n      <wt-floating-container\r\n        [items]=\"floatingItems\"\r\n        [testing]=\"testing\"\r\n      ></wt-floating-container>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRight,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
         },
         {
             "name": "AppSampleComponent",
-            "id": "component-AppSampleComponent-1850be47f5830d8e7b5d34ee935921575f963600261e360c243a7e7d3ac4d9270910cf3c4981f54bbbd6959e1adcaf1634f82cd66bbeda28ee62c70f1acbd06a",
+            "id": "component-AppSampleComponent-16a0ebf485d6f5605eaf68863752755bfdf900bbd17298f18d6065187adeb9c4611ddcb4ade718dab99f50c2acef4137130f7fb67bbebeef6fd4920d133f0d72",
             "file": "libs/material/src/lib/app-sample/app-sample.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1950,18 +1950,38 @@
                 {
                     "name": "CommonModule",
                     "type": "module"
+                },
+                {
+                    "name": "RouterModule",
+                    "type": "module"
+                },
+                {
+                    "name": "AppLayoutComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "MatListModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-app-sample',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './app-sample.component.html',\n  styleUrl: './app-sample.component.scss',\n})\nexport class AppSampleComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AppLayoutComponent } from '../app-layout/app-layout.component';\nimport { MatListModule } from '@angular/material/list';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { RouterModule } from '@angular/router';\n\n@Component({\n  selector: 'wt-app-sample',\n  standalone: true,\n  imports: [\n    CommonModule,\n    RouterModule,\n    AppLayoutComponent,\n    MatListModule,\n    MatButtonModule,\n    MatIconModule,\n  ],\n  templateUrl: './app-sample.component.html',\n  styleUrl: './app-sample.component.scss',\n})\nexport class AppSampleComponent {}\n",
             "styleUrl": "./app-sample.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>app-sample works!</p>\n"
+            "templateData": "<wt-app-layout></wt-app-layout>\n"
         },
         {
             "name": "BaseLayoutComponent",
@@ -2353,6 +2373,71 @@
             "templateData": "<!-- <div [class]=\"containerType + '-container'\" [class.scrollable]=\"isScrollable\">\n  <wt-template-outlet [items]=\"items\"></wt-template-outlet>\n</div> -->\n\n<!-- <h1>Row Container</h1> -->\n<!-- <div class=\"row-container\">\n  <div\n    class=\"row-container-item\"\n    *ngFor=\"let i of ' '.repeat(45).split(''); let index = index\"\n  >\n    Item-{{ index }}\n  </div>\n</div> -->\n<!-- \n\n<div class=\"column-container\">\n  <div\n    class=\"row-container-item\"\n    *ngFor=\"let i of ' '.repeat(45).split(''); let index = index\"\n  >\n    Item-{{ index }}\n  </div>\n</div> -->\n\n<div class=\"column-container-top\">\n  <div\n    class=\"row-container-item\"\n    *ngFor=\"let i of ' '.repeat(3).split(''); let index = index\"\n  >\n    Item-{{ index }}\n  </div>\n<div style=\"flex-grow: 1;\"></div>\n  <div style=\"justify-self: end\">Last Item</div>\n</div>\n"
         },
         {
+            "name": "FloatingContainerComponent",
+            "id": "component-FloatingContainerComponent-84336762b6f9e6d6d9f23c4cc8a3a93f45e2524dcd328bf1a1495e902333c7f617f14ebbd9d3a87cfcf5ef7fbd22cf6fd3bd49bd55408dad413cefd124545ee8",
+            "file": "libs/material/src/lib/common/floating-container/floating-container.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-floating-container",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./floating-container.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "QueryList<ITemplateRef<NgTemplateOutlet>>",
+                    "decorators": []
+                },
+                {
+                    "name": "testing",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "TemplateOutletComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, QueryList } from '@angular/core';\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\nimport { TemplateOutletComponent } from '../template-outlet/template-outlet.component';\nimport { ITemplateRef } from '../types';\n\n@Component({\n  selector: 'wt-floating-container',\n  standalone: true,\n  imports: [CommonModule, TemplateOutletComponent],\n  templateUrl: './floating-container.component.html',\n  styleUrl: './floating-container.component.scss',\n})\nexport class FloatingContainerComponent {\n  @Input() items?: QueryList<ITemplateRef<NgTemplateOutlet>>;\n  @Input() testing = false;\n}\n",
+            "styleUrl": "./floating-container.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"fixed-right-container\">\n  <div class=\"floating-content\">\n    <wt-template-outlet\n      [items]=\"items\"\n      [testing]=\"testing\"\n      testName=\"Floating Buttons\"\n    ></wt-template-outlet>\n  </div>\n</div>\n"
+        },
+        {
             "name": "FullscreenComponent",
             "id": "component-FullscreenComponent-3c3fa1b2d971254a40600621771ff0841000a37448a6ebb32c7ab062d4b5758a529c2caea38fa9d43021ddfb186ea34f50b9ef8d8cde19704d7b15885569d901",
             "file": "libs/material/src/lib/common/fullscreen/fullscreen.component.ts",
@@ -2741,7 +2826,7 @@
         },
         {
             "name": "WebLayoutComponent",
-            "id": "component-WebLayoutComponent-7864cc950ab6d93d149a5eae62bbe8d789fbe6e0bae1692ae2013fd2b7fc60bea91bb9fd0306eaf35d393d5a34648ea348b666548fad673ea56f138f6c7db37a",
+            "id": "component-WebLayoutComponent-5634025e216a2277e3136df892033e69b46f477410deea3a899abb162367086a1c70f2c559db3338d2b96ac6c660d57174c7b0abff0399ce7c1ce079809b93a4",
             "file": "libs/material/src/lib/web-layout/web-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2762,13 +2847,266 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 33,
                     "type": "boolean",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "contentLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ContentLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 104,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ContentLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "contentRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ContentRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 107,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ContentRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "floatingItems",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<FloatingItemsDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 77,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "FloatingItemsDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "footerLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<FooterLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 101,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "FooterLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "footerRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<FooterRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 98,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "FooterRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "mainContent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<MainContentDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 74,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "MainContentDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "sidenavLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<SidenavLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 86,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "SidenavLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "sidenavRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<SidenavRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 89,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "SidenavRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "statusbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 92,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "statusbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<StatusbarRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 95,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "StatusbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "toolbarLeft",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarLeftDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 83,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarLeftDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                },
+                {
+                    "name": "toolbarRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ToolbarRightDirective>",
+                    "optional": true,
+                    "description": "",
+                    "line": 80,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "ToolbarRightDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "inheritance": {
+                        "file": "BaseLayoutComponent"
+                    }
+                }
+            ],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
@@ -2795,18 +3133,79 @@
                 {
                     "name": "MatToolbarModule",
                     "type": "module"
+                },
+                {
+                    "name": "TemplateOutletComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "FloatingContainerComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "ViewportDirective",
+                    "type": "directive"
+                },
+                {
+                    "name": "FullscreenDirective",
+                    "type": "directive"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSidenavModule } from '@angular/material/sidenav';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatToolbarModule } from '@angular/material/toolbar';\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [\n    CommonModule,\n    MatSidenavModule,\n    MatButtonModule,\n    MatIconModule,\n    MatToolbarModule,\n  ],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent {\n  @Input() testing = true;\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSidenavModule } from '@angular/material/sidenav';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatToolbarModule } from '@angular/material/toolbar';\nimport {\n  BaseLayoutComponent,\n  FloatingContainerComponent,\n  FullscreenDirective,\n  TemplateOutletComponent,\n  ViewportDirective,\n} from '../common';\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [\n    CommonModule,\n    MatSidenavModule,\n    MatButtonModule,\n    MatIconModule,\n    MatToolbarModule,\n    TemplateOutletComponent,\n    FloatingContainerComponent,\n    ViewportDirective,\n    FullscreenDirective,\n  ],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent extends BaseLayoutComponent {\n  @Input() testing = true;\n}\n",
             "styleUrl": "./web-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "extends": [
+                "BaseLayoutComponent"
+            ],
+            "templateData": "<ng-template\n  #rowContainerTemplate\n  let-left=\"left\"\n  let-right=\"right\"\n  let-testName=\"testName\"\n>\n  <div class=\"row-container\">\n    <div class=\"row-container\">\n      <wt-template-outlet\n        [items]=\"left\"\n        [testing]=\"testing\"\n        testName=\"left\"\n      ></wt-template-outlet>\n    </div>\n    <div class=\"row-container-right\">\n      <wt-template-outlet\n        [items]=\"right\"\n        [testing]=\"testing\"\n        testName=\"right\"\n      ></wt-template-outlet>\n    </div>\n  </div>\n</ng-template>\n\n<div #viewport=\"wtViewport\" wtViewport class=\"main-container column-container\">\n  <mat-toolbar class=\"toolbar\" color=\"primary\">\n    <!-- Toolbar Items -->\n    <ng-container\n      *ngTemplateOutlet=\"\n        rowContainerTemplate;\n        context: {\n          left: toolbarLeft,\n          right: toolbarRight,\n          testName: 'toolbar'\n        }\n      \"\n    ></ng-container>\n  </mat-toolbar>\n\n  <div class=\"content-container row-container\">\n    <!-- Left content  -->\n    <div\n      class=\"content-container-left row-container-left\"\n      *ngIf=\"viewport.isNotHandset\"\n    >\n      <wt-template-outlet\n        [items]=\"contentLeft\"\n        [testing]=\"testing\"\n        testName=\"Left content\"\n      ></wt-template-outlet>\n    </div>\n\n    <!-- Main Content -->\n    <div class=\"content-container-main row-container\">\n      <wt-template-outlet\n        [items]=\"mainContent\"\n        [testing]=\"testing\"\n        testName=\"main content\"\n      ></wt-template-outlet>\n    </div>\n\n    <!-- Right content -->\n    <div\n      class=\"content-container-right row-container-right\"\n      *ngIf=\"viewport.isNotHandset\"\n    >\n      <wt-template-outlet\n        [items]=\"contentRight\"\n        [testing]=\"testing\"\n        testName=\"Right content\"\n      ></wt-template-outlet>\n    </div>\n  </div>\n\n  <wt-floating-container\n    [items]=\"floatingItems\"\n    [testing]=\"testing\"\n  ></wt-floating-container>\n\n  <!-- Footer -->\n  <mat-toolbar class=\"footer-toolbar\" color=\"accent\">\n    <ng-container\n      *ngTemplateOutlet=\"\n        rowContainerTemplate;\n        context: {\n          left: footerLeft,\n          right: footerRight,\n          testName: 'footer'\n        }\n      \"\n    ></ng-container>\n  </mat-toolbar>\n</div>\n"
+        },
+        {
+            "name": "WebSampleComponent",
+            "id": "component-WebSampleComponent-890bdf7f2487ed7441721fb9e901179f657fb76013d108da3473288fd65c1579d78f891564348edc44b72339769d655ccfa951bc1cdb28d287ade10eaa42552d",
+            "file": "libs/material/src/lib/web-sample/web-sample.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-web-sample",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./web-sample.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-web-sample',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './web-sample.component.html',\n  styleUrl: './web-sample.component.scss',\n})\nexport class WebSampleComponent {}\n",
+            "styleUrl": "./web-sample.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
             "extends": [],
-            "templateData": "<!-- Subscribers  -->\n<!-- <ng-container *ngIf=\"$isHandset | async\"></ng-container> -->\n\n<!-- General -->\n<ng-template #queryListTemplate let-items=\"items\" let-testName=\"testName\">\n  <span *ngIf=\"testing === true\">{{ testName || 'No test name' }}</span>\n\n  @if(items){ @for(item of items; track item){\n  <ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\n  } }\n</ng-template>\n\n<div class=\"column-container\">\n  <mat-toolbar class=\"main-toolbar\" color=\"primary\"></mat-toolbar>\n\n  <div class=\"row-container\">\n    <!-- Left content  -->\n    <div class=\"column-container\">Left content</div>\n\n    <div class=\"column-container\">Main Content</div>\n\n    <!-- Right content -->\n    <div class=\"column-container\">Right content</div>\n  </div>\n\n  <div class=\"row-container\">\n    \n  </div>\n</div>\n"
+            "templateData": "<p>web-sample works!</p>\n"
         }
     ],
     "modules": [],
@@ -2830,7 +3229,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n]"
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent\r\n]"
             },
             {
                 "name": "commonProviders",
@@ -2851,6 +3250,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n\n    const logo = canvas.queryByAltText('App Logo');\n    expect(logo).toBeTruthy();\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\n    expect(fullscreen).toBeTruthy();\n\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\n    expect(toggleLeftSidenav).toBeTruthy();\n\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\n    expect(toggleRightSidenav).toBeTruthy();\n\n    const delay = 400;\n\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/app-sample works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -2886,11 +3295,31 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/web-sample works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/common/container/container.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/container works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    testing: false,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/floating-container works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -2936,6 +3365,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AppSampleComponent>",
+                "defaultValue": "{\n  component: AppSampleComponent,\n  title: 'AppSampleComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/hello/hello.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -2966,11 +3405,31 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<WebSampleComponent>",
+                "defaultValue": "{\n  component: WebSampleComponent,\n  title: 'WebSampleComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/common/container/container.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ContainerComponent>",
                 "defaultValue": "{\n  component: ContainerComponent,\n  title: 'ContainerComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FloatingContainerComponent>",
+                "defaultValue": "{\n  component: FloatingContainerComponent,\n  title: 'FloatingContainerComponent',\n}"
             },
             {
                 "name": "meta",
@@ -3016,6 +3475,16 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/hello/hello.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -3046,11 +3515,31 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/src/lib/common/container/container.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    containerType: 'row',\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    testing: false,\n  },\n}"
             },
             {
                 "name": "Primary",
@@ -3177,6 +3666,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<AppSampleComponent>",
+                "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<HelloComponent>",
                 "file": "libs/material/src/lib/hello/hello.component.stories.ts",
                 "deprecated": false,
@@ -3210,8 +3710,30 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<WebSampleComponent>",
+                "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<ContainerComponent>",
                 "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FloatingContainerComponent>",
+                "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -3272,7 +3794,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n]"
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent\r\n]"
                 }
             ],
             "libs/material/src/lib/_story/common-providers.ts": [
@@ -3317,6 +3839,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  args: {\n    testing: true,\n  },\n}"
+                }
+            ],
+            "libs/material/src/lib/app-sample/app-sample.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/app-sample works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AppSampleComponent>",
+                    "defaultValue": "{\n  component: AppSampleComponent,\n  title: 'AppSampleComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
                 }
             ],
             "libs/material/src/lib/hello/hello.component.stories.ts": [
@@ -3415,6 +3969,38 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
+            "libs/material/src/lib/web-sample/web-sample.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/web-sample works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<WebSampleComponent>",
+                    "defaultValue": "{\n  component: WebSampleComponent,\n  title: 'WebSampleComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
             "libs/material/src/lib/common/container/container.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -3445,6 +4031,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  args: {\n    containerType: 'row',\n  },\n}"
+                }
+            ],
+            "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    testing: false,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/floating-container works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FloatingContainerComponent>",
+                    "defaultValue": "{\n  component: FloatingContainerComponent,\n  title: 'FloatingContainerComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    testing: false,\n  },\n}"
                 }
             ],
             "libs/material/src/lib/common/fullscreen/fullscreen.component.stories.ts": [
@@ -3643,6 +4261,19 @@
                     "kind": 183
                 }
             ],
+            "libs/material/src/lib/app-sample/app-sample.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AppSampleComponent>",
+                    "file": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/material/src/lib/hello/hello.component.stories.ts": [
                 {
                     "name": "Story",
@@ -3682,6 +4313,19 @@
                     "kind": 183
                 }
             ],
+            "libs/material/src/lib/web-sample/web-sample.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<WebSampleComponent>",
+                    "file": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/material/src/lib/common/container/container.component.stories.ts": [
                 {
                     "name": "Story",
@@ -3689,6 +4333,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<ContainerComponent>",
                     "file": "libs/material/src/lib/common/container/container.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FloatingContainerComponent>",
+                    "file": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -3811,6 +4468,36 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/app-sample/app-sample.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/material/src/lib/app-sample/app-sample.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -3872,6 +4559,45 @@
                 "type": "directive",
                 "linktype": "directive",
                 "name": "ContainerContentDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/floating-container/floating-container.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/common/floating-container/floating-container.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FloatingContainerComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
@@ -4278,7 +5004,46 @@
                 "linktype": "component",
                 "name": "WebLayoutComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/14",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/web-sample/web-sample.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/lib/web-sample/web-sample.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "WebSampleComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             }
         ]

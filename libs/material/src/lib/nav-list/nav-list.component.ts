@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MenuItem } from '../common/types';
 import { RouterModule } from '@angular/router';
+import { getActivatedItemName, setActivatedItemName } from '../common';
 
 @Component({
   selector: 'wt-nav-list',
@@ -21,10 +22,6 @@ import { RouterModule } from '@angular/router';
 })
 export class NavListComponent {
   /**
-   * The last clicked item's id is stored here
-   */
-  activeItem = 0;
-  /**
    * Nav list title
    */
   @Input() title: string = 'List title';
@@ -40,7 +37,11 @@ export class NavListComponent {
   @Output() clickEvent = new EventEmitter<MenuItem>();
 
   clickHandler(item: MenuItem) {
-    this.activeItem = item.id;
+    setActivatedItemName(item.title);
     this.clickEvent.emit(item);
+  }
+
+  isActiveListItem(item: MenuItem) {
+    return getActivatedItemName() == item.title;
   }
 }
