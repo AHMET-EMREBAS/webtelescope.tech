@@ -13,21 +13,23 @@ import {
   ViewportDirective,
 } from '../common';
 
+export const WebLayoutModules = [
+  CommonModule,
+  MatSidenavModule,
+  MatButtonModule,
+  MatIconModule,
+  MatToolbarModule,
+  TemplateOutletComponent,
+  FloatingContainerComponent,
+  ViewportDirective,
+  FullscreenDirective,
+  ...LayoutDirectives,
+];
+
 @Component({
   selector: 'wt-web-layout',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    TemplateOutletComponent,
-    FloatingContainerComponent,
-    ViewportDirective,
-    FullscreenDirective,
-    ...LayoutDirectives,
-  ],
+  imports: [...WebLayoutModules],
   templateUrl: './web-layout.component.html',
   styleUrl: './web-layout.component.scss',
   providers: [...LayoutDirectives],

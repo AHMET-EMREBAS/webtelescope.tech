@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { WebLayoutComponent } from './web-layout.component';
-import { BrowserTestingModule } from '@angular/platform-browser/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('WebLayoutComponent', () => {
   let component: WebLayoutComponent;
@@ -8,7 +8,7 @@ describe('WebLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WebLayoutComponent, BrowserTestingModule],
+      imports: [WebLayoutComponent, NoopAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WebLayoutComponent);
