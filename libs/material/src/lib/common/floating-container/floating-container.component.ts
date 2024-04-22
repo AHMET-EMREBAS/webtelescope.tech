@@ -14,8 +14,4 @@ import { FullscreenDirective } from '../fullscreen/fullscreen.directive';
 export class FloatingContainerComponent {
   @Input() items?: QueryList<ITemplateRef<NgTemplateOutlet>>;
   @Input() testing = false;
-
-  constructor(){ 
-    
-  }
 }
