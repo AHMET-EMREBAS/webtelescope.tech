@@ -1,6 +1,50 @@
-<div class="row-container">
-  @for(icon of iconList; track icon){
+<div class="row-container center-container">
+  <div class="column-container">
+    <div class="column-container sticky-top">
+      <h1>Google Material Icons</h1>
+      <div class="row-container" style="align-items: center">
+        <!-- Select Icon Color  -->
 
-  <mat-icon [cdkCopyToClipboard]="icon">{{ icon }}</mat-icon>
-  }
+        <fieldset>
+          <legend>Icon Color</legend>
+
+          <mat-radio-group
+            [(ngModel)]="color"
+            ariaLabel="Color"
+            labelPosition="before"
+          >
+            <div class="row-container">
+              <mat-radio-button value="primary">Primary </mat-radio-button>
+              <mat-radio-button value="accent">Accent </mat-radio-button>
+              <mat-radio-button value="warn">Warn </mat-radio-button>
+              <mat-radio-button value="">None </mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </fieldset>
+
+        <!-- Select Fill -->
+        <mat-slide-toggle [(ngModel)]="fill" labelPosition="before">
+          {{ fill ? 'Fill' : 'Outlined' }}
+        </mat-slide-toggle>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <input type="search" placeholder="search icons" matInput [formControl]="searchControl" />
+      </mat-form-field>
+    </div>
+
+    <div class="row-container icons-container">
+      @for(icon of filteredIcons; track icon){
+
+      <span (click)="message(icon)">
+        <mat-icon
+          [class.fill]="fill"
+          [color]="color"
+          [cdkCopyToClipboard]="icon"
+          >{{ icon }}</mat-icon
+        >
+      </span>
+      }
+    </div>
+  </div>
 </div>
