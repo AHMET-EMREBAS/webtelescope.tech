@@ -1,30 +1,32 @@
+import { Messages } from "./app.messages";
+
 export class AppPom {
   greeting() {
     return cy.get('h1.app-title');
   }
 
   homeMenuItem() {
-    return this.byTestid('Home');
+    return this.byTestid(Messages.HOME);
   }
 
   usersMenuItem() {
-    return this.byTestid('Users');
+    return this.byTestid(Messages.USERS);
   }
 
   chatWithUsButton() {
-    return this.byAriaLabel('Chat with us');
+    return this.byAriaLabel(Messages.CHAT_WITH_US);
   }
 
   notificationButton() {
-    return this.byAriaLabel('Notifications');
+    return this.byAriaLabel(Messages.NOTIFICATIONS);
   }
 
   leftSideNavigationButton() {
-    return this.byAriaLabel('Toggle left side navigation');
+    return this.byAriaLabel(Messages.TOGGLE_LEFT_SIDENAV);
   }
 
   rightSideNavigationButton() {
-    return this.byAriaLabel('Toggle right side navigation');
+    return this.byAriaLabel(Messages.TOGGLE_RIGHT_SIDENAV);
   }
 
   /**

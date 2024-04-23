@@ -1,3 +1,4 @@
+import { Messages } from '../support/app.messages';
 import { AppPom } from '../support/app.po';
 
 describe('client-e2e', () => {
@@ -10,19 +11,19 @@ describe('client-e2e', () => {
   });
 
   it('should render the home menu item', () => {
-    pom.homeMenuItem().contains(/Home/gi);
+    pom.homeMenuItem().contains(Messages.HOME);
   });
 
   it('should render user menu item', () => {
-    pom.usersMenuItem().contains(/Users/gi);
+    pom.usersMenuItem().contains(Messages.USERS);
   });
 
   it('should render chat with us button', () => {
-    pom.chatWithUsButton().contains('chat');
+    pom.chatWithUsButton().contains(Messages.CHAT_WITH_US);
   });
 
   it('should render notification button', () => {
-    pom.notificationButton().contains(/Notifications/gi);
+    pom.notificationButton().contains(/notifications/gi);
   });
 
   it('should render left side navigation button', () => {
@@ -30,6 +31,6 @@ describe('client-e2e', () => {
   });
 
   it('should render right side navigation button', () => {
-    pom.rightSideNavigationButton().contains(/app/gi);
+    pom.rightSideNavigationButton().contains(/apps/gi);
   });
 });
