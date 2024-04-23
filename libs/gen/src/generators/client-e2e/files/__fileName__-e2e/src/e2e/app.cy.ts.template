@@ -1,10 +1,25 @@
-import { getGreeting } from '../support/app.po';
+import { AppPom } from '../support/app.po';
 
 describe('client-e2e', () => {
-  beforeEach(() => cy.visit('/'));
+  let pom: AppPom;
+  before(() => {
+    cy.visit('/');
+    pom = new AppPom();
+  });
 
-  it('should display welcome message', () => {
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains(/Hello There!/);
+  it('should render main components', () => {
+    pom.chatWithUsButton().contains('chat');
+
+    pom.greeting().contains('Hello there!');
+
+    pom.homeMenuItem().contains('Home');
+
+    pom.notificationButton().contains('Notifications', { matchCase: false });
+
+    pom.usersMenuItem().contains('Users');
+
+    pom.leftSideNavigationButton().contains('menu', { matchCase: false });
+
+    pom.rightSideNavigationButton().contains('apps', { matchCase: false });
   });
 });
