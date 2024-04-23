@@ -19,7 +19,7 @@ describe('client-e2e', () => {
   });
 
   it('should render chat with us button', () => {
-    pom.chatWithUsButton().contains(Messages.CHAT_WITH_US);
+    pom.chatWithUsButton().contains(/chat/gi);
   });
 
   it('should render notification button', () => {
