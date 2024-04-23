@@ -62,24 +62,18 @@
   <!-- --Start of the content -->
   <mat-sidenav-content>
     <!-- Main toolbar -->
-    <mat-toolbar
-      class="toolbar"
-      color="primary"
-      i18n-aria-label
-      aria-label="Toolbar"
-    >
+    <mat-toolbar class="toolbar" color="primary" aria-label="Toolbar">
       <img wtAppLogo *ngIf="viewport.isNotHandset" />
 
       <!-- Left Sidenav Toggle -->
       <button
         mat-icon-button
         (click)="leftSidenav.toggle()"
-        i18n-aria-label
-        aria-label="Toggle Left Sidenav"
+        [ariaLabel]="leftSidenavToggleLabel"
       >
-        <mat-icon class="fill">{{
-          leftSidenav.opened ? 'menu_opened' : 'menu'
-        }}</mat-icon>
+        <mat-icon class="fill">
+          {{ leftSidenav.opened ? 'menu_opened' : 'menu' }}
+        </mat-icon>
       </button>
 
       <!-- Toolbar Items -->
@@ -98,8 +92,7 @@
       <button
         mat-icon-button
         (click)="rightSidenav.toggle()"
-        i18n-aria-label
-        aria-label="Toggle Right Sidenav"
+        [ariaLabel]="rightSidenavToggleLabel"
       >
         <mat-icon class="fill">{{ rightSidenavToggleIcon }}</mat-icon>
       </button>
@@ -114,7 +107,6 @@
         mat-icon-button
         wtFullscreenToggleButton
         [targetElement]="mainContentContainer"
-        i18n-aria-label
         aria-label="Toggle Fullscreen"
       >
         <mat-icon>
@@ -135,12 +127,7 @@
     </div>
 
     <!-- Statusbar -->
-    <mat-toolbar
-      class="statusbar"
-      color="primary"
-      i18n-aria-label
-      aria-label="Statusbar"
-    >
+    <mat-toolbar class="statusbar" color="primary" aria-label="Statusbar">
       <ng-container
         *ngTemplateOutlet="
           toolbarTemplate;

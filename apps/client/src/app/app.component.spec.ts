@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppMessages } from './common';
+import { Messages } from './common';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,7 +15,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain(
-      AppMessages.GREETING
+      Messages.GREETING
     );
   });
 });

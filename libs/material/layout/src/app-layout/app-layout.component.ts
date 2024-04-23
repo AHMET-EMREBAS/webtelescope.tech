@@ -46,6 +46,9 @@ export class AppLayoutComponent extends BaseLayoutComponent {
   @Input() testing = false;
 
   @Input() rightSidenavToggleIcon: Icon = 'apps';
+
+  @Input() leftSidenavToggleLabel?: string = 'Toggle left sidenav';
+  @Input() rightSidenavToggleLabel?: string = 'Toggle right sidenav';
 }
 
 @NgModule({

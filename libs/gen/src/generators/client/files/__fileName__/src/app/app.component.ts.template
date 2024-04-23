@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AppMessages } from './common/';
+import { Messages } from './common/';
 import {
   AppLayoutModule,
   MenuItem,
@@ -13,9 +13,9 @@ import { Title } from '@angular/platform-browser';
   imports: [RouterModule, AppLayoutModule, NavListComponent],
   selector: 'wt-root',
   template: `
-    <wt-app-layout>
+    <wt-app-layout rightSidenavToggleIcon="apps">
       <ng-template wtToolbarLeft>
-        <h1>
+        <h1 class="pv-2">
           {{ title.getTitle() }}
         </h1>
       </ng-template>
@@ -54,7 +54,7 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  readonly MM = AppMessages;
+  readonly MM = Messages;
 
   leftNavList: MenuItem[] = [
     {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AppMessages } from './common/';
+import { Messages } from './common/';
 import {
   AppLayoutModule,
   MenuItem,
@@ -54,7 +54,7 @@ import { Title } from '@angular/platform-browser';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  readonly MM = AppMessages;
+  readonly MM = Messages;
 
   leftNavList: MenuItem[] = [
     {

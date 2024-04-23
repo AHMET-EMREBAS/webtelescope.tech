@@ -1,4 +1,4 @@
-export class AppMessages {
+export class Messages {
   static GREETING = `Hello There!`;
   static HOME = `Home`;
   static ABOUT = `About`;
@@ -8,24 +8,28 @@ export class AppMessages {
   static ADMINISTRATIVE = `Administrative`;
   static USERS = `Users`;
   static CUSTOMERS = `Customers`;
-
-  static NEW(something: string) {
-    return `New ${something}`;
-  }
-
-  static ADD(something: string) {
-    return `Add ${something}`;
-  }
-
-  static UPDATE(something: string) {
-    return `Update ${something}`;
-  }
-
-  static DELETE(something: string) {
-    return `Delete ${something}`;
-  }
-
-  static FIND(something: string) {
-    return `Find ${something}`;
-  }
+  static NAVIGATION_PANEL = `Navigation panel`;
+  static PROFILE = `Profile`;
+  static SETTINGS = `Settings`;
+  static LOGIN = 'Login';
+  static LOGOUT = 'Logout';
+  static SIGNIN = 'Signin';
+  static SIGNUP = 'Signup';
+  static SUBSCRIPTION = 'Subscription';
+  static SECURITY = 'Security';
+  static WRONG = 'Wrong';
+  static LEFT = 'Left';
+  static RIGHT = 'Right';
+  static TOP = 'Top';
+  static BOTTOM = 'Bottom';
+  static ABOVE = 'Above';
+  static BELOW = 'Below';
+  static NEW = 'New';
+  static ADD = 'Add';
+  static UPD = 'Update';
+  static DEL = 'Delete';
+  static FIN = 'Find';
+  static TOGGLE = 'Toggle';
+  static OPEN = 'Open';
+  static PASSWORD = 'Password';
 }
