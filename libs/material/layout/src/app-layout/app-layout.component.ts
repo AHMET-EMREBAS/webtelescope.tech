@@ -14,6 +14,7 @@ import {
   FloatingContainerComponent,
   LayoutDirectives,
   FullscreenModule,
+  Icon,
 } from '../common/';
 
 export const AppLayoutModules = [
@@ -44,7 +45,7 @@ export class AppLayoutComponent extends BaseLayoutComponent {
    */
   @Input() testing = false;
 
-  @Input() rightSidenavToggleIcon = 'settings';
+  @Input() rightSidenavToggleIcon: Icon = 'apps';
 }
 
 @NgModule({

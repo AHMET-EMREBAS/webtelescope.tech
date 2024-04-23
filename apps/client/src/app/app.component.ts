@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
   imports: [RouterModule, AppLayoutModule, NavListComponent],
   selector: 'wt-root',
   template: `
-    <wt-app-layout>
+    <wt-app-layout rightSidenavToggleIcon="apps">
       <ng-template wtToolbarLeft>
         <h1 class="pv-2">
           {{ title.getTitle() }}
@@ -47,21 +47,6 @@ import { Title } from '@angular/platform-browser';
         </button>
       </ng-template>
       <ng-template wtMainContent>
-        <div
-          class="flex row end align-stretch "
-          style="border: 3px solid red ; height: 500px; width:500px;  "
-        >
-          <div style="background-color: orange;">FIrst ROw</div>
-          <div style="background-color: orange;">FIrst ROw</div>
-          <div style="background-color: orange;" class="self-start">
-            FIrst ROw
-          </div>
-          <div style="background-color: orange;">FIrst ROw</div>
-          <div style="background-color: orange;">FIrst ROw</div>
-          <div style="background-color: orange;" class="self-stretch">
-            FIrst ROw
-          </div>
-        </div>
         <router-outlet></router-outlet>
       </ng-template>
     </wt-app-layout>
