@@ -1,0 +1,44 @@
+{
+  "name": "material-list",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/material/list/src",
+  "prefix": "wt",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/material/list/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/material/list/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/material/list/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/material/list/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/material/list/**/*.ts",
+          "libs/material/list/**/*.html",
+          "libs/material/list/package.json"
+        ]
+      }
+    }
+  }
+}

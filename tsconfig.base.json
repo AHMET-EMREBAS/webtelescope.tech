@@ -21,6 +21,8 @@
       "@webpackages/db": ["libs/db/src/index.ts"],
       "@webpackages/gen": ["libs/gen/src/index.ts"],
       "@webpackages/material": ["libs/material/src/index.ts"],
+      "@webpackages/material/layout": ["libs/material/layout/src/index.ts"],
+      "@webpackages/material/list": ["libs/material/list/src/index.ts"],
       "@webpackages/utils": ["libs/utils/src/index.ts"]
     }
   },
