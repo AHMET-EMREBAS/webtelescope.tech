@@ -1,25 +1,36 @@
+import { Messages } from '../support/app.messages';
 import { AppPom } from '../support/app.po';
 
 describe('client-e2e', () => {
   let pom: AppPom;
-  before(() => {
+
+  beforeEach(() => {
     cy.visit('/');
+
     pom = new AppPom();
   });
 
-  it('should render main components', () => {
-    pom.chatWithUsButton().contains('chat');
+  it('should render the home menu item', () => {
+    pom.homeMenuItem().contains(Messages.HOME);
+  });
 
-    pom.greeting().contains('Hello there!');
+  it('should render user menu item', () => {
+    pom.usersMenuItem().contains(Messages.USERS);
+  });
 
-    pom.homeMenuItem().contains('Home');
+  it('should render chat with us button', () => {
+    pom.chatWithUsButton().contains(/chat/gi);
+  });
 
-    pom.notificationButton().contains('Notifications', { matchCase: false });
+  it('should render notification button', () => {
+    pom.notificationButton().contains(/notifications/gi);
+  });
 
-    pom.usersMenuItem().contains('Users');
+  it('should render left side navigation button', () => {
+    pom.leftSideNavigationButton().contains(/menu/gi);
+  });
 
-    pom.leftSideNavigationButton().contains('menu', { matchCase: false });
-
-    pom.rightSideNavigationButton().contains('apps', { matchCase: false });
+  it('should render right side navigation button', () => {
+    pom.rightSideNavigationButton().contains(/apps/gi);
   });
 });
