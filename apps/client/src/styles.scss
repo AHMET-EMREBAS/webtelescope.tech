@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+}
+
+.column-container {
+  position: relative;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  align-content: start;
+  justify-content: stretch;
+  flex-grow: 1;
+}
+
+.column-container-bottom {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: stretch;
+  gap: 1em;
+  flex-grow: 1;
+}
+
+.column-container-top {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1em;
+  flex-grow: 1;
+}
+
+.row-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: start;
+  gap: 1em;
+  flex-grow: 1;
+}
+
+.row-container-right {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
+  flex-grow: 1;
+}
+
+.row-container-left {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+  flex-grow: 1;
+}
+
+// wt-root {
+//   zoom: 0.8;
+// }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+}
+
+:root {
+  --scrollbar-thumb-color: crimson;
+  --scrollbar-track-color: gray;
+}
+
+@font-face {
+  font-family: Material Icons;
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(./assets/fonts/material-symbols.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: Handjet;
+  src: url(./assets/fonts/Handjet/Handjet-VariableFont.ttf);
+}
+@font-face {
+  font-family: Roboto;
+  src: url(./assets/fonts/Roboto_Flex/RobotoFlex.ttf);
+}
+@font-face {
+  font-family: Special Elite;
+  src: url(./assets/fonts/Special_Elite/SpecialElite-Regular.ttf);
+}
+@font-face {
+  font-family: Josefin Sans;
+  src: url(./assets/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Josefin Sans;
+  font-style: italic;
+  src: url(./assets/fonts/Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Lobster;
+  src: url(./assets/fonts/Lobster/Lobster-Regular.ttf);
+}
+@font-face {
+  font-family: Comfortaa;
+  src: url(./assets/fonts/Comfortaa/Comfortaa-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Rubik Dirt;
+  src: url(./assets/fonts/Rubik_Dirt/RubikDirt-Regular.ttf);
+}
+@font-face {
+  font-family: Rubik Iso;
+  src: url(./assets/fonts/Rubik_Iso/RubikIso-Regular.ttf);
+}
+@font-face {
+  font-family: Black Ops One;
+  src: url(./assets/fonts/Black_Ops_One/BlackOpsOne-Regular.ttf);
+}
+@font-face {
+  font-family: Concert One;
+  src: url(./assets/fonts/Concert_One/ConcertOne-Regular.ttf);
+}
+@font-face {
+  font-family: Tourney;
+  src: url(./assets/fonts/Tourney/Tourney-VariableFont_wdth.ttf);
+}
+@font-face {
+  font-family: Tourney;
+  font-style: italic;
+  src: url(./assets/fonts/Tourney/Tourney-Italic-VariableFont_wdth.ttf);
+}
+@font-face {
+  font-family: Dancing Script;
+  src: url(./assets/fonts/Dancing_Script/DancingScript-VariableFont_wght.ttf);
+}
+/** Fonts */
+:root {
+  --font-roboto: $value;
+  --font-comfortaa: $value;
+  --font-josefin-sans: $value;
+  --font-concert-one: $value;
+  --font-special-elite: $value;
+  --font-tourney: $value;
+  --font-rubik-iso: $value;
+  --font-rubik-dirt: $value;
+  --font-lobster: $value;
+  --font-dancing-script: $value;
+  --font-black-ops-one: $value;
+  --font-handjet: $value;
+  --font-icon: $value;
+}
+
+.ff-roboto {
+  font-family: Roboto, Verdana;
+}
+
+.ff-comfortaa {
+  font-family: Comfortaa, Verdana;
+}
+
+.ff-josefin-sans {
+  font-family: Josefin Sans, Verdana;
+}
+
+.ff-concert-one {
+  font-family: Concert One, Verdana;
+}
+
+.ff-special-elite {
+  font-family: Special Elite, Verdana;
+}
+
+.ff-tourney {
+  font-family: Tourney, Verdana;
+}
+
+.ff-rubik-iso {
+  font-family: Rubik Iso, Verdana;
+}
+
+.ff-rubik-dirt {
+  font-family: Rubik Dirt, Verdana;
+}
+
+.ff-lobster {
+  font-family: Lobster, Verdana;
+}
+
+.ff-dancing-script {
+  font-family: Dancing Script, Verdana;
+}
+
+.ff-black-ops-one {
+  font-family: Black Ops One, Verdana;
+}
+
+.ff-handjet {
+  font-family: Handjet, Verdana;
+}
+
+.ff-icon {
+  font-family: Material Icons, Verdana;
+}
+
+.material-icons {
+  font-family: Material Icons;
+  font-weight: normal;
+  font-style: normal;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-icons.fill {
+  font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
+} /*# sourceMappingURL=style.css.map */
