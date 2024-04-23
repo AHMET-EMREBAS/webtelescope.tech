@@ -35,7 +35,7 @@
     position="start"
     [opened]="viewport.toggleValue(true, false)"
     [mode]="viewport.toggleValue('side', 'over')"
-    (click)="viewport.isHandset ? leftSidenav.close() : null"
+    (click)="viewport.isHandset() ? leftSidenav.close() : null"
   >
     <wt-template-outlet
       [items]="sidenavLeft"
@@ -50,7 +50,7 @@
     class="right"
     position="end"
     [mode]="viewport.toggleValue('side', 'over')"
-    (click)="viewport.isHandset ? rightSidenav.close() : null"
+    (click)="viewport.isHandset() ? rightSidenav.close() : null"
   >
     <wt-template-outlet
       [items]="sidenavRight"

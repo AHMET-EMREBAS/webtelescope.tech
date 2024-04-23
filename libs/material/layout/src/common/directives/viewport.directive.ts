@@ -3,14 +3,24 @@ import { Observable, Subscription, map } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { IToggleValue } from '../types';
 
+/**
+ * Access the view port inforamtion utilizing this useful directive in your template
+ *
+ * ````html
+ * <container-element #viewport="wtViewport" wtViewport>
+ *    <h1> {{ viewport.toggleValue() }} </h1>
+ * </container-element>
+ * ````
+ */
 @Directive({
   selector: '[wtViewport]',
   standalone: true,
   exportAs: 'wtViewport',
 })
 export class ViewportDirective implements IToggleValue, OnInit, OnDestroy {
-  isHandset?: boolean;
-  isNotHandset?: boolean;
+  private __isHandset?: boolean;
+  private __isNotHandset?: boolean;
+  viewportSubscription!: Subscription;
 
   /**
    * @ignore internal
@@ -20,8 +30,8 @@ export class ViewportDirective implements IToggleValue, OnInit, OnDestroy {
     .pipe(
       map((e) => {
         const result = e.matches;
-        this.isHandset = result;
-        this.isNotHandset = !this.isHandset;
+        this.__isHandset = result;
+        this.__isNotHandset = !this.__isHandset;
         return result;
       })
     );
@@ -31,8 +41,6 @@ export class ViewportDirective implements IToggleValue, OnInit, OnDestroy {
     private readonly media: BreakpointObserver
   ) {}
 
-  viewportSubscription!: Subscription;
-
   ngOnInit(): void {
     this.viewportSubscription = this.$isHandset.subscribe();
   }
@@ -41,12 +49,8 @@ export class ViewportDirective implements IToggleValue, OnInit, OnDestroy {
     this.viewportSubscription.unsubscribe();
   }
 
-  toggle(actual: string, handset: string) {
-    return this.isHandset ? handset : actual;
-  }
-
   toggleValue<T>(actualValue: T, conditionalValue: T): T {
-    if (this.isHandset) {
+    if (this.__isHandset) {
       if (typeof conditionalValue == 'function') {
         return conditionalValue();
       }
@@ -56,5 +60,13 @@ export class ViewportDirective implements IToggleValue, OnInit, OnDestroy {
       return actualValue();
     }
     return actualValue;
+  }
+
+  isHandset() {
+    return this.__isHandset;
+  }
+
+  isNotHandset() {
+    return this.__isNotHandset;
   }
 }
