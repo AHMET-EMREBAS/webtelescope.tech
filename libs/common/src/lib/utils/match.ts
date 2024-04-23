@@ -14,6 +14,7 @@ export class Match<E, R> {
     return new Match<T, R>(enumClass, value);
   }
 
+  private readonly multipleResults: Some<() => R>[] = [];
   private resultFn?: () => R;
 
   /**
@@ -23,10 +24,11 @@ export class Match<E, R> {
     enumKey: K,
     handler: Some<() => R>
   ): Omit<OmitUsedKeys<E, R, K>, 'get'> {
-    if (this.resultFn === undefined) {
-      if (this.enumClass[enumKey] === this.value) {
+    if (this.enumClass[enumKey] === this.value) {
+      if (this.resultFn === undefined) {
         this.resultFn = handler;
       }
+      this.multipleResults.push(handler);
     }
     return this as OmitUsedKeys<E, R, K>;
   }
@@ -34,7 +36,7 @@ export class Match<E, R> {
   /**
    * Verify that you are done with matching enums, if there are more enum keys to match, they will appear as an option
    */
-  done<K extends keyof E>(verify: K | 'DONE'): Pick<Match<E, R>, 'get'> {
+  done<K extends keyof E>(verify: K | 'DONE'): Pick<Match<E, R>, 'get' | 'getAll'> {
     if (verify === 'DONE') {
       return this;
     }
@@ -48,5 +50,9 @@ export class Match<E, R> {
    */
   get(): Some<R> {
     return this.resultFn ? this.resultFn() : undefined;
+  }
+
+  getAll(): Some<R>[] {
+    return this.multipleResults.map((e) => e && e());
   }
 }

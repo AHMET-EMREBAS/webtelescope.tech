@@ -13,7 +13,7 @@ export class EnumFactory<T> {
   /**
    * Create a Match class for the enum {@link Match}
    */
-  matcher<R>(value: string | number): Omit<Match<T, R>, 'done'> {
+  matcher<R>(value: string | number): Pick<Match<T, R>, 'is'> {
     return Match.start<T, R>(this.enumClass, value);
   }
 }

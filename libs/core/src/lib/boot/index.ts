@@ -1,1 +1,1 @@
-export * from './boot-server';
+export * from './boot';
