@@ -11,6 +11,7 @@
     [activated]="isActiveListItem(item)"
     [routerLink]="[item.route]"
     (click)="clickHandler(item)"
+    [attr.data-testid]="item.title"
   >
     <span matListItemTitle>{{ item.title }}</span>
 
