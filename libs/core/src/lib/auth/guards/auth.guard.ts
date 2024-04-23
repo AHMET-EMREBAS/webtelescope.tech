@@ -28,13 +28,13 @@ export class AuthGuard implements CanActivate {
     const token = extractApiKey(context) ?? extractAuthCookie(context);
     if (!token) return false;
 
-    const { sub } = this.jwt.verify<Sub>(token);
+    const sub = this.jwt.verify<Sub>(token);
     if (!sub) return false;
 
-    const user = await this.userService.findById(sub);
+    const user = await this.userService.findById(sub.sub);
     if (!user) return false;
 
-    const rScopes = getScope(this.reflector, context);
+    const rScope = getScope(this.reflector, context);
     const rRole = getRole(this.reflector, context);
     const rPermission = getPermission(this.reflector, context);
 
@@ -45,38 +45,38 @@ export class AuthGuard implements CanActivate {
      * 3. required permission
      * So, there are 3 required checks
      **/
-    const rCheckCount = 3;
+    const rAuthCount = 3;
     const checkList: boolean[] = [];
 
-    const accept = () => checkList.push(true);
-    const deny = () => checkList.push(false);
-    const isOk = () =>
-      checkList.length == rCheckCount && checkList.reduce((p, c) => p && c);
+    const HaveIt = () => checkList.push(true);
+    const NotRequired = () => checkList.push(true);
+    const NotHaveIt = () => checkList.push(false);
+    const IsAuthorized = () =>
+      checkList.length == rAuthCount && checkList.reduce((p, c) => p && c);
 
-    
     // 1. Scope check
-    rScopes
-      ? user.scopes?.find((e) => e.name === rScopes)
-        ? accept()
-        : deny()
-      : accept();
+    rScope
+      ? user.scopes?.find((e) => e.name === rScope)
+        ? HaveIt()
+        : NotHaveIt()
+      : NotRequired();
 
     // 2. Role check
     rRole
       ? user.roles?.find((e) => e.name === rRole)
-        ? accept()
-        : deny()
-      : accept();
+        ? HaveIt()
+        : NotHaveIt()
+      : NotRequired();
 
     // 3. Permission check
     rPermission
       ? user.roles?.find((e) =>
           e.permissions?.find((p) => p.name === rPermission)
         )
-        ? accept()
-        : deny()
-      : accept();
+        ? HaveIt()
+        : NotHaveIt()
+      : NotRequired();
 
-    return isOk();
+    return IsAuthorized();
   }
 }
