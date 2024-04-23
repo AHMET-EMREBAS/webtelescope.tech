@@ -1,4 +1,4 @@
-import { createMetadata } from '../common';
+import { createMetadata } from '../../common';
 
 export const [SetPermission, getPermission, getPermissionToken] =
   createMetadata<string>('Permission');

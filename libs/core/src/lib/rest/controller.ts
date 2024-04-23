@@ -1,19 +1,26 @@
 import { Controller as NetsController, applyDecorators } from '@nestjs/common';
-import { AuthNames, SecurityType, SecurityTypeMatcher } from '../auth';
+import { ApiTags } from '@nestjs/swagger';
 import {
-  ApiBasicAuth,
-  ApiBearerAuth,
-  ApiCookieAuth,
-  ApiTags,
-} from '@nestjs/swagger';
+  ApiKeyAuth,
+  CookieAuth,
+  CredentialsAuth,
+  SetPermission,
+  SetRole,
+  SetScope,
+} from '../auth';
+
+export type SecurityOptions = {
+  apiKey: boolean;
+  cookie: boolean;
+  credentials: boolean;
+  scope: string;
+  role: string;
+  permission: string;
+};
 
 export type ControllerOptions = {
   path?: string;
-  security?: {
-    apiKey: boolean;
-    cookie: boolean;
-    credentials: boolean;
-  };
+  security?: SecurityOptions;
   tags?: string[];
 };
 
@@ -23,6 +30,14 @@ export function Controller(options: ControllerOptions) {
   const { path, security, tags } = options;
 
   if (tags) decorators.push(ApiTags(...tags));
+
+  if (security?.apiKey) decorators.push(ApiKeyAuth());
+  if (security?.cookie) decorators.push(CookieAuth());
+  if (security?.credentials) decorators.push(CredentialsAuth());
+
+  if (security?.scope) decorators.push(SetScope(security.scope));
+  if (security?.permission) decorators.push(SetPermission(security.permission));
+  if (security?.role) decorators.push(SetRole(security.role));
 
   return applyDecorators(NetsController(path ?? ''), ...decorators);
 }

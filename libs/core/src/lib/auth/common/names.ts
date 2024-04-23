@@ -1,10 +1,10 @@
 export enum AuthNames {
-  ORGNAME_HEADER_NAME = 'x-orgname',
+  ORGNAME_HEADER_KEY = 'x-orgname',
 
   /**
    * Api keys will be stored in the `autorization` in headers.
    */
-  AUTHORIZATION_HEADER = 'authorization',
+  AUTHORIZATION_HEADER_KEY = 'authorization',
   /**
    * Name of the api-key security schema. In this secuirty procees, users must provide an `authorization` header.
    * Otherwise, users are not authorized for any operations.
@@ -26,5 +26,5 @@ export enum AuthNames {
   /**
    * Name of the cookie for cookie security schema. `accesstoken`
    */
-  ACCESS_TOKEN_COOKIE_NAME = 'accesstoken',
+  ACCESS_TOKEN_COOKIE_KEY = 'accesstoken',
 }

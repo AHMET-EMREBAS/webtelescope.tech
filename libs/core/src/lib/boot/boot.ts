@@ -27,7 +27,7 @@ export function configureSwagger(
       description: 'Api-key is created for every user on successful login.',
       name: AuthNames.API_KEY_SECURITY_NAME,
     })
-    .addCookieAuth(AuthNames.ACCESS_TOKEN_COOKIE_NAME, {
+    .addCookieAuth(AuthNames.ACCESS_TOKEN_COOKIE_KEY, {
       type: 'http',
       name: AuthNames.COOKIE_SECURITY_NAME,
     })
@@ -53,7 +53,7 @@ export async function boot(module: Type, profileName: string) {
   const _cf = <T extends string = string>(key: string) =>
     config.getOrThrow<T>(_cn(key));
 
-  const MODE = process.env['NODE_ENV'] ?? 'production';
+  const MODE = _cf('NODE_ENV');
   const NAME = _cf('NAME');
   const PREFIX = _cf('PREFIX');
   const ORIGINS = _cf('ORIGINS');
