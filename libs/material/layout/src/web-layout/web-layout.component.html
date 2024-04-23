@@ -41,7 +41,7 @@
     <!-- Left content  -->
     <div
       class="content-container-left row-container-left"
-      *ngIf="viewport.isNotHandset"
+      *ngIf="viewport.isNotHandset()"
     >
       <wt-template-outlet
         [items]="contentLeft"
