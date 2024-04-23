@@ -1,5 +1,5 @@
 <div class="fixed-right-container" #screen="wtFullscreen" wtFullscreen>
-  <div class="floating-content" *ngIf="!screen.hasFullscreenElement()">
+  <div class="floating-content" *ngIf="!screen.isFullscreen()">
     <wt-template-outlet
       [items]="items"
       [testing]="testing"

@@ -22,7 +22,12 @@
   </div>
 </ng-template>
 
-<mat-sidenav-container #viewport="wtViewport" wtViewport>
+<mat-sidenav-container
+  #fullscreen="wtFullscreen"
+  wtFullscreen
+  #viewport="wtViewport"
+  wtViewport
+>
   <!-- Sidenav Left -->
   <mat-sidenav
     #leftSidenav
@@ -100,15 +105,14 @@
       <button
         class="fullscreen-button"
         mat-icon-button
-        #mainFullscreen="wtFullscreen"
-        wtFullscreen
+        wtFullscreenToggleButton
         [targetElement]="mainContentContainer"
         [attr.aria-label]="
-          mainFullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')
+          fullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')
         "
       >
         <mat-icon>
-          {{ mainFullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}
+          {{ fullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}
         </mat-icon>
       </button>
 

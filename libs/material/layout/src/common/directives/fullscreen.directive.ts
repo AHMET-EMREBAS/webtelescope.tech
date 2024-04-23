@@ -1,15 +1,15 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, Input, NgModule } from '@angular/core';
 import { IToggle, IToggleValue } from '../types';
 
 @Directive({
-  selector: '[wtFullscreen]',
+  selector: '[wtFullscreenToggleButton]',
   standalone: true,
-  exportAs: 'wtFullscreen',
 })
-export class FullscreenDirective implements IToggleValue, IToggle {
+export class FullscreenToggleDirective implements IToggle {
   @Input() targetElement?: HTMLElement;
+
   @HostListener('click')
-  clickHander() {
+  fullscreenButtonClick() {
     if (this.targetElement) {
       this.toggle(this.targetElement);
     } else {
@@ -17,14 +17,13 @@ export class FullscreenDirective implements IToggleValue, IToggle {
     }
   }
 
-  isFullscreen?: boolean;
-
   private open(element: HTMLElement) {
-    this.isFullscreen = true;
+    FullscreenDirective.isFullscreen = true;
     element.requestFullscreen();
   }
+
   private close() {
-    this.isFullscreen = false;
+    FullscreenDirective.isFullscreen = false;
     document.exitFullscreen();
   }
 
@@ -33,18 +32,35 @@ export class FullscreenDirective implements IToggleValue, IToggle {
    * @param element
    */
   toggle(element: HTMLElement): void {
-    if (this.isFullscreen) {
+    if (FullscreenDirective.isFullscreen) {
       this.close();
     } else {
       this.open(element);
     }
   }
+}
+
+// Access the fullscreen information accross the application
+// And toggle values based on it.
+@Directive({
+  selector: '[wtFullscreen]',
+  standalone: true,
+  exportAs: 'wtFullscreen',
+})
+export class FullscreenDirective implements IToggleValue {
+  static isFullscreen = false;
 
   toggleValue<T>(actualValue: T, conditionalValue: T): T {
-    return this.isFullscreen ? conditionalValue : actualValue;
+    return FullscreenDirective.isFullscreen ? conditionalValue : actualValue;
   }
 
-  hasFullscreenElement() {
-    return document.fullscreenElement;
+  isFullscreen() {
+    return FullscreenDirective.isFullscreen;
   }
 }
+
+@NgModule({
+  imports: [FullscreenDirective, FullscreenToggleDirective],
+  exports: [FullscreenDirective, FullscreenToggleDirective],
+})
+export class FullscreenModule {}

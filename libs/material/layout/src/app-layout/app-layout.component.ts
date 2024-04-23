@@ -8,12 +8,12 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   ViewportDirective,
-  FullscreenDirective,
   AppLogoDirective,
   TemplateOutletComponent,
   BaseLayoutComponent,
   FloatingContainerComponent,
   LayoutDirectives,
+  FullscreenModule,
 } from '../common/';
 
 export const AppLayoutModules = [
@@ -23,7 +23,7 @@ export const AppLayoutModules = [
   MatButtonModule,
   MatIconModule,
   ViewportDirective,
-  FullscreenDirective,
+  FullscreenModule,
   AppLogoDirective,
   TemplateOutletComponent,
   FloatingContainerComponent,
