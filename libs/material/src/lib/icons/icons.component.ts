@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconList } from '../common';
+import { Icons } from '../common';
 import { MatIconModule } from '@angular/material/icon';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatRadioModule } from '@angular/material/radio';
@@ -31,7 +31,6 @@ import { Subscription, debounceTime } from 'rxjs';
 export class IconsComponent implements OnInit, OnDestroy {
   fill = false;
   color = 'primary';
-  iconList = IconList;
   search: string = '';
   filteredIcons: string[] = [];
 
@@ -40,10 +39,10 @@ export class IconsComponent implements OnInit, OnDestroy {
   constructor(private readonly snack: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.searchControl.valueChanges
+    this.searchControlValueSubscription = this.searchControl.valueChanges
       .pipe(debounceTime(400))
       .subscribe((value) => {
-        this.filteredIcons = this.iconList.filter((e) => {
+        this.filteredIcons = Icons.filter((e) => {
           return value
             ?.toLowerCase()
             .split(' ')
@@ -63,11 +62,5 @@ export class IconsComponent implements OnInit, OnDestroy {
       verticalPosition: 'bottom',
       horizontalPosition: 'right',
     });
-  }
-
-  searchIcon(searchText: string) {
-    this.filteredIcons = this.iconList.filter((e) =>
-      e.includes(searchText.toLowerCase())
-    );
   }
 }

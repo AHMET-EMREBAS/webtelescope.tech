@@ -29,6 +29,10 @@ mat-sidenav-container {
   height: 100vh;
 }
 
+mat-sidenav-container > * {
+  zoom: 0.8;
+}
+
 mat-sidenav-content {
   display: flex;
   flex-direction: column;

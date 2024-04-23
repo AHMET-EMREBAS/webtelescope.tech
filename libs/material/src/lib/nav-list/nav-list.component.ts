@@ -20,7 +20,7 @@ import { getActivatedItemName, setActivatedItemName } from '../common';
   templateUrl: './nav-list.component.html',
   styleUrl: './nav-list.component.scss',
 })
-export class NavListComponent {
+export class WtNavListComponent {
   /**
    * Nav list title
    */

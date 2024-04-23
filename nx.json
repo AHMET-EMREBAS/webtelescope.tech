@@ -112,6 +112,10 @@
       "publishable": true,
       "projectNameAndRootFormat": "derived"
     },
+    "@nx/angular:module": {
+      "nameAndDirectoryFormat": "derived",
+      "project": "material"
+    },
     "@nx/angular:component": {
       "style": "scss",
       "nameAndDirectoryFormat": "derived",

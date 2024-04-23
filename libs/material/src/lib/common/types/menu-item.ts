@@ -1,4 +1,5 @@
 import { Color } from './color';
+import { Icon } from './icons';
 
 export type MenuItem = {
   id: number;
@@ -7,7 +8,7 @@ export type MenuItem = {
   meta?: string;
   route?: string;
   onClick?: () => void;
-  icon?: string;
+  icon?: Icon;
   iconColor?: Color;
   badge?: string;
   badgeColor?: Color;

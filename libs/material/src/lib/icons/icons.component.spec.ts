@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconsComponent } from './icons.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('IconsComponent', () => {
   let component: IconsComponent;
@@ -7,7 +8,7 @@ describe('IconsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IconsComponent],
+      imports: [IconsComponent, NoopAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(IconsComponent);

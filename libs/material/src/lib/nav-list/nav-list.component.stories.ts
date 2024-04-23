@@ -3,15 +3,15 @@ import {
   type Meta,
   type StoryObj,
 } from '@storybook/angular';
-import { NavListComponent } from './nav-list.component';
+import { WtNavListComponent } from './nav-list.component';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { commonProviders } from '../_story';
 
-const meta: Meta<NavListComponent> = {
-  component: NavListComponent,
-  title: 'NavListComponent',
+const meta: Meta<WtNavListComponent> = {
+  component: WtNavListComponent,
+  title: 'WtNavListComponent',
   decorators: [
     applicationConfig({
       providers: [...commonProviders],
@@ -19,7 +19,7 @@ const meta: Meta<NavListComponent> = {
   ],
 };
 export default meta;
-type Story = StoryObj<NavListComponent>;
+type Story = StoryObj<WtNavListComponent>;
 
 export const Primary: Story = {
   args: {

@@ -1,4 +1,8 @@
-<h3>{{ title }}</h3>
+<h1>
+  <strong>
+    {{ title }}
+  </strong>
+</h1>
 
 <mat-nav-list #navList>
   @for(item of items ; track item){
@@ -8,8 +12,7 @@
     [routerLink]="[item.route]"
     (click)="clickHandler(item)"
   >
-    <span matListItemTitle>{{ item.title | titlecase }}</span>
-    <!-- <span matListItemLine>{{ item.subtitle }}</span> -->
+    <span matListItemTitle>{{ item.title }}</span>
 
     <span matListItemIcon>
       <mat-icon
