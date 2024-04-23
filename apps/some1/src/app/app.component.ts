@@ -13,7 +13,11 @@ import { Title } from '@angular/platform-browser';
   imports: [RouterModule, AppLayoutModule, NavListComponent],
   selector: 'wt-root',
   template: `
-    <wt-app-layout rightSidenavToggleIcon="apps">
+    <wt-app-layout
+      rightSidenavToggleIcon="apps"
+      [leftSidenavToggleLabel]="MM.TOGGLE_LEFT_SIDENAV"
+      [rightSidenavToggleLabel]="MM.TOGGLE_RIGHT_SIDENAV"
+    >
       <!-- Toobar Left -->
       <ng-template wtToolbarLeft>
         <h1 class="app-title pv-2">{{ title.getTitle() }}</h1>

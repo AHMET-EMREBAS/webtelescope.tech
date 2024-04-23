@@ -19,6 +19,14 @@ export class AppPom {
     return this.byAriaLabel('Notifications');
   }
 
+  leftSideNavigationButton() {
+    return this.byAriaLabel('Toggle Left Side navigation');
+  }
+
+  rightSideNavigationButton() {
+    return this.byAriaLabel('Toggle Right Side navigation');
+  }
+
   /**
    * [data-testid]=?
    */

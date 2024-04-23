@@ -1,5 +1,5 @@
 export class Messages {
-  static GREETING = `Hello there!`;  
+  static GREETING = `Hello there!`;
   static HOME = `Home`;
   static ABOUT = `About`;
   static SERVICES = `Services`;
@@ -8,7 +8,7 @@ export class Messages {
   static ADMINISTRATIVE = `Administrative`;
   static USERS = `Users`;
   static CUSTOMERS = `Customers`;
-  static NAVIGATION_PANEL = `Navigation panel`;
+  static SIDENAV = `Side navigation`;
   static PROFILE = `Profile`;
   static SETTINGS = `Settings`;
   static LOGIN = `Login`;
@@ -32,4 +32,10 @@ export class Messages {
   static TOGGLE = `Toggle`;
   static OPEN = `Open`;
   static PASSWORD = `Password`;
+
+  static TOGGLE_LEFT_SIDENAV = [this.TOGGLE, this.LEFT, this.SIDENAV].join(' ');
+
+  static TOGGLE_RIGHT_SIDENAV = [this.TOGGLE, this.RIGHT, this.SIDENAV].join(
+    ' '
+  );
 }
