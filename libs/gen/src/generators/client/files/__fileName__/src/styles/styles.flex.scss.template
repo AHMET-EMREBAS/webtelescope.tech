@@ -1,0 +1,59 @@
+@each $short, $long in (row: row, col: column) {
+  .flex.#{$short} {
+    display: flex;
+    flex-direction: #{$long};
+  }
+}
+
+// Justify content
+@each $short,
+  $long
+    in (
+      between: space-between,
+      around: space-around,
+      evenly: space-evenly,
+      start: flex-start,
+      end: flex-end,
+      center: center
+    )
+{
+  .row.#{$short},
+  .col.#{$short} {
+    justify-content: #{$long};
+  }
+}
+
+// Align Items
+@each $short,
+  $long
+    in (
+      align-start: flex-start,
+      align-end: flex-end,
+      align-center: center,
+      stretch: stretch
+    )
+{
+  .row.#{$short},
+  .col.#{$short} {
+    align-items: #{$long};
+  }
+}
+
+//Self align Items
+@each $short,
+  $long in (start: flex-start, end: flex-end, center: center, stretch: stretch)
+{
+  .self-#{$short} {
+    align-self: #{$long};
+  }
+}
+
+@for $i from 0 through 6 {
+  .gap-#{$i} {
+    gap: #{$i}em;
+  }
+
+  .grow-#{$i} {
+    flex-grow: #{$i};
+  }
+}

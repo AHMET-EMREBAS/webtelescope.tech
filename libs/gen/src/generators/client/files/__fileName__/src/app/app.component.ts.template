@@ -1,13 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AppCommon } from './common/';
+import { AppMessages } from './common/';
+import {
+  AppLayoutModule,
+  MenuItem,
+  NavListComponent,
+} from '@webpackages/material/layout';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, AppLayoutModule, NavListComponent],
   selector: 'wt-root',
-  template: ` <h1>{{ Messages.GREETING }}</h1>
-    <router-outlet></router-outlet>`,
+  template: `
+    <wt-app-layout>
+      <ng-template wtToolbarLeft>
+        <h1>
+          {{ title.getTitle() }}
+        </h1>
+      </ng-template>
+      <ng-template wtToolbarRight>
+        <button mat-icon-button></button>
+      </ng-template>
+      <ng-template wtSidenavLeft>
+        <wt-nav-list title="Main" [items]="leftNavList"></wt-nav-list>
+      </ng-template>
+      <ng-template wtSidenavRight>
+        <wt-nav-list
+          [title]="MM.ADMINISTRATIVE"
+          [items]="rightNavList"
+        ></wt-nav-list>
+      </ng-template>
+      <ng-template wtStatusbarLeft>
+        <button mat-icon-button>
+          <mat-icon>help</mat-icon>
+        </button>
+      </ng-template>
+      <ng-template wtStatusbarRight>
+        <button mat-icon-button [ariaLabel]="MM.NOTIFICATIONS">
+          <mat-icon>notifications</mat-icon>
+        </button>
+      </ng-template>
+      <ng-template wtFloatingItems>
+        <button mat-fab [ariaLabel]="MM.CHAT_WITH_US">
+          <mat-icon>chat</mat-icon>
+        </button>
+      </ng-template>
+      <ng-template wtMainContent>
+        <router-outlet></router-outlet>
+      </ng-template>
+    </wt-app-layout>
+  `,
   styleUrl: './app.component.scss',
 })
-export class AppComponent extends AppCommon {}
+export class AppComponent implements OnInit {
+  readonly MM = AppMessages;
+
+  leftNavList: MenuItem[] = [
+    {
+      title: 'Home',
+      icon: 'home',
+    },
+  ];
+  rightNavList: MenuItem[] = [
+    {
+      title: 'Users',
+      icon: 'groups',
+    },
+  ];
+
+  constructor(public title: Title) {}
+
+  ngOnInit(): void {
+    this.title.setTitle('Hello, there!');
+  }
+}

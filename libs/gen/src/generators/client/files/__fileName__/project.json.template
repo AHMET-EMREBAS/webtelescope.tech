@@ -43,8 +43,7 @@
           "apps/<%- name %>/src/manifest.webmanifest"
         ],
         "styles": [
-          "@angular/material/prebuilt-themes/deeppurple-amber.css",
-          "apps/<%- name %>/src/styles.scss"
+          "apps/<%- name %>/src/styles/styles.scss"
         ],
         "scripts": [],
         "serviceWorker": true,

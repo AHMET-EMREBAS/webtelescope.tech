@@ -1,0 +1,26 @@
+@for $i from 0 through 12 {
+  $value: #{$i * 1}em;
+
+  @each $shortName, $name in (p: padding, m: margin) {
+    .#{$shortName}-#{$i} {
+      #{$name}: $value;
+    }
+    @each $shortSideName, $sideName in (r: right, l: left, t: top, b: bottom) {
+      .#{$shortName}#{$shortSideName}-#{$i} {
+        #{$name}-#{$sideName}: $value;
+      }
+    }
+
+    // Verticle spacing
+    .#{$shortName}v-#{$i} {
+      #{$name}-top: $value;
+      #{$name}-bottom: $value;
+    }
+
+    // Horizontal spacing
+    .#{$shortName}h-#{$i} {
+      #{$name}-left: $value;
+      #{$name}-right: $value;
+    }
+  }
+}

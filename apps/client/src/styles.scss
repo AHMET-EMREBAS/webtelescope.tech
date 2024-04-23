@@ -1,3 +1,6 @@
+@forward "styles.flex.scss";
+@forward "styles.space.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -18,8 +21,8 @@ body {
   display: flex;
   gap: 1em;
   flex-direction: column;
-  align-content: start;
   justify-content: stretch;
+  align-content: flex-start;
   flex-grow: 1;
 }
 
@@ -27,7 +30,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: stretch;
   gap: 1em;
   flex-grow: 1;
@@ -48,7 +51,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-content: start;
+  align-content: flex-start;
   gap: 1em;
   flex-grow: 1;
 }
@@ -72,10 +75,6 @@ body {
   gap: 1em;
   flex-grow: 1;
 }
-
-// wt-root {
-//   zoom: 0.8;
-// }
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -143,6 +142,7 @@ body {
 @font-face {
   font-family: Black Ops One;
   src: url(./assets/fonts/Black_Ops_One/BlackOpsOne-Regular.ttf);
+  
 }
 @font-face {
   font-family: Concert One;
@@ -249,3 +249,4 @@ body {
 .material-icons.fill {
   font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
 } /*# sourceMappingURL=style.css.map */
+

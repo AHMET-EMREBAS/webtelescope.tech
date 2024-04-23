@@ -1,7 +1,15 @@
 {
-  "eslint.validate": ["json"],
+  "eslint.validate": [
+    "json"
+  ],
   "yaml.schemas": {
-    "schemas/model.schema.json": ["*.model.yaml"]
+    "schemas/model.schema.json": [
+      "*.model.yaml"
+    ]
   },
+  "css.styleSheets": [
+    "../apps/**/*.scss",
+    "../apps/**/*.css",
+  ],
   "liveServer.settings.port": 5501
 }
