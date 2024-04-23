@@ -1,5 +1,45 @@
 {
-  "name": "Using fixtures to represent data",
-  "email": "hello@webtelescope.tech",
-  "body": "Fixtures are a great way to mock data for responses to routes"
+  messages:{ 
+
+
+ 
+   GREETING = `Hello there!`,
+   HOME = `Home`,
+   ABOUT = `About`,
+   SERVICES = `Services`,
+   NOTIFICATIONS = `Notifications`,
+   CHAT_WITH_US = `Chat with us`,
+   ADMINISTRATIVE = `Administrative`,
+   USERS = `Users`,
+   CUSTOMERS = `Customers`,
+   SIDENAV = `Side navigation`,
+   PROFILE = `Profile`,
+   SETTINGS = `Settings`,
+   LOGIN = `Login`,
+   LOGOUT = `Logout`,
+   SIGNIN = `Signin`,
+   SIGNUP = `Signup`,
+   SUBSCRIPTION = `Subscription`,
+   SECURITY = `Security`,
+   WRONG = `Wrong`,
+   LEFT = `Left`,
+   RIGHT = `Right`,
+   TOP = `Top`,
+   BOTTOM = `Bottom`,
+   ABOVE = `Above`,
+   BELOW = `Below`,
+   NEW = `New`,
+   ADD = `Add`,
+   UPDATE = `Update`,
+   DEL = `Delete`,
+   FIND = `Find`,
+   TOGGLE = `Toggle`,
+   OPEN = `Open`,
+   PASSWORD = `Password`,
+   TOGGLE_LEFT_SIDENAV = `Toggle left side navigation`,
+   TOGGLE_RIGHT_SIDENAV = `Toggle right side navigation`,
+
+
+} 
+
 }

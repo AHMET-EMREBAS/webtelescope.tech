@@ -20,11 +20,11 @@ export class AppPom {
   }
 
   leftSideNavigationButton() {
-    return this.byAriaLabel('Toggle Left Side navigation');
+    return this.byAriaLabel('Toggle left side navigation');
   }
 
   rightSideNavigationButton() {
-    return this.byAriaLabel('Toggle Right Side navigation');
+    return this.byAriaLabel('Toggle right side navigation');
   }
 
   /**

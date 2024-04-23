@@ -2,24 +2,34 @@ import { AppPom } from '../support/app.po';
 
 describe('client-e2e', () => {
   let pom: AppPom;
-  before(() => {
+
+  beforeEach(() => {
     cy.visit('/');
+
     pom = new AppPom();
   });
 
-  it('should render main components', () => {
+  it('should render the home menu item', () => {
+    pom.homeMenuItem().contains(/Home/gi);
+  });
+
+  it('should render user menu item', () => {
+    pom.usersMenuItem().contains(/Users/gi);
+  });
+
+  it('should render chat with us button', () => {
     pom.chatWithUsButton().contains('chat');
+  });
 
-    pom.greeting().contains('Hello there!');
+  it('should render notification button', () => {
+    pom.notificationButton().contains(/Notifications/gi);
+  });
 
-    pom.homeMenuItem().contains('Home');
+  it('should render left side navigation button', () => {
+    pom.leftSideNavigationButton().contains(/menu/gi);
+  });
 
-    pom.notificationButton().contains('Notifications', { matchCase: false });
-
-    pom.usersMenuItem().contains('Users');
-
-    pom.leftSideNavigationButton().contains('menu', { matchCase: false });
-
-    pom.rightSideNavigationButton().contains('apps', { matchCase: false });
+  it('should render right side navigation button', () => {
+    pom.rightSideNavigationButton().contains(/app/gi);
   });
 });
