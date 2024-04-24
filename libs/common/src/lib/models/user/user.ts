@@ -16,9 +16,9 @@ export interface IUser<
 export interface IUserView {
   username: string;
   password: string;
-  roles: string;
-  permissions: string;
-  scopes: string;
+  roles?: string;
+  permissions?: string;
+  scopes?: string;
 }
 
 export interface ICreateUserDto

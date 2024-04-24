@@ -3,17 +3,14 @@ import { ITimestamp } from '@webpackages/common';
 import { IDEntity, IDEntityView } from './id';
 import { ViewColumn } from './column';
 
-export abstract class TimestampEntity extends IDEntity implements ITimestamp {
+export class TimestampEntity extends IDEntity implements ITimestamp {
   @CreateDateColumn() createdAt!: Date;
-  @DeleteDateColumn() updatedAt!: Date;
-  @UpdateDateColumn() deletedAt?: Date;
+  @UpdateDateColumn() updatedAt!: Date;
+  @DeleteDateColumn() deletedAt?: Date;
 }
 
-export abstract class TimestampEntityView
-  extends IDEntityView
-  implements ITimestamp
-{
+export class TimestampEntityView extends IDEntityView implements ITimestamp {
   @ViewColumn() createdAt!: Date;
   @ViewColumn() updatedAt!: Date;
-  @ViewColumn() deletedAt!: Date;
+  @ViewColumn() deletedAt?: Date;
 }

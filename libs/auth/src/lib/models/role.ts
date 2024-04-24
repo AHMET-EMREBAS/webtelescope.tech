@@ -3,10 +3,11 @@ import {
   Entity,
   Many,
   TimestampEntity,
+  TimestampEntityView,
   ViewColumn,
   ViewEntity,
 } from '@webpackages/core';
-import { IRole, IRoleView } from '@webpackages/common';
+import { IRole } from '@webpackages/common';
 import { Permission } from './permission';
 
 @Entity()
@@ -17,10 +18,22 @@ export class Role extends TimestampEntity implements IRole<Permission> {
 
 @ViewEntity({
   expression(datasource) {
-    return datasource.createQueryBuilder().select().from(Role, 'main');
+    return datasource
+      .createQueryBuilder()
+
+      .select('r.id', 'id')
+      .addSelect('DATE(r.createdAt)', 'createdAt')
+      .addSelect('DATE(r.updatedAt)', 'updatedAt')
+      .addSelect('DATE(r.deletedAt)', 'deletedAt')
+      .addSelect('r.name', 'name')
+      .addSelect('GROUP_CONCAT(p.name)', 'permissions')
+      .from(Role, 'r')
+      .leftJoin('role_permissions_permission', 'rp', 'rp.roleId = r.id')
+      .leftJoin(Permission, 'p', 'p.id = rp.permissionId')
+      .groupBy('r.name');
   },
 })
-export class RoleView implements IRoleView {
+export class RoleView extends TimestampEntityView {
   @ViewColumn() name!: string;
   @ViewColumn() permissions!: string;
 }

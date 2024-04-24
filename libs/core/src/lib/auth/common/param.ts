@@ -8,7 +8,7 @@ import { IUser } from '@webpackages/common';
  * Param Decorator
  * Get user data from the request
  */
-export const User = createParamDecorator(
+export const UserParam = createParamDecorator(
   (data: unknown, context: ExecutionContext) => {
     return context.switchToHttp().getRequest().user as IUser;
   }

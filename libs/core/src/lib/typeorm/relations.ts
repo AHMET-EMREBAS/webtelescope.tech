@@ -35,7 +35,7 @@ export function One<T extends IID>(target: Type<T>) {
     ManyToOne(
       () => target,
       (t) => t.id,
-      { nullable: false }
+      { nullable: false, eager: true }
     ),
     JoinColumn()
   );
@@ -51,7 +51,7 @@ export function Many<T extends IID>(target: Type<T>) {
     ManyToMany(
       () => target,
       (t) => t.id,
-      { nullable: false }
+      { nullable: false, eager: true }
     ),
     JoinTable()
   );
