@@ -1,5 +1,5 @@
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
-import { IAuthUser } from './user';
+import { IAuthUser } from '../models/user';
 import { AuthNames } from './names';
 
 /**

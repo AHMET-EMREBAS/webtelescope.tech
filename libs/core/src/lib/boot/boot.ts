@@ -53,7 +53,7 @@ export async function boot(module: Type, profileName: string) {
   const _cf = <T extends string = string>(key: string) =>
     config.getOrThrow<T>(_cn(key));
 
-  const MODE = _cf('NODE_ENV');
+  const MODE = config.getOrThrow('NODE_ENV');
   const NAME = _cf('NAME');
   const PREFIX = _cf('PREFIX');
   const ORIGINS = _cf('ORIGINS');

@@ -1,20 +1,23 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { compare } from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
+import { extractBody, setAccessToken } from '../common';
 import {
   IAuthUserService,
+  IPasswordService,
+  ITokenService,
   InjectAuthUserService,
-  extractBody,
-  Sub,
-  setAccessToken,
-} from '../common';
+  InjectPasswordService,
+  InjectTokenService,
+} from '../services';
 
 @Injectable()
 export class LocalGuard implements CanActivate {
   constructor(
     @InjectAuthUserService()
     protected readonly userService: IAuthUserService,
-    protected readonly jwt: JwtService
+    @InjectPasswordService()
+    protected readonly passwordService: IPasswordService,
+    @InjectTokenService() protected readonly tokenService: ITokenService
   ) {}
   async canActivate(context: ExecutionContext) {
     const { username: providedUsername, password: providedPassword } =
@@ -27,7 +30,7 @@ export class LocalGuard implements CanActivate {
 
         const result = await compare(providedPassword, hashedPassword);
         if (result) {
-          const token = await this.jwt.signAsync({ sub } as Sub);
+          const token = await this.tokenService.sign({ sub });
           setAccessToken(context, token);
           return true;
         } else {

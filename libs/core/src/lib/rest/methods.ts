@@ -15,11 +15,11 @@ import {
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
-export type GetOptions = {
+export type MethodOptions = {
   path: string;
-  security: SecurityOptions;
+  security?: SecurityOptions;
 };
-export function Get(options: GetOptions) {
+export function Get(options: MethodOptions) {
   const { path, security } = options;
   const decorators: MethodDecorator[] = [
     ApiOkResponse({ description: 'Success' }),
@@ -33,7 +33,7 @@ export function Get(options: GetOptions) {
   return applyDecorators(NestGet(path ?? ''), ...decorators);
 }
 
-export function Post(options: GetOptions) {
+export function Post(options: MethodOptions) {
   const { path, security } = options;
   const decorators: MethodDecorator[] = [
     ApiCreatedResponse({ description: 'Success' }),
@@ -47,7 +47,7 @@ export function Post(options: GetOptions) {
   return applyDecorators(NestPost(path ?? ''), ...decorators);
 }
 
-export function Update(options: GetOptions) {
+export function Update(options: MethodOptions) {
   const { path, security } = options;
   const decorators: MethodDecorator[] = [
     ApiOkResponse({ description: 'Success' }),
@@ -61,7 +61,7 @@ export function Update(options: GetOptions) {
   return applyDecorators(NestPut(path ?? ''), ...decorators);
 }
 
-export function Delete(options: GetOptions) {
+export function Delete(options: MethodOptions) {
   const { path, security } = options;
   const decorators: MethodDecorator[] = [
     ApiOkResponse({ description: 'Success' }),

@@ -1,7 +1,7 @@
 import { UseGuards, applyDecorators } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthNames } from '../common/names';
-import { AuthGuard } from '.';
+import { AuthGuard } from './auth.guard';
 import { LocalGuard } from './local.guard';
 
 /**

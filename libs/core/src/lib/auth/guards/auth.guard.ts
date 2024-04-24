@@ -1,6 +1,10 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
 import {
   CommonRoles,
   extractApiKey,
@@ -9,31 +13,51 @@ import {
   getPublic,
   getRole,
   getScope,
-  IAuthUserService,
-  InjectAuthUserService,
-  Sub,
 } from '../common';
+import {
+  IAuthUserService,
+  ITokenService,
+  InjectAuthUserService,
+  InjectTokenService,
+} from '../services';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  private readonly logger = new Logger();
+
   constructor(
     protected readonly reflector: Reflector,
-    protected readonly jwt: JwtService,
+    @InjectTokenService() protected readonly tokenService: ITokenService,
     @InjectAuthUserService() protected readonly userService: IAuthUserService
   ) {}
 
+  log(msg: string) {
+    this.logger.debug(msg, AuthGuard.name);
+  }
   async canActivate(context: ExecutionContext) {
     const isPublic = getPublic(this.reflector, context);
-    if (isPublic) return true;
+    if (isPublic) {
+      this.log('Public resource access!');
+      return true;
+    }
 
     const token = extractApiKey(context) ?? extractAuthCookie(context);
-    if (!token) return false;
+    if (!token) {
+      this.log('Token is not found!');
+      return false;
+    }
 
-    const sub = this.jwt.verify<Sub>(token);
-    if (!sub) return false;
+    const sub = await this.tokenService.verify(token);
+    if (!sub) {
+      this.log('Token is not verified!');
+      return false;
+    }
 
     const user = await this.userService.findById(sub.sub);
-    if (!user) return false;
+    if (!user) {
+      this.log(`User could not be found by id ${sub.sub} `);
+      return false;
+    }
 
     // Common user authorization
     const rScope = getScope(this.reflector, context);
@@ -48,6 +72,7 @@ export class AuthGuard implements CanActivate {
         );
       })
     ) {
+      this.log('User has a special');
       return true;
     }
 

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExecutionContext } from '@nestjs/common';
-import { AuthNames } from '..';
+import { AuthNames } from './names';
 import { Some } from '@webpackages/common';
-import { IAuthUser } from './user';
+import { IAuthUser } from '../models/user';
 
 export function createHeaderExtractor<Request extends { headers: any }>(
   key: string
@@ -16,7 +16,7 @@ export function createCookieExtractor<Request extends { cookies: any }>(
   key: string
 ) {
   return (context: ExecutionContext) => {
-    return context.switchToHttp().getRequest<Request>().cookies[key];
+    return context.switchToHttp().getRequest<Request>().cookies?.[key];
   };
 }
 

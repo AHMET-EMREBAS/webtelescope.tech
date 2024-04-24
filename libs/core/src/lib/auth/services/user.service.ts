@@ -1,5 +1,5 @@
 import { Some } from '@webpackages/common';
-import { IAuthUser } from './user';
+import { IAuthUser } from '../models/user';
 
 export interface IAuthUserService {
   findByUsername(username: string): Promise<Some<IAuthUser>>;
