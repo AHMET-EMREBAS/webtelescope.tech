@@ -10,7 +10,7 @@ import {
   Profile,
   SlowInterceptor,
   TestUserService,
-  WithApiKey,
+  WithBearer,
 } from '@webpackages/core';
 import { IsNotEmpty } from 'class-validator';
 
@@ -38,7 +38,7 @@ export class AppController {
   ) {}
 
   @Get('secure')
-  @WithApiKey()
+  @WithBearer()
   secure() {
     return 'secured';
   }

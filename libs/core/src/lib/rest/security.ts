@@ -1,6 +1,6 @@
 import { applyDecorators } from '@nestjs/common';
 import {
-  WithApiKey,
+  WithBearer,
   WithCookie,
   WithCredential,
   SecurityOptions,
@@ -12,7 +12,7 @@ import {
 export function getSecurityDecorator(security: SecurityOptions) {
   const decorators: (ClassDecorator | MethodDecorator)[] = [];
   if (security) {
-    if (security.apiKey) decorators.push(WithApiKey());
+    if (security.apiKey) decorators.push(WithBearer());
     if (security.cookie) decorators.push(WithCookie());
     if (security.credentials) decorators.push(WithCredential());
 

@@ -25,11 +25,17 @@ export function configureSwagger(
   const { title, prefix } = options;
   const swaggerConfig = new DocumentBuilder()
     .setTitle(title)
+    .addApiKey({
+      type: 'apiKey',
+      in: 'headers',
+      'x-tokenName': AuthNames.OAUTH2_KEY,
+      name: AuthNames.OAUTH2_NAME,
+    })
     .addBearerAuth({
       type: 'http',
       in: 'headers',
       description: 'Api-key is created for every user on successful login.',
-      name: AuthNames.API_KEY_SECURITY_NAME,
+      name: AuthNames.BEARER_SECURITY_NAME,
     })
     .addCookieAuth(AuthNames.ACCESS_TOKEN_COOKIE_KEY, {
       type: 'http',

@@ -1,5 +1,5 @@
 import { UseGuards, applyDecorators } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOAuth2 } from '@nestjs/swagger';
 import { AuthNames } from '../common/names';
 import { AuthGuard } from './auth.guard';
 import { LocalGuard } from './local.guard';
@@ -8,9 +8,20 @@ import { LocalGuard } from './local.guard';
  * Security Guard Decorator
  * @returns
  */
+export function WithBearer() {
+  return applyDecorators(
+    ApiBearerAuth(AuthNames.BEARER_SECURITY_NAME),
+    UseGuards(AuthGuard)
+  );
+}
+
+/**
+ * Security Guard Decorator
+ * @returns
+ */
 export function WithApiKey() {
   return applyDecorators(
-    ApiBearerAuth(AuthNames.API_KEY_SECURITY_NAME),
+    ApiOAuth2(['app'],AuthNames.OAUTH2_NAME),
     UseGuards(AuthGuard)
   );
 }

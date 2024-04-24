@@ -4,12 +4,23 @@ export enum AuthNames {
   /**
    * Api keys will be stored in the `autorization` in headers.
    */
-  AUTHORIZATION_HEADER_KEY = 'authorization',
+  BEARER_HEADER_KEY = 'authorization',
+
+  /**
+   * Api keys will be stored in the `autorization` in headers.
+   */
+  OAUTH2_KEY = 'x-apikey',
+
   /**
    * Name of the api-key security schema. In this secuirty procees, users must provide an `authorization` header.
    * Otherwise, users are not authorized for any operations.
    */
-  API_KEY_SECURITY_NAME = 'Api key',
+  BEARER_SECURITY_NAME = 'Berar',
+
+  /**
+   * For third party subscribers
+   */
+  OAUTH2_NAME = 'Api Key',
 
   /**
    * Name of the credentials security schema. In this security process, users must provide valid and verified username and password.
