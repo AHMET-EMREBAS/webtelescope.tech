@@ -7,12 +7,17 @@ import { v4 } from 'uuid';
  */
 export type ProviderHandlers<T> = [
   (value: T) => Provider,
-  () => PropertyDecorator & ParameterDecorator
+  () => PropertyDecorator & ParameterDecorator,
+  () => string
 ];
 
 export function createValueProvider<T>(prefix: string): ProviderHandlers<T> {
   const provide = prefix + v4();
-  return [(useValue: T) => ({ provide, useValue }), () => Inject(provide)];
+  return [
+    (useValue: T) => ({ provide, useValue }),
+    () => Inject(provide),
+    () => provide,
+  ];
 }
 
 export function createClassProvider<T>(
@@ -22,5 +27,6 @@ export function createClassProvider<T>(
   return [
     (useClass: Type<T>) => ({ provide, useClass }),
     () => Inject(provide),
+    () => provide,
   ];
 }

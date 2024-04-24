@@ -7,7 +7,8 @@ import {
 import { Reflector } from '@nestjs/core';
 import {
   CommonRoles,
-  extractApiKey,
+  Sub,
+  extractBearerApiKey,
   extractAuthCookie,
   getPermission,
   getPublic,
@@ -15,11 +16,13 @@ import {
   getScope,
 } from '../common';
 import {
-  IAuthUserService,
+  IUserService,
   ITokenService,
-  InjectAuthUserService,
+  InjectUserService,
+  InjectRootUserService,
   InjectTokenService,
 } from '../services';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -28,20 +31,35 @@ export class AuthGuard implements CanActivate {
   constructor(
     protected readonly reflector: Reflector,
     @InjectTokenService() protected readonly tokenService: ITokenService,
-    @InjectAuthUserService() protected readonly userService: IAuthUserService
+    @InjectUserService() protected readonly userService: IUserService,
+    @InjectRootUserService()
+    protected readonly rootUserService: IUserService
   ) {}
 
   log(msg: string) {
     this.logger.debug(msg, AuthGuard.name);
   }
+
+  async isRootUser(sub: Sub) {
+    const found = await this.rootUserService.findById(sub.sub);
+    if (found?.roles?.find((e) => e.name == CommonRoles.ROOT)) {
+      return true;
+    }
+    return false;
+  }
+
   async canActivate(context: ExecutionContext) {
     const isPublic = getPublic(this.reflector, context);
+
     if (isPublic) {
       this.log('Public resource access!');
       return true;
     }
+    const req = context.switchToHttp().getRequest<Request>();
 
-    const token = extractApiKey(context) ?? extractAuthCookie(context);
+    console.table(req.cookies);
+    const token = extractBearerApiKey(context) ?? extractAuthCookie(context);
+
     if (!token) {
       this.log('Token is not found!');
       return false;
@@ -53,6 +71,12 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
+    // Check the user is root user
+    if (await this.isRootUser(sub)) {
+      return true;
+    }
+
+    // Regular user
     const user = await this.userService.findById(sub.sub);
     if (!user) {
       this.log(`User could not be found by id ${sub.sub} `);

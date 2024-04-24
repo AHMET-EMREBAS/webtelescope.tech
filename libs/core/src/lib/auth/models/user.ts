@@ -1,22 +1,22 @@
-export interface IAuthModelId {
+export interface __IID {
   id: number;
 }
 
-export interface IAuthScope extends IAuthModelId {
+export interface IScope extends __IID {
   name: string;
 }
 
-export interface IAuthPermission extends IAuthModelId {
+export interface IPermission extends __IID {
   name: string;
 }
-export interface IAuthRole extends IAuthModelId {
+export interface IRole extends __IID {
   name: string;
-  permissions?: IAuthPermission[];
+  permissions?: IPermission[];
 }
 
-export interface IAuthUser extends IAuthModelId {
+export interface IAuthUser extends __IID {
   username: string;
   password: string;
-  roles?: IAuthRole[];
-  scopes?: IAuthScope[];
+  roles?: IRole[];
+  scopes?: IScope[];
 }

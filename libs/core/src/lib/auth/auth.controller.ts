@@ -1,26 +1,32 @@
-import { Res } from '@nestjs/common';
+import { Body, Res } from '@nestjs/common';
 import { Controller, Post } from '../rest';
 import { AccessToken, AuthNames } from './common';
 import { Response } from 'express';
-import { IAuthUserService, InjectAuthUserService } from './services';
+import { WithCredential } from './guards';
+import { IsNotEmpty } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class LoginDto {
+  @ApiProperty({ type: 'string', example: 'root1@gmail.com' })
+  @IsNotEmpty()
+  username!: string;
+  @ApiProperty({ type: 'string', example: 'password1' })
+  @IsNotEmpty()
+  password!: string;
+}
 
 @Controller({
   path: 'auth',
   tags: [AuthController.name],
 })
 export class AuthController {
-  constructor(
-    @InjectAuthUserService()
-    protected readonly userService: IAuthUserService
-  ) {}
-
-  @Post({
-    path: 'login',
-    security: {
-      credentials: true,
-    },
-  })
-  login(@AccessToken() accessToken: string, @Res() res: Response) {
+  @WithCredential()
+  @Post({ path: 'login' })
+  login(
+    @AccessToken() accessToken: string,
+    @Res() res: Response,
+    @Body() loginDto: LoginDto
+  ) {
     res.cookie(AuthNames.ACCESS_TOKEN_COOKIE_KEY, accessToken);
     res.send({
       accessToken,

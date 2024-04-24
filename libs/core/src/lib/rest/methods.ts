@@ -21,7 +21,7 @@ export type MethodOptions = {
 };
 export function Get(options: MethodOptions) {
   const { path, security } = options;
-  const decorators: MethodDecorator[] = [
+  const decorators: (ClassDecorator | MethodDecorator)[] = [
     ApiOkResponse({ description: 'Success' }),
     ApiUnprocessableEntityResponse({ description: 'Query validation error' }),
     ApiNotFoundResponse({ description: 'Not found' }),

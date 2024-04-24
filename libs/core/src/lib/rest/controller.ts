@@ -11,6 +11,7 @@ export type ControllerOptions = {
 
 export function Controller(options: ControllerOptions) {
   const decorators: ClassDecorator[] = [];
+
   const { path, security, tags } = options;
 
   if (tags) decorators.push(ApiTags(...tags));

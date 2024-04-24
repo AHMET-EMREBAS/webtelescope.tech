@@ -1,13 +1,22 @@
 import { createClassProvider } from '../../common';
 import { IPasswordService } from './password.service';
 import { ITokenService } from './token.service';
-import { IAuthUserService } from './user.service';
+import { IUserService } from './user.service';
 
-export const [provideAuthUserService, InjectAuthUserService] =
-  createClassProvider<IAuthUserService>('AuthUserService');
+export const [provideUserService, InjectUserService, getUserServiceToken] =
+  createClassProvider<IUserService>('UserService');
 
-export const [providePasswordService, InjectPasswordService] =
-  createClassProvider<IPasswordService>('PasswordService');
+export const [
+  provideRootUserService,
+  InjectRootUserService,
+  getRootUserServiceToken,
+] = createClassProvider<IUserService>('RootUserService');
 
-export const [provideTokenService, InjectTokenService] =
+export const [
+  providePasswordService,
+  InjectPasswordService,
+  getPasswordServiceToken,
+] = createClassProvider<IPasswordService>('PasswordService');
+
+export const [provideTokenService, InjectTokenService, getTokenServiceToken] =
   createClassProvider<ITokenService>('TokenService');

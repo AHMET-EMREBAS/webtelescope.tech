@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { compare, genSalt, hash } from 'bcrypt';
 
 export interface IPasswordService<T = string> {
@@ -5,21 +6,23 @@ export interface IPasswordService<T = string> {
   compare(data: T, hashed: string): Promise<boolean>;
 }
 
-export class DefaultPasswordService implements IPasswordService {
+@Injectable()
+export class PasswordService implements IPasswordService {
   async compare(data: string, hashed: string): Promise<boolean> {
     return await compare(data, hashed);
   }
 
   async hash(data: string): Promise<string> {
-    return hash(data, await genSalt(8));
+    return await hash(data, await genSalt(8));
   }
 }
 
+@Injectable()
 export class TestPasswordService implements IPasswordService {
   async compare(data: string, hashed: string): Promise<boolean> {
-    return data === hashed;
+    return compare(data, hashed);
   }
   async hash(value: string): Promise<string> {
-    return value;
+    return await hash(value, await genSalt(8));
   }
 }

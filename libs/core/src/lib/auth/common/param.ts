@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
-import { IAuthUser } from '../models/user';
+import { IAuthUser } from '../models';
 import { AuthNames } from './names';
-
+import { Request } from 'express';
 /**
  * Param Decorator
  * Get user data from the request
  */
-export const User = createParamDecorator<ExecutionContext, IAuthUser>(
-  (data: ExecutionContext) => {
-    return data.switchToHttp().getRequest().user as IAuthUser;
+export const User = createParamDecorator(
+  (data: unknown, context: ExecutionContext) => {
+    return context.switchToHttp().getRequest().user as IAuthUser;
   }
 );
 
@@ -16,9 +17,9 @@ export const User = createParamDecorator<ExecutionContext, IAuthUser>(
  * Param decorator
  * Get access token from the  request
  */
-export const AccessToken = createParamDecorator<ExecutionContext, IAuthUser>(
-  (data: ExecutionContext) => {
-    return data.switchToHttp().getRequest()[
+export const AccessToken = createParamDecorator(
+  (data: unknown, context: ExecutionContext) => {
+    return context.switchToHttp().getRequest()[
       AuthNames.ACCESS_TOKEN_COOKIE_KEY
     ] as IAuthUser;
   }
@@ -29,7 +30,6 @@ export const AccessToken = createParamDecorator<ExecutionContext, IAuthUser>(
  * @param context
  * @param token
  */
-export function setAccessToken(context: ExecutionContext, token: string) {
-  context.switchToHttp().getRequest()[AuthNames.ACCESS_TOKEN_COOKIE_KEY] =
-    token;
+export function setAccessToken(req: Request, token: string) {
+  Object.assign(req, { [AuthNames.ACCESS_TOKEN_COOKIE_KEY]: token });
 }

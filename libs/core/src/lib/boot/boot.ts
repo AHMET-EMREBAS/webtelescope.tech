@@ -5,10 +5,14 @@ import {
   Type,
 } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { ConfigService } from '@nestjs/config';
+
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '../swagger';
 import { AuthNames } from '../auth';
+import {
+  IProfileConfigService,
+  getProfileConfigServiceToken,
+} from '../profile';
 
 export type SwaggerOptions = {
   title: string;
@@ -22,7 +26,7 @@ export function configureSwagger(
   const swaggerConfig = new DocumentBuilder()
     .setTitle(title)
     .addBearerAuth({
-      type: 'apiKey',
+      type: 'http',
       in: 'headers',
       description: 'Api-key is created for every user on successful login.',
       name: AuthNames.API_KEY_SECURITY_NAME,
@@ -43,23 +47,21 @@ export function configureSwagger(
   SwaggerModule.setup(prefix ?? 'api', app, doc);
 }
 
-export async function boot(module: Type, profileName: string) {
-  const profile = profileName.toUpperCase();
-
+export async function boot(module: Type) {
   const context = await NestFactory.create(module);
-  const config = context.get(ConfigService);
+  const configService = context.get<IProfileConfigService>(
+    getProfileConfigServiceToken()
+  );
 
-  const _cn = (key: string) => `${profile}_${key}`;
-  const _cf = <T extends string = string>(key: string) =>
-    config.getOrThrow<T>(_cn(key));
+  const _cs = (key: string) => configService.getOrThrow(key);
 
-  const MODE = config.getOrThrow('NODE_ENV');
-  const NAME = _cf('NAME');
-  const PREFIX = _cf('PREFIX');
-  const ORIGINS = _cf('ORIGINS');
-  const PORT = _cf('PORT');
-  const HTTPS = _cf('HTTPS');
-  const DOMAIN = _cf('DOMAIN');
+  const MODE = process.env['NODE_ENV'];
+  const NAME = _cs('NAME');
+  const PREFIX = _cs('PREFIX');
+  const ORIGINS = _cs('ORIGINS');
+  const PORT = _cs('PORT');
+  const HTTPS = _cs('HTTPS');
+  const DOMAIN = _cs('DOMAIN');
 
   console.table({
     MODE,

@@ -1,23 +1,77 @@
-import { Controller, Get, Headers, UseGuards } from '@nestjs/common';
-
+import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ApiBasicAuth, ApiBearerAuth } from '@nestjs/swagger';
-import { AuthGuard } from '@webpackages/core';
+import { ApiBasicAuth, ApiBearerAuth, ApiProperty } from '@nestjs/swagger';
+import {
+  IProfileConfigService,
+  InjectUserService,
+  InjectProfileConfigService,
+  MaintananceInterceptor,
+  Post,
+  Profile,
+  SlowInterceptor,
+  TestUserService,
+  WithApiKey,
+} from '@webpackages/core';
+import { IsNotEmpty } from 'class-validator';
+
+export class ProfileDto {
+  @ApiProperty({ enum: [Profile.SLOW, Profile.MAINTANANCE] })
+  @IsNotEmpty()
+  profile: string;
+}
+
+export class LocaleDto {
+  @ApiProperty({ enum: ['TR', 'EN', 'ES'] })
+  @IsNotEmpty()
+  locale: string;
+}
 
 @ApiBearerAuth()
 @ApiBasicAuth()
-@UseGuards(AuthGuard)
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    @InjectProfileConfigService()
+    private readonly configService: IProfileConfigService,
+    private readonly appService: AppService,
+    @InjectUserService() private readonly userService: TestUserService
+  ) {}
 
-  @Get('hello')
-  getData(@Headers() headers: any) {
-    return { ...headers };
+  @Get('secure')
+  @WithApiKey()
+  secure() {
+    return 'secured';
   }
 
+
+  @Get('hello')
+  getData() {
+    return { message: this.configService.getMessage('HELLO') };
+  }
+
+  @UseInterceptors(MaintananceInterceptor)
   @Get('users')
   getUSers() {
-    return [];
+    return this.userService.users;
+  }
+
+  @UseInterceptors(SlowInterceptor)
+  @Get('slow-users')
+  slowUsers() {
+    return this.userService.users;
+  }
+
+  @Post({ path: 'set-profile' })
+  setProfile(@Query() profileDto: ProfileDto) {
+    const { profile } = profileDto;
+    this.configService.set(Profile.PROFILE, profile);
+    return { profile };
+  }
+
+  @Post({ path: 'set-locale' })
+  setLocale(@Query() profileDto: LocaleDto) {
+    const { locale } = profileDto;
+    this.configService.set(Profile.LOCALE, locale);
+    return { locale };
   }
 }

@@ -1,45 +1,81 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { compare } from 'bcrypt';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { extractBody, setAccessToken } from '../common';
 import {
-  IAuthUserService,
+  IUserService,
   IPasswordService,
   ITokenService,
-  InjectAuthUserService,
+  InjectUserService,
   InjectPasswordService,
   InjectTokenService,
+  InjectRootUserService,
 } from '../services';
 
 @Injectable()
 export class LocalGuard implements CanActivate {
+  logger = new Logger();
+
+  log(msg: string) {
+    this.logger.debug(msg);
+  }
   constructor(
-    @InjectAuthUserService()
-    protected readonly userService: IAuthUserService,
+    @InjectUserService()
+    protected readonly userService: IUserService,
+
+    @InjectRootUserService()
+    protected readonly rootUserService: IUserService,
+
     @InjectPasswordService()
     protected readonly passwordService: IPasswordService,
+
     @InjectTokenService() protected readonly tokenService: ITokenService
   ) {}
-  async canActivate(context: ExecutionContext) {
-    const { username: providedUsername, password: providedPassword } =
-      extractBody(context);
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const req = context.switchToHttp().getRequest();
 
+    const { username: providedUsername, password: providedPassword } =
+      extractBody(req);
+
+    this.log(
+      `Provided username '${providedUsername}' and password '${providedPassword}'`
+    );
     if (providedUsername && providedPassword) {
-      const user = await this.userService.findByUsername(providedUsername);
+      (this.rootUserService as any).users.forEach((user: any) =>
+        console.table({ user })
+      );
+
+      const user =
+        (await this.userService.findByUsername(providedUsername)) ??
+        (await this.rootUserService.findByUsername(providedUsername));
+
+      this.log(`found user ${user?.username} | ${user?.password}`);
       if (user) {
         const { id: sub, password: hashedPassword } = user;
 
-        const result = await compare(providedPassword, hashedPassword);
+        const result = await this.passwordService.compare(
+          providedPassword,
+          hashedPassword
+        );
         if (result) {
           const token = await this.tokenService.sign({ sub });
-          setAccessToken(context, token);
+          setAccessToken(req, token);
           return true;
         } else {
+          this.log(
+            `Password does not match ${user.password} | ${hashedPassword}`
+          );
           return false;
         }
       } else {
+        this.log('Could not find the user by credential!');
         return false;
       }
     } else {
+      this.log('Username or password is not provided!');
       return false;
     }
   }

@@ -2,6 +2,7 @@
 export * from './common-roles'
 export * from './create-permission'
 export * from './extractors'
+export * from './jwt'
 export * from './metadata'
 export * from './names'
 export * from './param'

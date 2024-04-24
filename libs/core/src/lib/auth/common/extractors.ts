@@ -3,6 +3,7 @@ import { ExecutionContext } from '@nestjs/common';
 import { AuthNames } from './names';
 import { Some } from '@webpackages/common';
 import { IAuthUser } from '../models/user';
+import { Request } from 'express';
 
 export function createHeaderExtractor<Request extends { headers: any }>(
   key: string
@@ -20,12 +21,13 @@ export function createCookieExtractor<Request extends { cookies: any }>(
   };
 }
 
-/**
- * Extract api key from the request headers
- */
-export const extractApiKey = createHeaderExtractor(
-  AuthNames.AUTHORIZATION_HEADER_KEY
-);
+export const extractBearerApiKey = (context: ExecutionContext) => {
+  return context
+    .switchToHttp()
+    .getRequest<Request>()
+    .headers.authorization?.split(' ')
+    .pop();
+};
 
 /**
  * Extract orgname from the request headers
@@ -55,6 +57,6 @@ export const extractAuthCookie = createCookieExtractor(
  * @param context
  * @returns
  */
-export const extractBody = (context: ExecutionContext) => {
-  return context.switchToHttp().getRequest().body;
+export const extractBody = (req: Request) => {
+  return req.body;
 };

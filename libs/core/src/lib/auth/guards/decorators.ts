@@ -8,7 +8,7 @@ import { LocalGuard } from './local.guard';
  * Security Guard Decorator
  * @returns
  */
-export function ApiKeyAuth() {
+export function WithApiKey() {
   return applyDecorators(
     ApiBearerAuth(AuthNames.API_KEY_SECURITY_NAME),
     UseGuards(AuthGuard)
@@ -19,7 +19,7 @@ export function ApiKeyAuth() {
  * Security Guard Decorator
  * @returns
  */
-export function CookieAuth() {
+export function WithCookie() {
   return applyDecorators(
     ApiBearerAuth(AuthNames.COOKIE_SECURITY_NAME),
     UseGuards(AuthGuard)
@@ -30,7 +30,7 @@ export function CookieAuth() {
  * Security Guard Decorator
  * @returns
  */
-export function CredentialsAuth() {
+export function WithCredential() {
   return applyDecorators(
     ApiBearerAuth(AuthNames.CREDENTIALS_SECURITY_NAME),
     UseGuards(LocalGuard)
