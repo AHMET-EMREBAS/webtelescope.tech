@@ -1,5 +1,9 @@
-export * from './boot';
-export * from './typeorm';
-export * from './property';
-export * from './swagger';
+// @index('./*', f => `export * from '${f.path}'`)
 export * from './auth';
+export * from './boot';
+export * from './common';
+export * from './property';
+export * from './query';
+export * from './rest';
+export * from './swagger';
+export * from './typeorm';

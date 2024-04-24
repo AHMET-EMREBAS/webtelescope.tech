@@ -2,6 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import {
+  CommonRoles,
   extractApiKey,
   extractAuthCookie,
   getPermission,
@@ -34,9 +35,21 @@ export class AuthGuard implements CanActivate {
     const user = await this.userService.findById(sub.sub);
     if (!user) return false;
 
+    // Common user authorization
     const rScope = getScope(this.reflector, context);
     const rRole = getRole(this.reflector, context);
     const rPermission = getPermission(this.reflector, context);
+
+    // Special user authorization like Admin, Root, and Developer
+    if (
+      user.roles?.find((e) => {
+        return (
+          e.name === CommonRoles.ADMIN || e.name === CommonRoles.ROOT || e.name
+        );
+      })
+    ) {
+      return true;
+    }
 
     /**
      * To authorize the user, user must have
