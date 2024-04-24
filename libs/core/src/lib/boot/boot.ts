@@ -8,7 +8,6 @@ import { NestFactory } from '@nestjs/core';
 
 import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '../swagger';
-import { AuthNames } from '../auth';
 import {
   IProfileConfigService,
   getProfileConfigServiceToken,
@@ -25,26 +24,14 @@ export function configureSwagger(
   const { title, prefix } = options;
   const swaggerConfig = new DocumentBuilder()
     .setTitle(title)
-    .addApiKey({
-      type: 'apiKey',
-      in: 'headers',
-      'x-tokenName': AuthNames.OAUTH2_KEY,
-      name: AuthNames.OAUTH2_NAME,
-    })
     .addBearerAuth({
       type: 'http',
       in: 'headers',
       description: 'Api-key is created for every user on successful login.',
-      name: AuthNames.BEARER_SECURITY_NAME,
-    })
-    .addCookieAuth(AuthNames.ACCESS_TOKEN_COOKIE_KEY, {
-      type: 'http',
-      name: AuthNames.COOKIE_SECURITY_NAME,
     })
     .addBasicAuth({
       type: 'http',
       in: 'body',
-      name: AuthNames.CREDENTIALS_SECURITY_NAME,
     })
     .build();
 

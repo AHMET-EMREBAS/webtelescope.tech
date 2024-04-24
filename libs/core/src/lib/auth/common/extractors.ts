@@ -46,13 +46,6 @@ export const extractUser = (context: ExecutionContext) => {
 };
 
 /**
- * Extract auth cookie from cookies
- */
-export const extractAuthCookie = createCookieExtractor(
-  AuthNames.ACCESS_TOKEN_COOKIE_KEY
-);
-
-/**
  * Extract body from the request
  * @param context
  * @returns

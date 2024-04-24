@@ -1,6 +1,6 @@
 import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ApiBasicAuth, ApiBearerAuth, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IProfileConfigService,
   InjectUserService,
@@ -26,8 +26,6 @@ export class LocaleDto {
   locale: string;
 }
 
-@ApiBearerAuth()
-@ApiBasicAuth()
 @Controller()
 export class AppController {
   constructor(
@@ -37,12 +35,11 @@ export class AppController {
     @InjectUserService() private readonly userService: TestUserService
   ) {}
 
-  @Get('secure')
   @WithBearer()
+  @Get('secure')
   secure() {
     return 'secured';
   }
-
 
   @Get('hello')
   getData() {

@@ -9,7 +9,6 @@ import {
   CommonRoles,
   Sub,
   extractBearerApiKey,
-  extractAuthCookie,
   getPermission,
   getPublic,
   getRole,
@@ -58,7 +57,7 @@ export class AuthGuard implements CanActivate {
     const req = context.switchToHttp().getRequest<Request>();
 
     console.table(req.cookies);
-    const token = extractBearerApiKey(context) ?? extractAuthCookie(context);
+    const token = extractBearerApiKey(context);
 
     if (!token) {
       this.log('Token is not found!');

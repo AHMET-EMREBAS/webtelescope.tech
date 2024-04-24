@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Body, Res } from '@nestjs/common';
 import { Controller, Post } from '../rest';
-import { AccessToken, AuthNames } from './common';
-import { Response } from 'express';
+import { AuthNames, AuthToken } from './common';
 import { WithCredential } from './guards';
 import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
@@ -22,14 +22,7 @@ export class LoginDto {
 export class AuthController {
   @WithCredential()
   @Post({ path: 'login' })
-  login(
-    @AccessToken() accessToken: string,
-    @Res() res: Response,
-    @Body() loginDto: LoginDto
-  ) {
-    res.cookie(AuthNames.ACCESS_TOKEN_COOKIE_KEY, accessToken);
-    res.send({
-      accessToken,
-    });
+  login(@AuthToken() autorization: string, @Body() loginDto: LoginDto) {
+    return { [AuthNames.BEARER_HEADER_KEY]: autorization };
   }
 }

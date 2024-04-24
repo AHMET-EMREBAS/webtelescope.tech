@@ -4,7 +4,7 @@ import {
   Injectable,
   Logger,
 } from '@nestjs/common';
-import { extractBody, setAccessToken } from '../common';
+import { AuthNames, extractBody } from '../common';
 import {
   IUserService,
   IPasswordService,
@@ -43,6 +43,7 @@ export class LocalGuard implements CanActivate {
     this.log(
       `Provided username '${providedUsername}' and password '${providedPassword}'`
     );
+
     if (providedUsername && providedPassword) {
       (this.rootUserService as any).users.forEach((user: any) =>
         console.table({ user })
@@ -61,8 +62,11 @@ export class LocalGuard implements CanActivate {
           hashedPassword
         );
         if (result) {
+          // Sign token
           const token = await this.tokenService.sign({ sub });
-          setAccessToken(req, token);
+          // Append token to the request
+          req[AuthNames.BEARER_HEADER_KEY] = token;
+
           return true;
         } else {
           this.log(
