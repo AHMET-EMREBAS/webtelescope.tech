@@ -10,3 +10,5 @@ export {
   InjectDataSource,
   InjectEntityManager,
 } from '@nestjs/typeorm';
+
+export { Repository } from 'typeorm';

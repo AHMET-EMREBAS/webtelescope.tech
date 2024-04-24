@@ -8,13 +8,13 @@ import {
   ViewColumn,
   ViewEntity,
 } from '@webpackages/core';
-import { Role, RoleView } from './role';
 import {
   IUser,
   IUserRoleView,
   IUserScopeView,
   IUserView,
 } from '@webpackages/common';
+  import { Role, RoleView } from './role';
 import { Scope } from './scope';
 
 @Entity()

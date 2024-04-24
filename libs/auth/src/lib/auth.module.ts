@@ -1,9 +1,8 @@
 import {
   AuthController,
-  ConfigModule,
   Module,
-  ProfileModule,
   TypeOrmModule,
+  JwtModule,
   getPasswordServiceToken,
   getRootUserServiceToken,
   getTokenServiceToken,
@@ -13,6 +12,7 @@ import {
   provideTokenService,
   provideUserService,
 } from '@webpackages/core';
+import { ConfigModule } from '@webpackages/config';
 import {
   Permission,
   Role,
@@ -29,7 +29,6 @@ import {
   TokenService,
   UserService,
 } from './services';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [AuthController],
@@ -46,7 +45,7 @@ import { JwtModule } from '@nestjs/jwt';
       UserRoleView,
       UserScopeView,
     ]),
-    ProfileModule,
+    ConfigModule,
   ],
   providers: [
     providePasswordService(PasswordService),

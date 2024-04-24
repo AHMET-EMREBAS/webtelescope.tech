@@ -61,7 +61,7 @@ export class LocalGuard implements CanActivate {
           // Sign token
           const token = await this.tokenService.sign({ sub });
           // Append token to the request
-          req[AuthNames.BEARER_HEADER_KEY] = token;
+          req[AuthNames.BEARER_HEADER] = token;
 
           return true;
         } else {

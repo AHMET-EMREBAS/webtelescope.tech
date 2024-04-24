@@ -1,14 +1,12 @@
-import { ConfigService } from '@nestjs/config';
+import { ConfigService as NestConfigService } from '@nestjs/config';
 import { Some } from '@webpackages/common';
 import { Injectable } from '@nestjs/common';
-import { Profile } from './profiles';
-import { InjectProfileService } from './_providers';
-import { IProfileService } from './profile.service';
+import { ConfigProfile } from './config-profile';
 
 /**
  * This interface is not only for storing configuration but also it might be used for localization of your messages.
  */
-export interface IProfileConfigService {
+export interface IConfigService {
   /**
    * This method allows us to prefix, suffix, or modify config key
    * @param key
@@ -20,6 +18,9 @@ export interface IProfileConfigService {
    * @param key
    */
   __messageKey(key: string): string;
+
+  profile(): Some<string>;
+  profile(profileName: string): Some<string>;
 
   /**
    * Get the config by key or undefined
@@ -44,7 +45,7 @@ export interface IProfileConfigService {
    * Set multiple config items at a time.
    * @param record
    */
-  setRecord(record: Record<string, string>): void;
+  record(record: Record<string, string>): void;
 
   /**
    * Set message by key and value
@@ -71,20 +72,27 @@ export interface IProfileConfigService {
 }
 
 @Injectable()
-export class ProfileConfigService implements IProfileConfigService {
-  constructor(
-    @InjectProfileService() protected readonly profileService: IProfileService,
-    protected readonly configService: ConfigService
-  ) {}
+export class ConfigService implements IConfigService {
+  readonly $change = this.configService.changes$;
+
+  constructor(protected readonly configService: NestConfigService) {}
+
+  profile(profile?: string): string {
+    if (profile) {
+      this.configService.set(ConfigProfile.PROFILE, profile);
+    }
+    return this.configService.getOrThrow(ConfigProfile.PROFILE);
+  }
 
   __configKey(key: string) {
-    const prf = this.profileService.profile();
+    const prf = this.profile();
     return `${prf}_${key}`.toUpperCase();
   }
 
   __messageKey(key: string): string {
-    const locale = this.getOrThrow(Profile.LOCALE);
-    const prefix = `MSG_${locale}_`;
+    const locale = this.getOrThrow(ConfigProfile.LOCALE);
+    const profile = this.profile();
+    const prefix = `${profile}_MSG_${locale}_`;
     return `${prefix}${key}`.toUpperCase();
   }
 
@@ -100,12 +108,18 @@ export class ProfileConfigService implements IProfileConfigService {
     this.configService.set(this.__configKey(key), value);
   }
 
-  setRecord(record: Record<string, string>) {
+  record(record: Record<string, string>) {
     Object.entries(record).forEach(([key, value]) => {
       this.set(key, value);
     });
   }
 
+  getMessage(key: string): Some<string> {
+    return this.configService.get(this.__messageKey(key));
+  }
+  getMessageOrThrow(key: string): string | never {
+    return this.configService.getOrThrow(this.__messageKey(key));
+  }
   setMessage(key: string, value: string): void {
     this.configService.set(this.__messageKey(key), value);
   }
@@ -114,11 +128,5 @@ export class ProfileConfigService implements IProfileConfigService {
     Object.entries(record).forEach(([key, value]) => {
       this.setMessage(key, value);
     });
-  }
-  getMessage(key: string): Some<string> {
-    return this.configService.get(this.__messageKey(key));
-  }
-  getMessageOrThrow(key: string): string | never {
-    return this.configService.getOrThrow(this.__messageKey(key));
   }
 }

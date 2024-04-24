@@ -15,5 +15,5 @@ export const UserParam = createParamDecorator(
 );
 
 export const AuthToken = createParamDecorator((data, context) => {
-  return context.switchToHttp().getRequest()[AuthNames.BEARER_HEADER_KEY];
+  return context.switchToHttp().getRequest()[AuthNames.BEARER_HEADER];
 });

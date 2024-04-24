@@ -1,6 +1,6 @@
-export enum Profile {
-  LOCALE = 'LOCALE',
+export enum ConfigProfile {
   PROFILE = 'PROFILE',
+  LOCALE = 'LOCALE',
   MAINTANANCE = 'MAINTANANCE',
   NORMAL = 'NORMAL',
   SLOW = 'SLOW',

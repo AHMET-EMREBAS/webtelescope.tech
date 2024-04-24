@@ -1,19 +1,17 @@
 import {
-  IProfileConfigService,
   ITokenService,
-  InjectProfileConfigService,
   Injectable,
   JWT_KEYS,
   JwtService,
   JwtSignOptions,
   Sub,
 } from '@webpackages/core';
+import { ConfigService } from '@webpackages/config';
 
 @Injectable()
 export class TokenService implements ITokenService {
   constructor(
-    @InjectProfileConfigService()
-    protected readonly config: IProfileConfigService,
+    protected readonly config: ConfigService,
     protected readonly jwtService: JwtService
   ) {}
 

@@ -1,38 +1,39 @@
-import { Module, OnModuleInit } from '@nestjs/common';
-
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
 import {
-  InjectProfileConfigService,
-  ProfileConfigService,
-  ProfileModule,
+  Module,
+  DatabaseModule,
+  Repository,
+  InjectRepository,
   TypeOrmModule,
+  OnModuleInit,
 } from '@webpackages/core';
-import { AuthModule } from '@webpackages/auth';
-import { seedAppMessages as seedMessages } from './seed-messages';
+import { ConfigModule } from '@webpackages/config';
+
+import { Permission } from '@webpackages/auth';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: './tmp/test/database.sqlite',
-      autoLoadEntities: true,
-      synchronize: true,
-      dropSchema: true,
-    }),
-    ProfileModule,
-    AuthModule,
+    ConfigModule,
+    DatabaseModule.root(),
+    TypeOrmModule.forFeature([Permission]),
   ],
+
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements OnModuleInit {
   constructor(
-    @InjectProfileConfigService() private readonly config: ProfileConfigService
+    @InjectRepository(Permission) private readonly repo: Repository<Permission>
   ) {}
+
   onModuleInit() {
-    seedMessages(this.config);
+    console.log('MODULE init ....................................');
+    this.repo.find().then((data) => {
+      console.log('Data -----------');
+
+      console.table(data);
+      console.log('-----------DATA');
+    });
   }
 }

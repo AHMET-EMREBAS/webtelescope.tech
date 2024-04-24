@@ -1,3 +1,8 @@
-export { Module, Injectable, applyDecorators } from '@nestjs/common';
-export { compare, genSalt, hash } from 'bcrypt';
-export { ConfigModule, ConfigService } from '@nestjs/config';
+export {
+  Module,
+  Injectable,
+  applyDecorators,
+  OnModuleInit,
+} from '@nestjs/common';
+
+export { Request, Response } from 'express';

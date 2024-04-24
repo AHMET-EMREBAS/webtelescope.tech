@@ -5,20 +5,16 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { Observable, delay } from 'rxjs';
-import {
-  InjectProfileConfigService,
-  IProfileConfigService,
-  Profile,
-} from '../profile';
+import { ConfigService } from '../config.service';
+import { ConfigProfile } from '../config-profile';
 
 @Injectable()
 export class SlowInterceptor implements NestInterceptor<unknown> {
-  constructor(
-    @InjectProfileConfigService() private readonly config: IProfileConfigService
-  ) {}
+  constructor(private readonly config: ConfigService) {}
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    const profile = this.config.getOrThrow(Profile.PROFILE);
-    if (profile === Profile.SLOW) {
+    const profile = this.config.profile();
+    if (profile === ConfigProfile.SLOW) {
       return next.handle().pipe(delay(20000));
     }
     return next.handle();

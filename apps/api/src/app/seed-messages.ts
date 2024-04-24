@@ -1,24 +1,25 @@
-import { IProfileConfigService, Profile } from '@webpackages/core';
+import { ConfigProfile, IConfigService } from '@webpackages/config';
 
-export function seedAppMessages(config: IProfileConfigService) {
-  config.set(Profile.LOCALE, 'EN');
+export function seedAppMessages(config: IConfigService) {
+  config.set(ConfigProfile.LOCALE, 'EN');
 
   const enMessages = {
     HELLO: 'Hello: there!',
-    [Profile.MAINTANANCE]: 'Under Construction',
-    [Profile.TEST]: 'Sytem is under production test',
-    [Profile.SLOW]: 'Profile is set to slow-mode for possible security risks.',
+    [ConfigProfile.MAINTANANCE]: 'Under Construction',
+    [ConfigProfile.TEST]: 'Sytem is under production test',
+    [ConfigProfile.SLOW]:
+      'Profile is set to slow-mode for possible security risks.',
   };
 
   config.setMessages(enMessages);
 
-  config.set(Profile.LOCALE, 'TR');
+  config.set(ConfigProfile.LOCALE, 'TR');
 
   const trMessages = {
     HELLO: 'Merhaba',
-    [Profile.MAINTANANCE]: 'Yapim asamasinda',
-    [Profile.TEST]: 'Urun test ediliyor',
-    [Profile.SLOW]: 'Yavas profile active edildi.',
+    [ConfigProfile.MAINTANANCE]: 'Yapim asamasinda',
+    [ConfigProfile.TEST]: 'Urun test ediliyor',
+    [ConfigProfile.SLOW]: 'Yavas profile active edildi.',
   };
 
   config.setMessages(trMessages);

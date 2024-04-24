@@ -1,7 +1,11 @@
 import { Some, IUser, IRole, IPermission, IScope } from '@webpackages/common';
-import { IUserService, InjectRepository, Injectable } from '@webpackages/core';
+import {
+  IUserService,
+  InjectRepository,
+  Injectable,
+  Repository,
+} from '@webpackages/core';
 import { User } from '../models';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService implements IUserService {

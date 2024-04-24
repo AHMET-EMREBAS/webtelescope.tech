@@ -4,4 +4,10 @@ export * from './auth.module';
 export * from './common';
 export * from './guards';
 export * from './services';
-export { JwtService, JwtSignOptions } from '@nestjs/jwt';
+export {
+  JwtService,
+  JwtSignOptions,
+  JwtModule,
+  JwtModuleAsyncOptions,
+  JwtOptionsFactory,
+} from '@nestjs/jwt';

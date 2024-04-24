@@ -32,7 +32,7 @@ export const extractBearerApiKey = (context: ExecutionContext) => {
  * Extract orgname from the request headers
  */
 export const extractOrgname = createHeaderExtractor(
-  AuthNames.ORGNAME_HEADER_KEY
+  AuthNames.ORGNAME_HEADER
 );
 
 /**
