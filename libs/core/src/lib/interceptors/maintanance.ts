@@ -11,6 +11,10 @@ import {
   Profile,
 } from '../profile';
 
+/**
+ * If the profile is Maintanance, then maintanance message will be returned as response.
+ * Maintanance message will be retrived form the provided config service.
+ */
 @Injectable()
 export class MaintananceInterceptor implements NestInterceptor<unknown> {
   constructor(

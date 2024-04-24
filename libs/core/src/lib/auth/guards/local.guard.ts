@@ -45,10 +45,6 @@ export class LocalGuard implements CanActivate {
     );
 
     if (providedUsername && providedPassword) {
-      (this.rootUserService as any).users.forEach((user: any) =>
-        console.table({ user })
-      );
-
       const user =
         (await this.userService.findByUsername(providedUsername)) ??
         (await this.rootUserService.findByUsername(providedUsername));

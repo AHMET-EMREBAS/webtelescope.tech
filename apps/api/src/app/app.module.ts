@@ -7,29 +7,13 @@ import {
   IProfileConfigService,
   InjectProfileConfigService,
   Profile,
-  TestRootUserService,
-  TestUserService,
-  provideUserService,
-  provideRootUserService,
   ProfileModule,
-  AuthModule,
 } from '@webpackages/core';
 
-const AuthModuleTest = AuthModule.configure({
-  providers: [
-    provideUserService(TestUserService),
-    provideRootUserService(TestRootUserService),
-  ],
-});
-
 @Module({
-  imports: [ConfigModule.forRoot(), ProfileModule, AuthModuleTest],
+  imports: [ConfigModule.forRoot(), ProfileModule],
   controllers: [AppController],
-  providers: [
-    AppService,
-    provideUserService(TestUserService),
-    provideRootUserService(TestRootUserService),
-  ],
+  providers: [AppService],
 })
 export class AppModule implements OnModuleInit {
   constructor(

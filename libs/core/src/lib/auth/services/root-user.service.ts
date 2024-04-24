@@ -1,10 +1,9 @@
-import { Some } from '@webpackages/common';
-import { IAuthUser } from '../models/user';
+import { IUser, Some } from '@webpackages/common';
 import { Injectable } from '@nestjs/common';
 import { IUserService } from './user.service';
 import { genSaltSync, hashSync } from 'bcrypt';
 
-const SampleRootUsers = [
+const SampleRootUsers: IUser[] = [
   {
     id: 1,
     username: 'root1@gmail.com',
@@ -15,6 +14,7 @@ const SampleRootUsers = [
         name: 'Root',
       },
     ],
+
     scopes: [
       {
         id: 1,
@@ -39,10 +39,11 @@ const SampleRootUsers = [
       },
     ],
   },
-];
+] as IUser[];
+
 @Injectable()
 export class TestRootUserService implements IUserService {
-  users: IAuthUser[] = SampleRootUsers;
+  users: IUser[] = SampleRootUsers;
 
   constructor() {
     setTimeout(() => {
@@ -50,10 +51,10 @@ export class TestRootUserService implements IUserService {
     }, 2000);
   }
 
-  async findById(id: number): Promise<Some<IAuthUser>> {
+  async findById(id: number): Promise<Some<IUser>> {
     return this.users.find((e) => e.id == id);
   }
-  async findByUsername(username: string): Promise<Some<IAuthUser>> {
+  async findByUsername(username: string): Promise<Some<IUser>> {
     return this.users.find((e) => e.username === username);
   }
 }

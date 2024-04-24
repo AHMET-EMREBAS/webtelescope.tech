@@ -1,5 +1,4 @@
-import { Some } from '@webpackages/common';
-import { IAuthUser as IUser } from '../models/user';
+import { IUser, Some } from '@webpackages/common';
 import { Injectable } from '@nestjs/common';
 import { genSaltSync, hashSync } from 'bcrypt';
 
@@ -8,7 +7,7 @@ export interface IUserService {
   findById(id: number): Promise<Some<IUser>>;
 }
 
-const SampleUsers = [
+const SampleUsers: IUser[] = [
   {
     id: 1,
     username: 'user1@gmail.com',
@@ -45,7 +44,7 @@ const SampleUsers = [
       },
     ],
   },
-];
+] as IUser[];
 
 @Injectable()
 export class TestUserService implements IUserService {

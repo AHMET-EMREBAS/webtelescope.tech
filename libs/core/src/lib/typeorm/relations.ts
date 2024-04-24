@@ -4,6 +4,12 @@ import { JoinColumn, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
 interface IID {
   id: number;
 }
+
+/**
+ * Create owner relation (many to one)
+ * @param target
+ * @returns
+ */
 export function Owner<T extends IID>(target: Type<T>) {
   return applyDecorators(
     ManyToOne(
@@ -19,6 +25,11 @@ export function Owner<T extends IID>(target: Type<T>) {
   );
 }
 
+/**
+ * Create many to one relation
+ * @param target
+ * @returns
+ */
 export function One<T extends IID>(target: Type<T>) {
   return applyDecorators(
     ManyToOne(
@@ -30,6 +41,11 @@ export function One<T extends IID>(target: Type<T>) {
   );
 }
 
+/**
+ * Create many to many relation
+ * @param target
+ * @returns
+ */
 export function Many<T extends IID>(target: Type<T>) {
   return applyDecorators(
     ManyToMany(

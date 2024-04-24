@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
-import { IAuthUser } from '../models';
+
 import { AuthNames } from './names';
+import { IUser } from '@webpackages/common';
 
 /**
  * Param Decorator
@@ -9,7 +10,7 @@ import { AuthNames } from './names';
  */
 export const User = createParamDecorator(
   (data: unknown, context: ExecutionContext) => {
-    return context.switchToHttp().getRequest().user as IAuthUser;
+    return context.switchToHttp().getRequest().user as IUser;
   }
 );
 

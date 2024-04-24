@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@webpackages/auth": ["libs/auth/src/index.ts"],
       "@webpackages/browser": ["libs/browser/src/index.ts"],
       "@webpackages/common": ["libs/common/src/index.ts"],
       "@webpackages/core": ["libs/core/src/index.ts"],

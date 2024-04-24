@@ -1,6 +1,6 @@
-import { IID } from '../types';
+import { IBaseModel } from '../common';
 
-export interface ISample extends IID {
+export interface ISample extends IBaseModel {
   name: string;
 }
 

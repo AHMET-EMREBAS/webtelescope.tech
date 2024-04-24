@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExecutionContext } from '@nestjs/common';
 import { AuthNames } from './names';
-import { Some } from '@webpackages/common';
-import { IAuthUser } from '../models/user';
+import { Some, IUser } from '@webpackages/common';
 import { Request } from 'express';
 
 export function createHeaderExtractor<Request extends { headers: any }>(
@@ -42,7 +41,7 @@ export const extractOrgname = createHeaderExtractor(
  * @returns
  */
 export const extractUser = (context: ExecutionContext) => {
-  return context.switchToHttp().getRequest().user as Some<IAuthUser>;
+  return context.switchToHttp().getRequest().user as Some<IUser>;
 };
 
 /**
