@@ -14,7 +14,7 @@ export function getSecurityDecorator(security: SecurityOptions) {
 
   if (security?.apiKey) decorators.push(ApiKeyAuth());
   if (security?.cookie) decorators.push(CookieAuth());
-  if (security?.credentials) decorators.push(CredentialsAuth());
+  // if (security?.credentials) decorators.push(CredentialsAuth());
 
   if (security?.scope) decorators.push(SetScope(security.scope));
   if (security?.permission) decorators.push(SetPermission(security.permission));
