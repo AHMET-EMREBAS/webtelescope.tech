@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  IDEntityView,
   Many,
   TimestampEntity,
   TimestampEntityView,
@@ -8,7 +9,12 @@ import {
   ViewEntity,
 } from '@webpackages/core';
 import { Role, RoleView } from './role';
-import { IUser, IUserView } from '@webpackages/common';
+import {
+  IUser,
+  IUserRoleView,
+  IUserScopeView,
+  IUserView,
+} from '@webpackages/common';
 import { Scope } from './scope';
 
 @Entity()
@@ -19,6 +25,9 @@ export class User extends TimestampEntity implements IUser {
   @Many(Scope) scopes?: Scope[];
 }
 
+/**
+ * User role view
+ */
 @ViewEntity({
   expression(ds) {
     return ds
@@ -33,12 +42,15 @@ export class User extends TimestampEntity implements IUser {
       .groupBy('u.id');
   },
 })
-export class UserRoleView {
-  @ViewColumn() id!: number;
+export class UserRoleView extends IDEntityView implements IUserRoleView {
+  @ViewColumn() username!: string;
   @ViewColumn() roles!: string;
   @ViewColumn() permissions!: string;
 }
 
+/**
+ * User scope view
+ */
 @ViewEntity({
   expression(ds) {
     return ds
@@ -52,12 +64,14 @@ export class UserRoleView {
       .groupBy('u.id');
   },
 })
-export class UserScopeView {
-  @ViewColumn() id!: number;
+export class UserScopeView extends IDEntityView implements IUserScopeView {
   @ViewColumn() username!: string;
   @ViewColumn() scopes!: string;
 }
 
+/**
+ * Complete user view
+ */
 @ViewEntity({
   expression(ds) {
     return ds

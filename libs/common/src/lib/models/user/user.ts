@@ -12,14 +12,18 @@ export interface IUser<
   roles?: Role[];
   scopes?: Scope[];
 }
+export interface IUserBasicView extends Pick<IUser, 'id' | 'username'> {}
 
-export interface IUserView {
-  username: string;
-  password: string;
+export interface IUserRoleView extends IUserBasicView {
   roles?: string;
   permissions?: string;
+}
+
+export interface IUserScopeView extends IUserBasicView {
   scopes?: string;
 }
+
+export interface IUserView extends IUserRoleView, IUserScopeView {}
 
 export interface ICreateUserDto
   extends Pick<IUser<IID, IID>, 'username' | 'password' | 'roles' | 'scopes'> {}
@@ -27,4 +31,7 @@ export interface ICreateUserDto
 export interface IUpdateUserDto extends Partial<ICreateUserDto> {}
 
 export interface IQueryUserDto
-  extends Pick<IUserView, 'username' | 'roles' | 'permissions' | 'scopes'> {}
+  extends Pick<
+    IUserView,
+    'id' | 'username' | 'permissions' | 'roles' | 'scopes'
+  > {}

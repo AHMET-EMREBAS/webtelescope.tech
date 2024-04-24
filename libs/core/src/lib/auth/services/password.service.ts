@@ -7,17 +7,6 @@ export interface IPasswordService<T = string> {
 }
 
 @Injectable()
-export class PasswordService implements IPasswordService {
-  async compare(data: string, hashed: string): Promise<boolean> {
-    return await compare(data, hashed);
-  }
-
-  async hash(data: string): Promise<string> {
-    return await hash(data, await genSalt(8));
-  }
-}
-
-@Injectable()
 export class TestPasswordService implements IPasswordService {
   async compare(data: string, hashed: string): Promise<boolean> {
     return compare(data, hashed);

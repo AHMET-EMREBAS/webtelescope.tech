@@ -2,7 +2,9 @@
   "name": "@webpackages/auth",
   "version": "0.0.1",
   "dependencies": {
-    "@swc/helpers": "~0.5.2"
+    "@swc/helpers": "~0.5.2",
+    "@webpackages/core": "*",
+    "@webpackages/common": "*"
   },
   "type": "commonjs",
   "main": "./src/index.js",

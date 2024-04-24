@@ -1,15 +1,10 @@
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IProfileConfigService,
-  InjectUserService,
   InjectProfileConfigService,
-  MaintananceInterceptor,
   Post,
   Profile,
-  SlowInterceptor,
-  TestUserService,
   WithBearer,
 } from '@webpackages/core';
 import { IsNotEmpty } from 'class-validator';
@@ -30,9 +25,7 @@ export class LocaleDto {
 export class AppController {
   constructor(
     @InjectProfileConfigService()
-    private readonly configService: IProfileConfigService,
-    private readonly appService: AppService,
-    @InjectUserService() private readonly userService: TestUserService
+    private readonly configService: IProfileConfigService
   ) {}
 
   @WithBearer()
@@ -46,17 +39,17 @@ export class AppController {
     return { message: this.configService.getMessage('HELLO') };
   }
 
-  @UseInterceptors(MaintananceInterceptor)
-  @Get('users')
-  getUSers() {
-    return this.userService.users;
-  }
+  // @UseInterceptors(MaintananceInterceptor)
+  // @Get('users')
+  // getUSers() {
+  //   return this.userService.users;
+  // }
 
-  @UseInterceptors(SlowInterceptor)
-  @Get('slow-users')
-  slowUsers() {
-    return this.userService.users;
-  }
+  // @UseInterceptors(SlowInterceptor)
+  // @Get('slow-users')
+  // slowUsers() {
+  //   return this.userService.users;
+  // }
 
   @Post({ path: 'set-profile' })
   setProfile(@Query() profileDto: ProfileDto) {

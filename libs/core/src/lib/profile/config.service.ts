@@ -1,9 +1,9 @@
 import { ConfigService } from '@nestjs/config';
+import { Some } from '@webpackages/common';
+import { Injectable } from '@nestjs/common';
+import { Profile } from './profiles';
 import { InjectProfileService } from './_providers';
 import { IProfileService } from './profile.service';
-import { Some } from '@webpackages/common';
-import { Profile } from './profiles';
-import { Injectable } from '@nestjs/common';
 
 /**
  * This interface is not only for storing configuration but also it might be used for localization of your messages.
@@ -20,6 +20,7 @@ export interface IProfileConfigService {
    * @param key
    */
   __messageKey(key: string): string;
+
   /**
    * Get the config by key or undefined
    * @param key config key
@@ -44,6 +45,7 @@ export interface IProfileConfigService {
    * @param record
    */
   setRecord(record: Record<string, string>): void;
+
   /**
    * Set message by key and value
    * Messages are the text values used across the application like "Hello World", "Item Not Found" etc.
@@ -54,11 +56,17 @@ export interface IProfileConfigService {
   setMessage(key: string, value: string): void;
 
   setMessages(record: Record<string, string>): void;
+
   /**
    * Get message by message key
    * @param key Message key
    */
   getMessage(key: string): Some<string>;
+
+  /**
+   * Get message by message key or throw
+   * @param key
+   */
   getMessageOrThrow(key: string): string | never;
 }
 
