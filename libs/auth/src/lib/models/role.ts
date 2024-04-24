@@ -20,13 +20,12 @@ export class Role extends TimestampEntity implements IRole<Permission> {
   expression(datasource) {
     return datasource
       .createQueryBuilder()
-
       .select('r.id', 'id')
-      .addSelect('DATE(r.createdAt)', 'createdAt')
-      .addSelect('DATE(r.updatedAt)', 'updatedAt')
-      .addSelect('DATE(r.deletedAt)', 'deletedAt')
       .addSelect('r.name', 'name')
       .addSelect('GROUP_CONCAT(p.name)', 'permissions')
+      .addSelect('r.createdAt', 'createdAt')
+      .addSelect('r.updatedAt', 'updatedAt')
+      .addSelect('r.deletedAt', 'deletedAt')
       .from(Role, 'r')
       .leftJoin('role_permissions_permission', 'rp', 'rp.roleId = r.id')
       .leftJoin(Permission, 'p', 'p.id = rp.permissionId')
