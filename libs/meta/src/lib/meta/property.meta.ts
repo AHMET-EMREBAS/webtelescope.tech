@@ -136,6 +136,6 @@ export type __PropertyOptions<
   | Partial<NumberProperty>
   | Partial<BooleanProperty>
   | Partial<DateProperty>
-  | Partial<ObjectProperty<Obj>>
+  | Partial<ObjectProperty<Obj>>;
 
 export type PropertyOptions = Partial<__PropertyOptions>;
