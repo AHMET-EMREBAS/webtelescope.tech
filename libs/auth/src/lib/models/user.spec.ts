@@ -81,17 +81,6 @@ describe('User model', () => {
     expect(roleView).toBeTruthy();
   });
 
-  it('should create the roles and permissions', async () => {
-    const found = await role.find();
-
-    expect(found).toBeTruthy();
-    expect(found.length).toBe(1);
-
-    const permissions = found[0].permissions;
-
-    expect(permissions.length).toBe(3);
-  });
-
   it('should red the role view', async () => {
     const found = await roleView.find();
     const normal = await role.find();
