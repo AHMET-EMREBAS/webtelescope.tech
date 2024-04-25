@@ -1,19 +1,9 @@
 import { Model } from '../meta';
 import { names } from '../utils';
+import { printPropertyImports } from './imports-property.printer';
 
 export function printEntityImports(model: Model) {
-  const objectTypesList = [
-    ...new Set(
-      Object.entries(model.properties ?? {})
-        .filter(([, value]) => value?.type === 'object' || value?.enums)
-        .map(([key, value]) => {
-          return value?.enums ? names(key).className : value?.objectType;
-        })
-        .filter((e) => e)
-    ),
-  ].join(', ');
-
-  const objectTypesImport = `import { ${objectTypesList} } from '../types';`;
+  const objectTypesImport = printPropertyImports(model);
   const relationTypesImport = [
     ...new Set(
       Object.entries(model.relations ?? {})
