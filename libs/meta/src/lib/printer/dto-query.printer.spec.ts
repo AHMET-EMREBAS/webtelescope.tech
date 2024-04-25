@@ -2,12 +2,13 @@ import { Model } from '../meta';
 import { clearSpace } from '../utils';
 import { printQueryDto } from './dto-query.printer';
 import { TestModel } from '../builders';
+
 describe('QueryDto printer', () => {
   it('should print the query dto', () => {
     const model: Model = TestModel('Test');
 
     const __expected = `
-    export class QueryTestDto  implements IQueryTestDto { 
+    export class QueryTestDto implements IQueryTestDto { 
         text?:string;
         num?:number;
         bool?:boolean;
