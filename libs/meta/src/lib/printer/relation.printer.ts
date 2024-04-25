@@ -15,6 +15,8 @@ export function printRelation(
       ? 'IDDto'
       : classTYpe === 'dto-interface'
       ? 'IID'
+      : classTYpe === 'interface'
+      ? `I${options.target}`
       : options.target;
 
   return `${propertyName}${isRequrid}:${type}${isArray};`;
