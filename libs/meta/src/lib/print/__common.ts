@@ -1,14 +1,21 @@
-export enum ClassTypes {
-  Entity,
-  View,
-  CreateDto,
-  UpdateDto,
-  QueryDto,
-  IEntity,
-  IView,
-  ICreateDto,
-  IUpdateDto,
-  IQueryDto,
+export enum ClassType {
+  Entity = 'Entity',
+  View = 'View',
+  CreateDto = 'CreateDto',
+  UpdateDto = 'UpdateDto',
+  QueryDto = 'QueryDto',
+  IEntity = 'IEntity',
+  IView = 'IView',
+  ICreateDto = 'ICreateDto',
+  IUpdateDto = 'IUpdateDto',
+  IQueryDto = 'IQueryDto',
+}
+
+export enum CommonObjectTypes {
+  IDDto = 'IDDto',
+  IID = 'IID',
+  IBaseQueryDto = 'IBaseQueryDto',
+  BaseEntity = 'BaseEntity',
 }
 
 export interface IImplement {
@@ -17,6 +24,10 @@ export interface IImplement {
 
 export interface IExtend {
   extendings(): string;
+}
+
+export interface IArray {
+  isArray(): string;
 }
 
 export interface IName {

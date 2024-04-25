@@ -8,7 +8,7 @@ export function printRelation(
   options: RelationOptions
 ) {
   const isArray = options.type === 'Many' ? '[]' : '';
-  const isRequrid = printRequiredMark(classTYpe, options.requried);
+  const isRequrid = printRequiredMark(classTYpe, options.required);
 
   const type =
     classTYpe === 'dto'

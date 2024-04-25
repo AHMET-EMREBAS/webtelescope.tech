@@ -1,11 +1,11 @@
 import { PropertyOptions } from '../meta';
 import { toPropertyName } from '../utils';
-import { ClassTypes, IName, IRequried } from './__common';
+import { ClassType, IName, IRequried } from './__common';
 
-export class CommonPrintImp implements IRequried, IName {
+export class CommonPropertyPrinterImp implements IRequried, IName {
   constructor(
     protected readonly propertyName: string,
-    protected readonly classType: ClassTypes,
+    protected readonly classType: ClassType,
     protected readonly __options: Pick<PropertyOptions, 'required'>
   ) {}
 
@@ -16,27 +16,32 @@ export class CommonPrintImp implements IRequried, IName {
   viewName(modelName: string): string {
     return toPropertyName(modelName, this.propertyName);
   }
-  
+
+  /**
+   * Mark the property required based on the provided class-type.
+   * For example, in interfaces required mark is not allowed.
+   * @returns
+   */
   isRequried(): string {
     switch (this.classType) {
-      case ClassTypes.CreateDto:
-      case ClassTypes.Entity:
+      case ClassType.CreateDto:
+      case ClassType.Entity:
         return this.__options.required ? '!' : '?';
 
-      case ClassTypes.IEntity:
-      case ClassTypes.ICreateDto:
+      case ClassType.IEntity:
+      case ClassType.ICreateDto:
         return this.__options.required ? '' : '?';
 
-      case ClassTypes.IUpdateDto:
-      case ClassTypes.IQueryDto:
-      case ClassTypes.UpdateDto:
-      case ClassTypes.QueryDto:
+      case ClassType.IUpdateDto:
+      case ClassType.IQueryDto:
+      case ClassType.UpdateDto:
+      case ClassType.QueryDto:
         return '?';
 
-      case ClassTypes.View:
+      case ClassType.View:
         return '!';
 
-      case ClassTypes.IView:
+      case ClassType.IView:
         return '';
 
       default:

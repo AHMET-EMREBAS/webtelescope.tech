@@ -1,22 +1,22 @@
 import { PropertyOptions } from '../meta';
 import { names, stringify } from '../utils';
 import {
-  ClassTypes,
+  ClassType,
   IDecorate,
   IImport,
   IName,
   IRequried,
   IType,
 } from './__common';
-import { CommonPrintImp } from './common';
+import { CommonPropertyPrinterImp } from './common';
 
 export class BasePropertyPrinter
-  extends CommonPrintImp
+  extends CommonPropertyPrinterImp
   implements IType, IName, IRequried, IDecorate, IImport
 {
   constructor(
     cname: string,
-    ctype: ClassTypes,
+    ctype: ClassType,
     protected readonly options: PropertyOptions,
     protected readonly cpn = '@webpackages/common'
   ) {
@@ -40,23 +40,23 @@ export class BasePropertyPrinter
 
   decorators(): string {
     switch (this.classType) {
-      case ClassTypes.CreateDto:
-      case ClassTypes.UpdateDto:
-      case ClassTypes.QueryDto:
+      case ClassType.CreateDto:
+      case ClassType.UpdateDto:
+      case ClassType.QueryDto:
         return `@Property(${stringify(this.options)})`;
-      case ClassTypes.Entity:
+      case ClassType.Entity:
         return `@Column(${stringify({
           type: this.options.type,
           unique: this.options.unique,
         })})`;
-      case ClassTypes.View:
+      case ClassType.View:
         return '@ViewColumn()';
 
-      case ClassTypes.IEntity:
-      case ClassTypes.ICreateDto:
-      case ClassTypes.IUpdateDto:
-      case ClassTypes.IQueryDto:
-      case ClassTypes.IView:
+      case ClassType.IEntity:
+      case ClassType.ICreateDto:
+      case ClassType.IUpdateDto:
+      case ClassType.IQueryDto:
+      case ClassType.IView:
         return '';
       default:
         return '';
