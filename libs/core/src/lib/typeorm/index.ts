@@ -9,6 +9,7 @@ export {
   InjectRepository,
   InjectDataSource,
   InjectEntityManager,
+  TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 
-export { Repository } from 'typeorm';
+export { Repository, DataSource, DataSourceOptions } from 'typeorm';
