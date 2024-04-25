@@ -18,7 +18,7 @@ export function printDtoModelRelations(model: Model) {
     .join('\n\t');
 }
 
-export function printDto(model: Model) {
+export function printCreateDto(model: Model) {
   const propertiesText = printDtoModelProperties(model);
   const relationsText = printDtoModelRelations(model);
 

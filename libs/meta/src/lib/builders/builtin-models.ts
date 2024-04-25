@@ -21,7 +21,7 @@ export function TestModel(modelName = 'Category'): Model {
   return {
     modelName,
     properties: {
-      text: ShortString(),
+      text: ShortString({ required: true }),
       num: PositiveNumberProperty(),
       bool: DefaultBooleanProperty(),
       date: DateOfBirthProperty(),

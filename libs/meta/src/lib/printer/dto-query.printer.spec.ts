@@ -1,6 +1,6 @@
 import { Model } from '../meta';
 import { clearSpace } from '../utils';
-import { printQueryDto } from './query-dto.printer';
+import { printQueryDto } from './dto-query.printer';
 import { TestModel } from '../builders';
 describe('QueryDto printer', () => {
   it('should print the query dto', () => {
