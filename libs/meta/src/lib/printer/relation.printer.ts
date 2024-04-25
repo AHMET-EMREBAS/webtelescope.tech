@@ -1,5 +1,6 @@
 import { RelationProperty } from '../meta';
 import { ClassType } from './class-type';
+import { printRequiredMark } from './required-mark.printer';
 
 export function printRelation(
   classTYpe: ClassType,
@@ -7,11 +8,7 @@ export function printRelation(
   options: RelationProperty
 ) {
   const isArray = options.type === 'Many' ? '[]' : '';
-  const isRequrid = options.requried
-    ? classTYpe === 'interface' || classTYpe == 'dto-interface'
-      ? ''
-      : '!'
-    : '?';
+  const isRequrid = printRequiredMark(classTYpe, options.requried);
 
   const type =
     classTYpe === 'dto'

@@ -1,6 +1,7 @@
 import { PropertyOptions } from '../meta';
-import { uppercaseFirst } from '../utils';
 import { ClassType } from './class-type';
+import { printPropertyType } from './property-type.printer';
+import { printRequiredMark } from './required-mark.printer';
 
 /**
  * Print property string
@@ -14,26 +15,9 @@ export function printProperty(
   propertyName: string,
   options: PropertyOptions
 ) {
-  const { type } = options;
+  const type = printPropertyType(classType, propertyName, { ...options });
 
-  const pType = options.enums
-    ? uppercaseFirst(propertyName)
-    : type === 'date'
-    ? 'Date'
-    : type === 'object'
-    ? options.objectType ?? 'any'
-    : type;
+  const required = printRequiredMark(classType, options.required);
 
-  const isArray = options.isArray ? '[]' : '';
-
-  const isRequried =
-    classType === 'dto-query'
-      ? '?'
-      : options.required
-      ? classType === 'interface'
-        ? ''
-        : '!'
-      : '?';
-
-  return `${propertyName}${isRequried}:${pType}${isArray};`;
+  return `${propertyName}${required}:${type};`;
 }

@@ -72,7 +72,7 @@ export type DefaultValueType<T extends PropertyType> = OrType<
   >
 >;
 
-export type CommonProperty<T extends PropertyType> = {
+export type CommonProperty<T extends PropertyType, O extends string = string> = {
   type: T;
   inputType?: InputType;
   defaultValue?: DefaultValueType<T>;
@@ -82,6 +82,7 @@ export type CommonProperty<T extends PropertyType> = {
   enums?: DefaultValueType<T>[];
   searchable?: boolean;
   description?: string;
+  objectType?:O
 };
 
 export type CommonWrapper<P, T extends PropertyType> = P & CommonProperty<T>;
@@ -123,7 +124,7 @@ export type StringProperty<F = 'None'> = CommonWrapper<
 export type NumberProperty = CommonWrapper<__NumberProperty, 'number'>;
 export type BooleanProperty = CommonWrapper<__BooleanProperty, 'boolean'>;
 export type DateProperty = CommonWrapper<__DateProperty, 'date'>;
-export type ObjectProperty<O extends string> = CommonWrapper<
+export type ObjectProperty<O extends string = string> = CommonWrapper<
   __ObjectProperty<O>,
   'object'
 >;
