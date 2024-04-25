@@ -1,10 +1,4 @@
-import { Controller, Get, Headers } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 
 @Controller()
-export class AppController {
-  @Get('hello')
-  hello(@Headers('x-orgname') orgname: string) {
-    console.log(orgname);
-    return 'hello';
-  }
-}
+export class AppController {}

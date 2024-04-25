@@ -12,6 +12,10 @@ export function createHeaderExtractor<Request extends { headers: any }>(
   };
 }
 
+export function createHeaderExtractorFromRequest(key: string) {
+  return (req: Request) => req.headers[key];
+}
+
 export function createCookieExtractor<Request extends { cookies: any }>(
   key: string
 ) {
@@ -31,9 +35,12 @@ export const extractBearerApiKey = (context: ExecutionContext) => {
 /**
  * Extract orgname from the request headers
  */
-export const extractOrgname = createHeaderExtractor(
+export const extractOrgname = createHeaderExtractor(AuthNames.ORGNAME_HEADER);
+
+export const extractOrgnameFromRequest = createHeaderExtractorFromRequest(
   AuthNames.ORGNAME_HEADER
 );
+
 
 /**
  * Extract user from the request F
