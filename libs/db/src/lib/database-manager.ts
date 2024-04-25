@@ -1,61 +1,87 @@
 import { join } from 'path';
-import { Type, DataSource } from '@webpackages/core';
-import { copyFileSync } from 'fs';
+import { Type, DataSource, Injectable } from '@webpackages/core';
+import { constants, copyFile } from 'fs/promises';
+import { validateDatabaseName } from './name-validator';
 
-export function __validateDBName(name: string) {
-  if (name.replace('-', 'QQAAWWRR').match(/\W/))
-    throw new Error('Not special char but -!');
-
-  if (name.length > 30) throw new Error('Not more than 30 chars');
-  if (name.length < 3) throw new Error('Not less than 3 chars');
+export function __databaseName(
+  databaseFolderName: string,
+  groupFolderName: string,
+  targetName: string
+) {
+  validateDatabaseName(databaseFolderName);
+  validateDatabaseName(groupFolderName);
+  validateDatabaseName(targetName);
+  return join(
+    __dirname,
+    databaseFolderName,
+    groupFolderName,
+    targetName,
+    'main.sqlite'
+  );
 }
 
-export function dbnameForTemplate(template: string) {
-  return join(__dirname, 'database', 'templates', template + '.sqlite');
-}
-
-export function dbnameForOrganization(orgname: string) {
-  return join(__dirname, 'database', 'orgs', orgname + '.sqlite');
-}
-
+@Injectable()
 export class DatabaseManager {
+  constructor(private readonly databaseFolderName: string) {
+    validateDatabaseName(databaseFolderName);
+  }
   /**
    * Create organization database
    * @param database
    * @param entities
    * @returns
    */
-  private __create(database: string, entities: Type[]) {
-    return new DataSource({
+  private async __create(database: string, entities: Type[]) {
+    const con = await new DataSource({
       type: 'better-sqlite3',
       database,
       entities,
       synchronize: true,
       dropSchema: true,
     }).initialize();
+
+    await con.destroy();
+    return;
+  }
+  tempDBNAME(template: string) {
+    return __databaseName(this.databaseFolderName, 'templates', template);
+  }
+
+  orgDBNAME(orgname: string) {
+    return __databaseName(this.databaseFolderName, 'orgs', orgname);
   }
 
   private async __copy(template: string, database: string) {
-    copyFileSync(template, database);
+    await copyFile(template, database, constants.COPYFILE_EXCL);
   }
 
-  copyTemplate(template: string, orgname: string) {
-    const templateDir = dbnameForTemplate(template);
-    const orgnameDir = dbnameForOrganization(orgname);
-    this.__copy(templateDir, orgnameDir);
+  async copyTemplate(template: string, orgname: string) {
+    const templateDir = this.tempDBNAME(template);
+    const orgnameDir = this.orgDBNAME(orgname);
+    await this.__copy(templateDir, orgnameDir);
   }
 
   async create(database: string, entities: Type[]) {
-    __validateDBName(database);
-    return this.__create(dbnameForOrganization(database), entities);
+    validateDatabaseName(database);
+    return this.__create(this.orgDBNAME(database), entities);
   }
 
-  async source(database: string, entities: Type[] = []) {
-    return new DataSource({
+  async templateSource(databaseName: string, entities: Type[]) {
+    const database = this.tempDBNAME(databaseName);
+    return await new DataSource({
       type: 'better-sqlite3',
-      database: dbnameForOrganization(database),
+      database,
       entities,
-    });
+    }).initialize();
+  }
+
+  async source(databaseName: string, entities: Type[]) {
+    const database = this.orgDBNAME(databaseName);
+    return await new DataSource({
+      type: 'better-sqlite3',
+      database,
+      entities,
+    }).initialize();
   }
 
   /**
@@ -65,7 +91,7 @@ export class DatabaseManager {
    * @returns
    */
   async template(database: string, entities: Type[]) {
-    __validateDBName(database);
-    return this.__create(dbnameForTemplate(database), entities);
+    validateDatabaseName(database);
+    return this.__create(this.tempDBNAME(database), entities);
   }
 }
