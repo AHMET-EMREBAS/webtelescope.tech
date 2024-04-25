@@ -1,5 +1,5 @@
 import { PropertyOptions } from './property.meta';
-import { RelationProperty } from './relation.meta';
+import { RelationOptions } from './relation.meta';
 
 /**
  * Configurable Model metadata
@@ -15,7 +15,7 @@ export type Model<
   relations?: Partial<
     Record<
       RelationNames,
-      RelationProperty<
+      RelationOptions<
         M,
         Model<M, PropertyNames, RelationNames, StringFormat>
       >

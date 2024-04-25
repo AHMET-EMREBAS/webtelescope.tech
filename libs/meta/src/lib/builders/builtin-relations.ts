@@ -1,7 +1,7 @@
-import { RelationProperty } from '../meta';
+import { RelationOptions } from '../meta';
 import { CategoryModel } from './builtin-models';
 
-export function CategoryRelation(): RelationProperty {
+export function CategoryRelation(): RelationOptions {
   return {
     target: 'Category',
     type: 'Many',

@@ -1,5 +1,5 @@
 import { PropertyOptions } from '../meta';
-import { names, stringify, toPropertyName } from '../utils';
+import { names, stringify } from '../utils';
 import {
   ClassTypes,
   IDecorate,
@@ -8,16 +8,20 @@ import {
   IRequried,
   IType,
 } from './__common';
+import { CommonPrintImp } from './common';
 
-export class PropertyPrinter
+export class BasePropertyPrinter
+  extends CommonPrintImp
   implements IType, IName, IRequried, IDecorate, IImport
 {
   constructor(
-    protected readonly ctype: ClassTypes,
-    protected readonly pname: string,
+    cname: string,
+    ctype: ClassTypes,
     protected readonly options: PropertyOptions,
     protected readonly cpn = '@webpackages/common'
-  ) {}
+  ) {
+    super(cname, ctype, options);
+  }
 
   /**
    * Property types cannot be entity types, they are global standalone types like Day, Week, Month etc.
@@ -28,49 +32,14 @@ export class PropertyPrinter
   importing(): string {
     const objectType = this.options.objectType;
     const enumName = this.options.enums
-      ? names(this.pname).className
+      ? names(this.propertyName).className
       : undefined;
 
     return enumName ?? objectType ?? '';
   }
 
-  name(): string {
-    return this.pname;
-  }
-
-  viewName(modelName: string): string {
-    return toPropertyName(modelName, this.pname);
-  }
-
-  isRequried(): string {
-    switch (this.ctype) {
-      case ClassTypes.CreateDto:
-      case ClassTypes.Entity:
-        return this.options.required ? '!' : '?';
-
-      case ClassTypes.IEntity:
-      case ClassTypes.ICreateDto:
-        return this.options.required ? '' : '?';
-
-      case ClassTypes.IUpdateDto:
-      case ClassTypes.IQueryDto:
-      case ClassTypes.UpdateDto:
-      case ClassTypes.QueryDto:
-        return '?';
-
-      case ClassTypes.View:
-        return '!';
-
-      case ClassTypes.IView:
-        return '';
-
-      default:
-        return '?';
-    }
-  }
-
   decorators(): string {
-    switch (this.ctype) {
+    switch (this.classType) {
       case ClassTypes.CreateDto:
       case ClassTypes.UpdateDto:
       case ClassTypes.QueryDto:

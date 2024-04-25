@@ -6,16 +6,19 @@ import {
   IImport,
   IName,
   IPrint,
-  IType,
 } from './__common';
 
 export class ModelPrinter
-  implements IPrint, IDecorate, IName, IImport, IType, IImplement, IExtend
+  implements
+    IPrint,
+    IDecorate,
+    Pick<IName, 'name'>,
+    IImport,
+    IImplement,
+    IExtend
 {
   constructor(private readonly model: Model) {}
-  viewName(modelName: string): string {
-    throw new Error('Method not implemented.');
-  }
+
   importing(): string {
     return '';
   }

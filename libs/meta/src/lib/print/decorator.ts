@@ -1,4 +1,3 @@
-import { PropertyOptions } from '../meta';
 import { stringify } from '../utils';
 import { IName, IPrint } from './__common';
 

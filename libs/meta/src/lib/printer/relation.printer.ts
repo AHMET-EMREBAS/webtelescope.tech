@@ -1,11 +1,11 @@
-import { RelationProperty } from '../meta';
+import { RelationOptions } from '../meta';
 import { ClassType } from './class-type';
 import { printRequiredMark } from './required-mark.printer';
 
 export function printRelation(
   classTYpe: ClassType,
   propertyName: string,
-  options: RelationProperty
+  options: RelationOptions
 ) {
   const isArray = options.type === 'Many' ? '[]' : '';
   const isRequrid = printRequiredMark(classTYpe, options.requried);
