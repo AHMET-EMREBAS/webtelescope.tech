@@ -2,7 +2,7 @@ import { Model } from '../meta';
 import { printProperty } from './property.printer';
 import { printRelation } from './relation.printer';
 
-export function printEntityModelProperties(model: Model) {
+export function printEntityProperties(model: Model) {
   return Object.entries(model.properties ?? {})
     .map(([key, value]) => {
       return value && printProperty('entity', key, value);
@@ -10,7 +10,7 @@ export function printEntityModelProperties(model: Model) {
     .join('\n\t');
 }
 
-export function printEntityModelRelations(model: Model) {
+export function printEntityRelations(model: Model) {
   return Object.entries(model.relations ?? {})
     .map(([key, value]) => {
       return value && printRelation('entity', key, value);
@@ -21,7 +21,7 @@ export function printEntityModelRelations(model: Model) {
 export function printEntity(model: Model) {
   const className = model.modelName;
 
-  const propertiesText = printEntityModelProperties(model);
-  const relationsText = printEntityModelRelations(model);
+  const propertiesText = printEntityProperties(model);
+  const relationsText = printEntityRelations(model);
   return `export class ${className} extends BaseEntity implements I${className} {\n\t${propertiesText}\n\t${relationsText}\n}`;
 }
