@@ -58,7 +58,19 @@ export class RelationPrinter
   }
 
   importing(): string {
-    throw new Error('Method not implemented.');
+    switch (this.classType) {
+      case ClassType.CreateDto:
+      case ClassType.UpdateDto:
+      case ClassType.ICreateDto:
+      case ClassType.IUpdateDto:
+        return this.formatImport(CommonObjectTypes.IID, 'types');
+      case ClassType.Entity:
+      case ClassType.IQueryDto:
+      case ClassType.IView:
+    }
+    return `import { ${this.options.target} } from '../${this.toPropertyName(
+      this.options.target
+    )}'`;
   }
 
   type(): string {

@@ -1,13 +1,23 @@
 import { PropertyOptions } from '../meta';
 import { toPropertyName } from '../utils';
-import { ClassType, IName, IRequried } from './__common';
+import { ClassType, IFormatImport, IName, IRequried, IToPropertyName } from './__common';
 
-export class CommonPropertyPrinterImp implements IRequried, IName {
+export class CommonPropertyPrinterImp
+  implements IRequried, IName, IFormatImport, IToPropertyName
+{
   constructor(
     protected readonly propertyName: string,
     protected readonly classType: ClassType,
     protected readonly __options: Pick<PropertyOptions, 'required'>
   ) {}
+
+  toPropertyName(...args: string[]) {
+    return toPropertyName(...args);
+  }
+
+  formatImport(from: string, ...items: string[]): string {
+    return `import { ${items} } from '../${from}'`;
+  }
 
   name(): string {
     return this.propertyName;

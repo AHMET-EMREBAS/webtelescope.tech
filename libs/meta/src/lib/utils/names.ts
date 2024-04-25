@@ -5,9 +5,18 @@ export function uppercaseFirst(value: string) {
 
 export function toPropertyName(...args: string[]) {
   const [first, ...rest] = args
-    .filter((e) => e)
+    .filter((e) => {
+      if (e.match(/ {1,}/))
+        throw new Error('property name must not contain space!');
+
+      return e;
+    })
     .map(uppercaseFirst)
     .join('');
+
+  if (!first.match(/^[A-Za-z_$]/)) {
+    throw new Error('property name must start with a-z, A-Z, or _, $');
+  }
   return first.toLowerCase() + rest.join('');
 }
 

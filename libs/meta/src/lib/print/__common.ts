@@ -61,3 +61,21 @@ export interface IImport {
 export interface IPrint {
   print(): string;
 }
+
+export interface IFormatImport {
+  /**
+   *
+   * @param from package name or dir name
+   * @param items list of importing items
+   */
+  formatImport(from: string, ...items: string[]): string;
+}
+
+export interface IToPropertyName {
+  /**
+   * Transform a list of string into a property name
+   * For example [first,second, third] will be firstSecondThird
+   * @param items
+   */
+  toPropertyName(...items: string[]): string;
+}
