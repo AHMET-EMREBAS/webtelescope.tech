@@ -1,23 +1,27 @@
-import { __PropertyOptions } from './property.meta';
+import { PropertyOptions } from './property.meta';
 import { RelationProperty } from './relation.meta';
 
 /**
  * Configurable Model metadata
  */
-export type __Model<
-  M extends string,
-  PropertyNames extends string,
-  RelationNames extends string,
-  StringFormat extends string
+export type Model<
+  M extends string = string,
+  PropertyNames extends string = string,
+  RelationNames extends string = string,
+  StringFormat extends string = string
 > = {
   modelName: M;
-  properties?: Partial<
-    Record<PropertyNames, __PropertyOptions<StringFormat, M>>
+  properties?: Partial<Record<PropertyNames, PropertyOptions<StringFormat, M>>>;
+  relations?: Partial<
+    Record<
+      RelationNames,
+      RelationProperty<
+        M,
+        Model<M, PropertyNames, RelationNames, StringFormat>
+      >
+    >
   >;
-  relations?: Partial<Record<RelationNames, RelationProperty<M>>>;
 };
 
-/**
- * Static model metadata
- */
-export type Model = __Model<string, string, string, string>;
+
+

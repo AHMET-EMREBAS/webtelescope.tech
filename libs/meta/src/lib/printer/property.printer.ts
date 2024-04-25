@@ -1,4 +1,5 @@
 import { PropertyOptions } from '../meta';
+import { uppercaseFirst } from '../utils';
 import { ClassType } from './class-type';
 
 /**
@@ -14,20 +15,25 @@ export function printProperty(
   options: PropertyOptions
 ) {
   const { type } = options;
-  const pType =
-    type === 'date'
-      ? 'Date'
-      : type === 'object'
-      ? options.objectType ?? 'any'
-      : type;
+
+  const pType = options.enums
+    ? uppercaseFirst(propertyName)
+    : type === 'date'
+    ? 'Date'
+    : type === 'object'
+    ? options.objectType ?? 'any'
+    : type;
 
   const isArray = options.isArray ? '[]' : '';
 
-  const isRequried = options.required
-    ? classType === 'interface'
-      ? ''
-      : '!'
-    : '?';
+  const isRequried =
+    classType === 'dto-query'
+      ? '?'
+      : options.required
+      ? classType === 'interface'
+        ? ''
+        : '!'
+      : '?';
 
   return `${propertyName}${isRequried}:${pType}${isArray};`;
 }

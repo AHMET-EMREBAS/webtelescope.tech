@@ -128,8 +128,8 @@ export type ObjectProperty<O extends string> = CommonWrapper<
   'object'
 >;
 
-export type __PropertyOptions<
-  ST extends string = 'None',
+export type PropertyOptions<
+  ST extends string = string,
   Obj extends string = string
 > =
   | Partial<StringProperty<ST>>
@@ -138,4 +138,4 @@ export type __PropertyOptions<
   | Partial<DateProperty>
   | Partial<ObjectProperty<Obj>>;
 
-export type PropertyOptions = Partial<__PropertyOptions>;
+// export type PropertyOptions = Partial<__PropertyOptions>;
