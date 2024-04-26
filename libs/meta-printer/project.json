@@ -1,0 +1,40 @@
+{
+  "name": "meta-printer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/meta-printer/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/meta-printer",
+        "main": "libs/meta-printer/src/index.ts",
+        "tsConfig": "libs/meta-printer/tsconfig.lib.json",
+        "assets": ["libs/meta-printer/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs meta-printer {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/meta-printer/**/*.ts",
+          "libs/meta-printer/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/meta-printer/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
