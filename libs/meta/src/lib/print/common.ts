@@ -44,13 +44,13 @@ export class CommonPropertyPrinterImp
       case ClassType.IView:
       case ClassType.IQueryDto:
       case ClassType.QueryDto:
-        return this.toPropertyName(this.modelName, this.propertyName);
+        return this.viewName(this.modelName, this.propertyName);
     }
     return this.propertyName;
   }
 
-  viewName(modelName: string): string {
-    return toPropertyName(modelName, this.propertyName);
+  viewName(modelName: string, propertyName: string): string {
+    return toPropertyName(modelName, propertyName);
   }
 
   /**

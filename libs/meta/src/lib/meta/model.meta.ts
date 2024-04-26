@@ -17,10 +17,12 @@ export type Model<
   /**
    * Record of model properties
    */
-  properties?: Partial<Record<PropertyNames, PropertyOptions<StringFormat, M>>>;
+  // properties?: Partial<Record<PropertyNames, PropertyOptions<StringFormat, M>>>;
+  properties?: Record<PropertyNames, PropertyOptions<StringFormat, M>>;
 
   /**
    * Record of model relations
    */
-  relations?: Partial<Record<RelationNames, RelationOptions>>;
+  // relations?: Partial<Record<RelationNames, RelationOptions>>;
+  relations?: Record<RelationNames, RelationOptions>;
 };

@@ -16,6 +16,13 @@ export enum CommonObjectTypes {
   IID = 'IID',
   IBaseQueryDto = 'IBaseQueryDto',
   BaseEntity = 'BaseEntity',
+  IBaseEntity = 'IBaseEntity',
+  BaseEntityView = 'BaseEntityView',
+}
+
+export enum ClassDeclerationType {
+  CLASS = 'class',
+  INTERFACE = 'interface',
 }
 
 export interface IImplement {
@@ -37,9 +44,19 @@ export interface IName {
   name(): string;
 
   /**
-   * Property namem with model name prefix for database table views.
+   * Property name with model name prefix for database table views.
    */
-  viewName(modelName: string): string;
+  viewName(modelName: string, propertyName: string): string;
+}
+
+export interface IClassName {
+  /**
+   * Create a variant of class name from classType.
+   * For example CreateDto, UpdateDto, QueryDto, SomeView, ISome etc.
+   * @param classType
+   * @param className
+   */
+  toClassName(classType: ClassType, className: string): string;
 }
 
 export interface IType {
@@ -60,6 +77,16 @@ export type DecoratorName =
   | 'Many'
   | 'Owner';
 
+export enum DecoratorNames {
+  COLUMN = 'Column',
+  PROPERTY = 'Property',
+  VIEWCOLUMN = 'ViewColumn',
+  ENTITY = 'Entity',
+  DTO = 'Dto',
+  ONE = 'One',
+  MANY = 'Many',
+  OWNER = 'Owner',
+}
 export interface IDecorate {
   /**
    * Print the decorator
@@ -103,4 +130,12 @@ export interface IToName {
    * @param name
    */
   toClassName(name: string): string;
+}
+
+export interface IGeneric {
+  /**
+   * Classes or interfaces might have generics.
+   * Implement this function to print generics.
+   */
+  generics(): string;
 }
