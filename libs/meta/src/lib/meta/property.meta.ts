@@ -72,17 +72,50 @@ export type DefaultValueType<T extends PropertyType> = OrType<
   >
 >;
 
-export type CommonProperty<T extends PropertyType, O extends string = string> = {
+export type CommonProperty<
+  T extends PropertyType,
+  O extends string = string
+> = {
+  /**
+   * Property type
+   */
   type: T;
+
+  /**
+   * UI input element
+   */
   inputType?: InputType;
+
+  /**
+   * Default value
+   */
   defaultValue?: DefaultValueType<T>;
+
   required?: boolean;
   isArray?: boolean;
   unique?: boolean;
+
+  /**
+   * Limit input to a list of items
+   */
   enums?: DefaultValueType<T>[];
+
+  /**
+   * If set true, this property will be included in the query object
+   */
   searchable?: boolean;
+
   description?: string;
-  objectType?:O
+
+  /**
+   * In case property is an object type, the name of the object type
+   */
+  objectType?: O;
+
+  /**
+   * By default, all properties are included in entity views. Set false if you want to exclude this property from view.
+   */
+  excludeFromView?: boolean;
 };
 
 export type CommonWrapper<P, T extends PropertyType> = P & CommonProperty<T>;
@@ -99,21 +132,55 @@ export type __NumberProperty = {
 };
 
 export type __BooleanProperty = {
-  strict: boolean;
+  /**
+   * Ignore his configuration, it does not have any affect.
+   */
+  strict?: boolean;
 };
 
 export type __ObjectProperty<O extends string = string> = {
+  /**
+   * Name of the object type
+   */
   objectType: O;
 };
 
 export type __DateProperty = {
+  /**
+   * A day of month
+   */
   before?: MonthDay;
+  /**
+   * A day of month
+   */
   after?: MonthDay;
+
+  /**
+   * Find date if it is inweek
+   */
   inweek?: boolean;
+  /**
+   * Find date if it is weekend
+   */
   weekend?: boolean;
+  /**
+   * Find date if it is between two month days
+   */
   between: [MonthDay, MonthDay];
+
+  /**
+   * Find date if it is in the list of week days
+   */
   days?: WeekDay[];
+
+  /**
+   * Find date if it is the week day
+   */
   day: WeekDay;
+  
+  /**
+   * Find date if it is in the list of month days.
+   */
   monthdays?: MonthDay[];
 };
 

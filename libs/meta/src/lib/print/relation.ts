@@ -13,6 +13,9 @@ import {
 } from './__common';
 import { CommonPropertyPrinterImp } from './common';
 
+/**
+ * Print relation property
+ */
 export class RelationPrinter
   extends CommonPropertyPrinterImp
   implements IPrint, IType, IName, IRequried, IDecorate, IImport, IArray
@@ -20,8 +23,7 @@ export class RelationPrinter
   constructor(
     propertyName: string,
     classType: ClassType,
-    protected readonly options: RelationOptions,
-    protected readonly cpn = '@webpackages/common'
+    protected readonly options: RelationOptions
   ) {
     super(propertyName, classType, { required: options.required });
   }
@@ -85,7 +87,6 @@ export class RelationPrinter
         return CommonObjectTypes.IID + this.isArray();
 
       case ClassType.Entity:
-        return target + this.isArray();
       case ClassType.IEntity:
         return target + this.isArray();
     }

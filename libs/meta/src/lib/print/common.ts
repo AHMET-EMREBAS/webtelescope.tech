@@ -1,6 +1,12 @@
 import { PropertyOptions } from '../meta';
 import { toPropertyName } from '../utils';
-import { ClassType, IFormatImport, IName, IRequried, IToPropertyName } from './__common';
+import {
+  ClassType,
+  IFormatImport,
+  IName,
+  IRequried,
+  IToPropertyName,
+} from './__common';
 
 export class CommonPropertyPrinterImp
   implements IRequried, IName, IFormatImport, IToPropertyName
@@ -11,6 +17,11 @@ export class CommonPropertyPrinterImp
     protected readonly __options: Pick<PropertyOptions, 'required'>
   ) {}
 
+  /**
+   * Convert list of properties a single property name
+   * @param args
+   * @returns
+   */
   toPropertyName(...args: string[]) {
     return toPropertyName(...args);
   }

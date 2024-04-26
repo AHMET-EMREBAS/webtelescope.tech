@@ -17,16 +17,14 @@ export class BasePropertyPrinter
   constructor(
     cname: string,
     ctype: ClassType,
-    protected readonly options: PropertyOptions,
-    protected readonly cpn = '@webpackages/common'
+    protected readonly options: PropertyOptions
   ) {
     super(cname, ctype, options);
   }
 
   /**
-   * Property types cannot be entity types, they are global standalone types like Day, Week, Month etc.
-   * So all of class variants will use the same type.
-   * If the property is enum, then enum type, otherwise the object type or empty string
+   * import requried types for the property
+   * For example, SomeEnum, SomeType
    * @returns
    */
   importing(): string {
