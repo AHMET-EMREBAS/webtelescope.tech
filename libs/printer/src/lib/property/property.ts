@@ -11,11 +11,11 @@ export abstract class PropertyPrinter implements IPrint {
 
   /**
    * Delimeter between property name and type
-   * @defaultValue `:`
+   * @defaultValue `: `
    * @returns string
    */
   protected delimeter() {
-    return ':';
+    return ': ';
   }
 
   /**
