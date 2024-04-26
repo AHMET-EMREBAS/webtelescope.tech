@@ -63,8 +63,22 @@ export class PropertyPrinter
     return enumName ?? objectType ?? '';
   }
 
+  __propertyOptions() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { excludeFromView, searchable, ...options } = this.options;
+    return options;
+  }
   propertyDecorator() {
-    return `@Property(${stringify(this.options)})`;
+    const prop = (options: PropertyOptions) =>
+      `@Property(${stringify(options)})`;
+
+    switch (this.classType) {
+      case ClassType.QueryDto:
+      case ClassType.UpdateDto:
+        return prop({ ...this.__propertyOptions(), required: undefined });
+      default:
+        return prop(this.__propertyOptions());
+    }
   }
 
   columnDecorator() {

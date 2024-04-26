@@ -42,6 +42,8 @@ export class CommonPropertyPrinterImp
     switch (this.classType) {
       case ClassType.View:
       case ClassType.IView:
+      case ClassType.IQueryDto:
+      case ClassType.QueryDto:
         return this.toPropertyName(this.modelName, this.propertyName);
     }
     return this.propertyName;

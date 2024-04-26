@@ -34,32 +34,24 @@ export class RelationPrinter
     return this.relationType === 'Many' ? '[]' : '';
   }
 
-  __type(): string | undefined {
+  type(): string {
     switch (this.classType) {
       case ClassType.CreateDto:
       case ClassType.UpdateDto:
-        return CommonObjectTypes.IDDto;
+        return CommonObjectTypes.IDDto + this.isArray();
       case ClassType.IUpdateDto:
       case ClassType.ICreateDto:
-        return CommonObjectTypes.IID;
+        return CommonObjectTypes.IID + this.isArray();
 
       case ClassType.Entity:
       case ClassType.IEntity:
-        return this.modelName;
+        return this.modelName + this.isArray();
 
       default:
-        return;
+        return '';
     }
   }
 
-  type(): string {
-    const type = this.__type();
-
-    if (type) {
-      return type + this.isArray();
-    }
-    return '';
-  }
   relationDecorator() {
     return `@${this.relationType}(${this.modelName})`;
   }
@@ -117,6 +109,15 @@ export class RelationPrinter
   }
 
   print(): string {
+    // No printing for view and queries becuase we do not know the properties of this relation.
+    switch (this.classType) {
+      case ClassType.View:
+      case ClassType.IView:
+      case ClassType.QueryDto:
+      case ClassType.IQueryDto:
+        return '';
+    }
+
     const spaceAfter = (value?: string) => (value ? value + ' ' : '');
     return [
       spaceAfter(this.decorators()),
