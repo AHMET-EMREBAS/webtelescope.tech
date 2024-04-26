@@ -4,7 +4,7 @@ import {
 } from './property';
 describe('PropertyPrinter', () => {
   it.each`
-    printer | expected            | name       | type        | required
+    printer | expected             | name       | type        | required
     ${CPR}  | ${'some!: string;'}  | ${'some'}  | ${'string'} | ${true}
     ${CPR}  | ${'other?: number;'} | ${'other'} | ${'number'} | ${false}
     ${CPR}  | ${'other?: xyz;'}    | ${'other'} | ${'xyz'}    | ${false}
@@ -19,4 +19,39 @@ describe('PropertyPrinter', () => {
       expect(result).toBe(expected);
     }
   );
+
+  it.each`
+    expected                 | namePrefix | nameSuffix | typePrefix | typeSuffix
+    ${'__name$!: string;'}   | ${'__'}    | ${'$'}     | ${''}      | ${''}
+    ${'__name$!: TstringT;'} | ${'__'}    | ${'$'}     | ${'T'}     | ${'T'}
+  `(
+    'should print $expected from { namePrefix:$namePrefix, nameSuffix:$nameSuffix, typePrefix:$typePrefix, typeSuffix:$typeSuffix, } options',
+    ({ expected, namePrefix, nameSuffix, typePrefix, typeSuffix }) => {
+      const result = new CPR({
+        name: 'name',
+        type: 'string',
+        required: true,
+        namePrefix,
+        nameSuffix,
+        typePrefix,
+        typeSuffix,
+      }).print();
+
+      expect(result).toBe(expected);
+    }
+  );
+
+  it.each`
+    expected            | doc
+    ${'name!: string;'} | ${{ print: () => '// Doc' }}
+  `('should print $expected from { doc:$doc } options', ({ expected, doc }) => {
+    const result = new CPR({
+      name: 'name',
+      type: 'string',
+      required: true,
+      doc,
+    }).print();
+
+    expect(result).toBe(['// Doc', expected].join('\n'));
+  });
 });
