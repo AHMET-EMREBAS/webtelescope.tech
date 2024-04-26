@@ -71,11 +71,17 @@ export interface IFormatImport {
   formatImport(from: string, ...items: string[]): string;
 }
 
-export interface IToPropertyName {
+export interface IToName {
   /**
    * Transform a list of string into a property name
    * For example [first,second, third] will be firstSecondThird
    * @param items
    */
   toPropertyName(...items: string[]): string;
+
+  /**
+   * Convert class name into file nmae
+   * @param name
+   */
+  toFileName(name: string): string;
 }

@@ -1,21 +1,20 @@
-import { PropertyOptions } from '../meta';
-import { toPropertyName } from '../utils';
+import { names, toPropertyName } from '../utils';
 import {
   ClassType,
   IFormatImport,
   IName,
   IRequried,
-  IToPropertyName,
+  IToName,
 } from './__common';
 
 export class CommonPropertyPrinterImp
-  implements IRequried, IName, IFormatImport, IToPropertyName
+  implements IRequried, IName, IFormatImport, IToName
 {
   constructor(
     protected readonly classType: ClassType,
     protected readonly modelName: string,
     protected readonly propertyName: string,
-    protected readonly options: Pick<PropertyOptions, 'required'>
+    protected readonly required?: boolean
   ) {}
 
   /**
@@ -25,6 +24,10 @@ export class CommonPropertyPrinterImp
    */
   toPropertyName(...args: string[]) {
     return toPropertyName(...args);
+  }
+
+  toFileName(name: string) {
+    return names(name).fileName;
   }
 
   formatImport(from: string, ...items: string[]): string {
@@ -53,11 +56,11 @@ export class CommonPropertyPrinterImp
     switch (this.classType) {
       case ClassType.CreateDto:
       case ClassType.Entity:
-        return this.options.required ? '!' : '?';
+        return this.required ? '!' : '?';
 
       case ClassType.IEntity:
       case ClassType.ICreateDto:
-        return this.options.required ? '' : '?';
+        return this.required ? '' : '?';
 
       case ClassType.IUpdateDto:
       case ClassType.IQueryDto:
