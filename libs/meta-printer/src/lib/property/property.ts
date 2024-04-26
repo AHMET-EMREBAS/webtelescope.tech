@@ -1,11 +1,11 @@
-import { IPrint, PropertyPrinter as __PropertyPrinter } from '../__printer';
+import {
+  IPrint,
+  PropertyPrinter as __PropertyPrinter,
+  PropertyPrinterOptions as __PropertyPrinterOptions,
+} from '../__printer';
 import { toPropertyName } from '../utils';
 
-export type PropertyPrinterOptions = {
-  name: string;
-  type: string;
-  isArray?: boolean;
-  required?: boolean;
+export type PropertyPrinterOptions = __PropertyPrinterOptions & {
   modelName?: string;
 };
 

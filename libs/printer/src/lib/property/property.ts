@@ -1,14 +1,56 @@
-import { IPrint } from '../common';
+import { IPrint, NotExtended } from '../common';
 
-export type PropertyPrinterOptions = {
+export type PropertyPrinterOptions<E = NotExtended> = {
+  /**
+   * Name of the property
+   */
   name: string;
+
+  /**
+   * Property type
+   */
   type: string;
+
+  /**
+   * Is property array
+   */
   isArray?: boolean;
+
+  /**
+   * Is property required
+   */
   required?: boolean;
-};
+
+  /**
+   * Property documentation
+   */
+  doc?: IPrint;
+
+  /**
+   * Property type prefix  PrefixPropertyType
+   */
+  typePrefix?: string;
+
+  /**
+   * Property type suffix PropertyTypeSuffix
+   */
+  typeSuffix?: string;
+
+  /**
+   * Property name prefix  prefixPropertyName
+   */
+  namePrefix?: string;
+
+  /**
+   * Property name suffix  suffixPropertyName
+   */
+  nameSuffix?: string;
+} & E;
 
 export abstract class PropertyPrinter implements IPrint {
-  constructor(protected readonly __propertyPrinterOptions: PropertyPrinterOptions) {}
+  constructor(
+    protected readonly __propertyPrinterOptions: PropertyPrinterOptions
+  ) {}
 
   /**
    * Delimeter between property name and type
@@ -17,6 +59,21 @@ export abstract class PropertyPrinter implements IPrint {
    */
   protected __delimeter() {
     return ': ';
+  }
+  protected __prefix() {
+    return this.__propertyPrinterOptions.namePrefix ?? '';
+  }
+  protected __suffix() {
+    return this.__propertyPrinterOptions.nameSuffix ?? '';
+  }
+  protected __doc() {
+    return this.__propertyPrinterOptions.doc?.print() + '\n' ?? '';
+  }
+  protected __typePrefix() {
+    return this.__propertyPrinterOptions.typePrefix ?? '';
+  }
+  protected __typeSuffix() {
+    return this.__propertyPrinterOptions.typeSuffix ?? '';
   }
 
   /**
@@ -62,10 +119,15 @@ export abstract class PropertyPrinter implements IPrint {
 
   print(): string {
     return [
+      this.__doc(),
+      this.__prefix(),
       this.__name(),
+      this.__suffix(),
       this.__isRequired(),
       this.__delimeter(),
+      this.__typePrefix(),
       this.__type(),
+      this.__typeSuffix(),
       this.__endOfLine(),
     ].join('');
   }
