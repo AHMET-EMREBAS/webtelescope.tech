@@ -44,7 +44,7 @@ export class PropertyPrinter
         return '';
     }
   }
-  
+
   type(): string {
     return this.__type() + this.isArray();
   }
@@ -70,6 +70,7 @@ export class PropertyPrinter
   columnDecorator() {
     return `@Column(${stringify({
       type: this.options.type,
+      required: this.required,
       unique: this.options.unique,
     })})`;
   }
