@@ -54,7 +54,7 @@ type TBoolean = 'boolean';
 type TObject = 'object';
 type TDate = 'date';
 
-export enum PropertyTypes {
+export enum PropertyTypeName {
   STRING = 'string',
   NUMBER = 'number',
   BOOLEAN = 'boolean',

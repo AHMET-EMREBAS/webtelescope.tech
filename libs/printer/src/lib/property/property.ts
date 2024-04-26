@@ -3,43 +3,52 @@ import { IPrint } from '../common';
 export type PropertyPrinterOptions = {
   name: string;
   type: string;
+  isArray?: boolean;
   required?: boolean;
 };
 
 export abstract class PropertyPrinter implements IPrint {
-  constructor(protected readonly propertyPrinterOptions: PropertyPrinterOptions) {}
+  constructor(protected readonly __propertyPrinterOptions: PropertyPrinterOptions) {}
 
   /**
    * Delimeter between property name and type
    * @defaultValue `: `
    * @returns string
    */
-  protected delimeter() {
+  protected __delimeter() {
     return ': ';
   }
 
   /**
-   *
+   * @defaultImp  `requried  ? '!' : '?'`
    * @returns
    */
-  protected isRequired(): '!' | '?' | '' {
-    return this.propertyPrinterOptions.required ? '!' : '?';
+  protected __isRequired(): '!' | '?' | '' {
+    return this.__propertyPrinterOptions.required ? '!' : '?';
   }
 
   /**
    * Property name
    * @returns
    */
-  name() {
-    return this.propertyPrinterOptions.name;
+  protected __name() {
+    return this.__propertyPrinterOptions.name;
   }
 
   /**
    * Property type
    * @returns
    */
-  type() {
-    return this.propertyPrinterOptions.type;
+  protected __type() {
+    return this.__propertyPrinterOptions.type;
+  }
+
+  /**
+   * If the property is array then return '[]' else ''
+   * @returns
+   */
+  protected __isArray() {
+    return this.__propertyPrinterOptions.isArray ? '[]' : '';
   }
 
   /**
@@ -47,17 +56,17 @@ export abstract class PropertyPrinter implements IPrint {
    * @defaultValue ` ; `
    * @returns
    */
-  protected endOfLine() {
+  protected __endOfLine() {
     return ';';
   }
 
   print(): string {
     return [
-      this.name(),
-      this.isRequired(),
-      this.delimeter(),
-      this.type(),
-      this.endOfLine(),
+      this.__name(),
+      this.__isRequired(),
+      this.__delimeter(),
+      this.__type(),
+      this.__endOfLine(),
     ].join('');
   }
 }
@@ -71,7 +80,7 @@ export class ClassPropertyPrinter extends PropertyPrinter {}
  * Print interface property
  */
 export class InterfacePropertyPrinter extends PropertyPrinter {
-  protected override isRequired() {
-    return this.propertyPrinterOptions.required ? '' : '?';
+  protected override __isRequired() {
+    return this.__propertyPrinterOptions.required ? '' : '?';
   }
 }

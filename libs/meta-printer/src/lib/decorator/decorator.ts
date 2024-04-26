@@ -1,15 +1,13 @@
-import { IPrint, DecoratorPrinter } from '@webpackages/printer';
-import { ClassType } from '../common';
+import { IPrint, DecoratorPrinter } from '../__printer';
 
 /**
  * Implements the common decorator printer operation
  */
 export class BaseDecoratorPrinter extends DecoratorPrinter implements IPrint {
   constructor(
-    protected readonly classType: ClassType,
-    protected readonly decoratorName: string,
-    protected readonly decoratorOptionsPrinter: IPrint
+    protected readonly name: string,
+    protected readonly optionsPrinter: IPrint
   ) {
-    super({ name: decoratorName, options: decoratorOptionsPrinter.print() });
+    super({ name: name, options: optionsPrinter.print() });
   }
 }

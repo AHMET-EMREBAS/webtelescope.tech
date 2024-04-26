@@ -11,38 +11,38 @@ export type DecoratorPrinterOptions = {
 export class DecoratorPrinter implements IPrint {
   constructor(protected decoratorPrinterOptions: DecoratorPrinterOptions) {}
 
-  protected name() {
+  protected __name() {
     return this.decoratorPrinterOptions.name;
   }
 
   /**
    * @returns `(` by default
    */
-  protected optionsPrefix() {
+  protected __optionsPrefix() {
     return '(';
   }
 
   /**
    * @returns `)` by default
    */
-  protected optionsSuffix() {
+  protected __optionsSuffix() {
     return ')';
   }
-  protected options() {
+  protected __options() {
     return this.decoratorPrinterOptions.options;
   }
 
-  protected signiture() {
+  protected __signiture() {
     return '@';
   }
 
   print(): string {
     return [
-      this.signiture(),
-      this.name(),
-      this.optionsPrefix(),
-      this.options(),
-      this.optionsSuffix(),
+      this.__signiture(),
+      this.__name(),
+      this.__optionsPrefix(),
+      this.__options(),
+      this.__optionsSuffix(),
     ].join('');
   }
 }

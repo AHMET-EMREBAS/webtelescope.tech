@@ -1,9 +1,14 @@
-import { IPrint } from '@webpackages/printer';
+import { IPrint } from '../__printer';
+import { stringify } from '../utils';
 
-export class BaseDecoratorOptions<Options> implements IPrint {
-  constructor(protected readonly options: Options) {}
-
+export class BaseDecoratorOptionsPrinter<Options extends object>
+  implements IPrint
+{
+  constructor(protected readonly options?: Options) {}
   print(): string {
+    if (this.options) {
+      return stringify(this.options);
+    }
     return '';
   }
 }

@@ -13,31 +13,33 @@ export type ImportPrinterOptions = {
 };
 
 export class ImportPrinter implements IPrint {
-  constructor(protected readonly importPrinterOptions: ImportPrinterOptions) {}
+  constructor(
+    protected readonly __importPrinterOptions: ImportPrinterOptions
+  ) {}
 
   /**
    * Import keyword
    * @returns `import`
    */
-  protected importKeyWord() {
+  protected __importKeyWord() {
     return 'import';
   }
 
-  protected fromKeyWord() {
+  protected __fromKeyWord() {
     return 'from ';
   }
 
   /**
    * @returns `{ ` by default
    */
-  protected contentPrefix(): string {
+  protected __contentPrefix(): string {
     return ' { ';
   }
 
   /**
    * @returns ` }` by default
    */
-  protected contentSuffix(): string {
+  protected __contentSuffix(): string {
     return ' } ';
   }
 
@@ -45,27 +47,27 @@ export class ImportPrinter implements IPrint {
    * Items to be imported
    * @returns
    */
-  protected content(): string {
-    return this.importPrinterOptions.items.join(', ');
+  protected __content(): string {
+    return this.__importPrinterOptions.items.join(', ');
   }
 
-  protected source(): string {
-    return `'${this.importPrinterOptions.source}'`;
+  protected __source(): string {
+    return `'${this.__importPrinterOptions.source}'`;
   }
 
-  protected endOfLine() {
+  protected __endOfLine() {
     return ';';
   }
 
   print(): string {
     return [
-      this.importKeyWord(),
-      this.contentPrefix(),
-      this.content(),
-      this.contentSuffix(),
-      this.fromKeyWord(),
-      this.source(),
-      this.endOfLine(),
+      this.__importKeyWord(),
+      this.__contentPrefix(),
+      this.__content(),
+      this.__contentSuffix(),
+      this.__fromKeyWord(),
+      this.__source(),
+      this.__endOfLine(),
     ].join('');
   }
 }

@@ -16,21 +16,21 @@ export class ClassPrinter implements IPrint {
   /**
    * @returns `export` by default
    */
-  protected exportDef() {
+  protected __exportDef() {
     return 'export';
   }
 
   /**
    * @returns class name
    */
-  protected name() {
+  protected __name() {
     return this.clsasPrinterOptions.name;
   }
 
   /**
    * @returns class type class, interface, struct.
    */
-  protected type() {
+  protected __type() {
     return this.clsasPrinterOptions.type;
   }
 
@@ -38,7 +38,7 @@ export class ClassPrinter implements IPrint {
    * Override this method if the content prefix in your programming syntax is different.
    * @returns `{` by default
    */
-  protected contentPrefix() {
+  protected __contentPrefix() {
     return '{';
   }
 
@@ -46,22 +46,22 @@ export class ClassPrinter implements IPrint {
    * Override this method if the content suffix in your programming syntax is different.
    * @returns `}` by default
    */
-  protected contentSuffix() {
+  protected __contentSuffix() {
     return '}';
   }
 
-  protected content() {
+  protected __content() {
     return this.clsasPrinterOptions.content ?? '';
   }
 
   print(): string {
     return [
-      this.clsasPrinterOptions.exports ? this.exportDef() : '',
-      this.type(),
-      this.name(),
-      this.contentPrefix(),
-      this.content(),
-      this.contentSuffix(),
+      this.clsasPrinterOptions.exports ? this.__exportDef() : '',
+      this.__type(),
+      this.__name(),
+      this.__contentPrefix(),
+      this.__content(),
+      this.__contentSuffix(),
     ]
       .filter((e) => e != '' && e != undefined)
       .join(' ');
