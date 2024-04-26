@@ -12,9 +12,10 @@ export class CommonPropertyPrinterImp
   implements IRequried, IName, IFormatImport, IToPropertyName
 {
   constructor(
-    protected readonly propertyName: string,
     protected readonly classType: ClassType,
-    protected readonly __options: Pick<PropertyOptions, 'required'>
+    protected readonly modelName: string,
+    protected readonly propertyName: string,
+    protected readonly options: Pick<PropertyOptions, 'required'>
   ) {}
 
   /**
@@ -31,6 +32,11 @@ export class CommonPropertyPrinterImp
   }
 
   name(): string {
+    switch (this.classType) {
+      case ClassType.View:
+      case ClassType.IView:
+        return this.toPropertyName(this.modelName, this.propertyName);
+    }
     return this.propertyName;
   }
 
@@ -47,11 +53,11 @@ export class CommonPropertyPrinterImp
     switch (this.classType) {
       case ClassType.CreateDto:
       case ClassType.Entity:
-        return this.__options.required ? '!' : '?';
+        return this.options.required ? '!' : '?';
 
       case ClassType.IEntity:
       case ClassType.ICreateDto:
-        return this.__options.required ? '' : '?';
+        return this.options.required ? '' : '?';
 
       case ClassType.IUpdateDto:
       case ClassType.IQueryDto:

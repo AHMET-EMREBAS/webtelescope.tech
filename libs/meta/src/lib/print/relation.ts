@@ -21,11 +21,13 @@ export class RelationPrinter
   implements IPrint, IType, IName, IRequried, IDecorate, IImport, IArray
 {
   constructor(
-    propertyName: string,
-    classType: ClassType,
-    protected readonly options: RelationOptions
+    override classType: ClassType,
+    override propertyName: string,
+    override options: RelationOptions
   ) {
-    super(propertyName, classType, { required: options.required });
+    super(classType, options.model.modelName, propertyName, {
+      required: options.required,
+    });
   }
 
   isArray(): string {
