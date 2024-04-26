@@ -34,8 +34,12 @@ export class CommonPropertyPrinterImp
     return names(name).className;
   }
 
-  formatImport(from: string, ...items: string[]): string {
-    return `import { ${items} } from '../${from}'`;
+  formatImportFromPackage(from: string, ...items: string[]): string {
+    return `import { ${items} } from '${from}';`;
+  }
+
+  formatImportFromSibling(from: string, ...items: string[]): string {
+    return `import { ${items} } from '../${from}';`;
   }
 
   name(): string {

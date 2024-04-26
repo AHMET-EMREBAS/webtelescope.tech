@@ -46,7 +46,9 @@ export class RelationPrinter
       case ClassType.Entity:
         return this.modelName + this.isArray();
       case ClassType.IEntity:
-        return CommonObjectTypes.GENERIC_PREFIX + this.modelName + this.isArray();
+        return (
+          CommonObjectTypes.GENERIC_PREFIX + this.modelName + this.isArray()
+        );
       default:
         return '';
     }
@@ -84,21 +86,37 @@ export class RelationPrinter
     }
   }
 
+  baseClassesPackageName() {
+    return '@webpackages/core';
+  }
+
+  baseInterfacesPackageName() {
+    return '@webpackages/common';
+  }
+
   importing(): string {
     switch (this.classType) {
       case ClassType.CreateDto:
       case ClassType.UpdateDto:
+        return this.formatImportFromPackage(
+          this.baseClassesPackageName(),
+          CommonObjectTypes.IDDto
+        );
+
       case ClassType.ICreateDto:
       case ClassType.IUpdateDto:
-      case ClassType.IEntity:
-        return this.formatImport(CommonObjectTypes.IID, 'types');
+        return this.formatImportFromPackage(
+          this.baseInterfacesPackageName(),
+          CommonObjectTypes.IID
+        );
       case ClassType.Entity:
       case ClassType.View:
-        return this.formatImport(
+        return this.formatImportFromSibling(
           this.toFileName(this.modelName),
           this.modelName
         );
 
+      case ClassType.IEntity:
       case ClassType.IQueryDto:
       case ClassType.IView:
       case ClassType.QueryDto:

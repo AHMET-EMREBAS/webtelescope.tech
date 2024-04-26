@@ -112,7 +112,7 @@ export interface IFormatImport {
    * @param from package name or dir name
    * @param items list of importing items
    */
-  formatImport(from: string, ...items: string[]): string;
+  formatImportFromPackage(from: string, ...items: string[]): string;
 }
 
 export interface IToName {
