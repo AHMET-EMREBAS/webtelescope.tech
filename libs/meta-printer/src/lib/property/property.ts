@@ -1,3 +1,4 @@
+import { Model } from '../__meta';
 import {
   IPrint,
   PropertyPrinter as __PropertyPrinter,
@@ -5,17 +6,16 @@ import {
 } from '../__printer';
 import { toPropertyName } from '../utils';
 
-export type PropertyPrinterOptions = __PropertyPrinterOptions & {
-  modelName?: string;
-};
+export type PropertyPrinterOptions = __PropertyPrinterOptions<
+  Partial<Pick<Model, 'modelName'>>
+>;
 
 /**
  * Default property printer implementation following interface property syntax
  */
 export class PropertyPrinter extends __PropertyPrinter implements IPrint {
   constructor(protected readonly options: PropertyPrinterOptions) {
-    const { name, type, isArray, required } = options;
-    super({ name, type, isArray, required });
+    super(options);
   }
   protected override __isRequired(): '' | '!' | '?' {
     return this.options.required ? '' : '?';

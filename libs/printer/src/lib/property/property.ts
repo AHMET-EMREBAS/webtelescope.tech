@@ -1,51 +1,4 @@
-import { IPrint, NotExtended } from '../common';
-
-export type PropertyPrinterOptions<E = NotExtended> = {
-  /**
-   * Name of the property
-   */
-  name: string;
-
-  /**
-   * Property type
-   */
-  type: string;
-
-  /**
-   * Is property array
-   */
-  isArray?: boolean;
-
-  /**
-   * Is property required
-   */
-  required?: boolean;
-
-  /**
-   * Property documentation
-   */
-  doc?: IPrint;
-
-  /**
-   * Property type prefix  PrefixPropertyType
-   */
-  typePrefix?: string;
-
-  /**
-   * Property type suffix PropertyTypeSuffix
-   */
-  typeSuffix?: string;
-
-  /**
-   * Property name prefix  prefixPropertyName
-   */
-  namePrefix?: string;
-
-  /**
-   * Property name suffix  suffixPropertyName
-   */
-  nameSuffix?: string;
-} & E;
+import { IPrint, PropertyPrinterOptions } from '../common';
 
 export abstract class PropertyPrinter implements IPrint {
   constructor(
@@ -58,8 +11,9 @@ export abstract class PropertyPrinter implements IPrint {
    * @returns string
    */
   protected __delimeter() {
-    return ': ';
+    return this.__propertyPrinterOptions.delimeter ?? ': ';
   }
+
   protected __prefix() {
     return this.__propertyPrinterOptions.namePrefix ?? '';
   }
@@ -67,7 +21,8 @@ export abstract class PropertyPrinter implements IPrint {
     return this.__propertyPrinterOptions.nameSuffix ?? '';
   }
   protected __doc() {
-    return this.__propertyPrinterOptions.doc?.print() + '\n' ?? '';
+    const p = this.__propertyPrinterOptions.doc?.print();
+    return p ? p + '\n' : '';
   }
   protected __typePrefix() {
     return this.__propertyPrinterOptions.typePrefix ?? '';

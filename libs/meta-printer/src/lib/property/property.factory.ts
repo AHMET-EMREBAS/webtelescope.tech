@@ -1,3 +1,5 @@
+import { Model } from '../__meta';
+import { PropertyPrinterOptions } from '../__printer';
 import { ClassType } from '../common';
 import {
   ClassPropertyPrinter,
@@ -10,8 +12,13 @@ import {
 
 type TPropertyPrinter = typeof PropertyPrinter;
 
+export type PropertyFactoryOptions = PropertyPrinterOptions<
+  Partial<Pick<Model, 'modelName'>>
+>;
+
 export class PropertyPrinterFactory {
-    
+  constructor(protected readonly options: PropertyFactoryOptions) {}
+
   PickPrinter(classType: ClassType): TPropertyPrinter {
     switch (classType) {
       // Class property printer in use
