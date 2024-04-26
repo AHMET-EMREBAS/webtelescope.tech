@@ -10,10 +10,10 @@ import {
   IRequried,
   IType,
 } from './__common';
-import { CommonPropertyPrinterImp } from './common';
+import { CommonPrinter } from './common';
 
 export class PropertyPrinter
-  extends CommonPropertyPrinterImp
+  extends CommonPrinter
   implements IPrint, IType, IName, IRequried, IDecorate, IImport, IArray
 {
   constructor(

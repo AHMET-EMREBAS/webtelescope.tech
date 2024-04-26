@@ -7,9 +7,7 @@ import {
   IToName,
 } from './__common';
 
-export class CommonPropertyPrinterImp
-  implements IRequried, IName, IFormatImport, IToName
-{
+export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
   constructor(
     protected readonly classType: ClassType,
     protected readonly modelName: string,
@@ -18,7 +16,7 @@ export class CommonPropertyPrinterImp
   ) {}
 
   /**
-   * Convert list of properties a single property name
+   * Utility converts list of properties a single property name
    * @param args
    * @returns
    */
@@ -26,22 +24,53 @@ export class CommonPropertyPrinterImp
     return toPropertyName(...args);
   }
 
+  /**
+   * Utility function
+   * @param name
+   * @returns
+   */
   toFileName(name: string) {
     return names(name).fileName;
   }
-
+  /**
+   * Utility function
+   * @param name
+   * @returns
+   */
   toClassName(name: string) {
     return names(name).className;
   }
 
-  formatImportFromPackage(from: string, ...items: string[]): string {
+  importFromPackage(from: string, ...items: string[]): string {
     return `import { ${items} } from '${from}';`;
   }
 
-  formatImportFromSibling(from: string, ...items: string[]): string {
+  importFromSiblingDir(from: string, ...items: string[]): string {
     return `import { ${items} } from '../${from}';`;
   }
 
+  importFromSiblingFile(from: string, ...items: string[]): string {
+    return `import { ${items} } from '../${from}';`;
+  }
+
+  /**
+   * @returns '@webpackages/core';
+   */
+  baseClassesPackageName() {
+    return '@webpackages/core';
+  }
+
+  /**
+   * @returns '@webpackages/common';
+   */
+  baseInterfacesPackageName() {
+    return '@webpackages/common';
+  }
+
+  /**
+   * Property name
+   * @returns
+   */
   name(): string {
     switch (this.classType) {
       case ClassType.View:

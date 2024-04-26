@@ -1,5 +1,4 @@
 import { Model } from '../meta';
-import { toPropertyName } from '../utils';
 import {
   ClassDeclerationType,
   IDecorate,
@@ -14,10 +13,12 @@ import {
   IClassName,
   DecoratorNames,
 } from './__common';
+import { CommonPrinter } from './common';
 import { PropertyPrinter } from './property';
 import { RelationPrinter } from './relation';
 
 export class ModelPrinter
+  extends CommonPrinter
   implements
     IPrint,
     IDecorate,
@@ -29,10 +30,9 @@ export class ModelPrinter
     IClassName,
     IGeneric
 {
-  constructor(
-    protected readonly classType: ClassType,
-    protected readonly model: Model
-  ) {}
+  constructor(classType: ClassType, protected readonly model: Model) {
+    super(classType, model.modelName, '');
+  }
 
   exportKeyWord() {
     return 'export';
@@ -46,15 +46,18 @@ export class ModelPrinter
     return 'implements';
   }
 
-  modelName() {
+  override name(): string {
     return this.model.modelName;
   }
 
-  name(): string {
-    return this.model.modelName;
-  }
-
-  toClassName(classType: ClassType, className: string): string {
+  /**
+   * Convert modelName into the classType {@link ClassType} name
+   * For example, Product, IProduct, CreateProductDto, UpdateProductDto, IProductView, IUpdateProduct etc.
+   * @param classType
+   * @param className
+   * @returns
+   */
+  toClassTypeName(classType: ClassType): string {
     switch (classType) {
       case ClassType.ICreateDto:
       case ClassType.CreateDto:
@@ -62,22 +65,72 @@ export class ModelPrinter
       case ClassType.IUpdateDto:
       case ClassType.QueryDto:
       case ClassType.IQueryDto:
-        return classType.replace('Dto', className + 'Dto');
+        return classType.replace('Dto', this.modelName + 'Dto');
       case ClassType.Entity:
       case ClassType.IEntity:
-        return classType.replace('Entity', className);
+        return classType.replace('Entity', this.modelName);
       case ClassType.View:
       case ClassType.IView:
-        return classType.replace('View', className + 'View');
+        return classType.replace('View', this.modelName + 'View');
     }
   }
 
-  viewName(modelName: string, propertyName: string): string {
-    return toPropertyName(modelName, propertyName);
+  __propertyImports(classType: ClassType): string {
+    return (
+      this.__propertyPrinters(classType)
+        ?.map((e) => e.importing())
+        .join('\n') ?? ''
+    );
+  }
+  __relationImports(classType: ClassType): string {
+    return (
+      this.__relationPrinters(classType)
+        ?.map((e) => e.importing())
+        .join('\n') ?? ''
+    );
+  }
+
+  __modelImportsForCreateDto() {
+    return [
+      this.importFromPackage(this.baseClassesPackageName(), 'Dto', 'Property'),
+      this.importFromPackage(
+        this.baseInterfacesPackageName(),
+        this.toClassTypeName(ClassType.ICreateDto)
+      ),
+    ].join('\n');
+  }
+
+  __modelImports(): string {
+    switch (this.classType) {
+      case ClassType.CreateDto:
+        return this.__modelImportsForCreateDto();
+
+      case ClassType.UpdateDto:
+        return [
+          this.importFromPackage(
+            this.baseClassesPackageName(),
+            'Dto',
+            'PartialType'
+          ),
+          this.importFromSiblingFile(
+            this.toClassTypeName(ClassType.ICreateDto),
+            this.toClassTypeName(ClassType.CreateDto)
+          ),
+        ].join('\n');
+      case ClassType.Entity:
+      case ClassType.QueryDto:
+      case ClassType.IQueryDto:
+        return '';
+    }
+    return '';
   }
 
   importing(): string {
-    return '';
+    return [
+      this.__modelImports(),
+      this.__propertyImports(this.classType),
+      this.__relationImports(this.classType),
+    ].join('\n');
   }
 
   decorators(): string {
@@ -85,9 +138,9 @@ export class ModelPrinter
       case ClassType.CreateDto:
       case ClassType.UpdateDto:
       case ClassType.QueryDto:
-        return DecoratorNames.DTO;
+        return `@${DecoratorNames.DTO}()`;
       case ClassType.Entity:
-        return DecoratorNames.ENTITY;
+        return ` @${DecoratorNames.ENTITY}()`;
       default:
         return '';
     }
@@ -96,7 +149,7 @@ export class ModelPrinter
   implements(): string {
     switch (this.classType) {
       case ClassType.Entity:
-        return this.toClassName(ClassType.IEntity, this.modelName());
+        return this.toClassTypeName(ClassType.IEntity) + this.generics();
       case ClassType.IEntity:
         return CommonObjectTypes.IBaseEntity;
       case ClassType.IView:
@@ -104,7 +157,7 @@ export class ModelPrinter
       case ClassType.View:
         return CommonObjectTypes.BaseEntityView;
       case ClassType.IUpdateDto:
-        return `PartialType(Create${this.modelName()}Dto)`;
+        return this.toClassName(ClassType.ICreateDto);
       default:
         return '';
     }
@@ -120,7 +173,7 @@ export class ModelPrinter
       case ClassType.View:
         return CommonObjectTypes.BaseEntityView;
       case ClassType.IUpdateDto:
-        return `PartialType(Create${this.modelName()}Dto)`;
+        return `PartialType(Create${this.modelName}Dto)`;
 
       default:
         return '';
@@ -158,42 +211,116 @@ export class ModelPrinter
     return '';
   }
 
+  /**
+   * When the enity class implements its IEntity<T,V,A>
+   * This method print the actual value of <T, V, A>
+   * @returns
+   */
+  extendedClassGenerics() {
+    if (this.model.relations) {
+      return Object.values(this.model.relations)
+        .map((options) => {
+          return options.model.modelName;
+        })
+        .join(',');
+    }
+    return '';
+  }
+
   generics(): string {
     const g = this.__generics();
     return g && `<${g}>`;
   }
 
-  __properties(classType: ClassType): string {
-    if (!this.model.properties) return '';
-    return Object.entries(this.model.properties)
-      .map(([propertyName, options]) => {
-        return new PropertyPrinter(
-          classType,
-          this.modelName(),
-          propertyName,
-          options!
-        );
-      })
-      .map((e) => e.print())
-      .join('\n');
+  toClassTypeFileName(modelName: string) {
+    const classType = this.classType;
+    const fileName = this.toFileName(modelName);
+    switch (classType) {
+      case ClassType.CreateDto:
+      case ClassType.ICreateDto:
+        return `create-${fileName}.dto`;
+      case ClassType.UpdateDto:
+      case ClassType.IUpdateDto:
+        return `update-${fileName}.dto`;
+      case ClassType.QueryDto:
+      case ClassType.IQueryDto:
+        return `query-${fileName}.dto`;
+      case ClassType.Entity:
+      case ClassType.IEntity:
+        return `${fileName}`;
+      case ClassType.IView:
+      case ClassType.View:
+        return `${fileName}-view`;
+    }
   }
 
-  __relations(classType: ClassType): string {
-    if (!this.model.relations) return '';
+  /**
+   * Create list of RelationPrinters from relations
+   * @param classType
+   * @returns
+   */
+  __relationPrinters(classType: ClassType): RelationPrinter[] | undefined {
+    if (this.model.relations)
+      return Object.entries(this.model.relations).map(
+        ([propertyName, options]) => {
+          return new RelationPrinter(
+            classType,
+            this.modelName,
+            propertyName,
+            options.type,
+            options.required
+          );
+        }
+      );
 
-    return Object.entries(this.model.relations)
-      .map(([propertyName, options]) => {
-        options = options!;
-        return new RelationPrinter(
-          classType,
-          this.modelName(),
-          propertyName,
-          options.type,
-          options.required
-        );
-      })
-      .map((e) => e.print())
-      .join('\n');
+    return;
+  }
+
+  /**
+   * Create the list of PropertyPrinters form properties
+   * @param classType
+   * @returns
+   */
+  __propertyPrinters(classType: ClassType): PropertyPrinter[] | undefined {
+    if (this.model.properties)
+      return Object.entries(this.model.properties).map(
+        ([propertyName, options]) => {
+          return new PropertyPrinter(
+            classType,
+            this.modelName,
+            propertyName,
+            options!
+          );
+        }
+      );
+
+    return;
+  }
+
+  /**
+   * Print properties
+   * @param classType
+   * @returns
+   */
+  __properties(classType: ClassType): string {
+    return (
+      this.__propertyPrinters(classType)
+        ?.map((e) => e.print())
+        .join('\n') ?? ''
+    );
+  }
+
+  /**
+   * Print relations
+   * @param classType
+   * @returns
+   */
+  __relations(classType: ClassType): string {
+    return (
+      this.__relationPrinters(classType)
+        ?.map((e) => e.print())
+        .join('\n') ?? ''
+    );
   }
 
   printProperties() {
@@ -206,6 +333,7 @@ export class ModelPrinter
   decleration(content: string) {
     const sf = (value: string) => (value ? value + ' ' : '');
     return [
+      this.importing(),
       this.decorators(),
       this.exportKeyWord(),
       this.classDeclerationType(),

@@ -11,13 +11,13 @@ import {
   IRequried,
   IType,
 } from './__common';
-import { CommonPropertyPrinterImp } from './common';
+import { CommonPrinter } from './common';
 
 /**
  * Print relation property
  */
 export class RelationPrinter
-  extends CommonPropertyPrinterImp
+  extends CommonPrinter
   implements IPrint, IName, IRequried, IDecorate, IImport, IArray, IType
 {
   constructor(
@@ -86,32 +86,24 @@ export class RelationPrinter
     }
   }
 
-  baseClassesPackageName() {
-    return '@webpackages/core';
-  }
-
-  baseInterfacesPackageName() {
-    return '@webpackages/common';
-  }
-
   importing(): string {
     switch (this.classType) {
       case ClassType.CreateDto:
       case ClassType.UpdateDto:
-        return this.formatImportFromPackage(
+        return this.importFromPackage(
           this.baseClassesPackageName(),
           CommonObjectTypes.IDDto
         );
 
       case ClassType.ICreateDto:
       case ClassType.IUpdateDto:
-        return this.formatImportFromPackage(
+        return this.importFromPackage(
           this.baseInterfacesPackageName(),
           CommonObjectTypes.IID
         );
       case ClassType.Entity:
       case ClassType.View:
-        return this.formatImportFromSibling(
+        return this.importFromSiblingDir(
           this.toFileName(this.modelName),
           this.modelName
         );
