@@ -1,25 +1,52 @@
 import { PropertyOptions } from '../meta';
-import { names, stringify } from '../utils';
+import { stringify } from '../utils';
 import {
   ClassType,
+  IArray,
   IDecorate,
   IImport,
   IName,
+  IPrint,
   IRequried,
   IType,
 } from './__common';
 import { CommonPropertyPrinterImp } from './common';
 
-export class BasePropertyPrinter
+export class PropertyPrinter
   extends CommonPropertyPrinterImp
-  implements IType, IName, IRequried, IDecorate, IImport
+  implements IPrint, IType, IName, IRequried, IDecorate, IImport, IArray
 {
   constructor(
-    cname: string,
-    ctype: ClassType,
+    classType: ClassType,
+    modelName: string,
+    propertyName: string,
     protected readonly options: PropertyOptions
   ) {
-    super(cname, ctype, options);
+    super(classType, modelName, propertyName, options.required);
+  }
+
+  isArray(): string {
+    return this.options.isArray ? '[]' : '';
+  }
+
+  __type() {
+    switch (this.options.type) {
+      case 'boolean':
+      case 'number':
+      case 'string':
+        return this.options.type;
+      case 'date':
+        return 'Date';
+      case 'object':
+        return this.options.objectType ?? 'any';
+
+      default:
+        return '';
+    }
+  }
+  
+  type(): string {
+    return this.__type() + this.isArray();
   }
 
   /**
@@ -30,10 +57,25 @@ export class BasePropertyPrinter
   importing(): string {
     const objectType = this.options.objectType;
     const enumName = this.options.enums
-      ? names(this.propertyName).className
+      ? this.toClassName(this.propertyName)
       : undefined;
 
     return enumName ?? objectType ?? '';
+  }
+
+  propertyDecorator() {
+    return `@Property(${stringify(this.options)})`;
+  }
+
+  columnDecorator() {
+    return `@Column(${stringify({
+      type: this.options.type,
+      unique: this.options.unique,
+    })})`;
+  }
+
+  viewDecorator() {
+    return '@ViewColumn()';
   }
 
   decorators(): string {
@@ -41,14 +83,11 @@ export class BasePropertyPrinter
       case ClassType.CreateDto:
       case ClassType.UpdateDto:
       case ClassType.QueryDto:
-        return `@Property(${stringify(this.options)})`;
+        return this.propertyDecorator();
       case ClassType.Entity:
-        return `@Column(${stringify({
-          type: this.options.type,
-          unique: this.options.unique,
-        })})`;
+        return this.columnDecorator();
       case ClassType.View:
-        return '@ViewColumn()';
+        return this.viewDecorator();
 
       case ClassType.IEntity:
       case ClassType.ICreateDto:
@@ -61,23 +100,7 @@ export class BasePropertyPrinter
     }
   }
 
-  private __primitiveType() {
-    switch (this.options.type) {
-      case 'boolean':
-      case 'string':
-      case 'number':
-        return this.options.type;
-      case 'date':
-        return 'Date';
-      case 'object':
-        return this.options.objectType ?? 'any';
-      default:
-        return 'any';
-    }
-  }
-
-  type(): string {
-    const isArray = this.options.isArray ? '[]' : '';
-    return this.__primitiveType() + isArray;
+  print(): string {
+    return `${this.decorators()} ${this.name()}${this.isRequried()}: ${this.type()};`;
   }
 }

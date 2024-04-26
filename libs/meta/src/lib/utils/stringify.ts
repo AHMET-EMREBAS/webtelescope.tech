@@ -11,6 +11,7 @@ export function stringify(obj: Record<string, any> | string): string {
     return obj;
   } else if (typeof obj === 'object') {
     const code = Object.entries(obj)
+      .filter(([, value]) => value)
       .map(([key, value]) => {
         if (key === 'target' || key === 'objectType') {
           return `${key}: ${value}`;

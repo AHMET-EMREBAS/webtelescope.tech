@@ -54,6 +54,14 @@ type TBoolean = 'boolean';
 type TObject = 'object';
 type TDate = 'date';
 
+export enum PropertyTypes {
+  STRING = 'string',
+  NUMBER = 'number',
+  BOOLEAN = 'boolean',
+  OBJECT = 'object',
+  DATE = 'date',
+}
+
 export type PropertyType = TString | TNumber | TBoolean | TObject | TDate;
 
 export type PrimitiveType = string | number | boolean | Date;
@@ -177,7 +185,7 @@ export type __DateProperty = {
    * Find date if it is the week day
    */
   day: WeekDay;
-  
+
   /**
    * Find date if it is in the list of month days.
    */

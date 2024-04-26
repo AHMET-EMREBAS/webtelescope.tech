@@ -50,7 +50,20 @@ export interface IRequried {
   isRequried(): string;
 }
 
+export type DecoratorName =
+  | 'Column'
+  | 'Property'
+  | 'ViewColumn'
+  | 'Entity'
+  | 'Dto'
+  | 'One'
+  | 'Many'
+  | 'Owner';
+
 export interface IDecorate {
+  /**
+   * Print the decorator
+   */
   decorators(): string;
 }
 
@@ -84,4 +97,10 @@ export interface IToName {
    * @param name
    */
   toFileName(name: string): string;
+
+  /**
+   * Conver property name into class name
+   * @param name
+   */
+  toClassName(name: string): string;
 }
