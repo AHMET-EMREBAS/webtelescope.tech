@@ -4,18 +4,12 @@ import { ClassType } from '../common';
 /**
  * Implements the common decorator printer operation
  */
-export class BaseDecoratorPrinter<DecoratorOptions>
-  extends DecoratorPrinter
-  implements IPrint
-{
+export class BaseDecoratorPrinter extends DecoratorPrinter implements IPrint {
   constructor(
     protected readonly classType: ClassType,
     protected readonly decoratorName: string,
-    protected readonly decoratorPrinterOptions: DecoratorOptions
+    protected readonly decoratorOptionsPrinter: IPrint
   ) {
-    super({ name: decoratorName, options: '' });
-  }
-  print(): string {
-    return '';
+    super({ name: decoratorName, options: decoratorOptionsPrinter.print() });
   }
 }

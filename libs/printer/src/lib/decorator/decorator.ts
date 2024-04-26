@@ -1,4 +1,4 @@
-import { IPrint } from '../interfaces';
+import { IPrint } from '../common';
 
 export type DecoratorPrinterOptions = {
   name: string;
