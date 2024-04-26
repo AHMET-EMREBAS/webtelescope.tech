@@ -100,8 +100,16 @@ export class PropertyPrinter
         return '';
     }
   }
-
   print(): string {
-    return `${this.decorators()} ${this.name()}${this.isRequried()}: ${this.type()};`;
+    const spaceAfter = (value?: string) => (value ? value + ' ' : '');
+
+    return [
+      spaceAfter(this.decorators()),
+      this.name(),
+      this.isRequried(),
+      spaceAfter(':'),
+      this.type(),
+      ';',
+    ].join('');
   }
 }
