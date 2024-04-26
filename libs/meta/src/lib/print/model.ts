@@ -151,7 +151,7 @@ export class ModelPrinter
       case ClassType.IEntity:
         return Object.values(this.model.relations)
           .map((options) => {
-            return options.model.modelName;
+            return CommonObjectTypes.GENERIC_PREFIX + options.model.modelName;
           })
           .join(', ');
     }

@@ -18,6 +18,7 @@ export enum CommonObjectTypes {
   BaseEntity = 'BaseEntity',
   IBaseEntity = 'IBaseEntity',
   BaseEntityView = 'BaseEntityView',
+  GENERIC_PREFIX = 'T',
 }
 
 export enum ClassDeclerationType {

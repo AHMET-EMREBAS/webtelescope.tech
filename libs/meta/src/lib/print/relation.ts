@@ -44,9 +44,9 @@ export class RelationPrinter
         return CommonObjectTypes.IID + this.isArray();
 
       case ClassType.Entity:
-      case ClassType.IEntity:
         return this.modelName + this.isArray();
-
+      case ClassType.IEntity:
+        return CommonObjectTypes.GENERIC_PREFIX + this.modelName + this.isArray();
       default:
         return '';
     }

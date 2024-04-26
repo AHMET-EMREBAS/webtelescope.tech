@@ -9,8 +9,8 @@ describe('Relation Printer', () => {
     ${'@Many(Category) category?: Category[];'}                                            | ${ClassType.Entity}     | ${RelationType.Many}  | ${false}
     ${'@Owner(Category) category!: Category;'}                                             | ${ClassType.Entity}     | ${RelationType.Owner} | ${true}
     ${'category: Category;'}                                                               | ${ClassType.IEntity}    | ${RelationType.One}   | ${true}
-    ${'category: Category[];'}                                                             | ${ClassType.IEntity}    | ${RelationType.Many}  | ${true}
-    ${'category: Category;'}                                                               | ${ClassType.IEntity}    | ${RelationType.Owner} | ${true}
+    ${'category: TCategory[];'}                                                            | ${ClassType.IEntity}    | ${RelationType.Many}  | ${true}
+    ${'category: TCategory;'}                                                              | ${ClassType.IEntity}    | ${RelationType.Owner} | ${true}
     ${"@Property({ type:'object', objectType:IDDto, required:true }) category!: IDDto;"}   | ${ClassType.CreateDto}  | ${RelationType.One}   | ${true}
     ${"@Property({ type:'object', objectType:IDDto, required:true }) category!: IDDto[];"} | ${ClassType.CreateDto}  | ${RelationType.Many}  | ${true}
     ${"@Property({ type:'object', objectType:IDDto, required:true }) category!: IDDto;"}   | ${ClassType.CreateDto}  | ${RelationType.Owner} | ${true}
