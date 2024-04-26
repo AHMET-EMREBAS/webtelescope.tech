@@ -16,7 +16,8 @@ export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
   ) {}
 
   /**
-   * Utility converts list of properties a single property name
+   * Convert list of string into property name
+   * @example toPropertyName(some, some , other) // Output: someSomeOther
    * @param args
    * @returns
    */
@@ -25,7 +26,8 @@ export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
   }
 
   /**
-   * Utility function
+   * Convert string into file name
+   * @example  Some -> some, SomeFile -> some-file
    * @param name
    * @returns
    */
@@ -33,7 +35,8 @@ export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
     return names(name).fileName;
   }
   /**
-   * Utility function
+   * Convert string into class name
+   * @example  someName -> SomeName, product -> Product
    * @param name
    * @returns
    */
@@ -41,19 +44,41 @@ export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
     return names(name).className;
   }
 
-  importFromPackage(from: string, ...items: string[]): string {
-    return `import { ${items} } from '${from}';`;
+  /**
+   * Import items from the given package
+   * You do not have to hard code the `packageName`
+   * There are 2 methods  {@link baseClassesPackageName} and {@link baseInterfacesPackageName}
+   * You can override these two methods to provide your pacakge names.
+   * @param packageName
+   * @param items
+   * @returns
+   */
+  importFromPackage(packageName: string, ...items: string[]): string {
+    return `import { ${items} } from '${packageName}';`;
   }
 
-  importFromSiblingDir(from: string, ...items: string[]): string {
-    return `import { ${items} } from '../${from}';`;
+  /**
+   * Import items from the provided sibling directory (../model-name). You just need to provide the model names.
+   * @param from
+   * @param modelNames
+   * @returns
+   */
+  importFromSiblingDir(from: string, ...modelNames: string[]): string {
+    return `import { ${modelNames} } from '../${from}';`;
   }
 
+  /**
+   * Import items from the provided sibling file (./model-name). You ust need to provide the model name.
+   * @param from
+   * @param items
+   * @returns
+   */
   importFromSiblingFile(from: string, ...items: string[]): string {
     return `import { ${items} } from '../${from}';`;
   }
 
   /**
+   * Base class files' location
    * @returns '@webpackages/core';
    */
   baseClassesPackageName() {
@@ -61,6 +86,7 @@ export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
   }
 
   /**
+   * Base interface files' location.
    * @returns '@webpackages/common';
    */
   baseInterfacesPackageName() {
@@ -68,7 +94,8 @@ export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
   }
 
   /**
-   * Property name
+   * Print the name of the property based on the provided classType in the printer
+   * @example name() returns  `propertyName` in `entity class`, `classNamePropertyName` in `view class`
    * @returns
    */
   name(): string {
@@ -82,13 +109,19 @@ export class CommonPrinter implements IRequried, IName, IFormatImport, IToName {
     return this.propertyName;
   }
 
+  /**
+   * Convert property name of the model into view name by prefixing the property name with model name.
+   * @param modelName
+   * @param propertyName
+   * @returns
+   */
   viewName(modelName: string, propertyName: string): string {
     return toPropertyName(modelName, propertyName);
   }
 
   /**
    * Mark the property required based on the provided class-type.
-   * For example, in interfaces required mark is not allowed.
+   * @example  in interfaces required mark is not allowed.
    * @returns
    */
   isRequried(): string {

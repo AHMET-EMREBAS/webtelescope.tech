@@ -90,20 +90,20 @@ export class ModelPrinter
     );
   }
 
-  __modelImportsForCreateDto() {
-    return [
-      this.importFromPackage(this.baseClassesPackageName(), 'Dto', 'Property'),
-      this.importFromPackage(
-        this.baseInterfacesPackageName(),
-        this.toClassTypeName(ClassType.ICreateDto)
-      ),
-    ].join('\n');
-  }
-
   __modelImports(): string {
     switch (this.classType) {
       case ClassType.CreateDto:
-        return this.__modelImportsForCreateDto();
+        return [
+          this.importFromPackage(
+            this.baseClassesPackageName(),
+            'Dto',
+            'Property'
+          ),
+          this.importFromPackage(
+            this.baseInterfacesPackageName(),
+            this.toClassTypeName(ClassType.ICreateDto)
+          ),
+        ].join('\n');
 
       case ClassType.UpdateDto:
         return [
