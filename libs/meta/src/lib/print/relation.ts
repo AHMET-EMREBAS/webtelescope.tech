@@ -33,11 +33,12 @@ export class RelationPrinter
   }
 
   decorators(): string {
-    const { target, type } = this.options;
+    const { model, type } = this.options;
+    const { modelName } = model;
 
     switch (this.classType) {
       case ClassType.Entity:
-        return `@${type}(${target})`;
+        return `@${type}(${modelName})`;
 
       case ClassType.CreateDto:
       case ClassType.UpdateDto:
@@ -60,6 +61,7 @@ export class RelationPrinter
   }
 
   importing(): string {
+    const { modelName: target } = this.options.model;
     switch (this.classType) {
       case ClassType.CreateDto:
       case ClassType.UpdateDto:
@@ -70,13 +72,11 @@ export class RelationPrinter
       case ClassType.IQueryDto:
       case ClassType.IView:
     }
-    return `import { ${this.options.target} } from '../${this.toPropertyName(
-      this.options.target
-    )}'`;
+    return `import { ${target} } from '../${this.toPropertyName(target)}'`;
   }
 
   type(): string {
-    const { target } = this.options;
+    const { modelName: target } = this.options.model;
 
     switch (this.classType) {
       case ClassType.CreateDto:

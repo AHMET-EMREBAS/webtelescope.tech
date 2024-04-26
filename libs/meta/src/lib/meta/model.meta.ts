@@ -10,6 +10,9 @@ export type Model<
   RelationNames extends string = string,
   StringFormat extends string = string
 > = {
+  /**
+   * Name of the model
+   */
   modelName: M;
   /**
    * Record of model properties
@@ -19,10 +22,5 @@ export type Model<
   /**
    * Record of model relations
    */
-  relations?: Partial<
-    Record<
-      RelationNames,
-      RelationOptions<M, Model<M, PropertyNames, RelationNames, StringFormat>>
-    >
-  >;
+  relations?: Partial<Record<RelationNames, RelationOptions>>;
 };
