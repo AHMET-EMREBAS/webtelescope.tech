@@ -96,6 +96,9 @@ export interface IDecorate {
 }
 
 export interface IImport {
+  /**
+   * Print the required imports for properties and classes.
+   */
   importing(): string;
 }
 

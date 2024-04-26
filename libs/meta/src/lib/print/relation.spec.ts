@@ -8,7 +8,7 @@ describe('Relation Printer', () => {
     ${'@One(Category) category!: Category;'}                                               | ${ClassType.Entity}     | ${RelationType.One}   | ${true}
     ${'@Many(Category) category?: Category[];'}                                            | ${ClassType.Entity}     | ${RelationType.Many}  | ${false}
     ${'@Owner(Category) category!: Category;'}                                             | ${ClassType.Entity}     | ${RelationType.Owner} | ${true}
-    ${'category: Category;'}                                                               | ${ClassType.IEntity}    | ${RelationType.One}   | ${true}
+    ${'category: TCategory;'}                                                              | ${ClassType.IEntity}    | ${RelationType.One}   | ${true}
     ${'category: TCategory[];'}                                                            | ${ClassType.IEntity}    | ${RelationType.Many}  | ${true}
     ${'category: TCategory;'}                                                              | ${ClassType.IEntity}    | ${RelationType.Owner} | ${true}
     ${"@Property({ type:'object', objectType:IDDto, required:true }) category!: IDDto;"}   | ${ClassType.CreateDto}  | ${RelationType.One}   | ${true}
@@ -38,4 +38,19 @@ describe('Relation Printer', () => {
       expect(clearSpace(result)).toBe(expected);
     }
   );
+
+  it.each`
+    expected                                    | classType
+    ${"import { Category } from '../category'"} | ${ClassType.Entity}
+  `('should print $expected from  $classType', ({ expected, classType }) => {
+    const result = new RelationPrinter(
+      classType,
+      'Category',
+      'category',
+      RelationType.Many,
+      true
+    ).importing();
+
+    expect(clearSpace(result)).toBe(expected);
+  });
 });
