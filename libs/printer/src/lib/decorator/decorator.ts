@@ -9,10 +9,10 @@ export type DecoratorPrinterOptions = {
  * Print decorators/annotations
  */
 export class DecoratorPrinter implements IPrint {
-  constructor(protected decoratorOptions: DecoratorPrinterOptions) {}
+  constructor(protected decoratorPrinterOptions: DecoratorPrinterOptions) {}
 
   protected name() {
-    return this.decoratorOptions.name;
+    return this.decoratorPrinterOptions.name;
   }
 
   /**
@@ -29,7 +29,7 @@ export class DecoratorPrinter implements IPrint {
     return ')';
   }
   protected options() {
-    return this.decoratorOptions.options;
+    return this.decoratorPrinterOptions.options;
   }
 
   protected signiture() {

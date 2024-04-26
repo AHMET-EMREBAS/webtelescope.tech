@@ -7,7 +7,7 @@ export type PropertyPrinterOptions = {
 };
 
 export abstract class PropertyPrinter implements IPrint {
-  constructor(protected readonly options: PropertyPrinterOptions) {}
+  constructor(protected readonly propertyPrinterOptions: PropertyPrinterOptions) {}
 
   /**
    * Delimeter between property name and type
@@ -23,7 +23,7 @@ export abstract class PropertyPrinter implements IPrint {
    * @returns
    */
   protected isRequired(): '!' | '?' | '' {
-    return this.options.required ? '!' : '?';
+    return this.propertyPrinterOptions.required ? '!' : '?';
   }
 
   /**
@@ -31,7 +31,7 @@ export abstract class PropertyPrinter implements IPrint {
    * @returns
    */
   name() {
-    return this.options.name;
+    return this.propertyPrinterOptions.name;
   }
 
   /**
@@ -39,7 +39,7 @@ export abstract class PropertyPrinter implements IPrint {
    * @returns
    */
   type() {
-    return this.options.type;
+    return this.propertyPrinterOptions.type;
   }
 
   /**
@@ -72,6 +72,6 @@ export class ClassPropertyPrinter extends PropertyPrinter {}
  */
 export class InterfacePropertyPrinter extends PropertyPrinter {
   protected override isRequired() {
-    return this.options.required ? '' : '?';
+    return this.propertyPrinterOptions.required ? '' : '?';
   }
 }

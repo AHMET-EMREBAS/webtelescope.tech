@@ -11,7 +11,7 @@ export type ClsasPrinterOptions = {
  * Print class class defination
  */
 export class ClassPrinter implements IPrint {
-  constructor(protected readonly options: ClsasPrinterOptions) {}
+  constructor(protected readonly clsasPrinterOptions: ClsasPrinterOptions) {}
 
   /**
    * @returns `export` by default
@@ -24,14 +24,14 @@ export class ClassPrinter implements IPrint {
    * @returns class name
    */
   protected name() {
-    return this.options.name;
+    return this.clsasPrinterOptions.name;
   }
 
   /**
    * @returns class type class, interface, struct.
    */
   protected type() {
-    return this.options.type;
+    return this.clsasPrinterOptions.type;
   }
 
   /**
@@ -51,12 +51,12 @@ export class ClassPrinter implements IPrint {
   }
 
   protected content() {
-    return this.options.content ?? '';
+    return this.clsasPrinterOptions.content ?? '';
   }
 
   print(): string {
     return [
-      this.options.exports ? this.exportDef() : '',
+      this.clsasPrinterOptions.exports ? this.exportDef() : '',
       this.type(),
       this.name(),
       this.contentPrefix(),

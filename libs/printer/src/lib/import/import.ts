@@ -13,7 +13,7 @@ export type ImportPrinterOptions = {
 };
 
 export class ImportPrinter implements IPrint {
-  constructor(protected readonly options: ImportPrinterOptions) {}
+  constructor(protected readonly importPrinterOptions: ImportPrinterOptions) {}
 
   /**
    * Import keyword
@@ -46,11 +46,11 @@ export class ImportPrinter implements IPrint {
    * @returns
    */
   protected content(): string {
-    return this.options.items.join(', ');
+    return this.importPrinterOptions.items.join(', ');
   }
 
   protected source(): string {
-    return `'${this.options.source}'`;
+    return `'${this.importPrinterOptions.source}'`;
   }
 
   protected endOfLine() {
