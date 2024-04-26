@@ -1,14 +1,10 @@
 import { IPrint } from '../__printer';
 import { stringify } from '../utils';
 
-export class BaseDecoratorOptionsPrinter<Options extends object>
-  implements IPrint
-{
+export class DefaultDecoratorOptionsPrinter<Options> implements IPrint {
   constructor(protected readonly options?: Options) {}
   print(): string {
-    if (this.options) {
-      return stringify(this.options);
-    }
-    return '';
+    if (this.options == undefined) return '';
+    return stringify(this.options);
   }
 }

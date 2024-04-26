@@ -1,12 +1,4 @@
-import { ClassType } from './class-type';
-
-/**
- * Function that returns required or optional mark based on the class type {@link ClassType}
- */
-export type IsRequiredHandler = (
-  classType: ClassType,
-  required?: boolean
-) => '!' | '?' | '';
+import { ClassType, PrintRequiredMarFn } from '../common';
 
 /**
  * Mark the property by "!" | "?" | "" based on the required contraint and class-type {@link ClassType}.
@@ -14,7 +6,7 @@ export type IsRequiredHandler = (
  * @param required boolean
  * @returns
  */
-export const DefaultIsRequiredHandler: IsRequiredHandler = (
+export const IsRequiredProperty: PrintRequiredMarFn = (
   classType: ClassType,
   required?: boolean
 ) => {

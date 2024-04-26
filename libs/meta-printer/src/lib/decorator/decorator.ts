@@ -1,13 +1,17 @@
-import { IPrint, DecoratorPrinter } from '../__printer';
+import { IPrint, DecoratorPrinter as __DecoratorPrinter } from '../__printer';
+import { DecoratorName } from '../common';
 
 /**
  * Implements the common decorator printer operation
  */
-export class BaseDecoratorPrinter extends DecoratorPrinter implements IPrint {
+export class DecoratorPrinter extends __DecoratorPrinter {
   constructor(
-    protected readonly name: string,
-    protected readonly optionsPrinter: IPrint
+    protected readonly decoratorName: DecoratorName,
+    protected readonly decoratorOptionsPrinter?: IPrint
   ) {
-    super({ name: name, options: optionsPrinter.print() });
+    super({
+      name: decoratorName,
+      options: decoratorOptionsPrinter?.print() ?? '',
+    });
   }
 }
