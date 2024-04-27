@@ -20,10 +20,7 @@ export abstract class PropertyPrinter implements IPrint {
   protected __suffix() {
     return this.__propertyPrinterOptions.nameSuffix ?? '';
   }
-  protected __doc() {
-    const p = this.__propertyPrinterOptions.doc?.print();
-    return p ? p + '\n' : '';
-  }
+
   protected __typePrefix() {
     return this.__propertyPrinterOptions.typePrefix ?? '';
   }
@@ -74,7 +71,6 @@ export abstract class PropertyPrinter implements IPrint {
 
   print(): string {
     return [
-      this.__doc(),
       this.__prefix(),
       this.__name(),
       this.__suffix(),

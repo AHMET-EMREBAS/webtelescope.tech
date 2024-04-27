@@ -1,10 +1,11 @@
-import { NotExtended } from './not-extended';
 import { IPrint } from './print';
+
+export type NotExtended = { __notExtended?: 'Type is not extended' };
 
 /**
  * For property name prefix and suffix configuration
  */
-export type NamePrefixOptions = {
+export type NamePefixOptions = {
   /**
    * Property name prefix  prefixPropertyName
    */
@@ -31,9 +32,6 @@ export type TypePrefixOptions = {
   typeSuffix?: string;
 };
 
-/**
- * For class level or property level documentation configuration
- */
 export type DocOptions = {
   /**
    * Property documentation
@@ -45,11 +43,6 @@ export type DocOptions = {
    * By default documentation is written into property documentation.
    */
   isClassDoc?: boolean;
-
-  /**
-   * Multiple doc options to support both class level and property level documentation.
-   */
-  docs?: DocOptions[];
 };
 
 export type PropertyPrinterBasicOptions = {
@@ -87,12 +80,22 @@ export type ImportOptions = {
 
 export type PropertyPrinterOptions<E = NotExtended> =
   PropertyPrinterBasicOptions &
-    NamePrefixOptions &
+    NamePefixOptions &
     TypePrefixOptions &
-    ImportOptions &
-    DocOptions &
     DelimeterOptions &
     E;
+
+export type PackageNamePrefixOptions = {
+  /**
+   * Add prefix to the package name
+   */
+  packageNamePrefix?: string;
+
+  /**
+   * Add suffix to the package name
+   */
+  packagenameSuffix?: string;
+};
 
 export type ImportBasicOptions = {
   /**
@@ -106,12 +109,17 @@ export type ImportBasicOptions = {
   items: string[];
 };
 
-export type PackageNamePrefixOptions = {
-  packageNamePrefix?: string;
-  packagenameSuffix?: string;
+export type ImportPrinterOptions<E = NotExtended> = ImportBasicOptions &
+  NamePefixOptions &
+  PackageNamePrefixOptions &
+  E;
+
+export type DecoratorBasicOptions = {
+  name: string;
+  options: string;
 };
 
-export type ImportPrinterOptions<E = NotExtended> = ImportBasicOptions &
-  NamePrefixOptions &
-  PackageNamePrefixOptions &
+export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
+  DocOptions &
+  DecoratorBasicOptions &
   E;

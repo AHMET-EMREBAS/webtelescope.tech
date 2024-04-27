@@ -1,9 +1,6 @@
-import { IPrint } from '../common';
+import { IPrint ,DecoratorPrinterOptions} from '../common';
 
-export type DecoratorPrinterOptions = {
-  name: string;
-  options: string;
-};
+
 
 /**
  * Print decorators/annotations
