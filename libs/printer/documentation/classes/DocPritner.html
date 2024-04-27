@@ -261,17 +261,19 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="10"
-                                    class="link-to-prism">src/lib/doc/doc.ts:10</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">src/lib/doc/doc.ts:16</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Documentation content</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
                 </td>
@@ -300,8 +302,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/lib/doc/doc.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/lib/doc/doc.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -339,14 +341,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="6"
-                                    class="link-to-prism">src/lib/doc/doc.ts:6</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="9"
+                                    class="link-to-prism">src/lib/doc/doc.ts:9</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Check the document/comment is inline or multiline</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
@@ -378,8 +382,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/lib/doc/doc.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="24"
+                                    class="link-to-prism">src/lib/doc/doc.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -415,8 +419,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/lib/doc/doc.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/lib/doc/doc.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -447,19 +451,25 @@
 export class DocPritner implements IPrint {
   constructor(protected readonly __docPrinterOptions: DocPrinterOptions) {}
 
-  protected __isInline() {
+  /**
+   * Check the document/comment is inline or multiline
+   */
+  protected __isInline(): boolean {
     return this.__docPrinterOptions.inline &#x3D;&#x3D; true;
   }
 
-  protected __content() {
+  /**
+   * Documentation content
+   */
+  protected __content(): string {
     return this.__docPrinterOptions.content;
   }
 
-  protected __inlineDoc() {
+  protected __inlineDoc(): string {
     return &#x60;// ${this.__content().split(&#x27;\n&#x27;).join(&#x27; &#x27;)}&#x60;;
   }
 
-  protected __multiLineDoc() {
+  protected __multiLineDoc(): string {
     const content &#x3D; this.__content()
       .split(&#x27;\n&#x27;)
       .map((e) &#x3D;&gt; &#x60; * ${e}&#x60;)
