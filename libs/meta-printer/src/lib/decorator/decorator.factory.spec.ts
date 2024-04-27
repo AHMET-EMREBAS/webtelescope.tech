@@ -8,7 +8,7 @@ describe('DecoratorPrinterFactory', () => {
   it.each`
     expected                           | actual
     ${'@Entity()'}                     | ${Factory.ENTITY().print()}
-    ${"@Column({ type: 'string' })"}    | ${Factory.COLUMN({ type: 'string' }).print()}
+    ${"@Column({ type: 'string' })"}   | ${Factory.COLUMN({ type: 'string' }).print()}
     ${"@Property({ type: 'string' })"} | ${Factory.PROPERTY({ type: 'string' }).print()}
     ${'@ViewColumn()'}                 | ${Factory.VIEW_COLUMN().print()}
     ${'@Dto()'}                        | ${Factory.DTO().print()}

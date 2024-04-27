@@ -17,6 +17,7 @@ export class PropertyPrinter extends __PropertyPrinter implements IPrint {
   constructor(protected readonly options: PropertyPrinterOptions) {
     super(options);
   }
+
   protected override __isRequired(): '' | '!' | '?' {
     return this.options.required ? '' : '?';
   }
@@ -41,16 +42,6 @@ export class InterfacePropertyPrinter extends PropertyPrinter {
 }
 
 export class ViewEntityPropertyPrinter extends PropertyPrinter {
-  constructor(options: PropertyPrinterOptions) {
-    super({
-      ...options,
-      decoratorsPrinter: {
-        print() {
-          return '';
-        },
-      },
-    });
-  }
   protected override __isRequired(): '' | '!' | '?' {
     return '!';
   }

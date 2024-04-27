@@ -23,14 +23,10 @@ import { IPrint } from '../__printer';
 }
  */
 
-
-
-
 export class ViewEntityDecoratorOptionsPrinter implements IPrint {
-  private readonly mainAlias = 'main';
   constructor(protected readonly model: Model) {}
 
-  protected select(
+  protected __select(
     entityAlias: string,
     propertyName: string,
     propertyAlias: string
@@ -38,12 +34,26 @@ export class ViewEntityDecoratorOptionsPrinter implements IPrint {
     return `select('${entityAlias}.${propertyName}','${propertyAlias}')`;
   }
 
-  protected addSelect(
+  protected __addSelect(
     entityAlias: string,
     propertyName: string,
     propertyAlias: string
   ) {
     return `addSelect('${entityAlias}.${propertyName}','${propertyAlias}')`;
+  }
+
+  /**
+   *
+   * @param from ViewClassName
+   * @param alias
+   * @returns
+   */
+  protected __from(from: string, alias: string) {
+    return `from(${from} ,'${alias}')`;
+  }
+
+  protected __leftJoin(from: string, alias: string) {
+    return `leftJoin(${from} ,'${alias}', '')`;
   }
 
   print(): string {
@@ -52,7 +62,10 @@ export class ViewEntityDecoratorOptionsPrinter implements IPrint {
         return ds
           .createQueryBuilder()
           .select('main.id', 'id')
-          .groupBy('main.id')
+          .addSelect('main.username', 'username')
+          .from($)
+          .groupBy('main.id');
+      },
     }`;
   }
 }

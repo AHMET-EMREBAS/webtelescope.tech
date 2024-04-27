@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IPrint } from '../__printer';
-import { ClassType } from './class-type';
 
-export interface IPrinterPickerFactory<R extends IPrint = IPrint> {
-  PickPrinter(classType: ClassType): R;
-  Create(...args: any[]): R;
+export interface IPrinterPickerFactory<R> {
   Entity(...args: any[]): R;
   Update(...args: any[]): R;
   IEntity(...args: any[]): R;
