@@ -42,7 +42,14 @@ export class InterfacePropertyPrinter extends PropertyPrinter {
 
 export class ViewEntityPropertyPrinter extends PropertyPrinter {
   constructor(options: PropertyPrinterOptions) {
-    super(options);
+    super({
+      ...options,
+      decoratorsPrinter: {
+        print() {
+          return '';
+        },
+      },
+    });
   }
   protected override __isRequired(): '' | '!' | '?' {
     return '!';
@@ -56,7 +63,7 @@ export class ViewEntityPropertyPrinter extends PropertyPrinter {
   }
 
   protected override __name(): string {
-    return names(this.__modelName() + names(super.__name()).className)
+    return names(this.__modelName() + names(this.__name()).className)
       .propertyName;
   }
 }
@@ -67,18 +74,27 @@ export class QueryPropertyPrinter extends ViewEntityPropertyPrinter {
   }
 }
 
+/**
+ * All properties are optional
+ */
 export class OptionalPropertyPrinter extends PropertyPrinter {
   protected override __isRequired(): '' | '!' | '?' {
     return '?';
   }
 }
 
+/**
+ * All properties are required
+ */
 export class RequiredClassPropertyPrinter extends PropertyPrinter {
   protected override __isRequired(): '' | '!' | '?' {
     return '!';
   }
 }
 
+/**
+ * All properties are required
+ */
 export class RequiredInterfacePropertyPrinter extends PropertyPrinter {
   protected override __isRequired(): '' | '!' | '?' {
     return '!';

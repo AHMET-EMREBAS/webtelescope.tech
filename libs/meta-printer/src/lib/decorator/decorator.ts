@@ -7,11 +7,11 @@ import { DecoratorName } from '../common';
 export class DecoratorPrinter extends __DecoratorPrinter {
   constructor(
     protected readonly decoratorName: DecoratorName,
-    protected readonly decoratorOptionsPrinter?: IPrint
+    protected readonly optionsPrinter?: IPrint
   ) {
     super({
       name: decoratorName,
-      options: decoratorOptionsPrinter?.print() ?? '',
+      options: optionsPrinter?.print() ?? '',
     });
   }
 }

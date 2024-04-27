@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Stringify as code
  * @param obj
@@ -15,7 +16,9 @@ export function stringify(obj: Record<string, any> | string): string {
       })
       .join('\n');
 
-    return `{ ${code} }`;
+    const wrap = (__content: string) => `{ ${__content} }`;
+
+    return wrap(code.replace(/,$/, ''));
   }
   return '';
 }

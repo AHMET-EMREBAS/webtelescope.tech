@@ -1,6 +1,6 @@
 import { ClassType, INameFactory } from '../common';
 
-export class ClassFileNameFactory implements INameFactory {
+export class ClassNameFactory implements INameFactory {
   readonly Entity = ClassType.Entity.replace('#', this.className);
   readonly View = ClassType.View.replace('#', this.className);
   readonly Create = ClassType.Create.replace('#', this.className);

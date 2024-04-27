@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IPrint } from '../__printer';
 import { ClassType } from './class-type';
 
-export interface IPrinterPickerFactory<T> {
-  PickPrinter(classType: ClassType): T;
-  Create(modelName?: string): T;
-  Entity(modelName?: string): T;
-  Update(modelName?: string): T;
-  IEntity(modelName?: string): T;
-  ICreate(modelName?: string): T;
-  IUpdate(modelName?: string): T;
-  Query(modelName?: string): T;
-  IQuery(modelName?: string): T;
-  IView(modelName?: string): T;
-  View(modelName?: string): T;
+export interface IPrinterPickerFactory<R extends IPrint = IPrint> {
+  PickPrinter(classType: ClassType): R;
+  Create(...args: any[]): R;
+  Entity(...args: any[]): R;
+  Update(...args: any[]): R;
+  IEntity(...args: any[]): R;
+  ICreate(...args: any[]): R;
+  IUpdate(...args: any[]): R;
+  Query(...args: any[]): R;
+  IQuery(...args: any[]): R;
+  IView(...args: any[]): R;
+  View(...args: any[]): R;
 }
 
 export interface INameFactory {

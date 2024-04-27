@@ -1,95 +1,72 @@
+import { ColumnOptions, Model, PropertyOptions } from '../__meta';
 import { IPrint } from '../__printer';
 import { DecoratorName } from '../common';
 import { DecoratorPrinter } from './decorator';
+import { DecoratorOptionsPrinterFactory } from './decorator-options.factory';
 
-/**
- * Factory builder class for {@link DecoratorPrinter}
- */
 export class DecoratorPrinterFactory {
-  private constructor() {}
+  constructor(
+    protected readonly optionsFactory: DecoratorOptionsPrinterFactory
+  ) {}
 
-  protected static create(name: DecoratorName, optionsPrinter?: IPrint) {
-    return new DecoratorPrinter(name, optionsPrinter);
+  protected CREATE(decoratorName: DecoratorName, optionsPrinter: IPrint) {
+    return new DecoratorPrinter(decoratorName, optionsPrinter);
   }
 
-  /**
-   * ENTITY decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static ENTITY(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.ENTITY, optionsPrinter);
+  ENTITY() {
+    return this.CREATE(DecoratorName.ENTITY, this.optionsFactory.ENTITY());
   }
 
-  /**
-   * VIEW_ENTITY decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static VIEW_ENTITY(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.VIEW_ENTITY, optionsPrinter);
+  VIEW_ENTITY(model: Model) {
+    return this.CREATE(
+      DecoratorName.VIEW_ENTITY,
+      this.optionsFactory.VIEW_ENTITY(model)
+    );
   }
 
-  /**
-   * COLUMN decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static COLUMN(optionsPrinter: IPrint) {
-    return this.create(DecoratorName.COLUMN, optionsPrinter);
+  COLUMN(options: ColumnOptions) {
+    return this.CREATE(
+      DecoratorName.COLUMN,
+      this.optionsFactory.COLUMN(options)
+    );
   }
 
-  /**
-   * PROPERTY decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static PROPERTY(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.PROPERTY, optionsPrinter);
+  PROPERTY(options: PropertyOptions) {
+    return this.CREATE(
+      DecoratorName.PROPERTY,
+      this.optionsFactory.PROPERTY(options)
+    );
   }
 
-  /**
-   * VIEW_COLUMN decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static VIEW_COLUMN(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.VIEW_COLUMN, optionsPrinter);
+  VIEW_COLUMN() {
+    return this.CREATE(
+      DecoratorName.VIEW_COLUMN,
+      this.optionsFactory.VIEW_COLUMN()
+    );
   }
 
-  /**
-   * DTO decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static DTO(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.DTO, optionsPrinter);
+  DTO() {
+    return this.CREATE(DecoratorName.DTO, this.optionsFactory.DTO());
   }
 
-  /**
-   * MANY (entity relation) decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static MANY(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.MANY, optionsPrinter);
+  MANY(relationName: string) {
+    return this.CREATE(
+      DecoratorName.MANY,
+      this.optionsFactory.MANY(relationName)
+    );
   }
 
-  /**
-   * ONE (entity relation) decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static ONE(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.ONE, optionsPrinter);
+  ONE(relationName: string) {
+    return this.CREATE(
+      DecoratorName.ONE,
+      this.optionsFactory.ONE(relationName)
+    );
   }
 
-  /**
-   * OWNER (entity relation) decorator printer
-   * @param optionsPrinter {@link IPrint}
-   * @returns printer {@link DecoratorPrinterFactory}
-   */
-  static OWNER(optionsPrinter?: IPrint) {
-    return this.create(DecoratorName.OWNER, optionsPrinter);
+  OWNER(relationName: string) {
+    return this.CREATE(
+      DecoratorName.OWNER,
+      this.optionsFactory.OWNER(relationName)
+    );
   }
 }
