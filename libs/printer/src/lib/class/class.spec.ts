@@ -55,4 +55,39 @@ describe('ClassPrinter', () => {
       expect(result).toBe(expected);
     }
   );
+
+  describe('Doc', () => {
+    it('should printn doc', () => {
+      const content = `
+      /**
+       * @description Importing packages, classes, interfaces
+       * @returns string
+       */
+      protected __importings(): string {
+        return this.__options.importings?.print() ?? '';
+      }
+
+      /**
+       * @description Class decorators
+       * @returns string
+       */
+      protected __decorators(): string {
+        return this.__options.decorating?.print() ?? '';
+      } 
+      `;
+
+      const lines = content.split('\n');
+
+      const descriptions = [];
+      for (const line of lines) {
+        const matches = line.matchAll(/((@description)|(@return)).{0,}/g);
+
+        for (const m of matches) {
+          descriptions.push(m[0]);
+        }
+      }
+
+      console.log(descriptions);
+    });
+  });
 });
