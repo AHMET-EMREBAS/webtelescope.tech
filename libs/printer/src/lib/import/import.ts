@@ -1,50 +1,61 @@
 import { IPrint, ImportPrinterOptions } from '../common';
 
 export class ImportPrinter implements IPrint {
-  constructor(protected readonly __importPrinterOptions: ImportPrinterOptions) {}
+  constructor(
+    protected readonly __importPrinterOptions: ImportPrinterOptions
+  ) {}
 
   /**
-   * Import keyword
-   * @returns `import`
+   * Import keyword. By default, returns 'import'.
    */
-  protected __importKeyWord() {
+  protected __importKeyWord(): string {
     return 'import';
   }
-
-  protected __fromKeyWord() {
+  /**
+   * From keyword. By default, returns 'from'.
+   */
+  protected __fromKeyWord(): string {
     return 'from ';
   }
 
   /**
-   * @returns `{ ` by default
+   * Import content prefix. By default, returns '{'
    */
   protected __contentPrefix(): string {
     return ' { ';
   }
 
   /**
-   * @returns ` }` by default
+   * Import content suffix. By default, returns '}'
    */
   protected __contentSuffix(): string {
     return ' } ';
   }
 
   /**
-   * Items to be imported
-   * @returns
+   * Print the list of items to be imported as a coma seperated string.
    */
   protected __content(): string {
     return this.__importPrinterOptions.items.join(', ');
   }
 
+  /**
+   * Source pacakge or directory name.
+   */
   protected __source(): string {
     return `'${this.__importPrinterOptions.source}'`;
   }
 
-  protected __endOfLine() {
+  /**
+   * End of the import line. By default, returns ';'.
+   */
+  protected __endOfLine(): string {
     return ';';
   }
 
+  /**
+   * Print the import statement.
+   */
   print(): string {
     return [
       this.__importKeyWord(),

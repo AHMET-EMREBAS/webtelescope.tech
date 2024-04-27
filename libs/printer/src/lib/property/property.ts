@@ -1,40 +1,57 @@
 import { IPrint, PropertyPrinterOptions } from '../common';
 
+/**
+ * Print class and interface properties
+ */
 export abstract class PropertyPrinter implements IPrint {
   constructor(
     protected readonly __propertyPrinterOptions: PropertyPrinterOptions
   ) {}
 
+  /**
+   * Print documentation for the property
+   */
   protected __docs() {
     return this.__propertyPrinterOptions.docsPrinter?.print() ?? '';
   }
 
   /**
-   * Delimeter between property name and type
-   * @defaultValue `: `
-   * @returns string
+   * Delimeter between property name and type, default value is ': '
    */
-  protected __delimeter() {
+  protected __delimeter(): string {
     return this.__propertyPrinterOptions.delimeter ?? ': ';
   }
 
+  /**
+   * Prefixes the property name
+   */
   protected __prefix() {
     return this.__propertyPrinterOptions.namePrefix ?? '';
   }
+
+  /**
+   * Suffixes the property name
+   */
   protected __suffix() {
     return this.__propertyPrinterOptions.nameSuffix ?? '';
   }
 
+  /**
+   * Prefixes the property type name
+   */
   protected __typePrefix() {
     return this.__propertyPrinterOptions.typePrefix ?? '';
   }
+
+  /**
+   * Suffixes the property type name
+   */
   protected __typeSuffix() {
     return this.__propertyPrinterOptions.typeSuffix ?? '';
   }
 
   /**
-   * @defaultImp  `requried  ? '!' : '?'`
-   * @returns
+   * If the property is required, then return '!' else '?'
    */
   protected __isRequired(): '!' | '?' | '' {
     return this.__propertyPrinterOptions.required ? '!' : '?';
@@ -42,7 +59,6 @@ export abstract class PropertyPrinter implements IPrint {
 
   /**
    * Property name
-   * @returns
    */
   protected __name() {
     return this.__propertyPrinterOptions.name;
@@ -50,7 +66,6 @@ export abstract class PropertyPrinter implements IPrint {
 
   /**
    * Property type
-   * @returns
    */
   protected __type() {
     return this.__propertyPrinterOptions.type;
@@ -58,21 +73,22 @@ export abstract class PropertyPrinter implements IPrint {
 
   /**
    * If the property is array then return '[]' else ''
-   * @returns
    */
-  protected __isArray() {
+  protected __isArray(): '[]' | '' {
     return this.__propertyPrinterOptions.isArray ? '[]' : '';
   }
 
   /**
    * What is the closing line mark
    * @defaultValue ` ; `
-   * @returns
    */
   protected __endOfLine() {
     return ';';
   }
 
+  /**
+   * Print property
+   */
   print(): string {
     return [
       this.__docs(),
@@ -98,7 +114,7 @@ export class ClassPropertyPrinter extends PropertyPrinter {}
  * Print interface property
  */
 export class InterfacePropertyPrinter extends PropertyPrinter {
-  protected override __isRequired() {
+  protected override __isRequired(): '' | '?' {
     return this.__propertyPrinterOptions.required ? '' : '?';
   }
 }

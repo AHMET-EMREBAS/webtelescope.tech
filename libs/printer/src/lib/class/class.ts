@@ -1,54 +1,47 @@
 import { ClassPrinterOptions, IPrint, NotExtended } from '../common';
 
 /**
- * @description Print class class defination
- * @returns string
+ * Print class class defination
  */
 export class ClassPrinter<T = NotExtended> implements IPrint {
   constructor(protected readonly __options: ClassPrinterOptions<T>) {}
 
   /**
-   * @description Prefix name
-   * @returns string
+   * Prefix name
    */
   protected __namePrefix(): string {
     return this.__options.namePrefix ?? '';
   }
 
   /**
-   * @description Suffix name
-   * @returns string
+   * Suffix name
    */
   protected __nameSuffix(): string {
     return this.__options.nameSuffix ?? '';
   }
 
   /**
-   * @description Defines the `*.join(<join>)` delimeter. Default value is `' '`
-   * @returns string
+   * Defines the `*.join(<join>)` delimeter. Default value is `' '`
    */
   protected __joinBy(): string {
     return ' ';
   }
 
   /**
-   * @description Default value is `'export'`
-   * @returns string
+   * Default value is `'export'`
    */
   protected __exportKeyword(): string {
     return 'export';
   }
   /**
-   * @description Check the class exporting or not (public or private class) and return the `export` keyword or empty string.
-   * @returns string
+   * Check the class exporting or not (public or private class) and return the `export` keyword or empty string.
    */
   private __exportOrNot(): string {
     return this.__options.notExport == true ? '' : this.__exportKeyword();
   }
 
   /**
-   * @description Class name
-   * @returns string
+   * Class name
    */
   protected __name(): string {
     return [this.__namePrefix(), this.__options.name, this.__nameSuffix()].join(
@@ -57,96 +50,84 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
   }
 
   /**
-   * @description If the class has generics, this method will concat the class name with generics.
-   * @returns string
+   * If the class has generics, this method will concat the class name with generics.
    */
   private __nameWithGenerics(): string {
     return this.__name() + this.__generics();
   }
 
   /**
-   * @description Class type
-   * @returns string
+   * Class type
    */
   protected __type(): string {
     return this.__options.type;
   }
 
   /**
-   * @description Defines how the class content (properties) start with such us `{`, `:`. Default value is `'{'`
-   * @returns string
+   * Defines how the class content (properties) start with such us `{`, `:`. Default value is `'{'`
    */
   protected __contentPrefix(): string {
     return '{';
   }
 
   /**
-   * @description Defines how the class content (properties) ends with such us `{`, `;`. Default value is `'}'`
-   * @returns string
+   * Defines how the class content (properties) ends with such us `{`, `;`. Default value is `'}'`
    */
   protected __contentSuffix(): string {
     return '}';
   }
 
   /**
-   * @description Class generics decleration
-   * @returns string
+   * Class generics decleration
    */
   protected __generics(): string {
     return this.__options.generics?.print() ?? '';
   }
 
   /**
-   * @description Extending classes, interfaces
-   * @returns string
+   * Extending classes, interfaces
    */
   protected __extendings(): string {
     return this.__options.extending?.print() ?? '';
   }
 
   /**
-   * @description Implementing classes, interfaces.
-   * @returns string
+   * Implementing classes, interfaces.
    */
   protected __implements(): string {
     return this.__options.implementing?.print() ?? '';
   }
 
   /**
-   * @description Documentation/Comments
-   * @returns string
+   * Documentation/Comments
    */
   protected __docs(): string {
     return this.__options.docs?.print() ?? '';
   }
 
   /**
-   * @description Class content (properties)
-   * @returns string
+   * Class content (properties)
    */
   protected __content(): string {
     return this.__options.content?.print() ?? '';
   }
 
   /**
-   * @description  Importing packages, classes, interfaces
-   * @returns string
+   *  Importing packages, classes, interfaces
    */
   protected __importings(): string {
     return this.__options.importings?.print() ?? '';
   }
 
   /**
-   * @description Class decorators
-   * @returns string
+   * Class decorators
    */
   protected __decorators(): string {
     return this.__options.decorating?.print() ?? '';
   }
 
   /**
-   * @description This method wraps the the export, type, and nameWithGenerics method. Some programming languages implements decleration in different order.
-   * @returns string
+   * This method wraps the the export, type, and nameWithGenerics method. Some programming languages implements decleration in different order.
    */
   protected __decleration(): string {
     return [
@@ -157,8 +138,7 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
   }
 
   /**
-   * @description print the class
-   * @returns string
+   * Print the class
    */
   print(): string {
     return [

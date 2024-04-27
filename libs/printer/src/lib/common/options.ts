@@ -32,11 +32,23 @@ export type TypePrefixOptions = {
   typeSuffix?: string;
 };
 
+/**
+ * Documentation printer options
+ */
 export type DocPrinterOptions = {
+  /**
+   * Document content
+   */
   content: string;
+  /**
+   * Is inline document
+   */
   inline?: boolean;
 };
 
+/**
+ * Common/Basic property pritner options
+ */
 export type BasicPropertyPrinterOptions = {
   /**
    * Name of the property
@@ -69,6 +81,9 @@ export type BasicPropertyPrinterOptions = {
   decoratorsPrinter?: IPrint;
 };
 
+/**
+ * Defines the delimeter between property type and name
+ */
 export type DelimeterOptions = {
   /**
    * Default is ":"
@@ -76,7 +91,13 @@ export type DelimeterOptions = {
   delimeter?: string;
 };
 
+/**
+ * Provides the import printer to the classes.
+ */
 export type ImportOptions = {
+  /**
+   * Import printer
+   */
   imports?: IPrint;
 };
 
@@ -87,6 +108,9 @@ export type PropertyPrinterOptions<E = NotExtended> =
     DelimeterOptions &
     E;
 
+/**
+ * Package name prefix configuration
+ */
 export type PackageNamePrefixOptions = {
   /**
    * Add prefix to the package name
@@ -99,6 +123,9 @@ export type PackageNamePrefixOptions = {
   packagenameSuffix?: string;
 };
 
+/**
+ * Common import printer options
+ */
 export type BasicImportPrinterOptions = {
   /**
    * Source package or directory
@@ -116,6 +143,9 @@ export type ImportPrinterOptions<E = NotExtended> = BasicImportPrinterOptions &
   PackageNamePrefixOptions &
   E;
 
+/**
+ * Common decorator printer options
+ */
 export type BasicDecoratorPrinterOptions = {
   /**
    * Decorator name
@@ -132,6 +162,9 @@ export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
   BasicDecoratorPrinterOptions &
   E;
 
+/**
+ * Common class printer options
+ */
 export type BasicClassPrinterOptions = {
   /**
    * Class name
@@ -184,6 +217,10 @@ export type BasicClassPrinterOptions = {
   notExport?: boolean;
 };
 
+
+/**
+ * Class printer optionsF
+ */
 export type ClassPrinterOptions<T = NotExtended> = BasicClassPrinterOptions &
   NamePefixOptions &
   T;
