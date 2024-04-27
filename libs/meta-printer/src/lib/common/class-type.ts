@@ -6,45 +6,45 @@ export enum ClassType {
   /**
    * Entity class
    */
-  Entity,
+  Entity = '#',
 
   /**
    * View class
    */
-  View,
+  View = '#View',
 
   /**
    *  Data transfer object for create
    */
-  Create,
+  Create = 'Create#Dto',
   /**
    *  Data transfer object for update
    */
-  Update,
+  Update = 'Update#Dto',
   /**
    *  Query object of the entity
    */
-  Query,
+  Query = 'Query#Dto',
 
   /**
    * Entity interface for frontend usage
    */
-  IEntity,
+  IEntity = 'I#',
   /**
    * View interface for frontend usage
    */
-  IView,
+  IView = 'I#View',
 
   /**
    * Create-Dto interface for frontend usage
    */
-  ICreate,
+  ICreate = 'ICreate#Dto',
   /**
    * Update-Dto interface for frontend usage
    */
-  IUpdate,
+  IUpdate = 'IUpdate#Dto',
   /**
    * Query-Dto interface for frontend usage
    */
-  IQuery,
+  IQuery = 'IQuery#Dto',
 }

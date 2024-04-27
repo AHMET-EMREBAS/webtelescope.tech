@@ -1,6 +1,4 @@
-import { Model } from '../__meta';
-import { PropertyPrinterOptions } from '../__printer';
-import { ClassType } from '../common';
+import { ClassType, IPrinterPickerFactory } from '../common';
 import {
   ClassPropertyPrinter,
   InterfacePropertyPrinter,
@@ -10,14 +8,12 @@ import {
   ViewEntityPropertyPrinter,
 } from './property';
 
-type TPropertyPrinter = typeof PropertyPrinter;
+export type PropertyPrinterType = typeof PropertyPrinter;
 
-export type PropertyFactoryOptions = PropertyPrinterOptions<
-  Partial<Pick<Model, 'modelName'>>
->;
-
-export class PropertyPrinterFactory {
-  PickPrinter(classType: ClassType): TPropertyPrinter {
+export class PropertyPrinterFactory
+  implements IPrinterPickerFactory<PropertyPrinterType>
+{
+  PickPrinter(classType: ClassType): PropertyPrinterType {
     switch (classType) {
       // Class property printer in use
       case ClassType.Create:
@@ -49,7 +45,7 @@ export class PropertyPrinterFactory {
    * Create class property printer
    * @returns
    */
-  Create(): TPropertyPrinter {
+  Create(): PropertyPrinterType {
     return ClassPropertyPrinter;
   }
 
@@ -57,7 +53,7 @@ export class PropertyPrinterFactory {
    * Entity class property printer
    * @returns
    */
-  Entity(): TPropertyPrinter {
+  Entity(): PropertyPrinterType {
     return ClassPropertyPrinter;
   }
 
@@ -65,7 +61,7 @@ export class PropertyPrinterFactory {
    * Update class property printer
    * @returns
    */
-  Update(): TPropertyPrinter {
+  Update(): PropertyPrinterType {
     return OptionalPropertyPrinter;
   }
 
@@ -73,7 +69,7 @@ export class PropertyPrinterFactory {
    * IEntity class property printer
    * @returns
    */
-  IEntity(): TPropertyPrinter {
+  IEntity(): PropertyPrinterType {
     return InterfacePropertyPrinter;
   }
 
@@ -81,7 +77,7 @@ export class PropertyPrinterFactory {
    * ICreate class property printer
    * @returns
    */
-  ICreate(): TPropertyPrinter {
+  ICreate(): PropertyPrinterType {
     return InterfacePropertyPrinter;
   }
 
@@ -89,7 +85,7 @@ export class PropertyPrinterFactory {
    * IUpdate class property printer
    * @returns
    */
-  IUpdate(): TPropertyPrinter {
+  IUpdate(): PropertyPrinterType {
     return OptionalPropertyPrinter;
   }
 
@@ -97,7 +93,7 @@ export class PropertyPrinterFactory {
    * Query class property printer
    * @returns
    */
-  Query(): TPropertyPrinter {
+  Query(): PropertyPrinterType {
     return QueryPropertyPrinter;
   }
 
@@ -105,7 +101,7 @@ export class PropertyPrinterFactory {
    * IQuery class property printer
    * @returns
    */
-  IQuery(): TPropertyPrinter {
+  IQuery(): PropertyPrinterType {
     return QueryPropertyPrinter;
   }
 
@@ -113,7 +109,7 @@ export class PropertyPrinterFactory {
    * IView class property printer
    * @returns
    */
-  IView(): TPropertyPrinter {
+  IView(): PropertyPrinterType {
     return ViewEntityPropertyPrinter;
   }
 
@@ -121,7 +117,7 @@ export class PropertyPrinterFactory {
    * View class property printer
    * @returns
    */
-  View(): TPropertyPrinter {
+  View(): PropertyPrinterType {
     return ViewEntityPropertyPrinter;
   }
 }

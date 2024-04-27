@@ -1,10 +1,10 @@
 import { ClassPrinter } from './class';
 describe('ClassPrinter', () => {
   it.each`
-    expected                                         | name         | type           | content
-    ${'export class MyClass { // Empty class }'}     | ${'MyClass'} | ${'class'}     | ${'// Empty class'}
-    ${'export interface MyClass { // Empty class }'} | ${'MyClass'} | ${'interface'} | ${'// Empty class'}
-    ${'export Anything MyClass { }'}                 | ${'MyClass'} | ${'Anything'}  | ${''}
+    expected                          | name         | type           | content
+    ${'export class MyClass { }'}    | ${'MyClass'} | ${'class'}     | ${undefined}
+    ${'export interface MyClass { }'} | ${'MyClass'} | ${'interface'} | ${undefined}
+    ${'export Anything MyClass { }'}  | ${'MyClass'} | ${'Anything'}  | ${undefined}
   `(
     'should print $expected from $name, $type, $content',
     ({ expected, name, type, content }) => {

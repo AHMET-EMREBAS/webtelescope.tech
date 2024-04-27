@@ -1,10 +1,10 @@
-import { ClsasPrinterOptions, IPrint } from '../common';
+import { ClassPrinterOptions, IPrint, NotExtended } from '../common';
 
 /**
  * Print class class defination
  */
-export class ClassPrinter implements IPrint {
-  constructor(protected readonly clsasPrinterOptions: ClsasPrinterOptions) {}
+export class ClassPrinter<T = NotExtended> implements IPrint {
+  constructor(protected readonly clsasPrinterOptions: ClassPrinterOptions<T>) {}
 
   /**
    * @returns `export` by default
@@ -44,7 +44,7 @@ export class ClassPrinter implements IPrint {
   }
 
   protected __content() {
-    return this.clsasPrinterOptions.content ?? '';
+    return this.clsasPrinterOptions.content?.print() ?? '';
   }
 
   print(): string {

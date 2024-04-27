@@ -60,6 +60,7 @@ export class ViewEntityPropertyPrinter extends PropertyPrinter {
       .propertyName;
   }
 }
+
 export class QueryPropertyPrinter extends ViewEntityPropertyPrinter {
   protected override __isRequired(): '' | '!' | '?' {
     return '?';
