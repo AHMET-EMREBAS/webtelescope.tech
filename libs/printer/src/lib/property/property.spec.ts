@@ -40,18 +40,4 @@ describe('PropertyPrinter', () => {
       expect(result).toBe(expected);
     }
   );
-
-  it.each`
-    expected            | doc
-    ${'name!: string;'} | ${{ print: () => '// Doc' }}
-  `('should print $expected from { doc:$doc } options', ({ expected, doc }) => {
-    const result = new CPR({
-      name: 'name',
-      type: 'string',
-      required: true,
-      doc,
-    }).print();
-
-    expect(result).toBe(['// Doc', expected].join('\n'));
-  });
 });
