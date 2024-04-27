@@ -17,8 +17,6 @@ export type PropertyFactoryOptions = PropertyPrinterOptions<
 >;
 
 export class PropertyPrinterFactory {
-  constructor(protected readonly options: PropertyFactoryOptions) {}
-
   PickPrinter(classType: ClassType): TPropertyPrinter {
     switch (classType) {
       // Class property printer in use

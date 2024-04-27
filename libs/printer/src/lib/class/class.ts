@@ -1,11 +1,4 @@
-import { IPrint } from '../common';
-
-export type ClsasPrinterOptions = {
-  name: string;
-  type: string;
-  content?: string;
-  exports?: boolean;
-};
+import { ClsasPrinterOptions, IPrint } from '../common';
 
 /**
  * Print class class defination
@@ -56,7 +49,7 @@ export class ClassPrinter implements IPrint {
 
   print(): string {
     return [
-      this.clsasPrinterOptions.exports ? this.__exportDef() : '',
+      this.clsasPrinterOptions.notExport ? '' : this.__exportDef(),
       this.__type(),
       this.__name(),
       this.__contentPrefix(),

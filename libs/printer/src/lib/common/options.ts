@@ -1,4 +1,4 @@
-import { IPrint } from './print';
+import { IPrint } from './interfaces';
 
 export type NotExtended = { __notExtended?: 'Type is not extended' };
 
@@ -114,3 +114,13 @@ export type DecoratorBasicOptions = {
 export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
   DecoratorBasicOptions &
   E;
+
+export type BasicClassPrinterOptions = {
+  name: string;
+  type: string;
+  content?: string;
+  notExport?: boolean;
+};
+export type ClsasPrinterOptions<T = NotExtended> = BasicClassPrinterOptions &
+  NamePefixOptions &
+  T;

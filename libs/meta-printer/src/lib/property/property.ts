@@ -45,7 +45,7 @@ export class ViewEntityPropertyPrinter extends PropertyPrinter {
     super(options);
   }
   protected override __isRequired(): '' | '!' | '?' {
-    return '';
+    return '!';
   }
 
   protected __modelName() {
@@ -56,7 +56,8 @@ export class ViewEntityPropertyPrinter extends PropertyPrinter {
   }
 
   protected override __name(): string {
-    return names(this.__modelName() + super.__name()).propertyName;
+    return names(this.__modelName() + names(super.__name()).className)
+      .propertyName;
   }
 }
 export class QueryPropertyPrinter extends ViewEntityPropertyPrinter {
