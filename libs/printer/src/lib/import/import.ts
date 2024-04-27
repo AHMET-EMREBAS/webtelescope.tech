@@ -1,21 +1,7 @@
-import { IPrint } from '../common';
-
-export type ImportPrinterOptions = {
-  /**
-   * Source package or directory
-   */
-  source: string;
-
-  /**
-   * List of items to be imported
-   */
-  items: string[];
-};
+import { IPrint, ImportPrinterOptions } from '../common';
 
 export class ImportPrinter implements IPrint {
-  constructor(
-    protected readonly __importPrinterOptions: ImportPrinterOptions
-  ) {}
+  constructor(protected readonly __importPrinterOptions: ImportPrinterOptions) {}
 
   /**
    * Import keyword
