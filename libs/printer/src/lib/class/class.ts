@@ -12,18 +12,32 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
   protected __joinBy() {
     return ' ';
   }
+
+  protected __exportKeyword() {
+    return 'export';
+  }
   /**
    * @returns `export` by default
    */
-  protected __exportDef() {
-    return 'export';
+  private __exportOrNot() {
+    return this.__options.notExport == true ? '' : this.__exportKeyword();
   }
 
   /**
-   * @returns class name
+   * Print name only.
+   * Use nameWithGenerics function
+   * @returns
    */
   protected __name() {
     return this.__options.name;
+  }
+
+  /**
+   * Print name with generics
+   * @returns class name
+   */
+  private __nameWithGenerics() {
+    return this.__name() + this.__generics();
   }
 
   /**
@@ -73,16 +87,12 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
     return this.__options.importsPrinter?.print() ?? '';
   }
 
-  private __join(...args: string[]) {
-    return args.join('');
+  protected __decorators() {
+    return this.__options.decoratorsPrinter?.print() ?? '';
   }
 
-  private __conditional(
-    condition: boolean | undefined,
-    trueValue: string,
-    falseValue: string
-  ) {
-    return condition ? trueValue : falseValue;
+  private __join(...args: string[]) {
+    return args.join('');
   }
 
   print(): string {
@@ -91,11 +101,13 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
 
       this.__docs(),
 
-      this.__conditional(this.__options.notExport, '', this.__exportDef()),
+      this.__decorators(),
+
+      this.__exportOrNot(),
 
       this.__type(),
+      this.__nameWithGenerics(),
 
-      this.__join(this.__name(), this.__generics()),
       this.__extendings(),
       this.__implements(),
       this.__contentPrefix(),

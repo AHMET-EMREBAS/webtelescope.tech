@@ -5,6 +5,10 @@ export abstract class PropertyPrinter implements IPrint {
     protected readonly __propertyPrinterOptions: PropertyPrinterOptions
   ) {}
 
+  protected __docs() {
+    return this.__propertyPrinterOptions.docsPrinter?.print() ?? '';
+  }
+
   /**
    * Delimeter between property name and type
    * @defaultValue `: `
@@ -71,6 +75,7 @@ export abstract class PropertyPrinter implements IPrint {
 
   print(): string {
     return [
+      this.__docs(),
       this.__prefix(),
       this.__name(),
       this.__suffix(),

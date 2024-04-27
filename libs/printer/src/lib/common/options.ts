@@ -37,7 +37,7 @@ export type DocPrinterOptions = {
   inline?: boolean;
 };
 
-export type PropertyPrinterBasicOptions = {
+export type BasicPropertyPrinterOptions = {
   /**
    * Name of the property
    */
@@ -57,6 +57,16 @@ export type PropertyPrinterBasicOptions = {
    * Is property required
    */
   required?: boolean;
+
+  /**
+   * Documentation printer
+   */
+  docsPrinter?: IPrint;
+
+  /**
+   * Decorators printer
+   */
+  decoratorsPrinter?: IPrint;
 };
 
 export type DelimeterOptions = {
@@ -71,7 +81,7 @@ export type ImportOptions = {
 };
 
 export type PropertyPrinterOptions<E = NotExtended> =
-  PropertyPrinterBasicOptions &
+  BasicPropertyPrinterOptions &
     NamePefixOptions &
     TypePrefixOptions &
     DelimeterOptions &
@@ -89,7 +99,7 @@ export type PackageNamePrefixOptions = {
   packagenameSuffix?: string;
 };
 
-export type ImportBasicOptions = {
+export type BasicImportPrinterOptions = {
   /**
    * Source package or directory
    */
@@ -101,18 +111,18 @@ export type ImportBasicOptions = {
   items: string[];
 };
 
-export type ImportPrinterOptions<E = NotExtended> = ImportBasicOptions &
+export type ImportPrinterOptions<E = NotExtended> = BasicImportPrinterOptions &
   NamePefixOptions &
   PackageNamePrefixOptions &
   E;
 
-export type DecoratorBasicOptions = {
+export type BasicDecoratorPrinterOptions = {
   name: string;
   options: string;
 };
 
 export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
-  DecoratorBasicOptions &
+  BasicDecoratorPrinterOptions &
   E;
 
 export type BasicClassPrinterOptions = {
@@ -125,7 +135,9 @@ export type BasicClassPrinterOptions = {
   genericsPrinter?: IPrint;
   docsPrinter?: IPrint;
   importsPrinter?: IPrint;
+  decoratorsPrinter?: IPrint;
 };
+
 export type ClassPrinterOptions<T = NotExtended> = BasicClassPrinterOptions &
   NamePefixOptions &
   T;
