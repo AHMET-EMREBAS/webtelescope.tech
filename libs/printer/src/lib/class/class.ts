@@ -7,6 +7,12 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
   constructor(protected readonly __options: ClassPrinterOptions<T>) {}
 
   /**
+   * @returns `' '`
+   */
+  protected __joinBy() {
+    return ' ';
+  }
+  /**
    * @returns `export` by default
    */
   protected __exportDef() {
@@ -63,19 +69,12 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
     return this.__options.contentPrinter?.print() ?? '';
   }
 
-  __importings() {
+  protected __importings() {
     return this.__options.importsPrinter?.print() ?? '';
   }
 
   private __join(...args: string[]) {
     return args.join('');
-  }
-  private __joinWithSpace(...args: string[]) {
-    return args.join(' ');
-  }
-
-  private __joinWithLine(...args: string[]) {
-    return args.filter((e) => e).join('\n');
   }
 
   private __conditional(
@@ -104,6 +103,6 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
       this.__contentSuffix(),
     ]
       .filter((e) => e != '' && e != undefined)
-      .join(' ');
+      .join(this.__joinBy());
   }
 }
