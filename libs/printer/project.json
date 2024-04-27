@@ -45,21 +45,11 @@
         "jestConfig": "libs/printer/jest.config.ts"
       }
     },
-    "build:doc": {
-      "executor": "npx compodoc",
-      "command": "npx compodoc --",
-      "options": {
-        "tsconfig": "libs/printer/tscofnig.json",
-        "output": "dist/printer/doc",
-        "name": "Printer Package | WebTelescope"
-      }
+    "build-doc": {
+      "command": "npx compodoc libs/printer"
     },
-    "server:doc": {
-      "executor": "compodoc",
-      "options": {
-        "serve": "true",
-        "config": "libs/printer/package.json"
-      }
+    "serve-doc": {
+      "command": "npx compodoc -s"
     }
   },
   "tags": []
