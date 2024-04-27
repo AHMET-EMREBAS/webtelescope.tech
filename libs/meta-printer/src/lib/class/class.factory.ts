@@ -33,8 +33,9 @@ export class ClassPrinterFactory
         throw new Error();
     }
   }
-  Create(): typeof ClassPrinter {
-    throw new Error('Method not implemented.');
+
+  Create(modelName: string): typeof ClassPrinter {
+    throw new Error();
   }
   Entity(): typeof ClassPrinter {
     throw new Error('Method not implemented.');

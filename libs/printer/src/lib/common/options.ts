@@ -118,8 +118,13 @@ export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
 export type BasicClassPrinterOptions = {
   name: string;
   type: string;
-  content?: IPrint;
   notExport?: boolean;
+  contentPrinter?: IPrint;
+  extendsPrinter?: IPrint;
+  implementsPrinter?: IPrint;
+  genericsPrinter?: IPrint;
+  docsPrinter?: IPrint;
+  importsPrinter?: IPrint;
 };
 export type ClassPrinterOptions<T = NotExtended> = BasicClassPrinterOptions &
   NamePefixOptions &

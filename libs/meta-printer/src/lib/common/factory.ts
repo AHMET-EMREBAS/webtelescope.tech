@@ -2,16 +2,16 @@ import { ClassType } from './class-type';
 
 export interface IPrinterPickerFactory<T> {
   PickPrinter(classType: ClassType): T;
-  Create(): T;
-  Entity(): T;
-  Update(): T;
-  IEntity(): T;
-  ICreate(): T;
-  IUpdate(): T;
-  Query(): T;
-  IQuery(): T;
-  IView(): T;
-  View(): T;
+  Create(modelName?: string): T;
+  Entity(modelName?: string): T;
+  Update(modelName?: string): T;
+  IEntity(modelName?: string): T;
+  ICreate(modelName?: string): T;
+  IUpdate(modelName?: string): T;
+  Query(modelName?: string): T;
+  IQuery(modelName?: string): T;
+  IView(modelName?: string): T;
+  View(modelName?: string): T;
 }
 
 export interface INameFactory {
