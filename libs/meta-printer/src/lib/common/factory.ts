@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { Model } from '../__meta';
+import { IPrint } from '../__printer';
+import { ClassType } from './class-type';
+
 export interface IPrinterPickerFactory<R> {
   Entity(...args: any[]): R;
   Update(...args: any[]): R;
@@ -73,3 +77,15 @@ export interface INameFactory {
    */
   IQuery: string;
 }
+
+export interface IPicker<T, R, O = unknown> {
+  pick(type: T): R;
+  pick(type: T, options: O): R;
+}
+
+export interface INamePickerByClassType extends IPicker<ClassType, string> {}
+
+export interface IPrinterPickerByClassType extends IPicker<ClassType, IPrint> {}
+export interface IPrinterPickerByClassTypeAndModel
+  extends IPicker<ClassType, IPrint, Model> {}
+

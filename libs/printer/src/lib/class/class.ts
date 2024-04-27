@@ -64,31 +64,31 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
   }
 
   protected __generics() {
-    return this.__options.genericsPrinter?.print() ?? '';
+    return this.__options.generics?.print() ?? '';
   }
 
   protected __extendings() {
-    return this.__options.extendsPrinter?.print() ?? '';
+    return this.__options.extending?.print() ?? '';
   }
 
   protected __implements() {
-    return this.__options.implementsPrinter?.print() ?? '';
+    return this.__options.impementing?.print() ?? '';
   }
 
   protected __docs() {
-    return this.__options.docsPrinter?.print() ?? '';
+    return this.__options.docs?.print() ?? '';
   }
 
   protected __content() {
-    return this.__options.contentPrinter?.print() ?? '';
+    return this.__options.content?.print() ?? '';
   }
 
   protected __importings() {
-    return this.__options.importsPrinter?.print() ?? '';
+    return this.__options.importings?.print() ?? '';
   }
 
   protected __decorators() {
-    return this.__options.decoratorsPrinter?.print() ?? '';
+    return this.__options.decorating?.print() ?? '';
   }
 
   private __join(...args: string[]) {

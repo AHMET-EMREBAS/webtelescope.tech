@@ -117,8 +117,15 @@ export type ImportPrinterOptions<E = NotExtended> = BasicImportPrinterOptions &
   E;
 
 export type BasicDecoratorPrinterOptions = {
+  /**
+   * Decorator name
+   */
   name: string;
-  options: string;
+
+  /**
+   * Decorator options
+   */
+  options?: string;
 };
 
 export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
@@ -126,16 +133,55 @@ export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
   E;
 
 export type BasicClassPrinterOptions = {
+  /**
+   * Class name
+   */
   name: string;
+
+  /**
+   * Class type  class, interface or any type in the programming sytax
+   */
   type: string;
+
+  /**
+   * Represents properties of the class but properties have their own context.
+   */
+  content?: IPrint;
+
+  /**
+   * Extending classes
+   */
+  extending?: IPrint;
+
+  /**
+   * Implementing classes
+   */
+  impementing?: IPrint;
+
+  /**
+   * Importing packages, types, classes.
+   */
+  importings?: IPrint;
+
+  /**
+   * Generic types
+   */
+  generics?: IPrint;
+
+  /**
+   * Class decorator|anotation|macro
+   */
+  decorating?: IPrint;
+
+  /**
+   * Documentation
+   */
+  docs?: IPrint;
+
+  /**
+   * If set true, the class will not export to outside.
+   */
   notExport?: boolean;
-  contentPrinter?: IPrint;
-  extendsPrinter?: IPrint;
-  implementsPrinter?: IPrint;
-  genericsPrinter?: IPrint;
-  docsPrinter?: IPrint;
-  importsPrinter?: IPrint;
-  decoratorsPrinter?: IPrint;
 };
 
 export type ClassPrinterOptions<T = NotExtended> = BasicClassPrinterOptions &

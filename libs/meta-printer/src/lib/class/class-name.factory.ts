@@ -1,6 +1,9 @@
-import { ClassType, INameFactory } from '../common';
+import { ClassType, IClassNamePicker, INameFactory } from '../common';
 
-export class ClassNameFactory implements INameFactory {
+/**
+ * Produce the class name based on the provided class-type {@link ClassType}
+ */
+export class ClassNameFactory implements INameFactory, IClassNamePicker {
   readonly Entity = ClassType.Entity.replace('#', this.className);
   readonly View = ClassType.View.replace('#', this.className);
   readonly Create = ClassType.Create.replace('#', this.className);

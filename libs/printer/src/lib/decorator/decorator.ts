@@ -1,34 +1,42 @@
-import { IPrint ,DecoratorPrinterOptions} from '../common';
-
-
+import { IPrint, DecoratorPrinterOptions } from '../common';
 
 /**
  * Print decorators/annotations
  */
 export class DecoratorPrinter implements IPrint {
-  constructor(protected decoratorPrinterOptions: DecoratorPrinterOptions) {}
+  constructor(protected optionz: DecoratorPrinterOptions) {}
 
-  protected __name() {
-    return this.decoratorPrinterOptions.name;
+  /**
+   * Decorator name
+   */
+  protected __name(): string {
+    return this.optionz.name;
   }
 
   /**
-   * @returns `(` by default
+   * `@DecoratorName<prefix><options><suffix>`. Default value is `(`
    */
-  protected __optionsPrefix() {
+  protected __optionsPrefix(): string {
     return '(';
   }
 
   /**
-   * @returns `)` by default
+   * `@DecoratorName<prefix><options><suffix>` Default value is  `)`
    */
-  protected __optionsSuffix() {
+  protected __optionsSuffix(): string {
     return ')';
   }
-  protected __options() {
-    return this.decoratorPrinterOptions.options;
+
+  /**
+   * `@DecoratorName<prefix><options><suffix>`
+   */
+  protected __options(): string {
+    return this.optionz.options ?? '';
   }
 
+  /**
+   * Every programming language has its own decorator signiture such us `@`, `#`, `#[]`, `!` . Default value is `'@'`
+   */
   protected __signiture() {
     return '@';
   }
