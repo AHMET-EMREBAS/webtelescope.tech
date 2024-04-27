@@ -32,17 +32,9 @@ export type TypePrefixOptions = {
   typeSuffix?: string;
 };
 
-export type DocOptions = {
-  /**
-   * Property documentation
-   */
-  doc?: IPrint;
-
-  /**
-   * Is documentation desired to place in class-level documentation?
-   * By default documentation is written into property documentation.
-   */
-  isClassDoc?: boolean;
+export type DocPrinterOptions = {
+  content: string;
+  inline?: boolean;
 };
 
 export type PropertyPrinterBasicOptions = {
@@ -120,6 +112,5 @@ export type DecoratorBasicOptions = {
 };
 
 export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &
-  DocOptions &
   DecoratorBasicOptions &
   E;

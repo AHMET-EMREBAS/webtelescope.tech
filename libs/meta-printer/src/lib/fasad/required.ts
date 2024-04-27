@@ -1,4 +1,4 @@
-import { ClassType, PrintRequiredMarFn } from '../common';
+import { ClassType } from '../common';
 
 /**
  * Mark the property by "!" | "?" | "" based on the required contraint and class-type {@link ClassType}.
@@ -6,7 +6,7 @@ import { ClassType, PrintRequiredMarFn } from '../common';
  * @param required boolean
  * @returns
  */
-export const IsRequiredProperty: PrintRequiredMarFn = (
+export const IsRequiredProperty = (
   classType: ClassType,
   required?: boolean
 ) => {

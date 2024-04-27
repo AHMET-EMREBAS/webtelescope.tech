@@ -4,7 +4,7 @@ import {
   PropertyPrinter as __PropertyPrinter,
   PropertyPrinterOptions as __PropertyPrinterOptions,
 } from '../__printer';
-import { toPropertyName } from '../utils';
+import { names } from '../__utils';
 
 export type PropertyPrinterOptions = __PropertyPrinterOptions<
   Partial<Pick<Model, 'modelName'>>
@@ -56,7 +56,7 @@ export class ViewEntityPropertyPrinter extends PropertyPrinter {
   }
 
   protected override __name(): string {
-    return toPropertyName(this.__modelName(), super.__name());
+    return names(this.__modelName() + super.__name()).propertyName;
   }
 }
 export class QueryPropertyPrinter extends ViewEntityPropertyPrinter {
