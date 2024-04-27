@@ -7,6 +7,20 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
   constructor(protected readonly __options: ClassPrinterOptions<T>) {}
 
   /**
+   * Prefix name
+   */
+  protected __namePrefix() {
+    return this.__options.namePrefix ?? '';
+  }
+
+  /**
+   * Suffix name
+   */
+  protected __nameSuffix() {
+    return this.__options.nameSuffix ?? '';
+  }
+
+  /**
    * Defines the `*.join(<join>)` delimeter. Default value is `' '`
    */
   protected __joinBy() {
@@ -30,7 +44,9 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
    * Class name
    */
   protected __name() {
-    return this.__options.name;
+    return [this.__namePrefix(), this.__options.name, this.__nameSuffix()].join(
+      ''
+    );
   }
 
   /**
@@ -79,7 +95,7 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
    * Implementing classes, interfaces.
    */
   protected __implements() {
-    return this.__options.impementing?.print() ?? '';
+    return this.__options.implementing?.print() ?? '';
   }
 
   /**

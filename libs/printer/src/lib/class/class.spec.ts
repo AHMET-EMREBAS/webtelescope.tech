@@ -1,50 +1,55 @@
 import { ClassPrinter } from './class';
 describe('ClassPrinter', () => {
   it.each`
-    expected                                                                           | name         | type           | content
-    ${'imports Doc export class MyClass<T,A,B> extends Some implements Other { content }'}     | ${'MyClass'} | ${'class'}     | ${undefined}
-    ${'imports Doc export interface MyClass<T,A,B> extends Some implements Other { content }'} | ${'MyClass'} | ${'interface'} | ${undefined}
-    ${'imports Doc export Anything MyClass<T,A,B> extends Some implements Other { content }'}  | ${'MyClass'} | ${'Anything'}  | ${undefined}
+    expected                                                                                       | name         | type
+    ${'imports Doc D export class _MyClass_<T,A,B> extends Some implements Other { content }'}     | ${'MyClass'} | ${'class'}
+    ${'imports Doc D export interface _MyClass_<T,A,B> extends Some implements Other { content }'} | ${'MyClass'} | ${'interface'}
+    ${'imports Doc D export Anything _MyClass_<T,A,B> extends Some implements Other { content }'}  | ${'MyClass'} | ${'Anything'}
   `(
     'should print $expected from $name, $type, $content',
-    ({ expected, name, type, content }) => {
+    ({ expected, name, type }) => {
       const result = new ClassPrinter({
         name,
         type,
-        content,
-        importsPrinter:{ 
-          print(){ 
-            return 'imports'
-          }
 
+        importings: {
+          print() {
+            return 'imports';
+          },
         },
-
-        contentPrinter: {
+        content: {
           print() {
             return 'content';
           },
         },
-        docsPrinter: {
+        docs: {
           print() {
             return 'Doc';
           },
         },
-        extendsPrinter: {
+        extending: {
           print() {
             return 'extends Some';
           },
         },
 
-        genericsPrinter: {
+        generics: {
           print() {
             return '<T,A,B>';
           },
         },
-        implementsPrinter: {
+        implementing: {
           print() {
             return 'implements Other';
           },
         },
+        decorating: {
+          print() {
+            return 'D';
+          },
+        },
+        namePrefix: '_',
+        nameSuffix: '_',
       }).print();
 
       expect(result).toBe(expected);

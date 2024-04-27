@@ -156,7 +156,7 @@ export type BasicClassPrinterOptions = {
   /**
    * Implementing classes
    */
-  impementing?: IPrint;
+  implementing?: IPrint;
 
   /**
    * Importing packages, types, classes.
