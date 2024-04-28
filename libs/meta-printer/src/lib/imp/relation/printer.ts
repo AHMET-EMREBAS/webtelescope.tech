@@ -1,4 +1,4 @@
-import { PropertyOptions } from '@webpackages/meta';
+import { RelationOptions } from '@webpackages/meta';
 import { ClassType } from '../../common';
 import {
   classTypeConverter,
@@ -7,24 +7,24 @@ import {
   typeConverter,
 } from './converter';
 import { decoratorPicker, docPicker } from './picker';
-import { BasePrinter } from '../../core/property';
+import { BasePrinter } from '../../core/relation';
 
 /**
  * @DONE
  *
  */
-export class PropertyPrinter extends BasePrinter {
+export class RelationPrinter extends BasePrinter {
   constructor(
     protected readonly classType: ClassType,
     protected readonly modelName: string,
-    protected readonly propertyName: string,
-    protected readonly propertyOptions: PropertyOptions
+    protected readonly relationName: string,
+    protected readonly relationOptions: RelationOptions
   ) {
     super({
       classType,
       modelName,
-      propertyName,
-      propertyOptions,
+      relationName,
+      relationOptions,
       classTypeConverter,
       nameConverter,
       typeConverter,

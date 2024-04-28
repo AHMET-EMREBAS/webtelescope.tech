@@ -2,10 +2,11 @@ import {
   ClassType,
   Converter,
   PropertyDecoratorPrinterPicker,
-  PropertyDocPrinterPicker,
-} from '../common';
+  DocPrinterPicker,
+  isColumnArray,
+} from '../../common';
 
-import { PropertyOptions } from '@webpackages/meta';
+import { ColumnOptions } from '@webpackages/meta';
 import {
   ClassType as ExtClassType,
   PropertyPrinter,
@@ -14,11 +15,11 @@ import {
 export type NameConverterOptions = {
   classType: ClassType;
   modelName: string;
-  propertyName: string;
+  columnName: string;
 };
 
 export type ClassTypeConverter = Converter<ClassType, ExtClassType>;
-export type PropertyTypeConverter = Converter<string, string>;
+export type TypeConverter = Converter<string, string>;
 export type NameConverter = Converter<NameConverterOptions, string>;
 
 export type RequiredConverterOptions = {
@@ -28,61 +29,69 @@ export type RequiredConverterOptions = {
 
 export type RequiredConverter = Converter<RequiredConverterOptions, boolean>;
 
-export type PropertyPrinterOptions = {
+export type PrinterOptions = {
   classType: ClassType;
   modelName: string;
-  propertyName: string;
-  propertyOptions: PropertyOptions;
+  columnName: string;
+  columnOptions: ColumnOptions;
   namePrefix?: string;
   nameSuffix?: string;
   typePrefix?: string;
   typeSuffix?: string;
   delimeter?: string;
-  propertyNameConverter: NameConverter;
+  nameConverter: NameConverter;
+  typeConverter: TypeConverter;
   classTypeConverter: ClassTypeConverter;
-  propertyTypeConverter: PropertyTypeConverter;
-  decoratorPrinterPicker: PropertyDecoratorPrinterPicker;
   requiredConverter: RequiredConverter;
-  docPrinterPicker: PropertyDocPrinterPicker;
+  decoratorPicker: PropertyDecoratorPrinterPicker;
+  docPicker: DocPrinterPicker;
 };
 
-export class BasePropertyPrinter extends PropertyPrinter {
-  constructor(protected readonly options: PropertyPrinterOptions) {
+export class BasePrinter extends PropertyPrinter {
+  constructor(protected readonly options: PrinterOptions) {
     const {
       classType,
       modelName,
-      propertyName,
-      propertyOptions,
+      columnName,
+      columnOptions,
       namePrefix,
       nameSuffix,
       typePrefix,
       typeSuffix,
       delimeter,
-      propertyNameConverter,
-      propertyTypeConverter,
+      nameConverter,
+      typeConverter,
       classTypeConverter,
-      decoratorPrinterPicker,
+      decoratorPicker,
       requiredConverter,
-      docPrinterPicker,
+      docPicker,
     } = options;
 
+    if (!columnOptions.type) {
+      throw new Error('Column type is required!');
+    }
+    if (columnOptions.type === 'object') {
+      if (!columnOptions.objectType) {
+        throw new Error('objectType is required!');
+      }
+    }
     super({
       classType: classTypeConverter(classType),
-      name: propertyNameConverter({ classType, modelName, propertyName }),
-      type: propertyTypeConverter(propertyOptions.type ?? 'string'),
-      decoratorsPrinter: decoratorPrinterPicker({
+      name: nameConverter({ classType, modelName, columnName }),
+      type: typeConverter(columnOptions.type),
+      decoratorsPrinter: decoratorPicker({
         classType,
-        options: propertyOptions,
+        options: columnOptions,
       }),
       required: requiredConverter({
         classType,
-        required: propertyOptions.required,
+        required: columnOptions.required,
       }),
-      docsPrinter: docPrinterPicker({
+      docsPrinter: docPicker({
         classType,
-        options: propertyOptions.description,
+        options: columnOptions.description,
       }),
-      isArray: propertyOptions.isArray,
+      isArray: isColumnArray(columnOptions),
       namePrefix,
       nameSuffix,
       typePrefix,

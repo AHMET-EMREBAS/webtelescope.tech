@@ -15,11 +15,6 @@ export type RelationOptions = {
    */
   type: RelationType;
 
-  // /**
-  //  * Relation class name. For example, Category, Department
-  //  */
-  // target: T;
-
   required?: boolean;
 
   /**

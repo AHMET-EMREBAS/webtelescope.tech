@@ -1,5 +1,5 @@
-import { ClassType } from '../../common';
-import { RequiredConverter, RequiredConverterOptions } from '../../property';
+import { ClassType } from '../../../common';
+import { RequiredConverter, RequiredConverterOptions } from '../../../core/relation';
 
 export const requiredConverter: RequiredConverter = (
   options: RequiredConverterOptions

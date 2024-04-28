@@ -2,14 +2,13 @@ import { DecoratorPrinter } from '@webpackages/printer';
 import {
   ClassType,
   EmptyPrinter,
-  PrinterPickerOptions,
   PropertyDecoratorPrinterPicker,
+  PropertyDecoratorPrinterPickerOptions,
 } from '../../../common';
-import { ColumnOptions, PropertyOptions } from '@webpackages/meta';
 import { stringify } from '../../../utils';
 
-export const decoratorPrinterPicker: PropertyDecoratorPrinterPicker = (
-  __options: PrinterPickerOptions<PropertyOptions>
+export const decoratorPicker: PropertyDecoratorPrinterPicker = (
+  __options: PropertyDecoratorPrinterPickerOptions
 ) => {
   const { classType, options } = __options;
   switch (classType) {
@@ -25,18 +24,7 @@ export const decoratorPrinterPicker: PropertyDecoratorPrinterPicker = (
         options: stringify({ ...options, required: false }),
       });
 
-    case ClassType.ENTITY: {
-      const { type, unique, required, description } = options;
-      return new DecoratorPrinter({
-        name: 'Column',
-        options: stringify({
-          type,
-          unique,
-          required,
-          description,
-        } as ColumnOptions),
-      });
-    }
+    case ClassType.ENTITY:
     case ClassType.ICREATE:
     case ClassType.IENTITY:
     case ClassType.IQUERY:

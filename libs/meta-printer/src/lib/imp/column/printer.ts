@@ -1,4 +1,4 @@
-import { PropertyOptions } from '@webpackages/meta';
+import { ColumnOptions } from '@webpackages/meta';
 import { ClassType } from '../../common';
 import {
   classTypeConverter,
@@ -7,24 +7,20 @@ import {
   typeConverter,
 } from './converter';
 import { decoratorPicker, docPicker } from './picker';
-import { BasePrinter } from '../../core/property';
+import { BasePrinter } from '../../core/column';
 
-/**
- * @DONE
- *
- */
-export class PropertyPrinter extends BasePrinter {
+export class ColumnPrinter extends BasePrinter {
   constructor(
     protected readonly classType: ClassType,
     protected readonly modelName: string,
-    protected readonly propertyName: string,
-    protected readonly propertyOptions: PropertyOptions
+    protected readonly columnName: string,
+    protected readonly columnOptions: ColumnOptions
   ) {
     super({
       classType,
       modelName,
-      propertyName,
-      propertyOptions,
+      columnName,
+      columnOptions,
       classTypeConverter,
       nameConverter,
       typeConverter,

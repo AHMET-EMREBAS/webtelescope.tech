@@ -1,8 +1,8 @@
-import { ClassType } from '../../common';
-import { NameConverter, NameConverterOptions } from '../../property';
-import { toPropertyName } from '../../utils';
+import { ClassType } from '../../../common';
+import { NameConverter, NameConverterOptions } from '../../../core/property';
+import { toPropertyName } from '../../../utils';
 
-export const propertyNameConverter: NameConverter = (
+export const nameConverter: NameConverter = (
   options: NameConverterOptions
 ) => {
   const { classType, modelName, propertyName } = options;

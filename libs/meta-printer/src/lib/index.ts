@@ -1,4 +1,4 @@
 // @index(['./*', '!./__*'], f => `export * from '${f.path}'`)
 export * from './common';
 export * from './imp';
-export * from './property';
+export * from './core/property';

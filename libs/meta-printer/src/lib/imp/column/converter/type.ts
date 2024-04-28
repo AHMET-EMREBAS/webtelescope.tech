@@ -1,7 +1,7 @@
 import { PropertyType, PropertyTypeName } from '@webpackages/meta';
-import { PropertyTypeConverter } from '../../property';
+import { TypeConverter } from '../../../core/column';
 
-export const propertyTypeConverter: PropertyTypeConverter = (
+export const typeConverter: TypeConverter = (
   type: string,
   objectType?: string
 ): string => {

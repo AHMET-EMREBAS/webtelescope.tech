@@ -100,7 +100,9 @@ export type CommonProperty<
   defaultValue?: DefaultValueType<T>;
 
   required?: boolean;
+
   isArray?: boolean;
+
   unique?: boolean;
 
   /**

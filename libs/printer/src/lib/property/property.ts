@@ -29,7 +29,9 @@ export class PropertyPrinter implements IPrint {
   }
 
   protected __decorators(): string {
-    return this.__propertyPrinterOptions.decoratorsPrinter?.print() ?? '';
+    const dec = this.__propertyPrinterOptions.decoratorsPrinter?.print();
+
+    return dec ? dec + ' ' : '';
   }
 
   /**
