@@ -1,10 +1,38 @@
-import { BasePropertyPrinter } from './printer';
-import { ClassType, Converter, PrinterPicker } from '../common';
+import {
+  BasePropertyPrinter,
+  ClassTypeConverter,
+  NameConverter,
+  NameConverterOptions,
+  PropertyTypeConverter,
+  RequiredConverter,
+  RequiredConverterOptions,
+} from './printer';
+import { ClassType as PClassType } from '@webpackages/printer';
+import { ClassType, PrinterPicker } from '../common';
 
-const propertyNameConverter: Converter<any, any> = () => 'Name';
-const requiredConverter: Converter<any, any> = () => 'Required';
-const classTypeConverter: Converter<any, any> = () => 'ClassType';
-const propertyTypeConverter: Converter<any, any> = () => 'PropertyType';
+const propertyNameConverter: NameConverter = (
+  options: NameConverterOptions
+) => {
+  expect(options.classType).toBeDefined();
+  expect(options.modelName).toBeDefined();
+  expect(options.propertyName).toBeDefined();
+  return 'Name';
+};
+const requiredConverter: RequiredConverter = (
+  options: RequiredConverterOptions
+) => {
+  expect(options).toBeDefined();
+  expect(options.classType).toBeDefined();
+  return true;
+};
+const classTypeConverter: ClassTypeConverter = (type: ClassType) => {
+  expect(type).toBeDefined();
+  return PClassType.CLASS;
+};
+const propertyTypeConverter: PropertyTypeConverter = (type: string) => {
+  expect(type).toBeDefined();
+  return 'string';
+};
 
 const docPrinterPicker: PrinterPicker<any> = () => {
   return {
@@ -13,6 +41,7 @@ const docPrinterPicker: PrinterPicker<any> = () => {
     },
   };
 };
+
 const decoratorPrinterPicker: PrinterPicker<any> = () => {
   return {
     print() {
@@ -34,6 +63,10 @@ describe('Printer', () => {
       decoratorPrinterPicker,
       propertyTypeConverter,
       docPrinterPicker,
+      namePrefix: '__P__',
+      nameSuffix: '__S__',
+      typePrefix: '__TP__',
+      typeSuffix: '__TS__',
     }).print();
 
     console.log(result);

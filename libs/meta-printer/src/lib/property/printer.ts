@@ -18,7 +18,7 @@ export type NameConverterOptions = {
 };
 
 export type ClassTypeConverter = Converter<ClassType, ExtClassType>;
-export type PropertyTypeConverter = Converter<string | undefined, string>;
+export type PropertyTypeConverter = Converter<string, string>;
 export type NameConverter = Converter<NameConverterOptions, string>;
 
 export type RequiredConverterOptions = {
@@ -69,7 +69,7 @@ export class BasePropertyPrinter extends PropertyPrinter {
     super({
       classType: classTypeConverter(classType),
       name: propertyNameConverter({ classType, modelName, propertyName }),
-      type: propertyTypeConverter(propertyOptions.type),
+      type: propertyTypeConverter(propertyOptions.type ?? 'string'),
       decoratorsPrinter: decoratorPrinterPicker({
         classType,
         options: propertyOptions,

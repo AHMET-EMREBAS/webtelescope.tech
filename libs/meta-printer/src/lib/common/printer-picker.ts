@@ -1,4 +1,5 @@
-import { IPrint, PropertyOptions } from '../core';
+import { PropertyOptions } from '@webpackages/meta';
+import { IPrint } from '@webpackages/printer';
 import { ClassType } from './class-type';
 import { Picker } from './picker';
 

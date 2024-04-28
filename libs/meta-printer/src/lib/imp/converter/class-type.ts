@@ -1,7 +1,6 @@
-import { ExtClassType } from '../../core';
 import { ClassType } from '../../common';
-import { ClassTypeConverter } from '../../property/printer';
-
+import { ClassTypeConverter } from '../../property';
+import { ClassType as ExtClassType } from '@webpackages/printer';
 /**
  * Convert {@link ClassType} to {@link ExtClassType}
  * @param classType
