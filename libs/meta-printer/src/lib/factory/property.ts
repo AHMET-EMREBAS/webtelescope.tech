@@ -1,5 +1,5 @@
 import { IPrinterPickerFactory } from '../common';
-import { PropertyPrinter } from './property';
+import { PropertyPrinter } from '../property';
 
 export class PropertyPrinterFactory
   implements IPrinterPickerFactory<PropertyPrinter>

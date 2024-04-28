@@ -16,6 +16,9 @@ export interface IPrinterPickerFactory<R> {
   View(...args: any[]): R;
 }
 
+/**
+ * Provide a convenient interface to pick names based on {@link ClassType}
+ */
 export interface INameFactory {
   /**
    *  `${this.fileName}.entity`;
@@ -79,13 +82,30 @@ export interface INameFactory {
 }
 
 export interface IPicker<T, R, O = unknown> {
+  /**
+   * Pick by type
+   */
   pick(type: T): R;
+
+  /**
+   * Pick by type and configure with options
+   */
   pick(type: T, options: O): R;
 }
 
+/**
+ * Pick string value by {@link ClassType}
+ */
 export interface INamePickerByClassType extends IPicker<ClassType, string> {}
 
+/**
+ * Pick {@link IPrint } by {@link ClassType}
+ */
 export interface IPrinterPickerByClassType extends IPicker<ClassType, IPrint> {}
+
+/**
+ * Pick {@link IPring} by {@link ClassType} and provide {@link Model} configuration.
+ * When the printer needs model metadata, then implement this interface.
+ */
 export interface IPrinterPickerByClassTypeAndModel
   extends IPicker<ClassType, IPrint, Model> {}
-

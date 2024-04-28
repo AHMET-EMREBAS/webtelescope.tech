@@ -1,7 +1,7 @@
 import { ColumnOptions, Model, PropertyOptions } from '../__meta';
 import { IPrint } from '../__printer';
-import { DefaultDecoratorOptionsPrinter } from './decorator-options';
-import { ViewEntityDecoratorOptionsPrinter } from './view-entity-options';
+import { DefaultDecoratorOptionsPrinter } from '../decorator';
+import { ViewEntityDecoratorOptionsPrinter } from '../decorator';
 
 export class DecoratorOptionsPrinterFactory {
   protected defaultPrinter<O>(options?: O) {

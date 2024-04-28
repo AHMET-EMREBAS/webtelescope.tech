@@ -1,8 +1,8 @@
 import { ColumnOptions, Model, PropertyOptions } from '../__meta';
 import { IPrint } from '../__printer';
 import { DecoratorName } from '../common';
-import { DecoratorPrinter } from './decorator';
-import { DecoratorOptionsPrinterFactory } from './decorator-options.factory';
+import { DecoratorPrinter } from '../decorator';
+import { DecoratorOptionsPrinterFactory } from './decorator-options';
 
 export class DecoratorPrinterFactory {
   constructor(

@@ -1,6 +1,11 @@
-import { ClassType, INameFactory } from '../common';
+import { ClassType, INameFactory, IPicker } from '../common';
 
-export class FileNameFactory implements INameFactory {
+/**
+ * Provides a convinient way to create file names by {@link ClassType}
+ */
+export class FileNameFactory
+  implements INameFactory, IPicker<ClassType, string>
+{
   readonly Entity = this.replace('#.entity');
   readonly IEntity = this.replace('#');
 
@@ -20,7 +25,10 @@ export class FileNameFactory implements INameFactory {
     return ext.replace('#', this.fileName);
   }
 
-  pick(classType: ClassType) {
+  /**
+   * Pick file name by {@link ClassType}
+   */
+  pick(classType: ClassType): string {
     switch (classType) {
       case ClassType.Entity:
         return this.Entity;
@@ -47,7 +55,7 @@ export class FileNameFactory implements INameFactory {
 
   /**
    *
-   * @param fileName without any extention such as product, category, some
+   * @param fileName the raw file name such us product, user, category without any extentions or variants.
    */
   constructor(protected readonly fileName: string) {}
 }

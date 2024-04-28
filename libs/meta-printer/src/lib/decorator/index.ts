@@ -1,7 +1,7 @@
 // @index(['./*', '!./*.spec.ts'], f => `export * from '${f.path}'`)
-export * from './decorator-options.factory'
+export * from '../factory/decorator-options'
 export * from './decorator-options'
-export * from './decorator.factory'
-export * from './decorator.manager'
+export * from '../factory/decorator'
+export * from '../factory/decorator-manager'
 export * from './decorator'
 export * from './view-entity-options'

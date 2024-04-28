@@ -33,7 +33,7 @@ export class ClassPrinter extends __ClassPrinter {
       name: name.pick(options.classType),
       type: type.pick(options.classType),
       extending: extending?.pick(options.classType),
-      impementing:implementing.pick(options.classType,options.model),
+      implementing: implementing.pick(options.classType, options.model),
       decorating: decorators?.pick(options.classType),
       content: content?.pick(options.classType, options.model),
       docs: doc?.pick(options.classType, options.model),

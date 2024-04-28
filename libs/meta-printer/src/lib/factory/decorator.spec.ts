@@ -1,5 +1,5 @@
-import { DecoratorOptionsPrinterFactory } from './decorator-options.factory';
-import { DecoratorPrinterFactory } from './decorator.factory';
+import { DecoratorOptionsPrinterFactory } from './decorator-options';
+import { DecoratorPrinterFactory } from './decorator';
 const Factory = new DecoratorPrinterFactory(
   new DecoratorOptionsPrinterFactory()
 );

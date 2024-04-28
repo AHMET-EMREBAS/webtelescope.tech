@@ -1,8 +1,11 @@
 import { ClassType, IPrinterPickerFactory } from '../common';
-import { ClassPrinter } from './class';
+import { ClassPrinter } from '../class';
 
 export type ClassPrinterType = typeof ClassPrinter;
 
+/**
+ * Pick class printer by {@link ClassType}
+ */
 export class ClassPrinterFactory
   implements IPrinterPickerFactory<ClassPrinterType>
 {
@@ -34,7 +37,7 @@ export class ClassPrinterFactory
     }
   }
 
-  Create(modelName: string): typeof ClassPrinter {
+  Create(): typeof ClassPrinter {
     throw new Error();
   }
   Entity(): typeof ClassPrinter {

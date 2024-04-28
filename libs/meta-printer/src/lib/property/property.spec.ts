@@ -1,4 +1,4 @@
-import { PropertyPrinterFactory } from './property.factory';
+import { PropertyPrinterFactory } from '../factory';
 const Factory = new PropertyPrinterFactory();
 
 describe('PropertyPrinter', () => {
