@@ -2,7 +2,10 @@
   "name": "@webpackages/meta-printer",
   "version": "0.0.1",
   "dependencies": {
-    "@swc/helpers": "~0.5.2"
+    "@swc/helpers": "~0.5.2",
+    "@webpackages/meta": "*",
+    "@webpackages/utils": "*",
+    "@webpackages/printer": "*"
   },
   "type": "commonjs",
   "main": "./src/index.js",

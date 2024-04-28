@@ -27,4 +27,6 @@ export type RelationOptions = {
    * @internal
    */
   model: Model;
+
+  description?: string;
 };

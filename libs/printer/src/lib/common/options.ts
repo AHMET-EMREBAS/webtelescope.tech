@@ -1,3 +1,4 @@
+import { ClassType } from './class-types';
 import { IPrint } from './interfaces';
 
 export type NotExtended = {
@@ -64,6 +65,8 @@ export type BasicPropertyPrinterOptions = {
    * Property type
    */
   type: string;
+
+  classType: ClassType;
 
   /**
    * Is property array

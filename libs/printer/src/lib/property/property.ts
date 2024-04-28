@@ -1,4 +1,10 @@
-import { ArrayMark, IPrint, PropertyPrinterOptions, RequiredMark } from '../common';
+import {
+  ArrayMark,
+  ClassType,
+  IPrint,
+  PropertyPrinterOptions,
+  RequiredMark,
+} from '../common';
 
 /**
  * Print class and interface properties
@@ -20,6 +26,10 @@ export class PropertyPrinter implements IPrint {
    */
   protected __delimeter(): string {
     return this.__propertyPrinterOptions.delimeter ?? ': ';
+  }
+
+  protected __decorators(): string {
+    return this.__propertyPrinterOptions.decoratorsPrinter?.print() ?? '';
   }
 
   /**
@@ -54,6 +64,9 @@ export class PropertyPrinter implements IPrint {
    * If the property is required, then return '!' else '?'
    */
   protected __isRequired(): RequiredMark {
+    if (this.__propertyPrinterOptions.classType === ClassType.INTERFACE) {
+      return this.__propertyPrinterOptions.required ? '' : '?';
+    }
     return this.__propertyPrinterOptions.required ? '!' : '?';
   }
 
@@ -92,6 +105,7 @@ export class PropertyPrinter implements IPrint {
   print(): string {
     return [
       this.__docs(),
+      this.__decorators(),
       this.__prefix(),
       this.__name(),
       this.__suffix(),

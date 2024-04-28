@@ -1,3 +1,4 @@
+import { ClassType } from '../common';
 import {
   ClassPropertyPrinter as CPR,
   InterfacePropertyPrinter as IPP,
@@ -29,6 +30,7 @@ describe('PropertyPrinter', () => {
     ({ expected, namePrefix, nameSuffix, typePrefix, typeSuffix }) => {
       const result = new CPR({
         name: 'name',
+        classType: ClassType.CLASS,
         type: 'string',
         required: true,
         namePrefix,

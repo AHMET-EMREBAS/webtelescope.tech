@@ -1,0 +1,12 @@
+export enum ClassType {
+  ENTITY = 'ENTITY',
+  VIEW = 'VIEW',
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE',
+  QUERY = 'QUERY',
+  IENTITY = 'IENTITY',
+  IVIEW = 'IVIEW',
+  ICREATE = 'ICREATE',
+  IUPDATE = 'IUPDATE',
+  IQUERY = 'IQUERY',
+}

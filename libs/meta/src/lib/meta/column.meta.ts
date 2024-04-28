@@ -5,4 +5,5 @@ export type ColumnOptions<P extends PropertyType = PropertyType> = {
   required?: boolean;
   unique?: boolean;
   isArray?: boolean;
+  description?: string;
 };
