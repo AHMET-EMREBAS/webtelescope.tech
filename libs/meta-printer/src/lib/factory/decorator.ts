@@ -1,72 +1,64 @@
 import { ColumnOptions, Model, PropertyOptions } from '../__meta';
 import { IPrint } from '../__printer';
 import { DecoratorName } from '../common';
-import { DecoratorPrinter } from '../decorator';
-import { DecoratorOptionsPrinterFactory } from './decorator-options';
+import {
+  DecoratorOptionsPrinter,
+  DecoratorPrinter,
+  ViewEntityDecoratorOptionsPrinter,
+} from '../decorator';
 
 export class DecoratorPrinterFactory {
-  constructor(
-    protected readonly optionsFactory: DecoratorOptionsPrinterFactory
-  ) {}
+  protected __build(
+    decoratorName: DecoratorName,
+    options?: ColumnOptions | PropertyOptions | string,
+    optionsPrinter?: IPrint
+  ) {
+    const ___optionsPrinter = options
+      ? new DecoratorOptionsPrinter(options)
+      : optionsPrinter
+      ? optionsPrinter
+      : undefined;
 
-  protected CREATE(decoratorName: DecoratorName, optionsPrinter: IPrint) {
-    return new DecoratorPrinter(decoratorName, optionsPrinter);
+    return new DecoratorPrinter(decoratorName, ___optionsPrinter);
   }
 
   ENTITY() {
-    return this.CREATE(DecoratorName.ENTITY, this.optionsFactory.ENTITY());
+    return this.__build(DecoratorName.ENTITY);
   }
 
   VIEW_ENTITY(model: Model) {
-    return this.CREATE(
+    return this.__build(
       DecoratorName.VIEW_ENTITY,
-      this.optionsFactory.VIEW_ENTITY(model)
+      undefined,
+      new ViewEntityDecoratorOptionsPrinter(model).print()
     );
   }
 
   COLUMN(options: ColumnOptions) {
-    return this.CREATE(
-      DecoratorName.COLUMN,
-      this.optionsFactory.COLUMN(options)
-    );
+    return this.__build(DecoratorName.COLUMN, options);
   }
 
   PROPERTY(options: PropertyOptions) {
-    return this.CREATE(
-      DecoratorName.PROPERTY,
-      this.optionsFactory.PROPERTY(options)
-    );
+    return this.__build(DecoratorName.PROPERTY, options);
   }
 
   VIEW_COLUMN() {
-    return this.CREATE(
-      DecoratorName.VIEW_COLUMN,
-      this.optionsFactory.VIEW_COLUMN()
-    );
+    return this.__build(DecoratorName.VIEW_COLUMN);
   }
 
-  DTO() {
-    return this.CREATE(DecoratorName.DTO, this.optionsFactory.DTO());
+  DTO(options: PropertyOptions) {
+    return this.__build(DecoratorName.DTO, options);
   }
 
   MANY(relationName: string) {
-    return this.CREATE(
-      DecoratorName.MANY,
-      this.optionsFactory.MANY(relationName)
-    );
+    return this.__build(DecoratorName.MANY, relationName);
   }
 
   ONE(relationName: string) {
-    return this.CREATE(
-      DecoratorName.ONE,
-      this.optionsFactory.ONE(relationName)
-    );
+    return this.__build(DecoratorName.ONE, relationName);
   }
 
   OWNER(relationName: string) {
-    return this.CREATE(
-      DecoratorName.OWNER,
-      this.optionsFactory.OWNER(relationName)
-    );
+    return this.__build(DecoratorName.OWNER, relationName);
   }
 }

@@ -1,11 +1,11 @@
 import { ColumnOptions, Model, PropertyOptions } from '../__meta';
 import { IPrint } from '../__printer';
-import { DefaultDecoratorOptionsPrinter } from '../decorator';
+import { DecoratorOptionsPrinter } from '../decorator';
 import { ViewEntityDecoratorOptionsPrinter } from '../decorator';
 
 export class DecoratorOptionsPrinterFactory {
-  protected defaultPrinter<O>(options?: O) {
-    return new DefaultDecoratorOptionsPrinter<O>(options);
+  protected __build<O>(options?: O) {
+    return new DecoratorOptionsPrinter<O>(options);
   }
 
   /**
@@ -14,7 +14,7 @@ export class DecoratorOptionsPrinterFactory {
    * @returns printer {@link DecoratorOptionsPrinter}
    */
   PROPERTY(options: PropertyOptions): IPrint {
-    return this.defaultPrinter(options);
+    return this.__build(options);
   }
 
   /**
@@ -23,7 +23,7 @@ export class DecoratorOptionsPrinterFactory {
    * @returns printer {@link DecoratorOptionsPrinter}
    */
   COLUMN(options: ColumnOptions): IPrint {
-    return this.defaultPrinter(options);
+    return this.__build(options);
   }
 
   /**
@@ -32,7 +32,7 @@ export class DecoratorOptionsPrinterFactory {
    * @returns printer {@link DecoratorOptionsPrinter}
    */
   ENTITY(): IPrint {
-    return this.defaultPrinter();
+    return this.__build();
   }
 
   /**
@@ -41,42 +41,42 @@ export class DecoratorOptionsPrinterFactory {
    * @returns printer {@link DecoratorOptionsPrinter}
    */
   VIEW(): IPrint {
-    return this.defaultPrinter();
+    return this.__build();
   }
 
   /**
    * DTO decorator-options printer
    */
   DTO(): IPrint {
-    return this.defaultPrinter();
+    return this.__build();
   }
 
   /**
    * MANY decorator-options printer
    */
   MANY(relationTarget: string): IPrint {
-    return this.defaultPrinter(relationTarget);
+    return this.__build(relationTarget);
   }
 
   /**
    * ONE decorator-options printer
    */
   ONE(relationTarget: string): IPrint {
-    return this.defaultPrinter(relationTarget);
+    return this.__build(relationTarget);
   }
 
   /**
    * OWNER decorator-options printer
    */
   OWNER(relationTarget: string): IPrint {
-    return this.defaultPrinter(relationTarget);
+    return this.__build(relationTarget);
   }
 
   /**
    * VIEW_COLUMN decorator-options printer
    */
   VIEW_COLUMN(): IPrint {
-    return this.defaultPrinter();
+    return this.__build();
   }
 
   /**

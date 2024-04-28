@@ -219,7 +219,7 @@ export type BasicClassPrinterOptions = {
 
 
 /**
- * Class printer optionsF
+ * Class printer options
  */
 export type ClassPrinterOptions<T = NotExtended> = BasicClassPrinterOptions &
   NamePefixOptions &
