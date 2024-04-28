@@ -2,7 +2,7 @@ import { Model } from '../__meta';
 import { ClassPrinter as __ClassPrinter } from '../__printer';
 import {
   ClassType,
-  INamePickerByClassType,
+  IStringPickerByClassType,
   IPrinterPickerByClassType,
   IPrinterPickerByClassTypeAndModel,
 } from '../common';
@@ -16,32 +16,32 @@ export class ClassPrinter extends __ClassPrinter {
    * @param classType {@link ClassType}
    * @param model {@link Model}
    * @param options {@link ClassPrinterOptions}
-   * @param name {@link INamePickerByClassType}
-   * @param type {@link INamePickerByClassType}
+   * @param name {@link IStringPickerByClassType}
+   * @param type {@link IStringPickerByClassType}
    * @param extending {@link IPrinterPickerByClassTypeAndModel}
    * @param implementing {@link IPrinterPickerByClassTypeAndModel}
    * @param content {@link IPrinterPickerByClassTypeAndModel}
    * @param decorating {@link IPrinterPickerByClassType}
    * @param generics {@link IPrinterPickerByClassTypeAndModel}
    * @param importings {@link IPrinterPickerByClassTypeAndModel}
-   * @param namePrefix {@link INamePickerByClassType}
-   * @param nameSuffix {@link INamePickerByClassType}
+   * @param namePrefix {@link IStringPickerByClassType}
+   * @param nameSuffix {@link IStringPickerByClassType}
    * @param docs {@link IPrinterPickerByClassTypeAndModel}
    * @param notExport {@link boolea}
    */
   constructor(
     protected readonly classType: ClassType,
     protected readonly model: Model,
-    protected readonly name: INamePickerByClassType,
-    protected readonly type: INamePickerByClassType,
+    protected readonly name: IStringPickerByClassType,
+    protected readonly type: IStringPickerByClassType,
     protected readonly extending?: IPrinterPickerByClassTypeAndModel,
     protected readonly implementing?: IPrinterPickerByClassTypeAndModel,
     protected readonly content?: IPrinterPickerByClassTypeAndModel,
     protected readonly decorating?: IPrinterPickerByClassType,
     protected readonly generics?: IPrinterPickerByClassTypeAndModel,
     protected readonly importings?: IPrinterPickerByClassTypeAndModel,
-    protected readonly namePrefix?: INamePickerByClassType,
-    protected readonly nameSuffix?: INamePickerByClassType,
+    protected readonly namePrefix?: IStringPickerByClassType,
+    protected readonly nameSuffix?: IStringPickerByClassType,
     protected readonly docs?: IPrinterPickerByClassTypeAndModel,
     protected readonly notExport?: boolean
   ) {

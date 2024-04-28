@@ -30,7 +30,7 @@ export class DecoratorPrinterFactory {
     return this.__build(
       DecoratorName.VIEW_ENTITY,
       undefined,
-      new ViewEntityDecoratorOptionsPrinter(model).print()
+      new ViewEntityDecoratorOptionsPrinter(model)
     );
   }
 

@@ -1,4 +1,4 @@
-import { IPrint, PropertyPrinterOptions } from '../common';
+import { ArrayMark, IPrint, PropertyPrinterOptions, RequiredMark } from '../common';
 
 /**
  * Print class and interface properties
@@ -53,7 +53,7 @@ export class PropertyPrinter implements IPrint {
   /**
    * If the property is required, then return '!' else '?'
    */
-  protected __isRequired(): '!' | '?' | '' {
+  protected __isRequired(): RequiredMark {
     return this.__propertyPrinterOptions.required ? '!' : '?';
   }
 
@@ -74,7 +74,7 @@ export class PropertyPrinter implements IPrint {
   /**
    * If the property is array then return '[]' else ''
    */
-  protected __isArray(): '[]' | '' {
+  protected __isArray(): ArrayMark {
     return this.__propertyPrinterOptions.isArray ? '[]' : '';
   }
 

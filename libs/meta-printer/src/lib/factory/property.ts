@@ -1,15 +1,25 @@
+import { PropertyOptions } from '../__meta';
 import { IPrinterPickerFactory } from '../common';
 import { PropertyPrinter } from '../property';
 
 export class PropertyPrinterFactory
   implements IPrinterPickerFactory<PropertyPrinter>
 {
+  protected __build( propertyName: string, options: PropertyOptions) {
+    return new PropertyPrinter({ 
+      name:propertyName, 
+      type:
+    })
+  }
   /**
    * Entity class property printer
    * @returns
    */
-  Entity(): PropertyPrinter {
-    return new PropertyPrinter({ type: 'string', name: 'some' });
+  Entity(propertyName: string, options: PropertyOptions): PropertyPrinter {
+    return new PropertyPrinter({
+      name: propertyName,
+      type:'string'
+    });
   }
 
   /**

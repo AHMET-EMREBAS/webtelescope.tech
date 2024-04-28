@@ -1,10 +1,10 @@
 import { ClassType as __ClassType } from '../__printer';
-import { ClassType, INamePickerByClassType } from '../common';
+import { ClassType, IStringPickerByClassType } from '../common';
 
 /**
  * Produce the type of class interface or class {@link __ClassType}
  */
-export class ClassTypeFactory implements INamePickerByClassType {
+export class ClassTypeFactory implements IStringPickerByClassType {
   pick(classType: ClassType) {
     switch (classType) {
       case ClassType.Create:

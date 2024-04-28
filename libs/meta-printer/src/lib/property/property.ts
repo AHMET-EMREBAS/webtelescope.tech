@@ -1,93 +1,51 @@
-import { Model } from '../__meta';
+import { PropertyOptions } from '../__meta';
 import {
   IPrint,
+  RequiredMark,
   PropertyPrinter as __PropertyPrinter,
-  PropertyPrinterOptions as __PropertyPrinterOptions,
 } from '../__printer';
-import { names } from '../__utils';
-
-export type PropertyPrinterOptions = __PropertyPrinterOptions<
-  Partial<Pick<Model, 'modelName'>>
->;
+import {
+  ClassType,
+  IStringPickerByClassType,
+  IPickValuePickerByClassName,
+  IPrinterPickerByClassType,
+} from '../common';
 
 /**
  * Default property printer implementation following interface property syntax
  */
 export class PropertyPrinter extends __PropertyPrinter implements IPrint {
-  constructor(protected readonly options: PropertyPrinterOptions) {
-    super(options);
+  constructor(
+    protected readonly classType: ClassType,
+    protected readonly modelName: string,
+    protected readonly propertyOptions: PropertyOptions,
+    protected readonly name: IStringPickerByClassType,
+    protected readonly type: IStringPickerByClassType,
+    protected readonly isRequired: IPickValuePickerByClassName<RequiredMark>,
+    protected readonly decorators: IPrinterPickerByClassType,
+    protected readonly docs: IPrinterPickerByClassType,
+    protected readonly namePrefix?: IStringPickerByClassType,
+    protected readonly nameSuffix?: IStringPickerByClassType,
+    protected readonly typePrefix?: IStringPickerByClassType,
+    protected readonly typeSuffix?: IStringPickerByClassType,
+    protected readonly delimeter?: IStringPickerByClassType
+  ) {
+    super({
+      name: name.pick(classType),
+      type: type.pick(classType, propertyOptions.type),
+      decoratorsPrinter: decorators.pick(classType, propertyOptions),
+      docsPrinter: docs.pick(classType, propertyOptions),
+      isArray: propertyOptions.isArray,
+      namePrefix: namePrefix?.pick(classType),
+      nameSuffix: nameSuffix?.pick(classType),
+      required: propertyOptions.required,
+      typePrefix: typePrefix?.pick(classType),
+      typeSuffix: typeSuffix?.pick(classType),
+      delimeter: delimeter?.pick(classType),
+    });
   }
 
-  protected override __isRequired(): '' | '!' | '?' {
-    return this.options.required ? '' : '?';
-  }
-}
-
-/**
- * Property printer for class syntax
- */
-export class ClassPropertyPrinter extends PropertyPrinter {
-  protected override __isRequired(): '' | '!' | '?' {
-    return this.options.required ? '!' : '?';
-  }
-}
-
-/**
- * Property printer for interface syntax
- */
-export class InterfacePropertyPrinter extends PropertyPrinter {
-  protected override __isRequired(): '' | '!' | '?' {
-    return this.options.required ? '' : '?';
-  }
-}
-
-export class ViewEntityPropertyPrinter extends PropertyPrinter {
-  protected override __isRequired(): '' | '!' | '?' {
-    return '!';
-  }
-
-  protected __modelName() {
-    if (!this.options.modelName) {
-      throw new Error(`modelName is requried to print view entity properties!`);
-    }
-    return this.options.modelName;
-  }
-
-  protected override __name(): string {
-    return names(this.__modelName() + names(this.__name()).className)
-      .propertyName;
-  }
-}
-
-export class QueryPropertyPrinter extends ViewEntityPropertyPrinter {
-  protected override __isRequired(): '' | '!' | '?' {
-    return '?';
-  }
-}
-
-/**
- * All properties are optional
- */
-export class OptionalPropertyPrinter extends PropertyPrinter {
-  protected override __isRequired(): '' | '!' | '?' {
-    return '?';
-  }
-}
-
-/**
- * All properties are required
- */
-export class RequiredClassPropertyPrinter extends PropertyPrinter {
-  protected override __isRequired(): '' | '!' | '?' {
-    return '!';
-  }
-}
-
-/**
- * All properties are required
- */
-export class RequiredInterfacePropertyPrinter extends PropertyPrinter {
-  protected override __isRequired(): '' | '!' | '?' {
-    return '!';
+  protected override __isRequired(): RequiredMark {
+    return this.isRequired.pick(this.classType);
   }
 }

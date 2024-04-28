@@ -4,16 +4,16 @@ import { Model } from '../__meta';
 import { IPrint } from '../__printer';
 import { ClassType } from './class-type';
 
-export interface IPrinterPickerFactory<R> {
-  Entity(...args: any[]): R;
-  Update(...args: any[]): R;
-  IEntity(...args: any[]): R;
-  ICreate(...args: any[]): R;
-  IUpdate(...args: any[]): R;
-  Query(...args: any[]): R;
-  IQuery(...args: any[]): R;
-  IView(...args: any[]): R;
-  View(...args: any[]): R;
+export interface IPrinterPickerFactory {
+  Entity(...args: any[]): IPrint
+  Update(...args: any[]): IPrint
+  IEntity(...args: any[]): IPrint
+  ICreate(...args: any[]): IPrint
+  IUpdate(...args: any[]): IPrint
+  Query(...args: any[]): IPrint
+  IQuery(...args: any[]): IPrint
+  IView(...args: any[]): IPrint
+  View(...args: any[]): IPrint
 }
 
 /**
@@ -81,22 +81,32 @@ export interface INameFactory {
   IQuery: string;
 }
 
-export interface IPicker<T, R, O = unknown> {
+export interface IPicker<TParam, TReturn, TOptions = unknown> {
   /**
    * Pick by type
    */
-  pick(type: T): R;
+  pick(type: TParam): TReturn;
 
   /**
    * Pick by type and configure with options
    */
-  pick(type: T, options: O): R;
+  pick(type: TParam, options?: TOptions): TReturn;
 }
 
 /**
  * Pick string value by {@link ClassType}
  */
-export interface INamePickerByClassType extends IPicker<ClassType, string> {}
+export interface IStringPickerByClassType
+  extends IPicker<ClassType, string, string> {}
+
+export interface IPickValuePickerByClassName<ValueType>
+  extends IPicker<ClassType, ValueType, boolean> {}
+
+/**
+ * Pick string value by {@link ClassType}
+ */
+export interface IConditionalPickerByClassName<T = boolean>
+  extends IPicker<ClassType, boolean, T> {}
 
 /**
  * Pick {@link IPrint } by {@link ClassType}
