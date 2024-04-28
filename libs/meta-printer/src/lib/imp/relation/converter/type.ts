@@ -7,6 +7,7 @@ export const typeConverter: TypeConverter = (
   const { classType, type } = options;
   switch (classType) {
     case ClassType.IENTITY:
+      return `T${type}`;
     case ClassType.ENTITY:
       return type;
     case ClassType.CREATE:

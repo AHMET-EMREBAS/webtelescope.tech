@@ -6,6 +6,7 @@ import {
   RelationDecoratorPrinterPickerOptions,
 } from '../../../common';
 import { stringify } from '../../../utils';
+import { RelationType } from '@webpackages/meta';
 
 export const decoratorPicker: RelationDecoratorPrinterPicker = (
   __options: RelationDecoratorPrinterPickerOptions
@@ -17,7 +18,11 @@ export const decoratorPicker: RelationDecoratorPrinterPicker = (
     case ClassType.UPDATE:
       return new DecoratorPrinter({
         name: 'Property',
-        options: stringify({ type: 'ID' }),
+        options: stringify({
+          type: 'ID',
+          required: options.required ? true : false,
+          isArray: options.type === RelationType.Many ? true : false,
+        }),
       });
     case ClassType.ENTITY:
       return new DecoratorPrinter({

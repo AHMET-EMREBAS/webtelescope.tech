@@ -1,5 +1,5 @@
 import { ClassType } from '../../common';
-import { ColumnPrinter } from './printer';
+import { PropertyPrinter } from './printer';
 describe('Column Printer', () => {
   it.each`
     expected                                                              | classType            | modelName | name      | options
@@ -16,7 +16,7 @@ describe('Column Printer', () => {
   `(
     '$classType | should print $expected for $options',
     ({ expected, classType, modelName, name, options }) => {
-      const result = new ColumnPrinter(
+      const result = new PropertyPrinter(
         classType,
         modelName,
         name,

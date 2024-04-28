@@ -116,6 +116,7 @@ export class PropertyPrinter implements IPrint {
       this.__typePrefix(),
       this.__type(),
       this.__typeSuffix(),
+      this.__isArray(),
       this.__endOfLine(),
     ].join('');
   }

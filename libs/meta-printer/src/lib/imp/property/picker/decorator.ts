@@ -23,8 +23,10 @@ export const decoratorPicker: PropertyDecoratorPrinterPicker = (
         name: 'Property',
         options: stringify({ ...options, required: false }),
       });
-
     case ClassType.ENTITY:
+      throw new Error(
+        'You should use the dedicated colum printer for printing entity columns!'
+      );
     case ClassType.ICREATE:
     case ClassType.IENTITY:
     case ClassType.IQUERY:
