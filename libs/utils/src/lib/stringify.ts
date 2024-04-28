@@ -14,7 +14,7 @@ export function stringify(obj: Record<string, any> | string): string {
       .map(([key, value]) => {
         return `${key}: ${stringify(value)},`;
       })
-      .join('\n');
+      .join(' ');
 
     const wrap = (__content: string) => `{ ${__content} }`;
 

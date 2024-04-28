@@ -25,6 +25,10 @@ export const decoratorPicker: PropertyDecoratorPrinterPicker = (
       });
 
     case ClassType.ENTITY:
+      return new DecoratorPrinter({
+        name: 'Column',
+        options: stringify({ ...options }),
+      });
     case ClassType.ICREATE:
     case ClassType.IENTITY:
     case ClassType.IQUERY:

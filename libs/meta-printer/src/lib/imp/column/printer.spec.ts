@@ -2,10 +2,15 @@ import { ClassType } from '../../common';
 import { ColumnPrinter } from './printer';
 describe('Column Printer', () => {
   it.each`
-    expected                                        | classType           | modelName  | name      | options
-    ${"@Property({ type: 'string' }) name?: string;"} | ${ClassType.CREATE} | ${'Model'} | ${'name'} | ${{ type: 'string' }}
+    expected                                                              | classType            | modelName | name      | options
+    ${"@Property({ type: 'string' }) name?: string;"}                     | ${ClassType.CREATE}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${"@Property({ type: 'string',\nrequired: false }) name?: string;"}    | ${ClassType.UPDATE}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${"@Property({ type: 'string',\nrequired: false }) catName?: string;"} | ${ClassType.QUERY}   | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${"@Column({ type: 'string' }) name?: string;"}                       | ${ClassType.ENTITY}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'name?: string;'}                                                   | ${ClassType.IENTITY} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'name?: string;'}                                                   | ${ClassType.ICREATE} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
   `(
-    'should print $expected from $classType, $modelName, $name, $options',
+    '$classType | should print $expected for $options',
     ({ expected, classType, modelName, name, options }) => {
       const result = new ColumnPrinter(
         classType,
