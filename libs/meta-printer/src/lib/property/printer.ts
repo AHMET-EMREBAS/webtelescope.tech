@@ -2,7 +2,7 @@ import {
   ClassType,
   Converter,
   PropertyDecoratorPrinterPicker,
-  PropertyDeocPrinterPicker,
+  PropertyDocPrinterPicker,
 } from '../common';
 
 import { PropertyOptions } from '@webpackages/meta';
@@ -43,7 +43,7 @@ export type PropertyPrinterOptions = {
   propertyTypeConverter: PropertyTypeConverter;
   decoratorPrinterPicker: PropertyDecoratorPrinterPicker;
   requiredConverter: RequiredConverter;
-  docPrinterPicker: PropertyDeocPrinterPicker;
+  docPrinterPicker: PropertyDocPrinterPicker;
 };
 
 export class BasePropertyPrinter extends PropertyPrinter {

@@ -1,8 +1,17 @@
+/**
+ * @DONE
+ *
+ */
 import { PropertyOptions } from '@webpackages/meta';
 import { ClassType, EmptyPrinter } from '../../common';
 import { BasePropertyPrinter } from '../../property';
-import { classTypeConverter, requiredConverter } from '../converter';
-import { propertyDecoratorPrinterPicker } from '../picker/property';
+import {
+  classTypeConverter,
+  requiredConverter,
+  propertyNameConverter,
+  propertyTypeConverter,
+} from '../converter';
+import { decoratorPrinterPicker } from '../picker/property';
 
 export class PropertyPrinter extends BasePropertyPrinter {
   constructor(
@@ -16,12 +25,12 @@ export class PropertyPrinter extends BasePropertyPrinter {
       modelName,
       propertyName,
       propertyOptions,
-      classTypeConverter: classTypeConverter,
-      propertyNameConverter: () => '',
-      propertyTypeConverter: () => '',
+      classTypeConverter,
+      propertyNameConverter,
+      propertyTypeConverter,
       requiredConverter,
-      decoratorPrinterPicker: propertyDecoratorPrinterPicker,
-      docPrinterPicker: (...args: any[]) => EmptyPrinter,
+      decoratorPrinterPicker
+      docPrinterPicker,
     });
   }
 }

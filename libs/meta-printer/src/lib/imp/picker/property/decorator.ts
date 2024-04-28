@@ -8,11 +8,10 @@ import {
 import { ColumnOptions, PropertyOptions } from '@webpackages/meta';
 import { stringify } from '../../../utils';
 
-export const propertyDecoratorPrinterPicker: PropertyDecoratorPrinterPicker = (
+export const decoratorPrinterPicker: PropertyDecoratorPrinterPicker = (
   __options: PrinterPickerOptions<PropertyOptions>
 ) => {
   const { classType, options } = __options;
-
   switch (classType) {
     case ClassType.CREATE:
       return new DecoratorPrinter({

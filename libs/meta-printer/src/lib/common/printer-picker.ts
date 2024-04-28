@@ -9,6 +9,6 @@ export type PrinterPicker<T> = Picker<PrinterPickerOptions<T>, IPrint>;
 
 export type PropertyDecoratorPrinterPicker = PrinterPicker<PropertyOptions>;
 
-export type PropertyDeocPrinterPicker<T = string> = PrinterPicker<
+export type PropertyDocPrinterPicker<T = string> = PrinterPicker<
   T | undefined
 >;
