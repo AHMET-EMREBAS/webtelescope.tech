@@ -3,7 +3,7 @@ import { IPrint, PropertyPrinterOptions } from '../common';
 /**
  * Print class and interface properties
  */
-export abstract class PropertyPrinter implements IPrint {
+export class PropertyPrinter implements IPrint {
   constructor(
     protected readonly __propertyPrinterOptions: PropertyPrinterOptions
   ) {}

@@ -10,35 +10,43 @@ export class ImplementPrinter implements IPrint {
   ) {}
 
   /**
-   * Delimeter between implemented Interfaces.
-   * @returns
+   * Defines delimeter between implementing items
    */
-  protected __delimeter() {
+  protected __delimeter(): string {
     return ', ';
   }
 
   /**
-   * default value is " " (single space)
-   * @returns
+   * Define join-delimeter between part of implements. Default value is " " (single space)
    */
-  protected __jonBy() {
+  protected __jonBy(): string {
     return ' ';
   }
 
   /**
-   * @returns implements keyword 
+   * Defines the keyword used for implement. Default value is 'implements'
    */
-  protected __keyword() {
+  protected __keyword(): string {
     return 'implements';
   }
 
-  protected __items() {
+  /**
+   * Print implementing items
+   */
+  protected __items(): string {
     return this.extendsPrinterOptions.items?.join(', ') ?? '';
   }
-  protected __item() {
-    return this.extendsPrinterOptions.item;
+
+  /**
+   * Print implementing item
+   */
+  protected __item(): string {
+    return this.extendsPrinterOptions.item ?? '';
   }
 
+  /**
+   * Print implements
+   */
   print(): string {
     return [this.__keyword(), this.__items(), this.__item()].join(
       this.__jonBy()

@@ -1,45 +1,66 @@
 import { IPrint } from '../common';
 
+/**
+ * Generic printer options
+ */
 export type GenericPrinterOptions = {
+  /**
+   * Generic items
+   */
   items?: string[];
+
+  /**
+   * Generic item
+   */
   item?: string;
 };
 
+/**
+ * Print generics
+ */
 export class GenericPrinter implements IPrint {
   constructor(
     protected readonly extendsPrinterOptions: GenericPrinterOptions
   ) {}
 
   /**
-   *
-   * @returns `', '`
+   * Defines the delimeter between the generic items. Default value is ', '
    */
-  protected __delimeter() {
+  protected __delimeter(): string {
     return ', ';
   }
 
   /**
-   * @returns `'<'`
+   * Defines prefix for generic statement. Default value is '<'
    */
-  protected __prefix() {
+  protected __prefix(): string {
     return '<';
   }
 
   /**
-   * @returns `'>'`
+   * Defines suffix for generic statement. Default value is '>'
    */
-  protected __suffix() {
+  protected __suffix(): string {
     return '>';
   }
 
-  protected __items() {
+  /**
+   * Print generic items
+   */
+  protected __items(): string {
     return this.extendsPrinterOptions.items?.join(this.__delimeter()) ?? '';
   }
 
-  protected __item() {
-    return this.extendsPrinterOptions.item;
+  /**
+   * Print generic item
+   */
+  protected __item(): string {
+    return this.extendsPrinterOptions.item ?? '';
   }
 
+  /**
+   * Print the generics
+   */
   print(): string {
     return [
       this.__prefix(),

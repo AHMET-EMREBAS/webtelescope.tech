@@ -1,5 +1,8 @@
 import { IPrint, ImportPrinterOptions } from '../common';
 
+/**
+ * Print imports
+ */
 export class ImportPrinter implements IPrint {
   constructor(
     protected readonly __importPrinterOptions: ImportPrinterOptions

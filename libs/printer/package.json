@@ -8,7 +8,7 @@
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "compodoc": {
-    "output": "dist/docs/@webpackages/printer",
-    "port": "4400"
+    "tsconfig": "./tsconfig.json",
+    "output": "../../dist/docs/@webpackages/printer"
   }
 }

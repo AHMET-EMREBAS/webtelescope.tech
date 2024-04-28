@@ -1,5 +1,8 @@
 import { DocPrinterOptions, IPrint } from '../common';
 
+/**
+ * Print documentation
+ */
 export class DocPritner implements IPrint {
   constructor(protected readonly __docPrinterOptions: DocPrinterOptions) {}
 
@@ -17,6 +20,9 @@ export class DocPritner implements IPrint {
     return this.__docPrinterOptions.content;
   }
 
+  /**
+   * Check is inline or not
+   */
   protected __inlineDoc(): string {
     return `// ${this.__content().split('\n').join(' ')}`;
   }
@@ -29,6 +35,9 @@ export class DocPritner implements IPrint {
     return `/**\n${content}\n */`;
   }
 
+  /**
+   * Print the content
+   */
   print(): string {
     if (this.__content())
       if (this.__isInline()) {
