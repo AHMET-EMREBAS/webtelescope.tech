@@ -1,20 +1,17 @@
-import { DecoratorOptionsPrinterFactory } from './decorator-options';
-import { DecoratorPrinterFactory } from './decorator';
-const Factory = new DecoratorPrinterFactory(
-  new DecoratorOptionsPrinterFactory()
-);
+import { DecoratorPrinterFactory } from './common-decorators';
+const Decorators = new DecoratorPrinterFactory();
 
 describe('DecoratorPrinterFactory', () => {
   it.each`
     expected                           | actual
-    ${'@Entity()'}                     | ${Factory.ENTITY().print()}
-    ${"@Column({ type: 'string' })"}   | ${Factory.COLUMN({ type: 'string' }).print()}
-    ${"@Property({ type: 'string' })"} | ${Factory.PROPERTY({ type: 'string' }).print()}
-    ${'@ViewColumn()'}                 | ${Factory.VIEW_COLUMN().print()}
-    ${'@Dto()'}                        | ${Factory.DTO().print()}
-    ${"@Many('Some')"}                 | ${Factory.MANY('Some').print()}
-    ${"@One('Some')"}                  | ${Factory.ONE('Some').print()}
-    ${"@Owner('Some')"}                | ${Factory.OWNER('Some').print()}
+    ${'@Entity()'}                     | ${Decorators.ENTITY().print()}
+    ${"@Column({ type: 'string' })"}   | ${Decorators.COLUMN({ type: 'string' }).print()}
+    ${"@Property({ type: 'string' })"} | ${Decorators.PROPERTY({ type: 'string' }).print()}
+    ${'@ViewColumn()'}                 | ${Decorators.VIEW_COLUMN().print()}
+    ${'@Dto()'}                        | ${Decorators.DTO().print()}
+    ${"@Many('Some')"}                 | ${Decorators.MANY('Some').print()}
+    ${"@One('Some')"}                  | ${Decorators.ONE('Some').print()}
+    ${"@Owner('Some')"}                | ${Decorators.OWNER('Some').print()}
   `('should print $expected ', ({ expected, actual }) => {
     expect(actual).toBe(expected);
   });

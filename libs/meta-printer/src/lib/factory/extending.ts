@@ -1,52 +1,31 @@
 import { Model } from '../__meta';
-import { IPrint } from '../__printer';
-import { EmptyPrinter, IPrinterPickerFactory } from '../common';
-import { ClassNameFactory } from './class-name';
+import { ExtendPrinter, IPrint } from '../__printer';
+import {
+  ClassType,
+  EmptyPrinter,
+  INameFactory,
+  IPrinterPickerByClassTypeAndModel,
+} from '../common';
 
-export class ExtendingFactory implements IPrinterPickerFactory {
-  protected nameFactory!: ClassNameFactory;
-  constructor(protected readonly model: Model) {
-    this.nameFactory = new ClassNameFactory(model.modelName);
-  }
+export class ExtendingFactory implements IPrinterPickerByClassTypeAndModel {
+  constructor(protected readonly nameFactory: INameFactory) {}
 
-  Entity(): IPrint {
-    return new EmptyPrinter();
-  }
+  pick(type: ClassType, ): IPrint {
+    switch (type) {
+      case ClassType.Update:
+        return new ExtendPrinter({
+          item: `PartialType(${this.nameFactory.Create})`,
+        });
+      case ClassType.Entity:
+        return new ExtendPrinter({
+          item: 'BaseEntity',
+        });
+      case ClassType.IUpdate:
+        return new ExtendPrinter({
+          item: `Partial<${this.nameFactory.ICreate}>`,
+        });
+    }
 
-  Update(): IPrint {
-    const createDtoName = this.nameFactory.Create;
-    return {
-      print() {
-        return `PartialType(${createDtoName})`;
-      },
-    };
-  }
-
-  IEntity(): IPrint {
-    return new EmptyPrinter();
-  }
-
-  ICreate(): IPrint {
-    return new EmptyPrinter();
-  }
-
-  IUpdate(): IPrint {
-    return new EmptyPrinter();
-  }
-
-  Query(): IPrint {
-    return new EmptyPrinter();
-  }
-
-  IQuery(): IPrint {
-    return new EmptyPrinter();
-  }
-
-  IView(): IPrint {
-    return new EmptyPrinter();
-  }
-
-  View(): IPrint {
     return new EmptyPrinter();
   }
 }

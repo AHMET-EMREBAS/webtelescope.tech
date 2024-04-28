@@ -1,12 +1,8 @@
-import { Model } from '../__meta';
 import {
   ImportPrinter as __ImportPrinter,
-  ImportPrinterOptions as __ImportPrinterOptions,
+  ImportPrinterOptions,
 } from '../__printer';
 
-export type ImportPrinterOptions = __ImportPrinterOptions<
-  Pick<Model, 'modelName' | 'properties' | 'relations'>
->;
 /**
  * Implements the common import printer operations
  */

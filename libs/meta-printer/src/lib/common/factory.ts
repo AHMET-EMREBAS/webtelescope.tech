@@ -1,19 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Model } from '../__meta';
+import {
+  ColumnOptions,
+  Model,
+  PropertyOptions,
+  RelationOptions,
+} from '../__meta';
 import { IPrint } from '../__printer';
 import { ClassType } from './class-type';
 
 export interface IPrinterPickerFactory {
-  Entity(...args: any[]): IPrint
-  Update(...args: any[]): IPrint
-  IEntity(...args: any[]): IPrint
-  ICreate(...args: any[]): IPrint
-  IUpdate(...args: any[]): IPrint
-  Query(...args: any[]): IPrint
-  IQuery(...args: any[]): IPrint
-  IView(...args: any[]): IPrint
-  View(...args: any[]): IPrint
+  Entity(...args: any[]): IPrint;
+  Update(...args: any[]): IPrint;
+  IEntity(...args: any[]): IPrint;
+  ICreate(...args: any[]): IPrint;
+  IUpdate(...args: any[]): IPrint;
+  Query(...args: any[]): IPrint;
+  IQuery(...args: any[]): IPrint;
+  IView(...args: any[]): IPrint;
+  View(...args: any[]): IPrint;
 }
 
 /**
@@ -81,7 +86,11 @@ export interface INameFactory {
   IQuery: string;
 }
 
-export interface IPicker<TParam, TReturn, TOptions = unknown> {
+export interface IPicker<
+  TParam = ClassType,
+  TReturn = IPrint,
+  TOptions = unknown
+> {
   /**
    * Pick by type
    */
@@ -119,3 +128,10 @@ export interface IPrinterPickerByClassType extends IPicker<ClassType, IPrint> {}
  */
 export interface IPrinterPickerByClassTypeAndModel
   extends IPicker<ClassType, IPrint, Model> {}
+
+export interface IPrinterPickerByCLassTypeAndPropertyOptions
+  extends IPicker<
+    ClassType,
+    IPrint,
+    PropertyOptions | ColumnOptions | RelationOptions
+  > {}

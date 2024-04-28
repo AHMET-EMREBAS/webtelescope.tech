@@ -1,6 +1,11 @@
 import { IPrint } from './interfaces';
 
-export type NotExtended = { __notExtended?: 'Type is not extended' };
+export type NotExtended = {
+  /**
+   * Indicate that this type does not extend any other types
+   */
+  __notExtended?: 'Type is not extended';
+};
 
 /**
  * For property name prefix and suffix configuration
@@ -216,7 +221,6 @@ export type BasicClassPrinterOptions = {
    */
   notExport?: boolean;
 };
-
 
 /**
  * Class printer options
