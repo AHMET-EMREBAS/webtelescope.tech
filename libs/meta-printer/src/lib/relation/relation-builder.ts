@@ -41,6 +41,7 @@ export class RelationBuilder {
   IEntityProperty(): IPrint {
     return this.__build({
       decoratorsPrinter: undefined,
+      classType: ClassType.INTERFACE,
       type: `T${this.modelName}`,
     });
   }
@@ -71,6 +72,7 @@ export class RelationBuilder {
   ICreateDtoProperty(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IID,
+      classType: ClassType.INTERFACE,
       decoratorsPrinter: undefined,
     });
   }
@@ -78,20 +80,40 @@ export class RelationBuilder {
   IUpdateDtoProperty(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IID,
+      classType: ClassType.INTERFACE,
       required: undefined,
       decoratorsPrinter: undefined,
     });
+  }
+
+  ViewProperties(): IPrint {
+    const queries = this.optionsManager
+      .toView()
+      .map((e) => {
+        return this.__build({
+          decoratorsPrinter: this.decoratorBuilder.ViewColumn(),
+          required: undefined,
+          isArray: undefined,
+          ...e,
+        });
+      })
+      .map((e) => e.print())
+      .join('\n');
+    return {
+      print() {
+        return queries;
+      },
+    };
   }
 
   QueryDtoProperties(): IPrint {
     const queries = this.optionsManager
       .toQuery()
       .map((e) => {
-        console.log(e);
         return this.__build({
           decoratorsPrinter: this.decoratorBuilder.QueryProperty(),
           required: undefined,
-          isArray: false,
+          isArray: undefined,
           ...e,
         });
       })
@@ -106,12 +128,14 @@ export class RelationBuilder {
 
   IQueryDtoProperties(): IPrint {
     const queries = this.optionsManager
-      .toQuery()
+      .toIQuery()
       .map((e) => {
         return this.__build({
-          ...e,
           decoratorsPrinter: undefined,
           required: undefined,
+          isArray: undefined,
+          classType: ClassType.INTERFACE,
+          ...e,
         });
       })
       .map((e) => e.print())

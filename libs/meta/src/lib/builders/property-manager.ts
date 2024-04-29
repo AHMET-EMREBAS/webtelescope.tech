@@ -50,6 +50,11 @@ export class PropertyManager {
   }
 
   toView(modelName: string = '') {
-    return this.toQuery(modelName);
+    if (this.propertyOptions.searchable) {
+      return this.__buildPropertyOptions({
+        name: this.toViewName(modelName, this.propertyOptions.name),
+      });
+    }
+    return { ...this.propertyOptions, excludeFromView: true };
   }
 }

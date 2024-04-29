@@ -34,4 +34,7 @@ export class RelationDecoratorBuilder {
       options: this.manager.toRelationColumn(),
     });
   }
+  ViewColumn() {
+    return new DecoratorPrinter({ name: DecoratorName.ViewColumn });
+  }
 }

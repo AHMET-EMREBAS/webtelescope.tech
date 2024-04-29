@@ -2,7 +2,7 @@ import { PropertyOptions, RelationOptions, RelationType } from '../meta';
 import { ModelManager } from './model-manager';
 
 export enum BuiltinClassNames {
-  IID = 'IDD',
+  IID = 'IID',
   IDDto = 'IDDto',
 }
 
