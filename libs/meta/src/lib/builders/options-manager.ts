@@ -1,7 +1,10 @@
 import { ColumnOptions } from '../meta/column.meta';
 import { PropertyOptions } from '../meta/property.meta';
 
-export class PropertyOptionsBuilder {
+/**
+ * Build proprety options using this class so you can access property-to-column property-to-relation transformers.
+ */
+export class PropertyOptionsManager {
   constructor(protected readonly options: PropertyOptions) {}
 
   toColumn(): ColumnOptions {
@@ -13,6 +16,10 @@ export class PropertyOptionsBuilder {
       required: this.options.required,
       unique: this.options.unique,
     };
+  }
+
+  toProperty(): PropertyOptions {
+    return this.options;
   }
 
   toQuery(): PropertyOptions {
@@ -29,5 +36,4 @@ export class PropertyOptionsBuilder {
       required: false,
     };
   }
-  
 }

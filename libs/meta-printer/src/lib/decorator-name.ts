@@ -1,9 +1,9 @@
 export enum DecoratorName {
   Property = 'Property',
-  ViewColumn = '',
   Column = 'Column',
   Relation = 'Relation',
-  Entity = 'Entity',
   Dto = 'Dto',
+  Entity = 'Entity',
   ViewEntity = 'ViewEntity',
+  ViewColumn = 'ViewColumn',
 }

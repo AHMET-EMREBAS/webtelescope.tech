@@ -1,3 +1,3 @@
 // @index('./*', f => `export * from '${f.path}'`)
-export * from './options'
+export * from './options-manager'
 export * from './relation'

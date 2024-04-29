@@ -1,4 +1,4 @@
-export enum ClassName {
+export enum ResClassType {
   Entity = '#',
   View = '#View',
   Create = 'Create#Dto',
@@ -6,7 +6,7 @@ export enum ClassName {
   Query = 'Query#Dto',
   IEntity = 'I#',
   IView = 'I#View',
-  ICreate = 'ICreate#Dto',
-  IUpdate = 'IUpdate#Dto',
-  IQuery = 'IQuery#Dto',
+  ICreate = 'I#Create',
+  IUpdate = 'I#Update',
+  IQuery = 'I#Query',
 }
