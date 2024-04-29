@@ -1,5 +1,3 @@
-import { names } from '@webpackages/utils';
-
 export interface IPackageNames {
   /**
    * Used for interfaces, types
@@ -10,11 +8,6 @@ export interface IPackageNames {
    * Used for server side code
    */
   core(): string;
-
-  /**
-   * Resolve model name to the path '../${model-name}';
-   */
-  sibling(modelName: string): string;
 }
 
 export class PackageNames implements IPackageNames {
@@ -24,9 +17,5 @@ export class PackageNames implements IPackageNames {
 
   core(): string {
     return '@webpackages/core';
-  }
-
-  sibling(modelName: string): string {
-    return `../${names(modelName).fileName}`;
   }
 }

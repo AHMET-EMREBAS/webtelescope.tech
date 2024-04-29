@@ -1,4 +1,5 @@
 import { names } from '@webpackages/utils';
+import { INamedBuilder } from './names-builder';
 
 export enum FileName {
   Entity = '#.entity',
@@ -13,26 +14,35 @@ export enum FileName {
   IQueryDto = 'query-#',
 }
 
-export class FileNameBuilder {
-  constructor(protected className: string) {
-    this.className = names(className).fileName;
-  }
+export type Backward = '' | './' | '../' | '../../';
+
+export class FileNameBuilder implements INamedBuilder<string> {
+  constructor(protected readonly className: string) {}
 
   protected __replace(placeholder: string) {
-    return placeholder.replace('#', this.className);
+    return placeholder.replace('#', names(this.className).fileName);
   }
+
+  Dir() {
+    return names(this.className).fileName;
+  }
+
   Entity() {
     return this.__replace(FileName.Entity);
   }
+
   View() {
     return this.__replace(FileName.View);
   }
+
   Create() {
     return this.__replace(FileName.CreateDto);
   }
+
   Update() {
     return this.__replace(FileName.UpdateDto);
   }
+
   Query() {
     return this.__replace(FileName.QueryDto);
   }

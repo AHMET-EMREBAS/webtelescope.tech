@@ -1,3 +1,5 @@
+import { INamedBuilder } from './names-builder';
+
 export enum ClassName {
   Entity = '#',
   View = '#View',
@@ -11,7 +13,7 @@ export enum ClassName {
   IQueryDto = 'I#QueryDto',
 }
 
-export class ClassNameBuilder {
+export class ClassNameBuilder implements INamedBuilder<string> {
   constructor(protected readonly className: string) {}
 
   Entity() {
