@@ -10,6 +10,7 @@ export enum RelationType {
 }
 
 export type RelationOptions = {
+  name?: string;
   /**
    * Type of the relation {@link RelationType}
    */

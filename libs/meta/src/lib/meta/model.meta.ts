@@ -25,4 +25,6 @@ export type Model<
    */
   // relations?: Partial<Record<RelationNames, RelationOptions>>;
   relations?: Record<RelationNames, RelationOptions>;
+
+  description?: string;
 };

@@ -84,6 +84,8 @@ export type CommonProperty<
   T extends PropertyType,
   O extends string = string
 > = {
+  name?: string;
+
   /**
    * Property type
    */
@@ -106,6 +108,11 @@ export type CommonProperty<
   unique?: boolean;
 
   /**
+   * If set false, this field is not updated
+   */
+  update?: boolean;
+
+  /**
    * Limit input to a list of items
    */
   enums?: DefaultValueType<T>[];
@@ -115,6 +122,9 @@ export type CommonProperty<
    */
   searchable?: boolean;
 
+  /**
+   *
+   */
   description?: string;
 
   /**
