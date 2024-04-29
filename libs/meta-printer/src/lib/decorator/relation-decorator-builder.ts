@@ -27,7 +27,7 @@ export class RelationDecoratorBuilder {
     return this.__buildProperty(this.manager.toUpdate());
   }
 
-  QueryProperty(): IPrint {
+  QueryProperty(propertyName: string = '?'): IPrint {
     return new DecoratorPrinter({
       name: DecoratorName.Property,
       options: { type: 'string' },

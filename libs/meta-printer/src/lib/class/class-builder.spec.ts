@@ -7,21 +7,38 @@ describe('ClassBuilder', () => {
     const categoryModel: Model = {
       modelName: 'Category',
       properties: {
-        name: { type: 'string', unique: true, required: true, minLength: 3 },
+        name: {
+          searchable: true,
+          type: 'string',
+          unique: true,
+          required: true,
+          minLength: 3,
+        },
       },
     };
 
     const departmentModel: Model = {
       modelName: 'Department',
       properties: {
-        name: { type: 'string', unique: true, required: true, minLength: 3 },
+        name: {
+          searchable: true,
+          type: 'string',
+          unique: true,
+          required: true,
+          minLength: 3,
+        },
       },
     };
 
     const model: Model = {
       modelName: 'Model',
       properties: {
-        name: { type: 'string', required: true, unique: true },
+        name: {
+          searchable: true,
+          type: 'string',
+          required: true,
+          unique: true,
+        },
         age: { type: 'number', update: false },
       },
       relations: {
@@ -44,5 +61,6 @@ describe('ClassBuilder', () => {
     console.log('View: ', builder.View().print());
     console.log('CreateDto: ', builder.CreateDto().print());
     console.log('CreateDto: ', builder.UpdateDto().print());
+    console.log('CreateDto: ', builder.QueryDto().print());
   });
 });

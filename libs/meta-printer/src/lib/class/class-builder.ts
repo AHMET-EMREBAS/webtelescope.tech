@@ -141,7 +141,25 @@ export class ClassBuilder {
   }
 
   QueryDto() {
-    return '';
+    return new ClassPrinter({
+      name: this.nameBuilder.Query(),
+      type: ClassType.CLASS,
+      decoratingString: this.decoratorBuilder.Dto().print(),
+      contentString: [
+        this.modelManager
+          .rawProperties()
+          .map((e) => {
+            return this.propertyBuilder(e).QueryDtoProperty().print();
+          })
+          .join('\n'),
+        this.modelManager
+          .rawRelations()
+          .map((e) => {
+            return this.relationBuilder(e).QueryDtoProperties().print();
+          })
+          .join('\n'),
+      ].join('\n'),
+    });
   }
 
   IEntity() {

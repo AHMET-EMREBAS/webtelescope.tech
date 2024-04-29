@@ -50,6 +50,7 @@ export class PropertyBuilder {
       return this.__build({
         decoratorsPrinter: this.decoratorBuilder.QueryProperty(),
         required: undefined,
+        
       });
     }
     return EmptyPrinter;

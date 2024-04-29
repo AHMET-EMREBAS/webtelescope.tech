@@ -102,7 +102,7 @@ export class RelationBuilder {
       .toQuery()
       .map((e) => {
         return this.__build({
-          decoratorsPrinter: this.decoratorBuilder.QueryProperty(),
+          decoratorsPrinter: this.decoratorBuilder.QueryProperty(e.name),
           required: undefined,
           isArray: undefined,
           ...e,

@@ -37,17 +37,20 @@ export class PropertyManager {
   }
 
   toCreate(): PropertyOptions {
-    return this.__buildPropertyOptions();
+    return this.__buildPropertyOptions({});
   }
 
   toUpdate(): PropertyOptions {
-    return this.__buildPropertyOptions({ required: undefined });
+    return this.__buildPropertyOptions({
+      required: undefined,
+    });
   }
 
   toQuery(modelName = ''): PropertyOptions {
     return this.__buildPropertyOptions({
       name: toPropertyName(modelName, this.propertyOptions.name),
       required: undefined,
+      unique: undefined,
     });
   }
 
