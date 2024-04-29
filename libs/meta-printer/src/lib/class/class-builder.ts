@@ -28,7 +28,6 @@ export class ClassBuilder {
 
   protected relationBuilder(options: RelationOptions): RelationBuilder {
     if (!options.name) throw new Error('Relation name is required!');
-
     const manager = new RelationManager(options);
     const decoratorBuilder = new RelationDecoratorBuilder(manager);
     return new RelationBuilder(
@@ -76,15 +75,69 @@ export class ClassBuilder {
   }
 
   View() {
-    return '';
+    return new ClassPrinter({
+      name: this.nameBuilder.View(),
+      type: ClassType.CLASS,
+      decoratingString: this.decoratorBuilder.ViewEntity().print(),
+      contentString: [
+        this.modelManager
+          .rawProperties()
+          .map((e) => {
+            return this.propertyBuilder(e).ViewProperty().print();
+          })
+          .join('\n'),
+        this.modelManager
+          .rawRelations()
+          .map((e) => {
+            return this.relationBuilder(e).ViewProperties().print();
+          })
+          .join('\n'),
+      ].join('\n'),
+    });
   }
 
   CreateDto() {
-    return '';
+    return new ClassPrinter({
+      name: this.nameBuilder.Create(),
+      type: ClassType.CLASS,
+      decoratingString: this.decoratorBuilder.Dto().print(),
+      contentString: [
+        this.modelManager
+          .rawProperties()
+          .map((e) => {
+            return this.propertyBuilder(e).CreateDtoProperty().print();
+          })
+          .join('\n'),
+        this.modelManager
+          .rawRelations()
+          .map((e) => {
+            return this.relationBuilder(e).CreateDtoProperty().print();
+          })
+          .join('\n'),
+      ].join('\n'),
+    });
   }
 
   UpdateDto() {
-    return '';
+    return new ClassPrinter({
+      name: this.nameBuilder.Update(),
+      type: ClassType.CLASS,
+      decoratingString: this.decoratorBuilder.Dto().print(),
+      contentString: [
+        this.modelManager
+          .rawProperties()
+          .map((e) => {
+            return this.propertyBuilder(e).UpdateDtoProperty().print();
+          })
+          .join('\n'),
+        this.modelManager
+          .rawRelations()
+          .map((e) => {
+            return this.relationBuilder(e).UpdateDtoProperty().print();
+          })
+          .join('\n'),
+      ].join('\n'),
+    });
   }
 
   QueryDto() {

@@ -18,7 +18,10 @@ export class PropertyManager {
     } as PropertyOptions);
   }
 
-  isSearchable() {
+  canUpdate() {
+    return this.propertyOptions.update != false;
+  }
+  canSearch() {
     return this.propertyOptions.searchable;
   }
 

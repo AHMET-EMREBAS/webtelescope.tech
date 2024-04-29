@@ -11,13 +11,22 @@ describe('ClassBuilder', () => {
       },
     };
 
+    const departmentModel: Model = {
+      modelName: 'Department',
+      properties: {
+        name: { type: 'string', unique: true, required: true, minLength: 3 },
+      },
+    };
+
     const model: Model = {
       modelName: 'Model',
       properties: {
         name: { type: 'string', required: true, unique: true },
+        age: { type: 'number', update: false },
       },
       relations: {
         category: { type: RelationType.Many, model: categoryModel },
+        department: { type: RelationType.One, model: departmentModel },
       },
     };
 
@@ -31,6 +40,9 @@ describe('ClassBuilder', () => {
       decoratorBuilder
     );
 
-    console.log(builder.Entity().print());
+    console.log('Entity: ', builder.Entity().print());
+    console.log('View: ', builder.View().print());
+    console.log('CreateDto: ', builder.CreateDto().print());
+    console.log('CreateDto: ', builder.UpdateDto().print());
   });
 });

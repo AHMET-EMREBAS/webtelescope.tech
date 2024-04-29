@@ -36,14 +36,17 @@ export class PropertyBuilder {
   }
 
   UpdateDtoProperty(): IPrint {
-    return this.__build({
-      required: undefined,
-      decoratorsPrinter: this.decoratorBuilder.UpdateProperty(),
-    });
+    if (this.optionsManager.canUpdate()) {
+      return this.__build({
+        required: undefined,
+        decoratorsPrinter: this.decoratorBuilder.UpdateProperty(),
+      });
+    }
+    return EmptyPrinter;
   }
 
   QueryDtoProperty(): IPrint {
-    if (this.optionsManager.isSearchable()) {
+    if (this.optionsManager.canSearch()) {
       return this.__build({
         decoratorsPrinter: this.decoratorBuilder.QueryProperty(),
         required: undefined,
