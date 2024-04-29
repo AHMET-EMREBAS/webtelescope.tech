@@ -30,9 +30,13 @@ export class RelationManager {
       isArray: this.__isArray(),
     };
   }
+  modelName() {
+    return this.relationOptions.model.modelName;
+  }
 
-  toRelationColumn(): RelationOptions {
-    return { ...this.relationOptions };
+  toRelationColumn(): Omit<RelationOptions, 'model'> {
+    const { type, required } = this.relationOptions;
+    return { type, required };
   }
 
   toIEntity(): PropertyOptions {
@@ -61,8 +65,6 @@ export class RelationManager {
     });
   }
 
-
-  
   toQuery(): PropertyOptions[] {
     return this.__modelManager().queryProperties();
   }

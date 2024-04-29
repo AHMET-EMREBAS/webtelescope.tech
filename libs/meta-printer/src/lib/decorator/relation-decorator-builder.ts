@@ -1,38 +1,30 @@
-import { PropertyOptions, RelationManager } from '@webpackages/meta';
+import { RelationManager, PropertyOptions } from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
 import { DecoratorName } from '../common';
+import { excludeUndefined } from '@webpackages/utils';
 
 export class RelationDecoratorBuilder {
-  constructor(protected readonly optionsManager: RelationManager) {}
+  constructor(protected readonly manager: RelationManager) {}
 
-  protected __buildPropertyDecorator(options?: PropertyOptions): IPrint {
+  protected __buildProperty(options?: PropertyOptions): IPrint {
     return new DecoratorPrinter({
       name: DecoratorName.Property,
-      options: options,
+      options: options ? excludeUndefined(options) : undefined,
     });
   }
 
   CreateProperty(): IPrint {
-    return this.__buildPropertyDecorator(this.optionsManager.toCreate());
+    return this.__buildProperty(this.manager.toCreate());
   }
 
   UpdateProperty(): IPrint {
-    return this.__buildPropertyDecorator(this.optionsManager.toUpdate());
-  }
-
-  QueryProperties(): IPrint[] {
-    return this.optionsManager.toQuery().map(this.__buildPropertyDecorator);
+    return this.__buildProperty(this.manager.toUpdate());
   }
 
   EntityRelation(): IPrint {
     return new DecoratorPrinter({
       name: DecoratorName.Relation,
-      options: this.optionsManager.toColumn(),
+      options: this.manager.toRelationColumn(),
     });
-  }
-
-  ViewColumns(): IPrint[] {
-    return this.optionsManager.toViews()
-    return new DecoratorPrinter({ name: DecoratorName.ViewColumn });
   }
 }

@@ -2,17 +2,42 @@ import {
   ModelManager,
   PropertyOptions,
   PropertyManager,
+  RelationManager,
+  RelationOptions,
 } from '@webpackages/meta';
 import { PropertyBuilder } from '../property';
-import { PropertyDecoratorBuilder } from '../decorator';
+import {
+  ClassDecoratorBuilder,
+  PropertyDecoratorBuilder,
+  RelationDecoratorBuilder,
+} from '../decorator';
 import { ClassNameBuilder } from '../common';
 import { ClassPrinter, ClassType } from '@webpackages/printer';
+import { RelationBuilder } from '../relation';
 
 export class ClassBuilder {
   constructor(
     protected readonly modelManager: ModelManager,
-    protected readonly classNameBuilder: ClassNameBuilder
+    protected readonly nameBuilder: ClassNameBuilder,
+    protected readonly decoratorBuilder: ClassDecoratorBuilder
   ) {}
+
+  protected __modelName() {
+    return this.modelManager.modelName();
+  }
+
+  protected relationBuilder(options: RelationOptions): RelationBuilder {
+    if (!options.name) throw new Error('Relation name is required!');
+
+    const manager = new RelationManager(options);
+    const decoratorBuilder = new RelationDecoratorBuilder(manager);
+    return new RelationBuilder(
+      this.__modelName(),
+      options.name,
+      manager,
+      decoratorBuilder
+    );
+  }
 
   protected propertyBuilder(options: PropertyOptions): PropertyBuilder {
     if (!options.name) throw new Error('Propery name is required!');
@@ -30,11 +55,23 @@ export class ClassBuilder {
 
   Entity() {
     return new ClassPrinter({
-      name: this.classNameBuilder.Entity(),
+      name: this.nameBuilder.Entity(),
       type: ClassType.CLASS,
-      content: this.modelManager.rawProperties().map((e) => {
-        return this.propertyBuilder(e).EntityProperty();
-      }),
+      decoratingString: this.decoratorBuilder.Entity().print(),
+      contentString: [
+        this.modelManager
+          .rawProperties()
+          .map((e) => {
+            return this.propertyBuilder(e).EntityProperty().print();
+          })
+          .join('\n'),
+        this.modelManager
+          .rawRelations()
+          .map((e) => {
+            return this.relationBuilder(e).EntityProperty().print();
+          })
+          .join('\n'),
+      ].join('\n'),
     });
   }
 

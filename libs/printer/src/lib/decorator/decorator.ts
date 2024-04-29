@@ -1,4 +1,4 @@
-import { stringify } from '@webpackages/utils';
+import { excludeUndefined, stringify } from '@webpackages/utils';
 import { IPrint, DecoratorPrinterOptions } from '../common';
 /**
  * Print decorators/annotations
@@ -31,13 +31,12 @@ export class DecoratorPrinter implements IPrint {
    * `@DecoratorName<prefix><options><suffix>`
    */
   protected __options(): string {
-    if (this.optionz) {
-      if (this.optionz.printRaw) {
-        return (this.optionz.options as string) ?? '';
-      }
-      return stringify(this.optionz.options);
+    const { options, optionsString } = this.optionz;
+    if (options) {
+      return stringify(excludeUndefined(options));
+    } else {
+      return optionsString ?? '';
     }
-    return '';
   }
 
   /**

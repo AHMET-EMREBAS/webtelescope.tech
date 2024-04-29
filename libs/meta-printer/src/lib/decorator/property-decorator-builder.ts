@@ -13,7 +13,7 @@ export class PropertyDecoratorBuilder {
   }
 
   CreateProperty(): IPrint {
-    return this.__buildPropertyDecorator(this.optionsManager.toProperty());
+    return this.__buildPropertyDecorator(this.optionsManager.toCreate());
   }
 
   UpdateProperty(): IPrint {

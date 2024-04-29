@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ClassType } from './class-types';
 import { IPrint } from './interfaces';
 
@@ -163,7 +164,11 @@ export type BasicDecoratorPrinterOptions = {
   /**
    * Decorator options
    */
-  options?: unknown;
+  options?: Record<string, any>;
+  /**
+   * Pass options as string
+   */
+  optionsString?: string;
 
   /**
    * If set true, options will be printed as it is
