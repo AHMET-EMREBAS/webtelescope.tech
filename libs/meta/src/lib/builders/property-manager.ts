@@ -1,6 +1,6 @@
-import { excludeFalse, names } from '@webpackages/utils';
-import { ColumnOptions } from '../meta/column.meta';
-import { PropertyOptions } from '../meta/property.meta';
+import { toPropertyName } from '@webpackages/utils';
+import { ColumnOptions, PropertyOptions } from '../meta';
+import { orderPropertyOptions } from './order-objects';
 
 /**
  * Build proprety options using this class so you can access property-to-column property-to-relation transformers.
@@ -8,21 +8,14 @@ import { PropertyOptions } from '../meta/property.meta';
 export class PropertyManager {
   constructor(protected readonly propertyOptions: PropertyOptions) {}
 
-  protected toViewName(modelName?: string, name?: string) {
-    if (modelName && name) {
-      return names(modelName + names(name).className).propertyName;
-    }
-    return name;
-  }
-
   protected __buildPropertyOptions(
     options?: Partial<PropertyOptions>
   ): PropertyOptions {
-    return {
+    return orderPropertyOptions({
       ...this.propertyOptions,
       ...options,
       type: this.propertyOptions.type,
-    } as PropertyOptions;
+    } as PropertyOptions);
   }
 
   isSearchable() {
@@ -30,17 +23,7 @@ export class PropertyManager {
   }
 
   toColumn(): ColumnOptions {
-    const { name, type, description, isArray, objectType, required, unique } =
-      this.propertyOptions;
-    return excludeFalse({
-      name,
-      type,
-      description,
-      isArray,
-      objectType,
-      required,
-      unique,
-    });
+    return orderPropertyOptions(this.propertyOptions);
   }
 
   toCreate(): PropertyOptions {
@@ -53,14 +36,14 @@ export class PropertyManager {
 
   toQuery(modelName = ''): PropertyOptions {
     return this.__buildPropertyOptions({
-      name: this.toViewName(modelName, this.propertyOptions.name),
+      name: toPropertyName(modelName, this.propertyOptions.name),
       required: undefined,
     });
   }
 
   toView(modelName: string = '') {
     return this.__buildPropertyOptions({
-      name: this.toViewName(modelName, this.propertyOptions.name),
+      name: toPropertyName(modelName, this.propertyOptions.name),
     });
   }
 }

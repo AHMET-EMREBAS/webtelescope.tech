@@ -5,7 +5,9 @@ export function orderObject<T extends object>(
   const newObject: T = {} as T;
 
   for (const o of order) {
-    newObject[o] = object[o];
+    if (object[o] != undefined) {
+      newObject[o] = object[o];
+    }
   }
 
   return { ...newObject, ...object };

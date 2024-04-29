@@ -2,16 +2,11 @@ import { PropertyManager } from '@webpackages/meta';
 import { PropertyBuilder } from './property-builder';
 import { PropertyDecoratorBuilder } from '../decorator';
 
-// const categoryModel: Model = {
-//   modelName: 'Cat',
-//   properties: {
-//     name: { type: 'string', unique: true, required: true, searchable: true },
-//   },
-// };
+
 const manager = new PropertyManager({
   type: 'string',
-  required: false,
-  searchable: false,
+  required: true,
+  searchable: true,
 });
 const decoratorBuilder = new PropertyDecoratorBuilder(manager);
 const b = new PropertyBuilder('Cat', 'cat', manager, decoratorBuilder);

@@ -1,5 +1,10 @@
-import { names, splitByUppercase } from './names';
+import { names, splitByUppercase, toPropertyName } from './names';
 describe('Names', () => {
+  it('should transform list of string into property name', () => {
+    const result = toPropertyName('Hello', 'there');
+
+    expect(result).toBe('helloThere');
+  });
   it('should splitBy uppercase', () => {
     const result = splitByUppercase('HelloWorldHowAreYou');
     expect(result).toBe('Hello_World_How_Are_You');

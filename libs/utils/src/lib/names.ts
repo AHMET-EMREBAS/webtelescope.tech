@@ -17,7 +17,7 @@ export function splitByUppercase(className: string) {
 }
 
 function uppercaseFirst(name: string) {
-  return [name[0].toUpperCase(), name.slice(1)].join('');
+  return name && [name[0].toUpperCase(), name.slice(1)].join('');
 }
 
 function lowercaseFirst(name: string) {
@@ -63,4 +63,14 @@ export function names(name: string) {
     propertyName: __propertyName(name),
     constName: __constName(name),
   };
+}
+
+export function toPropertyName(...items: (string | undefined)[]) {
+  return names(
+    (items as string[])
+      .filter((e) => e)
+      .map(names)
+      .map((e) => e.className)
+      .join('')
+  ).propertyName;
 }

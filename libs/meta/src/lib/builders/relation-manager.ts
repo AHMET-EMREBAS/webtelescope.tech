@@ -1,5 +1,6 @@
 import { PropertyOptions, RelationOptions, RelationType } from '../meta';
 import { ModelManager } from './model-manager';
+import { orderPropertyOptions } from './order-objects';
 
 export enum BuiltinClassNames {
   IID = 'IID',
@@ -20,28 +21,15 @@ export class RelationManager {
   protected __toPropertyOptions(
     options?: Partial<PropertyOptions>
   ): PropertyOptions {
-    const { description: rDescription, required: rRequired } =
-      this.relationOptions;
-    const result = {
-      required: rRequired,
-      description: rDescription,
+    const { description, required } = this.relationOptions;
+    return orderPropertyOptions({
+      required,
+      description,
       objectType: 'IDDto',
       ...options,
       type: 'object',
       isArray: this.__isArray(),
-    };
-
-    const { type, objectType, required, isArray, description } = result;
-
-    const orderedResult = {
-      type,
-      objectType,
-      required,
-      isArray,
-      description,
-    } as PropertyOptions;
-
-    return orderedResult;
+    });
   }
 
   modelName() {

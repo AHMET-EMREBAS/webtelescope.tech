@@ -12,7 +12,7 @@ describe('stringify', () => {
       clearSpace(`{
         target: 'Category',
         value: 1,
-        obj: { name: 'Name', some: 100, },
+        obj: { name: 'Name', some: 100 }
     }`)
     );
   });
