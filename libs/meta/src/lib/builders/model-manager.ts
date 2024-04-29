@@ -24,7 +24,7 @@ export class ModelManager {
   /**
    * To list of properties
    */
-  __propertiesList(): AsList<PropertyOptions> {
+  rawProperties(): AsList<PropertyOptions> {
     return Object.entries(this.properties()).map(([key, value]) => {
       return { ...value, name: key };
     });
@@ -33,7 +33,7 @@ export class ModelManager {
   /**
    * To list of relations
    */
-  __relationsList(): AsList<RelationOptions> {
+  rawRelations(): AsList<RelationOptions> {
     return Object.entries(this.relations()).map(([key, value]) => {
       return { ...value, name: key };
     });
@@ -43,7 +43,7 @@ export class ModelManager {
    * To list of view columns.
    */
   viewProperties(): AsList<PropertyOptions> {
-    return this.__propertiesList()
+    return this.rawProperties()
       .filter((e) => !e.excludeFromView)
       .map((e) => {
         return new PropertyManager(e).toView(this.modelName());
@@ -54,7 +54,7 @@ export class ModelManager {
    * To list of query propertiesF
    */
   queryProperties() {
-    return this.__propertiesList()
+    return this.rawProperties()
       .filter((e) => e.searchable != false)
       .map((e) => {
         return new PropertyManager(e).toQuery();
@@ -62,16 +62,14 @@ export class ModelManager {
   }
 
   /**
-   * 
+   *
    */
   columnProperties() {
-    return this.__propertiesList().map((e) =>
-      new PropertyManager(e).toColumn()
-    );
+    return this.rawProperties().map((e) => new PropertyManager(e).toColumn());
   }
 
   updateProperties() {
-    return this.__propertiesList()
+    return this.rawProperties()
       .filter((e) => e.update != false)
       .map((e) => new PropertyManager(e).toUpdate());
   }
@@ -81,15 +79,15 @@ export class ModelManager {
   }
 
   uniqueProperties() {
-    return this.__propertiesList().filter((e) => e.unique);
+    return this.rawProperties().filter((e) => e.unique);
   }
 
   requiredProperties() {
-    return this.__propertiesList().filter((e) => e.required);
+    return this.rawProperties().filter((e) => e.required);
   }
 
   requiredRelations() {
-    return this.__relationsList().filter((e) => e.required);
+    return this.rawRelations().filter((e) => e.required);
   }
 
   propertyNames() {
@@ -101,14 +99,14 @@ export class ModelManager {
   }
 
   oneRelations() {
-    return this.__relationsList().filter((e) => e.type === RelationType.One);
+    return this.rawRelations().filter((e) => e.type === RelationType.One);
   }
 
   ownerRelations() {
-    return this.__relationsList().filter((e) => e.type === RelationType.Owner);
+    return this.rawRelations().filter((e) => e.type === RelationType.Owner);
   }
 
   manyRelations() {
-    return this.__relationsList().filter((e) => e.type === RelationType.Many);
+    return this.rawRelations().filter((e) => e.type === RelationType.Many);
   }
 }

@@ -18,7 +18,7 @@ export class PropertyBuilder {
   ) {}
 
   protected __build(overrideOptions?: Partial<PropertyPrinterOptions>): IPrint {
-    const options = this.optionsManager.toProperty();
+    const options = this.optionsManager.toCreate();
     const { description } = options;
     return new PropertyPrinter({
       ...options,

@@ -11,7 +11,6 @@ describe('ClassPrinter', () => {
       const result = new ClassPrinter({
         name,
         type,
-
         importings: {
           print() {
             return 'imports';

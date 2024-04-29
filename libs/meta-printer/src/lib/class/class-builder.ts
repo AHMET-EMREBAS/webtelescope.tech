@@ -2,11 +2,11 @@ import {
   ModelManager,
   PropertyOptions,
   PropertyManager,
-  RelationOptions,
 } from '@webpackages/meta';
-import { PropertyBuilder } from '../property/property-builder';
+import { PropertyBuilder } from '../property';
 import { PropertyDecoratorBuilder } from '../decorator';
 import { ClassNameBuilder } from '../common';
+import { ClassPrinter, ClassType } from '@webpackages/printer';
 
 export class ClassBuilder {
   constructor(
@@ -14,37 +14,28 @@ export class ClassBuilder {
     protected readonly classNameBuilder: ClassNameBuilder
   ) {}
 
+  protected propertyBuilder(options: PropertyOptions): PropertyBuilder {
+    if (!options.name) throw new Error('Propery name is required!');
 
-  protected getRelationBuilder(relationName:string, options:RelationOptions){ 
-    return new RelationBuilder();
-  }
-
-  protected getPropertyBuilder(propertyName: string, options: PropertyOptions) {
-    const optionsManager = new PropertyManager(options);
+    const propertyManager = new PropertyManager(options);
     const modelName = this.modelManager.modelName();
-    const decoratorBuilder = new PropertyDecoratorBuilder(optionsManager);
+    const decoratorBuilder = new PropertyDecoratorBuilder(propertyManager);
     return new PropertyBuilder(
       modelName,
-      propertyName,
-      optionsManager,
+      options.name,
+      propertyManager,
       decoratorBuilder
     );
   }
 
-  protected getPropertyBuilderList(): PropertyBuilder[] {
-    return this.modelManager.propertiesAsList().map((e) => {
-      return this.getPropertyBuilder(e.name, e);
-    });
-  }
-
-  protected getRelationBuilderList(): PropertyBuilder[] {
-    return this.modelManager.relationsAsList().map((e) => {
-      return this.getPropertyBuilder(e.name, e);
-    });
-  }
-
   Entity() {
-    return '';
+    return new ClassPrinter({
+      name: this.classNameBuilder.Entity(),
+      type: ClassType.CLASS,
+      content: this.modelManager.rawProperties().map((e) => {
+        return this.propertyBuilder(e).EntityProperty();
+      }),
+    });
   }
 
   View() {

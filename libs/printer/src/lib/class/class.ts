@@ -81,49 +81,67 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
    * Class generics decleration
    */
   protected __generics(): string {
-    return this.__options.generics?.print() ?? '';
+    return (
+      this.__options.generics?.print() ?? this.__options.genericsString ?? ''
+    );
   }
 
   /**
    * Extending classes, interfaces
    */
   protected __extendings(): string {
-    return this.__options.extending?.print() ?? '';
+    return (
+      this.__options.extending?.print() ?? this.__options.extendingString ?? ''
+    );
   }
 
   /**
    * Implementing classes, interfaces.
    */
   protected __implements(): string {
-    return this.__options.implementing?.print() ?? '';
+    return (
+      this.__options.implementing?.print() ??
+      this.__options.implementingString ??
+      ''
+    );
   }
 
   /**
    * Documentation/Comments
    */
   protected __docs(): string {
-    return this.__options.docs?.print() ?? '';
+    return this.__options.docs?.print() ?? this.__options.docsString ?? '';
   }
 
   /**
    * Class content (properties)
    */
   protected __content(): string {
-    return this.__options.content?.print() ?? '';
+    return (
+      this.__options.content?.print() ?? this.__options.contentString ?? ''
+    );
   }
 
   /**
    *  Importing packages, classes, interfaces
    */
   protected __importings(): string {
-    return this.__options.importings?.print() ?? '';
+    return (
+      this.__options.importings?.print() ??
+      this.__options.importingsString ??
+      ''
+    );
   }
 
   /**
    * Class decorators
    */
   protected __decorators(): string {
-    return this.__options.decorating?.print() ?? '';
+    return (
+      this.__options.decorating?.print() ??
+      this.__options.decoratingString ??
+      ''
+    );
   }
 
   /**

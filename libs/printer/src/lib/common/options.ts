@@ -195,9 +195,19 @@ export type BasicClassPrinterOptions = {
   content?: IPrint;
 
   /**
+   * Pass content as string
+   */
+  contentString?: string;
+
+  /**
    * Extending classes
    */
   extending?: IPrint;
+
+  /**
+   * Pass extendings as string
+   */
+  extendingString?: string;
 
   /**
    * Implementing classes
@@ -205,9 +215,19 @@ export type BasicClassPrinterOptions = {
   implementing?: IPrint;
 
   /**
+   * Pass implementing as string
+   */
+  implementingString?: string;
+
+  /**
    * Importing packages, types, classes.
    */
   importings?: IPrint;
+
+  /**
+   * Pass imports as string
+   */
+  importingsString?: string;
 
   /**
    * Generic types
@@ -215,14 +235,29 @@ export type BasicClassPrinterOptions = {
   generics?: IPrint;
 
   /**
+   * Pass generics as string
+   */
+  genericsString?: string;
+
+  /**
    * Class decorator|anotation|macro
    */
   decorating?: IPrint;
 
   /**
+   * Pass decorating as string
+   */
+  decoratingString?: string;
+
+  /**
    * Documentation
    */
   docs?: IPrint;
+
+  /**
+   * Pass docs as string
+   */
+  docsString?: string;
 
   /**
    * If set true, the class will not export to outside.

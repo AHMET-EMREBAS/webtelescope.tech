@@ -12,6 +12,7 @@ export class RelationManager {
   protected __isArray() {
     return this.relationOptions.type == RelationType.Many ? true : false;
   }
+
   protected __modelManager() {
     return new ModelManager(this.relationOptions.model);
   }
@@ -30,7 +31,7 @@ export class RelationManager {
     };
   }
 
-  toColumn(): RelationOptions {
+  toRelationColumn(): RelationOptions {
     return { ...this.relationOptions };
   }
 
@@ -60,6 +61,8 @@ export class RelationManager {
     });
   }
 
+
+  
   toQuery(): PropertyOptions[] {
     return this.__modelManager().queryProperties();
   }
