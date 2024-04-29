@@ -1,7 +1,8 @@
 import { Model, ModelManager, RelationType } from '@webpackages/meta';
 import { ClassBuilder } from './class-builder';
-import { ClassNameBuilder } from '../common';
+import { ClassNameBuilder, PackageNames } from '../common';
 import { ClassDecoratorBuilder } from '../decorator';
+import { ImportBuilder } from '../imports';
 describe('ClassBuilder', () => {
   it('should build the class', () => {
     const categoryModel: Model = {
@@ -49,18 +50,20 @@ describe('ClassBuilder', () => {
 
     const manager = new ModelManager(model);
 
+    const importBuilder = new ImportBuilder(manager, new PackageNames());
     const classNameBuilder = new ClassNameBuilder('Model');
     const decoratorBuilder = new ClassDecoratorBuilder(manager);
     const builder = new ClassBuilder(
       manager,
       classNameBuilder,
-      decoratorBuilder
+      decoratorBuilder,
+      importBuilder
     );
 
     console.log('Entity: ', builder.Entity().print());
     console.log('View: ', builder.View().print());
-    console.log('CreateDto: ', builder.CreateDto().print());
-    console.log('CreateDto: ', builder.UpdateDto().print());
-    console.log('CreateDto: ', builder.QueryDto().print());
+    console.log('CreateDto: ', builder.Create().print());
+    console.log('CreateDto: ', builder.Update().print());
+    console.log('CreateDto: ', builder.Query().print());
   });
 });

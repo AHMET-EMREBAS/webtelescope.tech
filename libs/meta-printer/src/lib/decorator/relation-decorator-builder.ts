@@ -5,9 +5,9 @@ import {
   orderPropertyOptions,
 } from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
-import { DecoratorName } from '../common';
+import { DecoratorName, INamedBuilder } from '../common';
 
-export class RelationDecoratorBuilder {
+export class RelationDecoratorBuilder implements INamedBuilder<IPrint> {
   constructor(protected readonly manager: RelationManager) {}
 
   protected __buildProperty(options?: PropertyOptions): IPrint {
@@ -19,28 +19,45 @@ export class RelationDecoratorBuilder {
     });
   }
 
-  CreateProperty(): IPrint {
+  Create(): IPrint {
     return this.__buildProperty(this.manager.toCreate());
   }
 
-  UpdateProperty(): IPrint {
+  Update(): IPrint {
     return this.__buildProperty(this.manager.toUpdate());
   }
 
-  QueryProperty(propertyName: string = '?'): IPrint {
+  Query(propertyName: string = '?'): IPrint {
     return new DecoratorPrinter({
       name: DecoratorName.Property,
       options: { type: 'string' },
     });
   }
 
-  EntityRelation(): IPrint {
+  Entity(): IPrint {
     return new DecoratorPrinter({
       name: DecoratorName.Relation,
       options: this.manager.toRelationColumn(),
     });
   }
-  ViewColumn() {
+
+  View() {
     return new DecoratorPrinter({ name: DecoratorName.ViewColumn });
+  }
+
+  IEntity(): IPrint {
+    throw new Error('Method not implemented.');
+  }
+  IView(): IPrint {
+    throw new Error('Method not implemented.');
+  }
+  ICreate(): IPrint {
+    throw new Error('Method not implemented.');
+  }
+  IUpdate(): IPrint {
+    throw new Error('Method not implemented.');
+  }
+  IQuery(): IPrint {
+    throw new Error('Method not implemented.');
   }
 }

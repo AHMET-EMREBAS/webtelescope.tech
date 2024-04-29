@@ -8,8 +8,9 @@ import {
 } from '@webpackages/printer';
 
 import { RelationDecoratorBuilder } from '../decorator';
+import { INamedBuilder } from '../common';
 
-export class RelationBuilder {
+export class RelationBuilder implements INamedBuilder<IPrint> {
   constructor(
     protected readonly modelName: string,
     protected readonly propertyName: string,
@@ -24,20 +25,20 @@ export class RelationBuilder {
       ...options,
       name: this.propertyName,
       classType: ClassType.CLASS,
-      decoratorsPrinter: this.decoratorBuilder.CreateProperty(),
+      decoratorsPrinter: this.decoratorBuilder.Create(),
       docsPrinter: new DocPritner({ content: description ?? '' }),
       type: this.modelName,
       ...overrideOptions,
     });
   }
 
-  EntityProperty(): IPrint {
+  Entity(): IPrint {
     return this.__build({
-      decoratorsPrinter: this.decoratorBuilder.EntityRelation(),
+      decoratorsPrinter: this.decoratorBuilder.Entity(),
     });
   }
 
-  IEntityProperty(): IPrint {
+  IEntity(): IPrint {
     return this.__build({
       decoratorsPrinter: undefined,
       classType: ClassType.INTERFACE,
@@ -45,22 +46,22 @@ export class RelationBuilder {
     });
   }
 
-  CreateDtoProperty(): IPrint {
+  Create(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IDDto,
-      decoratorsPrinter: this.decoratorBuilder.CreateProperty(),
+      decoratorsPrinter: this.decoratorBuilder.Create(),
     });
   }
 
-  UpdateDtoProperty(): IPrint {
+  Update(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IDDto,
       required: undefined,
-      decoratorsPrinter: this.decoratorBuilder.UpdateProperty(),
+      decoratorsPrinter: this.decoratorBuilder.Update(),
     });
   }
 
-  ICreateDtoProperty(): IPrint {
+  ICreate(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IID,
       classType: ClassType.INTERFACE,
@@ -68,7 +69,7 @@ export class RelationBuilder {
     });
   }
 
-  IUpdateDtoProperty(): IPrint {
+  IUpdate(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IID,
       classType: ClassType.INTERFACE,
@@ -77,12 +78,12 @@ export class RelationBuilder {
     });
   }
 
-  ViewProperties(): IPrint {
+  View(): IPrint {
     const queries = this.optionsManager
       .toView()
       .map((e) => {
         return this.__build({
-          decoratorsPrinter: this.decoratorBuilder.ViewColumn(),
+          decoratorsPrinter: this.decoratorBuilder.View(),
           required: undefined,
           isArray: undefined,
           ...e,
@@ -97,12 +98,12 @@ export class RelationBuilder {
     };
   }
 
-  QueryDtoProperties(): IPrint {
+  Query(): IPrint {
     const queries = this.optionsManager
       .toQuery()
       .map((e) => {
         return this.__build({
-          decoratorsPrinter: this.decoratorBuilder.QueryProperty(e.name),
+          decoratorsPrinter: this.decoratorBuilder.Query(e.name),
           required: undefined,
           isArray: undefined,
           ...e,
@@ -117,7 +118,7 @@ export class RelationBuilder {
     };
   }
 
-  IQueryDtoProperties(): IPrint {
+  IQuery(): IPrint {
     const queries = this.optionsManager
       .toIQuery()
       .map((e) => {
@@ -126,6 +127,25 @@ export class RelationBuilder {
           required: undefined,
           isArray: undefined,
           classType: ClassType.INTERFACE,
+          ...e,
+        });
+      })
+      .map((e) => e.print())
+      .join('\n');
+    return {
+      print() {
+        return queries;
+      },
+    };
+  }
+
+  IView(): IPrint {
+    const queries = this.optionsManager
+      .toIQuery()
+      .map((e) => {
+        return this.__build({
+          decoratorsPrinter: this.decoratorBuilder.View(),
+          isArray: undefined,
           ...e,
         });
       })
