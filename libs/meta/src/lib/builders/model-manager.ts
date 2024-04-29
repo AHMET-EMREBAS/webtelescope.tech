@@ -53,11 +53,11 @@ export class ModelManager {
   /**
    * To list of query propertiesF
    */
-  queryProperties() {
+  queryProperties(modelName = '') {
     return this.rawProperties()
-      .filter((e) => e.searchable != false)
+      .filter((e) => e.searchable == true && !e.excludeFromView == true)
       .map((e) => {
-        return new PropertyManager(e).toQuery();
+        return new PropertyManager(e).toQuery(modelName);
       });
   }
 

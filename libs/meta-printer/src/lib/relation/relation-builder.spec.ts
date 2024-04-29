@@ -5,7 +5,7 @@ import { RelationDecoratorBuilder } from '../decorator';
 const categoryModel: Model = {
   modelName: 'Cat',
   properties: {
-    name: { type: 'string', unique: true, required: true },
+    name: { type: 'string', unique: true, required: true, searchable: true },
   },
 };
 const manager = new RelationManager({
@@ -18,10 +18,11 @@ const b = new RelationBuilder('Cat', 'cat', manager, decoratorBuilder);
 
 describe('RelationBuilder', () => {
   it.each`
-    expected                                                                                               | actual
+    expected                                                                                              | actual
     ${"@Property({ type: 'object', objectType: 'IDDto', required: true, isArray: true }) cat!: IDDto[];"} | ${b.CreateDtoProperty().print()}
     ${"@Property({ type: 'object', objectType: 'IDDto', isArray: true }) cat?: IDDto[];"}                 | ${b.UpdateDtoProperty().print()}
-    ${"@Relation({ type: 'Many', required: true }) cat!: Cat[];"}                                          | ${b.EntityProperty().print()}
+    ${"@Relation({ type: 'Many', required: true }) cat!: Cat[];"}                                         | ${b.EntityProperty().print()}
+    ${"@Property({ type: 'string' }) catName?: string;"}                                                  | ${b.QueryDtoProperties().print()}
   `('should print the $expected result', ({ expected, actual }) => {
     expect(actual).toBe(expected);
   });

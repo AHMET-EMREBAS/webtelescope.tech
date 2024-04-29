@@ -43,6 +43,7 @@ export class RelationManager {
 
     return orderedResult;
   }
+
   modelName() {
     return this.relationOptions.model.modelName;
   }
@@ -67,25 +68,29 @@ export class RelationManager {
   toUpdate(): PropertyOptions {
     return this.__toPropertyOptions({
       objectType: BuiltinClassNames.IDDto,
-      required: undefined
+      required: undefined,
     });
   }
 
   toIUpdate(): PropertyOptions {
     return this.__toPropertyOptions({
       objectType: BuiltinClassNames.IID,
-      required: undefined
+      required: undefined,
     });
   }
 
   toQuery(): PropertyOptions[] {
-    return this.__modelManager().queryProperties();
+    return this.__modelManager().queryProperties(this.modelName());
   }
 
   toIQuery(): PropertyOptions[] {
     return this.toQuery();
   }
 
+  /**
+   * Return the viewable properties from the model
+   * @returns
+   */
   toView(): PropertyOptions[] {
     return this.__modelManager().viewProperties();
   }

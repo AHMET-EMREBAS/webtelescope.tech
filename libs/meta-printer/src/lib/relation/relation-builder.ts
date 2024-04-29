@@ -83,10 +83,43 @@ export class RelationBuilder {
     });
   }
 
-  // IQueryDtoProperty(): IPrint {
-  //   return this.__build({
-  //     required: undefined,
-  //     decoratorsPrinter: undefined,
-  //   });
-  // }
+  QueryDtoProperties(): IPrint {
+    const queries = this.optionsManager
+      .toQuery()
+      .map((e) => {
+        console.log(e);
+        return this.__build({
+          decoratorsPrinter: this.decoratorBuilder.QueryProperty(),
+          required: undefined,
+          isArray: false,
+          ...e,
+        });
+      })
+      .map((e) => e.print())
+      .join('\n');
+    return {
+      print() {
+        return queries;
+      },
+    };
+  }
+
+  IQueryDtoProperties(): IPrint {
+    const queries = this.optionsManager
+      .toQuery()
+      .map((e) => {
+        return this.__build({
+          ...e,
+          decoratorsPrinter: undefined,
+          required: undefined,
+        });
+      })
+      .map((e) => e.print())
+      .join('\n');
+    return {
+      print() {
+        return queries;
+      },
+    };
+  }
 }

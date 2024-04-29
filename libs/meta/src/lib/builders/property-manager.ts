@@ -46,8 +46,7 @@ export class PropertyManager {
         required: undefined,
       });
     }
-
-    throw new Error(`Property is not searchable!`);
+    return { ...this.propertyOptions, excludeFromView: true };
   }
 
   toView(modelName: string = '') {

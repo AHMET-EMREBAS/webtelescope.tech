@@ -21,6 +21,13 @@ export class RelationDecoratorBuilder {
     return this.__buildProperty(this.manager.toUpdate());
   }
 
+  QueryProperty(): IPrint {
+    return new DecoratorPrinter({
+      name: DecoratorName.Property,
+      options: { type: 'string' },
+    });
+  }
+
   EntityRelation(): IPrint {
     return new DecoratorPrinter({
       name: DecoratorName.Relation,
