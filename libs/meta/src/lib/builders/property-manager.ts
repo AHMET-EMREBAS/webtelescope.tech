@@ -1,4 +1,4 @@
-import { names } from '@webpackages/utils';
+import { excludeFalse, names } from '@webpackages/utils';
 import { ColumnOptions } from '../meta/column.meta';
 import { PropertyOptions } from '../meta/property.meta';
 
@@ -25,10 +25,22 @@ export class PropertyManager {
     } as PropertyOptions;
   }
 
+  isSearchable() {
+    return this.propertyOptions.searchable;
+  }
+
   toColumn(): ColumnOptions {
     const { name, type, description, isArray, objectType, required, unique } =
       this.propertyOptions;
-    return { name, type, description, isArray, objectType, required, unique };
+    return excludeFalse({
+      name,
+      type,
+      description,
+      isArray,
+      objectType,
+      required,
+      unique,
+    });
   }
 
   toCreate(): PropertyOptions {
@@ -36,25 +48,19 @@ export class PropertyManager {
   }
 
   toUpdate(): PropertyOptions {
-    return this.__buildPropertyOptions({ required: false });
+    return this.__buildPropertyOptions({ required: undefined });
   }
 
   toQuery(modelName = ''): PropertyOptions {
-    if (this.propertyOptions.searchable) {
-      return this.__buildPropertyOptions({
-        name: this.toViewName(modelName, this.propertyOptions.name),
-        required: undefined,
-      });
-    }
-    return { ...this.propertyOptions, excludeFromView: true };
+    return this.__buildPropertyOptions({
+      name: this.toViewName(modelName, this.propertyOptions.name),
+      required: undefined,
+    });
   }
 
   toView(modelName: string = '') {
-    if (this.propertyOptions.searchable) {
-      return this.__buildPropertyOptions({
-        name: this.toViewName(modelName, this.propertyOptions.name),
-      });
-    }
-    return { ...this.propertyOptions, excludeFromView: true };
+    return this.__buildPropertyOptions({
+      name: this.toViewName(modelName, this.propertyOptions.name),
+    });
   }
 }

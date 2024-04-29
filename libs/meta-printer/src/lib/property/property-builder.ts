@@ -8,6 +8,7 @@ import {
 } from '@webpackages/printer';
 import { PropertyDecoratorBuilder } from '../decorator';
 import { PropertyManager } from '@webpackages/meta';
+import { EmptyPrinter } from '../common';
 
 export class PropertyBuilder {
   constructor(
@@ -36,28 +37,19 @@ export class PropertyBuilder {
 
   UpdateDtoProperty(): IPrint {
     return this.__build({
-      required: false,
+      required: undefined,
       decoratorsPrinter: this.decoratorBuilder.UpdateProperty(),
     });
   }
 
   QueryDtoProperty(): IPrint {
-    return this.__build({
-      required: false,
-      decoratorsPrinter: this.decoratorBuilder.QueryProperty(),
-    });
-  }
-
-  ICreateDtoProperty(): IPrint {
-    return this.__build({ decoratorsPrinter: undefined });
-  }
-
-  IUpdateDtoProperty(): IPrint {
-    return this.__build({ required: false, decoratorsPrinter: undefined });
-  }
-
-  IQueryDtoProperty(): IPrint {
-    return this.__build({ required: false, decoratorsPrinter: undefined });
+    if (this.optionsManager.isSearchable()) {
+      return this.__build({
+        decoratorsPrinter: this.decoratorBuilder.QueryProperty(),
+        required: undefined,
+      });
+    }
+    return EmptyPrinter;
   }
 
   EntityProperty(): IPrint {
@@ -66,17 +58,46 @@ export class PropertyBuilder {
     });
   }
 
-  IEntityProperty(): IPrint {
-    return this.__build({ decoratorsPrinter: undefined });
-  }
-
   ViewProperty(): IPrint {
     return this.__build({
       decoratorsPrinter: this.decoratorBuilder.ViewColumn(),
     });
   }
 
+  IEntityProperty(): IPrint {
+    return this.__build({
+      classType: ClassType.INTERFACE,
+      decoratorsPrinter: undefined,
+    });
+  }
+
+  ICreateDtoProperty(): IPrint {
+    return this.__build({
+      classType: ClassType.INTERFACE,
+      decoratorsPrinter: undefined,
+    });
+  }
+
+  IUpdateDtoProperty(): IPrint {
+    return this.__build({
+      classType: ClassType.INTERFACE,
+      required: undefined,
+      decoratorsPrinter: undefined,
+    });
+  }
+
+  IQueryDtoProperty(): IPrint {
+    return this.__build({
+      classType: ClassType.INTERFACE,
+      required: undefined,
+      decoratorsPrinter: undefined,
+    });
+  }
+
   IViewProperty(): IPrint {
-    return this.__build({ decoratorsPrinter: undefined });
+    return this.__build({
+      classType: ClassType.INTERFACE,
+      decoratorsPrinter: undefined,
+    });
   }
 }

@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PropertyOptions, PropertyManager } from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
 import { DecoratorName } from '../common/decorator-name';
+import { excludeFalse } from '@webpackages/utils';
 
 export class PropertyDecoratorBuilder {
   constructor(protected readonly optionsManager: PropertyManager) {}
 
   protected __buildPropertyDecorator(options?: PropertyOptions): IPrint {
+    const { searchable, update, excludeFromView, required, ...__options } =
+      options ?? {};
     return new DecoratorPrinter({
       name: DecoratorName.Property,
-      options: options,
+      options: excludeFalse(__options),
     });
   }
 

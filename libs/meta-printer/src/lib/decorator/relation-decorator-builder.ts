@@ -1,15 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { RelationManager, PropertyOptions } from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
 import { DecoratorName } from '../common';
-import { excludeUndefined } from '@webpackages/utils';
 
 export class RelationDecoratorBuilder {
   constructor(protected readonly manager: RelationManager) {}
 
   protected __buildProperty(options?: PropertyOptions): IPrint {
+    const { searchable, excludeFromView, update, required, ...rest } =
+      options ?? {};
     return new DecoratorPrinter({
       name: DecoratorName.Property,
-      options: options ? excludeUndefined(options) : undefined,
+      options: { ...rest, required: required ? true : undefined },
     });
   }
 

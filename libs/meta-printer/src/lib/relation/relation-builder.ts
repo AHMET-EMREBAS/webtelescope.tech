@@ -27,7 +27,6 @@ export class RelationBuilder {
       decoratorsPrinter: this.decoratorBuilder.CreateProperty(),
       docsPrinter: new DocPritner({ content: description ?? '' }),
       type: this.modelName,
-
       ...overrideOptions,
     });
   }
@@ -45,14 +44,6 @@ export class RelationBuilder {
       type: `T${this.modelName}`,
     });
   }
-
-  // ViewProperty(): IPrint {
-  //   return this.__build({ decoratorsPrinter: this.decoratorBuilder.View() });
-  // }
-
-  // IViewProperty(): IPrint {
-  //   return this.__build({ decoratorsPrinter: undefined });
-  // }
 
   CreateDtoProperty(): IPrint {
     return this.__build({
