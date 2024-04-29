@@ -1,30 +1,28 @@
 import { Model, RelationManager, RelationType } from '@webpackages/meta';
 import { RelationBuilder } from './relation-builder';
 import { RelationDecoratorBuilder } from '../decorator';
+
+const categoryModel: Model = {
+  modelName: 'Cat',
+  properties: {
+    name: { type: 'string', unique: true, required: true },
+  },
+};
+const manager = new RelationManager({
+  type: RelationType.Many,
+  required: true,
+  model: categoryModel,
+});
+const decoratorBuilder = new RelationDecoratorBuilder(manager);
+const b = new RelationBuilder('Cat', 'cat', manager, decoratorBuilder);
+
 describe('RelationBuilder', () => {
-  it('should build realtions', () => {
-    const categoryModel: Model = {
-      modelName: 'Category',
-      properties: {
-        name: { type: 'string', unique: true, required: true },
-      },
-    };
-    const manager = new RelationManager({
-      type: RelationType.Many,
-      model: categoryModel,
-    });
-    const decoratorBuilder = new RelationDecoratorBuilder(manager);
-    const builder = new RelationBuilder(
-      'Category',
-      'category',
-      manager,
-      decoratorBuilder
-    );
-
-    let result = builder.CreateDtoProperty().print();
-    result = builder.CreateDtoProperty().print();
-    result = builder.EntityProperty().print();
-
-    console.log(result);
+  it.each`
+    expected                                                                                               | actual
+    ${"@Property({ type: 'object', objectType: 'IDDto', required: true, isArray: true }) cat!: IDDto[];"} | ${b.CreateDtoProperty().print()}
+    ${"@Property({ type: 'object', objectType: 'IDDto', isArray: true }) cat?: IDDto[];"}                 | ${b.UpdateDtoProperty().print()}
+    ${"@Relation({ type: 'Many', required: true }) cat!: Cat[];"}                                          | ${b.EntityProperty().print()}
+  `('should print the $expected result', ({ expected, actual }) => {
+    expect(actual).toBe(expected);
   });
 });

@@ -20,15 +20,28 @@ export class RelationManager {
   protected __toPropertyOptions(
     options?: Partial<PropertyOptions>
   ): PropertyOptions {
-    const { description, required } = this.relationOptions;
-    return {
-      required,
-      description,
+    const { description: rDescription, required: rRequired } =
+      this.relationOptions;
+    const result = {
+      required: rRequired,
+      description: rDescription,
       objectType: 'IDDto',
       ...options,
       type: 'object',
       isArray: this.__isArray(),
     };
+
+    const { type, objectType, required, isArray, description } = result;
+
+    const orderedResult = {
+      type,
+      objectType,
+      required,
+      isArray,
+      description,
+    } as PropertyOptions;
+
+    return orderedResult;
   }
   modelName() {
     return this.relationOptions.model.modelName;
@@ -54,14 +67,14 @@ export class RelationManager {
   toUpdate(): PropertyOptions {
     return this.__toPropertyOptions({
       objectType: BuiltinClassNames.IDDto,
-      required: false,
+      required: undefined
     });
   }
 
   toIUpdate(): PropertyOptions {
     return this.__toPropertyOptions({
       objectType: BuiltinClassNames.IID,
-      required: false,
+      required: undefined
     });
   }
 

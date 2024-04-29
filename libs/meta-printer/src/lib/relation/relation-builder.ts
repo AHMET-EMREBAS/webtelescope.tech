@@ -7,7 +7,7 @@ import {
   PropertyPrinterOptions,
 } from '@webpackages/printer';
 
-import { RelationDecoratorBuilder } from '../decorator/relation-decorator-builder';
+import { RelationDecoratorBuilder } from '../decorator';
 
 export class RelationBuilder {
   constructor(
@@ -27,13 +27,13 @@ export class RelationBuilder {
       decoratorsPrinter: this.decoratorBuilder.CreateProperty(),
       docsPrinter: new DocPritner({ content: description ?? '' }),
       type: this.modelName,
+
       ...overrideOptions,
     });
   }
 
   EntityProperty(): IPrint {
     return this.__build({
-      ...this.optionsManager.toRelationColumn(),
       decoratorsPrinter: this.decoratorBuilder.EntityRelation(),
     });
   }
@@ -63,7 +63,7 @@ export class RelationBuilder {
   UpdateDtoProperty(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IDDto,
-      required: false,
+      required: undefined,
       decoratorsPrinter: this.decoratorBuilder.UpdateProperty(),
     });
   }
@@ -78,14 +78,14 @@ export class RelationBuilder {
   IUpdateDtoProperty(): IPrint {
     return this.__build({
       type: BuiltinClassNames.IID,
-      required: false,
+      required: undefined,
       decoratorsPrinter: undefined,
     });
   }
 
   // IQueryDtoProperty(): IPrint {
   //   return this.__build({
-  //     required: false,
+  //     required: undefined,
   //     decoratorsPrinter: undefined,
   //   });
   // }

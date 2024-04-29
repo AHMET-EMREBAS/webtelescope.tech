@@ -43,7 +43,7 @@ export class PropertyManager {
     if (this.propertyOptions.searchable) {
       return this.__buildPropertyOptions({
         name: this.toViewName(modelName, this.propertyOptions.name),
-        required: false,
+        required: undefined,
       });
     }
 
