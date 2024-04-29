@@ -14,7 +14,7 @@ const b = new PropertyBuilder('Cat', 'cat', manager, decoratorBuilder);
 describe('PropertyBuilder', () => {
   it.each`
     name                    | expected                                                         | actual
-    ${'EntityProperty'}     | ${"@Column({ type:'string', required: true }) cat!: string;"}    | ${b.EntityProperty().print()}
+    ${'EntityProperty'}     | ${"@Column({ type: 'string', required: true }) cat!: string;"}    | ${b.EntityProperty().print()}
     ${'ViewProperty'}       | ${'@ViewColumn() cat!: string;'}                                 | ${b.ViewProperty().print()}
     ${'CreateDtoProperty'}  | ${"@Property({ type: 'string', required: true }) cat!: string;"} | ${b.CreateDtoProperty().print()}
     ${'UpdateDtoProperty'}  | ${"@Property({ type: 'string' }) cat?: string;"}                 | ${b.UpdateDtoProperty().print()}

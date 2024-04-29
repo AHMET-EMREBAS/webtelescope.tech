@@ -17,11 +17,15 @@ export function splitByUppercase(className: string) {
 }
 
 function uppercaseFirst(name: string) {
-  return name && [name[0].toUpperCase(), name.slice(1)].join('');
+  if (name) return name && [name[0].toUpperCase(), name.slice(1)].join('');
+
+  return '';
 }
 
 function lowercaseFirst(name: string) {
-  return [name[0].toLowerCase(), name.slice(1)].join('');
+  if (name) return [name[0].toLowerCase(), name.slice(1)].join('');
+
+  return '';
 }
 
 function __className(name: string) {

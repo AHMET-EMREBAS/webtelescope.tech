@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { RelationManager, PropertyOptions } from '@webpackages/meta';
+import {
+  RelationManager,
+  PropertyOptions,
+  orderPropertyOptions,
+} from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
 import { DecoratorName } from '../common';
 
@@ -7,11 +11,11 @@ export class RelationDecoratorBuilder {
   constructor(protected readonly manager: RelationManager) {}
 
   protected __buildProperty(options?: PropertyOptions): IPrint {
-    const { searchable, excludeFromView, update, required, ...rest } =
+    const { searchable, excludeFromView, update, name, ...rest } =
       options ?? {};
     return new DecoratorPrinter({
       name: DecoratorName.Property,
-      options: { ...rest, required: required ? true : undefined },
+      options: orderPropertyOptions(rest as PropertyOptions),
     });
   }
 

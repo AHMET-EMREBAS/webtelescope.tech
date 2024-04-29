@@ -1,4 +1,4 @@
-import { toPropertyName } from '@webpackages/utils';
+import { excludeFalse, toPropertyName } from '@webpackages/utils';
 import { ColumnOptions, PropertyOptions } from '../meta';
 import { orderPropertyOptions } from './order-objects';
 
@@ -23,7 +23,14 @@ export class PropertyManager {
   }
 
   toColumn(): ColumnOptions {
-    return orderPropertyOptions(this.propertyOptions);
+    return excludeFalse({
+      type: this.propertyOptions.type,
+      objectType: this.propertyOptions.objectType,
+      isArray: this.propertyOptions.isArray,
+      required: this.propertyOptions.required,
+      unique: this.propertyOptions.unique,
+      description: this.propertyOptions.description,
+    });
   }
 
   toCreate(): PropertyOptions {
