@@ -15,7 +15,7 @@ export function TestModel(modelName = 'Category'): Model {
   return {
     modelName,
     properties: {
-      text: { type: 'string', required: true },
+      text: { type: 'object', required: true, objectType: '' },
       num: { type: 'number', required: true },
       bool: { type: 'boolean', required: true },
       date: { type: 'date', required: true },

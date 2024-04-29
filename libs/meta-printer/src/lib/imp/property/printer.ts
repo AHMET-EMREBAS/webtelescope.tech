@@ -1,5 +1,5 @@
 import { PropertyOptions } from '@webpackages/meta';
-import { ClassType } from '../../common';
+import { ClassName } from '../../common';
 import {
   classTypeConverter,
   requiredConverter,
@@ -15,7 +15,7 @@ import { BasePrinter } from '../../core/property';
  */
 export class PropertyPrinter extends BasePrinter {
   constructor(
-    protected readonly classType: ClassType,
+    protected readonly classType: ClassName,
     protected readonly modelName: string,
     protected readonly propertyName: string,
     protected readonly propertyOptions: PropertyOptions

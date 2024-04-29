@@ -4,10 +4,10 @@ import {
   RelationOptions,
 } from '@webpackages/meta';
 import { IPrint } from '@webpackages/printer';
-import { ClassType } from './class-type';
+import { ClassName } from './class-name';
 import { Picker } from './picker';
 
-export type PrinterPickerOptions<T> = { classType: ClassType; options: T };
+export type PrinterPickerOptions<T> = { classType: ClassName; options: T };
 export type PrinterPicker<T> = Picker<PrinterPickerOptions<T>, IPrint>;
 
 // DOc

@@ -1,5 +1,5 @@
+import { stringify } from '@webpackages/utils';
 import { IPrint, DecoratorPrinterOptions } from '../common';
-
 /**
  * Print decorators/annotations
  */
@@ -31,7 +31,13 @@ export class DecoratorPrinter implements IPrint {
    * `@DecoratorName<prefix><options><suffix>`
    */
   protected __options(): string {
-    return this.optionz.options ?? '';
+    if (this.optionz) {
+      if (this.optionz.printRaw) {
+        return (this.optionz.options as string) ?? '';
+      }
+      return stringify(this.optionz.options);
+    }
+    return '';
   }
 
   /**

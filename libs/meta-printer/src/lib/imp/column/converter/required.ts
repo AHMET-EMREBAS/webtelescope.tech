@@ -1,4 +1,4 @@
-import { ClassType } from '../../../common';
+import { ClassName } from '../../../common';
 import {
   RequiredConverter,
   RequiredConverterOptions,
@@ -9,18 +9,18 @@ export const requiredConverter: RequiredConverter = (
 ) => {
   const { classType, required } = options;
   switch (classType) {
-    case ClassType.CREATE:
-    case ClassType.ICREATE:
-    case ClassType.ENTITY:
-    case ClassType.IENTITY:
+    case ClassName.Create:
+    case ClassName.ICreate:
+    case ClassName.Entity:
+    case ClassName.IEntity:
       return required == true ? true : false;
-    case ClassType.IQUERY:
-    case ClassType.IUPDATE:
-    case ClassType.QUERY:
-    case ClassType.UPDATE:
+    case ClassName.IQuery:
+    case ClassName.IUpdate:
+    case ClassName.Query:
+    case ClassName.Update:
       return false;
-    case ClassType.VIEW:
-    case ClassType.IVIEW:
+    case ClassName.View:
+    case ClassName.IView:
       return true;
   }
 };

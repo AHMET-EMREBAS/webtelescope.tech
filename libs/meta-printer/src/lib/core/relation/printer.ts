@@ -1,5 +1,5 @@
 import {
-  ClassType,
+  ClassName,
   Converter,
   RelationDecoratorPrinterPicker,
   DocPrinterPicker,
@@ -13,29 +13,29 @@ import {
 } from '@webpackages/printer';
 
 export type NameConverterOptions = {
-  classType: ClassType;
+  classType: ClassName;
   modelName: string;
   relationName: string;
 };
 
 export type TypeConverterOptions = {
-  classType: ClassType;
+  classType: ClassName;
   type: string;
 };
 export type TypeConverter = Converter<TypeConverterOptions, string>;
 
-export type ClassTypeConverter = Converter<ClassType, ExtClassType>;
+export type ClassTypeConverter = Converter<ClassName, ExtClassType>;
 export type NameConverter = Converter<NameConverterOptions, string>;
 
 export type RequiredConverterOptions = {
-  classType: ClassType;
+  classType: ClassName;
   required?: boolean;
 };
 
 export type RequiredConverter = Converter<RequiredConverterOptions, boolean>;
 
 export type PrinterOptions = {
-  classType: ClassType;
+  classType: ClassName;
   modelName: string;
   relationName: string;
   relationOptions: RelationOptions;

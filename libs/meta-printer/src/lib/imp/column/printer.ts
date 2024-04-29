@@ -1,5 +1,5 @@
 import { ColumnOptions } from '@webpackages/meta';
-import { ClassType } from '../../common';
+import { ClassName } from '../../common';
 import {
   classTypeConverter,
   requiredConverter,
@@ -11,7 +11,7 @@ import { BasePrinter } from '../../core/column';
 
 export class ColumnPrinter extends BasePrinter {
   constructor(
-    protected readonly classType: ClassType,
+    protected readonly classType: ClassName,
     protected readonly modelName: string,
     protected readonly columnName: string,
     protected readonly columnOptions: ColumnOptions

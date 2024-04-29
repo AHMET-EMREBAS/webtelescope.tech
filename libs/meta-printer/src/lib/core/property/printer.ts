@@ -1,5 +1,5 @@
 import {
-  ClassType,
+  ClassName,
   Converter,
   PropertyDecoratorPrinterPicker,
   DocPrinterPicker,
@@ -13,24 +13,24 @@ import {
 } from '@webpackages/printer';
 
 export type NameConverterOptions = {
-  classType: ClassType;
+  classType: ClassName;
   modelName: string;
   propertyName: string;
 };
 
-export type ClassTypeConverter = Converter<ClassType, ExtClassType>;
+export type ClassTypeConverter = Converter<ClassName, ExtClassType>;
 export type TypeConverter = Converter<string, string>;
 export type NameConverter = Converter<NameConverterOptions, string>;
 
 export type RequiredConverterOptions = {
-  classType: ClassType;
+  classType: ClassName;
   required?: boolean;
 };
 
 export type RequiredConverter = Converter<RequiredConverterOptions, boolean>;
 
 export type PrinterOptions = {
-  classType: ClassType;
+  classType: ClassName;
   modelName: string;
   propertyName: string;
   propertyOptions: PropertyOptions;

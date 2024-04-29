@@ -1,41 +1,28 @@
-import { DecoratorPrinter } from '@webpackages/printer';
 import {
-  ClassType,
+  ClassName,
+  ColumnDecoratorPrinterPicker,
+  ColumnDecoratorPrinterPickerOptions,
   EmptyPrinter,
-  PropertyDecoratorPrinterPicker,
-  PropertyDecoratorPrinterPickerOptions,
 } from '../../../common';
-import { stringify } from '../../../utils';
+import { Decorators } from '../../../core/decorator';
 
-export const decoratorPicker: PropertyDecoratorPrinterPicker = (
-  __options: PropertyDecoratorPrinterPickerOptions
+export const decoratorPicker: ColumnDecoratorPrinterPicker = (
+  __options: ColumnDecoratorPrinterPickerOptions
 ) => {
   const { classType, options } = __options;
-  switch (classType) {
-    case ClassType.CREATE:
-      return new DecoratorPrinter({
-        name: 'Property',
-        options: stringify({ ...options }),
-      });
-    case ClassType.UPDATE:
-    case ClassType.QUERY:
-      return new DecoratorPrinter({
-        name: 'Property',
-        options: stringify({ ...options, required: false }),
-      });
 
-    case ClassType.ENTITY:
-      return new DecoratorPrinter({
-        name: 'Column',
-        options: stringify({ ...options }),
-      });
-    case ClassType.ICREATE:
-    case ClassType.IENTITY:
-    case ClassType.IQUERY:
-    case ClassType.IUPDATE:
-    case ClassType.IVIEW:
+  switch (classType) {
+    case ClassName.Entity:
+      return Decorators.Column(options);
+    case ClassName.ICreate:
+    case ClassName.IEntity:
+    case ClassName.IQuery:
+    case ClassName.IUpdate:
+    case ClassName.IView:
       return EmptyPrinter;
-    case ClassType.VIEW:
-      return new DecoratorPrinter({ name: 'ViewColumn' });
+    case ClassName.View:
+      return Decorators.ViewColumn();
   }
+
+  return EmptyPrinter;
 };

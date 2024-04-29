@@ -131,14 +131,14 @@ export type CommonProperty<
 export type CommonWrapper<P, T extends PropertyType> = P & CommonProperty<T>;
 
 export type __StringProperty<F> = {
-  minLength: number;
-  maxLength: number;
-  format: F;
+  minLength?: number;
+  maxLength?: number;
+  format?: F;
 };
 
 export type __NumberProperty = {
-  minimum: number;
-  maximum: number;
+  minimum?: number;
+  maximum?: number;
 };
 
 export type __BooleanProperty = {
@@ -176,7 +176,7 @@ export type __DateProperty = {
   /**
    * Find date if it is between two month days
    */
-  between: [MonthDay, MonthDay];
+  between?: [MonthDay, MonthDay];
 
   /**
    * Find date if it is in the list of week days
@@ -186,7 +186,7 @@ export type __DateProperty = {
   /**
    * Find date if it is the week day
    */
-  day: WeekDay;
+  day?: WeekDay;
 
   /**
    * Find date if it is in the list of month days.
@@ -210,10 +210,10 @@ export type PropertyOptions<
   ST extends string = string,
   Obj extends string = string
 > =
-  | Partial<StringProperty<ST>>
-  | Partial<NumberProperty>
-  | Partial<BooleanProperty>
-  | Partial<DateProperty>
-  | Partial<ObjectProperty<Obj>>;
+  | StringProperty<ST>
+  | NumberProperty
+  | BooleanProperty
+  | DateProperty
+  | ObjectProperty<Obj>;
 
 // export type PropertyOptions = Partial<__PropertyOptions>;

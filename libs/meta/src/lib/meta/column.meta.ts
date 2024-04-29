@@ -1,7 +1,7 @@
 import { PropertyType } from './property.meta';
 
-export type ColumnOptions<P extends PropertyType = PropertyType> = {
-  type: P;
+export type ColumnOptions = {
+  type: PropertyType;
   required?: boolean;
   unique?: boolean;
   isArray?: boolean;

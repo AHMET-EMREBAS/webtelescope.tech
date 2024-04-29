@@ -1,6 +1,5 @@
-import { DecoratorPrinter } from '@webpackages/printer';
 import {
-  ClassType,
+  ClassName,
   EmptyPrinter,
   RelationDecoratorPrinterPicker,
   RelationDecoratorPrinterPickerOptions,
@@ -13,31 +12,42 @@ export const decoratorPicker: RelationDecoratorPrinterPicker = (
 ) => {
   const { classType, options } = __options;
   const { model, type } = options;
+
+  const isArray = (type:RelationType)=>type == RelationType.Many ? true :false; 
+  
   switch (classType) {
-    case ClassType.CREATE:
-    case ClassType.UPDATE:
+    case ClassName.Create:
+      return new DecoratorPrinter({
+        name: '',
+        options: stringify({
+          type: 'ID',
+          required: options.required ? true : false,
+          isArray:isArray(type)
+        }),
+      });
+    case ClassName.Update:
       return new DecoratorPrinter({
         name: 'Property',
         options: stringify({
           type: 'ID',
-          required: options.required ? true : false,
-          isArray: options.type === RelationType.Many ? true : false,
+          required: false,
+          isArray: true
         }),
       });
-    case ClassType.ENTITY:
+    case ClassName.Entity:
       return new DecoratorPrinter({
         name: type,
         options: model.modelName,
       });
 
     // Relation properties will not fall in the following cases!
-    case ClassType.VIEW:
-    case ClassType.QUERY:
-    case ClassType.ICREATE:
-    case ClassType.IENTITY:
-    case ClassType.IQUERY:
-    case ClassType.IUPDATE:
-    case ClassType.IVIEW:
+    case ClassName.View:
+    case ClassName.Query:
+    case ClassName.ICreate:
+    case ClassName.IEntity:
+    case ClassName.IQuery:
+    case ClassName.IUpdate:
+    case ClassName.IView:
       return EmptyPrinter;
   }
 };

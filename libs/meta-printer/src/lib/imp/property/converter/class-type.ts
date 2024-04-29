@@ -1,26 +1,26 @@
-import { ClassType } from '../../../common';
+import { ClassName } from '../../../common';
 import { ClassTypeConverter } from '../../../core/property';
 import { ClassType as ExtClassType } from '@webpackages/printer';
 /**
- * Convert {@link ClassType} to {@link ExtClassType}
+ * Convert {@link ClassName} to {@link ExtClassType}
  * @param classType
  * @returns
  */
 export const classTypeConverter: ClassTypeConverter = (
-  classType: ClassType
+  classType: ClassName
 ): ExtClassType => {
   switch (classType) {
-    case ClassType.ENTITY:
-    case ClassType.VIEW:
-    case ClassType.CREATE:
-    case ClassType.UPDATE:
-    case ClassType.QUERY:
+    case ClassName.Entity:
+    case ClassName.View:
+    case ClassName.Create:
+    case ClassName.Update:
+    case ClassName.Query:
       return ExtClassType.CLASS;
-    case ClassType.IENTITY:
-    case ClassType.IVIEW:
-    case ClassType.ICREATE:
-    case ClassType.IUPDATE:
-    case ClassType.IQUERY:
+    case ClassName.IEntity:
+    case ClassName.IView:
+    case ClassName.ICreate:
+    case ClassName.IUpdate:
+    case ClassName.IQuery:
       return ExtClassType.INTERFACE;
   }
 };

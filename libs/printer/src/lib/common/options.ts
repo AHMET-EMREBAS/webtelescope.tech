@@ -163,7 +163,12 @@ export type BasicDecoratorPrinterOptions = {
   /**
    * Decorator options
    */
-  options?: string;
+  options?: unknown;
+
+  /**
+   * If set true, options will be printed as it is
+   */
+  printRaw?: boolean;
 };
 
 export type DecoratorPrinterOptions<E = NotExtended> = NamePefixOptions &

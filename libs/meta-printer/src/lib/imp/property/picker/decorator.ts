@@ -1,6 +1,6 @@
 import { DecoratorPrinter } from '@webpackages/printer';
 import {
-  ClassType,
+  ClassName,
   EmptyPrinter,
   PropertyDecoratorPrinterPicker,
   PropertyDecoratorPrinterPickerOptions,
@@ -12,28 +12,28 @@ export const decoratorPicker: PropertyDecoratorPrinterPicker = (
 ) => {
   const { classType, options } = __options;
   switch (classType) {
-    case ClassType.CREATE:
+    case ClassName.Create:
       return new DecoratorPrinter({
         name: 'Property',
         options: stringify({ ...options }),
       });
-    case ClassType.UPDATE:
-    case ClassType.QUERY:
+    case ClassName.Update:
+    case ClassName.Query:
       return new DecoratorPrinter({
         name: 'Property',
         options: stringify({ ...options, required: false }),
       });
-    case ClassType.ENTITY:
+    case ClassName.Entity:
       throw new Error(
         'You should use the dedicated colum printer for printing entity columns!'
       );
-    case ClassType.ICREATE:
-    case ClassType.IENTITY:
-    case ClassType.IQUERY:
-    case ClassType.IUPDATE:
-    case ClassType.IVIEW:
+    case ClassName.ICreate:
+    case ClassName.IEntity:
+    case ClassName.IQuery:
+    case ClassName.IUpdate:
+    case ClassName.IView:
       return EmptyPrinter;
-    case ClassType.VIEW:
+    case ClassName.View:
       return new DecoratorPrinter({ name: 'ViewColumn' });
   }
 };

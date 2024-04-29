@@ -4,7 +4,7 @@
  * @param obj
  * @returns
  */
-export function stringify(obj: Record<string, any> | string): string {
+export function stringify(obj: any): any {
   if (typeof obj === 'string') {
     return `'${obj}'`;
   } else if (typeof obj === 'number' || typeof obj === 'boolean') {

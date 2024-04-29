@@ -1,18 +1,18 @@
-import { ClassType } from '../../common';
+import { ClassName } from '../../common';
 import { ColumnPrinter } from './printer';
 describe('Column Printer', () => {
   it.each`
     expected                                                              | classType            | modelName | name      | options
-    ${"@Property({ type: 'string', isArray: true }) name?: string[];"}    | ${ClassType.CREATE}  | ${'Cat'}  | ${'name'} | ${{ type: 'string', isArray: true }}
-    ${"@Property({ type: 'string', required: false }) name?: string;"}    | ${ClassType.UPDATE}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${"@Property({ type: 'string', required: false }) catName?: string;"} | ${ClassType.QUERY}   | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${"@Column({ type: 'string' }) name?: string;"}                       | ${ClassType.ENTITY}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${'@ViewColumn() catName!: string;'}                                  | ${ClassType.VIEW}    | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${'name?: string;'}                                                   | ${ClassType.ICREATE} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${'name?: string;'}                                                   | ${ClassType.IUPDATE} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${'catName?: string;'}                                                | ${ClassType.IQUERY}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${'name?: string;'}                                                   | ${ClassType.IENTITY} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
-    ${'catName: string;'}                                                 | ${ClassType.IVIEW}   | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${"@Property({ type: 'string', isArray: true }) name?: string[];"}    | ${ClassName.Create}  | ${'Cat'}  | ${'name'} | ${{ type: 'string', isArray: true }}
+    ${"@Property({ type: 'string', required: false }) name?: string;"}    | ${ClassName.Update}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${"@Property({ type: 'string', required: false }) catName?: string;"} | ${ClassName.Query}   | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${"@Column({ type: 'string' }) name?: string;"}                       | ${ClassName.Entity}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'@ViewColumn() catName!: string;'}                                  | ${ClassName.View}    | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'name?: string;'}                                                   | ${ClassName.ICreate} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'name?: string;'}                                                   | ${ClassName.IUpdate} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'catName?: string;'}                                                | ${ClassName.IQuery}  | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'name?: string;'}                                                   | ${ClassName.IEntity} | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
+    ${'catName: string;'}                                                 | ${ClassName.IView}   | ${'Cat'}  | ${'name'} | ${{ type: 'string' }}
   `(
     '$classType | should print $expected for $options',
     ({ expected, classType, modelName, name, options }) => {

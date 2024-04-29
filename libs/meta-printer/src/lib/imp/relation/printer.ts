@@ -1,5 +1,5 @@
 import { RelationOptions } from '@webpackages/meta';
-import { ClassType } from '../../common';
+import { ClassName } from '../../common';
 import {
   classTypeConverter,
   requiredConverter,
@@ -15,7 +15,7 @@ import { BasePrinter } from '../../core/relation';
  */
 export class RelationPrinter extends BasePrinter {
   constructor(
-    protected readonly classType: ClassType,
+    protected readonly classType: ClassName,
     protected readonly modelName: string,
     protected readonly relationName: string,
     protected readonly relationOptions: RelationOptions

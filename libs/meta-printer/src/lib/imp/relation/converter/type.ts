@@ -1,25 +1,25 @@
 import { TypeConverter, TypeConverterOptions } from '../../../core/relation';
-import { ClassType } from '../../../common';
+import { ClassName } from '../../../common';
 
 export const typeConverter: TypeConverter = (
   options: TypeConverterOptions
 ): string => {
   const { classType, type } = options;
   switch (classType) {
-    case ClassType.IENTITY:
+    case ClassName.IEntity:
       return `T${type}`;
-    case ClassType.ENTITY:
+    case ClassName.Entity:
       return type;
-    case ClassType.CREATE:
-    case ClassType.UPDATE:
+    case ClassName.Create:
+    case ClassName.Update:
       return 'IDDto';
-    case ClassType.IUPDATE:
-    case ClassType.ICREATE:
+    case ClassName.IUpdate:
+    case ClassName.ICreate:
       return 'IID';
-    case ClassType.IQUERY:
-    case ClassType.IVIEW:
-    case ClassType.QUERY:
-    case ClassType.VIEW:
+    case ClassName.IQuery:
+    case ClassName.IView:
+    case ClassName.Query:
+    case ClassName.View:
       return 'any; // Something wrong with this line! Relation property should not be here!';
   }
 };
