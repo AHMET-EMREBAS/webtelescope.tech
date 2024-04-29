@@ -11,17 +11,18 @@ import {
   PropertyDecoratorBuilder,
   RelationDecoratorBuilder,
 } from '../decorator';
-import { ClassNameBuilder } from '../common';
-import { ClassPrinter, ClassType } from '@webpackages/printer';
+import { ClassNameBuilder, INamedBuilder } from '../common';
+import { IPrint } from '@webpackages/printer';
 import { RelationBuilder } from '../relation';
+import { ImportBuilder } from '../imports';
 
-export class ClassBuilder {
+export class ClassBuilder implements INamedBuilder<IPrint> {
   constructor(
     protected readonly modelManager: ModelManager,
     protected readonly nameBuilder: ClassNameBuilder,
-    protected readonly decoratorBuilder: ClassDecoratorBuilder
+    protected readonly decoratorBuilder: ClassDecoratorBuilder,
+    protected readonly importBuilder: ImportBuilder
   ) {}
-
   protected __modelName() {
     return this.modelManager.modelName();
   }
@@ -52,129 +53,34 @@ export class ClassBuilder {
     );
   }
 
-  Entity() {
-    return new ClassPrinter({
-      name: this.nameBuilder.Entity(),
-      type: ClassType.CLASS,
-      decoratingString: this.decoratorBuilder.Entity().print(),
-      contentString: [
-        this.modelManager
-          .rawProperties()
-          .map((e) => {
-            return this.propertyBuilder(e).EntityProperty().print();
-          })
-          .join('\n'),
-        this.modelManager
-          .rawRelations()
-          .map((e) => {
-            return this.relationBuilder(e).EntityProperty().print();
-          })
-          .join('\n'),
-      ].join('\n'),
-    });
+  Entity(): IPrint {
+    throw new Error('Method not implemented.');
   }
-
-  View() {
-    return new ClassPrinter({
-      name: this.nameBuilder.View(),
-      type: ClassType.CLASS,
-      decoratingString: this.decoratorBuilder.ViewEntity().print(),
-      contentString: [
-        this.modelManager
-          .rawProperties()
-          .map((e) => {
-            return this.propertyBuilder(e).ViewProperty().print();
-          })
-          .join('\n'),
-        this.modelManager
-          .rawRelations()
-          .map((e) => {
-            return this.relationBuilder(e).ViewProperties().print();
-          })
-          .join('\n'),
-      ].join('\n'),
-    });
+  View(): IPrint {
+    throw new Error('Method not implemented.');
   }
-
-  CreateDto() {
-    return new ClassPrinter({
-      name: this.nameBuilder.Create(),
-      type: ClassType.CLASS,
-      decoratingString: this.decoratorBuilder.Dto().print(),
-      contentString: [
-        this.modelManager
-          .rawProperties()
-          .map((e) => {
-            return this.propertyBuilder(e).CreateDtoProperty().print();
-          })
-          .join('\n'),
-        this.modelManager
-          .rawRelations()
-          .map((e) => {
-            return this.relationBuilder(e).CreateDtoProperty().print();
-          })
-          .join('\n'),
-      ].join('\n'),
-    });
+  Create(): IPrint {
+    throw new Error('Method not implemented.');
   }
-
-  UpdateDto() {
-    return new ClassPrinter({
-      name: this.nameBuilder.Update(),
-      type: ClassType.CLASS,
-      decoratingString: this.decoratorBuilder.Dto().print(),
-      contentString: [
-        this.modelManager
-          .rawProperties()
-          .map((e) => {
-            return this.propertyBuilder(e).UpdateDtoProperty().print();
-          })
-          .join('\n'),
-        this.modelManager
-          .rawRelations()
-          .map((e) => {
-            return this.relationBuilder(e).UpdateDtoProperty().print();
-          })
-          .join('\n'),
-      ].join('\n'),
-    });
+  Update(): IPrint {
+    throw new Error('Method not implemented.');
   }
-
-  QueryDto() {
-    return new ClassPrinter({
-      name: this.nameBuilder.Query(),
-      type: ClassType.CLASS,
-      decoratingString: this.decoratorBuilder.Dto().print(),
-      contentString: [
-        this.modelManager
-          .rawProperties()
-          .map((e) => {
-            return this.propertyBuilder(e).QueryDtoProperty().print();
-          })
-          .join('\n'),
-        this.modelManager
-          .rawRelations()
-          .map((e) => {
-            return this.relationBuilder(e).QueryDtoProperties().print();
-          })
-          .join('\n'),
-      ].join('\n'),
-    });
+  Query(): IPrint {
+    throw new Error('Method not implemented.');
   }
-
-  IEntity() {
-    return '';
+  IEntity(): IPrint {
+    throw new Error('Method not implemented.');
   }
-  IView() {
-    return '';
+  IView(): IPrint {
+    throw new Error('Method not implemented.');
   }
-  ICreateDto() {
-    return '';
+  ICreate(): IPrint {
+    throw new Error('Method not implemented.');
   }
-  IUpdateDto() {
-    return '';
+  IUpdate(): IPrint {
+    throw new Error('Method not implemented.');
   }
-  IQueryDto() {
-    return '';
+  IQuery(): IPrint {
+    throw new Error('Method not implemented.');
   }
 }
