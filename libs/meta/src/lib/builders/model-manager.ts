@@ -1,3 +1,4 @@
+import { uniq } from '@webpackages/utils';
 import { PropertyManager } from '.';
 import { Model } from '../meta/model.meta';
 import { PropertyOptions } from '../meta/property.meta';
@@ -80,6 +81,10 @@ export class ModelManager {
 
   uniqueProperties() {
     return this.rawProperties().filter((e) => e.unique);
+  }
+
+  uniqueRelationNames(): string[] {
+    return uniq(this.rawRelations().map((e) => e.model.modelName));
   }
 
   requiredProperties() {
