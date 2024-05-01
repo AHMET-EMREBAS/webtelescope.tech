@@ -28,11 +28,11 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       new ImportPrinter({
         items,
         source,
-      }),
+      }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.IEntity()],
         source: this.packageNameProvider.common(),
-      }),
+      }).print(),
     ].join('\n');
 
     return {
@@ -56,7 +56,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       new ImportPrinter({
         items: [this.classNameBuilder.IView()],
         source: this.packageNameProvider.common(),
-      }),
+      }).print(),
     ].join('\n');
 
     return {
@@ -80,7 +80,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       new ImportPrinter({
         items: [this.classNameBuilder.ICreate()],
         source: this.packageNameProvider.common(),
-      }),
+      }).print(),
     ].join('\n');
 
     return {
@@ -104,7 +104,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       new ImportPrinter({
         items: [this.classNameBuilder.IUpdate()],
         source: this.packageNameProvider.common(),
-      }),
+      }).print(),
     ].join('\n');
 
     return {
@@ -128,7 +128,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       new ImportPrinter({
         items: [this.classNameBuilder.IQuery()],
         source: this.packageNameProvider.common(),
-      }),
+      }).print(),
     ].join('\n');
 
     return {
