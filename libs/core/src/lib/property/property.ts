@@ -15,13 +15,14 @@ import {
   isNumber,
 } from 'class-validator';
 
-export function InputObject() {
+export function Dto() {
   return applyDecorators(Exclude());
 }
 
 export type PropertyOptions = Omit<
   ApiPropertyOptions & {
     enum?: (string | number)[];
+    unique?: boolean;
     objectType?: TypeType;
   },
   'nullable'

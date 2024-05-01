@@ -38,6 +38,7 @@ function __createDto(
     content: classBuilder.Create().print(),
   });
 }
+
 function __updateDto(
   tree: Tree,
   projectRoot: string,
