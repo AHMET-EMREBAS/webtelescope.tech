@@ -1,1 +1,1 @@
-export * from './class-builder';
+export * from './class';
