@@ -1,36 +1,80 @@
 import { formatFiles, generateFiles, names, Tree } from '@nx/devkit';
-import { EntityGeneratorSchema } from './schema';
 import { join } from 'path';
-import { FileNameBuilder, getClassBuilder } from '@webpackages/meta-printer';
+import {
+  ClassBuilder,
+  FileNameBuilder,
+  getClassBuilder,
+  ICoverAllClassTypes,
+} from '@webpackages/meta-printer';
+import * as MetaData from '@webpackages/gen-meta';
+import { Model } from '@webpackages/meta';
+import { IPrint } from '@webpackages/printer';
 
-export async function entityGenerator(
+const classBuilders = Object.entries(
+  MetaData as unknown as Record<string, Model>
+).map(([, value]) => {
+  return [value.modelName, getClassBuilder(value)] as [string, ClassBuilder];
+});
+
+function __entity(
   tree: Tree,
-  options: EntityGeneratorSchema
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
 ) {
-  const projectRoot = `libs/gen-entity/src/lib/${options.name}`;
-
-  const classBuilder = getClassBuilder({
-    modelName: names(options.name).className,
-    properties: {
-      name: { type: 'string' },
-    },
-    relations: {
-      category: {
-        relationType: 'Many',
-        model: {
-          modelName: 'Category',
-          properties: { name: { type: 'string' } },
-        },
-      },
-    },
-  });
-
-  const fileNameBuilder = new FileNameBuilder(options.name);
   generateFiles(tree, join(__dirname, 'files'), projectRoot, {
-    fileName: fileNameBuilder.Entity(),
+    fileName: fileBuilder.Entity(),
     content: classBuilder.Entity().print(),
   });
-  await formatFiles(tree);
+}
+function __createDto(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.Create(),
+    content: classBuilder.Create().print(),
+  });
+}
+function __updateDto(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.Update(),
+    content: classBuilder.Update().print(),
+  });
 }
 
+function __queryDto(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.Query(),
+    content: classBuilder.Query().print(),
+  });
+}
+
+function ___gen(tree: Tree) {
+  for (const [modelName, classBuilder] of classBuilders) {
+    const projectRoot = `libs/gen-entity/src/lib/${names(modelName).fileName}`;
+    const fileNameBuilder = new FileNameBuilder(modelName);
+    __entity(tree, projectRoot, fileNameBuilder, classBuilder);
+    __createDto(tree, projectRoot, fileNameBuilder, classBuilder);
+    __updateDto(tree, projectRoot, fileNameBuilder, classBuilder);
+    __queryDto(tree, projectRoot, fileNameBuilder, classBuilder);
+  }
+}
+
+export async function entityGenerator(tree: Tree) {
+  ___gen(tree);
+  await formatFiles(tree);
+}
 export default entityGenerator;

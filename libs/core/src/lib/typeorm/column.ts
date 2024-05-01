@@ -3,6 +3,7 @@ import { Column as Col, ColumnType, ViewColumn as _ViewColumn } from 'typeorm';
 export type ColumnOptions = {
   type: 'string' | 'number' | 'date' | 'boolean';
   unique?: boolean;
+  required?: boolean;
 };
 
 export function Column({ type, unique }: ColumnOptions) {

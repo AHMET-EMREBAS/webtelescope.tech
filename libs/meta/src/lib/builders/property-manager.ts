@@ -20,7 +20,6 @@ export class PropertyManager {
 
   toColumn(): ColumnOptions {
     return excludeFalse<ColumnOptions>({
-      name: this.propertyOptions.name,
       type: this.propertyOptions.type,
       objectType: this.propertyOptions.objectType,
       isArray: this.propertyOptions.isArray,

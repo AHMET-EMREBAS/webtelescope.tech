@@ -1,3 +1,4 @@
+import { ModelManager, NameModel } from '@webpackages/meta';
 import {
   ClassNameBuilder,
   DecoratorListProvider,
@@ -9,6 +10,7 @@ import { ClassImportBuilder } from './class';
 describe('ClassImportBuilder', () => {
   it('should print the required imports for by class type', () => {
     const imports = new ClassImportBuilder(
+      new ModelManager(NameModel('Category')),
       new PackageNameProvider(),
       new ClassNameBuilder('Sample'),
       new DecoratorListProvider(new DecoratorNameProvider())

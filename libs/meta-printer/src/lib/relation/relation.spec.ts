@@ -18,16 +18,16 @@ const b = new RelationBuilder('Cat', 'cat', manager, decoratorBuilder);
 
 describe('RelationBuilder', () => {
   it.each`
-    name                     | expected                                                                                              | actual
-    ${'EntityProperty'}      | ${"@Relation({ relationType: 'Many', required: true }) cat!: Cat[];"}                                 | ${b.Entity().print()}
-    ${'ViewProperties'}      | ${'@ViewColumn() catName!: string;'}                                                                  | ${b.View().print()}
-    ${'CreateDtoProperty'}   | ${"@Property({ type: 'object', objectType: 'IDDto', isArray: true, required: true }) cat!: IDDto[];"} | ${b.Create().print()}
-    ${'UpdateDtoProperty'}   | ${"@Property({ type: 'object', objectType: 'IDDto', isArray: true }) cat?: IDDto[];"}                 | ${b.Update().print()}
-    ${'QueryDtoProperties'}  | ${"@Property({ type: 'string' }) catName?: string;"}                                                  | ${b.Query().print()}
-    ${'IQueryDtoProperties'} | ${'catName?: string;'}                                                                                | ${b.IQuery().print()}
-    ${'IEntityProperty'}     | ${'cat: TCat[];'}                                                                                     | ${b.IEntity().print()}
-    ${'ICreateDtoProperty'}  | ${'cat: IID[];'}                                                                                      | ${b.ICreate().print()}
-    ${'IUpdateDtoProperty'}  | ${'cat?: IID[];'}                                                                                     | ${b.IUpdate().print()}
+    name                     | expected                                                                                            | actual
+    ${'EntityProperty'}      | ${"@Relation({ relationType: 'Many', required: true, objectType: Cat }) cat!: Cat[];"}               | ${b.Entity().print()}
+    ${'ViewProperties'}      | ${'@ViewColumn() catName!: string;'}                                                                | ${b.View().print()}
+    ${'CreateDtoProperty'}   | ${"@Property({ type: 'object', objectType: IDDto, isArray: true, required: true }) cat!: IDDto[];"} | ${b.Create().print()}
+    ${'UpdateDtoProperty'}   | ${"@Property({ type: 'object', objectType: IDDto, isArray: true }) cat?: IDDto[];"}                 | ${b.Update().print()}
+    ${'QueryDtoProperties'}  | ${"@Property({ type: 'string' }) catName?: string;"}                                                | ${b.Query().print()}
+    ${'IQueryDtoProperties'} | ${'catName?: string;'}                                                                              | ${b.IQuery().print()}
+    ${'IEntityProperty'}     | ${'cat: TCat[];'}                                                                                   | ${b.IEntity().print()}
+    ${'ICreateDtoProperty'}  | ${'cat: IID[];'}                                                                                    | ${b.ICreate().print()}
+    ${'IUpdateDtoProperty'}  | ${'cat?: IID[];'}                                                                                   | ${b.IUpdate().print()}
   `('$name | should print the $expected result', ({ expected, actual }) => {
     expect(actual).toBe(expected);
   });
