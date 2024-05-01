@@ -184,7 +184,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   IView(): IPrint {
     return new ClassPrinter({
       className: this.nameBuilder.IView(),
-      classType: ClassType.CLASS,
+      classType: ClassType.INTERFACE,
       contentString: [
         this.modelManager
           .propertiesList()
@@ -205,7 +205,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   ICreate(): IPrint {
     return new ClassPrinter({
       className: this.nameBuilder.ICreate(),
-      classType: ClassType.CLASS,
+      classType: ClassType.INTERFACE,
       contentString: [
         this.modelManager
           .propertiesList()
@@ -226,7 +226,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   IUpdate(): IPrint {
     return new ClassPrinter({
       className: this.nameBuilder.IUpdate(),
-      classType: ClassType.CLASS,
+      classType: ClassType.INTERFACE,
       contentString: [
         this.modelManager
           .propertiesList()
@@ -247,10 +247,11 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   IQuery(): IPrint {
     return new ClassPrinter({
       className: this.nameBuilder.IQuery(),
-      classType: ClassType.CLASS,
+      classType: ClassType.INTERFACE,
       contentString: [
         this.modelManager
           .propertiesList()
+          .filter((e) => e.searchable != false)
           .map((e) => {
             return this.propertyBuilder(e).IQuery().print();
           })
@@ -258,7 +259,9 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
         this.modelManager
           .relationsList()
           .map((e) => {
-            return this.relationBuilder(e).IQuery().print();
+            return this.relationBuilder(e)
+              .IQuery()
+              .print();
           })
           .join('\n'),
       ].join('\n'),

@@ -18,13 +18,6 @@ export class PropertyManager {
     } as PropertyOptions);
   }
 
-  canUpdate() {
-    return this.propertyOptions.update != false;
-  }
-  canSearch() {
-    return this.propertyOptions.searchable;
-  }
-
   toColumn(): ColumnOptions {
     return excludeFalse<ColumnOptions>({
       name: this.propertyOptions.name,

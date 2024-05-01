@@ -8,7 +8,6 @@ import {
 } from '@webpackages/printer';
 import { PropertyDecoratorBuilder } from '../decorator';
 import { PropertyManager } from '@webpackages/meta';
-import { EmptyPrinter } from '../common-imp';
 import { ICoverAllClassTypes } from '../common';
 
 /**
@@ -41,23 +40,17 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
   }
 
   Update(): IPrint {
-    if (this.optionsManager.canUpdate()) {
-      return this.__build({
-        required: undefined,
-        decoratorsPrinter: this.decoratorBuilder.Update(),
-      });
-    }
-    return EmptyPrinter;
+    return this.__build({
+      required: undefined,
+      decoratorsPrinter: this.decoratorBuilder.Update(),
+    });
   }
 
   Query(): IPrint {
-    if (this.optionsManager.canSearch()) {
-      return this.__build({
-        decoratorsPrinter: this.decoratorBuilder.Query(),
-        required: undefined,
-      });
-    }
-    return EmptyPrinter;
+    return this.__build({
+      decoratorsPrinter: this.decoratorBuilder.Query(),
+      required: undefined,
+    });
   }
 
   Entity(): IPrint {

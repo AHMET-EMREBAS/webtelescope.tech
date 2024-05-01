@@ -49,7 +49,7 @@ export class ModelManager {
 
   queryProperties(modelName = '') {
     return this.propertiesList()
-      .filter((e) => e.searchable == true && !e.excludeFromView == true)
+      .filter((e) => e.searchable != false)
       .map((e) => {
         return new PropertyManager(e).toQuery(modelName);
       });

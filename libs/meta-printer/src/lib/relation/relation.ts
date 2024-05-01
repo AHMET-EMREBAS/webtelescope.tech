@@ -84,6 +84,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
   View(): IPrint {
     const queries = this.optionsManager
       .toView()
+      .filter((e) => e.searchable != false)
       .map((e) => {
         return this.__build({
           decoratorsPrinter: this.decoratorBuilder.View(),
@@ -104,6 +105,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
   Query(): IPrint {
     const queries = this.optionsManager
       .toQuery()
+      .filter((e) => e.searchable != false)
       .map((e) => {
         return this.__build({
           decoratorsPrinter: this.decoratorBuilder.Query(e.name),
@@ -124,6 +126,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
   IQuery(): IPrint {
     const queries = this.optionsManager
       .toIQuery()
+      .filter((e) => e.searchable != false)
       .map((e) => {
         return this.__build({
           decoratorsPrinter: undefined,
@@ -145,6 +148,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
   IView(): IPrint {
     const queries = this.optionsManager
       .toIQuery()
+      .filter((e) => e.searchable != false)
       .map((e) => {
         return this.__build({
           decoratorsPrinter: this.decoratorBuilder.View(),
