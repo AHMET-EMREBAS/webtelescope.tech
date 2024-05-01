@@ -19,6 +19,11 @@
       "factory": "./src/generators/client-e2e/generator",
       "schema": "./src/generators/client-e2e/schema.json",
       "description": "client-e2e generator"
+    },
+    "model": {
+      "factory": "./src/generators/model/generator",
+      "schema": "./src/generators/model/schema.json",
+      "description": "model generator"
     }
   }
 }
