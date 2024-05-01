@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type __PrimitiveType = string | number | boolean | object;
 
 export type PropertyOptions<T extends __PrimitiveType> = {
@@ -17,7 +18,7 @@ export type PropertyOptions<T extends __PrimitiveType> = {
   maxLength?: number;
   minimum?: number;
   maximum?: number;
-  enums?: T[];
+  enums?: any[];
   update?: boolean;
   inView?: boolean;
   strict?: boolean;

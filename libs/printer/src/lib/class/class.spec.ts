@@ -9,8 +9,8 @@ describe('ClassPrinter', () => {
     'should print $expected from $name, $type, $content',
     ({ expected, name, type }) => {
       const result = new ClassPrinter({
-        name,
-        type,
+        className: name,
+        classType: type,
         importings: {
           print() {
             return 'imports';

@@ -57,36 +57,12 @@ export type DocPrinterOptions = {
  * Common/Basic property pritner options
  */
 export type BasicPropertyPrinterOptions = {
-  /**
-   * Name of the property
-   */
   propertyName: string;
-
-  /**
-   * Property type
-   */
   type: string;
-
   classType: ClassType;
-
-  /**
-   * Is property array
-   */
   isArray?: boolean;
-
-  /**
-   * Is property required
-   */
   required?: boolean;
-
-  /**
-   * Documentation printer
-   */
   docsPrinter?: IPrint;
-
-  /**
-   * Decorators printer
-   */
   decoratorsPrinter?: IPrint;
 };
 
@@ -187,12 +163,12 @@ export type BasicClassPrinterOptions = {
   /**
    * Class name
    */
-  name: string;
+  className: string;
 
   /**
    * Class type  class, interface or any type in the programming sytax
    */
-  type: string;
+  classType: string;
 
   /**
    * Represents properties of the class but properties have their own context.

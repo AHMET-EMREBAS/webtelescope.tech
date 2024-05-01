@@ -29,7 +29,8 @@ export class ModelManager {
    */
   propertiesList(): AsList<PropertyOptions> {
     return Object.entries(this.properties()).map(([key, value]) => {
-      return { ...value, name: key };
+      const r: PropertyOptions = { ...value, propertyName: key };
+      return r;
     });
   }
 
@@ -38,7 +39,8 @@ export class ModelManager {
    */
   relationsList(): AsList<RelationOptions> {
     return Object.entries(this.relations()).map(([key, value]) => {
-      return { ...value, name: key };
+      const r: RelationOptions = { ...value, relationName: key };
+      return r;
     });
   }
 

@@ -1,3 +1,5 @@
+import { Model, RelationType } from '../common-imp';
+
 /**
  * @param text
  * @param num

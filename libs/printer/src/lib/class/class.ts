@@ -44,7 +44,7 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
    * Class name
    */
   protected __name(): string {
-    return [this.__namePrefix(), this.__options.name, this.__nameSuffix()].join(
+    return [this.__namePrefix(), this.__options.className, this.__nameSuffix()].join(
       ''
     );
   }
@@ -60,7 +60,7 @@ export class ClassPrinter<T = NotExtended> implements IPrint {
    * Class type
    */
   protected __type(): string {
-    return this.__options.type;
+    return this.__options.classType;
   }
 
   /**

@@ -58,8 +58,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
 
   Entity(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.Entity(),
-      type: ClassType.CLASS,
+      className: this.nameBuilder.Entity(),
+      classType: ClassType.CLASS,
       contentString: [
         this.modelManager
           .propertiesList()
@@ -79,64 +79,64 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
 
   View(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.View(),
-      type: ClassType.CLASS,
+      className: this.nameBuilder.View(),
+      classType: ClassType.CLASS,
     });
   }
 
   Create(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.Create(),
-      type: ClassType.CLASS,
+      className: this.nameBuilder.Create(),
+      classType: ClassType.CLASS,
     });
   }
 
   Update(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.Update(),
-      type: ClassType.CLASS,
+      className: this.nameBuilder.Update(),
+      classType: ClassType.CLASS,
     });
   }
 
   Query(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.Query(),
-      type: ClassType.CLASS,
+      className: this.nameBuilder.Query(),
+      classType: ClassType.CLASS,
     });
   }
 
   IEntity(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.IEntity(),
-      type: ClassType.INTERFACE,
+      className: this.nameBuilder.IEntity(),
+      classType: ClassType.INTERFACE,
     });
   }
 
   IView(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.IView(),
-      type: ClassType.INTERFACE,
+      className: this.nameBuilder.IView(),
+      classType: ClassType.INTERFACE,
     });
   }
 
   ICreate(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.ICreate(),
-      type: ClassType.INTERFACE,
+      className: this.nameBuilder.ICreate(),
+      classType: ClassType.INTERFACE,
     });
   }
 
   IUpdate(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.IUpdate(),
-      type: ClassType.INTERFACE,
+      className: this.nameBuilder.IUpdate(),
+      classType: ClassType.INTERFACE,
     });
   }
 
   IQuery(): IPrint {
     return new ClassPrinter({
-      name: this.nameBuilder.IQuery(),
-      type: ClassType.INTERFACE,
+      className: this.nameBuilder.IQuery(),
+      classType: ClassType.INTERFACE,
     });
   }
 }

@@ -48,8 +48,8 @@ export const EntityProperties: IPrint = {
 };
 
 export const EntityPrinter = new ClassPrinter({
-  name: 'User',
-  type: ClassType.CLASS,
+  className: 'User',
+  classType: ClassType.CLASS,
   content: EntityProperties,
   decorating: EntityDecorator,
   importings: EntityImports,

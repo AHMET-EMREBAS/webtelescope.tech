@@ -25,6 +25,7 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
   protected __build(overrideOptions?: Partial<PropertyPrinterOptions>): IPrint {
     const options = this.optionsManager.toCreate();
     const { description } = options;
+
     return new PropertyPrinter({
       ...options,
       propertyName: this.propertyName,
@@ -32,7 +33,7 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
       decoratorsPrinter: this.decoratorBuilder.Create(),
       docsPrinter: new DocPritner({ content: description ?? '' }),
       ...overrideOptions,
-    });
+    } as PropertyPrinterOptions);
   }
 
   Create(): IPrint {
