@@ -14,31 +14,56 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
    */
   constructor(
     protected readonly packageNameProvider: IPackageNameProvider,
+    protected readonly classNameBuilder: ICoverAllClassTypes<string>,
     protected readonly decoratorListProvider: ICoverAllClassTypes<string[]>
   ) {}
 
   /**
-   * Entity and Column imports
+   * Entity, Column, and IEntity imports
    */
   Entity(): IPrint {
     const items = [...this.decoratorListProvider.Entity()];
     const source = this.packageNameProvider.core();
-    return new ImportPrinter({
-      items,
-      source,
-    });
+    const content = [
+      new ImportPrinter({
+        items,
+        source,
+      }),
+      new ImportPrinter({
+        items: [this.classNameBuilder.IEntity()],
+        source: this.packageNameProvider.common(),
+      }),
+    ].join('\n');
+
+    return {
+      print() {
+        return content;
+      },
+    };
   }
 
   /**
-   * ViewEntity and ViewColumn imports
+   * ViewEntity, ViewColumn, IView imports
    */
   View(): IPrint {
     const items = [...this.decoratorListProvider.View()];
     const source = this.packageNameProvider.core();
-    return new ImportPrinter({
-      items,
-      source,
-    });
+    const content = [
+      new ImportPrinter({
+        items,
+        source,
+      }).print(),
+      new ImportPrinter({
+        items: [this.classNameBuilder.IView()],
+        source: this.packageNameProvider.common(),
+      }),
+    ].join('\n');
+
+    return {
+      print() {
+        return content;
+      },
+    };
   }
 
   /**
@@ -47,10 +72,22 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
   Create(): IPrint {
     const items = [...this.decoratorListProvider.Create()];
     const source = this.packageNameProvider.core();
-    return new ImportPrinter({
-      items,
-      source,
-    });
+    const content = [
+      new ImportPrinter({
+        items,
+        source,
+      }).print(),
+      new ImportPrinter({
+        items: [this.classNameBuilder.ICreate()],
+        source: this.packageNameProvider.common(),
+      }),
+    ].join('\n');
+
+    return {
+      print() {
+        return content;
+      },
+    };
   }
 
   /**
@@ -59,10 +96,22 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
   Update(): IPrint {
     const items = [...this.decoratorListProvider.Update()];
     const source = this.packageNameProvider.core();
-    return new ImportPrinter({
-      items,
-      source,
-    });
+    const content = [
+      new ImportPrinter({
+        items,
+        source,
+      }).print(),
+      new ImportPrinter({
+        items: [this.classNameBuilder.IUpdate()],
+        source: this.packageNameProvider.common(),
+      }),
+    ].join('\n');
+
+    return {
+      print() {
+        return content;
+      },
+    };
   }
 
   /**
@@ -71,10 +120,22 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
   Query(): IPrint {
     const items = [...this.decoratorListProvider.Query()];
     const source = this.packageNameProvider.core();
-    return new ImportPrinter({
-      items,
-      source,
-    });
+    const content = [
+      new ImportPrinter({
+        items,
+        source,
+      }).print(),
+      new ImportPrinter({
+        items: [this.classNameBuilder.IQuery()],
+        source: this.packageNameProvider.common(),
+      }),
+    ].join('\n');
+
+    return {
+      print() {
+        return content;
+      },
+    };
   }
 
   /**

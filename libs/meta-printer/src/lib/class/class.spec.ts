@@ -8,7 +8,8 @@ import {
 } from '../common-imp';
 import { ClassDecoratorBuilder } from '../decorator';
 import { ClassImportBuilder } from '../imports';
-
+import { ExtendingBuilder } from './extending';
+import { ImplementingBuilder } from './implementing';
 const model: Model = {
   modelName: 'Sample',
   properties: {
@@ -20,7 +21,7 @@ const model: Model = {
       model: {
         modelName: 'Category',
         properties: {
-          name: { type: 'string',  },
+          name: { type: 'string' },
         },
       },
     },
@@ -30,14 +31,18 @@ const manager = new ModelManager(model);
 
 describe('ClassBuilder', () => {
   it('should build the class', () => {
+    const classNameBuilder = new ClassNameBuilder('Sample');
     const builder = new ClassBuilder(
       manager,
-      new ClassNameBuilder('Sample'),
+      classNameBuilder,
       new ClassDecoratorBuilder(manager),
       new ClassImportBuilder(
         new PackageNameProvider(),
+        classNameBuilder,
         new DecoratorListProvider(new DecoratorNameProvider())
-      )
+      ),
+      new ExtendingBuilder(manager),
+      new ImplementingBuilder(manager, classNameBuilder)
     );
 
     console.log('Entity: ', builder.Entity().print());

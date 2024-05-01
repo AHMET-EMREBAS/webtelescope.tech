@@ -5,6 +5,8 @@ import { orderPropertyOptions } from './order-objects';
 export enum BuiltinClassNames {
   IID = 'IID',
   IDDto = 'IDDto',
+  BaseEntity = 'BaseEntity',
+  IBaseEntity = 'IBaseEntity',
 }
 
 export class RelationManager {
