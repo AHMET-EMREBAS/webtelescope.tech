@@ -22,21 +22,21 @@ export const EntityProperties: IPrint = {
     return [
       new PropertyPrinter({
         classType: ClassType.CLASS,
-        propertyName: 'id',
+        name: 'id',
         type: 'number',
         required: true,
         decoratorsPrinter: ColumnDecorator('{ type: "number" }'),
       }),
       new PropertyPrinter({
         classType: ClassType.CLASS,
-        propertyName: 'username',
+        name: 'username',
         type: 'string',
         required: true,
         decoratorsPrinter: ColumnDecorator('{ type: "string" }'),
       }),
       new PropertyPrinter({
         classType: ClassType.CLASS,
-        propertyName: 'password',
+        name: 'password',
         type: 'string',
         required: true,
         decoratorsPrinter: ColumnDecorator('{ type: "string" }'),

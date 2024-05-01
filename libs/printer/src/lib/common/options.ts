@@ -57,7 +57,7 @@ export type DocPrinterOptions = {
  * Common/Basic property pritner options
  */
 export type BasicPropertyPrinterOptions = {
-  propertyName: string;
+  name: string;
   type: string;
   classType: ClassType;
   isArray?: boolean;

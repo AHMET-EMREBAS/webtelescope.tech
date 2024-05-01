@@ -49,15 +49,21 @@ export class PropertyManager {
 
   toQuery(modelName = ''): PropertyOptions {
     return this.__buildPropertyOptions({
-      name: toPropertyName(modelName, this.propertyOptions.name),
       required: undefined,
       unique: undefined,
+      name: toPropertyName(
+        this.propertyOptions.modelName ?? modelName,
+        this.propertyOptions.name
+      ),
     });
   }
 
   toView(modelName: string = '') {
     return this.__buildPropertyOptions({
-      name: toPropertyName(modelName, this.propertyOptions.name),
+      name: toPropertyName(
+        this.propertyOptions.modelName ?? modelName,
+        this.propertyOptions.name
+      ),
     });
   }
 }

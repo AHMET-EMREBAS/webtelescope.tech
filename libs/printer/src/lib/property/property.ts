@@ -76,7 +76,7 @@ export class PropertyPrinter implements IPrint {
    * Property name
    */
   protected __name() {
-    return this.__propertyPrinterOptions.propertyName;
+    return this.__propertyPrinterOptions.name;
   }
 
   /**
