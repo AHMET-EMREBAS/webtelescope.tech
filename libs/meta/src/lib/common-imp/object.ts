@@ -1,3 +1,3 @@
-import { PropertyOptions } from '../common';
+import { __PropertyOptions } from '../common';
 
-export type __Object = PropertyOptions<'object'>;
+export type __Object = __PropertyOptions<'object'>;

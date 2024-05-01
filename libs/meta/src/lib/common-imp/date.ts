@@ -1,3 +1,3 @@
-import { PropertyOptions } from '../common';
+import { __PropertyOptions } from '../common';
 
-export type __Date = PropertyOptions<'date'>;
+export type __Date = __PropertyOptions<'date'>;

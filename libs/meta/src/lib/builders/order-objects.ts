@@ -11,7 +11,7 @@ export function orderPropertyOptions(
   return excludeFalse(
     excludeUndefined(
       orderObject(options, [
-        'propertyName',
+        'name',
         'type',
         'objectType',
         'isArray',

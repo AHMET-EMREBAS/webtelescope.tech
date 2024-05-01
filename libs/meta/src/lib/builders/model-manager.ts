@@ -1,11 +1,11 @@
 import { uniq } from '@webpackages/utils';
-import { PropertyManager } from './property-manager';
 import {
   Model,
   PropertyOptions,
   RelationOptions,
   RelationType,
 } from '../common-imp';
+import { PropertyManager } from './property-manager';
 
 type AsList<T> = T[];
 
@@ -29,24 +29,16 @@ export class ModelManager {
    */
   propertiesList(): AsList<PropertyOptions> {
     return Object.entries(this.properties()).map(([key, value]) => {
-      const r: PropertyOptions = { ...value, propertyName: key };
-      return r;
+      return { ...value, name: key };
     });
   }
 
-  /**
-   * To list of relations
-   */
   relationsList(): AsList<RelationOptions> {
     return Object.entries(this.relations()).map(([key, value]) => {
-      const r: RelationOptions = { ...value, relationName: key };
-      return r;
+      return { ...value, name: key };
     });
   }
 
-  /**
-   * To list of view columns.
-   */
   viewProperties(): AsList<PropertyOptions> {
     return this.propertiesList()
       .filter((e) => !e.excludeFromView)
@@ -55,9 +47,6 @@ export class ModelManager {
       });
   }
 
-  /**
-   * To list of query propertiesF
-   */
   queryProperties(modelName = '') {
     return this.propertiesList()
       .filter((e) => e.searchable == true && !e.excludeFromView == true)
@@ -67,7 +56,7 @@ export class ModelManager {
   }
 
   /**
-   *
+   * Convert properties into column properties
    */
   columnProperties() {
     return this.propertiesList().map((e) => new PropertyManager(e).toColumn());
@@ -77,10 +66,6 @@ export class ModelManager {
     return this.propertiesList()
       .filter((e) => e.update != false)
       .map((e) => new PropertyManager(e).toUpdate());
-  }
-
-  description() {
-    return this.model.description;
   }
 
   uniqueProperties() {
@@ -123,5 +108,12 @@ export class ModelManager {
     return this.relationsList().filter(
       (e) => e.relationType === RelationType.Many
     );
+  }
+
+  /**
+   * Model description
+   */
+  description() {
+    return this.model.description;
   }
 }

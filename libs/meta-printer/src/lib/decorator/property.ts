@@ -15,7 +15,7 @@ export class PropertyDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(protected readonly optionsManager: PropertyManager) {}
 
   protected __buildPropertyDecorator(options?: PropertyOptions): IPrint {
-    const { searchable, update, excludeFromView, propertyName: name, ...__options } =
+    const { searchable, update, excludeFromView, name: name, ...__options } =
       options ?? {};
     return new DecoratorPrinter({
       name: DecoratorName.Property,

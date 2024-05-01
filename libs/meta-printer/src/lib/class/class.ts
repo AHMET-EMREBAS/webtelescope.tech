@@ -30,27 +30,26 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   }
 
   protected relationBuilder(options: RelationOptions): RelationBuilder {
-    console.log(options);
-    if (!options.relationName) throw new Error('Relation name is required!');
+    if (!options.name) throw new Error('Relation name is required!');
     const manager = new RelationManager(options);
     const decoratorBuilder = new RelationDecoratorBuilder(manager);
     return new RelationBuilder(
       this.__modelName(),
-      options.relationName,
+      options.name,
       manager,
       decoratorBuilder
     );
   }
 
   protected propertyBuilder(options: PropertyOptions): PropertyBuilder {
-    if (!options.propertyName) throw new Error('Propery name is required!');
+    if (!options.name) throw new Error('Propery name is required!');
 
     const propertyManager = new PropertyManager(options);
     const modelName = this.modelManager.modelName();
     const decoratorBuilder = new PropertyDecoratorBuilder(propertyManager);
     return new PropertyBuilder(
       modelName,
-      options.propertyName,
+      options.name,
       propertyManager,
       decoratorBuilder
     );

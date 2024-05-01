@@ -26,7 +26,8 @@ export class PropertyManager {
   }
 
   toColumn(): ColumnOptions {
-    return excludeFalse({
+    return excludeFalse<ColumnOptions>({
+      name: this.propertyOptions.name,
       type: this.propertyOptions.type,
       objectType: this.propertyOptions.objectType,
       isArray: this.propertyOptions.isArray,
@@ -48,7 +49,7 @@ export class PropertyManager {
 
   toQuery(modelName = ''): PropertyOptions {
     return this.__buildPropertyOptions({
-      propertyName: toPropertyName(modelName, this.propertyOptions.propertyName),
+      name: toPropertyName(modelName, this.propertyOptions.name),
       required: undefined,
       unique: undefined,
     });
@@ -56,7 +57,7 @@ export class PropertyManager {
 
   toView(modelName: string = '') {
     return this.__buildPropertyOptions({
-      propertyName: toPropertyName(modelName, this.propertyOptions.propertyName),
+      name: toPropertyName(modelName, this.propertyOptions.name),
     });
   }
 }

@@ -106,7 +106,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
       .toQuery()
       .map((e) => {
         return this.__build({
-          decoratorsPrinter: this.decoratorBuilder.Query(e.propertyName),
+          decoratorsPrinter: this.decoratorBuilder.Query(e.name),
           required: undefined,
           isArray: undefined,
           ...e,

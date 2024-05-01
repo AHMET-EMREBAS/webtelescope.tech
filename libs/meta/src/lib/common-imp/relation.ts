@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Model } from './model';
-import { PropertyOptions } from '../common';
+import { __PropertyOptions } from '../common';
 
 export type RelationOptions = Pick<
-  PropertyOptions<any>,
-  'relationType' | 'required' | 'description' | 'relationName'
+  __PropertyOptions<any>,
+  'relationType' | 'required' | 'description' | 'name'
 > & {
   model: Model;
 };

@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type __PrimitiveType = string | number | boolean | object;
 
-export type PropertyOptions<T extends __PrimitiveType> = {
-  propertyName?: string;
+export type __PropertyOptions<T extends __PrimitiveType> = {
+  name?: string;
   type?: string;
   objectType?: string;
   required?: boolean;
   isArray?: boolean;
   unique?: boolean;
   modelName?: string;
-  relationName?: string;
   relationType: string;
   format?: string;
   description?: string;
