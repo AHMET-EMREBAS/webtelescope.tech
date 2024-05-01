@@ -183,7 +183,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   IEntity(): IPrint {
     return new ClassPrinter({
       className: this.nameBuilder.IEntity(),
-      classType: ClassType.CLASS,
+      classType: ClassType.INTERFACE,
       decorating: this.decoratorBuilder.IEntity(),
       importings: this.importBuilder.IEntity(),
       extending: this.extendingBuilder.IEntity(),

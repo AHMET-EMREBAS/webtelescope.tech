@@ -1,0 +1,13 @@
+// @index('./**/*.ts', f => `export * from '${f.path}'`)
+export * from './category/category'
+export * from './category/create-category'
+export * from './category/query-category'
+export * from './category/update-category'
+export * from './department/create-department'
+export * from './department/department'
+export * from './department/query-department'
+export * from './department/update-department'
+export * from './product/create-product'
+export * from './product/product'
+export * from './product/query-product'
+export * from './product/update-product'

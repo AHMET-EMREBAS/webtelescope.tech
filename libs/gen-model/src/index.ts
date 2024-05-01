@@ -1,1 +1,1 @@
-export * from './lib/gen-model';
+export * from './lib';
