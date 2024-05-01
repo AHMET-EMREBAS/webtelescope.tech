@@ -59,16 +59,16 @@ export function Many<T extends IID>(target: Type<T>) {
 
 export type RelationOptions = {
   type: 'Many' | 'One' | 'Owner';
-  target: Type;
+  objectType: Type;
 };
 
 export function Relation(options: RelationOptions) {
   switch (options.type) {
     case 'Many':
-      return Many(options.target);
+      return Many(options.objectType);
     case 'One':
-      return One(options.target);
+      return One(options.objectType);
     case 'Owner':
-      return Owner(options.target);
+      return Owner(options.objectType);
   }
 }

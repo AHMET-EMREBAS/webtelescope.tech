@@ -4,7 +4,7 @@ import { __PropertyOptions } from '../common';
 
 export type RelationOptions = Pick<
   __PropertyOptions<any>,
-  'relationType' | 'required' | 'description' | 'name'
+  'relationType' | 'required' | 'description' | 'name' | 'objectType'
 > & {
   model: Model;
 };

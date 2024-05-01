@@ -58,8 +58,8 @@ export class RelationManager {
    * This method is not actually converts but pick required properties for the relation-column
    */
   toRelationColumn(): Omit<RelationOptions, 'model'> {
-    const { relationType, required } = this.relationOptions;
-    return { relationType, required };
+    const { model, relationType, required } = this.relationOptions;
+    return { relationType, required, objectType: model.modelName };
   }
 
   /**

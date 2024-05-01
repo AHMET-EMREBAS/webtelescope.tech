@@ -15,11 +15,23 @@ export class RelationDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(protected readonly manager: RelationManager) {}
 
   protected __buildProperty(options?: PropertyOptions): IPrint {
-    const { searchable, excludeFromView, update, name: name, ...rest } =
-      options ?? {};
+    const {
+      searchable,
+      excludeFromView,
+      update,
+      name: name,
+      ...rest
+    } = options ?? {};
     return new DecoratorPrinter({
       name: DecoratorName.Property,
       options: orderPropertyOptions(rest as PropertyOptions),
+    });
+  }
+
+  Entity(): IPrint {
+    return new DecoratorPrinter({
+      name: DecoratorName.Relation,
+      options: this.manager.toRelationColumn(),
     });
   }
 
@@ -35,13 +47,6 @@ export class RelationDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
     return new DecoratorPrinter({
       name: DecoratorName.Property,
       options: { type: 'string' },
-    });
-  }
-
-  Entity(): IPrint {
-    return new DecoratorPrinter({
-      name: DecoratorName.Relation,
-      options: this.manager.toRelationColumn(),
     });
   }
 

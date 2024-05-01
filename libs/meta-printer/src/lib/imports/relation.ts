@@ -1,10 +1,10 @@
 import { IPrint, ImportPrinter } from '@webpackages/printer';
 import { Backward } from '../common-imp';
-import { ICoverAllClassTypes, IDir } from '../common';
+import { ICoverAllClassTypes, IDirName } from '../common';
 
 export class RelationImportBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(
-    protected readonly fileNameBuilder: ICoverAllClassTypes<string> & IDir,
+    protected readonly fileNameBuilder: ICoverAllClassTypes<string> & IDirName,
     protected readonly classNameBuilder: ICoverAllClassTypes<string>,
     protected readonly backward: Backward
   ) {}

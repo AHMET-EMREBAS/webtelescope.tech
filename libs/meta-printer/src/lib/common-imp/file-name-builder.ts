@@ -1,5 +1,5 @@
 import { names } from '@webpackages/utils';
-import { ICoverAllClassTypes } from '../common/cover-all-class-types';
+import { ICoverAllClassTypes, IDirName } from '../common';
 
 export enum FileName {
   Entity = '#.entity',
@@ -16,14 +16,14 @@ export enum FileName {
 
 export type Backward = '' | './' | '../' | '../../';
 
-export class FileNameBuilder implements ICoverAllClassTypes<string>  {
+export class FileNameBuilder implements ICoverAllClassTypes<string>, IDirName {
   constructor(protected readonly className: string) {}
 
   protected __replace(placeholder: string) {
     return placeholder.replace('#', names(this.className).fileName);
   }
 
-  Dir() {
+  DirName() {
     return names(this.className).fileName;
   }
 

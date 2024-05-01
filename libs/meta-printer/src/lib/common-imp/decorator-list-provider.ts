@@ -12,6 +12,7 @@ export class DecoratorListProvider implements ICoverAllClassTypes<string[]> {
     return [
       this.decoratorNameProvider.Column(),
       this.decoratorNameProvider.Entity(),
+      this.decoratorNameProvider.Relation(),
     ];
   }
   View(): string[] {

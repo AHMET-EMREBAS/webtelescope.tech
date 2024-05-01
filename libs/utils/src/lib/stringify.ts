@@ -12,6 +12,9 @@ export function stringify(obj: any): any {
   } else if (typeof obj === 'object') {
     const code = Object.entries(obj)
       .map(([key, value]) => {
+        if (key === 'objectType' || key === 'target') {
+          return `${key}: ${value}`;
+        }
         return `${key}: ${stringify(value)},`;
       })
       .join(' ');
