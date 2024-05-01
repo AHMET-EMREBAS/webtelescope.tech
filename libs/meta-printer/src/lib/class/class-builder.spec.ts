@@ -1,8 +1,14 @@
 import { Model, ModelManager, RelationType } from '@webpackages/meta';
 import { ClassBuilder } from './class-builder';
-import { ClassNameBuilder, PackageNames } from '../common';
+import {
+  ClassNameBuilder,
+  DecoratorListProvider,
+  DecoratorNameProvider,
+  PackageNameProvider,
+} from '../common-imp';
 import { ClassDecoratorBuilder } from '../decorator';
-import { ImportBuilder } from '../imports';
+import { ClassImportBuilder } from '../imports';
+
 describe('ClassBuilder', () => {
   it('should build the class', () => {
     const categoryModel: Model = {
@@ -43,16 +49,22 @@ describe('ClassBuilder', () => {
         age: { type: 'number', update: false },
       },
       relations: {
-        category: { type: RelationType.Many, model: categoryModel },
-        department: { type: RelationType.One, model: departmentModel },
+        category: { relationType: RelationType.Many, model: categoryModel },
+        department: { relationType: RelationType.One, model: departmentModel },
       },
     };
 
     const manager = new ModelManager(model);
-
-    const importBuilder = new ImportBuilder(manager, new PackageNames());
-    const classNameBuilder = new ClassNameBuilder('Model');
     const decoratorBuilder = new ClassDecoratorBuilder(manager);
+    const decoratorListProvider = new DecoratorListProvider(
+      new DecoratorNameProvider()
+    );
+    const importBuilder = new ClassImportBuilder(
+      new PackageNameProvider(),
+      decoratorListProvider
+    );
+
+    const classNameBuilder = new ClassNameBuilder('Model');
     const builder = new ClassBuilder(
       manager,
       classNameBuilder,

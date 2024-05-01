@@ -1,4 +1,4 @@
-export interface INamedBuilder<T> {
+export interface ICoverAllClassTypes<T> {
   Entity(): T;
   View(): T;
   Create(): T;

@@ -1,5 +1,5 @@
 import { names } from '@webpackages/utils';
-import { INamedBuilder } from './names-builder';
+import { ICoverAllClassTypes } from '../common/cover-all-class-types';
 
 export enum FileName {
   Entity = '#.entity',
@@ -16,7 +16,7 @@ export enum FileName {
 
 export type Backward = '' | './' | '../' | '../../';
 
-export class FileNameBuilder implements INamedBuilder<string> {
+export class FileNameBuilder implements ICoverAllClassTypes<string> {
   constructor(protected readonly className: string) {}
 
   protected __replace(placeholder: string) {

@@ -1,4 +1,4 @@
-import { PropertyOptions, RelationOptions, RelationType } from '../meta';
+import { PropertyOptions, RelationOptions, RelationType } from '../common-imp';
 import { ModelManager } from './model-manager';
 import { orderPropertyOptions } from './order-objects';
 
@@ -11,7 +11,9 @@ export class RelationManager {
   constructor(protected readonly relationOptions: RelationOptions) {}
 
   protected __isArray() {
-    return this.relationOptions.type == RelationType.Many ? true : false;
+    return this.relationOptions.relationType == RelationType.Many
+      ? true
+      : false;
   }
 
   protected __modelManager() {
@@ -37,8 +39,8 @@ export class RelationManager {
   }
 
   toRelationColumn(): Omit<RelationOptions, 'model'> {
-    const { type, required } = this.relationOptions;
-    return { type, required };
+    const { relationType: type, required } = this.relationOptions;
+    return { relationType: type, required };
   }
 
   toIEntity(): PropertyOptions {

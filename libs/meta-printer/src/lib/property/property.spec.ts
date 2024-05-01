@@ -1,5 +1,5 @@
 import { PropertyManager } from '@webpackages/meta';
-import { PropertyBuilder } from './property-builder';
+import { PropertyBuilder } from './property';
 import { PropertyDecoratorBuilder } from '../decorator';
 
 

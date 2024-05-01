@@ -1,13 +1,13 @@
-import { Model, RelationOptions, RelationType } from '../meta';
+import { Model, RelationOptions, RelationType } from '../common-imp';
 
 export function OwnerRelation(model: Model): RelationOptions {
-  return { type: RelationType.Owner, required: true, model };
+  return { relationType: RelationType.Owner, required: true, model };
 }
 
 export function OneRelation(model: Model): RelationOptions {
-  return { type: RelationType.One, model };
+  return { relationType: RelationType.One, model };
 }
 
 export function ManyRelation(model: Model): RelationOptions {
-  return { type: RelationType.Many, model };
+  return { relationType: RelationType.Many, model };
 }

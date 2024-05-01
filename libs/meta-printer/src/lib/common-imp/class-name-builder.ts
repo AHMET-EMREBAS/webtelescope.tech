@@ -1,4 +1,4 @@
-import { INamedBuilder } from './names-builder';
+import { ICoverAllClassTypes } from '../common/cover-all-class-types';
 
 export enum ClassName {
   Entity = '#',
@@ -13,7 +13,7 @@ export enum ClassName {
   IQueryDto = 'I#QueryDto',
 }
 
-export class ClassNameBuilder implements INamedBuilder<string> {
+export class ClassNameBuilder implements ICoverAllClassTypes<string> {
   constructor(protected readonly className: string) {}
 
   Entity() {

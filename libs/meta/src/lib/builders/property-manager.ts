@@ -1,5 +1,5 @@
 import { excludeFalse, toPropertyName } from '@webpackages/utils';
-import { ColumnOptions, PropertyOptions } from '../meta';
+import { ColumnOptions, PropertyOptions } from '../common-imp';
 import { orderPropertyOptions } from './order-objects';
 
 /**

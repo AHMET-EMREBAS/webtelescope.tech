@@ -11,29 +11,30 @@ import {
   PropertyDecoratorBuilder,
   RelationDecoratorBuilder,
 } from '../decorator';
-import { ClassNameBuilder, INamedBuilder } from '../common';
+import { ClassNameBuilder } from '../common-imp';
 import { IPrint } from '@webpackages/printer';
 import { RelationBuilder } from '../relation';
-import { ImportBuilder } from '../imports';
+import { ICoverAllClassTypes } from '../common';
+import { ClassImportBuilder } from '../imports';
 
-export class ClassBuilder implements INamedBuilder<IPrint> {
+export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(
     protected readonly modelManager: ModelManager,
     protected readonly nameBuilder: ClassNameBuilder,
     protected readonly decoratorBuilder: ClassDecoratorBuilder,
-    protected readonly importBuilder: ImportBuilder
+    protected readonly importBuilder: ClassImportBuilder
   ) {}
   protected __modelName() {
     return this.modelManager.modelName();
   }
 
   protected relationBuilder(options: RelationOptions): RelationBuilder {
-    if (!options.name) throw new Error('Relation name is required!');
+    if (!options.relationName) throw new Error('Relation name is required!');
     const manager = new RelationManager(options);
     const decoratorBuilder = new RelationDecoratorBuilder(manager);
     return new RelationBuilder(
       this.__modelName(),
-      options.name,
+      options.relationName,
       manager,
       decoratorBuilder
     );
@@ -56,15 +57,19 @@ export class ClassBuilder implements INamedBuilder<IPrint> {
   Entity(): IPrint {
     throw new Error('Method not implemented.');
   }
+
   View(): IPrint {
     throw new Error('Method not implemented.');
   }
+
   Create(): IPrint {
     throw new Error('Method not implemented.');
   }
+
   Update(): IPrint {
     throw new Error('Method not implemented.');
   }
+
   Query(): IPrint {
     throw new Error('Method not implemented.');
   }

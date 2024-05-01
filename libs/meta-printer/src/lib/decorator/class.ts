@@ -1,8 +1,12 @@
 import { ModelManager } from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
-import { DecoratorName, INamedBuilder } from '../common';
+import { DecoratorName, EmptyPrinter } from '../common-imp';
+import { ICoverAllClassTypes } from '../common';
 
-export class ClassDecoratorBuilder implements INamedBuilder<IPrint> {
+/**
+ * Provides class decorators
+ */
+export class ClassDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(protected readonly modelManager: ModelManager) {}
 
   Entity(): IPrint {
@@ -21,19 +25,34 @@ export class ClassDecoratorBuilder implements INamedBuilder<IPrint> {
     return new DecoratorPrinter({ name: DecoratorName.Dto });
   }
 
+  /**
+   * Interfaces does not have decorators
+   */
   IEntity(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
+  /**
+   * Interfaces does not have decorators
+   */
   IView(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
+  /**
+   * Interfaces does not have decorators
+   */
   ICreate(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
+  /**
+   * Interfaces does not have decorators
+   */
   IUpdate(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
+  /**
+   * Interfaces does not have decorators
+   */
   IQuery(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
 }

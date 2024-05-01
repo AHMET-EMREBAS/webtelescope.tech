@@ -1,5 +1,5 @@
 import { Model, RelationManager, RelationType } from '@webpackages/meta';
-import { RelationBuilder } from './relation-builder';
+import { RelationBuilder } from './relation';
 import { RelationDecoratorBuilder } from '../decorator';
 
 const categoryModel: Model = {
@@ -9,7 +9,7 @@ const categoryModel: Model = {
   },
 };
 const manager = new RelationManager({
-  type: RelationType.Many,
+  relationType: RelationType.Many,
   required: true,
   model: categoryModel,
 });
@@ -19,7 +19,7 @@ const b = new RelationBuilder('Cat', 'cat', manager, decoratorBuilder);
 describe('RelationBuilder', () => {
   it.each`
     name                     | expected                                                                                              | actual
-    ${'EntityProperty'}      | ${"@Relation({ type: 'Many', required: true }) cat!: Cat[];"}                                         | ${b.Entity().print()}
+    ${'EntityProperty'}      | ${"@Relation({ relationType: 'Many', required: true }) cat!: Cat[];"}                                 | ${b.Entity().print()}
     ${'ViewProperties'}      | ${'@ViewColumn() catName!: string;'}                                                                  | ${b.View().print()}
     ${'CreateDtoProperty'}   | ${"@Property({ type: 'object', objectType: 'IDDto', isArray: true, required: true }) cat!: IDDto[];"} | ${b.Create().print()}
     ${'UpdateDtoProperty'}   | ${"@Property({ type: 'object', objectType: 'IDDto', isArray: true }) cat?: IDDto[];"}                 | ${b.Update().print()}

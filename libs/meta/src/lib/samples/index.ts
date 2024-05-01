@@ -1,5 +1,3 @@
-import { Model, RelationType } from '../meta';
-
 /**
  * @param text
  * @param num
@@ -24,7 +22,7 @@ export function TestModel(modelName = 'Category'): Model {
     },
     relations: {
       category: {
-        type: RelationType.Many,
+        relationType: RelationType.Many,
         model: {
           modelName: 'Category',
           properties: { name: { type: 'string' } },

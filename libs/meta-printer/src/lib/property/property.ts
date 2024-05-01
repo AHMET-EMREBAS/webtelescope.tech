@@ -8,9 +8,13 @@ import {
 } from '@webpackages/printer';
 import { PropertyDecoratorBuilder } from '../decorator';
 import { PropertyManager } from '@webpackages/meta';
-import { EmptyPrinter, INamedBuilder } from '../common';
+import { EmptyPrinter } from '../common-imp';
+import { ICoverAllClassTypes } from '../common';
 
-export class PropertyBuilder implements INamedBuilder<IPrint> {
+/**
+ * Provides all properties
+ */
+export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(
     protected readonly modelName: string,
     protected readonly propertyName: string,

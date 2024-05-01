@@ -8,9 +8,12 @@ import {
 } from '@webpackages/printer';
 
 import { RelationDecoratorBuilder } from '../decorator';
-import { INamedBuilder } from '../common';
+import { ICoverAllClassTypes } from '../common';
 
-export class RelationBuilder implements INamedBuilder<IPrint> {
+/**
+ * Provides all relation properties
+ */
+export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(
     protected readonly modelName: string,
     protected readonly propertyName: string,

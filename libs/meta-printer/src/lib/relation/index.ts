@@ -1,1 +1,1 @@
-export * from './relation-builder';
+export * from './relation';

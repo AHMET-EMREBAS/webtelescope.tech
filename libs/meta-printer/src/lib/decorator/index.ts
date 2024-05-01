@@ -1,3 +1,3 @@
-export * from './property-decorator-builder';
-export * from './class-decorator-builder';
-export * from './relation-decorator-builder';
+export * from './property';
+export * from './class';
+export * from './relation';

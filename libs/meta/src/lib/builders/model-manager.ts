@@ -1,11 +1,13 @@
 import { uniq } from '@webpackages/utils';
-import { PropertyManager } from '.';
-import { Model } from '../meta/model.meta';
-import { PropertyOptions } from '../meta/property.meta';
-import { RelationOptions, RelationType } from '../meta/relation.meta';
+import { PropertyManager } from './property-manager';
+import {
+  Model,
+  PropertyOptions,
+  RelationOptions,
+  RelationType,
+} from '../common-imp';
 
 type AsList<T> = T[];
-// type AnyOptions = PropertyOptions | ColumnOptions | RelationOptions;
 
 export class ModelManager {
   constructor(protected readonly model: Model) {}
@@ -104,14 +106,20 @@ export class ModelManager {
   }
 
   oneRelations() {
-    return this.rawRelations().filter((e) => e.type === RelationType.One);
+    return this.rawRelations().filter(
+      (e) => e.relationType === RelationType.One
+    );
   }
 
   ownerRelations() {
-    return this.rawRelations().filter((e) => e.type === RelationType.Owner);
+    return this.rawRelations().filter(
+      (e) => e.relationType === RelationType.Owner
+    );
   }
 
   manyRelations() {
-    return this.rawRelations().filter((e) => e.type === RelationType.Many);
+    return this.rawRelations().filter(
+      (e) => e.relationType === RelationType.Many
+    );
   }
 }

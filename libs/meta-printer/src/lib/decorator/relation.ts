@@ -1,45 +1,51 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
+  RelationManager,
   PropertyOptions,
-  PropertyManager,
   orderPropertyOptions,
 } from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
-import { DecoratorName } from '../common/decorator-name';
-import { INamedBuilder } from '../common';
+import { DecoratorName } from '../common-imp';
+import { ICoverAllClassTypes } from '../common';
 
-export class PropertyDecoratorBuilder implements INamedBuilder<IPrint> {
-  constructor(protected readonly optionsManager: PropertyManager) {}
+/**
+ * Provides relation decorators
+ */
+export class RelationDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
+  constructor(protected readonly manager: RelationManager) {}
 
-  protected __buildPropertyDecorator(options?: PropertyOptions): IPrint {
-    const { searchable, update, excludeFromView, name, ...__options } =
+  protected __buildProperty(options?: PropertyOptions): IPrint {
+    const { searchable, excludeFromView, update, name, ...rest } =
       options ?? {};
     return new DecoratorPrinter({
       name: DecoratorName.Property,
-      options: orderPropertyOptions(__options as PropertyOptions),
+      options: orderPropertyOptions(rest as PropertyOptions),
     });
   }
 
   Create(): IPrint {
-    return this.__buildPropertyDecorator(this.optionsManager.toCreate());
+    return this.__buildProperty(this.manager.toCreate());
   }
 
   Update(): IPrint {
-    return this.__buildPropertyDecorator(this.optionsManager.toUpdate());
+    return this.__buildProperty(this.manager.toUpdate());
   }
 
-  Query(): IPrint {
-    return this.__buildPropertyDecorator(this.optionsManager.toQuery());
+  Query(propertyName: string = '?'): IPrint {
+    return new DecoratorPrinter({
+      name: DecoratorName.Property,
+      options: { type: 'string' },
+    });
   }
 
   Entity(): IPrint {
     return new DecoratorPrinter({
-      name: DecoratorName.Column,
-      options: this.optionsManager.toColumn(),
+      name: DecoratorName.Relation,
+      options: this.manager.toRelationColumn(),
     });
   }
 
-  View(): IPrint {
+  View() {
     return new DecoratorPrinter({ name: DecoratorName.ViewColumn });
   }
 
