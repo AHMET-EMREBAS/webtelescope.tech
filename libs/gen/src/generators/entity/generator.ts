@@ -1,24 +1,16 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nx/devkit';
-import * as path from 'path';
+import { formatFiles, generateFiles, names, Tree } from '@nx/devkit';
 import { EntityGeneratorSchema } from './schema';
+import { join } from 'path';
 
 export async function entityGenerator(
   tree: Tree,
   options: EntityGeneratorSchema
 ) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
+  const projectRoot = `libs/entities/src/lib/${options.name}`;
+
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    ...names(options.name),
   });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
   await formatFiles(tree);
 }
 
