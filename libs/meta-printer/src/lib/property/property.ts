@@ -27,7 +27,7 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
     const { description } = options;
     return new PropertyPrinter({
       ...options,
-      name: this.propertyName,
+      propertyName: this.propertyName,
       classType: ClassType.CLASS,
       decoratorsPrinter: this.decoratorBuilder.Create(),
       docsPrinter: new DocPritner({ content: description ?? '' }),

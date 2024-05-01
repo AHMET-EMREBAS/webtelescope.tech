@@ -60,7 +60,7 @@ export type BasicPropertyPrinterOptions = {
   /**
    * Name of the property
    */
-  name: string;
+  propertyName: string;
 
   /**
    * Property type

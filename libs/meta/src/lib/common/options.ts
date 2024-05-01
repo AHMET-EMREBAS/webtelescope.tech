@@ -1,7 +1,7 @@
 export type __PrimitiveType = string | number | boolean | object;
 
 export type PropertyOptions<T extends __PrimitiveType> = {
-  name?: string;
+  propertyName?: string;
   type?: string;
   objectType?: string;
   required?: boolean;

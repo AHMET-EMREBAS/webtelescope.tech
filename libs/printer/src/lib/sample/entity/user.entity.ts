@@ -11,29 +11,32 @@ export const EntityImports = new ImportPrinter({
 
 export const EntityDecorator = new DecoratorPrinter({ name: 'Entity' });
 
-export const ColumnDecorator = (options: string) =>
+export const ColumnDecorator = (optionsString: string) =>
   new DecoratorPrinter({
     name: 'Column',
-    options,
+    optionsString,
   });
 
 export const EntityProperties: IPrint = {
   print() {
     return [
       new PropertyPrinter({
-        name: 'id',
+        classType: ClassType.CLASS,
+        propertyName: 'id',
         type: 'number',
         required: true,
         decoratorsPrinter: ColumnDecorator('{ type: "number" }'),
       }),
       new PropertyPrinter({
-        name: 'username',
+        classType: ClassType.CLASS,
+        propertyName: 'username',
         type: 'string',
         required: true,
         decoratorsPrinter: ColumnDecorator('{ type: "string" }'),
       }),
       new PropertyPrinter({
-        name: 'password',
+        classType: ClassType.CLASS,
+        propertyName: 'password',
         type: 'string',
         required: true,
         decoratorsPrinter: ColumnDecorator('{ type: "string" }'),
@@ -43,7 +46,6 @@ export const EntityProperties: IPrint = {
       .join('\n');
   },
 };
-
 
 export const EntityPrinter = new ClassPrinter({
   name: 'User',

@@ -48,7 +48,7 @@ export class PropertyManager {
 
   toQuery(modelName = ''): PropertyOptions {
     return this.__buildPropertyOptions({
-      name: toPropertyName(modelName, this.propertyOptions.name),
+      propertyName: toPropertyName(modelName, this.propertyOptions.propertyName),
       required: undefined,
       unique: undefined,
     });
@@ -56,7 +56,7 @@ export class PropertyManager {
 
   toView(modelName: string = '') {
     return this.__buildPropertyOptions({
-      name: toPropertyName(modelName, this.propertyOptions.name),
+      propertyName: toPropertyName(modelName, this.propertyOptions.propertyName),
     });
   }
 }

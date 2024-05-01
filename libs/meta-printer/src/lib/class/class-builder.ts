@@ -12,7 +12,7 @@ import {
   RelationDecoratorBuilder,
 } from '../decorator';
 import { ClassNameBuilder } from '../common-imp';
-import { IPrint } from '@webpackages/printer';
+import { ClassPrinter, ClassType, IPrint } from '@webpackages/printer';
 import { RelationBuilder } from '../relation';
 import { ICoverAllClassTypes } from '../common';
 import { ClassImportBuilder } from '../imports';
@@ -24,11 +24,13 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     protected readonly decoratorBuilder: ClassDecoratorBuilder,
     protected readonly importBuilder: ClassImportBuilder
   ) {}
+
   protected __modelName() {
     return this.modelManager.modelName();
   }
 
   protected relationBuilder(options: RelationOptions): RelationBuilder {
+    console.log(options);
     if (!options.relationName) throw new Error('Relation name is required!');
     const manager = new RelationManager(options);
     const decoratorBuilder = new RelationDecoratorBuilder(manager);
@@ -41,51 +43,100 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   }
 
   protected propertyBuilder(options: PropertyOptions): PropertyBuilder {
-    if (!options.name) throw new Error('Propery name is required!');
+    if (!options.propertyName) throw new Error('Propery name is required!');
 
     const propertyManager = new PropertyManager(options);
     const modelName = this.modelManager.modelName();
     const decoratorBuilder = new PropertyDecoratorBuilder(propertyManager);
     return new PropertyBuilder(
       modelName,
-      options.name,
+      options.propertyName,
       propertyManager,
       decoratorBuilder
     );
   }
 
   Entity(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.Entity(),
+      type: ClassType.CLASS,
+      contentString: [
+        this.modelManager
+          .propertiesList()
+          .map((e) => {
+            return this.propertyBuilder(e).Entity().print();
+          })
+          .join('\n'),
+        this.modelManager
+          .relationsList()
+          .map((e) => {
+            return this.relationBuilder(e).Entity().print();
+          })
+          .join('\n'),
+      ].join('\n'),
+    });
   }
 
   View(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.View(),
+      type: ClassType.CLASS,
+    });
   }
 
   Create(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.Create(),
+      type: ClassType.CLASS,
+    });
   }
 
   Update(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.Update(),
+      type: ClassType.CLASS,
+    });
   }
 
   Query(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.Query(),
+      type: ClassType.CLASS,
+    });
   }
+
   IEntity(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.IEntity(),
+      type: ClassType.INTERFACE,
+    });
   }
+
   IView(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.IView(),
+      type: ClassType.INTERFACE,
+    });
   }
+
   ICreate(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.ICreate(),
+      type: ClassType.INTERFACE,
+    });
   }
+
   IUpdate(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.IUpdate(),
+      type: ClassType.INTERFACE,
+    });
   }
+
   IQuery(): IPrint {
-    throw new Error('Method not implemented.');
+    return new ClassPrinter({
+      name: this.nameBuilder.IQuery(),
+      type: ClassType.INTERFACE,
+    });
   }
 }

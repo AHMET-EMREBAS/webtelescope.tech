@@ -26,7 +26,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
     const { description } = options;
     return new PropertyPrinter({
       ...options,
-      name: this.propertyName,
+      propertyName: this.propertyName,
       classType: ClassType.CLASS,
       decoratorsPrinter: this.decoratorBuilder.Create(),
       docsPrinter: new DocPritner({ content: description ?? '' }),
@@ -106,7 +106,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
       .toQuery()
       .map((e) => {
         return this.__build({
-          decoratorsPrinter: this.decoratorBuilder.Query(e.name),
+          decoratorsPrinter: this.decoratorBuilder.Query(e.propertyName),
           required: undefined,
           isArray: undefined,
           ...e,
