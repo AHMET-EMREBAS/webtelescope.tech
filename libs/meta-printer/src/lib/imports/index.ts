@@ -1,3 +1,3 @@
-// @index('./*', f => `export * from '${f.path}'`)
-export * from './class';
-export * from './relation';
+// @index(['./*','!./*.spec.ts'], f => `export * from '${f.path}'`)
+export * from './class'
+export * from './relation'

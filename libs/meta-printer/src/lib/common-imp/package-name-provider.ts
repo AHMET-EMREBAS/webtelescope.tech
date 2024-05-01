@@ -20,9 +20,8 @@ export interface IPackageNameProvider {
  */
 export class PackageNameProvider implements IPackageNameProvider {
   common(): string {
-    return '@webpackages/common';
+    return '@webpackages/gen-model';
   }
-
   utils(): string {
     return `@webpackages/utils`;
   }

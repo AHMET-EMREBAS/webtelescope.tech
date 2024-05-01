@@ -42,13 +42,17 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
   Entity(): IPrint {
     const content = [
       new ImportPrinter({
-        items: [...this.decoratorListProvider.Entity()],
+        items: [
+          ...this.decoratorListProvider.Entity(),
+          BuiltinClassNames.BaseEntity,
+        ],
         source: this.packageNameProvider.core(),
       }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.IEntity()],
         source: this.packageNameProvider.common(),
       }).print(),
+
       ...this.RelationImports().map((e) => e.Entity().print()),
     ].join('\n');
 

@@ -1,21 +1,21 @@
 {
-  "name": "entities",
+  "name": "gen-meta",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/entities/src",
+  "sourceRoot": "libs/gen-meta/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:swc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/entities",
-        "main": "libs/entities/src/index.ts",
-        "tsConfig": "libs/entities/tsconfig.lib.json",
-        "assets": ["libs/entities/*.md"]
+        "outputPath": "dist/libs/gen-meta",
+        "main": "libs/gen-meta/src/index.ts",
+        "tsConfig": "libs/gen-meta/tsconfig.lib.json",
+        "assets": ["libs/gen-meta/*.md"]
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs entities {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs gen-meta {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {
@@ -23,8 +23,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/entities/**/*.ts",
-          "libs/entities/package.json"
+          "libs/gen-meta/**/*.ts",
+          "libs/gen-meta/package.json"
         ]
       }
     },
@@ -32,7 +32,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/entities/jest.config.ts"
+        "jestConfig": "libs/gen-meta/jest.config.ts"
       }
     }
   },

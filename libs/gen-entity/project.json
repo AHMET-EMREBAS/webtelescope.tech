@@ -1,0 +1,40 @@
+{
+  "name": "gen-entity",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/gen-entity/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/gen-entity",
+        "main": "libs/gen-entity/src/index.ts",
+        "tsConfig": "libs/gen-entity/tsconfig.lib.json",
+        "assets": ["libs/gen-entity/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs gen-entity {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/gen-entity/**/*.ts",
+          "libs/gen-entity/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/gen-entity/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

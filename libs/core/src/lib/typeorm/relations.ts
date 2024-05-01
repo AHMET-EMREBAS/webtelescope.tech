@@ -56,3 +56,19 @@ export function Many<T extends IID>(target: Type<T>) {
     JoinTable()
   );
 }
+
+export type RelationOptions = {
+  type: 'Many' | 'One' | 'Owner';
+  target: Type;
+};
+
+export function Relation(options: RelationOptions) {
+  switch (options.type) {
+    case 'Many':
+      return Many(options.target);
+    case 'One':
+      return One(options.target);
+    case 'Owner':
+      return Owner(options.target);
+  }
+}

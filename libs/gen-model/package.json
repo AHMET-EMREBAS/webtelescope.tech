@@ -1,5 +1,5 @@
 {
-  "name": "@webpackages/entities",
+  "name": "@webpackages/gen-model",
   "version": "0.0.1",
   "dependencies": {
     "@swc/helpers": "~0.5.2"
