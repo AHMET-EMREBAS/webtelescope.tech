@@ -7,7 +7,6 @@ import {
 } from '@webpackages/meta';
 import { PropertyBuilder } from '../property';
 import {
-  ClassDecoratorBuilder,
   PropertyDecoratorBuilder,
   RelationDecoratorBuilder,
 } from '../decorator';
@@ -15,14 +14,13 @@ import { ClassNameBuilder } from '../common-imp';
 import { ClassPrinter, ClassType, IPrint } from '@webpackages/printer';
 import { RelationBuilder } from '../relation';
 import { ICoverAllClassTypes } from '../common';
-import { ClassImportBuilder } from '../imports';
 
 export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(
     protected readonly modelManager: ModelManager,
     protected readonly nameBuilder: ClassNameBuilder,
-    protected readonly decoratorBuilder: ClassDecoratorBuilder,
-    protected readonly importBuilder: ClassImportBuilder
+    protected readonly decoratorBuilder: ICoverAllClassTypes<IPrint>,
+    protected readonly importBuilder: ICoverAllClassTypes<IPrint>
   ) {}
 
   protected __modelName() {
@@ -59,6 +57,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.Entity(),
       classType: ClassType.CLASS,
+      decorating: this.decoratorBuilder.Entity(),
+      importings: this.importBuilder.Entity(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -80,6 +80,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.View(),
       classType: ClassType.CLASS,
+      decorating: this.decoratorBuilder.View(),
+      importings: this.importBuilder.View(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -101,6 +103,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.Create(),
       classType: ClassType.CLASS,
+      decorating: this.decoratorBuilder.Create(),
+      importings: this.importBuilder.Create(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -122,6 +126,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.Update(),
       classType: ClassType.CLASS,
+      decorating: this.decoratorBuilder.Update(),
+      importings: this.importBuilder.Update(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -143,6 +149,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.Query(),
       classType: ClassType.CLASS,
+      decorating: this.decoratorBuilder.Query(),
+      importings: this.importBuilder.Query(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -164,6 +172,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.IEntity(),
       classType: ClassType.CLASS,
+      decorating: this.decoratorBuilder.IEntity(),
+      importings: this.importBuilder.IEntity(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -185,6 +195,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.IView(),
       classType: ClassType.INTERFACE,
+      decorating: this.decoratorBuilder.IView(),
+      importings: this.importBuilder.IView(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -206,6 +218,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.ICreate(),
       classType: ClassType.INTERFACE,
+      decorating: this.decoratorBuilder.ICreate(),
+      importings: this.importBuilder.ICreate(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -227,6 +241,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.IUpdate(),
       classType: ClassType.INTERFACE,
+      decorating: this.decoratorBuilder.IUpdate(),
+      importings: this.importBuilder.IUpdate(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -248,6 +264,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     return new ClassPrinter({
       className: this.nameBuilder.IQuery(),
       classType: ClassType.INTERFACE,
+      decorating: this.decoratorBuilder.IQuery(),
+      importings: this.importBuilder.IQuery(),
       contentString: [
         this.modelManager
           .propertiesList()
@@ -259,9 +277,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
         this.modelManager
           .relationsList()
           .map((e) => {
-            return this.relationBuilder(e)
-              .IQuery()
-              .print();
+            return this.relationBuilder(e).IQuery().print();
           })
           .join('\n'),
       ].join('\n'),

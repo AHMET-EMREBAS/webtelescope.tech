@@ -44,7 +44,7 @@ describe('ClassBuilder', () => {
     console.log('View: ', builder.View().print());
     console.log('CreateDto: ', builder.Create().print());
     console.log('UpdateDto: ', builder.Update().print());
-    console.log('------------------------');
+    console.log('-------------------------------------');
     console.log('QueryDto: ', builder.Query().print());
     console.log('ICreate: ', builder.ICreate().print());
     console.log('IUpdate: ', builder.IUpdate().print());
