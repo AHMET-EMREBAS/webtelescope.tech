@@ -1,7 +1,13 @@
 import { IPrint, ImportPrinter } from '@webpackages/printer';
-import { EmptyPrinter, IPackageNameProvider } from '../common-imp';
-import { BuiltinClassNames } from '@webpackages/meta';
+import {
+  ClassNameBuilder,
+  EmptyPrinter,
+  FileNameBuilder,
+  IPackageNameProvider,
+} from '../common-imp';
+import { BuiltinClassNames, ModelManager } from '@webpackages/meta';
 import { ICoverAllClassTypes } from '../common';
+import { RelationImportBuilder } from './relation';
 
 /**
  * Provides import for classes (Dto, Entity, Column, Property etc)
@@ -13,26 +19,37 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
    * @param decoratorListProvider provides decorator list for each class type
    */
   constructor(
+    protected readonly modelManager: ModelManager,
     protected readonly packageNameProvider: IPackageNameProvider,
     protected readonly classNameBuilder: ICoverAllClassTypes<string>,
     protected readonly decoratorListProvider: ICoverAllClassTypes<string[]>
   ) {}
 
+  RelationImports(): RelationImportBuilder[] {
+    const manager = this.modelManager;
+    return manager.relationsList().map((e) => {
+      return new RelationImportBuilder(
+        new FileNameBuilder(e.model.modelName),
+        new ClassNameBuilder(e.model.modelName),
+        '../'
+      );
+    });
+  }
+
   /**
    * Entity, Column, and IEntity imports
    */
   Entity(): IPrint {
-    const items = [...this.decoratorListProvider.Entity()];
-    const source = this.packageNameProvider.core();
     const content = [
       new ImportPrinter({
-        items,
-        source,
+        items: [...this.decoratorListProvider.Entity()],
+        source: this.packageNameProvider.core(),
       }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.IEntity()],
         source: this.packageNameProvider.common(),
       }).print(),
+      ...this.RelationImports().map((e) => e.Entity().print()),
     ].join('\n');
 
     return {

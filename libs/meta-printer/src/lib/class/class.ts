@@ -34,7 +34,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     const manager = new RelationManager(options);
     const decoratorBuilder = new RelationDecoratorBuilder(manager);
     return new RelationBuilder(
-      this.__modelName(),
+      options.model.modelName,
       options.name,
       manager,
       decoratorBuilder

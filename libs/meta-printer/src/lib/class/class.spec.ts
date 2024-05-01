@@ -37,6 +37,7 @@ describe('ClassBuilder', () => {
       classNameBuilder,
       new ClassDecoratorBuilder(manager),
       new ClassImportBuilder(
+        manager,
         new PackageNameProvider(),
         classNameBuilder,
         new DecoratorListProvider(new DecoratorNameProvider())

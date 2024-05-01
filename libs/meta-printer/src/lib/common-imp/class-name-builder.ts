@@ -8,9 +8,9 @@ export enum ClassName {
   QueryDto = 'Query#Dto',
   IEntity = 'I#',
   IView = 'I#View',
-  ICreateDto = 'I#CreateDto',
-  IUpdateDto = 'I#UpdateDto',
-  IQueryDto = 'I#QueryDto',
+  ICreateDto = 'ICreate#Dto',
+  IUpdateDto = 'IUpdate#Dto',
+  IQueryDto = 'IQuery#Dto',
 }
 
 export class ClassNameBuilder implements ICoverAllClassTypes<string> {
