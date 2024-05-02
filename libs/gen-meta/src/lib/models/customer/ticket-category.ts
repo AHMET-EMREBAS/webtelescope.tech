@@ -1,3 +1,3 @@
-import { Model, NameModel } from '@webpackages/meta';
+import { Model, NameModel } from '../../core'
 
 export const TicketCategoryModel: Model = NameModel('TicketCategory');

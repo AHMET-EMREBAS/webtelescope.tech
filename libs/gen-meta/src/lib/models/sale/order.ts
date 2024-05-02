@@ -12,6 +12,7 @@ export const OrderModel: Model = {
   modelName: 'Order',
   properties: {
     quantity: PositiveNumberProperty({ required: true, icon: 'quantity' }),
+    discount: CurrencyProperty({ icon: 'discount' }),
     total: CurrencyProperty({ required: true }),
     subTotal: CurrencyProperty({ required: true }),
     tax: CurrencyProperty({ required: true }),

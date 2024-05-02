@@ -109,7 +109,7 @@ export function PositiveNumberProperty(
 }
 
 export function CurrencyProperty(
-  options: Pick<PropertyOptions, 'required'>
+  options: Pick<PropertyOptions, 'required' | 'icon' | 'label'>
 ): PropertyOptions {
   return {
     type: PropertyTypes.NUMBER,

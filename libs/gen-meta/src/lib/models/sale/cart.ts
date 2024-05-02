@@ -15,7 +15,7 @@ export const CartModel: Model = {
   },
   relations: {
     customer: OwnerRelation(CustomerModel),
-    user: OwnerRelation(UserModel),
+    employee: OwnerRelation(UserModel),
     store: OwnerRelation(StoreModel),
   },
 };

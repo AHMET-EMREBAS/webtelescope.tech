@@ -7,6 +7,7 @@ import {
   ShortTextProperty,
 } from '@webpackages/meta';
 import { UserModel } from '../user';
+import { SprintModel } from './sprint';
 
 export const TaskModel: Model = {
   modelName: 'Task',
@@ -18,9 +19,9 @@ export const TaskModel: Model = {
     startDate: DateProperty({ label: 'Start date', icon: 'date' }),
     endDate: DateProperty({ label: 'Start date', icon: 'date' }),
   },
-
   relations: {
     assignees: OneRelation(UserModel),
     createdBy: OneRelation(UserModel),
+    sprint: OneRelation(SprintModel),
   },
 };

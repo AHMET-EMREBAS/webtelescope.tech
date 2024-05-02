@@ -1,5 +1,7 @@
-import { Model, PasswordProperty, UserNameProperty } from '@webpackages/meta';
 import {
+  Model,
+  PasswordProperty,
+  UserNameProperty,
   CreateAddressFor,
   CreateEmailModelFor,
   CreateImageModelFor,
