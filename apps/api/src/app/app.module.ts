@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@webpackages/config';
-import { RoleModule, PermissionModule } from '@webpackages/gen-rest';
+import * as Modules from '@webpackages/gen-rest';
 
 @Module({
   imports: [
@@ -15,8 +15,7 @@ import { RoleModule, PermissionModule } from '@webpackages/gen-rest';
       synchronize: true,
       dropSchema: true,
     }),
-    RoleModule,
-    PermissionModule,
+    ...Object.values(Modules).filter((e) => e.name.endsWith('Module')),
   ],
 })
 export class AppModule {}

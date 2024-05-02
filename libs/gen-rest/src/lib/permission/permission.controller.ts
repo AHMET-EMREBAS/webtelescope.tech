@@ -15,10 +15,13 @@ import {
   UnsetRelationDto,
   AddRelation,
   RemoveRelation,
+  InjectRepository,
+  Repository,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
   Permission,
+  PermissionView,
   QueryPermissionDto,
   UpdatePermissionDto,
   CreatePermissionDto,
@@ -31,7 +34,12 @@ const Paths = getApiPaths(Permission.name);
   tags: [PermissionController.name],
 })
 export class PermissionController {
-  constructor(protected readonly service: PermissionService) {}
+  constructor(
+    protected readonly service: PermissionService,
+    @InjectRepository(PermissionView)
+    protected readonly viewService: Repository<PermissionView>
+  ) {}
+
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
@@ -40,6 +48,11 @@ export class PermissionController {
     console.table(paginator);
     console.table(queryDto);
     return await this.service.find({ ...paginator, where: { ...queryDto } });
+  }
+
+  @Get({ path: Paths.PLURAL_PATH })
+  async findOneById(@SourceId() id: number) {
+    return await this.viewService.findOneBy({ id } as any);
   }
 
   @Post({ path: Paths.SINGULAR_PATH })

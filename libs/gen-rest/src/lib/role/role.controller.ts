@@ -15,40 +15,53 @@ import {
   UnsetRelationDto,
   AddRelation,
   RemoveRelation,
+  InjectRepository,
+  Repository,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
-  <%- className %>,
-  Query<%- className %>Dto,
-  Update<%- className %>Dto,
-  Create<%- className %>Dto,
+  Role,
+  RoleView,
+  QueryRoleDto,
+  UpdateRoleDto,
+  CreateRoleDto,
 } from '@webpackages/gen-entity';
-import { <%- className %>Service } from './<%- fileName %>.service';
+import { RoleService } from './role.service';
 
-const Paths = getApiPaths(<%- className %>.name);
+const Paths = getApiPaths(Role.name);
 
 @Controller({
-  tags: [<%- className %>Controller.name],
+  tags: [RoleController.name],
 })
-export class <%- className %>Controller {
-  constructor(protected readonly service: <%- className %>Service) {}
+export class RoleController {
+  constructor(
+    protected readonly service: RoleService,
+    @InjectRepository(RoleView)
+    protected readonly viewService: Repository<RoleView>
+  ) {}
+
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
-    @Query() queryDto: Query<%- className %>Dto
+    @Query() queryDto: QueryRoleDto
   ) {
     console.table(paginator);
     console.table(queryDto);
     return await this.service.find({ ...paginator, where: { ...queryDto } });
   }
 
+  @Get({ path: Paths.PLURAL_PATH })
+  async findOneById(@SourceId() id: number) {
+    return await this.viewService.findOneBy({ id } as any);
+  }
+
   @Post({ path: Paths.SINGULAR_PATH })
-  async save(@Body() body: Create<%- className %>Dto) {
+  async save(@Body() body: CreateRoleDto) {
     return await this.service.saveSafe(body);
   }
 
   @Update({ path: Paths.BY_ID_PATH })
-  update(@SourceId() id: number, @Body() body: Update<%- className %>Dto) {
+  update(@SourceId() id: number, @Body() body: UpdateRoleDto) {
     return this.service.updateSafe(id, body);
   }
 

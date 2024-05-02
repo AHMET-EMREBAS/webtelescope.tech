@@ -1,20 +1,29 @@
 import { formatFiles, generateFiles, names, Tree } from '@nx/devkit';
 import * as path from 'path';
 import * as MetaData from '@webpackages/gen-meta';
-import { Model } from '@webpackages/meta';
+import { Model, ModelManager } from '@webpackages/meta';
 
 const modelNames = Object.entries(
   MetaData as unknown as Record<string, Model>
 ).map(([, value]) => {
-  return value.modelName;
+  return new ModelManager(value);
 });
 
 function __gen(tree: Tree) {
-  for (const modelName of modelNames) {
-    const projectRoot = `libs/gen-rest/src/lib/${names(modelName).fileName}`;
+  for (const manager of modelNames) {
+    const modelName = manager.modelName();
+    const N = names(modelName);
+    const projectRoot = `libs/gen-rest/src/lib/${N.fileName}`;
 
+    const relations = manager.uniqueRelationNames();
+
+    const relationEntitiesAndViews = [...relations, `${N.className}View`]
+      .filter((e) => e.trim().length > 0)
+      .join(',');
     generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {
       ...names(modelName),
+      relationEntitiesAndViews,
+      relationImports: `import { ${relationEntitiesAndViews} } from '@webpackages/gen-entity';`,
     });
   }
 }

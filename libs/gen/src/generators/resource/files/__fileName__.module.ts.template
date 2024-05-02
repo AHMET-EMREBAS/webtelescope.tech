@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@webpackages/core';
 import { <%- className %> } from '@webpackages/gen-entity';
-import { <%- className %>Controller } from './permission.controller';
-import { <%- className %>Service } from './permission.service';
+import { <%- className %>Controller } from './<%- fileName %>.controller';
+import { <%- className %>Service } from './<%- fileName %>.service';
+<%- relationImports %>
 
 @Module({
-  imports: [TypeOrmModule.forFeature([<%- className %>, <%- relations %>])],
+  imports: [TypeOrmModule.forFeature([<%- className %>, <%- relationEntitiesAndViews %> ])],
   controllers: [<%- className %>Controller],
   providers: [<%- className %>Service],
 })
