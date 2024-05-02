@@ -21,5 +21,5 @@ export class UpdateUserDto implements IUpdateUserDto {
   password?: string;
   @Property({ type: 'object', objectType: IDDto, isArray: true })
   roles?: IDDto[];
-  @Property({ type: 'object', objectType: IDDto }) department?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) userDepartment?: IDDto;
 }

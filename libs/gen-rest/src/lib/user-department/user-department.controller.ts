@@ -20,30 +20,30 @@ import {
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
-  CustomerProfile,
-  CustomerProfileView,
-  QueryCustomerProfileDto,
-  UpdateCustomerProfileDto,
-  CreateCustomerProfileDto,
+  UserDepartment,
+  UserDepartmentView,
+  QueryUserDepartmentDto,
+  UpdateUserDepartmentDto,
+  CreateUserDepartmentDto,
 } from '@webpackages/gen-entity';
-import { CustomerProfileService } from './customer-profile.service';
+import { UserDepartmentService } from './user-department.service';
 
-const Paths = getApiPaths(CustomerProfile.name);
+const Paths = getApiPaths(UserDepartment.name);
 
 @Controller({
-  tags: [CustomerProfileController.name],
+  tags: [UserDepartmentController.name],
 })
-export class CustomerProfileController {
+export class UserDepartmentController {
   constructor(
-    protected readonly service: CustomerProfileService,
-    @InjectRepository(CustomerProfileView)
-    protected readonly viewService: Repository<CustomerProfileView>
+    protected readonly service: UserDepartmentService,
+    @InjectRepository(UserDepartmentView)
+    protected readonly viewService: Repository<UserDepartmentView>
   ) {}
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
-    @Query() queryDto: QueryCustomerProfileDto
+    @Query() queryDto: QueryUserDepartmentDto
   ) {
     return await this.viewService.find({
       ...paginator,
@@ -57,12 +57,12 @@ export class CustomerProfileController {
   }
 
   @Post({ path: Paths.SINGULAR_PATH })
-  async save(@Body() body: CreateCustomerProfileDto) {
+  async save(@Body() body: CreateUserDepartmentDto) {
     return await this.service.saveSafe(body);
   }
 
   @Update({ path: Paths.BY_ID_PATH })
-  update(@SourceId() id: number, @Body() body: UpdateCustomerProfileDto) {
+  update(@SourceId() id: number, @Body() body: UpdateUserDepartmentDto) {
     return this.service.updateSafe(id, body);
   }
 

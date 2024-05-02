@@ -45,12 +45,13 @@ export class UserAddressController {
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryUserAddressDto
   ) {
-    console.table(paginator);
-    console.table(queryDto);
-    return await this.service.find({ ...paginator, where: { ...queryDto } });
+    return await this.viewService.find({
+      ...paginator,
+      where: { ...queryDto },
+    });
   }
 
-  @Get({ path: Paths.PLURAL_PATH })
+  @Get({ path: Paths.BY_ID_PATH })
   async findOneById(@SourceId() id: number) {
     return await this.viewService.findOneBy({ id } as any);
   }

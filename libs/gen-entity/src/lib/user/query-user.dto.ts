@@ -12,5 +12,5 @@ export class QueryUserDto implements IQueryUserDto {
   username?: string;
   @Property({ type: 'string' }) roleName?: string;
   @Property({ type: 'string' }) roleDescription?: string;
-  @Property({ type: 'string' }) departmentName?: string;
+  @Property({ type: 'string' }) userDepartmentName?: string;
 }

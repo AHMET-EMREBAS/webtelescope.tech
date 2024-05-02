@@ -1,5 +1,6 @@
 import {
   CreateAddressFor,
+  CreateDepartmentFor,
   CreateEmailModelFor,
   CreateImageModelFor,
   CreatePhoneModelFor,
@@ -10,8 +11,9 @@ import {
   PasswordProperty,
   UserNameProperty,
 } from '../../core';
-import { DepartmentModel } from '../common';
 import { RoleModel } from './role';
+
+export const UserDepartment = CreateDepartmentFor('UserDepartment');
 
 export const UserModel: Model = {
   modelName: 'User',
@@ -21,7 +23,7 @@ export const UserModel: Model = {
   },
   relations: {
     roles: ManyRelation(RoleModel),
-    department: OneRelation(DepartmentModel),
+    userDepartment: OneRelation(UserDepartment),
   },
 };
 
