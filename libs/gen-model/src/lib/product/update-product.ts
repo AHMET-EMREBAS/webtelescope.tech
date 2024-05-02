@@ -1,6 +1,9 @@
-import { IID } from '@webpackages/gen-model';
+import { IID } from '@webpackages/common';
 export interface IUpdateProductDto {
-  name?: string;
+  barcode?: string;
+  /**
+   * Required unique short text
+   */ name?: string;
   description?: string;
   category?: IID[];
   department?: IID;

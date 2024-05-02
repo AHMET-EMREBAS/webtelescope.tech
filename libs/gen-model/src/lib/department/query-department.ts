@@ -1,3 +1,5 @@
 export interface IQueryDepartmentDto {
-  name?: string;
+  /**
+   * Required unique short text
+   */ name?: string;
 }

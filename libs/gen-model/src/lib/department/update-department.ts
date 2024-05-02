@@ -1,4 +1,6 @@
-import { IID } from '@webpackages/gen-model';
+import { IID } from '@webpackages/common';
 export interface IUpdateDepartmentDto {
-  name?: string;
+  /**
+   * Required unique short text
+   */ name?: string;
 }

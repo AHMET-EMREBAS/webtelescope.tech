@@ -1,6 +1,14 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IDepartment } from '@webpackages/gen-model';
+import { IDepartment } from '@webpackages/common';
 @Entity()
 export class Department extends BaseEntity implements IDepartment {
-  @Column({ type: 'string', required: true, unique: true }) name!: string;
+  /**
+   * Required unique short text
+   */ @Column({
+    type: 'string',
+    required: true,
+    unique: true,
+    description: 'Required unique short text',
+  })
+  name!: string;
 }

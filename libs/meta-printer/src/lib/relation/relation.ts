@@ -41,46 +41,6 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
     });
   }
 
-  IEntity(): IPrint {
-    return this.__build({
-      decoratorsPrinter: undefined,
-      classType: ClassType.INTERFACE,
-      type: `T${this.modelName}`,
-    });
-  }
-
-  Create(): IPrint {
-    return this.__build({
-      type: BuiltinClassNames.IDDto,
-      decoratorsPrinter: this.decoratorBuilder.Create(),
-    });
-  }
-
-  Update(): IPrint {
-    return this.__build({
-      type: BuiltinClassNames.IDDto,
-      required: undefined,
-      decoratorsPrinter: this.decoratorBuilder.Update(),
-    });
-  }
-
-  ICreate(): IPrint {
-    return this.__build({
-      type: BuiltinClassNames.IID,
-      classType: ClassType.INTERFACE,
-      decoratorsPrinter: undefined,
-    });
-  }
-
-  IUpdate(): IPrint {
-    return this.__build({
-      type: BuiltinClassNames.IID,
-      classType: ClassType.INTERFACE,
-      required: undefined,
-      decoratorsPrinter: undefined,
-    });
-  }
-
   View(): IPrint {
     const queries = this.optionsManager
       .toView()
@@ -102,6 +62,21 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
     };
   }
 
+  Create(): IPrint {
+    return this.__build({
+      type: BuiltinClassNames.IDDto,
+      decoratorsPrinter: this.decoratorBuilder.Create(),
+    });
+  }
+
+  Update(): IPrint {
+    return this.__build({
+      type: BuiltinClassNames.IDDto,
+      required: undefined,
+      decoratorsPrinter: this.decoratorBuilder.Update(),
+    });
+  }
+
   Query(): IPrint {
     const queries = this.optionsManager
       .toQuery()
@@ -121,6 +96,31 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
         return queries;
       },
     };
+  }
+
+  IEntity(): IPrint {
+    return this.__build({
+      decoratorsPrinter: undefined,
+      classType: ClassType.INTERFACE,
+      type: `T${this.modelName}`,
+    });
+  }
+
+  ICreate(): IPrint {
+    return this.__build({
+      type: BuiltinClassNames.IID,
+      classType: ClassType.INTERFACE,
+      decoratorsPrinter: undefined,
+    });
+  }
+
+  IUpdate(): IPrint {
+    return this.__build({
+      type: BuiltinClassNames.IID,
+      classType: ClassType.INTERFACE,
+      required: undefined,
+      decoratorsPrinter: undefined,
+    });
   }
 
   IQuery(): IPrint {
@@ -151,7 +151,8 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
       .filter((e) => e.searchable != false)
       .map((e) => {
         return this.__build({
-          decoratorsPrinter: this.decoratorBuilder.View(),
+          classType: ClassType.INTERFACE,
+          decoratorsPrinter: this.decoratorBuilder.IView(),
           isArray: undefined,
           ...e,
         });

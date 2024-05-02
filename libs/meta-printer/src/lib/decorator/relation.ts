@@ -5,7 +5,7 @@ import {
   orderPropertyOptions,
 } from '@webpackages/meta';
 import { DecoratorPrinter, IPrint } from '@webpackages/printer';
-import { DecoratorName } from '../common-imp';
+import { DecoratorName, EmptyPrinter } from '../common-imp';
 import { ICoverAllClassTypes } from '../common';
 
 /**
@@ -55,18 +55,18 @@ export class RelationDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
   }
 
   IEntity(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
   IView(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
   ICreate(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
   IUpdate(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
   IQuery(): IPrint {
-    throw new Error('Method not implemented.');
+    return EmptyPrinter;
   }
 }

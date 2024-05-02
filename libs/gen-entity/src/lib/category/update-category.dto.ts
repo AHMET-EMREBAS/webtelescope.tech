@@ -1,7 +1,16 @@
 import { Dto, Property } from '@webpackages/core';
-import { IUpdateCategoryDto } from '@webpackages/gen-model';
+import { IUpdateCategoryDto } from '@webpackages/common';
 @Dto()
 export class UpdateCategoryDto implements IUpdateCategoryDto {
-  @Property({ type: 'string', unique: true, minLength: 3, maxLength: 30 })
+  /**
+   * Required unique short text
+   */ @Property({
+    type: 'string',
+    unique: true,
+    description: 'Required unique short text',
+    minLength: 3,
+    maxLength: 100,
+    inputType: 'text',
+  })
   name?: string;
 }

@@ -16,7 +16,7 @@ const classBuilders = Object.entries(
   return [value.modelName, getClassBuilder(value)] as [string, ClassBuilder];
 });
 
-function __entity(
+function Entity(
   tree: Tree,
   projectRoot: string,
   fileBuilder: ICoverAllClassTypes<string>,
@@ -27,7 +27,20 @@ function __entity(
     content: classBuilder.Entity().print(),
   });
 }
-function __createDto(
+
+function View(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.View(),
+    content: classBuilder.View().print(),
+  });
+}
+
+function CreateDto(
   tree: Tree,
   projectRoot: string,
   fileBuilder: ICoverAllClassTypes<string>,
@@ -39,7 +52,7 @@ function __createDto(
   });
 }
 
-function __updateDto(
+function UpdateDto(
   tree: Tree,
   projectRoot: string,
   fileBuilder: ICoverAllClassTypes<string>,
@@ -51,7 +64,7 @@ function __updateDto(
   });
 }
 
-function __queryDto(
+function QueryDto(
   tree: Tree,
   projectRoot: string,
   fileBuilder: ICoverAllClassTypes<string>,
@@ -63,19 +76,92 @@ function __queryDto(
   });
 }
 
-function ___gen(tree: Tree) {
+function IEntity(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.IEntity(),
+    content: classBuilder.IEntity().print(),
+  });
+}
+
+function IView(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.IView(),
+    content: classBuilder.IView().print(),
+  });
+}
+
+function ICreate(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.ICreate(),
+    content: classBuilder.ICreate().print(),
+  });
+}
+
+function IUpdate(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.IUpdate(),
+    content: classBuilder.IUpdate().print(),
+  });
+}
+
+function IQuery(
+  tree: Tree,
+  projectRoot: string,
+  fileBuilder: ICoverAllClassTypes<string>,
+  classBuilder: ICoverAllClassTypes<IPrint>
+) {
+  generateFiles(tree, join(__dirname, 'files'), projectRoot, {
+    fileName: fileBuilder.IQuery(),
+    content: classBuilder.IQuery().print(),
+  });
+}
+
+function __genEntities(tree: Tree) {
   for (const [modelName, classBuilder] of classBuilders) {
     const projectRoot = `libs/gen-entity/src/lib/${names(modelName).fileName}`;
     const fileNameBuilder = new FileNameBuilder(modelName);
-    __entity(tree, projectRoot, fileNameBuilder, classBuilder);
-    __createDto(tree, projectRoot, fileNameBuilder, classBuilder);
-    __updateDto(tree, projectRoot, fileNameBuilder, classBuilder);
-    __queryDto(tree, projectRoot, fileNameBuilder, classBuilder);
+    Entity(tree, projectRoot, fileNameBuilder, classBuilder);
+    View(tree, projectRoot, fileNameBuilder, classBuilder);
+    CreateDto(tree, projectRoot, fileNameBuilder, classBuilder);
+    UpdateDto(tree, projectRoot, fileNameBuilder, classBuilder);
+    QueryDto(tree, projectRoot, fileNameBuilder, classBuilder);
+  }
+  for (const [modelName, classBuilder] of classBuilders) {
+    const projectRoot = `libs/gen-model/src/lib/${names(modelName).fileName}`;
+    const fileNameBuilder = new FileNameBuilder(modelName);
+
+    IEntity(tree, projectRoot, fileNameBuilder, classBuilder);
+    IView(tree, projectRoot, fileNameBuilder, classBuilder);
+    ICreate(tree, projectRoot, fileNameBuilder, classBuilder);
+    IUpdate(tree, projectRoot, fileNameBuilder, classBuilder);
+    IQuery(tree, projectRoot, fileNameBuilder, classBuilder);
   }
 }
 
 export async function entityGenerator(tree: Tree) {
-  ___gen(tree);
+  __genEntities(tree);
+
   await formatFiles(tree);
 }
+
 export default entityGenerator;

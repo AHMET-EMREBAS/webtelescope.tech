@@ -1,4 +1,6 @@
-import { IID } from '@webpackages/gen-model';
+import { IID } from '@webpackages/common';
 export interface ICategory {
-  name: string;
+  /**
+   * Required unique short text
+   */ name: string;
 }
