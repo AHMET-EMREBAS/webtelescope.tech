@@ -1,0 +1,18 @@
+import { NgrxCollectionService } from '../base';
+import { I<%- className %>, I<%- className %>View } from '@webpackages/gen-model';
+import { EntityCollectionServiceElementsFactory } from '@ngrx/data';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class <%- className %>Service extends NgrxCollectionService<I<%- className %>> {
+  constructor(factory: EntityCollectionServiceElementsFactory) {
+    super('<%- className %>', factory);
+  }
+}
+
+@Injectable()
+export class <%- className %>ViewService extends NgrxCollectionService<I<%- className %>View> {
+  constructor(factory: EntityCollectionServiceElementsFactory) {
+    super('<%- className %>View', factory);
+  }
+}
