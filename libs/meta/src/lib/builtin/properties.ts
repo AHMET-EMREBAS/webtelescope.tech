@@ -36,6 +36,18 @@ export function LongTextProperty(
   };
 }
 
+export function EnumProperty(
+  options: Pick<PropertyOptions, 'enums'> &
+    Pick<PropertyOptions, 'required' | 'icon' | 'label'>
+): PropertyOptions {
+  return {
+    type: PropertyTypes.STRING,
+    inputType: 'select',
+    icon: 'select',
+    ...options,
+  };
+}
+
 export function UniqueNameProperty(
   options?: Pick<
     PropertyOptions,
@@ -144,7 +156,7 @@ export function BooleanProperty(
 }
 
 export function DateProperty(
-  options?: Pick<PropertyOptions, 'required'>
+  options?: Pick<PropertyOptions, 'required' | 'description' | 'label' | 'icon'>
 ): PropertyOptions {
   return {
     type: PropertyTypes.DATE,

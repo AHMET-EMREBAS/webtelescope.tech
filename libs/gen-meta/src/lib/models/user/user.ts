@@ -9,6 +9,7 @@ import {
   PasswordProperty,
   UserNameProperty,
 } from '../../core';
+import { DepartmentModel } from '../common';
 import { RoleModel } from './role';
 
 export const UserModel: Model = {
@@ -19,6 +20,7 @@ export const UserModel: Model = {
   },
   relations: {
     roles: ManyRelation(RoleModel),
+    department: ManyRelation(DepartmentModel),
   },
 };
 
