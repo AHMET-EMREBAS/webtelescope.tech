@@ -10,7 +10,7 @@ describe('stringify', () => {
 
     expect(clearSpace(value)).toBe(
       clearSpace(`{
-        target: 'Category',
+        target: Category,
         value: 1,
         obj: { name: 'Name', some: 100 }
     }`)

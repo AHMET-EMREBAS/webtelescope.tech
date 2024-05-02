@@ -2,9 +2,7 @@ import { Dto, Property, IDDto } from '@webpackages/core';
 import { IQueryCustomerProfileDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryCustomerProfileDto implements IQueryCustomerProfileDto {
-  @Property({ type: 'string', minLength: 3, maxLength: 100, inputType: 'text' })
-  firstName?: string;
-  @Property({ type: 'string', minLength: 3, maxLength: 100, inputType: 'text' })
-  lastName?: string;
+  @Property({}) firstName?: string;
+  @Property({}) lastName?: string;
   @Property({ type: 'string' }) customerUsername?: string;
 }

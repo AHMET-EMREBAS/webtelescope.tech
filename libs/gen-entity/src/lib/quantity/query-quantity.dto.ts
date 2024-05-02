@@ -5,11 +5,7 @@ export class QueryQuantityDto implements IQueryQuantityDto {
   /**
    * Quantity of the Product-Sku in the store.
    */
-  @Property({
-    type: 'number',
-    description: 'Quantity of the Product-Sku in the store.',
-    minimum: 0,
-  })
+  @Property({ description: 'Quantity of the Product-Sku in the store.' })
   quanitty?: number;
   @Property({ type: 'string' }) skuBarcode?: string;
   @Property({ type: 'string' }) skuSku?: string;

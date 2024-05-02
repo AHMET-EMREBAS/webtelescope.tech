@@ -5,12 +5,5 @@ export class QueryCategoryDto implements IQueryCategoryDto {
   /**
    * Required unique short text
    */
-  @Property({
-    type: 'string',
-    description: 'Required unique short text',
-    minLength: 3,
-    maxLength: 100,
-    inputType: 'text',
-  })
-  name?: string;
+  @Property({ description: 'Required unique short text' }) name?: string;
 }

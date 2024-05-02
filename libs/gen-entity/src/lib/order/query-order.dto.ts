@@ -2,45 +2,15 @@ import { Dto, Property, IDDto } from '@webpackages/core';
 import { IQueryOrderDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryOrderDto implements IQueryOrderDto {
-  @Property({ type: 'number', minimum: 0, icon: 'quantity' }) quantity?: number;
-  @Property({
-    type: 'number',
-    minimum: 0,
-    icon: 'discount',
-    inputType: 'currency',
-  })
-  discount?: number;
-  @Property({
-    type: 'number',
-    minimum: 0,
-    icon: 'currency',
-    inputType: 'currency',
-  })
-  total?: number;
-  @Property({
-    type: 'number',
-    minimum: 0,
-    icon: 'currency',
-    inputType: 'currency',
-  })
-  subTotal?: number;
-  @Property({
-    type: 'number',
-    minimum: 0,
-    icon: 'currency',
-    inputType: 'currency',
-  })
-  tax?: number;
+  @Property({}) quantity?: number;
+  @Property({}) discount?: number;
+  @Property({}) total?: number;
+  @Property({}) subTotal?: number;
+  @Property({}) tax?: number;
   /**
    * Order description or notes
    */
-  @Property({
-    type: 'string',
-    description: 'Order description or notes',
-    maxLength: 1000,
-    inputType: 'textarea',
-  })
-  description?: string;
+  @Property({ description: 'Order description or notes' }) description?: string;
   @Property({ type: 'string' }) skuBarcode?: string;
   @Property({ type: 'string' }) skuSku?: string;
   @Property({ type: 'string' }) skuName?: string;

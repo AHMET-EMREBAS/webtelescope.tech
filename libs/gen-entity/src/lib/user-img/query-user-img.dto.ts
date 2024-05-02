@@ -5,21 +5,7 @@ export class QueryUserImgDto implements IQueryUserImgDto {
   /**
    * Image url
    */
-  @Property({
-    type: 'string',
-    description: 'Image url',
-    maxLength: 1000,
-    inputType: 'url',
-    format: 'url',
-    icon: 'url',
-  })
-  url?: string;
-  @Property({
-    type: 'string',
-    maxLength: 1000,
-    inputType: 'textarea',
-    icon: 'description',
-  })
-  description?: string;
+  @Property({ description: 'Image url' }) url?: string;
+  @Property({}) description?: string;
   @Property({ type: 'string' }) userUsername?: string;
 }

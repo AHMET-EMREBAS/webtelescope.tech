@@ -33,7 +33,12 @@ export class DecoratorPrinter implements IPrint {
   protected __options(): string {
     const { options, optionsString } = this.optionz;
     if (options) {
-      return stringify(excludeUndefined(options));
+      try {
+        return stringify(excludeUndefined(options));
+      } catch (err) {
+        console.log('>>>>>>>>>>> : ', err);
+        throw new Error("Hre");
+      }
     } else {
       return optionsString ?? '';
     }

@@ -4,8 +4,12 @@
  * @returns
  */
 export function excludeUndefined<T extends object, R = T>(obj: T): R {
-  return Object.entries(obj)
+  const m = Object.entries(obj)
     .filter(([, value]) => value != undefined)
-    .map(([key, value]) => ({ [key]: value }))
-    .reduce((p, c) => ({ ...p, ...c })) as R;
+    .map(([key, value]) => ({ [key]: value }));
+
+  if (m.length > 0) {
+    return m.reduce((p, c) => ({ ...p, ...c })) as R;
+  }
+  return {} as R;
 }
