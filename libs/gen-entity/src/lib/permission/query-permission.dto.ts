@@ -1,5 +1,7 @@
 import { Dto, Property, IDDto } from '@webpackages/core';
 import { IQueryPermissionDto } from '@webpackages/gen-model';
+import { Transform } from 'class-transformer';
+import { ILike } from 'typeorm';
 @Dto()
 export class QueryPermissionDto implements IQueryPermissionDto {
   /**
@@ -7,10 +9,9 @@ export class QueryPermissionDto implements IQueryPermissionDto {
    */
   @Property({
     type: 'string',
-    description: 'Required unique short text',
-    minLength: 3,
-    maxLength: 100,
+    description: 'Query permission by name.',
     inputType: 'text',
   })
+  @Transform(({ value }) => (value && ILike(`%${value}%`)) ?? undefined)
   name?: string;
 }

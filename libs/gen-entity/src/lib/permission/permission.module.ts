@@ -53,12 +53,12 @@ export class PermissionController {
 
   @Post({ path: PermissionPaths.SINGULAR_PATH })
   async save(@Body() body: CreatePermissionDto) {
-    return await this.service.save(body);
+    return await this.service.saveSafe(body);
   }
 
   @Update({ path: PermissionPaths.BY_ID_PATH })
   update(@SourceId() id: number, @Body() body: UpdatePermissionDto) {
-    return this.service.update(id, body);
+    return this.service.updateSafe(id, body);
   }
 
   @Delete({ path: PermissionPaths.BY_ID_PATH })
