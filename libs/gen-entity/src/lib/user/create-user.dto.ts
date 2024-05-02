@@ -22,7 +22,7 @@ export class CreateUserDto implements ICreateUserDto {
   })
   password!: string;
   @Property({ type: 'object', objectType: IDDto, isArray: true })
-  roles?: IDDto[];
+  role?: IDDto[];
   @Property({ type: 'object', objectType: IDDto, isArray: true })
   department?: IDDto[];
 }

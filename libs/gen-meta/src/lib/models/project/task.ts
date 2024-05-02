@@ -20,7 +20,7 @@ export const TaskModel: Model = {
     endDate: DateProperty({ label: 'Start date', icon: 'date' }),
   },
   relations: {
-    assignees: OneRelation(UserModel),
+    user: OneRelation(UserModel),
     sprint: OneRelation(SprintModel),
   },
 };

@@ -6,6 +6,6 @@ export interface ICreateCartDto {
    */
   checked?: boolean;
   customer: IID;
-  employee: IID;
+  user: IID;
   store: IID;
 }

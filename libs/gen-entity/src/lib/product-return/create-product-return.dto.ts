@@ -12,6 +12,5 @@ export class CreateProductReturnDto implements ICreateProductReturnDto {
   @Property({ type: 'number', required: true, minimum: 0 }) quantity!: number;
   @Property({ type: 'object', objectType: IDDto, required: true })
   order!: IDDto;
-  @Property({ type: 'object', objectType: IDDto, required: true })
-  employee!: IDDto;
+  @Property({ type: 'object', objectType: IDDto, required: true }) user!: IDDto;
 }

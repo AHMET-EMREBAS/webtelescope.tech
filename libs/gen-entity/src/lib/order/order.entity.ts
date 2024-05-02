@@ -9,6 +9,9 @@ export class Order extends BaseEntity implements IOrder<Sku, Cart> {
   @Column({ type: 'number', required: true }) total!: number;
   @Column({ type: 'number', required: true }) subTotal!: number;
   @Column({ type: 'number', required: true }) tax!: number;
+  /**
+   * Order description or notes
+   */
   @Column({ type: 'string', description: 'Order description or notes' })
   description?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Sku })

@@ -9,7 +9,7 @@ export class Ticket
 {
   @Column({ type: 'string', required: true }) title!: string;
   @Column({ type: 'string', required: true }) description!: string;
-  @Relation({ relationType: 'One', objectType: User }) assignee?: User;
+  @Relation({ relationType: 'One', objectType: User }) user?: User;
   @Relation({ relationType: 'One', objectType: TicketCategory })
-  category?: TicketCategory;
+  ticketCategory?: TicketCategory;
 }

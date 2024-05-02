@@ -28,6 +28,6 @@ export class UpdateTaskDto implements IUpdateTaskDto {
   @Property({ type: 'date', label: 'Start date', icon: 'date' })
   startDate?: Date;
   @Property({ type: 'date', label: 'Start date', icon: 'date' }) endDate?: Date;
-  @Property({ type: 'object', objectType: IDDto }) assignees?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) user?: IDDto;
   @Property({ type: 'object', objectType: IDDto }) sprint?: IDDto;
 }

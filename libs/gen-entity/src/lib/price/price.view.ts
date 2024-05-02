@@ -1,6 +1,24 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IPriceView } from '@webpackages/gen-model';
-@ViewEntity()
+import { Price } from './price.entity';
+import { PriceLevel } from '../price-level/price-level.entity';
+import { Product } from '../product/product.entity';
+@ViewEntity({
+  expression(ds) {
+    return ds
+      .createQueryBuilder()
+      .select('price.id', 'priceId')
+      .addSelect('price.description', 'description')
+      .addSelect('price.checked', 'checked')
+      .addSelect('priceLevel.name', 'priceLevelName')
+      .addSelect('product.barcode', 'productBarcode')
+      .addSelect('product.name', 'productName')
+      .addSelect('product.description', 'productDescription')
+      .from(Price, 'price')
+      .leftJoin(PriceLevel, 'priceLevel', 'priceLevel.id = price.priceLevelId')
+      .leftJoin(Product, 'product', 'product.id = price.productId');
+  },
+})
 export class PriceView implements IPriceView {
   /**
    * Price

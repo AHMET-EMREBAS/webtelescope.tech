@@ -22,5 +22,5 @@ export class UpdateRoleDto implements IUpdateRoleDto {
   })
   description?: string;
   @Property({ type: 'object', objectType: IDDto, isArray: true })
-  permissions?: IDDto[];
+  permission?: IDDto[];
 }

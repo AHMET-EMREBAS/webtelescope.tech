@@ -19,6 +19,6 @@ export class UpdateCartDto implements IUpdateCartDto {
   })
   checked?: boolean;
   @Property({ type: 'object', objectType: IDDto }) customer?: IDDto;
-  @Property({ type: 'object', objectType: IDDto }) employee?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) user?: IDDto;
   @Property({ type: 'object', objectType: IDDto }) store?: IDDto;
 }

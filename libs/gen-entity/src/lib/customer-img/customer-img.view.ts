@@ -1,6 +1,20 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ICustomerImgView } from '@webpackages/gen-model';
-@ViewEntity()
+import { CustomerImg } from './customer-img.entity';
+import { Customer } from '../customer/customer.entity';
+@ViewEntity({
+  expression(ds) {
+    return ds
+      .createQueryBuilder()
+      .select('customerImg.id', 'customerImgId')
+      .addSelect('customerImg.description', 'description')
+      .addSelect('customerImg.checked', 'checked')
+      .addSelect('customer.username', 'customerUsername')
+      .addSelect('customer.password', 'customerPassword')
+      .from(CustomerImg, 'customerImg')
+      .leftJoin(Customer, 'customer', 'customer.id = customerImg.customerId');
+  },
+})
 export class CustomerImgView implements ICustomerImgView {
   /**
    * Image url

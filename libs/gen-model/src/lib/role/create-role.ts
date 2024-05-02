@@ -5,5 +5,5 @@ export interface ICreateRoleDto {
    */
   name: string;
   description?: string;
-  permissions?: IID[];
+  permission?: IID[];
 }

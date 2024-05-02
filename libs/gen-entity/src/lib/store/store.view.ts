@@ -1,6 +1,17 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IStoreView } from '@webpackages/gen-model';
-@ViewEntity()
+import { Store } from './store.entity';
+@ViewEntity({
+  expression(ds) {
+    return ds
+      .createQueryBuilder()
+      .select('store.id', 'storeId')
+      .addSelect('store.description', 'description')
+      .addSelect('store.checked', 'checked')
+
+      .from(Store, 'store');
+  },
+})
 export class StoreView implements IStoreView {
   /**
    * Required unique short text

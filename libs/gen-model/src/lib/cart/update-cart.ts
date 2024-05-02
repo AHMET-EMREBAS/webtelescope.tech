@@ -6,6 +6,6 @@ export interface IUpdateCartDto {
    */
   checked?: boolean;
   customer?: IID;
-  employee?: IID;
+  user?: IID;
   store?: IID;
 }

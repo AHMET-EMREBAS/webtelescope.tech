@@ -20,8 +20,7 @@ export class CreateCartDto implements ICreateCartDto {
   checked?: boolean;
   @Property({ type: 'object', objectType: IDDto, required: true })
   customer!: IDDto;
-  @Property({ type: 'object', objectType: IDDto, required: true })
-  employee!: IDDto;
+  @Property({ type: 'object', objectType: IDDto, required: true }) user!: IDDto;
   @Property({ type: 'object', objectType: IDDto, required: true })
   store!: IDDto;
 }

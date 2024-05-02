@@ -6,6 +6,6 @@ export interface ITask<TUser, TSprint> {
   due?: Date;
   startDate?: Date;
   endDate?: Date;
-  assignees?: TUser;
+  user?: TUser;
   sprint?: TSprint;
 }

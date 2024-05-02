@@ -1,6 +1,25 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IQuantityView } from '@webpackages/gen-model';
-@ViewEntity()
+import { Quantity } from './quantity.entity';
+import { Sku } from '../sku/sku.entity';
+import { Store } from '../store/store.entity';
+@ViewEntity({
+  expression(ds) {
+    return ds
+      .createQueryBuilder()
+      .select('quantity.id', 'quantityId')
+      .addSelect('quantity.description', 'description')
+      .addSelect('quantity.checked', 'checked')
+      .addSelect('sku.barcode', 'skuBarcode')
+      .addSelect('sku.sku', 'skuSku')
+      .addSelect('sku.name', 'skuName')
+      .addSelect('sku.description', 'skuDescription')
+      .addSelect('store.name', 'storeName')
+      .from(Quantity, 'quantity')
+      .leftJoin(Sku, 'sku', 'sku.id = quantity.skuId')
+      .leftJoin(Store, 'store', 'store.id = quantity.storeId');
+  },
+})
 export class QuantityView implements IQuantityView {
   /**
    * Quantity of the Product-Sku in the store.

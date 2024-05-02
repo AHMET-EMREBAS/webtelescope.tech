@@ -20,7 +20,7 @@ export class UpdateUserDto implements IUpdateUserDto {
   })
   password?: string;
   @Property({ type: 'object', objectType: IDDto, isArray: true })
-  roles?: IDDto[];
+  role?: IDDto[];
   @Property({ type: 'object', objectType: IDDto, isArray: true })
   department?: IDDto[];
 }

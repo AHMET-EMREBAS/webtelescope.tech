@@ -1,6 +1,17 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ISprintView } from '@webpackages/gen-model';
-@ViewEntity()
+import { Sprint } from './sprint.entity';
+@ViewEntity({
+  expression(ds) {
+    return ds
+      .createQueryBuilder()
+      .select('sprint.id', 'sprintId')
+      .addSelect('sprint.description', 'description')
+      .addSelect('sprint.checked', 'checked')
+
+      .from(Sprint, 'sprint');
+  },
+})
 export class SprintView implements ISprintView {
   /**
    * Required unique short text

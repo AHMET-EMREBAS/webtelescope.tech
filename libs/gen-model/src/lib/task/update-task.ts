@@ -6,6 +6,6 @@ export interface IUpdateTaskDto {
   due?: Date;
   startDate?: Date;
   endDate?: Date;
-  assignees?: IID;
+  user?: IID;
   sprint?: IID;
 }

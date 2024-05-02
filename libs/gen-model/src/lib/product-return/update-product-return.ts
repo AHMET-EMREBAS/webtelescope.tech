@@ -3,5 +3,5 @@ export interface IUpdateProductReturnDto {
   description?: string;
   quantity?: number;
   order?: IID;
-  employee?: IID;
+  user?: IID;
 }

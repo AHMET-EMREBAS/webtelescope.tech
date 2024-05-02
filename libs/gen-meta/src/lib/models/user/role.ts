@@ -13,6 +13,6 @@ export const RoleModel: Model = {
     description: DescriptionProperty(),
   },
   relations: {
-    permissions: ManyRelation(PermissionModel),
+    permission: ManyRelation(PermissionModel),
   },
 };

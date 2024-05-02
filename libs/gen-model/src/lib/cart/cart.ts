@@ -6,6 +6,6 @@ export interface ICart<TCustomer, TUser, TStore> {
    */
   checked?: boolean;
   customer: TCustomer;
-  employee: TUser;
+  user: TUser;
   store: TStore;
 }

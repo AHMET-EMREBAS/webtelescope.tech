@@ -5,5 +5,5 @@ export interface IRole<TPermission> {
    */
   name: string;
   description?: string;
-  permissions?: TPermission[];
+  permission?: TPermission[];
 }

@@ -14,7 +14,7 @@ export class Cart extends BaseEntity implements ICart<Customer, User, Store> {
   @Relation({ relationType: 'Owner', required: true, objectType: Customer })
   customer!: Customer;
   @Relation({ relationType: 'Owner', required: true, objectType: User })
-  employee!: User;
+  user!: User;
   @Relation({ relationType: 'Owner', required: true, objectType: Store })
   store!: Store;
 }

@@ -5,5 +5,5 @@ export interface IUpdateRoleDto {
    */
   name?: string;
   description?: string;
-  permissions?: IID[];
+  permission?: IID[];
 }

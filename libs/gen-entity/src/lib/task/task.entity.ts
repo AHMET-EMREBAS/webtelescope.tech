@@ -10,6 +10,6 @@ export class Task extends BaseEntity implements ITask<User, Sprint> {
   @Column({ type: 'date' }) due?: Date;
   @Column({ type: 'date' }) startDate?: Date;
   @Column({ type: 'date' }) endDate?: Date;
-  @Relation({ relationType: 'One', objectType: User }) assignees?: User;
+  @Relation({ relationType: 'One', objectType: User }) user?: User;
   @Relation({ relationType: 'One', objectType: Sprint }) sprint?: Sprint;
 }

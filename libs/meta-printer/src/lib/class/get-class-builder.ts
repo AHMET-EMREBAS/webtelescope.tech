@@ -3,6 +3,7 @@ import {
   ClassNameBuilder,
   DecoratorListProvider,
   DecoratorNameProvider,
+  FileNameBuilder,
   PackageNameProvider,
 } from '../common-imp';
 import { ClassBuilder } from './class';
@@ -21,7 +22,7 @@ export function getClassBuilder(model: Model): ClassBuilder {
   const decoratorListProvider = new DecoratorListProvider(
     decoratorNameProvider
   );
-
+  const fileNameBuilder = new FileNameBuilder(model.modelName);
   const genericsBuilder = new GenericsBuilder(modelManager);
   const genericsImpBuilder = new GenericsImpBuilder(modelManager);
 
@@ -33,6 +34,7 @@ export function getClassBuilder(model: Model): ClassBuilder {
       modelManager,
       packageManagerProvider,
       classNameBuilder,
+      fileNameBuilder,
       decoratorListProvider
     ),
     new ExtendingBuilder(modelManager),

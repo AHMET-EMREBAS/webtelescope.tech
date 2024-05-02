@@ -8,6 +8,7 @@ import {
 import { BuiltinClassNames, ModelManager } from '@webpackages/meta';
 import { ICoverAllClassTypes } from '../common';
 import { RelationImportBuilder } from './relation';
+import { names } from '@webpackages/utils';
 
 /**
  * Provides import for classes (Dto, Entity, Column, Property etc)
@@ -22,7 +23,9 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
     protected readonly modelManager: ModelManager,
     protected readonly packageNameProvider: IPackageNameProvider,
     protected readonly classNameBuilder: ICoverAllClassTypes<string>,
-    protected readonly decoratorListProvider: ICoverAllClassTypes<string[]>
+    protected readonly fileNameBuilder: ICoverAllClassTypes<string>,
+    protected readonly decoratorListProvider: ICoverAllClassTypes<string[]>, 
+  
   ) {}
 
   RelationImports(): RelationImportBuilder[] {
@@ -32,6 +35,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
         console.log('Model not found .........', e);
       }
       return new RelationImportBuilder(
+        this.modelManager,
         new FileNameBuilder(e.model.modelName),
         new ClassNameBuilder(e.model.modelName),
         '../'
@@ -81,6 +85,12 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
         items: [this.classNameBuilder.IView()],
         source: this.packageNameProvider.models(),
       }).print(),
+
+      new ImportPrinter({
+        items: [this.classNameBuilder.Entity()],
+        source: `./${this.fileNameBuilder.Entity()}`,
+      }).print(),
+      ...this.RelationImports().map((e) => e.Entity().print()),
     ].join('\n');
 
     return {

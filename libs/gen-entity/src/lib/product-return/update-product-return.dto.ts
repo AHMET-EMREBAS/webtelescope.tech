@@ -6,5 +6,5 @@ export class UpdateProductReturnDto implements IUpdateProductReturnDto {
   description?: string;
   @Property({ type: 'number', minimum: 0 }) quantity?: number;
   @Property({ type: 'object', objectType: IDDto }) order?: IDDto;
-  @Property({ type: 'object', objectType: IDDto }) employee?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) user?: IDDto;
 }

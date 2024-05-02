@@ -14,7 +14,7 @@ export const TicketModel: Model = {
     description: LongTextProperty({ required: true }),
   },
   relations: {
-    assignee: OneRelation(UserModel),
-    category: OneRelation(TicketCategoryModel),
+    user: OneRelation(UserModel),
+    ticketCategory: OneRelation(TicketCategoryModel),
   },
 };

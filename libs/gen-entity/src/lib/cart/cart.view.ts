@@ -18,12 +18,15 @@ import { Store } from '../store/store.entity';
       .addSelect('store.name', 'storeName')
       .from(Cart, 'cart')
       .leftJoin(Customer, 'customer', 'customer.id = cart.customerId')
-      .leftJoin(User, 'user', 'user.id = cart.employeeId')
+      .leftJoin(User, 'user', 'user.id = cart.userId')
       .leftJoin(Store, 'store', 'store.id = cart.storeId');
   },
 })
 export class CartView implements ICartView {
   @ViewColumn() description!: string;
+  /**
+   * Is chart checked out or not?
+   */
   @ViewColumn() checked!: boolean;
   @ViewColumn() customerUsername!: string;
   @ViewColumn() customerPassword!: string;

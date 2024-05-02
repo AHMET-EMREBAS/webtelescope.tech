@@ -12,5 +12,5 @@ export class ProductReturn
   @Relation({ relationType: 'Owner', required: true, objectType: Order })
   order!: Order;
   @Relation({ relationType: 'Owner', required: true, objectType: User })
-  employee!: User;
+  user!: User;
 }

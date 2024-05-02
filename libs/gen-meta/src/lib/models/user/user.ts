@@ -19,7 +19,7 @@ export const UserModel: Model = {
     password: PasswordProperty(),
   },
   relations: {
-    roles: ManyRelation(RoleModel),
+    role: ManyRelation(RoleModel),
     department: ManyRelation(DepartmentModel),
   },
 };

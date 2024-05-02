@@ -17,6 +17,6 @@ export class CreateTicketDto implements ICreateTicketDto {
     inputType: 'textarea',
   })
   description!: string;
-  @Property({ type: 'object', objectType: IDDto }) assignee?: IDDto;
-  @Property({ type: 'object', objectType: IDDto }) category?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) user?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) ticketCategory?: IDDto;
 }

@@ -15,6 +15,6 @@ export const ProductReturn: Model = {
   },
   relations: {
     order: OwnerRelation(OrderModel),
-    employee: OwnerRelation(UserModel),
+    user: OwnerRelation(UserModel),
   },
 };
