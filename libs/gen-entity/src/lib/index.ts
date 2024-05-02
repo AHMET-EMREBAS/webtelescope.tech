@@ -163,3 +163,4 @@ export * from './user/user.view';
 // ------------------------
 
 export * from './role/role.module';
+export * from './permission/permission.module';

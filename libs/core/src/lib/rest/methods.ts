@@ -23,6 +23,7 @@ export type MethodOptions = {
 export function Get(options: MethodOptions) {
   const { path, security } = options;
   const decorators: (ClassDecorator | MethodDecorator)[] = [
+    ApiOperation({ summary: 'Query all entities' }),
     ApiOkResponse({ description: 'Success' }),
     ApiUnprocessableEntityResponse({ description: 'Query validation error' }),
     ApiNotFoundResponse({ description: 'Not found' }),
@@ -37,6 +38,7 @@ export function Get(options: MethodOptions) {
 export function Post(options: MethodOptions) {
   const { path, security } = options;
   const decorators: MethodDecorator[] = [
+    ApiOperation({ summary: 'Save entity' }),
     ApiCreatedResponse({ description: 'Success' }),
     ApiUnprocessableEntityResponse({ description: 'Input validation error' }),
     ApiNotFoundResponse({ description: 'Not found' }),
@@ -51,6 +53,7 @@ export function Post(options: MethodOptions) {
 export function Update(options: MethodOptions) {
   const { path, security } = options;
   const decorators: MethodDecorator[] = [
+    ApiOperation({ summary: 'Update entity' }),
     ApiOkResponse({ description: 'Success' }),
     ApiUnprocessableEntityResponse({ description: 'Query validation error' }),
     ApiNotFoundResponse({ description: 'Not found' }),
@@ -65,6 +68,7 @@ export function Update(options: MethodOptions) {
 export function Delete(options: MethodOptions) {
   const { path, security } = options;
   const decorators: MethodDecorator[] = [
+    ApiOperation({ summary: 'Delete entity' }),
     ApiOkResponse({ description: 'Success' }),
     ApiUnprocessableEntityResponse({ description: 'Query validation error' }),
     ApiNotFoundResponse({ description: 'Not found' }),

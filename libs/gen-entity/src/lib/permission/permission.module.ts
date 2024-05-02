@@ -1,3 +1,5 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   Controller,
   Get,
@@ -21,50 +23,50 @@ import {
   RemoveRelation,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
-import { Role } from './role.entity';
-import { QueryRoleDto } from './query-role.dto';
-import { UpdateRoleDto } from './update-role.dto';
-import { CreateRoleDto } from './create-role.dto';
+import { Permission } from './permission.entity';
+import { QueryPermissionDto } from './query-permission.dto';
+import { UpdatePermissionDto } from './update-permission.dto';
+import { CreatePermissionDto } from './create-permission.dto';
 
 @Injectable()
-export class RoleService extends RepositoryService<Role> {
-  constructor(@InjectRepository(Role) repo: Repository<Role>) {
+export class PermissionService extends RepositoryService<Permission> {
+  constructor(@InjectRepository(Permission) repo: Repository<Permission>) {
     super(repo);
   }
 }
-const RolePaths = getApiPaths(Role.name);
+const PermissionPaths = getApiPaths(Permission.name);
 
 @Controller({
-  tags: [RoleController.name],
+  tags: [PermissionController.name],
 })
-export class RoleController {
-  constructor(protected readonly service: RoleService) {}
-  @Get({ path: RolePaths.PLURAL_PATH })
+export class PermissionController {
+  constructor(protected readonly service: PermissionService) {}
+  @Get({ path: PermissionPaths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
-    @Query() queryDto: QueryRoleDto
+    @Query() queryDto: QueryPermissionDto
   ) {
     console.table(paginator);
     console.table(queryDto);
     return await this.service.find({ ...paginator, where: { ...queryDto } });
   }
 
-  @Post({ path: RolePaths.SINGULAR_PATH })
-  async save(@Body() body: CreateRoleDto) {
+  @Post({ path: PermissionPaths.SINGULAR_PATH })
+  async save(@Body() body: CreatePermissionDto) {
     return await this.service.save(body);
   }
 
-  @Update({ path: RolePaths.BY_ID_PATH })
-  update(@SourceId() id: number, @Body() body: UpdateRoleDto) {
+  @Update({ path: PermissionPaths.BY_ID_PATH })
+  update(@SourceId() id: number, @Body() body: UpdatePermissionDto) {
     return this.service.update(id, body);
   }
 
-  @Delete({ path: RolePaths.BY_ID_PATH })
+  @Delete({ path: PermissionPaths.BY_ID_PATH })
   delete(@SourceId() id: number) {
     return this.service.delete(id);
   }
 
-  @SetRelation({ path: RolePaths.RELATION_NAME_AND_ID_PATH })
+  @SetRelation({ path: PermissionPaths.RELATION_NAME_AND_ID_PATH })
   setRelation(@Param() param: RelationDto) {
     const { relationName, entityId, relationId } = param;
     return this.service
@@ -74,7 +76,7 @@ export class RoleController {
       .set(relationId);
   }
 
-  @UnsetRelation({ path: RolePaths.RELATION_NAME_PATH })
+  @UnsetRelation({ path: PermissionPaths.RELATION_NAME_PATH })
   unsetRelation(@Param() param: UnsetRelationDto) {
     const { relationName, entityId } = param;
     return this.service
@@ -84,7 +86,7 @@ export class RoleController {
       .set(null);
   }
 
-  @AddRelation({ path: RolePaths.RELATION_NAME_AND_ID_PATH })
+  @AddRelation({ path: PermissionPaths.RELATION_NAME_AND_ID_PATH })
   addRelation(@Param() param: RelationDto) {
     const { relationName, entityId, relationId } = param;
     return this.service
@@ -94,7 +96,7 @@ export class RoleController {
       .set(relationId);
   }
 
-  @RemoveRelation({ path: RolePaths.RELATION_NAME_AND_ID_PATH })
+  @RemoveRelation({ path: PermissionPaths.RELATION_NAME_AND_ID_PATH })
   removeRelation(@Param() param: RelationDto) {
     const { relationName, entityId, relationId } = param;
     return this.service
@@ -104,3 +106,10 @@ export class RoleController {
       .set(relationId);
   }
 }
+
+@Module({
+  imports: [TypeOrmModule.forFeature([Permission])],
+  controllers: [PermissionController],
+  providers: [PermissionService],
+})
+export class PermissionModule {}

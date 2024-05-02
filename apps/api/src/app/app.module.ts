@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@webpackages/config';
-import { SampleModule, TypeOrmModule } from '@webpackages/core';
+import { PermissionModule, RoleModule } from '@webpackages/gen-entity';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { SampleModule, TypeOrmModule } from '@webpackages/core';
       synchronize: true,
       dropSchema: true,
     }),
-    SampleModule,
+    RoleModule,
+    PermissionModule,
   ],
 })
 export class AppModule {}
