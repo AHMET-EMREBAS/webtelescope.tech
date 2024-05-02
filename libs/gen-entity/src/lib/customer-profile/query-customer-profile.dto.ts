@@ -6,4 +6,5 @@ export class QueryCustomerProfileDto implements IQueryCustomerProfileDto {
   firstName?: string;
   @Property({ type: 'string', minLength: 3, maxLength: 100, inputType: 'text' })
   lastName?: string;
+  @Property({ type: 'string' }) customerUsername?: string;
 }

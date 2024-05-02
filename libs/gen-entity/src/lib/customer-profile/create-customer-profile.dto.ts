@@ -6,4 +6,6 @@ export class CreateCustomerProfileDto implements ICreateCustomerProfileDto {
   firstName?: string;
   @Property({ type: 'string', minLength: 3, maxLength: 100, inputType: 'text' })
   lastName?: string;
+  @Property({ type: 'object', objectType: IDDto, required: true })
+  customer!: IDDto;
 }

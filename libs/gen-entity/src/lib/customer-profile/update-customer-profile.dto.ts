@@ -6,4 +6,5 @@ export class UpdateCustomerProfileDto implements IUpdateCustomerProfileDto {
   firstName?: string;
   @Property({ type: 'string', minLength: 3, maxLength: 100, inputType: 'text' })
   lastName?: string;
+  @Property({ type: 'object', objectType: IDDto }) customer?: IDDto;
 }
