@@ -7,9 +7,9 @@ export class QueryUserPhoneDto implements IQueryUserPhoneDto {
     minLength: 3,
     maxLength: 100,
     inputType: 'text',
-    format: 'email',
-    autocomplete: 'email',
+    format: 'phone',
+    autocomplete: 'tel',
   })
-  email?: string;
+  phone?: string;
   @Property({ type: 'string' }) userUsername?: string;
 }

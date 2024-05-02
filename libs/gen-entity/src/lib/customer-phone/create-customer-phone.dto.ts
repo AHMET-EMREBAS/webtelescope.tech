@@ -7,10 +7,10 @@ export class CreateCustomerPhoneDto implements ICreateCustomerPhoneDto {
     minLength: 3,
     maxLength: 100,
     inputType: 'text',
-    format: 'email',
-    autocomplete: 'email',
+    format: 'phone',
+    autocomplete: 'tel',
   })
-  email?: string;
+  phone?: string;
   @Property({ type: 'object', objectType: IDDto, required: true })
   customer!: IDDto;
 }

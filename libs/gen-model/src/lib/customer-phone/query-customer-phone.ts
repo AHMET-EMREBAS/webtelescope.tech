@@ -1,4 +1,4 @@
 export interface IQueryCustomerPhoneDto {
-  email?: string;
+  phone?: string;
   customerUsername?: string;
 }

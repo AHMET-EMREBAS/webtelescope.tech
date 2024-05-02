@@ -7,7 +7,7 @@ import { Customer } from '../customer/customer.entity';
     return ds
       .createQueryBuilder()
       .select('customerPhone.id', 'customerPhoneId')
-      .addSelect('customerPhone.email', 'email')
+      .addSelect('customerPhone.phone', 'phone')
 
       .addSelect('customer.username', 'customerUsername')
       .from(CustomerPhone, 'customerPhone')
@@ -15,6 +15,6 @@ import { Customer } from '../customer/customer.entity';
   },
 })
 export class CustomerPhoneView implements ICustomerPhoneView {
-  @ViewColumn() email!: string;
+  @ViewColumn() phone!: string;
   @ViewColumn() customerUsername!: string;
 }

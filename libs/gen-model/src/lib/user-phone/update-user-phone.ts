@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
 export interface IUpdateUserPhoneDto {
-  email?: string;
+  phone?: string;
   user?: IID;
 }

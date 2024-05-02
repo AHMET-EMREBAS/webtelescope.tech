@@ -1,4 +1,4 @@
 export interface IUserPhoneView {
-  email: string;
+  phone: string;
   userUsername: string;
 }

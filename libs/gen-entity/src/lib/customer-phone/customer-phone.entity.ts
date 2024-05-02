@@ -6,7 +6,7 @@ export class CustomerPhone
   extends BaseEntity
   implements ICustomerPhone<Customer>
 {
-  @Column({ type: 'string' }) email?: string;
+  @Column({ type: 'string' }) phone?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Customer })
   customer!: Customer;
 }

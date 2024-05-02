@@ -7,9 +7,9 @@ export class UpdateCustomerPhoneDto implements IUpdateCustomerPhoneDto {
     minLength: 3,
     maxLength: 100,
     inputType: 'text',
-    format: 'email',
-    autocomplete: 'email',
+    format: 'phone',
+    autocomplete: 'tel',
   })
-  email?: string;
+  phone?: string;
   @Property({ type: 'object', objectType: IDDto }) customer?: IDDto;
 }

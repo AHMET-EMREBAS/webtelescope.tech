@@ -1,4 +1,4 @@
 export interface ICustomerPhoneView {
-  email: string;
+  phone: string;
   customerUsername: string;
 }
