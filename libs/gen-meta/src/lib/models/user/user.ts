@@ -6,6 +6,7 @@ import {
   CreateProfileModelFor,
   ManyRelation,
   Model,
+  OneRelation,
   PasswordProperty,
   UserNameProperty,
 } from '../../core';
@@ -19,8 +20,8 @@ export const UserModel: Model = {
     password: PasswordProperty(),
   },
   relations: {
-    role: ManyRelation(RoleModel),
-    department: ManyRelation(DepartmentModel),
+    roles: ManyRelation(RoleModel),
+    department: OneRelation(DepartmentModel),
   },
 };
 

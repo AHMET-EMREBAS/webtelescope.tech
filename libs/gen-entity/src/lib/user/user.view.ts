@@ -14,7 +14,8 @@ import { Department } from '../department/department.entity';
       .addSelect('role.description', 'roleDescription')
       .addSelect('department.name', 'departmentName')
       .from(User, 'user')
-      .leftJoin(Role, 'role', 'role.id = user.roleId')
+      .leftJoin('user_roles_role', 'roles', 'roles.userId = user.id')
+      .leftJoin(Role, 'role', 'roles.roleId = role.id')
       .leftJoin(Department, 'department', 'department.id = user.departmentId');
   },
 })

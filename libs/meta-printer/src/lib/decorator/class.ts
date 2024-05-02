@@ -40,6 +40,11 @@ export class ClassDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
             ${this.modelManager
               .relationsList()
               .map((e) => {
+                // .leftJoin('user_roles_role', 'roles', 'roles.userId = user.id')
+                // .leftJoin(Role, 'role', 'role.id = roles.roleId');
+                // -----------------------
+                // .leftJoin('x_ys_y', 'ys', 'ys.xId = x.id')
+                // .leftJoin(Y, 'y', 'y.id = ys.yId');
                 const smm = new ModelManager(e.model);
                 return smm
                   .propertiesList()
@@ -52,11 +57,22 @@ export class ClassDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
                   .join('\n');
               })
               .join('\n')}
-            .from(${main}, '${alias}')
+                .from(${main}, '${alias}')
             ${this.modelManager
               .relationsList()
               .map((e) => {
-                return `.leftJoin(${m(e)}, '${p(e)}', '${comp(e)}')`;
+                if (e.relationType != 'Many') {
+                  return `.leftJoin(${m(e)}, '${p(e)}', '${comp(e)}')`;
+                } else {
+                  return [
+                    `.leftJoin('${alias}_${p(e)}s_${p(e)}', '${p(e)}s', '${p(
+                      e
+                    )}s.${alias}Id = ${alias}.id' )`,
+                    `.leftJoin(${m(e)}, '${p(e)}', '${p(e)}s.${p(e)}Id = ${p(
+                      e
+                    )}.id')`,
+                  ].join('\n');
+                }
               })
               .join('\n')};
         },

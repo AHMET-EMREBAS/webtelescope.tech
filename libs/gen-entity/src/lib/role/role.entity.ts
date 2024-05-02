@@ -15,5 +15,5 @@ export class Role extends BaseEntity implements IRole<Permission> {
   name!: string;
   @Column({ type: 'string' }) description?: string;
   @Relation({ relationType: 'Many', objectType: Permission })
-  permission?: Permission[];
+  permissions?: Permission[];
 }

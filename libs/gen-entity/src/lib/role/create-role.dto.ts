@@ -23,5 +23,5 @@ export class CreateRoleDto implements ICreateRoleDto {
   })
   description?: string;
   @Property({ type: 'object', objectType: IDDto, isArray: true })
-  permission?: IDDto[];
+  permissions?: IDDto[];
 }

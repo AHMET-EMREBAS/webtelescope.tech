@@ -12,7 +12,16 @@ import { Permission } from '../permission/permission.entity';
 
       .addSelect('permission.name', 'permissionName')
       .from(Role, 'role')
-      .leftJoin(Permission, 'permission', 'permission.id = role.permissionId');
+      .leftJoin(
+        'role_permissions_permission',
+        'permissions',
+        'permissions.roleId = role.id'
+      )
+      .leftJoin(
+        Permission,
+        'permission',
+        'permissions.permissionId = permission.id'
+      );
   },
 })
 export class RoleView implements IRoleView {
