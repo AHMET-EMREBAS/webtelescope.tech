@@ -4,7 +4,8 @@ import { ICreateStoreDto } from '@webpackages/gen-model';
 export class CreateStoreDto implements ICreateStoreDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

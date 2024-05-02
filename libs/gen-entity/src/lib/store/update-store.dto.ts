@@ -4,7 +4,8 @@ import { IUpdateStoreDto } from '@webpackages/gen-model';
 export class UpdateStoreDto implements IUpdateStoreDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     unique: true,
     description: 'Required unique short text',

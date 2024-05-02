@@ -4,7 +4,8 @@ import { ICreateTicketCategoryDto } from '@webpackages/gen-model';
 export class CreateTicketCategoryDto implements ICreateTicketCategoryDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

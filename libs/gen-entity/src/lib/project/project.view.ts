@@ -4,6 +4,7 @@ import { IProjectView } from '@webpackages/gen-model';
 export class ProjectView implements IProjectView {
   /**
    * Required unique short text
-   */ @ViewColumn() name!: string;
+   */
+  @ViewColumn() name!: string;
   @ViewColumn() description!: string;
 }

@@ -4,5 +4,6 @@ import { ISprintView } from '@webpackages/gen-model';
 export class SprintView implements ISprintView {
   /**
    * Required unique short text
-   */ @ViewColumn() name!: string;
+   */
+  @ViewColumn() name!: string;
 }

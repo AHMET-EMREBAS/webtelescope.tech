@@ -4,7 +4,8 @@ import { IQueryPriceLevelDto } from '@webpackages/gen-model';
 export class QueryPriceLevelDto implements IQueryPriceLevelDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Required unique short text',
     minLength: 3,

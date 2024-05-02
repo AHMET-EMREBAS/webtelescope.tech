@@ -2,7 +2,8 @@ export interface ICartView {
   description: string;
   /**
    * Is chart checked out or not?
-   */ checked: boolean;
+   */
+  checked: boolean;
   customerUsername: string;
   customerPassword: string;
   userUsername: string;

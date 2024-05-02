@@ -4,5 +4,6 @@ import { IDepartmentView } from '@webpackages/gen-model';
 export class DepartmentView implements IDepartmentView {
   /**
    * Required unique short text
-   */ @ViewColumn() name!: string;
+   */
+  @ViewColumn() name!: string;
 }

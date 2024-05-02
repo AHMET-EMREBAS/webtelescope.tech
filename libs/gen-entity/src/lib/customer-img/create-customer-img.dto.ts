@@ -4,7 +4,8 @@ import { ICreateCustomerImgDto } from '@webpackages/gen-model';
 export class CreateCustomerImgDto implements ICreateCustomerImgDto {
   /**
    * Image url
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     description: 'Image url',

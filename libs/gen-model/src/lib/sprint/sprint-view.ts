@@ -1,5 +1,6 @@
 export interface ISprintView {
   /**
    * Required unique short text
-   */ name: string;
+   */
+  name: string;
 }

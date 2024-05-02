@@ -4,7 +4,8 @@ import { IQueryDepartmentDto } from '@webpackages/gen-model';
 export class QueryDepartmentDto implements IQueryDepartmentDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Required unique short text',
     minLength: 3,

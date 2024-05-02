@@ -4,7 +4,8 @@ import { IUpdateTicketCategoryDto } from '@webpackages/gen-model';
 export class UpdateTicketCategoryDto implements IUpdateTicketCategoryDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     unique: true,
     description: 'Required unique short text',

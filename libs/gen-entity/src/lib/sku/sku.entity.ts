@@ -7,7 +7,8 @@ export class Sku extends BaseEntity implements ISku<Product> {
   @Column({ type: 'string', required: true, unique: true }) sku!: string;
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

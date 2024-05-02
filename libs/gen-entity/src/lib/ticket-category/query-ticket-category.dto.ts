@@ -4,7 +4,8 @@ import { IQueryTicketCategoryDto } from '@webpackages/gen-model';
 export class QueryTicketCategoryDto implements IQueryTicketCategoryDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Required unique short text',
     minLength: 3,

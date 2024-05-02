@@ -1,7 +1,8 @@
 export interface IProductImgView {
   /**
    * Image url
-   */ url: string;
+   */
+  url: string;
   description: string;
   productBarcode: string;
   productName: string;

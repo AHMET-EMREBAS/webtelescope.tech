@@ -1,7 +1,8 @@
 export interface IQueryUserImgDto {
   /**
    * Image url
-   */ url?: string;
+   */
+  url?: string;
   description?: string;
   userUsername?: string;
   userPassword?: string;

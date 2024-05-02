@@ -4,7 +4,8 @@ import { IProductImgView } from '@webpackages/gen-model';
 export class ProductImgView implements IProductImgView {
   /**
    * Image url
-   */ @ViewColumn() url!: string;
+   */
+  @ViewColumn() url!: string;
   @ViewColumn() description!: string;
   @ViewColumn() productBarcode!: string;
   @ViewColumn() productName!: string;

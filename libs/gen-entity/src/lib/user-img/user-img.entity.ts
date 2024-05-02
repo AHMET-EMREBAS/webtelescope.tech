@@ -5,7 +5,8 @@ import { User } from '../user/user.entity';
 export class UserImg extends BaseEntity implements IUserImg<User> {
   /**
    * Image url
-   */ @Column({ type: 'string', required: true, description: 'Image url' })
+   */
+  @Column({ type: 'string', required: true, description: 'Image url' })
   url!: string;
   @Column({ type: 'string' }) description?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: User })

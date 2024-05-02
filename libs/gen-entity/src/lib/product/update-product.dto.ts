@@ -13,7 +13,8 @@ export class UpdateProductDto implements IUpdateProductDto {
   barcode?: string;
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     unique: true,
     description: 'Required unique short text',

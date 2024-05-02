@@ -3,7 +3,8 @@ export interface IProduct<TCategory, TDepartment> {
   barcode: string;
   /**
    * Required unique short text
-   */ name: string;
+   */
+  name: string;
   description?: string;
   category?: TCategory[];
   department?: TDepartment;

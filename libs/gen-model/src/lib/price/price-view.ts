@@ -1,10 +1,12 @@
 export interface IPriceView {
   /**
    * Price
-   */ price: number;
+   */
+  price: number;
   /**
    * Cost
-   */ cost: number;
+   */
+  cost: number;
   priceLevelName: string;
   productBarcode: string;
   productName: string;

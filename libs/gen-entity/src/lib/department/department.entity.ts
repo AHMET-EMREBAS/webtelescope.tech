@@ -4,7 +4,8 @@ import { IDepartment } from '@webpackages/gen-model';
 export class Department extends BaseEntity implements IDepartment {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

@@ -10,7 +10,8 @@ export class Product
   @Column({ type: 'string', required: true, unique: true }) barcode!: string;
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

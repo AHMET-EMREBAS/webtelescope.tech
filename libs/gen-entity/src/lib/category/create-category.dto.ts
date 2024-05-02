@@ -4,7 +4,8 @@ import { ICreateCategoryDto } from '@webpackages/gen-model';
 export class CreateCategoryDto implements ICreateCategoryDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

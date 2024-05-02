@@ -7,7 +7,8 @@ export interface ICreateOrderDto {
   tax: number;
   /**
    * Order description or notes
-   */ description?: string;
+   */
+  description?: string;
   sku: IID;
   cart: IID;
 }

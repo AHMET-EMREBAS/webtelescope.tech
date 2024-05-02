@@ -4,12 +4,13 @@ import { IQueryPriceDto } from '@webpackages/gen-model';
 export class QueryPriceDto implements IQueryPriceDto {
   /**
    * Price
-   */ @Property({ type: 'number', description: 'Price', minimum: 0 })
+   */
+  @Property({ type: 'number', description: 'Price', minimum: 0 })
   price?: number;
   /**
    * Cost
-   */ @Property({ type: 'number', description: 'Cost', minimum: 0 })
-  cost?: number;
+   */
+  @Property({ type: 'number', description: 'Cost', minimum: 0 }) cost?: number;
   @Property({ type: 'string' }) priceLevelName?: string;
   @Property({ type: 'string' }) productBarcode?: string;
   @Property({ type: 'string' }) productName?: string;

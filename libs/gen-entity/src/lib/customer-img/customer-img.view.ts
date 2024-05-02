@@ -4,7 +4,8 @@ import { ICustomerImgView } from '@webpackages/gen-model';
 export class CustomerImgView implements ICustomerImgView {
   /**
    * Image url
-   */ @ViewColumn() url!: string;
+   */
+  @ViewColumn() url!: string;
   @ViewColumn() description!: string;
   @ViewColumn() customerUsername!: string;
   @ViewColumn() customerPassword!: string;

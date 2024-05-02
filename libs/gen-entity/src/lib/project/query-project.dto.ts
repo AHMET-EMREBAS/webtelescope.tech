@@ -4,7 +4,8 @@ import { IQueryProjectDto } from '@webpackages/gen-model';
 export class QueryProjectDto implements IQueryProjectDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Required unique short text',
     minLength: 3,

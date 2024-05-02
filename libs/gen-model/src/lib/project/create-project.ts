@@ -2,6 +2,7 @@ import { IID } from '@webpackages/common';
 export interface ICreateProjectDto {
   /**
    * Required unique short text
-   */ name: string;
+   */
+  name: string;
   description?: string;
 }

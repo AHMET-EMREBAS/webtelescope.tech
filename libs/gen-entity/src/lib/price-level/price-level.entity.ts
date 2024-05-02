@@ -4,7 +4,8 @@ import { IPriceLevel } from '@webpackages/gen-model';
 export class PriceLevel extends BaseEntity implements IPriceLevel {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

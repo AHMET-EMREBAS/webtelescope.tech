@@ -4,7 +4,8 @@ import { ICreateSprintDto } from '@webpackages/gen-model';
 export class CreateSprintDto implements ICreateSprintDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

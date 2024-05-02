@@ -6,7 +6,8 @@ export interface IQueryOrderDto {
   tax?: number;
   /**
    * Order description or notes
-   */ description?: string;
+   */
+  description?: string;
   skuBarcode?: string;
   skuSku?: string;
   skuName?: string;

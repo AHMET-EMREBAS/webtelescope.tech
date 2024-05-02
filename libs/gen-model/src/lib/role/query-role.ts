@@ -1,7 +1,8 @@
 export interface IQueryRoleDto {
   /**
    * Required unique short text
-   */ name?: string;
+   */
+  name?: string;
   description?: string;
   permissionName?: string;
 }

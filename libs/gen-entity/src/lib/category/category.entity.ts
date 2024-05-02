@@ -4,7 +4,8 @@ import { ICategory } from '@webpackages/gen-model';
 export class Category extends BaseEntity implements ICategory {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

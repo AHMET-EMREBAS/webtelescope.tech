@@ -4,7 +4,8 @@ import { IQueryQuantityDto } from '@webpackages/gen-model';
 export class QueryQuantityDto implements IQueryQuantityDto {
   /**
    * Quantity of the Product-Sku in the store.
-   */ @Property({
+   */
+  @Property({
     type: 'number',
     description: 'Quantity of the Product-Sku in the store.',
     minimum: 0,

@@ -3,6 +3,7 @@ import { IQueryOrderDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryOrderDto implements IQueryOrderDto {
   @Property({ type: 'number', minimum: 0, icon: 'quantity' }) quantity?: number;
+  
   @Property({
     type: 'number',
     minimum: 0,
@@ -10,6 +11,7 @@ export class QueryOrderDto implements IQueryOrderDto {
     inputType: 'currency',
   })
   discount?: number;
+
   @Property({
     type: 'number',
     minimum: 0,
@@ -17,6 +19,7 @@ export class QueryOrderDto implements IQueryOrderDto {
     inputType: 'currency',
   })
   total?: number;
+
   @Property({
     type: 'number',
     minimum: 0,
@@ -24,6 +27,7 @@ export class QueryOrderDto implements IQueryOrderDto {
     inputType: 'currency',
   })
   subTotal?: number;
+
   @Property({
     type: 'number',
     minimum: 0,
@@ -31,15 +35,16 @@ export class QueryOrderDto implements IQueryOrderDto {
     inputType: 'currency',
   })
   tax?: number;
-  /**
-   * Order description or notes
-   */ @Property({
+
+  
+  @Property({
     type: 'string',
     description: 'Order description or notes',
     maxLength: 1000,
     inputType: 'textarea',
   })
   description?: string;
+  
   @Property({ type: 'string' }) skuBarcode?: string;
   @Property({ type: 'string' }) skuSku?: string;
   @Property({ type: 'string' }) skuName?: string;

@@ -5,7 +5,8 @@ import { Customer } from '../customer/customer.entity';
 export class CustomerImg extends BaseEntity implements ICustomerImg<Customer> {
   /**
    * Image url
-   */ @Column({ type: 'string', required: true, description: 'Image url' })
+   */
+  @Column({ type: 'string', required: true, description: 'Image url' })
   url!: string;
   @Column({ type: 'string' }) description?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Customer })

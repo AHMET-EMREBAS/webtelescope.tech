@@ -32,7 +32,7 @@ export class DocPritner implements IPrint {
       .split('\n')
       .map((e) => ` * ${e}`)
       .join('\n');
-    return `/**\n${content}\n */`;
+    return `/**\n${content}\n */\n`;
   }
 
   /**

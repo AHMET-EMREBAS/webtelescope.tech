@@ -4,7 +4,8 @@ import { IUserImgView } from '@webpackages/gen-model';
 export class UserImgView implements IUserImgView {
   /**
    * Image url
-   */ @ViewColumn() url!: string;
+   */
+  @ViewColumn() url!: string;
   @ViewColumn() description!: string;
   @ViewColumn() userUsername!: string;
   @ViewColumn() userPassword!: string;

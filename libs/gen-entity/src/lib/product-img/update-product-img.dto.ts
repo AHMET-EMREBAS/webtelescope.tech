@@ -4,7 +4,8 @@ import { IUpdateProductImgDto } from '@webpackages/gen-model';
 export class UpdateProductImgDto implements IUpdateProductImgDto {
   /**
    * Image url
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Image url',
     maxLength: 1000,

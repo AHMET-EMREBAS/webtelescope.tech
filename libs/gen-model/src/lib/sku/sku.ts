@@ -4,7 +4,8 @@ export interface ISku<TProduct> {
   sku: string;
   /**
    * Required unique short text
-   */ name: string;
+   */
+  name: string;
   description?: string;
   product: TProduct;
 }

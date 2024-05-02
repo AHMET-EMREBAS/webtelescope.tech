@@ -6,11 +6,13 @@ import { Product } from '../product/product.entity';
 export class Price extends BaseEntity implements IPrice<PriceLevel, Product> {
   /**
    * Price
-   */ @Column({ type: 'number', required: true, description: 'Price' })
+   */
+  @Column({ type: 'number', required: true, description: 'Price' })
   price!: number;
   /**
    * Cost
-   */ @Column({ type: 'number', required: true, description: 'Cost' })
+   */
+  @Column({ type: 'number', required: true, description: 'Cost' })
   cost!: number;
   @Relation({ relationType: 'Owner', required: true, objectType: PriceLevel })
   priceLevel!: PriceLevel;

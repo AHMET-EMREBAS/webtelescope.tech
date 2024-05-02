@@ -1,7 +1,8 @@
 export interface ICustomerImgView {
   /**
    * Image url
-   */ url: string;
+   */
+  url: string;
   description: string;
   customerUsername: string;
   customerPassword: string;

@@ -4,5 +4,6 @@ import { IPriceLevelView } from '@webpackages/gen-model';
 export class PriceLevelView implements IPriceLevelView {
   /**
    * Required unique short text
-   */ @ViewColumn() name!: string;
+   */
+  @ViewColumn() name!: string;
 }

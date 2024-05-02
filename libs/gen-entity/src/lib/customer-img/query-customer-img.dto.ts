@@ -4,7 +4,8 @@ import { IQueryCustomerImgDto } from '@webpackages/gen-model';
 export class QueryCustomerImgDto implements IQueryCustomerImgDto {
   /**
    * Image url
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Image url',
     maxLength: 1000,

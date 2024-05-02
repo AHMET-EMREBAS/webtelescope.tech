@@ -3,7 +3,8 @@ export interface ICart<TCustomer, TUser, TStore> {
   description?: string;
   /**
    * Is chart checked out or not?
-   */ checked?: boolean;
+   */
+  checked?: boolean;
   customer: TCustomer;
   employee: TUser;
   store: TStore;

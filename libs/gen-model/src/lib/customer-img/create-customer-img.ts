@@ -2,7 +2,8 @@ import { IID } from '@webpackages/common';
 export interface ICreateCustomerImgDto {
   /**
    * Image url
-   */ url: string;
+   */
+  url: string;
   description?: string;
   owner: IID;
 }

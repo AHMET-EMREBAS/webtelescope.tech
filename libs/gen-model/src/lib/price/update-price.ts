@@ -2,10 +2,12 @@ import { IID } from '@webpackages/common';
 export interface IUpdatePriceDto {
   /**
    * Price
-   */ price?: number;
+   */
+  price?: number;
   /**
    * Cost
-   */ cost?: number;
+   */
+  cost?: number;
   priceLevel?: IID;
   product?: IID;
 }

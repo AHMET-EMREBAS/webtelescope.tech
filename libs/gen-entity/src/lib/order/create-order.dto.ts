@@ -37,7 +37,8 @@ export class CreateOrderDto implements ICreateOrderDto {
   tax!: number;
   /**
    * Order description or notes
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Order description or notes',
     maxLength: 1000,

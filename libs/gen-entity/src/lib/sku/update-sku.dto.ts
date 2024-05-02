@@ -21,7 +21,8 @@ export class UpdateSkuDto implements IUpdateSkuDto {
   sku?: string;
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     unique: true,
     description: 'Required unique short text',

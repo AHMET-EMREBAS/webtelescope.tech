@@ -4,7 +4,8 @@ import { ITicketCategory } from '@webpackages/gen-model';
 export class TicketCategory extends BaseEntity implements ITicketCategory {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

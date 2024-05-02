@@ -6,7 +6,8 @@ import { Store } from '../store/store.entity';
 export class Quantity extends BaseEntity implements IQuantity<Sku, Store> {
   /**
    * Quantity of the Product-Sku in the store.
-   */ @Column({
+   */
+  @Column({
     type: 'number',
     required: true,
     description: 'Quantity of the Product-Sku in the store.',

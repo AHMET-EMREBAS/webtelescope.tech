@@ -3,7 +3,8 @@ export interface ICreateProductDto {
   barcode: string;
   /**
    * Required unique short text
-   */ name: string;
+   */
+  name: string;
   description?: string;
   category?: IID[];
   department?: IID;

@@ -3,7 +3,8 @@ export interface IQuerySkuDto {
   sku?: string;
   /**
    * Required unique short text
-   */ name?: string;
+   */
+  name?: string;
   description?: string;
   productBarcode?: string;
   productName?: string;

@@ -7,9 +7,7 @@ export class OrderView implements IOrderView {
   @ViewColumn() total!: number;
   @ViewColumn() subTotal!: number;
   @ViewColumn() tax!: number;
-  /**
-   * Order description or notes
-   */ @ViewColumn() description!: string;
+  @ViewColumn() description!: string;
   @ViewColumn() skuBarcode!: string;
   @ViewColumn() skuSku!: string;
   @ViewColumn() skuName!: string;

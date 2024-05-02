@@ -4,7 +4,8 @@ import { ICreateQuantityDto } from '@webpackages/gen-model';
 export class CreateQuantityDto implements ICreateQuantityDto {
   /**
    * Quantity of the Product-Sku in the store.
-   */ @Property({
+   */
+  @Property({
     type: 'number',
     required: true,
     description: 'Quantity of the Product-Sku in the store.',

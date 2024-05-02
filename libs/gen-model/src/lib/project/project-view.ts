@@ -1,6 +1,7 @@
 export interface IProjectView {
   /**
    * Required unique short text
-   */ name: string;
+   */
+  name: string;
   description: string;
 }

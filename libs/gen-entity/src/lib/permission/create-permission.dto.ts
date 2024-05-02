@@ -4,7 +4,8 @@ import { ICreatePermissionDto } from '@webpackages/gen-model';
 export class CreatePermissionDto implements ICreatePermissionDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

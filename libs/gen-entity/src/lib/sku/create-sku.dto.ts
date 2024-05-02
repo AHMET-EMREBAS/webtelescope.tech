@@ -23,7 +23,8 @@ export class CreateSkuDto implements ICreateSkuDto {
   sku!: string;
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

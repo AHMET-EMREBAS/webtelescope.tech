@@ -8,7 +8,8 @@ export class Cart extends BaseEntity implements ICart<Customer, User, Store> {
   @Column({ type: 'string' }) description?: string;
   /**
    * Is chart checked out or not?
-   */ @Column({ type: 'boolean', description: 'Is chart checked out or not?' })
+   */
+  @Column({ type: 'boolean', description: 'Is chart checked out or not?' })
   checked?: boolean;
   @Relation({ relationType: 'Owner', required: true, objectType: Customer })
   customer!: Customer;

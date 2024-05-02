@@ -11,7 +11,8 @@ export class CreateCartDto implements ICreateCartDto {
   description?: string;
   /**
    * Is chart checked out or not?
-   */ @Property({
+   */
+  @Property({
     type: 'boolean',
     description: 'Is chart checked out or not?',
     inputType: 'slide-toggle',

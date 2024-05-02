@@ -4,7 +4,8 @@ import { IUpdatePriceLevelDto } from '@webpackages/gen-model';
 export class UpdatePriceLevelDto implements IUpdatePriceLevelDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     unique: true,
     description: 'Required unique short text',

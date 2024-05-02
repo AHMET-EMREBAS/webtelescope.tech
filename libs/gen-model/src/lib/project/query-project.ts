@@ -1,6 +1,7 @@
 export interface IQueryProjectDto {
   /**
    * Required unique short text
-   */ name?: string;
+   */
+  name?: string;
   description?: string;
 }

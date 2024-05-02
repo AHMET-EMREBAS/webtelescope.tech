@@ -4,7 +4,8 @@ import { ISprint } from '@webpackages/gen-model';
 export class Sprint extends BaseEntity implements ISprint {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

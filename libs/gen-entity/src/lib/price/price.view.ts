@@ -4,10 +4,12 @@ import { IPriceView } from '@webpackages/gen-model';
 export class PriceView implements IPriceView {
   /**
    * Price
-   */ @ViewColumn() price!: number;
+   */
+  @ViewColumn() price!: number;
   /**
    * Cost
-   */ @ViewColumn() cost!: number;
+   */
+  @ViewColumn() cost!: number;
   @ViewColumn() priceLevelName!: string;
   @ViewColumn() productBarcode!: string;
   @ViewColumn() productName!: string;

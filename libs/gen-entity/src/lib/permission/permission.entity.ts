@@ -4,7 +4,8 @@ import { IPermission } from '@webpackages/gen-model';
 export class Permission extends BaseEntity implements IPermission {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

@@ -1,4 +1,4 @@
-import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
+import { Column, Entity, BaseEntity } from '@webpackages/core';
 import { ICustomer } from '@webpackages/gen-model';
 @Entity()
 export class Customer extends BaseEntity implements ICustomer {

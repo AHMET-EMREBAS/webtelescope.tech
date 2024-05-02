@@ -4,7 +4,8 @@ import { IUpdateQuantityDto } from '@webpackages/gen-model';
 export class UpdateQuantityDto implements IUpdateQuantityDto {
   /**
    * Quantity of the Product-Sku in the store.
-   */ @Property({
+   */
+  @Property({
     type: 'number',
     description: 'Quantity of the Product-Sku in the store.',
     minimum: 0,

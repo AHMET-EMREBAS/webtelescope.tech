@@ -4,7 +4,8 @@ import { ICreateRoleDto } from '@webpackages/gen-model';
 export class CreateRoleDto implements ICreateRoleDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

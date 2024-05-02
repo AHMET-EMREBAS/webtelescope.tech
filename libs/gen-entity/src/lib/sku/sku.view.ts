@@ -6,7 +6,8 @@ export class SkuView implements ISkuView {
   @ViewColumn() sku!: string;
   /**
    * Required unique short text
-   */ @ViewColumn() name!: string;
+   */
+  @ViewColumn() name!: string;
   @ViewColumn() description!: string;
   @ViewColumn() productBarcode!: string;
   @ViewColumn() productName!: string;

@@ -4,5 +4,6 @@ import { IPermissionView } from '@webpackages/gen-model';
 export class PermissionView implements IPermissionView {
   /**
    * Required unique short text
-   */ @ViewColumn() name!: string;
+   */
+  @ViewColumn() name!: string;
 }

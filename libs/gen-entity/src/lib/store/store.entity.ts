@@ -4,7 +4,8 @@ import { IStore } from '@webpackages/gen-model';
 export class Store extends BaseEntity implements IStore {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

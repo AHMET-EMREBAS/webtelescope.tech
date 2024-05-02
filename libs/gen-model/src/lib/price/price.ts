@@ -2,10 +2,12 @@ import { IID } from '@webpackages/common';
 export interface IPrice<TPriceLevel, TProduct> {
   /**
    * Price
-   */ price: number;
+   */
+  price: number;
   /**
    * Cost
-   */ cost: number;
+   */
+  cost: number;
   priceLevel: TPriceLevel;
   product: TProduct;
 }

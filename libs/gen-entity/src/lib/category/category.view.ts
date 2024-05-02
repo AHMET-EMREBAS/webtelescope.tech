@@ -4,5 +4,6 @@ import { ICategoryView } from '@webpackages/gen-model';
 export class CategoryView implements ICategoryView {
   /**
    * Required unique short text
-   */ @ViewColumn() name!: string;
+   */
+  @ViewColumn() name!: string;
 }

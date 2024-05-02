@@ -4,7 +4,8 @@ import { IUpdateDepartmentDto } from '@webpackages/gen-model';
 export class UpdateDepartmentDto implements IUpdateDepartmentDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     unique: true,
     description: 'Required unique short text',

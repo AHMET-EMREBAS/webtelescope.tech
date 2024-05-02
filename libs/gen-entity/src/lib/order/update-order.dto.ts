@@ -33,7 +33,8 @@ export class UpdateOrderDto implements IUpdateOrderDto {
   tax?: number;
   /**
    * Order description or notes
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     description: 'Order description or notes',
     maxLength: 1000,

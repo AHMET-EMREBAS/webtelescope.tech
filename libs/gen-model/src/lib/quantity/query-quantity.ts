@@ -1,7 +1,8 @@
 export interface IQueryQuantityDto {
   /**
    * Quantity of the Product-Sku in the store.
-   */ quanitty?: number;
+   */
+  quanitty?: number;
   skuBarcode?: string;
   skuSku?: string;
   skuName?: string;

@@ -14,7 +14,8 @@ export class CreateProductDto implements ICreateProductDto {
   barcode!: string;
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

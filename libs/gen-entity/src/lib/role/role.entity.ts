@@ -5,7 +5,8 @@ import { Permission } from '../permission/permission.entity';
 export class Role extends BaseEntity implements IRole<Permission> {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,

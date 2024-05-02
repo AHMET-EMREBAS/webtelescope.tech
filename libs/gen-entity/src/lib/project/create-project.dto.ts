@@ -4,7 +4,8 @@ import { ICreateProjectDto } from '@webpackages/gen-model';
 export class CreateProjectDto implements ICreateProjectDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     required: true,
     unique: true,

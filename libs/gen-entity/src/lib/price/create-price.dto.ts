@@ -4,7 +4,8 @@ import { ICreatePriceDto } from '@webpackages/gen-model';
 export class CreatePriceDto implements ICreatePriceDto {
   /**
    * Price
-   */ @Property({
+   */
+  @Property({
     type: 'number',
     required: true,
     description: 'Price',
@@ -13,12 +14,8 @@ export class CreatePriceDto implements ICreatePriceDto {
   price!: number;
   /**
    * Cost
-   */ @Property({
-    type: 'number',
-    required: true,
-    description: 'Cost',
-    minimum: 0,
-  })
+   */
+  @Property({ type: 'number', required: true, description: 'Cost', minimum: 0 })
   cost!: number;
   @Property({ type: 'object', objectType: IDDto, required: true })
   priceLevel!: IDDto;

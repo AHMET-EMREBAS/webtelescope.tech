@@ -4,7 +4,8 @@ import { IQuantityView } from '@webpackages/gen-model';
 export class QuantityView implements IQuantityView {
   /**
    * Quantity of the Product-Sku in the store.
-   */ @ViewColumn() quanitty!: number;
+   */
+  @ViewColumn() quanitty!: number;
   @ViewColumn() skuBarcode!: string;
   @ViewColumn() skuSku!: string;
   @ViewColumn() skuName!: string;

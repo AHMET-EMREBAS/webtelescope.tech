@@ -4,7 +4,8 @@ import { IUpdateSprintDto } from '@webpackages/gen-model';
 export class UpdateSprintDto implements IUpdateSprintDto {
   /**
    * Required unique short text
-   */ @Property({
+   */
+  @Property({
     type: 'string',
     unique: true,
     description: 'Required unique short text',

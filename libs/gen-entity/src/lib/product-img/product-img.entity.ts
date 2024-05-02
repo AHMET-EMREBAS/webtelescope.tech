@@ -5,7 +5,8 @@ import { Product } from '../product/product.entity';
 export class ProductImg extends BaseEntity implements IProductImg<Product> {
   /**
    * Image url
-   */ @Column({ type: 'string', required: true, description: 'Image url' })
+   */
+  @Column({ type: 'string', required: true, description: 'Image url' })
   url!: string;
   @Column({ type: 'string' }) description?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Product })

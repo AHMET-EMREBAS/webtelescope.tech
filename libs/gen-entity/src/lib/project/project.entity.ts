@@ -4,7 +4,8 @@ import { IProject } from '@webpackages/gen-model';
 export class Project extends BaseEntity implements IProject {
   /**
    * Required unique short text
-   */ @Column({
+   */
+  @Column({
     type: 'string',
     required: true,
     unique: true,
