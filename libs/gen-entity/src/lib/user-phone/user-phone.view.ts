@@ -7,10 +7,9 @@ import { User } from '../user/user.entity';
     return ds
       .createQueryBuilder()
       .select('userPhone.id', 'userPhoneId')
-      .addSelect('userPhone.description', 'description')
-      .addSelect('userPhone.checked', 'checked')
+      .addSelect('userPhone.email', 'email')
+
       .addSelect('user.username', 'userUsername')
-      .addSelect('user.password', 'userPassword')
       .from(UserPhone, 'userPhone')
       .leftJoin(User, 'user', 'user.id = userPhone.userId');
   },
@@ -18,5 +17,4 @@ import { User } from '../user/user.entity';
 export class UserPhoneView implements IUserPhoneView {
   @ViewColumn() email!: string;
   @ViewColumn() userUsername!: string;
-  @ViewColumn() userPassword!: string;
 }

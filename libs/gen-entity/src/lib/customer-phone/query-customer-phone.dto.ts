@@ -12,5 +12,4 @@ export class QueryCustomerPhoneDto implements IQueryCustomerPhoneDto {
   })
   email?: string;
   @Property({ type: 'string' }) customerUsername?: string;
-  @Property({ type: 'string' }) customerPassword?: string;
 }

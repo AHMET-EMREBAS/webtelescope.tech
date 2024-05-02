@@ -19,8 +19,6 @@ export class QueryCartDto implements IQueryCartDto {
   })
   checked?: boolean;
   @Property({ type: 'string' }) customerUsername?: string;
-  @Property({ type: 'string' }) customerPassword?: string;
   @Property({ type: 'string' }) userUsername?: string;
-  @Property({ type: 'string' }) userPassword?: string;
   @Property({ type: 'string' }) storeName?: string;
 }

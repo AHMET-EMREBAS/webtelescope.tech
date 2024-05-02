@@ -11,6 +11,5 @@ export class CreateUserEmailDto implements ICreateUserEmailDto {
     icon: 'email',
   })
   email?: string;
-  @Property({ type: 'object', objectType: IDDto, required: true })
-  ownwer!: IDDto;
+  @Property({ type: 'object', objectType: IDDto, required: true }) user!: IDDto;
 }

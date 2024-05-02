@@ -10,5 +10,5 @@ export class ProductImg extends BaseEntity implements IProductImg<Product> {
   url!: string;
   @Column({ type: 'string' }) description?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Product })
-  owner!: Product;
+  product!: Product;
 }

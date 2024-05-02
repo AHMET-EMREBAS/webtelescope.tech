@@ -8,10 +8,14 @@ import { Sprint } from '../sprint/sprint.entity';
     return ds
       .createQueryBuilder()
       .select('task.id', 'taskId')
+      .addSelect('task.title', 'title')
       .addSelect('task.description', 'description')
-      .addSelect('task.checked', 'checked')
+      .addSelect('task.difficulty', 'difficulty')
+      .addSelect('task.due', 'due')
+      .addSelect('task.startDate', 'startDate')
+      .addSelect('task.endDate', 'endDate')
+
       .addSelect('user.username', 'userUsername')
-      .addSelect('user.password', 'userPassword')
       .addSelect('sprint.name', 'sprintName')
       .from(Task, 'task')
       .leftJoin(User, 'user', 'user.id = task.userId')
@@ -26,6 +30,5 @@ export class TaskView implements ITaskView {
   @ViewColumn() startDate!: Date;
   @ViewColumn() endDate!: Date;
   @ViewColumn() userUsername!: string;
-  @ViewColumn() userPassword!: string;
   @ViewColumn() sprintName!: string;
 }

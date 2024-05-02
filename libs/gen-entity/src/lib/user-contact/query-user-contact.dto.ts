@@ -39,5 +39,4 @@ export class QueryUserContactDto implements IQueryUserContactDto {
   })
   zip?: string;
   @Property({ type: 'string' }) userUsername?: string;
-  @Property({ type: 'string' }) userPassword?: string;
 }

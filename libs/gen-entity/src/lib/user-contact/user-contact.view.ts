@@ -7,10 +7,12 @@ import { User } from '../user/user.entity';
     return ds
       .createQueryBuilder()
       .select('userContact.id', 'userContactId')
-      .addSelect('userContact.description', 'description')
-      .addSelect('userContact.checked', 'checked')
+      .addSelect('userContact.state', 'state')
+      .addSelect('userContact.city', 'city')
+      .addSelect('userContact.street', 'street')
+      .addSelect('userContact.zip', 'zip')
+
       .addSelect('user.username', 'userUsername')
-      .addSelect('user.password', 'userPassword')
       .from(UserContact, 'userContact')
       .leftJoin(User, 'user', 'user.id = userContact.userId');
   },
@@ -21,5 +23,4 @@ export class UserContactView implements IUserContactView {
   @ViewColumn() street!: string;
   @ViewColumn() zip!: string;
   @ViewColumn() userUsername!: string;
-  @ViewColumn() userPassword!: string;
 }

@@ -23,5 +23,5 @@ export class CreateProductImgDto implements ICreateProductImgDto {
   })
   description?: string;
   @Property({ type: 'object', objectType: IDDto, required: true })
-  owner!: IDDto;
+  product!: IDDto;
 }

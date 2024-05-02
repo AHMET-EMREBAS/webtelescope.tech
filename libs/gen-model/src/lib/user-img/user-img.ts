@@ -5,5 +5,5 @@ export interface IUserImg<TUser> {
    */
   url: string;
   description?: string;
-  owner: TUser;
+  user: TUser;
 }

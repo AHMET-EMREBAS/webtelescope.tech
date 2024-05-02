@@ -7,6 +7,5 @@ export class QueryTicketDto implements IQueryTicketDto {
   @Property({ type: 'string', maxLength: 1000, inputType: 'textarea' })
   description?: string;
   @Property({ type: 'string' }) userUsername?: string;
-  @Property({ type: 'string' }) userPassword?: string;
   @Property({ type: 'string' }) ticketCategoryName?: string;
 }

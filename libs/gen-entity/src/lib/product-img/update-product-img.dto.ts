@@ -21,5 +21,5 @@ export class UpdateProductImgDto implements IUpdateProductImgDto {
     icon: 'description',
   })
   description?: string;
-  @Property({ type: 'object', objectType: IDDto }) owner?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) product?: IDDto;
 }

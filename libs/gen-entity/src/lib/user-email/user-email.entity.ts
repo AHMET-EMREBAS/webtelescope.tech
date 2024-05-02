@@ -5,5 +5,5 @@ import { User } from '../user/user.entity';
 export class UserEmail extends BaseEntity implements IUserEmail<User> {
   @Column({ type: 'string' }) email?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: User })
-  ownwer!: User;
+  user!: User;
 }

@@ -5,5 +5,5 @@ export interface IUpdateUserImgDto {
    */
   url?: string;
   description?: string;
-  owner?: IID;
+  user?: IID;
 }

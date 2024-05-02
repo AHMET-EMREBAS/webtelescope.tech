@@ -7,10 +7,12 @@ import { Customer } from '../customer/customer.entity';
     return ds
       .createQueryBuilder()
       .select('customerContact.id', 'customerContactId')
-      .addSelect('customerContact.description', 'description')
-      .addSelect('customerContact.checked', 'checked')
+      .addSelect('customerContact.state', 'state')
+      .addSelect('customerContact.city', 'city')
+      .addSelect('customerContact.street', 'street')
+      .addSelect('customerContact.zip', 'zip')
+
       .addSelect('customer.username', 'customerUsername')
-      .addSelect('customer.password', 'customerPassword')
       .from(CustomerContact, 'customerContact')
       .leftJoin(
         Customer,
@@ -25,5 +27,4 @@ export class CustomerContactView implements ICustomerContactView {
   @ViewColumn() street!: string;
   @ViewColumn() zip!: string;
   @ViewColumn() customerUsername!: string;
-  @ViewColumn() customerPassword!: string;
 }

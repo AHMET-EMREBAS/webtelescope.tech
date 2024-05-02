@@ -11,5 +11,5 @@ export class CustomerContact
   @Column({ type: 'string' }) street?: string;
   @Column({ type: 'string' }) zip?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Customer })
-  owner!: Customer;
+  customer!: Customer;
 }

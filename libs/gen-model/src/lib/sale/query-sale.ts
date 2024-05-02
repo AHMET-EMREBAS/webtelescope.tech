@@ -6,5 +6,4 @@ export interface IQuerySaleDto {
   cartDescription?: string;
   cartChecked?: boolean;
   customerUsername?: string;
-  customerPassword?: string;
 }

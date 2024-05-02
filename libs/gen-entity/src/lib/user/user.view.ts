@@ -8,8 +8,8 @@ import { Department } from '../department/department.entity';
     return ds
       .createQueryBuilder()
       .select('user.id', 'userId')
-      .addSelect('user.description', 'description')
-      .addSelect('user.checked', 'checked')
+      .addSelect('user.username', 'username')
+
       .addSelect('role.name', 'roleName')
       .addSelect('role.description', 'roleDescription')
       .addSelect('department.name', 'departmentName')
@@ -20,7 +20,6 @@ import { Department } from '../department/department.entity';
 })
 export class UserView implements IUserView {
   @ViewColumn() username!: string;
-  @ViewColumn() password!: string;
   @ViewColumn() roleName!: string;
   @ViewColumn() roleDescription!: string;
   @ViewColumn() departmentName!: string;

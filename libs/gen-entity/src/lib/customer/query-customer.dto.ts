@@ -10,12 +10,4 @@ export class QueryCustomerDto implements IQueryCustomerDto {
     format: 'email',
   })
   username?: string;
-  @Property({
-    type: 'string',
-    minLength: 3,
-    maxLength: 100,
-    inputType: 'text',
-    format: 'password',
-  })
-  password?: string;
 }

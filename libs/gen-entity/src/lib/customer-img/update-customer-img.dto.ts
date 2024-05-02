@@ -21,5 +21,5 @@ export class UpdateCustomerImgDto implements IUpdateCustomerImgDto {
     icon: 'description',
   })
   description?: string;
-  @Property({ type: 'object', objectType: IDDto }) owner?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) customer?: IDDto;
 }

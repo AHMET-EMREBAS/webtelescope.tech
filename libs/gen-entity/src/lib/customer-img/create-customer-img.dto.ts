@@ -23,5 +23,5 @@ export class CreateCustomerImgDto implements ICreateCustomerImgDto {
   })
   description?: string;
   @Property({ type: 'object', objectType: IDDto, required: true })
-  owner!: IDDto;
+  customer!: IDDto;
 }

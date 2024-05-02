@@ -8,5 +8,4 @@ export interface IQueryProductReturnDto {
   orderTax?: number;
   orderDescription?: string;
   userUsername?: string;
-  userPassword?: string;
 }

@@ -6,13 +6,11 @@ import { Customer } from './customer.entity';
     return ds
       .createQueryBuilder()
       .select('customer.id', 'customerId')
-      .addSelect('customer.description', 'description')
-      .addSelect('customer.checked', 'checked')
+      .addSelect('customer.username', 'username')
 
       .from(Customer, 'customer');
   },
 })
 export class CustomerView implements ICustomerView {
   @ViewColumn() username!: string;
-  @ViewColumn() password!: string;
 }

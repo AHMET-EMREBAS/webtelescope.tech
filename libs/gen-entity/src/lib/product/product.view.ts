@@ -8,8 +8,10 @@ import { Department } from '../department/department.entity';
     return ds
       .createQueryBuilder()
       .select('product.id', 'productId')
+      .addSelect('product.barcode', 'barcode')
+      .addSelect('product.name', 'name')
       .addSelect('product.description', 'description')
-      .addSelect('product.checked', 'checked')
+
       .addSelect('category.name', 'categoryName')
       .addSelect('department.name', 'departmentName')
       .from(Product, 'product')

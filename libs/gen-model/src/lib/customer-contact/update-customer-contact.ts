@@ -4,5 +4,5 @@ export interface IUpdateCustomerContactDto {
   city?: string;
   street?: string;
   zip?: string;
-  owner?: IID;
+  customer?: IID;
 }

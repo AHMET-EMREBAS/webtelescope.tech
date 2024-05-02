@@ -8,5 +8,4 @@ export interface IProductReturnView {
   orderTax: number;
   orderDescription: string;
   userUsername: string;
-  userPassword: string;
 }

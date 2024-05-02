@@ -5,5 +5,5 @@ export interface ICreateUserImgDto {
    */
   url: string;
   description?: string;
-  owner: IID;
+  user: IID;
 }

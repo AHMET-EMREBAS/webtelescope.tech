@@ -8,8 +8,8 @@ import { Store } from '../store/store.entity';
     return ds
       .createQueryBuilder()
       .select('quantity.id', 'quantityId')
-      .addSelect('quantity.description', 'description')
-      .addSelect('quantity.checked', 'checked')
+      .addSelect('quantity.quanitty', 'quanitty')
+
       .addSelect('sku.barcode', 'skuBarcode')
       .addSelect('sku.sku', 'skuSku')
       .addSelect('sku.name', 'skuName')

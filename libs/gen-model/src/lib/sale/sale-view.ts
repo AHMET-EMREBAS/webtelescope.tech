@@ -6,5 +6,4 @@ export interface ISaleView {
   cartDescription: string;
   cartChecked: boolean;
   customerUsername: string;
-  customerPassword: string;
 }

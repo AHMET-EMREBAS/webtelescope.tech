@@ -6,6 +6,6 @@ export interface ICreateProductDto {
    */
   name: string;
   description?: string;
-  category?: IID[];
+  category?: IID;
   department?: IID;
 }

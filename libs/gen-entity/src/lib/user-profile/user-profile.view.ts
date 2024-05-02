@@ -6,8 +6,8 @@ import { UserProfile } from './user-profile.entity';
     return ds
       .createQueryBuilder()
       .select('userProfile.id', 'userProfileId')
-      .addSelect('userProfile.description', 'description')
-      .addSelect('userProfile.checked', 'checked')
+      .addSelect('userProfile.firstName', 'firstName')
+      .addSelect('userProfile.lastName', 'lastName')
 
       .from(UserProfile, 'userProfile');
   },

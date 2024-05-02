@@ -5,5 +5,5 @@ export interface ICustomerImg<TCustomer> {
    */
   url: string;
   description?: string;
-  owner: TCustomer;
+  customer: TCustomer;
 }

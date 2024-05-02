@@ -4,5 +4,5 @@ export interface IUserContact<TUser> {
   city?: string;
   street?: string;
   zip?: string;
-  owner: TUser;
+  user: TUser;
 }

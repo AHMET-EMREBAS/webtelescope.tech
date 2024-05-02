@@ -8,8 +8,9 @@ import { Product } from '../product/product.entity';
     return ds
       .createQueryBuilder()
       .select('price.id', 'priceId')
-      .addSelect('price.description', 'description')
-      .addSelect('price.checked', 'checked')
+      .addSelect('price.price', 'price')
+      .addSelect('price.cost', 'cost')
+
       .addSelect('priceLevel.name', 'priceLevelName')
       .addSelect('product.barcode', 'productBarcode')
       .addSelect('product.name', 'productName')

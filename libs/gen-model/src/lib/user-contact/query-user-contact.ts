@@ -4,5 +4,4 @@ export interface IQueryUserContactDto {
   street?: string;
   zip?: string;
   userUsername?: string;
-  userPassword?: string;
 }

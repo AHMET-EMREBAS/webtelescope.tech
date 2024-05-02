@@ -9,7 +9,8 @@ import { User } from '../user/user.entity';
       .createQueryBuilder()
       .select('productReturn.id', 'productReturnId')
       .addSelect('productReturn.description', 'description')
-      .addSelect('productReturn.checked', 'checked')
+      .addSelect('productReturn.quantity', 'quantity')
+
       .addSelect('order.quantity', 'orderQuantity')
       .addSelect('order.discount', 'orderDiscount')
       .addSelect('order.total', 'orderTotal')
@@ -17,7 +18,6 @@ import { User } from '../user/user.entity';
       .addSelect('order.tax', 'orderTax')
       .addSelect('order.description', 'orderDescription')
       .addSelect('user.username', 'userUsername')
-      .addSelect('user.password', 'userPassword')
       .from(ProductReturn, 'productReturn')
       .leftJoin(Order, 'order', 'order.id = productReturn.orderId')
       .leftJoin(User, 'user', 'user.id = productReturn.userId');
@@ -33,5 +33,4 @@ export class ProductReturnView implements IProductReturnView {
   @ViewColumn() orderTax!: number;
   @ViewColumn() orderDescription!: string;
   @ViewColumn() userUsername!: string;
-  @ViewColumn() userPassword!: string;
 }

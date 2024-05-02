@@ -7,10 +7,10 @@ import { User } from '../user/user.entity';
     return ds
       .createQueryBuilder()
       .select('userImg.id', 'userImgId')
+      .addSelect('userImg.url', 'url')
       .addSelect('userImg.description', 'description')
-      .addSelect('userImg.checked', 'checked')
+
       .addSelect('user.username', 'userUsername')
-      .addSelect('user.password', 'userPassword')
       .from(UserImg, 'userImg')
       .leftJoin(User, 'user', 'user.id = userImg.userId');
   },
@@ -22,5 +22,4 @@ export class UserImgView implements IUserImgView {
   @ViewColumn() url!: string;
   @ViewColumn() description!: string;
   @ViewColumn() userUsername!: string;
-  @ViewColumn() userPassword!: string;
 }

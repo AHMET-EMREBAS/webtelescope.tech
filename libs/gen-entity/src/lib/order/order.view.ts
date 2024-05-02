@@ -8,8 +8,13 @@ import { Cart } from '../cart/cart.entity';
     return ds
       .createQueryBuilder()
       .select('order.id', 'orderId')
+      .addSelect('order.quantity', 'quantity')
+      .addSelect('order.discount', 'discount')
+      .addSelect('order.total', 'total')
+      .addSelect('order.subTotal', 'subTotal')
+      .addSelect('order.tax', 'tax')
       .addSelect('order.description', 'description')
-      .addSelect('order.checked', 'checked')
+
       .addSelect('sku.barcode', 'skuBarcode')
       .addSelect('sku.sku', 'skuSku')
       .addSelect('sku.name', 'skuName')

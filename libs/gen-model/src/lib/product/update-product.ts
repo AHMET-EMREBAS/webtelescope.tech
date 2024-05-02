@@ -6,6 +6,6 @@ export interface IUpdateProductDto {
    */
   name?: string;
   description?: string;
-  category?: IID[];
+  category?: IID;
   department?: IID;
 }

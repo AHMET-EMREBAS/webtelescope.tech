@@ -1,3 +1,4 @@
+import { names } from '@webpackages/utils';
 import { LongTextProperty, Model, OwnerRelation } from './core';
 
 export function CreateCommentModelFor(userModel: Model, target: Model): Model {
@@ -10,8 +11,8 @@ export function CreateCommentModelFor(userModel: Model, target: Model): Model {
       }),
     },
     relations: {
-      owner: OwnerRelation(userModel),
-      target: OwnerRelation(target),
+      [names(userModel.modelName).propertyName]: OwnerRelation(userModel),
+      [names(target.modelName).propertyName]: OwnerRelation(target),
     },
   };
 }

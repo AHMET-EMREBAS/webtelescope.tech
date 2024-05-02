@@ -7,8 +7,9 @@ import { Product } from '../product/product.entity';
     return ds
       .createQueryBuilder()
       .select('productImg.id', 'productImgId')
+      .addSelect('productImg.url', 'url')
       .addSelect('productImg.description', 'description')
-      .addSelect('productImg.checked', 'checked')
+
       .addSelect('product.barcode', 'productBarcode')
       .addSelect('product.name', 'productName')
       .addSelect('product.description', 'productDescription')

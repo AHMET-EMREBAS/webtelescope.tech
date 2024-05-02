@@ -7,8 +7,9 @@ import { Permission } from '../permission/permission.entity';
     return ds
       .createQueryBuilder()
       .select('role.id', 'roleId')
+      .addSelect('role.name', 'name')
       .addSelect('role.description', 'description')
-      .addSelect('role.checked', 'checked')
+
       .addSelect('permission.name', 'permissionName')
       .from(Role, 'role')
       .leftJoin(Permission, 'permission', 'permission.id = role.permissionId');

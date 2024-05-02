@@ -2,7 +2,6 @@ import {
   BarcodeProperty,
   CreateImageModelFor,
   DescriptionProperty,
-  ManyRelation,
   Model,
   OneRelation,
   UniqueNameProperty,
@@ -17,7 +16,7 @@ export const ProductModel: Model = {
     description: DescriptionProperty(),
   },
   relations: {
-    category: ManyRelation(CategoryModel),
+    category: OneRelation(CategoryModel),
     department: OneRelation(DepartmentModel),
   },
 };

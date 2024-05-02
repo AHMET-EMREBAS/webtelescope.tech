@@ -38,5 +38,5 @@ export class UpdateUserContactDto implements IUpdateUserContactDto {
     autocomplete: 'postal-code',
   })
   zip?: string;
-  @Property({ type: 'object', objectType: IDDto }) owner?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) user?: IDDto;
 }

@@ -8,5 +8,5 @@ export class UserContact extends BaseEntity implements IUserContact<User> {
   @Column({ type: 'string' }) street?: string;
   @Column({ type: 'string' }) zip?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: User })
-  owner!: User;
+  user!: User;
 }

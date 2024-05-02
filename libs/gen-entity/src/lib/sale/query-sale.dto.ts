@@ -27,5 +27,4 @@ export class QuerySaleDto implements IQuerySaleDto {
   @Property({ type: 'string' }) cartDescription?: string;
   @Property({ type: 'string' }) cartChecked?: boolean;
   @Property({ type: 'string' }) customerUsername?: string;
-  @Property({ type: 'string' }) customerPassword?: string;
 }

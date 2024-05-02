@@ -12,5 +12,5 @@ export class CreateCustomerPhoneDto implements ICreateCustomerPhoneDto {
   })
   email?: string;
   @Property({ type: 'object', objectType: IDDto, required: true })
-  ownwer!: IDDto;
+  customer!: IDDto;
 }

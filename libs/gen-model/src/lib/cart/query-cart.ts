@@ -5,8 +5,6 @@ export interface IQueryCartDto {
    */
   checked?: boolean;
   customerUsername?: string;
-  customerPassword?: string;
   userUsername?: string;
-  userPassword?: string;
   storeName?: string;
 }

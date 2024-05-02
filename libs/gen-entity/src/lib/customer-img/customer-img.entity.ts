@@ -10,5 +10,5 @@ export class CustomerImg extends BaseEntity implements ICustomerImg<Customer> {
   url!: string;
   @Column({ type: 'string' }) description?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Customer })
-  owner!: Customer;
+  customer!: Customer;
 }

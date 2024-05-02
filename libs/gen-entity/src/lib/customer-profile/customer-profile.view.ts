@@ -6,8 +6,8 @@ import { CustomerProfile } from './customer-profile.entity';
     return ds
       .createQueryBuilder()
       .select('customerProfile.id', 'customerProfileId')
-      .addSelect('customerProfile.description', 'description')
-      .addSelect('customerProfile.checked', 'checked')
+      .addSelect('customerProfile.firstName', 'firstName')
+      .addSelect('customerProfile.lastName', 'lastName')
 
       .from(CustomerProfile, 'customerProfile');
   },

@@ -92,6 +92,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
       contentString: [
         this.modelManager
           .propertiesList()
+          .filter((e) => e.searchable != false)
           .map((e) => {
             return this.propertyBuilder(e).View().print();
           })
@@ -167,6 +168,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
       contentString: [
         this.modelManager
           .propertiesList()
+          .filter((e) => e.searchable != false)
           .map((e) => {
             return this.propertyBuilder(e).Query().print();
           })
@@ -218,6 +220,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
       contentString: [
         this.modelManager
           .propertiesList()
+          .filter((e) => e.searchable != false)
           .map((e) => {
             return this.propertyBuilder(e).IView().print();
           })

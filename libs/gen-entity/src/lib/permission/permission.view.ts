@@ -6,8 +6,7 @@ import { Permission } from './permission.entity';
     return ds
       .createQueryBuilder()
       .select('permission.id', 'permissionId')
-      .addSelect('permission.description', 'description')
-      .addSelect('permission.checked', 'checked')
+      .addSelect('permission.name', 'name')
 
       .from(Permission, 'permission');
   },

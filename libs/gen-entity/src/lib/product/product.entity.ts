@@ -19,8 +19,7 @@ export class Product
   })
   name!: string;
   @Column({ type: 'string' }) description?: string;
-  @Relation({ relationType: 'Many', objectType: Category })
-  category?: Category[];
+  @Relation({ relationType: 'One', objectType: Category }) category?: Category;
   @Relation({ relationType: 'One', objectType: Department })
   department?: Department;
 }

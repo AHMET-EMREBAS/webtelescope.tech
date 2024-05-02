@@ -9,6 +9,7 @@ import {
 import { PropertyDecoratorBuilder } from '../decorator';
 import { PropertyManager } from '@webpackages/meta';
 import { ICoverAllClassTypes } from '../common';
+import { EmptyPrinter } from '../common-imp';
 
 /**
  * Provides all properties
@@ -20,6 +21,10 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
     protected readonly optionsManager: PropertyManager,
     protected readonly decoratorBuilder: PropertyDecoratorBuilder
   ) {}
+
+  protected __canSearch() {
+    return this.optionsManager.toCreate().searchable != false;
+  }
 
   protected __build(overrideOptions?: Partial<PropertyPrinterOptions>): IPrint {
     const options = this.optionsManager.toCreate();
@@ -47,10 +52,13 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
   }
 
   Query(): IPrint {
-    return this.__build({
-      decoratorsPrinter: this.decoratorBuilder.Query(),
-      required: undefined,
-    });
+    if (this.__canSearch()) {
+      return this.__build({
+        decoratorsPrinter: this.decoratorBuilder.Query(),
+        required: undefined,
+      });
+    }
+    return EmptyPrinter;
   }
 
   Entity(): IPrint {
@@ -60,10 +68,14 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
   }
 
   View(): IPrint {
-    return this.__build({
-      decoratorsPrinter: this.decoratorBuilder.View(),
-      required: true,
-    });
+    if (this.__canSearch()) {
+      return this.__build({
+        decoratorsPrinter: this.decoratorBuilder.View(),
+        required: true,
+      });
+    }
+
+    return EmptyPrinter;
   }
 
   IEntity(): IPrint {
@@ -89,18 +101,25 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
   }
 
   IQuery(): IPrint {
-    return this.__build({
-      classType: ClassType.INTERFACE,
-      required: undefined,
-      decoratorsPrinter: undefined,
-    });
+    if (this.__canSearch()) {
+      return this.__build({
+        classType: ClassType.INTERFACE,
+        required: undefined,
+        decoratorsPrinter: undefined,
+      });
+    }
+
+    return EmptyPrinter;
   }
 
   IView(): IPrint {
-    return this.__build({
-      classType: ClassType.INTERFACE,
-      decoratorsPrinter: undefined,
-      required: true,
-    });
+    if (this.__canSearch()) {
+      return this.__build({
+        classType: ClassType.INTERFACE,
+        decoratorsPrinter: undefined,
+        required: true,
+      });
+    }
+    return EmptyPrinter;
   }
 }

@@ -38,6 +38,5 @@ export class CreateUserContactDto implements ICreateUserContactDto {
     autocomplete: 'postal-code',
   })
   zip?: string;
-  @Property({ type: 'object', objectType: IDDto, required: true })
-  owner!: IDDto;
+  @Property({ type: 'object', objectType: IDDto, required: true }) user!: IDDto;
 }

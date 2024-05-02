@@ -22,6 +22,5 @@ export class CreateUserImgDto implements ICreateUserImgDto {
     icon: 'description',
   })
   description?: string;
-  @Property({ type: 'object', objectType: IDDto, required: true })
-  owner!: IDDto;
+  @Property({ type: 'object', objectType: IDDto, required: true }) user!: IDDto;
 }

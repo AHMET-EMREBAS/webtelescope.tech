@@ -8,5 +8,5 @@ export class CustomerEmail
 {
   @Column({ type: 'string' }) email?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: Customer })
-  ownwer!: Customer;
+  customer!: Customer;
 }

@@ -1,3 +1,4 @@
+import { names } from '@webpackages/utils';
 import { Model, OwnerRelation, ShortTextProperty } from './core';
 
 export function CreateAddressFor(model: Model): Model {
@@ -16,7 +17,7 @@ export function CreateAddressFor(model: Model): Model {
       zip: ShortTextProperty({ icon: 'zip', autocomplete: 'postal-code' }),
     },
     relations: {
-      owner: OwnerRelation(model),
+      [names(model.modelName).propertyName]: OwnerRelation(model),
     },
   };
 }
@@ -28,7 +29,7 @@ export function CreateEmailModelFor(model: Model): Model {
       email: ShortTextProperty({ format: 'email', icon: 'email' }),
     },
     relations: {
-      ownwer: OwnerRelation(model),
+      [names(model.modelName).propertyName]: OwnerRelation(model),
     },
   };
 }
@@ -40,7 +41,7 @@ export function CreatePhoneModelFor(model: Model): Model {
       email: ShortTextProperty({ format: 'email', autocomplete: 'email' }),
     },
     relations: {
-      ownwer: OwnerRelation(model),
+      [names(model.modelName).propertyName]: OwnerRelation(model),
     },
   };
 }

@@ -5,5 +5,4 @@ export interface ICustomerImgView {
   url: string;
   description: string;
   customerUsername: string;
-  customerPassword: string;
 }

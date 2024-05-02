@@ -7,10 +7,10 @@ import { Customer } from '../customer/customer.entity';
     return ds
       .createQueryBuilder()
       .select('customerImg.id', 'customerImgId')
+      .addSelect('customerImg.url', 'url')
       .addSelect('customerImg.description', 'description')
-      .addSelect('customerImg.checked', 'checked')
+
       .addSelect('customer.username', 'customerUsername')
-      .addSelect('customer.password', 'customerPassword')
       .from(CustomerImg, 'customerImg')
       .leftJoin(Customer, 'customer', 'customer.id = customerImg.customerId');
   },
@@ -22,5 +22,4 @@ export class CustomerImgView implements ICustomerImgView {
   @ViewColumn() url!: string;
   @ViewColumn() description!: string;
   @ViewColumn() customerUsername!: string;
-  @ViewColumn() customerPassword!: string;
 }

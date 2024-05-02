@@ -11,5 +11,5 @@ export class UpdateUserPhoneDto implements IUpdateUserPhoneDto {
     autocomplete: 'email',
   })
   email?: string;
-  @Property({ type: 'object', objectType: IDDto }) ownwer?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) user?: IDDto;
 }

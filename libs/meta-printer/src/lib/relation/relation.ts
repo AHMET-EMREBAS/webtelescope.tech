@@ -147,7 +147,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
 
   IView(): IPrint {
     const queries = this.optionsManager
-      .toIQuery()
+      .toView()
       .filter((e) => e.searchable != false)
       .map((e) => {
         return this.__build({

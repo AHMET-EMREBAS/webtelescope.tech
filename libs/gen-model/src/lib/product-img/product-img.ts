@@ -5,5 +5,5 @@ export interface IProductImg<TProduct> {
    */
   url: string;
   description?: string;
-  owner: TProduct;
+  product: TProduct;
 }

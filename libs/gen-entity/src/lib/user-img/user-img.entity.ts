@@ -10,5 +10,5 @@ export class UserImg extends BaseEntity implements IUserImg<User> {
   url!: string;
   @Column({ type: 'string' }) description?: string;
   @Relation({ relationType: 'Owner', required: true, objectType: User })
-  owner!: User;
+  user!: User;
 }

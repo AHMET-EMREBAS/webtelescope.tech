@@ -4,5 +4,5 @@ export interface ICreateUserContactDto {
   city?: string;
   street?: string;
   zip?: string;
-  owner: IID;
+  user: IID;
 }

@@ -5,5 +5,4 @@ export interface IQueryUserImgDto {
   url?: string;
   description?: string;
   userUsername?: string;
-  userPassword?: string;
 }

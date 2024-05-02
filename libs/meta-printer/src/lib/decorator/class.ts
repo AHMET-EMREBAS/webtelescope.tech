@@ -29,14 +29,21 @@ export class ClassDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
           return ds
             .createQueryBuilder()
             .select('${alias}.id', '${alias}Id')
-            .addSelect('${alias}.description', 'description')
-            .addSelect('${alias}.checked', 'checked')
+            ${this.modelManager
+              .propertiesList()
+              .filter((e) => e.searchable != false)
+              .map((e) => {
+                return `.addSelect('${alias}.${e.name}', '${e.name}')`;
+              })
+              .join('\n')}
+              
             ${this.modelManager
               .relationsList()
               .map((e) => {
                 const smm = new ModelManager(e.model);
                 return smm
                   .propertiesList()
+                  .filter((e) => e.searchable != false)
                   .map((z) => {
                     return `.addSelect('${p(e)}.${z.name}', '${p(e)}${cn(
                       z.name!

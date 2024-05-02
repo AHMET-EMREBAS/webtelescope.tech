@@ -5,5 +5,4 @@ export interface IUserImgView {
   url: string;
   description: string;
   userUsername: string;
-  userPassword: string;
 }

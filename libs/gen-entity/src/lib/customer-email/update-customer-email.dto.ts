@@ -11,5 +11,5 @@ export class UpdateCustomerEmailDto implements IUpdateCustomerEmailDto {
     icon: 'email',
   })
   email?: string;
-  @Property({ type: 'object', objectType: IDDto }) ownwer?: IDDto;
+  @Property({ type: 'object', objectType: IDDto }) customer?: IDDto;
 }

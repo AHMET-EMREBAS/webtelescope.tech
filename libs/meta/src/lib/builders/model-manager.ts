@@ -41,7 +41,7 @@ export class ModelManager {
 
   viewProperties(): AsList<PropertyOptions> {
     return this.propertiesList()
-      .filter((e) => !e.excludeFromView)
+      .filter((e) => e.searchable != false)
       .map((e) => {
         return new PropertyManager(e).toView(this.modelName());
       });

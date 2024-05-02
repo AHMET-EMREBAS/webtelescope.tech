@@ -12,5 +12,4 @@ export class QueryProductReturnDto implements IQueryProductReturnDto {
   @Property({ type: 'string' }) orderTax?: number;
   @Property({ type: 'string' }) orderDescription?: string;
   @Property({ type: 'string' }) userUsername?: string;
-  @Property({ type: 'string' }) userPassword?: string;
 }

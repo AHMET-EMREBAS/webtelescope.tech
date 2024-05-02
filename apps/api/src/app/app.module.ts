@@ -13,10 +13,10 @@ import * as AllEntities from '@webpackages/gen-entity';
 
 const entities = Object.entries(AllEntities)
   .filter(([key, value]) => {
-    console.log(key, value);
-    if (key.includes('View') || key.includes('Dto')) {
+    if (key.includes('Dto')) {
       return false;
     }
+    console.log(value);
     return true;
   })
   .map(([, value]) => value);
@@ -26,14 +26,14 @@ const entities = Object.entries(AllEntities)
     ConfigModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      entities: [...entities, AllEntities.CartView],
+      entities: [...entities],
       username: 'postgres',
       password: 'password',
       database: 'devdb',
       synchronize: true,
       dropSchema: true,
     }),
-    TypeOrmModule.forFeature([...entities, AllEntities.CartView]),
+    TypeOrmModule.forFeature([...entities]),
   ],
 })
 export class AppModule implements OnModuleInit {
@@ -79,19 +79,19 @@ export class AppModule implements OnModuleInit {
 
     const cart = await this.cart.save([
       {
-        employee: user1,
+        user: user1,
         customer: customer1,
         description: 'First cart',
         store: store1,
       },
       {
-        employee: user2,
+        user: user2,
         customer: customer2,
         description: 'Second cart',
         store: store1,
       },
       {
-        employee: user1,
+        user: user1,
         customer: customer2,
         description: 'Third cart',
         store: store1,

@@ -22,5 +22,4 @@ export class QueryCustomerImgDto implements IQueryCustomerImgDto {
   })
   description?: string;
   @Property({ type: 'string' }) customerUsername?: string;
-  @Property({ type: 'string' }) customerPassword?: string;
 }

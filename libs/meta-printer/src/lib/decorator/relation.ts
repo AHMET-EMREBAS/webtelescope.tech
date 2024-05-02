@@ -17,7 +17,6 @@ export class RelationDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
   protected __buildProperty(options?: PropertyOptions): IPrint {
     const {
       searchable,
-      excludeFromView,
       update,
       name: name,
       ...rest

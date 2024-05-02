@@ -6,8 +6,8 @@ import { Project } from './project.entity';
     return ds
       .createQueryBuilder()
       .select('project.id', 'projectId')
+      .addSelect('project.name', 'name')
       .addSelect('project.description', 'description')
-      .addSelect('project.checked', 'checked')
 
       .from(Project, 'project');
   },

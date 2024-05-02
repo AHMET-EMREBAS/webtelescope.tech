@@ -19,7 +19,6 @@ export type __PropertyOptions<T extends __PrimitiveType> = {
   maximum?: number;
   enums?: any[];
   update?: boolean;
-  inView?: boolean;
   strict?: boolean;
   before?: string;
   after?: string;
@@ -34,5 +33,4 @@ export type __PropertyOptions<T extends __PrimitiveType> = {
   icon?: string;
   label?: string;
   searchable?: boolean;
-  excludeFromView?: boolean;
 };

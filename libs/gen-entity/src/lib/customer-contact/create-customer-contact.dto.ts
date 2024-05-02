@@ -39,5 +39,5 @@ export class CreateCustomerContactDto implements ICreateCustomerContactDto {
   })
   zip?: string;
   @Property({ type: 'object', objectType: IDDto, required: true })
-  owner!: IDDto;
+  customer!: IDDto;
 }

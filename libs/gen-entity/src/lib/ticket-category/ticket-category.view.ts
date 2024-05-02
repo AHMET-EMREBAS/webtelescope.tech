@@ -6,8 +6,7 @@ import { TicketCategory } from './ticket-category.entity';
     return ds
       .createQueryBuilder()
       .select('ticketCategory.id', 'ticketCategoryId')
-      .addSelect('ticketCategory.description', 'description')
-      .addSelect('ticketCategory.checked', 'checked')
+      .addSelect('ticketCategory.name', 'name')
 
       .from(TicketCategory, 'ticketCategory');
   },

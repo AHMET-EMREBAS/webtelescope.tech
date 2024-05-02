@@ -11,10 +11,9 @@ import { Store } from '../store/store.entity';
       .select('cart.id', 'cartId')
       .addSelect('cart.description', 'description')
       .addSelect('cart.checked', 'checked')
+
       .addSelect('customer.username', 'customerUsername')
-      .addSelect('customer.password', 'customerPassword')
       .addSelect('user.username', 'userUsername')
-      .addSelect('user.password', 'userPassword')
       .addSelect('store.name', 'storeName')
       .from(Cart, 'cart')
       .leftJoin(Customer, 'customer', 'customer.id = cart.customerId')
@@ -29,8 +28,6 @@ export class CartView implements ICartView {
    */
   @ViewColumn() checked!: boolean;
   @ViewColumn() customerUsername!: string;
-  @ViewColumn() customerPassword!: string;
   @ViewColumn() userUsername!: string;
-  @ViewColumn() userPassword!: string;
   @ViewColumn() storeName!: string;
 }

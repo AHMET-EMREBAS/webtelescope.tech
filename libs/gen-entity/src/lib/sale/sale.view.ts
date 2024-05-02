@@ -8,12 +8,14 @@ import { Customer } from '../customer/customer.entity';
     return ds
       .createQueryBuilder()
       .select('sale.id', 'saleId')
-      .addSelect('sale.description', 'description')
-      .addSelect('sale.checked', 'checked')
+      .addSelect('sale.total', 'total')
+      .addSelect('sale.subtotal', 'subtotal')
+      .addSelect('sale.tax', 'tax')
+      .addSelect('sale.discount', 'discount')
+
       .addSelect('cart.description', 'cartDescription')
       .addSelect('cart.checked', 'cartChecked')
       .addSelect('customer.username', 'customerUsername')
-      .addSelect('customer.password', 'customerPassword')
       .from(Sale, 'sale')
       .leftJoin(Cart, 'cart', 'cart.id = sale.cartId')
       .leftJoin(Customer, 'customer', 'customer.id = sale.customerId');
@@ -27,5 +29,4 @@ export class SaleView implements ISaleView {
   @ViewColumn() cartDescription!: string;
   @ViewColumn() cartChecked!: boolean;
   @ViewColumn() customerUsername!: string;
-  @ViewColumn() customerPassword!: string;
 }

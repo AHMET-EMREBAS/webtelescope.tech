@@ -6,8 +6,7 @@ import { Sprint } from './sprint.entity';
     return ds
       .createQueryBuilder()
       .select('sprint.id', 'sprintId')
-      .addSelect('sprint.description', 'description')
-      .addSelect('sprint.checked', 'checked')
+      .addSelect('sprint.name', 'name')
 
       .from(Sprint, 'sprint');
   },

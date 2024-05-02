@@ -29,6 +29,5 @@ export class QueryTaskDto implements IQueryTaskDto {
   startDate?: Date;
   @Property({ type: 'date', label: 'Start date', icon: 'date' }) endDate?: Date;
   @Property({ type: 'string' }) userUsername?: string;
-  @Property({ type: 'string' }) userPassword?: string;
   @Property({ type: 'string' }) sprintName?: string;
 }

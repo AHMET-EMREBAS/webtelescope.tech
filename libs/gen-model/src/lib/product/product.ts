@@ -6,6 +6,6 @@ export interface IProduct<TCategory, TDepartment> {
    */
   name: string;
   description?: string;
-  category?: TCategory[];
+  category?: TCategory;
   department?: TDepartment;
 }

@@ -1,3 +1,4 @@
+import { names } from '@webpackages/utils';
 import {
   DescriptionProperty,
   LongTextProperty,
@@ -19,7 +20,7 @@ export function CreateImageModelFor(model: Model): Model {
       description: DescriptionProperty(),
     },
     relations: {
-      owner: OwnerRelation(model),
+      [names(model.modelName).propertyName]: OwnerRelation(model),
     },
   };
 }

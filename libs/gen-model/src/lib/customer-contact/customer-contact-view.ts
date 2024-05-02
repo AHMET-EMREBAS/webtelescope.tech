@@ -4,5 +4,4 @@ export interface ICustomerContactView {
   street: string;
   zip: string;
   customerUsername: string;
-  customerPassword: string;
 }

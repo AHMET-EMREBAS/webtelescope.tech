@@ -6,8 +6,7 @@ import { PriceLevel } from './price-level.entity';
     return ds
       .createQueryBuilder()
       .select('priceLevel.id', 'priceLevelId')
-      .addSelect('priceLevel.description', 'description')
-      .addSelect('priceLevel.checked', 'checked')
+      .addSelect('priceLevel.name', 'name')
 
       .from(PriceLevel, 'priceLevel');
   },

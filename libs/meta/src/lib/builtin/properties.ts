@@ -11,6 +11,7 @@ export type CommonPropertyOptions = Pick<
   | 'inputType'
   | 'icon'
   | 'label'
+  | 'searchable'
 >;
 
 export function ShortTextProperty(
@@ -70,7 +71,11 @@ export function UserNameProperty(): PropertyOptions {
   });
 }
 export function PasswordProperty(): PropertyOptions {
-  return ShortTextProperty({ format: 'password', required: true });
+  return ShortTextProperty({
+    format: 'password',
+    required: true,
+    searchable: false,
+  });
 }
 
 export function BarcodeProperty(): PropertyOptions {

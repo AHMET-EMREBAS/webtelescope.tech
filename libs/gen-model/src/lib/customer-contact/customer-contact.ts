@@ -4,5 +4,5 @@ export interface ICustomerContact<TCustomer> {
   city?: string;
   street?: string;
   zip?: string;
-  owner: TCustomer;
+  customer: TCustomer;
 }

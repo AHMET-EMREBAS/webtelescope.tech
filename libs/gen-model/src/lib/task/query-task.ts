@@ -6,6 +6,5 @@ export interface IQueryTaskDto {
   startDate?: Date;
   endDate?: Date;
   userUsername?: string;
-  userPassword?: string;
   sprintName?: string;
 }

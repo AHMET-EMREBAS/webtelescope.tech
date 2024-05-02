@@ -5,5 +5,5 @@ export interface ICreateProductImgDto {
    */
   url: string;
   description?: string;
-  owner: IID;
+  product: IID;
 }
