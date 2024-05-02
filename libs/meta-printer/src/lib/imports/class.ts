@@ -28,6 +28,9 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
   RelationImports(): RelationImportBuilder[] {
     const manager = this.modelManager;
     return manager.relationsList().map((e) => {
+      if (!e?.model?.modelName) {
+        console.log('Model not found .........', e);
+      }
       return new RelationImportBuilder(
         new FileNameBuilder(e.model.modelName),
         new ClassNameBuilder(e.model.modelName),

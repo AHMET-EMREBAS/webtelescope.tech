@@ -3,9 +3,10 @@ import {
   DescriptionProperty,
   Model,
   OwnerRelation,
-} from '@webpackages/meta';
+} from '../../core';
 import { CustomerModel } from '../customer';
-import { StoreModel, UserModel } from '../common';
+import { StoreModel } from '../common';
+import { UserModel } from '../user';
 
 export const CartModel: Model = {
   modelName: 'Cart',
