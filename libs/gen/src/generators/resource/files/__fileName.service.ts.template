@@ -1,0 +1,14 @@
+import {
+  InjectRepository,
+  Injectable,
+  Repository,
+  RepositoryService,
+} from '@webpackages/core';
+import { <%- className %> } from '@webpackages/gen-entity';
+
+@Injectable()
+export class <%- className %>Service extends RepositoryService<<%- className %>> {
+  constructor(@InjectRepository(<%- className %>) repo: Repository<<%- className %>>) {
+    super(repo);
+  }
+}

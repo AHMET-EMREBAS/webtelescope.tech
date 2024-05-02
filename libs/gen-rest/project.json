@@ -1,0 +1,40 @@
+{
+  "name": "gen-rest",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/gen-rest/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/gen-rest",
+        "main": "libs/gen-rest/src/index.ts",
+        "tsConfig": "libs/gen-rest/tsconfig.lib.json",
+        "assets": ["libs/gen-rest/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs gen-rest {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/gen-rest/**/*.ts",
+          "libs/gen-rest/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/gen-rest/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

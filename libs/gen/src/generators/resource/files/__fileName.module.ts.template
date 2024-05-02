@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@webpackages/core';
+import { <%- className %> } from '@webpackages/gen-entity';
+import { <%- className %>Controller } from './permission.controller';
+import { <%- className %>Service } from './permission.service';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([<%- className %>, <%- relations %>])],
+  controllers: [<%- className %>Controller],
+  providers: [<%- className %>Service],
+})
+export class <%- className %>Module {}

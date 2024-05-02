@@ -1,7 +1,8 @@
-import { Dto, Property, IDDto } from '@webpackages/core';
+import { Dto, Property } from '@webpackages/core';
 import { IQueryPermissionDto } from '@webpackages/gen-model';
 import { Transform } from 'class-transformer';
 import { ILike } from 'typeorm';
+
 @Dto()
 export class QueryPermissionDto implements IQueryPermissionDto {
   /**

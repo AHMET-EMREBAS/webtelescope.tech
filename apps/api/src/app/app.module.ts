@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@webpackages/config';
-import { PermissionModule, RoleModule } from '@webpackages/gen-entity';
+import { RoleModule, PermissionModule } from '@webpackages/gen-rest';
 
 @Module({
   imports: [

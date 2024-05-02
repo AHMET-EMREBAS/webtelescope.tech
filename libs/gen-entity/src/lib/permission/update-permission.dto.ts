@@ -1,4 +1,4 @@
-import { Dto, Property, IDDto } from '@webpackages/core';
+import { Dto, Property } from '@webpackages/core';
 import { IUpdatePermissionDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdatePermissionDto implements IUpdatePermissionDto {

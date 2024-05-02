@@ -1,24 +1,26 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nx/devkit';
+import { formatFiles, generateFiles, names, Tree } from '@nx/devkit';
 import * as path from 'path';
-import { ResourceGeneratorSchema } from './schema';
+import * as MetaData from '@webpackages/gen-meta';
+import { Model } from '@webpackages/meta';
 
-export async function resourceGenerator(
-  tree: Tree,
-  options: ResourceGeneratorSchema
-) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
-  });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
+const modelNames = Object.entries(
+  MetaData as unknown as Record<string, Model>
+).map(([, value]) => {
+  return value.modelName;
+});
+
+function __gen(tree: Tree) {
+  for (const modelName of modelNames) {
+    const projectRoot = `libs/gen-rest/src/lib/${names(modelName).fileName}`;
+
+    generateFiles(tree, path.join(__dirname, 'files'), projectRoot, {
+      ...names(modelName),
+    });
+  }
+}
+
+export async function resourceGenerator(tree: Tree) {
+  __gen(tree);
   await formatFiles(tree);
 }
 
