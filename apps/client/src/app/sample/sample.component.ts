@@ -10,6 +10,7 @@ import { CategoryService } from '@webpackages/material/services';
   styleUrl: './sample.component.scss',
 })
 export class SampleComponent implements AfterViewInit {
+  count$ = this.category.allCount$;
   constructor(protected readonly category: CategoryService) {}
   ngAfterViewInit(): void {
     this.category.entities$.subscribe(console.log);
