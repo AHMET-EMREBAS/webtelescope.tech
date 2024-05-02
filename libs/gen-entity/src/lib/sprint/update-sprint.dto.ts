@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateSprintDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateSprintDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateSprintDto implements IUpdateSprintDto {
   /**

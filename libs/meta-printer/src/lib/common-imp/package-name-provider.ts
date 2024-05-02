@@ -4,6 +4,8 @@ export interface IPackageNameProvider {
    */
   common(): string;
 
+  models(): string;
+
   /**
    * Used for server side code
    */
@@ -21,6 +23,10 @@ export interface IPackageNameProvider {
 export class PackageNameProvider implements IPackageNameProvider {
   common(): string {
     return '@webpackages/common';
+  }
+
+  models(): string {
+    return `@webpackages/gen-model`;
   }
   utils(): string {
     return `@webpackages/utils`;

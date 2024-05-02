@@ -4,6 +4,7 @@ export type ColumnOptions = {
   type: 'string' | 'number' | 'date' | 'boolean';
   unique?: boolean;
   required?: boolean;
+  description?: string;
 };
 
 export function Column({ type, unique }: ColumnOptions) {

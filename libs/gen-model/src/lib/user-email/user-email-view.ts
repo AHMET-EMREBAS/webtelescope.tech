@@ -1,5 +1,5 @@
 export interface IUserEmailView {
-  email?: string;
+  email: string;
   userUsername: string;
   userPassword: string;
 }

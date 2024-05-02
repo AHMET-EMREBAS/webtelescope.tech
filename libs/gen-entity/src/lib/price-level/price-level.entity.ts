@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IPriceLevel } from '@webpackages/common';
+import { IPriceLevel } from '@webpackages/gen-model';
 @Entity()
 export class PriceLevel extends BaseEntity implements IPriceLevel {
   /**

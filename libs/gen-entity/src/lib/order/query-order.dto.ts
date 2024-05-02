@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQueryOrderDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQueryOrderDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryOrderDto implements IQueryOrderDto {
   @Property({ type: 'number', minimum: 0, icon: 'quantity' }) quantity?: number;

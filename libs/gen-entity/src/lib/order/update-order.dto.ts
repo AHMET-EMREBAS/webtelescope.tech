@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateOrderDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateOrderDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateOrderDto implements IUpdateOrderDto {
   @Property({ type: 'number', minimum: 0, icon: 'quantity' }) quantity?: number;

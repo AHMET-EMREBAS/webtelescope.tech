@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { ITicketCategory } from '@webpackages/common';
+import { ITicketCategory } from '@webpackages/gen-model';
 @Entity()
 export class TicketCategory extends BaseEntity implements ITicketCategory {
   /**

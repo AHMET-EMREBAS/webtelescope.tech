@@ -62,11 +62,14 @@ export class GenericPrinter implements IPrint {
    * Print the generics
    */
   print(): string {
-    return [
-      this.__prefix(),
-      this.__items(),
-      this.__item(),
-      this.__suffix(),
-    ].join(' ');
+    if (this.__items()) {
+      return [
+        this.__prefix(),
+        this.__items(),
+        this.__item(),
+        this.__suffix(),
+      ].join(' ');
+    }
+    return '';
   }
 }

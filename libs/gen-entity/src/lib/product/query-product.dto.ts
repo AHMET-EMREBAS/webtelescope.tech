@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQueryProductDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQueryProductDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryProductDto implements IQueryProductDto {
   @Property({

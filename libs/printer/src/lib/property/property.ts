@@ -83,7 +83,9 @@ export class PropertyPrinter implements IPrint {
    * Property type
    */
   protected __type() {
-    return this.__propertyPrinterOptions.type;
+    const t = this.__propertyPrinterOptions.type;
+
+    return t === 'date' ? 'Date' : t;
   }
 
   /**

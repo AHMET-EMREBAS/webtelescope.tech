@@ -4,7 +4,7 @@ export interface ISkuView {
   /**
    * Required unique short text
    */ name: string;
-  description?: string;
+  description: string;
   productBarcode: string;
   productName: string;
   productDescription: string;

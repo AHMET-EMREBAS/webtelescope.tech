@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateTicketDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateTicketDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateTicketDto implements ICreateTicketDto {
   @Property({

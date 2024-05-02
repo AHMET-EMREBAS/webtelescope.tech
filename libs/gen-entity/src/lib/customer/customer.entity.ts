@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { ICustomer } from '@webpackages/common';
+import { ICustomer } from '@webpackages/gen-model';
 @Entity()
 export class Customer extends BaseEntity implements ICustomer {
   @Column({ type: 'string', required: true, unique: true }) username!: string;

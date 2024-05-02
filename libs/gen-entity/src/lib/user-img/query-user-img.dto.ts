@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQueryUserImgDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQueryUserImgDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryUserImgDto implements IQueryUserImgDto {
   /**

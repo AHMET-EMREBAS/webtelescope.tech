@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQueryUserDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQueryUserDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryUserDto implements IQueryUserDto {
   @Property({

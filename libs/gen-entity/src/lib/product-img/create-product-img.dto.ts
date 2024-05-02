@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateProductImgDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateProductImgDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateProductImgDto implements ICreateProductImgDto {
   /**

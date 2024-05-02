@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { ICategory } from '@webpackages/common';
+import { ICategory } from '@webpackages/gen-model';
 @Entity()
 export class Category extends BaseEntity implements ICategory {
   /**

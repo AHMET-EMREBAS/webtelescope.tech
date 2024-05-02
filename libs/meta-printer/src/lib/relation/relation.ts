@@ -48,9 +48,9 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
       .map((e) => {
         return this.__build({
           decoratorsPrinter: this.decoratorBuilder.View(),
-          required: undefined,
           isArray: undefined,
           ...e,
+          required: true,
         });
       })
       .map((e) => e.print())
@@ -155,6 +155,7 @@ export class RelationBuilder implements ICoverAllClassTypes<IPrint> {
           decoratorsPrinter: this.decoratorBuilder.IView(),
           isArray: undefined,
           ...e,
+          required: true,
         });
       })
       .map((e) => e.print())

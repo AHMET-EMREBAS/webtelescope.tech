@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQueryTicketDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQueryTicketDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryTicketDto implements IQueryTicketDto {
   @Property({ type: 'string', minLength: 3, maxLength: 100, inputType: 'text' })

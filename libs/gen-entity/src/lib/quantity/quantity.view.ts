@@ -1,5 +1,5 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
-import { IQuantityView } from '@webpackages/common';
+import { IQuantityView } from '@webpackages/gen-model';
 @ViewEntity()
 export class QuantityView implements IQuantityView {
   /**
@@ -8,6 +8,6 @@ export class QuantityView implements IQuantityView {
   @ViewColumn() skuBarcode!: string;
   @ViewColumn() skuSku!: string;
   @ViewColumn() skuName!: string;
-  @ViewColumn() skuDescription?: string;
+  @ViewColumn() skuDescription!: string;
   @ViewColumn() storeName!: string;
 }

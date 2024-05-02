@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateSkuDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateSkuDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateSkuDto implements ICreateSkuDto {
   @Property({

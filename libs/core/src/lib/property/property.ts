@@ -24,6 +24,11 @@ export type PropertyOptions = Omit<
     enum?: (string | number)[];
     unique?: boolean;
     objectType?: TypeType;
+    inputType?: string;
+    icon?: string;
+    autocomplete?: string;
+    label?: string;
+    enums?:any[]
   },
   'nullable'
 >;

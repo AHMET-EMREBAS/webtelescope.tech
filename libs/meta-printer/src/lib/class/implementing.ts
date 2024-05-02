@@ -6,12 +6,15 @@ import { ClassNameBuilder, EmptyPrinter } from '../common-imp';
 export class ImplementingBuilder implements ICoverAllClassTypes<IPrint> {
   constructor(
     protected readonly modelManager: ModelManager,
-    protected readonly classNameBuilder: ClassNameBuilder
+    protected readonly classNameBuilder: ClassNameBuilder,
+    protected readonly genericsImpBuilder: ICoverAllClassTypes<IPrint>
   ) {}
 
   Entity(): IPrint {
     return new ImplementPrinter({
-      item: this.classNameBuilder.IEntity(),
+      item:
+        this.classNameBuilder.IEntity() +
+        this.genericsImpBuilder.Entity().print(),
     });
   }
 

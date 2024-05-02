@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQuerySkuDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQuerySkuDto } from '@webpackages/gen-model';
 @Dto()
 export class QuerySkuDto implements IQuerySkuDto {
   @Property({

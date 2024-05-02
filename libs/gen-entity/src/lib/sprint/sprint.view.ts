@@ -1,5 +1,5 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
-import { ISprintView } from '@webpackages/common';
+import { ISprintView } from '@webpackages/gen-model';
 @ViewEntity()
 export class SprintView implements ISprintView {
   /**

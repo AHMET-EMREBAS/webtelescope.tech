@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateSkuDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateSkuDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateSkuDto implements IUpdateSkuDto {
   @Property({

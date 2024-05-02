@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreatePriceDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreatePriceDto } from '@webpackages/gen-model';
 @Dto()
 export class CreatePriceDto implements ICreatePriceDto {
   /**

@@ -1,8 +1,8 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { ISku } from '@webpackages/common';
+import { ISku } from '@webpackages/gen-model';
 import { Product } from '../product/product.entity';
 @Entity()
-export class Sku extends BaseEntity implements ISku {
+export class Sku extends BaseEntity implements ISku<Product> {
   @Column({ type: 'string', required: true, unique: true }) barcode!: string;
   @Column({ type: 'string', required: true, unique: true }) sku!: string;
   /**

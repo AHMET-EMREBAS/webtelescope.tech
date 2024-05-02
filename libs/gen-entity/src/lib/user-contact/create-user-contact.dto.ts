@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateUserContactDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateUserContactDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateUserContactDto implements ICreateUserContactDto {
   @Property({

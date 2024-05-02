@@ -1,1 +1,1 @@
-export * from './lib/gen-entity';
+export * from './lib';

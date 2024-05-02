@@ -1,8 +1,8 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { ICustomerImg } from '@webpackages/common';
+import { ICustomerImg } from '@webpackages/gen-model';
 import { Customer } from '../customer/customer.entity';
 @Entity()
-export class CustomerImg extends BaseEntity implements ICustomerImg {
+export class CustomerImg extends BaseEntity implements ICustomerImg<Customer> {
   /**
    * Image url
    */ @Column({ type: 'string', required: true, description: 'Image url' })

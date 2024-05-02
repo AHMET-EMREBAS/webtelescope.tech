@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateOrderDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateOrderDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateOrderDto implements ICreateOrderDto {
   @Property({ type: 'number', required: true, minimum: 0, icon: 'quantity' })

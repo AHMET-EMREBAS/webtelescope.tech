@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateProductReturnDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateProductReturnDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateProductReturnDto implements IUpdateProductReturnDto {
   @Property({ type: 'string', maxLength: 1000, inputType: 'textarea' })

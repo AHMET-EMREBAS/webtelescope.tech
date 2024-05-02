@@ -10,6 +10,9 @@ export function stringify(obj: any): any {
   } else if (typeof obj === 'number' || typeof obj === 'boolean') {
     return obj;
   } else if (typeof obj === 'object') {
+    if (Array.isArray(obj)) {
+      return `[${obj.map((e) => stringify(e)).join(', ')}]`;
+    }
     const code = Object.entries(obj)
       .map(([key, value]) => {
         if (key === 'objectType' || key === 'target') {

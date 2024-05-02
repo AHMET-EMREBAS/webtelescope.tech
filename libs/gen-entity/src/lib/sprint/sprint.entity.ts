@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { ISprint } from '@webpackages/common';
+import { ISprint } from '@webpackages/gen-model';
 @Entity()
 export class Sprint extends BaseEntity implements ISprint {
   /**

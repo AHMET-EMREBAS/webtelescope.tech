@@ -1,9 +1,9 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IQuantity } from '@webpackages/common';
+import { IQuantity } from '@webpackages/gen-model';
 import { Sku } from '../sku/sku.entity';
 import { Store } from '../store/store.entity';
 @Entity()
-export class Quantity extends BaseEntity implements IQuantity {
+export class Quantity extends BaseEntity implements IQuantity<Sku, Store> {
   /**
    * Quantity of the Product-Sku in the store.
    */ @Column({

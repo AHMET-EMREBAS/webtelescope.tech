@@ -1,9 +1,9 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IOrder } from '@webpackages/common';
+import { IOrder } from '@webpackages/gen-model';
 import { Sku } from '../sku/sku.entity';
 import { Cart } from '../cart/cart.entity';
 @Entity()
-export class Order extends BaseEntity implements IOrder {
+export class Order extends BaseEntity implements IOrder<Sku, Cart> {
   @Column({ type: 'number', required: true }) quantity!: number;
   @Column({ type: 'number' }) discount?: number;
   @Column({ type: 'number', required: true }) total!: number;

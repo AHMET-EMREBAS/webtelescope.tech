@@ -21,7 +21,6 @@ export const TaskModel: Model = {
   },
   relations: {
     assignees: OneRelation(UserModel),
-    createdBy: OneRelation(UserModel),
     sprint: OneRelation(SprintModel),
   },
 };

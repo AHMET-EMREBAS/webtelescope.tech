@@ -60,6 +60,7 @@ export function Many<T extends IID>(target: Type<T>) {
 export type RelationOptions = {
   relationType: 'Many' | 'One' | 'Owner';
   objectType: Type;
+  required?: boolean;
 };
 
 export function Relation(options: RelationOptions) {

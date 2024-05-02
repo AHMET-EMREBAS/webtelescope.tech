@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IProject } from '@webpackages/common';
+import { IProject } from '@webpackages/gen-model';
 @Entity()
 export class Project extends BaseEntity implements IProject {
   /**

@@ -1,5 +1,5 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
-import { ISkuView } from '@webpackages/common';
+import { ISkuView } from '@webpackages/gen-model';
 @ViewEntity()
 export class SkuView implements ISkuView {
   @ViewColumn() barcode!: string;
@@ -7,8 +7,8 @@ export class SkuView implements ISkuView {
   /**
    * Required unique short text
    */ @ViewColumn() name!: string;
-  @ViewColumn() description?: string;
+  @ViewColumn() description!: string;
   @ViewColumn() productBarcode!: string;
   @ViewColumn() productName!: string;
-  @ViewColumn() productDescription?: string;
+  @ViewColumn() productDescription!: string;
 }

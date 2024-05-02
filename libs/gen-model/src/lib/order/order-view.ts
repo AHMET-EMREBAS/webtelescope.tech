@@ -1,12 +1,12 @@
 export interface IOrderView {
   quantity: number;
-  discount?: number;
+  discount: number;
   total: number;
   subTotal: number;
   tax: number;
   /**
    * Order description or notes
-   */ description?: string;
+   */ description: string;
   skuBarcode: string;
   skuSku: string;
   skuName: string;

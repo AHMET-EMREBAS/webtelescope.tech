@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQueryTaskDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQueryTaskDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryTaskDto implements IQueryTaskDto {
   @Property({
@@ -19,17 +19,15 @@ export class QueryTaskDto implements IQueryTaskDto {
   description?: string;
   @Property({
     type: 'string',
-    enums: { 0: 'hard', 1: 'medium', 2: 'easy' },
+    enums: ['hard', 'medium', 'easy'],
     inputType: 'select',
     icon: 'select',
   })
   difficulty?: string;
-  @Property({ type: 'date' }) due?: date;
+  @Property({ type: 'date' }) due?: Date;
   @Property({ type: 'date', label: 'Start date', icon: 'date' })
-  startDate?: date;
-  @Property({ type: 'date', label: 'Start date', icon: 'date' }) endDate?: date;
-  @Property({ type: 'string' }) userUsername?: string;
-  @Property({ type: 'string' }) userPassword?: string;
+  startDate?: Date;
+  @Property({ type: 'date', label: 'Start date', icon: 'date' }) endDate?: Date;
   @Property({ type: 'string' }) userUsername?: string;
   @Property({ type: 'string' }) userPassword?: string;
   @Property({ type: 'string' }) sprintName?: string;

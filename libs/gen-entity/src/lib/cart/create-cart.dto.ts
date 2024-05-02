@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateCartDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateCartDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateCartDto implements ICreateCartDto {
   @Property({

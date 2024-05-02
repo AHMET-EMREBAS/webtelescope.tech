@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateProjectDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateProjectDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateProjectDto implements ICreateProjectDto {
   /**

@@ -1,5 +1,5 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
-import { ITicketView } from '@webpackages/common';
+import { ITicketView } from '@webpackages/gen-model';
 @ViewEntity()
 export class TicketView implements ITicketView {
   @ViewColumn() title!: string;

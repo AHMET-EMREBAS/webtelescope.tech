@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IStore } from '@webpackages/common';
+import { IStore } from '@webpackages/gen-model';
 @Entity()
 export class Store extends BaseEntity implements IStore {
   /**

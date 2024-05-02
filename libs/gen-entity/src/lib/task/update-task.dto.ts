@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateTaskDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateTaskDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateTaskDto implements IUpdateTaskDto {
   @Property({
@@ -19,16 +19,15 @@ export class UpdateTaskDto implements IUpdateTaskDto {
   description?: string;
   @Property({
     type: 'string',
-    enums: { 0: 'hard', 1: 'medium', 2: 'easy' },
+    enums: ['hard', 'medium', 'easy'],
     inputType: 'select',
     icon: 'select',
   })
   difficulty?: string;
-  @Property({ type: 'date' }) due?: date;
+  @Property({ type: 'date' }) due?: Date;
   @Property({ type: 'date', label: 'Start date', icon: 'date' })
-  startDate?: date;
-  @Property({ type: 'date', label: 'Start date', icon: 'date' }) endDate?: date;
+  startDate?: Date;
+  @Property({ type: 'date', label: 'Start date', icon: 'date' }) endDate?: Date;
   @Property({ type: 'object', objectType: IDDto }) assignees?: IDDto;
-  @Property({ type: 'object', objectType: IDDto }) createdBy?: IDDto;
   @Property({ type: 'object', objectType: IDDto }) sprint?: IDDto;
 }

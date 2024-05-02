@@ -1,9 +1,9 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IPrice } from '@webpackages/common';
+import { IPrice } from '@webpackages/gen-model';
 import { PriceLevel } from '../price-level/price-level.entity';
 import { Product } from '../product/product.entity';
 @Entity()
-export class Price extends BaseEntity implements IPrice {
+export class Price extends BaseEntity implements IPrice<PriceLevel, Product> {
   /**
    * Price
    */ @Column({ type: 'number', required: true, description: 'Price' })

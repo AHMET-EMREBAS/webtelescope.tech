@@ -1,9 +1,9 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { ISale } from '@webpackages/common';
+import { ISale } from '@webpackages/gen-model';
 import { Cart } from '../cart/cart.entity';
 import { Customer } from '../customer/customer.entity';
 @Entity()
-export class Sale extends BaseEntity implements ISale {
+export class Sale extends BaseEntity implements ISale<Cart, Customer> {
   @Column({ type: 'number', required: true }) total!: number;
   @Column({ type: 'number', required: true }) subtotal!: number;
   @Column({ type: 'number', required: true }) tax!: number;

@@ -4,7 +4,6 @@ export * from './entity';
 export * from './timestamp';
 export * from './id';
 export * from './base-entity';
-
 export {
   TypeOrmModule,
   InjectRepository,

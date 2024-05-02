@@ -53,7 +53,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.IEntity()],
-        source: this.packageNameProvider.common(),
+        source: this.packageNameProvider.models(),
       }).print(),
 
       ...this.RelationImports().map((e) => e.Entity().print()),
@@ -79,7 +79,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.IView()],
-        source: this.packageNameProvider.common(),
+        source: this.packageNameProvider.models(),
       }).print(),
     ].join('\n');
 
@@ -94,7 +94,10 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
    * Dto, Property import
    */
   Create(): IPrint {
-    const items = [...this.decoratorListProvider.Create()];
+    const items = [
+      ...this.decoratorListProvider.Create(),
+      BuiltinClassNames.IDDto,
+    ];
     const source = this.packageNameProvider.core();
     const content = [
       new ImportPrinter({
@@ -103,7 +106,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.ICreate()],
-        source: this.packageNameProvider.common(),
+        source: this.packageNameProvider.models(),
       }).print(),
     ].join('\n');
 
@@ -118,7 +121,10 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
    * Dto, Property, PartialType import
    */
   Update(): IPrint {
-    const items = [...this.decoratorListProvider.Update()];
+    const items = [
+      ...this.decoratorListProvider.Update(),
+      BuiltinClassNames.IDDto,
+    ];
     const source = this.packageNameProvider.core();
     const content = [
       new ImportPrinter({
@@ -127,7 +133,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.IUpdate()],
-        source: this.packageNameProvider.common(),
+        source: this.packageNameProvider.models(),
       }).print(),
     ].join('\n');
 
@@ -142,7 +148,10 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
    * Dto, Property import
    */
   Query(): IPrint {
-    const items = [...this.decoratorListProvider.Query()];
+    const items = [
+      ...this.decoratorListProvider.Query(),
+      BuiltinClassNames.IDDto,
+    ];
     const source = this.packageNameProvider.core();
     const content = [
       new ImportPrinter({
@@ -151,7 +160,7 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
       }).print(),
       new ImportPrinter({
         items: [this.classNameBuilder.IQuery()],
-        source: this.packageNameProvider.common(),
+        source: this.packageNameProvider.models(),
       }).print(),
     ].join('\n');
 

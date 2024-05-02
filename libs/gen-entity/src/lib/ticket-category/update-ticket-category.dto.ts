@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateTicketCategoryDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateTicketCategoryDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateTicketCategoryDto implements IUpdateTicketCategoryDto {
   /**

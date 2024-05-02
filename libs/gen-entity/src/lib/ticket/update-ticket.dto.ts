@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateTicketDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateTicketDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateTicketDto implements IUpdateTicketDto {
   @Property({ type: 'string', minLength: 3, maxLength: 100, inputType: 'text' })

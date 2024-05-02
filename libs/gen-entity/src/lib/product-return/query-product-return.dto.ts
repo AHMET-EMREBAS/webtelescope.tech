@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IQueryProductReturnDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IQueryProductReturnDto } from '@webpackages/gen-model';
 @Dto()
 export class QueryProductReturnDto implements IQueryProductReturnDto {
   @Property({ type: 'string', maxLength: 1000, inputType: 'textarea' })

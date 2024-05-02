@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { ICreateCustomerPhoneDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { ICreateCustomerPhoneDto } from '@webpackages/gen-model';
 @Dto()
 export class CreateCustomerPhoneDto implements ICreateCustomerPhoneDto {
   @Property({

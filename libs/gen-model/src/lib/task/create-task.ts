@@ -3,10 +3,9 @@ export interface ICreateTaskDto {
   title: string;
   description?: string;
   difficulty?: string;
-  due?: date;
-  startDate?: date;
-  endDate?: date;
+  due?: Date;
+  startDate?: Date;
+  endDate?: Date;
   assignees?: IID;
-  createdBy?: IID;
   sprint?: IID;
 }

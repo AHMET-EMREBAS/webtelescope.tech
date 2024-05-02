@@ -1,5 +1,5 @@
-import { Dto, Property } from '@webpackages/core';
-import { IUpdateUserPhoneDto } from '@webpackages/common';
+import { Dto, Property, IDDto } from '@webpackages/core';
+import { IUpdateUserPhoneDto } from '@webpackages/gen-model';
 @Dto()
 export class UpdateUserPhoneDto implements IUpdateUserPhoneDto {
   @Property({

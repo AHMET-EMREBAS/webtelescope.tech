@@ -62,6 +62,7 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
   View(): IPrint {
     return this.__build({
       decoratorsPrinter: this.decoratorBuilder.View(),
+      required: true,
     });
   }
 
@@ -99,6 +100,7 @@ export class PropertyBuilder implements ICoverAllClassTypes<IPrint> {
     return this.__build({
       classType: ClassType.INTERFACE,
       decoratorsPrinter: undefined,
+      required: true,
     });
   }
 }

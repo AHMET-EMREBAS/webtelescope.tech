@@ -1,8 +1,8 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IRole } from '@webpackages/common';
+import { IRole } from '@webpackages/gen-model';
 import { Permission } from '../permission/permission.entity';
 @Entity()
-export class Role extends BaseEntity implements IRole {
+export class Role extends BaseEntity implements IRole<Permission> {
   /**
    * Required unique short text
    */ @Column({

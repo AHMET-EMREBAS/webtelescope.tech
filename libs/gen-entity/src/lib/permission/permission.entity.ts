@@ -1,5 +1,5 @@
 import { Column, Entity, Relation, BaseEntity } from '@webpackages/core';
-import { IPermission } from '@webpackages/common';
+import { IPermission } from '@webpackages/gen-model';
 @Entity()
 export class Permission extends BaseEntity implements IPermission {
   /**

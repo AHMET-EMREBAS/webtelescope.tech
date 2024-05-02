@@ -1,5 +1,5 @@
 export interface ICustomerPhoneView {
-  email?: string;
+  email: string;
   customerUsername: string;
   customerPassword: string;
 }
