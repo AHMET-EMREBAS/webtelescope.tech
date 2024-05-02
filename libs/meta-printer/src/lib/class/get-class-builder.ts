@@ -10,6 +10,7 @@ import { ClassDecoratorBuilder } from '../decorator';
 import { ClassImportBuilder } from '../imports';
 import { ExtendingBuilder } from './extending';
 import { ImplementingBuilder } from './implementing';
+import { GenericsBuilder } from './generics-builder';
 
 export function getClassBuilder(model: Model): ClassBuilder {
   const modelManager = new ModelManager(model);
@@ -31,6 +32,7 @@ export function getClassBuilder(model: Model): ClassBuilder {
       decoratorListProvider
     ),
     new ExtendingBuilder(modelManager),
-    new ImplementingBuilder(modelManager, classNameBuilder)
+    new ImplementingBuilder(modelManager, classNameBuilder),
+    new GenericsBuilder(modelManager)
   );
 }

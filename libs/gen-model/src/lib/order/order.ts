@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IOrder {
+export interface IOrder<TSku, TCart> {
   quantity: number;
   discount?: number;
   total: number;

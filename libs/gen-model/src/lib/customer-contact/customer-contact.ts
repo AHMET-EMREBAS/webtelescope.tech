@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ICustomerContact {
+export interface ICustomerContact<TCustomer> {
   state?: string;
   city?: string;
   street?: string;

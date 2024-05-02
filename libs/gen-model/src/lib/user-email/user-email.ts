@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IUserEmail {
+export interface IUserEmail<TUser> {
   email?: string;
   ownwer: TUser;
 }

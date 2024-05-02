@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ICustomerImg {
+export interface ICustomerImg<TCustomer> {
   /**
    * Image url
    */ url: string;

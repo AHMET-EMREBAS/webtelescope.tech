@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IUserProfile {
+export interface IUserProfile<> {
   firstName?: string;
   lastName?: string;
 }

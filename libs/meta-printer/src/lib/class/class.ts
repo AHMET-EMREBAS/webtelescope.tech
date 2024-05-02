@@ -22,7 +22,8 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
     protected readonly decoratorBuilder: ICoverAllClassTypes<IPrint>,
     protected readonly importBuilder: ICoverAllClassTypes<IPrint>,
     protected readonly extendingBuilder: ICoverAllClassTypes<IPrint>,
-    protected readonly implementingBuilder: ICoverAllClassTypes<IPrint>
+    protected readonly implementingBuilder: ICoverAllClassTypes<IPrint>,
+    protected readonly genericsBuilder: ICoverAllClassTypes<IPrint>
   ) {}
 
   protected __modelName() {
@@ -188,6 +189,7 @@ export class ClassBuilder implements ICoverAllClassTypes<IPrint> {
       importings: this.importBuilder.IEntity(),
       extending: this.extendingBuilder.IEntity(),
       implementing: this.implementingBuilder.IEntity(),
+      generics: this.genericsBuilder.IEntity(),
       contentString: [
         this.modelManager
           .propertiesList()
