@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ISale<TCart, TCustomer> {
+export interface ISale<TCart = IID, TCustomer = IID> {
   total: number;
   subtotal: number;
   tax: number;

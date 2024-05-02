@@ -22,7 +22,7 @@ export class GenericsBuilder implements ICoverAllClassTypes<IPrint> {
   }
   IEntity(): IPrint {
     return new GenericPrinter({
-      items: this.modelManager.uniqueRelationNames().map((e) => `T${e}`),
+      items: this.modelManager.uniqueRelationNames().map((e) => `T${e} = IID`),
     });
   }
   IView(): IPrint {

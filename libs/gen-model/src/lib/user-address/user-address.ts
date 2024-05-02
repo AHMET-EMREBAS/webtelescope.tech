@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IUserAddress<TUser> {
+export interface IUserAddress<TUser = IID> {
   state?: string;
   city?: string;
   street?: string;

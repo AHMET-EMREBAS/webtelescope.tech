@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ISku<TProduct> {
+export interface ISku<TProduct = IID> {
   barcode: string;
   sku: string;
   /**

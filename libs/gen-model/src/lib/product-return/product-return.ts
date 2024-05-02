@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IProductReturn<TOrder, TUser> {
+export interface IProductReturn<TOrder = IID, TUser = IID> {
   description: string;
   quantity: number;
   order: TOrder;

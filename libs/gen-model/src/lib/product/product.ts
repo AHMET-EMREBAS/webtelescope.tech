@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IProduct<TCategory, TDepartment> {
+export interface IProduct<TCategory = IID, TDepartment = IID> {
   barcode: string;
   /**
    * Required unique short text

@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IRole<TPermission> {
+export interface IRole<TPermission = IID> {
   /**
    * Required unique short text
    */

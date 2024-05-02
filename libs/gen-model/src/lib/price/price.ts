@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IPrice<TPriceLevel, TProduct> {
+export interface IPrice<TPriceLevel = IID, TProduct = IID> {
   /**
    * Price
    */
