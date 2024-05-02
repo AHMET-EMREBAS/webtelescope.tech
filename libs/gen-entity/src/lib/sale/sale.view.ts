@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ISaleView } from '@webpackages/gen-model';
 import { Sale } from './sale.entity';
+import { BaseView } from '@webpackages/core';
 import { Cart } from '../cart/cart.entity';
 import { Customer } from '../customer/customer.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('sale.id', 'saleId')
+      .select('sale.id', 'id')
       .addSelect('sale.total', 'total')
       .addSelect('sale.subtotal', 'subtotal')
       .addSelect('sale.tax', 'tax')
@@ -21,7 +22,7 @@ import { Customer } from '../customer/customer.entity';
       .leftJoin(Customer, 'customer', 'customer.id = sale.customerId');
   },
 })
-export class SaleView implements ISaleView {
+export class SaleView extends BaseView implements ISaleView {
   @ViewColumn() total!: number;
   @ViewColumn() subtotal!: number;
   @ViewColumn() tax!: number;

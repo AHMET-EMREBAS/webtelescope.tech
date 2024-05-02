@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IStore {
+export interface IStore extends IID {
   /**
    * Required unique short text
    */

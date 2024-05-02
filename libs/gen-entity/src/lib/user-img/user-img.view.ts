@@ -1,12 +1,13 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IUserImgView } from '@webpackages/gen-model';
 import { UserImg } from './user-img.entity';
+import { BaseView } from '@webpackages/core';
 import { User } from '../user/user.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('userImg.id', 'userImgId')
+      .select('userImg.id', 'id')
       .addSelect('userImg.url', 'url')
       .addSelect('userImg.description', 'description')
 
@@ -15,7 +16,7 @@ import { User } from '../user/user.entity';
       .leftJoin(User, 'user', 'user.id = userImg.userId');
   },
 })
-export class UserImgView implements IUserImgView {
+export class UserImgView extends BaseView implements IUserImgView {
   /**
    * Image url
    */

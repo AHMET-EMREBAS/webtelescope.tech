@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ICategory {
+export interface ICategory extends IID {
   /**
    * Required unique short text
    */

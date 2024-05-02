@@ -1,6 +1,7 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ICartView } from '@webpackages/gen-model';
 import { Cart } from './cart.entity';
+import { BaseView } from '@webpackages/core';
 import { Customer } from '../customer/customer.entity';
 import { User } from '../user/user.entity';
 import { Store } from '../store/store.entity';
@@ -8,7 +9,7 @@ import { Store } from '../store/store.entity';
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('cart.id', 'cartId')
+      .select('cart.id', 'id')
       .addSelect('cart.description', 'description')
       .addSelect('cart.checked', 'checked')
 
@@ -21,7 +22,7 @@ import { Store } from '../store/store.entity';
       .leftJoin(Store, 'store', 'store.id = cart.storeId');
   },
 })
-export class CartView implements ICartView {
+export class CartView extends BaseView implements ICartView {
   @ViewColumn() description!: string;
   /**
    * Is chart checked out or not?

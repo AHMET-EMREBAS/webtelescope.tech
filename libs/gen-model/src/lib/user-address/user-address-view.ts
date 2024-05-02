@@ -1,4 +1,5 @@
-export interface IUserAddressView {
+import { IID } from '@webpackages/common';
+export interface IUserAddressView extends IID {
   state: string;
   city: string;
   street: string;

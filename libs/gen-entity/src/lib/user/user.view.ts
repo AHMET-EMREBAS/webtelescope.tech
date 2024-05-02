@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IUserView } from '@webpackages/gen-model';
 import { User } from './user.entity';
+import { BaseView } from '@webpackages/core';
 import { Role } from '../role/role.entity';
 import { UserDepartment } from '../user-department/user-department.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('user.id', 'userId')
+      .select('user.id', 'id')
       .addSelect('user.username', 'username')
 
       .addSelect('role.name', 'roleName')
@@ -23,7 +24,7 @@ import { UserDepartment } from '../user-department/user-department.entity';
       );
   },
 })
-export class UserView implements IUserView {
+export class UserView extends BaseView implements IUserView {
   @ViewColumn() username!: string;
   @ViewColumn() roleName!: string;
   @ViewColumn() roleDescription!: string;

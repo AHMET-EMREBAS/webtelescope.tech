@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IOrderView } from '@webpackages/gen-model';
 import { Order } from './order.entity';
+import { BaseView } from '@webpackages/core';
 import { Sku } from '../sku/sku.entity';
 import { Cart } from '../cart/cart.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('order.id', 'orderId')
+      .select('order.id', 'id')
       .addSelect('order.quantity', 'quantity')
       .addSelect('order.discount', 'discount')
       .addSelect('order.total', 'total')
@@ -26,7 +27,7 @@ import { Cart } from '../cart/cart.entity';
       .leftJoin(Cart, 'cart', 'cart.id = order.cartId');
   },
 })
-export class OrderView implements IOrderView {
+export class OrderView extends BaseView implements IOrderView {
   @ViewColumn() quantity!: number;
   @ViewColumn() discount!: number;
   @ViewColumn() total!: number;

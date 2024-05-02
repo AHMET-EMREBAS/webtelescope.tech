@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IProductReturnView } from '@webpackages/gen-model';
 import { ProductReturn } from './product-return.entity';
+import { BaseView } from '@webpackages/core';
 import { Order } from '../order/order.entity';
 import { User } from '../user/user.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('productReturn.id', 'productReturnId')
+      .select('productReturn.id', 'id')
       .addSelect('productReturn.description', 'description')
       .addSelect('productReturn.quantity', 'quantity')
 
@@ -23,7 +24,7 @@ import { User } from '../user/user.entity';
       .leftJoin(User, 'user', 'user.id = productReturn.userId');
   },
 })
-export class ProductReturnView implements IProductReturnView {
+export class ProductReturnView extends BaseView implements IProductReturnView {
   @ViewColumn() description!: string;
   @ViewColumn() quantity!: number;
   @ViewColumn() orderQuantity!: number;

@@ -1,4 +1,5 @@
-export interface IUserImgView {
+import { IID } from '@webpackages/common';
+export interface IUserImgView extends IID {
   /**
    * Image url
    */

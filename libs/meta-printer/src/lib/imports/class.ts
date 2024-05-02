@@ -90,6 +90,10 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
         items: [this.classNameBuilder.Entity()],
         source: `./${this.fileNameBuilder.Entity()}`,
       }).print(),
+      new ImportPrinter({
+        items: [BuiltinClassNames.BaseView],
+        source: this.packageNameProvider.core(),
+      }).print(),
       ...this.RelationImports().map((e) => e.Entity().print()),
     ].join('\n');
 
@@ -194,7 +198,10 @@ export class ClassImportBuilder implements ICoverAllClassTypes<IPrint> {
    * Interfaces only import IID for generic type
    */
   IView(): IPrint {
-    return EmptyPrinter;
+    return new ImportPrinter({
+      items: [BuiltinClassNames.IID],
+      source: this.packageNameProvider.common(),
+    });;
   }
   /**
    * Interfaces only import IID for generic type

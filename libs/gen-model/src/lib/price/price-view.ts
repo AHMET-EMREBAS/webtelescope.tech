@@ -1,4 +1,5 @@
-export interface IPriceView {
+import { IID } from '@webpackages/common';
+export interface IPriceView extends IID {
   /**
    * Price
    */

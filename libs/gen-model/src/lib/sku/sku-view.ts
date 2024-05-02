@@ -1,4 +1,5 @@
-export interface ISkuView {
+import { IID } from '@webpackages/common';
+export interface ISkuView extends IID {
   barcode: string;
   sku: string;
   /**

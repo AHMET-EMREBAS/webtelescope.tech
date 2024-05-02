@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ITaskView } from '@webpackages/gen-model';
 import { Task } from './task.entity';
+import { BaseView } from '@webpackages/core';
 import { User } from '../user/user.entity';
 import { Sprint } from '../sprint/sprint.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('task.id', 'taskId')
+      .select('task.id', 'id')
       .addSelect('task.title', 'title')
       .addSelect('task.description', 'description')
       .addSelect('task.difficulty', 'difficulty')
@@ -22,7 +23,7 @@ import { Sprint } from '../sprint/sprint.entity';
       .leftJoin(Sprint, 'sprint', 'sprint.id = task.sprintId');
   },
 })
-export class TaskView implements ITaskView {
+export class TaskView extends BaseView implements ITaskView {
   @ViewColumn() title!: string;
   @ViewColumn() description!: string;
   @ViewColumn() difficulty!: string;

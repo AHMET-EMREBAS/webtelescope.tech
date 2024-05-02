@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ITicketView } from '@webpackages/gen-model';
 import { Ticket } from './ticket.entity';
+import { BaseView } from '@webpackages/core';
 import { User } from '../user/user.entity';
 import { TicketCategory } from '../ticket-category/ticket-category.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('ticket.id', 'ticketId')
+      .select('ticket.id', 'id')
       .addSelect('ticket.title', 'title')
       .addSelect('ticket.description', 'description')
 
@@ -22,7 +23,7 @@ import { TicketCategory } from '../ticket-category/ticket-category.entity';
       );
   },
 })
-export class TicketView implements ITicketView {
+export class TicketView extends BaseView implements ITicketView {
   @ViewColumn() title!: string;
   @ViewColumn() description!: string;
   @ViewColumn() userUsername!: string;

@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import Quill from 'quill';
-
-import Chart from 'chart.js/auto';
+import { CategoryService } from '@webpackages/material/services';
 
 @Component({
   selector: 'wt-sample',
@@ -12,47 +10,11 @@ import Chart from 'chart.js/auto';
   styleUrl: './sample.component.scss',
 })
 export class SampleComponent implements AfterViewInit {
-  @ViewChild('editor')
-  editor!: ElementRef<HTMLDivElement>;
-
-  @ViewChild('chart')
-  chartRef!: ElementRef<HTMLCanvasElement>;
+  constructor(protected readonly category: CategoryService) {}
   ngAfterViewInit(): void {
-    new Quill(this.editor.nativeElement, {
-      theme: 'snow',
-    });
+    this.category.entities$.subscribe(console.log);
 
-    const chart = new Chart(this.chartRef.nativeElement, {
-      type: 'doughnut',
-
-      data: {
-        datasets: [
-          {
-            label: 'First',
-            data: [1, 2, 3, 4, 5, 6, 7, 8],
-            borderColor: 'red',
-            backgroundColor:'red'
-          },
-          {
-            label: 'Second',
-            data: [1, 2, 3, 4, 5, 6, 7, 8],
-            borderColor: 'blue',
-            backgroundColor:'blue'
-          },
-          {
-            label: 'Third',
-            data: [1, 2, 3, 4, 5, 6, 7, 8],
-            borderColor: 'orange',
-            backgroundColor:'orange'
-          },
-        ],
-        labels: ['First', 'Second', 'Third'],
-        yLabels: ['Some', 'Other', 'Any'],
-        xLabels: ['Some-x', 'Other', 'Any'],
-      },
-      options: {
-        responsive: true,
-      },
-    });
+    console.log('IS working? ');
+    this.category.add({ id: 1, name: 'New Category  1' });
   }
 }

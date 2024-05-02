@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IQuantity<TSku = IID, TStore = IID> {
+export interface IQuantity<TSku = IID, TStore = IID> extends IID {
   /**
    * Quantity of the Product-Sku in the store.
    */

@@ -1,12 +1,13 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ICustomerPhoneView } from '@webpackages/gen-model';
 import { CustomerPhone } from './customer-phone.entity';
+import { BaseView } from '@webpackages/core';
 import { Customer } from '../customer/customer.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('customerPhone.id', 'customerPhoneId')
+      .select('customerPhone.id', 'id')
       .addSelect('customerPhone.phone', 'phone')
 
       .addSelect('customer.username', 'customerUsername')
@@ -14,7 +15,7 @@ import { Customer } from '../customer/customer.entity';
       .leftJoin(Customer, 'customer', 'customer.id = customerPhone.customerId');
   },
 })
-export class CustomerPhoneView implements ICustomerPhoneView {
+export class CustomerPhoneView extends BaseView implements ICustomerPhoneView {
   @ViewColumn() phone!: string;
   @ViewColumn() customerUsername!: string;
 }

@@ -1,12 +1,13 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ICustomerProfileView } from '@webpackages/gen-model';
 import { CustomerProfile } from './customer-profile.entity';
+import { BaseView } from '@webpackages/core';
 import { Customer } from '../customer/customer.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('customerProfile.id', 'customerProfileId')
+      .select('customerProfile.id', 'id')
       .addSelect('customerProfile.firstName', 'firstName')
       .addSelect('customerProfile.lastName', 'lastName')
 
@@ -19,7 +20,10 @@ import { Customer } from '../customer/customer.entity';
       );
   },
 })
-export class CustomerProfileView implements ICustomerProfileView {
+export class CustomerProfileView
+  extends BaseView
+  implements ICustomerProfileView
+{
   @ViewColumn() firstName!: string;
   @ViewColumn() lastName!: string;
   @ViewColumn() customerUsername!: string;

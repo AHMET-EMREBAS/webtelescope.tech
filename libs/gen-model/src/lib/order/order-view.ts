@@ -1,4 +1,5 @@
-export interface IOrderView {
+import { IID } from '@webpackages/common';
+export interface IOrderView extends IID {
   quantity: number;
   discount: number;
   total: number;

@@ -1,4 +1,5 @@
-export interface ITaskView {
+import { IID } from '@webpackages/common';
+export interface ITaskView extends IID {
   title: string;
   description: string;
   difficulty: string;

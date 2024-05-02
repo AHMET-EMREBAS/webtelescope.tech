@@ -12,7 +12,9 @@ export class ExtendingBuilder implements ICoverAllClassTypes<IPrint> {
     });
   }
   View(): IPrint {
-    return EmptyPrinter;
+    return new ExtendPrinter({
+      item: 'BaseView',
+    });
   }
   Create(): IPrint {
     return EmptyPrinter;
@@ -24,10 +26,14 @@ export class ExtendingBuilder implements ICoverAllClassTypes<IPrint> {
     return EmptyPrinter;
   }
   IEntity(): IPrint {
-    return EmptyPrinter;
+    return new ExtendPrinter({
+      item: 'IID',
+    });
   }
   IView(): IPrint {
-    return EmptyPrinter;
+    return new ExtendPrinter({
+      item: 'IID',
+    });
   }
   ICreate(): IPrint {
     return EmptyPrinter;

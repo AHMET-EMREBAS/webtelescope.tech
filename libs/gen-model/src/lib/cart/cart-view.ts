@@ -1,4 +1,5 @@
-export interface ICartView {
+import { IID } from '@webpackages/common';
+export interface ICartView extends IID {
   description: string;
   /**
    * Is chart checked out or not?

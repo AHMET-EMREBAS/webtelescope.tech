@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IPriceView } from '@webpackages/gen-model';
 import { Price } from './price.entity';
+import { BaseView } from '@webpackages/core';
 import { PriceLevel } from '../price-level/price-level.entity';
 import { Product } from '../product/product.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('price.id', 'priceId')
+      .select('price.id', 'id')
       .addSelect('price.price', 'price')
       .addSelect('price.cost', 'cost')
 
@@ -20,7 +21,7 @@ import { Product } from '../product/product.entity';
       .leftJoin(Product, 'product', 'product.id = price.productId');
   },
 })
-export class PriceView implements IPriceView {
+export class PriceView extends BaseView implements IPriceView {
   /**
    * Price
    */

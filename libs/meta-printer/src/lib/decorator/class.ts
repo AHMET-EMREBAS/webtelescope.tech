@@ -28,7 +28,7 @@ export class ClassDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
         expression(ds) {
           return ds
             .createQueryBuilder()
-            .select('${alias}.id', '${alias}Id')
+            .select('${alias}.id', 'id')
             ${this.modelManager
               .propertiesList()
               .filter((e) => e.searchable != false)

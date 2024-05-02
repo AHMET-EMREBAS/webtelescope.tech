@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ICustomerImg<TCustomer = IID> {
+export interface ICustomerImg<TCustomer = IID> extends IID {
   /**
    * Image url
    */

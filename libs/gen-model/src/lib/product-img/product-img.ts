@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IProductImg<TProduct = IID> {
+export interface IProductImg<TProduct = IID> extends IID {
   /**
    * Image url
    */

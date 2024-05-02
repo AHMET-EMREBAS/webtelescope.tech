@@ -1,12 +1,13 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { ISkuView } from '@webpackages/gen-model';
 import { Sku } from './sku.entity';
+import { BaseView } from '@webpackages/core';
 import { Product } from '../product/product.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('sku.id', 'skuId')
+      .select('sku.id', 'id')
       .addSelect('sku.barcode', 'barcode')
       .addSelect('sku.sku', 'sku')
       .addSelect('sku.name', 'name')
@@ -19,7 +20,7 @@ import { Product } from '../product/product.entity';
       .leftJoin(Product, 'product', 'product.id = sku.productId');
   },
 })
-export class SkuView implements ISkuView {
+export class SkuView extends BaseView implements ISkuView {
   @ViewColumn() barcode!: string;
   @ViewColumn() sku!: string;
   /**

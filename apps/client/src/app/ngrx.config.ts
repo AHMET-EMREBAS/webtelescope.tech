@@ -5,8 +5,10 @@ import { provideEntityData, withEffects } from '@ngrx/data';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { SampleService } from './services';
 import { APP_INTERCEPTORS } from './common';
+import { CategoryService } from '@webpackages/material/services';
 
-const COLLECTION_SERVICES: Type<unknown>[] = [SampleService];
+
+const COLLECTION_SERVICES: Type<unknown>[] = [CategoryService];
 
 export const NGRX_CONFIG: ApplicationConfig = {
   providers: [
@@ -15,8 +17,8 @@ export const NGRX_CONFIG: ApplicationConfig = {
     provideEffects([]),
     provideEntityData(
       {
-        entityMetadata: { Sample: {} },
-        pluralNames: { Sample: 'Samples' },
+        entityMetadata: { Category: {} },
+        pluralNames: { Category: 'Categorys' },
       },
       withEffects()
     ),

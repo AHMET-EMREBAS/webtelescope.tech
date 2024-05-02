@@ -1,13 +1,14 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IProductView } from '@webpackages/gen-model';
 import { Product } from './product.entity';
+import { BaseView } from '@webpackages/core';
 import { Category } from '../category/category.entity';
 import { Department } from '../department/department.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('product.id', 'productId')
+      .select('product.id', 'id')
       .addSelect('product.barcode', 'barcode')
       .addSelect('product.name', 'name')
       .addSelect('product.description', 'description')
@@ -23,7 +24,7 @@ import { Department } from '../department/department.entity';
       );
   },
 })
-export class ProductView implements IProductView {
+export class ProductView extends BaseView implements IProductView {
   @ViewColumn() barcode!: string;
   /**
    * Required unique short text

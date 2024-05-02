@@ -1,12 +1,13 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IRoleView } from '@webpackages/gen-model';
 import { Role } from './role.entity';
+import { BaseView } from '@webpackages/core';
 import { Permission } from '../permission/permission.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('role.id', 'roleId')
+      .select('role.id', 'id')
       .addSelect('role.name', 'name')
       .addSelect('role.description', 'description')
 
@@ -24,7 +25,7 @@ import { Permission } from '../permission/permission.entity';
       );
   },
 })
-export class RoleView implements IRoleView {
+export class RoleView extends BaseView implements IRoleView {
   /**
    * Required unique short text
    */

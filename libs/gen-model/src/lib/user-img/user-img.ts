@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface IUserImg<TUser = IID> {
+export interface IUserImg<TUser = IID> extends IID {
   /**
    * Image url
    */

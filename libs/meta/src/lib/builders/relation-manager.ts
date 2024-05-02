@@ -7,6 +7,7 @@ export enum BuiltinClassNames {
   IDDto = 'IDDto',
   BaseEntity = 'BaseEntity',
   IBaseEntity = 'IBaseEntity',
+  BaseView = 'BaseView',
 }
 
 export class RelationManager {

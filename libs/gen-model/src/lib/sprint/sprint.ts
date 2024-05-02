@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ISprint {
+export interface ISprint extends IID {
   /**
    * Required unique short text
    */

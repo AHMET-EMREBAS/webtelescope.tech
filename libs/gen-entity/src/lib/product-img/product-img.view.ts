@@ -1,12 +1,13 @@
 import { ViewEntity, ViewColumn } from '@webpackages/core';
 import { IProductImgView } from '@webpackages/gen-model';
 import { ProductImg } from './product-img.entity';
+import { BaseView } from '@webpackages/core';
 import { Product } from '../product/product.entity';
 @ViewEntity({
   expression(ds) {
     return ds
       .createQueryBuilder()
-      .select('productImg.id', 'productImgId')
+      .select('productImg.id', 'id')
       .addSelect('productImg.url', 'url')
       .addSelect('productImg.description', 'description')
 
@@ -17,7 +18,7 @@ import { Product } from '../product/product.entity';
       .leftJoin(Product, 'product', 'product.id = productImg.productId');
   },
 })
-export class ProductImgView implements IProductImgView {
+export class ProductImgView extends BaseView implements IProductImgView {
   /**
    * Image url
    */

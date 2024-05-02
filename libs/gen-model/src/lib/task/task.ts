@@ -1,5 +1,5 @@
 import { IID } from '@webpackages/common';
-export interface ITask<TUser = IID, TSprint = IID> {
+export interface ITask<TUser = IID, TSprint = IID> extends IID {
   title: string;
   description?: string;
   difficulty?: string;
