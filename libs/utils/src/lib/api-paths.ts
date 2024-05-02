@@ -1,6 +1,7 @@
 import { plural } from './plural';
 
 export type ApiPaths = {
+  METADATA_KEY: string;
   /**
    * id
    */
@@ -13,6 +14,11 @@ export type ApiPaths = {
    * relationName
    */
   RELATION_NAME_KEY: string;
+
+  /**
+   * allows users to query entity's metadata like count, fields, unique fields, relations, and so more.
+   */
+  METADATA: string;
   /**
    * singular
    */
@@ -37,6 +43,11 @@ export type ApiPaths = {
 
 export enum ApiPathKeys {
   /**
+   *  used to query metadata of the entityF
+   */
+  METADATA_KEY = 'metadata',
+
+  /**
    * 'authToken'
    * */
   AUTH_TOKEN = 'authToken',
@@ -55,6 +66,7 @@ export enum ApiPathKeys {
 }
 /**
  * Create the api end points from resource name
+ * METADATA_KEY = 'metadata'
  * ID_KEY = 'id'
  * RELATION_ID_KEY = 'relationId'
  * RELATION_NAME_KEY = 'relationName'
@@ -67,6 +79,7 @@ export enum ApiPathKeys {
  * @returns
  */
 export function getApiPaths(resourceName: string): ApiPaths {
+  const METADATA_KEY = ApiPathKeys.METADATA_KEY;
   const ID_KEY = ApiPathKeys.ID_KEY;
   const RELATION_ID_KEY = ApiPathKeys.RELATION_ID_KEY;
   const RELATION_NAME_KEY = ApiPathKeys.RELATION_NAME_KEY;
@@ -77,10 +90,13 @@ export function getApiPaths(resourceName: string): ApiPaths {
   const RELATION_NAME_PATH = `${SINGULAR_PATH}/:${ID_KEY}/:${RELATION_NAME_KEY}`;
   const RELATION_NAME_AND_ID_PATH = `${RELATION_NAME_PATH}/:${RELATION_ID_KEY}`;
 
+  const METADATA = `${PLURAL_PATH}/:${METADATA_KEY}`;
   return {
     ID_KEY,
     RELATION_ID_KEY,
     RELATION_NAME_KEY,
+    METADATA_KEY,
+    METADATA,
     SINGULAR_PATH,
     PLURAL_PATH,
     BY_ID_PATH,

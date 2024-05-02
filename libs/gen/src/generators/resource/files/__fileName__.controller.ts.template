@@ -16,7 +16,8 @@ import {
   AddRelation,
   RemoveRelation,
   InjectRepository,
-  Repository,
+  Repository,  
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   Update<%- className %>Dto,
   Create<%- className %>Dto,
 } from '@webpackages/gen-entity';
-import { <%- className %>Service } from './<%- fileName %>.service';
+import { <%- className %>Service,  <%- className %>ViewService } from './<%- fileName %>.service';
 
 const Paths = getApiPaths(<%- className %>.name);
 
@@ -34,14 +35,22 @@ const Paths = getApiPaths(<%- className %>.name);
   tags: [<%- className %>Controller.name],
 })
 export class <%- className %>Controller {
-  constructor(protected readonly service: <%- className %>Service, @InjectRepository(<%- className %>View) protected readonly viewService: Repository<<%- className %>View>) {}
+  constructor(
+    protected readonly service: <%- className %>Service, 
+   protected readonly viewService:  <%- className %>ViewService
+   ) {}
 
-   @Get({ path: Paths.PLURAL_PATH })
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
+
+  @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: Query<%- className %>Dto
   ) {
-    return await this.viewService.find({ ...paginator, where: { ...queryDto } });
+    return await this.viewService.queryAll({ ...paginator, where: { ...queryDto } });
   }
 
 

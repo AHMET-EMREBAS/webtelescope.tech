@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateUserImgDto,
   CreateUserImgDto,
 } from '@webpackages/gen-entity';
-import { UserImgService } from './user-img.service';
+import { UserImgService, UserImgViewService } from './user-img.service';
 
 const Paths = getApiPaths(UserImg.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(UserImg.name);
 export class UserImgController {
   constructor(
     protected readonly service: UserImgService,
-    @InjectRepository(UserImgView)
-    protected readonly viewService: Repository<UserImgView>
+    protected readonly viewService: UserImgViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryUserImgDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

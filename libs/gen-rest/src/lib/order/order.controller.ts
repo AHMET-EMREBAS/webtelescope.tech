@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateOrderDto,
   CreateOrderDto,
 } from '@webpackages/gen-entity';
-import { OrderService } from './order.service';
+import { OrderService, OrderViewService } from './order.service';
 
 const Paths = getApiPaths(Order.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Order.name);
 export class OrderController {
   constructor(
     protected readonly service: OrderService,
-    @InjectRepository(OrderView)
-    protected readonly viewService: Repository<OrderView>
+    protected readonly viewService: OrderViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryOrderDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

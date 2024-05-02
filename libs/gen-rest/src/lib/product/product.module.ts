@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@webpackages/core';
 import { Product } from '@webpackages/gen-entity';
 import { ProductController } from './product.controller';
-import { ProductService } from './product.service';
+import { ProductService, ProductViewService } from './product.service';
 import { Category, Department, ProductView } from '@webpackages/gen-entity';
 
 @Module({
@@ -10,6 +10,6 @@ import { Category, Department, ProductView } from '@webpackages/gen-entity';
     TypeOrmModule.forFeature([Product, Category, Department, ProductView]),
   ],
   controllers: [ProductController],
-  providers: [ProductService],
+  providers: [ProductService, ProductViewService],
 })
 export class ProductModule {}

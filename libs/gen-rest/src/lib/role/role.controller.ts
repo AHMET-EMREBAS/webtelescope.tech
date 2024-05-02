@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateRoleDto,
   CreateRoleDto,
 } from '@webpackages/gen-entity';
-import { RoleService } from './role.service';
+import { RoleService, RoleViewService } from './role.service';
 
 const Paths = getApiPaths(Role.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Role.name);
 export class RoleController {
   constructor(
     protected readonly service: RoleService,
-    @InjectRepository(RoleView)
-    protected readonly viewService: Repository<RoleView>
+    protected readonly viewService: RoleViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryRoleDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

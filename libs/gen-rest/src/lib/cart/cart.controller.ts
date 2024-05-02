@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateCartDto,
   CreateCartDto,
 } from '@webpackages/gen-entity';
-import { CartService } from './cart.service';
+import { CartService, CartViewService } from './cart.service';
 
 const Paths = getApiPaths(Cart.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Cart.name);
 export class CartController {
   constructor(
     protected readonly service: CartService,
-    @InjectRepository(CartView)
-    protected readonly viewService: Repository<CartView>
+    protected readonly viewService: CartViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryCartDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

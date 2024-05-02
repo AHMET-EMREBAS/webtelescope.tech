@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateSprintDto,
   CreateSprintDto,
 } from '@webpackages/gen-entity';
-import { SprintService } from './sprint.service';
+import { SprintService, SprintViewService } from './sprint.service';
 
 const Paths = getApiPaths(Sprint.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Sprint.name);
 export class SprintController {
   constructor(
     protected readonly service: SprintService,
-    @InjectRepository(SprintView)
-    protected readonly viewService: Repository<SprintView>
+    protected readonly viewService: SprintViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QuerySprintDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

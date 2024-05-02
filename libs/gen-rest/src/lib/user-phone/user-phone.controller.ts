@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateUserPhoneDto,
   CreateUserPhoneDto,
 } from '@webpackages/gen-entity';
-import { UserPhoneService } from './user-phone.service';
+import { UserPhoneService, UserPhoneViewService } from './user-phone.service';
 
 const Paths = getApiPaths(UserPhone.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(UserPhone.name);
 export class UserPhoneController {
   constructor(
     protected readonly service: UserPhoneService,
-    @InjectRepository(UserPhoneView)
-    protected readonly viewService: Repository<UserPhoneView>
+    protected readonly viewService: UserPhoneViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryUserPhoneDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

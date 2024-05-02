@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateSkuDto,
   CreateSkuDto,
 } from '@webpackages/gen-entity';
-import { SkuService } from './sku.service';
+import { SkuService, SkuViewService } from './sku.service';
 
 const Paths = getApiPaths(Sku.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Sku.name);
 export class SkuController {
   constructor(
     protected readonly service: SkuService,
-    @InjectRepository(SkuView)
-    protected readonly viewService: Repository<SkuView>
+    protected readonly viewService: SkuViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QuerySkuDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

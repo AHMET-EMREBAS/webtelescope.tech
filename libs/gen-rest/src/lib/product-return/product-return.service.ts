@@ -4,12 +4,21 @@ import {
   Repository,
   RepositoryService,
 } from '@webpackages/core';
-import { ProductReturn } from '@webpackages/gen-entity';
+import { ProductReturn, ProductReturnView } from '@webpackages/gen-entity';
 
 @Injectable()
 export class ProductReturnService extends RepositoryService<ProductReturn> {
   constructor(
     @InjectRepository(ProductReturn) repo: Repository<ProductReturn>
+  ) {
+    super(repo);
+  }
+}
+
+@Injectable()
+export class ProductReturnViewService extends RepositoryService<ProductReturnView> {
+  constructor(
+    @InjectRepository(ProductReturnView) repo: Repository<ProductReturnView>
   ) {
     super(repo);
   }

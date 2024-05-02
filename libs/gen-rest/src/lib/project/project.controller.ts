@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateProjectDto,
   CreateProjectDto,
 } from '@webpackages/gen-entity';
-import { ProjectService } from './project.service';
+import { ProjectService, ProjectViewService } from './project.service';
 
 const Paths = getApiPaths(Project.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Project.name);
 export class ProjectController {
   constructor(
     protected readonly service: ProjectService,
-    @InjectRepository(ProjectView)
-    protected readonly viewService: Repository<ProjectView>
+    protected readonly viewService: ProjectViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryProjectDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

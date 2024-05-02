@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateTaskDto,
   CreateTaskDto,
 } from '@webpackages/gen-entity';
-import { TaskService } from './task.service';
+import { TaskService, TaskViewService } from './task.service';
 
 const Paths = getApiPaths(Task.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Task.name);
 export class TaskController {
   constructor(
     protected readonly service: TaskService,
-    @InjectRepository(TaskView)
-    protected readonly viewService: Repository<TaskView>
+    protected readonly viewService: TaskViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryTaskDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

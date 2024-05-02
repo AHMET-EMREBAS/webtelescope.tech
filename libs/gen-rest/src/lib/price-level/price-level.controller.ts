@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,10 @@ import {
   UpdatePriceLevelDto,
   CreatePriceLevelDto,
 } from '@webpackages/gen-entity';
-import { PriceLevelService } from './price-level.service';
+import {
+  PriceLevelService,
+  PriceLevelViewService,
+} from './price-level.service';
 
 const Paths = getApiPaths(PriceLevel.name);
 
@@ -36,16 +40,20 @@ const Paths = getApiPaths(PriceLevel.name);
 export class PriceLevelController {
   constructor(
     protected readonly service: PriceLevelService,
-    @InjectRepository(PriceLevelView)
-    protected readonly viewService: Repository<PriceLevelView>
+    protected readonly viewService: PriceLevelViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryPriceLevelDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

@@ -1,0 +1,44 @@
+{
+  "name": "material-chart",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/material/chart/src",
+  "prefix": "wt",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/material/chart/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/material/chart/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/material/chart/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/material/chart/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/material/chart/**/*.ts",
+          "libs/material/chart/**/*.html",
+          "libs/material/chart/package.json"
+        ]
+      }
+    }
+  }
+}

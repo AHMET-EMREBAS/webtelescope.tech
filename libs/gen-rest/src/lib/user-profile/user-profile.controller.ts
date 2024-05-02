@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,10 @@ import {
   UpdateUserProfileDto,
   CreateUserProfileDto,
 } from '@webpackages/gen-entity';
-import { UserProfileService } from './user-profile.service';
+import {
+  UserProfileService,
+  UserProfileViewService,
+} from './user-profile.service';
 
 const Paths = getApiPaths(UserProfile.name);
 
@@ -36,16 +40,20 @@ const Paths = getApiPaths(UserProfile.name);
 export class UserProfileController {
   constructor(
     protected readonly service: UserProfileService,
-    @InjectRepository(UserProfileView)
-    protected readonly viewService: Repository<UserProfileView>
+    protected readonly viewService: UserProfileViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryUserProfileDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

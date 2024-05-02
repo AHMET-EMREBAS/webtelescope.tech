@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateStoreDto,
   CreateStoreDto,
 } from '@webpackages/gen-entity';
-import { StoreService } from './store.service';
+import { StoreService, StoreViewService } from './store.service';
 
 const Paths = getApiPaths(Store.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Store.name);
 export class StoreController {
   constructor(
     protected readonly service: StoreService,
-    @InjectRepository(StoreView)
-    protected readonly viewService: Repository<StoreView>
+    protected readonly viewService: StoreViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryStoreDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

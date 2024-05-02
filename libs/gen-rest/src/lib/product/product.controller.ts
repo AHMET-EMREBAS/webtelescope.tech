@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateProductDto,
   CreateProductDto,
 } from '@webpackages/gen-entity';
-import { ProductService } from './product.service';
+import { ProductService, ProductViewService } from './product.service';
 
 const Paths = getApiPaths(Product.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Product.name);
 export class ProductController {
   constructor(
     protected readonly service: ProductService,
-    @InjectRepository(ProductView)
-    protected readonly viewService: Repository<ProductView>
+    protected readonly viewService: ProductViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryProductDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

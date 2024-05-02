@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdatePermissionDto,
   CreatePermissionDto,
 } from '@webpackages/gen-entity';
-import { PermissionService } from './permission.service';
+import { PermissionService, PermissionViewService } from './permission.service';
 
 const Paths = getApiPaths(Permission.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Permission.name);
 export class PermissionController {
   constructor(
     protected readonly service: PermissionService,
-    @InjectRepository(PermissionView)
-    protected readonly viewService: Repository<PermissionView>
+    protected readonly viewService: PermissionViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryPermissionDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

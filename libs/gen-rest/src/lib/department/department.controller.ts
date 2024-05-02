@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateDepartmentDto,
   CreateDepartmentDto,
 } from '@webpackages/gen-entity';
-import { DepartmentService } from './department.service';
+import { DepartmentService, DepartmentViewService } from './department.service';
 
 const Paths = getApiPaths(Department.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Department.name);
 export class DepartmentController {
   constructor(
     protected readonly service: DepartmentService,
-    @InjectRepository(DepartmentView)
-    protected readonly viewService: Repository<DepartmentView>
+    protected readonly viewService: DepartmentViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryDepartmentDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@webpackages/core';
 import { CustomerPhone } from '@webpackages/gen-entity';
 import { CustomerPhoneController } from './customer-phone.controller';
-import { CustomerPhoneService } from './customer-phone.service';
+import {
+  CustomerPhoneService,
+  CustomerPhoneViewService,
+} from './customer-phone.service';
 import { Customer, CustomerPhoneView } from '@webpackages/gen-entity';
 
 @Module({
@@ -10,6 +13,6 @@ import { Customer, CustomerPhoneView } from '@webpackages/gen-entity';
     TypeOrmModule.forFeature([CustomerPhone, Customer, CustomerPhoneView]),
   ],
   controllers: [CustomerPhoneController],
-  providers: [CustomerPhoneService],
+  providers: [CustomerPhoneService, CustomerPhoneViewService],
 })
 export class CustomerPhoneModule {}

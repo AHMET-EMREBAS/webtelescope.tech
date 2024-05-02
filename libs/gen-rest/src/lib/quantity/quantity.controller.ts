@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateQuantityDto,
   CreateQuantityDto,
 } from '@webpackages/gen-entity';
-import { QuantityService } from './quantity.service';
+import { QuantityService, QuantityViewService } from './quantity.service';
 
 const Paths = getApiPaths(Quantity.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Quantity.name);
 export class QuantityController {
   constructor(
     protected readonly service: QuantityService,
-    @InjectRepository(QuantityView)
-    protected readonly viewService: Repository<QuantityView>
+    protected readonly viewService: QuantityViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryQuantityDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

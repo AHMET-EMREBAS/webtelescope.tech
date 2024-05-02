@@ -22378,12 +22378,12 @@
     "directives": [
         {
             "name": "AppLogoDirective",
-            "id": "directive-AppLogoDirective-acc8b6064aa401689bf25b8d88a89c44dd88721386d9663242ceca42238096198c74f63d6b0185dd2a8b2e54980082a640ec30d78fc17649d457acd6f52bd5e9",
+            "id": "directive-AppLogoDirective-27a9e920c42e56ad66eb2115b70c74951c91c7e888c83f0efc58980fe26745abe6077adb5e1b72ef8ee1cd533e72888a04cd69eacb6d7a07cd06e4d16eeba075",
             "file": "libs/material/layout/src/common/app-logo/app-logo.directive.ts",
             "type": "directive",
             "description": "<p>You can style the app-logo using app-logo class</p>\n",
             "rawdescription": "\n\nYou can style the app-logo using app-logo class\n",
-            "sourceCode": "import { Directive, ElementRef, OnInit } from '@angular/core';\nimport { IElementRef } from '../types';\n\n/**\n * You can style the app-logo using app-logo class\n */\n@Directive({\n  selector: '[wtAppLogo]',\n  standalone: true,\n})\nexport class AppLogoDirective implements IElementRef<HTMLImageElement>, OnInit {\n  constructor(public elementRef: ElementRef<HTMLImageElement>) {}\n\n  ngOnInit(): void {\n    this.elementRef.nativeElement.classList.add('app-logo');\n\n    this.elementRef.nativeElement.setAttribute(\n      'src',\n      'assets/icons/icon-72x72.png'\n    );\n\n    this.elementRef.nativeElement.setAttribute('alt', 'App Logo');\n  }\n}\n",
+            "sourceCode": "import { Directive, ElementRef, OnInit } from '@angular/core';\r\nimport { IElementRef } from '../types';\r\n\r\n/**\r\n * You can style the app-logo using app-logo class\r\n */\r\n@Directive({\r\n  selector: '[wtAppLogo]',\r\n  standalone: true,\r\n})\r\nexport class AppLogoDirective implements IElementRef<HTMLImageElement>, OnInit {\r\n  constructor(public elementRef: ElementRef<HTMLImageElement>) {}\r\n\r\n  ngOnInit(): void {\r\n    this.elementRef.nativeElement.classList.add('app-logo');\r\n\r\n    this.elementRef.nativeElement.setAttribute(\r\n      'src',\r\n      'assets/icons/icon-72x72.png'\r\n    );\r\n\r\n    this.elementRef.nativeElement.setAttribute('alt', 'App Logo');\r\n  }\r\n}\r\n",
             "selector": "[wtAppLogo]",
             "providers": [],
             "hostDirectives": [],
@@ -22779,15 +22779,110 @@
         },
         {
             "name": "FullscreenDirective",
-            "id": "directive-FullscreenDirective-b94173875fcc28c4b3717c9c317898fb24423c52324871a88153036a6f90d0ae28b4174c6c5ea035cb9fc2719105d1a0a6e833c149c6097e458e0eee413b9195",
+            "id": "directive-FullscreenDirective-cc430a211715611c095dc4fc71ed98efa1adfdec572bf3913b2b9a13d58c6e51b5b700f3c01f3561f8790e0445042a6e716accf2662f1296d5e1eb916508db1d",
             "file": "libs/material/layout/src/common/directives/fullscreen.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Directive, HostListener, Input } from '@angular/core';\nimport { IToggle, IToggleValue } from '../types';\n\n@Directive({\n  selector: '[wtFullscreen]',\n  standalone: true,\n  exportAs: 'wtFullscreen',\n})\nexport class FullscreenDirective implements IToggleValue, IToggle {\n  @Input() targetElement?: HTMLElement;\n  @HostListener('click')\n  clickHander() {\n    if (this.targetElement) {\n      this.toggle(this.targetElement);\n    } else {\n      console.warn('targetElement is not provided to the fullscreen directive');\n    }\n  }\n\n  isFullscreen?: boolean;\n\n  private open(element: HTMLElement) {\n    this.isFullscreen = true;\n    element.requestFullscreen();\n  }\n  private close() {\n    this.isFullscreen = false;\n    document.exitFullscreen();\n  }\n\n  /**\n   * Toggle fullscreen\n   * @param element\n   */\n  toggle(element: HTMLElement): void {\n    if (this.isFullscreen) {\n      this.close();\n    } else {\n      this.open(element);\n    }\n  }\n\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\n    return this.isFullscreen ? conditionalValue : actualValue;\n  }\n\n  hasFullscreenElement() {\n    return document.fullscreenElement;\n  }\n}\n",
+            "sourceCode": "import { Directive, HostListener, Input, NgModule } from '@angular/core';\r\nimport { IToggle, IToggleValue } from '../types';\r\n\r\n@Directive({\r\n  selector: '[wtFullscreenToggleButton]',\r\n  standalone: true,\r\n})\r\nexport class FullscreenToggleDirective implements IToggle {\r\n  @Input() targetElement?: HTMLElement;\r\n\r\n  @HostListener('click')\r\n  fullscreenButtonClick() {\r\n    if (this.targetElement) {\r\n      this.toggle(this.targetElement);\r\n    } else {\r\n      console.warn('targetElement is not provided to the fullscreen directive');\r\n    }\r\n  }\r\n\r\n  private open(element: HTMLElement) {\r\n    FullscreenDirective.isFullscreen = true;\r\n    element.requestFullscreen();\r\n  }\r\n\r\n  private close() {\r\n    FullscreenDirective.isFullscreen = false;\r\n    document.exitFullscreen();\r\n  }\r\n\r\n  /**\r\n   * Toggle fullscreen\r\n   * @param element\r\n   */\r\n  toggle(element: HTMLElement): void {\r\n    if (FullscreenDirective.isFullscreen) {\r\n      this.close();\r\n    } else {\r\n      this.open(element);\r\n    }\r\n  }\r\n}\r\n\r\n// Access the fullscreen information accross the application\r\n// And toggle values based on it.\r\n@Directive({\r\n  selector: '[wtFullscreen]',\r\n  standalone: true,\r\n  exportAs: 'wtFullscreen',\r\n})\r\nexport class FullscreenDirective implements IToggleValue {\r\n  static isFullscreen = false;\r\n\r\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\r\n    return FullscreenDirective.isFullscreen ? conditionalValue : actualValue;\r\n  }\r\n\r\n  isFullscreen() {\r\n    return FullscreenDirective.isFullscreen;\r\n  }\r\n}\r\n\r\n@NgModule({\r\n  imports: [FullscreenDirective, FullscreenToggleDirective],\r\n  exports: [FullscreenDirective, FullscreenToggleDirective],\r\n})\r\nexport class FullscreenModule {}\r\n",
             "selector": "[wtFullscreen]",
             "providers": [],
             "exportAs": "wtFullscreen",
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "isFullscreen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51,
+                    "modifierKind": [
+                        126
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "isFullscreen",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleValue",
+                    "args": [
+                        {
+                            "name": "actualValue",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "conditionalValue",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "T",
+                    "typeParameters": [
+                        "T"
+                    ],
+                    "line": 53,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "actualValue",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "conditionalValue",
+                            "type": "T",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "extends": [],
+            "implements": [
+                "IToggleValue"
+            ]
+        },
+        {
+            "name": "FullscreenToggleDirective",
+            "id": "directive-FullscreenToggleDirective-cc430a211715611c095dc4fc71ed98efa1adfdec572bf3913b2b9a13d58c6e51b5b700f3c01f3561f8790e0445042a6e716accf2662f1296d5e1eb916508db1d",
+            "file": "libs/material/layout/src/common/directives/fullscreen.directive.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Directive, HostListener, Input, NgModule } from '@angular/core';\r\nimport { IToggle, IToggleValue } from '../types';\r\n\r\n@Directive({\r\n  selector: '[wtFullscreenToggleButton]',\r\n  standalone: true,\r\n})\r\nexport class FullscreenToggleDirective implements IToggle {\r\n  @Input() targetElement?: HTMLElement;\r\n\r\n  @HostListener('click')\r\n  fullscreenButtonClick() {\r\n    if (this.targetElement) {\r\n      this.toggle(this.targetElement);\r\n    } else {\r\n      console.warn('targetElement is not provided to the fullscreen directive');\r\n    }\r\n  }\r\n\r\n  private open(element: HTMLElement) {\r\n    FullscreenDirective.isFullscreen = true;\r\n    element.requestFullscreen();\r\n  }\r\n\r\n  private close() {\r\n    FullscreenDirective.isFullscreen = false;\r\n    document.exitFullscreen();\r\n  }\r\n\r\n  /**\r\n   * Toggle fullscreen\r\n   * @param element\r\n   */\r\n  toggle(element: HTMLElement): void {\r\n    if (FullscreenDirective.isFullscreen) {\r\n      this.close();\r\n    } else {\r\n      this.open(element);\r\n    }\r\n  }\r\n}\r\n\r\n// Access the fullscreen information accross the application\r\n// And toggle values based on it.\r\n@Directive({\r\n  selector: '[wtFullscreen]',\r\n  standalone: true,\r\n  exportAs: 'wtFullscreen',\r\n})\r\nexport class FullscreenDirective implements IToggleValue {\r\n  static isFullscreen = false;\r\n\r\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\r\n    return FullscreenDirective.isFullscreen ? conditionalValue : actualValue;\r\n  }\r\n\r\n  isFullscreen() {\r\n    return FullscreenDirective.isFullscreen;\r\n  }\r\n}\r\n\r\n@NgModule({\r\n  imports: [FullscreenDirective, FullscreenToggleDirective],\r\n  exports: [FullscreenDirective, FullscreenToggleDirective],\r\n})\r\nexport class FullscreenModule {}\r\n",
+            "selector": "[wtFullscreenToggleButton]",
+            "providers": [],
             "hostDirectives": [],
             "standalone": true,
             "inputsClass": [
@@ -22795,7 +22890,7 @@
                     "name": "targetElement",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 9,
                     "type": "HTMLElement",
                     "decorators": []
                 }
@@ -22814,20 +22909,23 @@
                     "line": 12
                 }
             ],
-            "propertiesClass": [
-                {
-                    "name": "isFullscreen",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "boolean",
-                    "optional": true,
-                    "description": "",
-                    "line": 20
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [
                 {
-                    "name": "clickHander",
+                    "name": "close",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "fullscreenButtonClick",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
@@ -22846,29 +22944,6 @@
                     ]
                 },
                 {
-                    "name": "close",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 26,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        123
-                    ]
-                },
-                {
-                    "name": "hasFullscreenElement",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 47,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
                     "name": "open",
                     "args": [
                         {
@@ -22881,7 +22956,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 20,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -22912,7 +22987,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nToggle fullscreen\n",
@@ -22920,8 +22995,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 795,
-                                "end": 802,
+                                "pos": 827,
+                                "end": 834,
                                 "flags": 16842752,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -22932,8 +23007,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 789,
-                                "end": 794,
+                                "pos": 821,
+                                "end": 826,
                                 "flags": 16842752,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -22943,56 +23018,10 @@
                             "comment": ""
                         }
                     ]
-                },
-                {
-                    "name": "toggleValue",
-                    "args": [
-                        {
-                            "name": "actualValue",
-                            "type": "T",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "conditionalValue",
-                            "type": "T",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "T",
-                    "typeParameters": [
-                        "T"
-                    ],
-                    "line": 43,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "actualValue",
-                            "type": "T",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        },
-                        {
-                            "name": "conditionalValue",
-                            "type": "T",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
                 }
             ],
             "extends": [],
             "implements": [
-                "IToggleValue",
                 "IToggle"
             ]
         },
@@ -23453,12 +23482,12 @@
         },
         {
             "name": "ViewportDirective",
-            "id": "directive-ViewportDirective-c416869c68e8b2c7c4a24c054967b9f42a887f3bca57ffd4ffad123f1625f449dfbe8f8b68c3e537bcef12bae0b60ab3a7c47447dba465f2b4b385012798acc1",
+            "id": "directive-ViewportDirective-34819149050a0bc1cd9a09096e15c8dd45c6f9e51e9bdf08ecdbb4f95d3f95e6eac3d792ee9f9ecec2c1c267c93fc589b98dba220314c0b56b00c064fb99c9b1",
             "file": "libs/material/layout/src/common/directives/viewport.directive.ts",
             "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';\nimport { Observable, Subscription, map } from 'rxjs';\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\nimport { IToggleValue } from '../types';\n\n@Directive({\n  selector: '[wtViewport]',\n  standalone: true,\n  exportAs: 'wtViewport',\n})\nexport class ViewportDirective implements IToggleValue, OnInit, OnDestroy {\n  isHandset?: boolean;\n  isNotHandset?: boolean;\n\n  /**\n   * @ignore internal\n   */\n  $isHandset: Observable<boolean> = this.media\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\n    .pipe(\n      map((e) => {\n        const result = e.matches;\n        this.isHandset = result;\n        this.isNotHandset = !this.isHandset;\n        return result;\n      })\n    );\n\n  constructor(\n    public readonly elementRef: ElementRef<HTMLElement>,\n    private readonly media: BreakpointObserver\n  ) {}\n\n  viewportSubscription!: Subscription;\n\n  ngOnInit(): void {\n    this.viewportSubscription = this.$isHandset.subscribe();\n  }\n\n  ngOnDestroy(): void {\n    this.viewportSubscription.unsubscribe();\n  }\n\n  toggle(actual: string, handset: string) {\n    return this.isHandset ? handset : actual;\n  }\n\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\n    if (this.isHandset) {\n      if (typeof conditionalValue == 'function') {\n        return conditionalValue();\n      }\n      return conditionalValue;\n    }\n    if (typeof actualValue === 'function') {\n      return actualValue();\n    }\n    return actualValue;\n  }\n}\n",
+            "description": "<p>Access the view port inforamtion utilizing this useful directive in your template</p>\n<b>Example :</b><div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;container-element #viewport=&quot;wtViewport&quot; wtViewport&gt;\n   &lt;h1&gt; {{ viewport.toggleValue() }} &lt;/h1&gt;\n&lt;/container-element&gt;</code></pre></div>",
+            "rawdescription": "\n\nAccess the view port inforamtion utilizing this useful directive in your template\n\n````html\n<container-element #viewport=\"wtViewport\" wtViewport>\n   <h1> {{ viewport.toggleValue() }} </h1>\n</container-element>\n````\n",
+            "sourceCode": "import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';\r\nimport { Observable, Subscription, map } from 'rxjs';\r\nimport { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';\r\nimport { IToggleValue } from '../types';\r\n\r\n/**\r\n * Access the view port inforamtion utilizing this useful directive in your template\r\n *\r\n * ````html\r\n * <container-element #viewport=\"wtViewport\" wtViewport>\r\n *    <h1> {{ viewport.toggleValue() }} </h1>\r\n * </container-element>\r\n * ````\r\n */\r\n@Directive({\r\n  selector: '[wtViewport]',\r\n  standalone: true,\r\n  exportAs: 'wtViewport',\r\n})\r\nexport class ViewportDirective implements IToggleValue, OnInit, OnDestroy {\r\n  private __isHandset?: boolean;\r\n  private __isNotHandset?: boolean;\r\n  viewportSubscription!: Subscription;\r\n\r\n  /**\r\n   * @ignore internal\r\n   */\r\n  $isHandset: Observable<boolean> = this.media\r\n    .observe([Breakpoints.Handset, Breakpoints.Small, Breakpoints.XSmall])\r\n    .pipe(\r\n      map((e) => {\r\n        const result = e.matches;\r\n        this.__isHandset = result;\r\n        this.__isNotHandset = !this.__isHandset;\r\n        return result;\r\n      })\r\n    );\r\n\r\n  constructor(\r\n    public readonly elementRef: ElementRef<HTMLElement>,\r\n    private readonly media: BreakpointObserver\r\n  ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.viewportSubscription = this.$isHandset.subscribe();\r\n  }\r\n\r\n  ngOnDestroy(): void {\r\n    this.viewportSubscription.unsubscribe();\r\n  }\r\n\r\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\r\n    if (this.__isHandset) {\r\n      if (typeof conditionalValue == 'function') {\r\n        return conditionalValue();\r\n      }\r\n      return conditionalValue;\r\n    }\r\n    if (typeof actualValue === 'function') {\r\n      return actualValue();\r\n    }\r\n    return actualValue;\r\n  }\r\n\r\n  isHandset() {\r\n    return this.__isHandset;\r\n  }\r\n\r\n  isNotHandset() {\r\n    return this.__isNotHandset;\r\n  }\r\n}\r\n",
             "selector": "[wtViewport]",
             "providers": [],
             "exportAs": "wtViewport",
@@ -23472,35 +23501,41 @@
             "hostListeners": [],
             "propertiesClass": [
                 {
+                    "name": "__isHandset",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": true,
+                    "description": "",
+                    "line": 21,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "__isNotHandset",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": true,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
                     "name": "elementRef",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ElementRef<HTMLElement>",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 40,
                     "modifierKind": [
                         125,
                         148
                     ]
-                },
-                {
-                    "name": "isHandset",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "boolean",
-                    "optional": true,
-                    "description": "",
-                    "line": 12
-                },
-                {
-                    "name": "isNotHandset",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "boolean",
-                    "optional": true,
-                    "description": "",
-                    "line": 13
                 },
                 {
                     "name": "viewportSubscription",
@@ -23509,17 +23544,37 @@
                     "type": "Subscription",
                     "optional": false,
                     "description": "",
-                    "line": 34
+                    "line": 23
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "isHandset",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 65,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "isNotHandset",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 69,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "ngOnDestroy",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 40,
+                    "line": 48,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -23529,52 +23584,9 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "toggle",
-                    "args": [
-                        {
-                            "name": "actual",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "handset",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "string",
-                    "typeParameters": [],
                     "line": 44,
                     "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "actual",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        },
-                        {
-                            "name": "handset",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
+                    "deprecationMessage": ""
                 },
                 {
                     "name": "toggleValue",
@@ -23597,7 +23609,7 @@
                     "typeParameters": [
                         "T"
                     ],
-                    "line": 48,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -23647,7 +23659,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 27,
+                "line": 37,
                 "jsdoctags": [
                     {
                         "name": "elementRef",
@@ -23674,7 +23686,7 @@
     "components": [
         {
             "name": "AppLayoutComponent",
-            "id": "component-AppLayoutComponent-644767045ef99cc1a65205e0d3c0e40f09c7da5ad49863dfe1f0d0bc11a218d319d460e73a0c814a97308ac2d1c1bbe6054e4a8efafe0a55ef1519588acda6cd",
+            "id": "component-AppLayoutComponent-b1b13844d5f2469f93efed6f0812f3366b9890d5fb365c5ea84a98d20578bdb04700c7bd91b6370c576ddbdb4b132f179c7d1c3f8a411471d4a26a45bb31a811",
             "file": "libs/material/layout/src/app-layout/app-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -23691,11 +23703,29 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "rightSidenavToggleIcon",
-                    "defaultValue": "'settings'",
+                    "name": "leftSidenavToggleLabel",
+                    "defaultValue": "'Toggle left sidenav'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 50,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "rightSidenavToggleIcon",
+                    "defaultValue": "'apps'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 48,
+                    "type": "Icon",
+                    "decorators": []
+                },
+                {
+                    "name": "rightSidenavToggleLabel",
+                    "defaultValue": "'Toggle right sidenav'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
                     "type": "string",
                     "decorators": []
                 },
@@ -23706,7 +23736,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTest the app layout without pushing the content\n",
                     "description": "<p>Test the app layout without pushing the content</p>\n",
-                    "line": 45,
+                    "line": 46,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -23985,7 +24015,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport { MatTooltipModule } from '@angular/material/tooltip';\r\nimport {\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  BaseLayoutComponent,\r\n  FloatingContainerComponent,\r\n  LayoutDirectives,\r\n} from '../common/';\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...LayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n})\r\nexport class AppLayoutComponent extends BaseLayoutComponent {\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n}\r\n\r\n@NgModule({\r\n  imports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n  exports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n})\r\nexport class AppLayoutModule {}\r\n",
+            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport { MatTooltipModule } from '@angular/material/tooltip';\r\nimport {\r\n  ViewportDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  BaseLayoutComponent,\r\n  FloatingContainerComponent,\r\n  LayoutDirectives,\r\n  FullscreenModule,\r\n  Icon,\r\n} from '../common/';\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenModule,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...LayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n})\r\nexport class AppLayoutComponent extends BaseLayoutComponent {\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon: Icon = 'apps';\r\n\r\n  @Input() leftSidenavToggleLabel?: string = 'Toggle left sidenav';\r\n  @Input() rightSidenavToggleLabel?: string = 'Toggle right sidenav';\r\n}\r\n\r\n@NgModule({\r\n  imports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n  exports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n})\r\nexport class AppLayoutModule {}\r\n",
             "styleUrl": "./app-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -23993,11 +24023,11 @@
             "extends": [
                 "BaseLayoutComponent"
             ],
-            "templateData": "<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        testName=\"left\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        testName=\"right\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container #viewport=\"wtViewport\" wtViewport>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"viewport.toggleValue(true, false)\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.isHandset ? leftSidenav.close() : null\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavLeft\"\r\n      [testing]=\"testing\"\r\n      testName=\"Left sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.isHandset ? rightSidenav.close() : null\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavRight\"\r\n      [testing]=\"testing\"\r\n      testName=\"Right sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- --Start of the content -->\r\n  <mat-sidenav-content>\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n      <img wtAppLogo *ngIf=\"viewport.isNotHandset\" />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        aria-label=\"Toggle Left Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{\r\n          leftSidenav.opened ? 'menu_opened' : 'menu'\r\n        }}</mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        aria-label=\"Toggle Right Sidenav\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container column-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        #mainFullscreen=\"wtFullscreen\"\r\n        wtFullscreen\r\n        [targetElement]=\"mainContentContainer\"\r\n        [attr.aria-label]=\"\r\n          mainFullscreen.toggleValue('Fullscreen', 'Exit Fullscreen')\r\n        \"\r\n      >\r\n        <mat-icon>\r\n          {{ mainFullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"Main Content\"\r\n      ></wt-template-outlet>\r\n\r\n      <wt-floating-container\r\n        [items]=\"floatingItems\"\r\n        [testing]=\"testing\"\r\n      ></wt-floating-container>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRight,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
+            "templateData": "<ng-template\r\n  #toolbarTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        testName=\"left\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        testName=\"right\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<mat-sidenav-container\r\n  #fullscreen=\"wtFullscreen\"\r\n  wtFullscreen\r\n  #viewport=\"wtViewport\"\r\n  wtViewport\r\n>\r\n  <!-- Sidenav Left -->\r\n  <mat-sidenav\r\n    #leftSidenav\r\n    class=\"left\"\r\n    position=\"start\"\r\n    [opened]=\"viewport.toggleValue(true, false)\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.isHandset() ? leftSidenav.close() : null\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavLeft\"\r\n      [testing]=\"testing\"\r\n      testName=\"Left sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- Sidenav Right -->\r\n  <mat-sidenav\r\n    #rightSidenav\r\n    class=\"right\"\r\n    position=\"end\"\r\n    [mode]=\"viewport.toggleValue('side', 'over')\"\r\n    (click)=\"viewport.isHandset() ? rightSidenav.close() : null\"\r\n  >\r\n    <wt-template-outlet\r\n      [items]=\"sidenavRight\"\r\n      [testing]=\"testing\"\r\n      testName=\"Right sidenav\"\r\n    ></wt-template-outlet>\r\n  </mat-sidenav>\r\n\r\n  <!-- --Start of the content -->\r\n  <mat-sidenav-content>\r\n    <!-- Main toolbar -->\r\n    <mat-toolbar class=\"toolbar\" color=\"primary\" aria-label=\"Toolbar\">\r\n      <img wtAppLogo *ngIf=\"viewport.isNotHandset\" />\r\n\r\n      <!-- Left Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"leftSidenav.toggle()\"\r\n        [ariaLabel]=\"leftSidenavToggleLabel\"\r\n      >\r\n        <mat-icon class=\"fill\">\r\n          {{ leftSidenav.opened ? 'menu_opened' : 'menu' }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <!-- Toolbar Items -->\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: toolbarLeft,\r\n            right: toolbarRight,\r\n            testName: 'toolbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n\r\n      <!-- Right Sidenav Toggle -->\r\n      <button\r\n        mat-icon-button\r\n        (click)=\"rightSidenav.toggle()\"\r\n        [ariaLabel]=\"rightSidenavToggleLabel\"\r\n      >\r\n        <mat-icon class=\"fill\">{{ rightSidenavToggleIcon }}</mat-icon>\r\n      </button>\r\n    </mat-toolbar>\r\n\r\n    <!-- Main Content  -->\r\n\r\n    <div #mainContentContainer class=\"main-content-container column-container\">\r\n      <!-- Full Screen Button -->\r\n      <button\r\n        class=\"fullscreen-button\"\r\n        mat-icon-button\r\n        wtFullscreenToggleButton\r\n        [targetElement]=\"mainContentContainer\"\r\n        aria-label=\"Toggle Fullscreen\"\r\n      >\r\n        <mat-icon>\r\n          {{ fullscreen.toggleValue('fullscreen', 'fullscreen_exit') }}\r\n        </mat-icon>\r\n      </button>\r\n\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"Main Content\"\r\n      ></wt-template-outlet>\r\n\r\n      <wt-floating-container\r\n        [items]=\"floatingItems\"\r\n        [testing]=\"testing\"\r\n      ></wt-floating-container>\r\n    </div>\r\n\r\n    <!-- Statusbar -->\r\n    <mat-toolbar class=\"statusbar\" color=\"primary\" aria-label=\"Statusbar\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"\r\n          toolbarTemplate;\r\n          context: {\r\n            left: statusbarLeft,\r\n            right: statusbarRight,\r\n            testName: 'statusbar'\r\n          }\r\n        \"\r\n      ></ng-container>\r\n    </mat-toolbar>\r\n    <!-- --Endof the content -->\r\n  </mat-sidenav-content>\r\n</mat-sidenav-container>\r\n"
         },
         {
             "name": "AppSampleComponent",
-            "id": "component-AppSampleComponent-0575d561e223fdd13655f5e54618c0925fc5532694ee0189a07c49b564bbf6a49655da6fc50859eff54d2c85305577edb77762626e1e456d5ab23ffc9e4f1f3d",
+            "id": "component-AppSampleComponent-8fe8ded3520ed58ea8a9431f622caa6baf77af9ea4e0a74c9a8db36578497b4d95a75995bd366c447dbb407c95ae8d7a08d17eb56ec3bdb70ef18e7774a7f119",
             "file": "libs/material/layout/src/app-sample/app-sample.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -24042,13 +24072,13 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AppLayoutModule } from '../app-layout/app-layout.component';\nimport { RouterModule } from '@angular/router';\nimport { NavListComponent } from '../nav-list';\n\n@Component({\n  selector: 'wt-app-sample',\n  standalone: true,\n  imports: [CommonModule, RouterModule, AppLayoutModule, NavListComponent],\n  templateUrl: './app-sample.component.html',\n  styleUrl: './app-sample.component.scss',\n})\nexport class AppSampleComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { AppLayoutModule } from '../app-layout/app-layout.component';\r\nimport { RouterModule } from '@angular/router';\r\nimport { NavListComponent } from '../nav-list';\r\n\r\n@Component({\r\n  selector: 'wt-app-sample',\r\n  standalone: true,\r\n  imports: [CommonModule, RouterModule, AppLayoutModule, NavListComponent],\r\n  templateUrl: './app-sample.component.html',\r\n  styleUrl: './app-sample.component.scss',\r\n})\r\nexport class AppSampleComponent {}\r\n",
             "styleUrl": "./app-sample.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<wt-app-layout [rightSidenavToggleIcon]=\"'settings'\">\n  <ng-template wtToolbarRight>\n    <button mat-icon-button><mat-icon>person</mat-icon></button>\n  </ng-template>\n\n  <ng-template wtToolbarLeft>\n    <button mat-icon-button><mat-icon>home</mat-icon></button>\n  </ng-template>\n\n  <ng-template wtMainContent>\n    <div class=\"column-container\">\n      <img\n        src=\"./assets/imgs/clock.svg\"\n        alt=\"Time\"\n        style=\"width: 100px; margin: auto\"\n      />\n\n      <div class=\"ff-comfortaa\" style=\"text-align: center\">\n        <h1 style=\"color: green\">Good News</h1>\n        <p>Hey, how you doing today. I got some good news for you!</p>\n        <p>Are you ready?</p>\n        <p>\n          You got <strong> 100 sales in 3 hours</strong>! Not me! People love\n          your products!\n        </p>\n        <p>Have a look at the <a href=\"#sales-report\">sales' report </a></p>\n        <hr />\n        <h1 style=\"color: crimson\">Bad News</h1>\n        <p>Unfortunately, we go some bad news!</p>\n        <p>\n          We have 11 product 2 employee related issues! Please have a look at\n          your <a href=\"#inbox\">inbox </a>\n        </p>\n      </div>\n      <div class=\"ff-comfortaa\" style=\"text-align: center\">\n        <h1 style=\"color: green\">Good News</h1>\n        <p>Hey, how you doing today. I got some good news for you!</p>\n        <p>Are you ready?</p>\n        <p>\n          You got <strong> 100 sales in 3 hours</strong>! Not me! People love\n          your products!\n        </p>\n        <p>Have a look at the <a href=\"#sales-report\">sales' report </a></p>\n        <hr />\n        <h1 style=\"color: crimson\">Bad News</h1>\n        <p>Unfortunately, we go some bad news!</p>\n        <p>\n          We have 11 product 2 employee related issues! Please have a look at\n          your <a href=\"#inbox\">inbox </a>\n        </p>\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template wtSidenavLeft>\n    <wt-nav-list\n      title=\"Inventory\"\n      [items]=\"[\n        { id: 1, icon: 'apps', title: 'Products', route: 'some' },\n        { id: 2, icon: 'numbers', title: 'Counter', route: 'some' }\n      ]\"\n    ></wt-nav-list>\n  </ng-template>\n\n  <ng-template wtSidenavLeft>\n    <wt-nav-list\n      title=\"Promotions\"\n      [items]=\"[\n        { id: 3, icon: 'money', title: 'Prices', route: 'some' },\n        { id: 4, icon: 'arrow_right', title: 'Discounts', route: 'some' },\n        { id: 4, icon: 'money', title: 'Promoted Items', route: 'some' }\n      ]\"\n    ></wt-nav-list>\n  </ng-template>\n\n  <ng-template wtSidenavLeft>\n    <wt-nav-list\n      title=\"Meta\"\n      [items]=\"[\n        { id: 3, icon: 'category', title: 'Categories', route: 'some' },\n        { id: 4, icon: 'business', title: 'Departments', route: 'some' }\n      ]\"\n    ></wt-nav-list>\n  </ng-template>\n  <ng-template wtSidenavRight>\n    <wt-nav-list\n      title=\"Administrative\"\n      [items]=\"[\n        {\n          id: 5,\n          icon: 'group',\n          title: 'Employees',\n          route: 'some',\n          \n        },\n        {\n          id: 5,\n          icon: 'add',\n          title: 'New Employee',\n          route: 'some',\n          \n        },\n      ]\"\n    ></wt-nav-list>\n  </ng-template>\n\n  <ng-template wtSidenavRight>\n    <wt-nav-list\n      title=\"Store Management\"\n      [items]=\"[\n        {\n          id: 6,\n          icon: 'store',\n          title: 'Stores',\n          route: 'some',\n          \n        },\n        {\n          id: 6,\n          icon: 'add',\n          title: 'New Store',\n          route: 'some',\n          \n        }\n      ]\"\n    ></wt-nav-list>\n  </ng-template>\n\n  <ng-template wtSidenavRight>\n    <wt-nav-list\n      title=\"Customer Management\"\n      [items]=\"[\n        {\n          id: 6,\n          icon: 'group',\n          title: 'Customers',\n          route: 'some',\n          \n        }\n      ]\"\n    ></wt-nav-list>\n\n    <ng-template wtStatusbarLeft>\n      <button\n        mat-icon-button\n        color=\"accent\"\n        matBadgeColor=\"warn\"\n        matBadge=\"100\"\n      >\n        <mat-icon>light</mat-icon>\n      </button>\n      <button mat-icon-button color=\"accent\" matBadgeColor=\"warn\" matBadge=\"5\">\n        <mat-icon>reports</mat-icon>\n      </button>\n    </ng-template>\n\n    <ng-template wtStatusbarRight>\n      <button mat-icon-button matBadge=\"3\" matBadgeColor=\"warn\" color=\"accent\">\n        <mat-icon class=\"fill\"> mail </mat-icon>\n      </button>\n      <button mat-icon-button matBadge=\"12\" matBadgeColor=\"warn\" color=\"accent\">\n        <mat-icon class=\"fill\">notifications</mat-icon>\n      </button>\n    </ng-template>\n  </ng-template>\n\n  <ng-template wtFloatingItems>\n    <div class=\"column-container\">\n      <button mat-mini-fab color=\"primary\"><mat-icon>chat</mat-icon></button>\n      <button mat-mini-fab color=\"accent\"><mat-icon>info</mat-icon></button>\n      <button mat-mini-fab color=\"warn\"><mat-icon>phone</mat-icon></button>\n    </div>\n  </ng-template>\n</wt-app-layout>\n"
+            "templateData": "<wt-app-layout [rightSidenavToggleIcon]=\"'settings'\">\r\n  <ng-template wtToolbarRight>\r\n    <button mat-icon-button><mat-icon>person</mat-icon></button>\r\n  </ng-template>\r\n\r\n  <ng-template wtToolbarLeft>\r\n    <button mat-icon-button><mat-icon>home</mat-icon></button>\r\n  </ng-template>\r\n\r\n  <ng-template wtMainContent>\r\n    <div class=\"column-container\">\r\n      <img\r\n        src=\"./assets/imgs/clock.svg\"\r\n        alt=\"Time\"\r\n        style=\"width: 100px; margin: auto\"\r\n      />\r\n\r\n      <div class=\"ff-comfortaa\" style=\"text-align: center\">\r\n        <h1 style=\"color: green\">Good News</h1>\r\n        <p>Hey, how you doing today. I got some good news for you!</p>\r\n        <p>Are you ready?</p>\r\n        <p>\r\n          You got <strong> 100 sales in 3 hours</strong>! Not me! People love\r\n          your products!\r\n        </p>\r\n        <p>Have a look at the <a href=\"#sales-report\">sales' report </a></p>\r\n        <hr />\r\n        <h1 style=\"color: crimson\">Bad News</h1>\r\n        <p>Unfortunately, we go some bad news!</p>\r\n        <p>\r\n          We have 11 product 2 employee related issues! Please have a look at\r\n          your <a href=\"#inbox\">inbox </a>\r\n        </p>\r\n      </div>\r\n      <div class=\"ff-comfortaa\" style=\"text-align: center\">\r\n        <h1 style=\"color: green\">Good News</h1>\r\n        <p>Hey, how you doing today. I got some good news for you!</p>\r\n        <p>Are you ready?</p>\r\n        <p>\r\n          You got <strong> 100 sales in 3 hours</strong>! Not me! People love\r\n          your products!\r\n        </p>\r\n        <p>Have a look at the <a href=\"#sales-report\">sales' report </a></p>\r\n        <hr />\r\n        <h1 style=\"color: crimson\">Bad News</h1>\r\n        <p>Unfortunately, we go some bad news!</p>\r\n        <p>\r\n          We have 11 product 2 employee related issues! Please have a look at\r\n          your <a href=\"#inbox\">inbox </a>\r\n        </p>\r\n      </div>\r\n    </div>\r\n  </ng-template>\r\n\r\n  <ng-template wtSidenavLeft>\r\n    <wt-nav-list\r\n      title=\"Inventory\"\r\n      [items]=\"[\r\n        { id: 1, icon: 'apps', title: 'Products', route: 'some' },\r\n        { id: 2, icon: 'numbers', title: 'Counter', route: 'some' }\r\n      ]\"\r\n    ></wt-nav-list>\r\n  </ng-template>\r\n\r\n  <ng-template wtSidenavLeft>\r\n    <wt-nav-list\r\n      title=\"Promotions\"\r\n      [items]=\"[\r\n        { id: 3, icon: 'money', title: 'Prices', route: 'some' },\r\n        { id: 4, icon: 'arrow_right', title: 'Discounts', route: 'some' },\r\n        { id: 4, icon: 'money', title: 'Promoted Items', route: 'some' }\r\n      ]\"\r\n    ></wt-nav-list>\r\n  </ng-template>\r\n\r\n  <ng-template wtSidenavLeft>\r\n    <wt-nav-list\r\n      title=\"Meta\"\r\n      [items]=\"[\r\n        { id: 3, icon: 'category', title: 'Categories', route: 'some' },\r\n        { id: 4, icon: 'business', title: 'Departments', route: 'some' }\r\n      ]\"\r\n    ></wt-nav-list>\r\n  </ng-template>\r\n  <ng-template wtSidenavRight>\r\n    <wt-nav-list\r\n      title=\"Administrative\"\r\n      [items]=\"[\r\n        {\r\n          id: 5,\r\n          icon: 'group',\r\n          title: 'Employees',\r\n          route: 'some',\r\n          \r\n        },\r\n        {\r\n          id: 5,\r\n          icon: 'add',\r\n          title: 'New Employee',\r\n          route: 'some',\r\n          \r\n        },\r\n      ]\"\r\n    ></wt-nav-list>\r\n  </ng-template>\r\n\r\n  <ng-template wtSidenavRight>\r\n    <wt-nav-list\r\n      title=\"Store Management\"\r\n      [items]=\"[\r\n        {\r\n          id: 6,\r\n          icon: 'store',\r\n          title: 'Stores',\r\n          route: 'some',\r\n          \r\n        },\r\n        {\r\n          id: 6,\r\n          icon: 'add',\r\n          title: 'New Store',\r\n          route: 'some',\r\n          \r\n        }\r\n      ]\"\r\n    ></wt-nav-list>\r\n  </ng-template>\r\n\r\n  <ng-template wtSidenavRight>\r\n    <wt-nav-list\r\n      title=\"Customer Management\"\r\n      [items]=\"[\r\n        {\r\n          id: 6,\r\n          icon: 'group',\r\n          title: 'Customers',\r\n          route: 'some',\r\n          \r\n        }\r\n      ]\"\r\n    ></wt-nav-list>\r\n\r\n    <ng-template wtStatusbarLeft>\r\n      <button\r\n        mat-icon-button\r\n        color=\"accent\"\r\n        matBadgeColor=\"warn\"\r\n        matBadge=\"100\"\r\n      >\r\n        <mat-icon>light</mat-icon>\r\n      </button>\r\n      <button mat-icon-button color=\"accent\" matBadgeColor=\"warn\" matBadge=\"5\">\r\n        <mat-icon>reports</mat-icon>\r\n      </button>\r\n    </ng-template>\r\n\r\n    <ng-template wtStatusbarRight>\r\n      <button mat-icon-button matBadge=\"3\" matBadgeColor=\"warn\" color=\"accent\">\r\n        <mat-icon class=\"fill\"> mail </mat-icon>\r\n      </button>\r\n      <button mat-icon-button matBadge=\"12\" matBadgeColor=\"warn\" color=\"accent\">\r\n        <mat-icon class=\"fill\">notifications</mat-icon>\r\n      </button>\r\n    </ng-template>\r\n  </ng-template>\r\n\r\n  <ng-template wtFloatingItems>\r\n    <div class=\"column-container\">\r\n      <button mat-mini-fab color=\"primary\"><mat-icon>chat</mat-icon></button>\r\n      <button mat-mini-fab color=\"accent\"><mat-icon>info</mat-icon></button>\r\n      <button mat-mini-fab color=\"warn\"><mat-icon>phone</mat-icon></button>\r\n    </div>\r\n  </ng-template>\r\n</wt-app-layout>\r\n"
         },
         {
             "name": "BaseLayoutComponent",
@@ -24302,8 +24332,127 @@
             "extends": []
         },
         {
+            "name": "ChartComponent",
+            "id": "component-ChartComponent-ff272736f5c55586fec215bf6c73f195d6280725eebc47a59aed8bdb59b1c7fc9fc4bd8185fd888eadf4729690475f4d1033f5630bcfa1dda321f40835c74ceb",
+            "file": "libs/material/chart/src/lib/chart/chart.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-chart",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./chart.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-chart',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './chart.component.html',\n  styleUrl: './chart.component.scss',\n})\nexport class ChartComponent {}\n",
+            "styleUrl": "./chart.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>chart works!</p>\n"
+        },
+        {
+            "name": "EditorComponent",
+            "id": "component-EditorComponent-6add7d908dc277448aa687e8c4b3eaa1334250554d620ecc663d040cd4d7f53d73c3000e7ae540390d314cc1361a478027e4b9cd5d6259ab1bf609d996e9adb7",
+            "file": "libs/material/editor/src/lib/editor/editor.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-editor",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./editor.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "editor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef<HTMLDivElement>",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'editor'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 13,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport Quill from 'quill';\n@Component({\n  selector: 'wt-editor',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './editor.component.html',\n  styleUrl: './editor.component.scss',\n})\nexport class EditorComponent implements AfterViewInit {\n  @ViewChild('editor') editor!: ElementRef<HTMLDivElement>;\n  ngAfterViewInit(): void {\n    new Quill(this.editor.nativeElement, {\n      theme: 'snow',\n    });\n  }\n}\n",
+            "styleUrl": "./editor.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "implements": [
+                "AfterViewInit"
+            ],
+            "templateData": "<link href=\"https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.core.css\" rel=\"stylesheet\">\n\n<div #editor>\n  <h2>Demo content</h2>\n  <p>Some other content <code>show</code></p>\n</div>\n"
+        },
+        {
             "name": "FloatingContainerComponent",
-            "id": "component-FloatingContainerComponent-7a8714d8b8f1a48ae5a661238169b4dd304357f23aa5b377705094e3fee913c0e70f27f67fe4e9776a91b5c731d9ef8931a025a8732cec2802d320e1faa20e39",
+            "id": "component-FloatingContainerComponent-a690a3f09be52e6fa7f35fa15e263834e17193dd74e9726b06bf2bfb563fedafba6f47eea24dcc5a54218e196a4dba95ad3dce8f9e31d14d97808ff97b1db915",
             "file": "libs/material/layout/src/common/floating-container/floating-container.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -24362,17 +24511,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, QueryList } from '@angular/core';\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\nimport { TemplateOutletComponent } from '../template-outlet/template-outlet.component';\nimport { ITemplateRef } from '../types';\nimport { FullscreenDirective } from '../directives';\n\n@Component({\n  selector: 'wt-floating-container',\n  standalone: true,\n  imports: [CommonModule, TemplateOutletComponent, FullscreenDirective],\n  templateUrl: './floating-container.component.html',\n  styleUrl: './floating-container.component.scss',\n})\nexport class FloatingContainerComponent {\n  @Input() items?: QueryList<ITemplateRef<NgTemplateOutlet>>;\n  @Input() testing = false;\n}\n",
+            "sourceCode": "import { Component, Input, QueryList } from '@angular/core';\r\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\r\nimport { TemplateOutletComponent } from '../template-outlet/template-outlet.component';\r\nimport { ITemplateRef } from '../types';\r\nimport { FullscreenDirective } from '../directives';\r\n\r\n@Component({\r\n  selector: 'wt-floating-container',\r\n  standalone: true,\r\n  imports: [CommonModule, TemplateOutletComponent, FullscreenDirective],\r\n  templateUrl: './floating-container.component.html',\r\n  styleUrl: './floating-container.component.scss',\r\n})\r\nexport class FloatingContainerComponent {\r\n  @Input() items?: QueryList<ITemplateRef<NgTemplateOutlet>>;\r\n  @Input() testing = false;\r\n}\r\n",
             "styleUrl": "./floating-container.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<div class=\"fixed-right-container\" #screen=\"wtFullscreen\" wtFullscreen>\n  <div class=\"floating-content\" *ngIf=\"!screen.hasFullscreenElement()\">\n    <wt-template-outlet\n      [items]=\"items\"\n      [testing]=\"testing\"\n      testName=\"Floating Buttons\"\n    ></wt-template-outlet>\n  </div>\n</div>\n"
+            "templateData": "<div class=\"fixed-right-container\" #screen=\"wtFullscreen\" wtFullscreen>\r\n  <div class=\"floating-content\" *ngIf=\"!screen.isFullscreen()\">\r\n    <wt-template-outlet\r\n      [items]=\"items\"\r\n      [testing]=\"testing\"\r\n      testName=\"Floating Buttons\"\r\n    ></wt-template-outlet>\r\n  </div>\r\n</div>\r\n"
         },
         {
             "name": "IconsComponent",
-            "id": "component-IconsComponent-909e56a762df120c9e622e26541c6f187f6abba3a1db72a12339390309258fb672c2980433cce7657d0d0e24061ed40b5540fde64712b5c2ba5a794fd23a7edb",
+            "id": "component-IconsComponent-6c7eda8c88b4db65bf018e5c37618151fb83d7e3d8f4f6a3e679460e112e3c18b9667567fa69c3c4862090b1127f49214301ce57d66cc9a6b4447a4c19ea6794",
             "file": "libs/material/layout/src/icons/icons.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -24550,7 +24699,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnDestroy, OnInit } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { Icons } from '../common';\nimport { MatIconModule } from '@angular/material/icon';\nimport { ClipboardModule } from '@angular/cdk/clipboard';\nimport { MatRadioModule } from '@angular/material/radio';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatSlideToggleModule } from '@angular/material/slide-toggle';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';\nimport { Subscription, debounceTime } from 'rxjs';\n@Component({\n  selector: 'wt-icons',\n  standalone: true,\n  imports: [\n    CommonModule,\n    MatIconModule,\n    MatButtonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    ClipboardModule,\n    MatRadioModule,\n    MatInputModule,\n    MatSlideToggleModule,\n    MatSnackBarModule,\n  ],\n  templateUrl: './icons.component.html',\n  styleUrl: './icons.component.scss',\n})\nexport class IconsComponent implements OnInit, OnDestroy {\n  fill = false;\n  color = 'primary';\n  search: string = '';\n  filteredIcons: string[] = [];\n\n  searchControl = new FormControl('');\n  searchControlValueSubscription!: Subscription;\n  constructor(private readonly snack: MatSnackBar) {}\n\n  ngOnInit(): void {\n    this.searchControlValueSubscription = this.searchControl.valueChanges\n      .pipe(debounceTime(400))\n      .subscribe((value) => {\n        this.filteredIcons = Icons.filter((e) => {\n          return value\n            ?.toLowerCase()\n            .split(' ')\n            .map((v) => e.includes(v))\n            .reduce((p, c) => p || c);\n        });\n      });\n  }\n  ngOnDestroy(): void {\n    this.searchControlValueSubscription.unsubscribe();\n  }\n\n  message(value: string) {\n    const isFill = this.fill ? 'class=\"fill\"' : '';\n    const template = `<mat-icon ${isFill} color=\"${this.color}\" > ${value}</mat-icon> `;\n    this.snack.open(`${template} is copied to clipboard`, undefined, {\n      verticalPosition: 'bottom',\n      horizontalPosition: 'right',\n    });\n  }\n}\n",
+            "sourceCode": "import { Component, OnDestroy, OnInit } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { Icons } from '../common';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { ClipboardModule } from '@angular/cdk/clipboard';\r\nimport { MatRadioModule } from '@angular/material/radio';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSlideToggleModule } from '@angular/material/slide-toggle';\r\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';\r\nimport { Subscription, debounceTime } from 'rxjs';\r\n@Component({\r\n  selector: 'wt-icons',\r\n  standalone: true,\r\n  imports: [\r\n    CommonModule,\r\n    MatIconModule,\r\n    MatButtonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    ClipboardModule,\r\n    MatRadioModule,\r\n    MatInputModule,\r\n    MatSlideToggleModule,\r\n    MatSnackBarModule,\r\n  ],\r\n  templateUrl: './icons.component.html',\r\n  styleUrl: './icons.component.scss',\r\n})\r\nexport class IconsComponent implements OnInit, OnDestroy {\r\n  fill = false;\r\n  color = 'primary';\r\n  search: string = '';\r\n  filteredIcons: string[] = [];\r\n\r\n  searchControl = new FormControl('');\r\n  searchControlValueSubscription!: Subscription;\r\n  constructor(private readonly snack: MatSnackBar) {}\r\n\r\n  ngOnInit(): void {\r\n    this.searchControlValueSubscription = this.searchControl.valueChanges\r\n      .pipe(debounceTime(400))\r\n      .subscribe((value) => {\r\n        this.filteredIcons = Icons.filter((e) => {\r\n          return value\r\n            ?.toLowerCase()\r\n            .split(' ')\r\n            .map((v) => e.includes(v))\r\n            .reduce((p, c) => p || c);\r\n        });\r\n      });\r\n  }\r\n  ngOnDestroy(): void {\r\n    this.searchControlValueSubscription.unsubscribe();\r\n  }\r\n\r\n  message(value: string) {\r\n    const isFill = this.fill ? 'class=\"fill\"' : '';\r\n    const template = `<mat-icon ${isFill} color=\"${this.color}\" > ${value}</mat-icon> `;\r\n    this.snack.open(`${template} is copied to clipboard`, undefined, {\r\n      verticalPosition: 'bottom',\r\n      horizontalPosition: 'right',\r\n    });\r\n  }\r\n}\r\n",
             "styleUrl": "./icons.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -24586,11 +24735,140 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<div class=\"row-container center-container\">\n  <div class=\"column-container\">\n    <div class=\"column-container sticky-top\">\n      <h1>Google Material Icons</h1>\n      <div class=\"row-container\" style=\"align-items: center\">\n        <!-- Select Icon Color  -->\n\n        <fieldset>\n          <legend>Icon Color</legend>\n\n          <mat-radio-group\n            [(ngModel)]=\"color\"\n            ariaLabel=\"Color\"\n            labelPosition=\"before\"\n          >\n            <div class=\"row-container\">\n              <mat-radio-button value=\"primary\">Primary </mat-radio-button>\n              <mat-radio-button value=\"accent\">Accent </mat-radio-button>\n              <mat-radio-button value=\"warn\">Warn </mat-radio-button>\n              <mat-radio-button value=\"\">None </mat-radio-button>\n            </div>\n          </mat-radio-group>\n        </fieldset>\n\n        <!-- Select Fill -->\n        <mat-slide-toggle [(ngModel)]=\"fill\" labelPosition=\"before\">\n          {{ fill ? 'Fill' : 'Outlined' }}\n        </mat-slide-toggle>\n      </div>\n\n      <mat-form-field appearance=\"outline\">\n        <input type=\"search\" placeholder=\"search icons\" matInput [formControl]=\"searchControl\" />\n      </mat-form-field>\n    </div>\n\n    <div class=\"row-container icons-container\">\n      @for(icon of filteredIcons; track icon){\n\n      <span (click)=\"message(icon)\">\n        <mat-icon\n          [class.fill]=\"fill\"\n          [color]=\"color\"\n          [cdkCopyToClipboard]=\"icon\"\n          >{{ icon }}</mat-icon\n        >\n      </span>\n      }\n    </div>\n  </div>\n</div>\n"
+            "templateData": "<div class=\"row-container center-container\">\r\n  <div class=\"column-container\">\r\n    <div class=\"column-container sticky-top\">\r\n      <h1>Google Material Icons</h1>\r\n      <div class=\"row-container\" style=\"align-items: center\">\r\n        <!-- Select Icon Color  -->\r\n\r\n        <fieldset>\r\n          <legend>Icon Color</legend>\r\n\r\n          <mat-radio-group\r\n            [(ngModel)]=\"color\"\r\n            ariaLabel=\"Color\"\r\n            labelPosition=\"before\"\r\n          >\r\n            <div class=\"row-container\">\r\n              <mat-radio-button value=\"primary\">Primary </mat-radio-button>\r\n              <mat-radio-button value=\"accent\">Accent </mat-radio-button>\r\n              <mat-radio-button value=\"warn\">Warn </mat-radio-button>\r\n              <mat-radio-button value=\"\">None </mat-radio-button>\r\n            </div>\r\n          </mat-radio-group>\r\n        </fieldset>\r\n\r\n        <!-- Select Fill -->\r\n        <mat-slide-toggle [(ngModel)]=\"fill\" labelPosition=\"before\">\r\n          {{ fill ? 'Fill' : 'Outlined' }}\r\n        </mat-slide-toggle>\r\n      </div>\r\n\r\n      <mat-form-field appearance=\"outline\">\r\n        <input type=\"search\" placeholder=\"search icons\" matInput [formControl]=\"searchControl\" />\r\n      </mat-form-field>\r\n    </div>\r\n\r\n    <div class=\"row-container icons-container\">\r\n      @for(icon of filteredIcons; track icon){\r\n\r\n      <span (click)=\"message(icon)\">\r\n        <mat-icon\r\n          [class.fill]=\"fill\"\r\n          [color]=\"color\"\r\n          [cdkCopyToClipboard]=\"icon\"\r\n          >{{ icon }}</mat-icon\r\n        >\r\n      </span>\r\n      }\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+        },
+        {
+            "name": "MaterialChartComponent",
+            "id": "component-MaterialChartComponent-0e35a4e3902d80c74358c4777a1e7b8d20b6bd8eac1f475d3ec36c0c4ab0d83a178dabe1b145e2f125545e2a677917c5c78eb6f976e1d7dd76dee1f7c5a249e6",
+            "file": "libs/material/chart/src/lib/material-chart/material-chart.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-material-chart",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./material-chart.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-material-chart',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './material-chart.component.html',\n  styleUrl: './material-chart.component.css',\n})\nexport class MaterialChartComponent {}\n",
+            "styleUrl": "./material-chart.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>material-chart works!</p>\n"
+        },
+        {
+            "name": "MaterialEditorComponent",
+            "id": "component-MaterialEditorComponent-18068b8e598f669e2c6d7daed69aa3e3d3b2f7243c3902e1bcd20413c1e749d191841c2c6dcf68c69e8e66a02d9e44ded6f85c54aa916908cc923cc5b001b0d1",
+            "file": "libs/material/editor/src/lib/material-editor/material-editor.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-material-editor",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./material-editor.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-material-editor',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './material-editor.component.html',\n  styleUrl: './material-editor.component.css',\n})\nexport class MaterialEditorComponent {}\n",
+            "styleUrl": "./material-editor.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>material-editor works!</p>\n"
+        },
+        {
+            "name": "MaterialFormsComponent",
+            "id": "component-MaterialFormsComponent-a40458cb608473ebaec8e8732d6fa213276855bf516af811e1970dade073bd1d0fb6f7fb815b0d1b5c0dc07d047d5341349c6aee5f949854c5dd6cd390686181",
+            "file": "libs/material/forms/src/lib/material-forms/material-forms.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-material-forms",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./material-forms.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-material-forms',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './material-forms.component.html',\n  styleUrl: './material-forms.component.css',\n})\nexport class MaterialFormsComponent {}\n",
+            "styleUrl": "./material-forms.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>material-forms works!</p>\n"
         },
         {
             "name": "NavListComponent",
-            "id": "component-NavListComponent-6662abbe1dfd7d968c10e0d646d8c64d0bc321d813410fc9baa4decc9963972f825f94d6fd5d40169759ab07521df2d2f8b2b57ef6e3d34175e26a6db38e3d85",
+            "id": "component-NavListComponent-d97b0507b08a3698c6ca02a79572a02ca465108633ad1383b309dc34b179a738ab8c874bdb2942ce5722fb3267b6efab3c72b5040f94f14967717c7498cf6db0",
             "file": "libs/material/layout/src/nav-list/nav-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -24730,17 +25008,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatListModule } from '@angular/material/list';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatBadgeModule } from '@angular/material/badge';\nimport { MenuItem } from '../common/types';\nimport { RouterModule } from '@angular/router';\nimport { getActivatedItemName, setActivatedItemName } from '../common';\n\n@Component({\n  selector: 'wt-nav-list',\n  standalone: true,\n  imports: [\n    CommonModule,\n    RouterModule,\n    MatListModule,\n    MatIconModule,\n    MatBadgeModule,\n  ],\n  templateUrl: './nav-list.component.html',\n  styleUrl: './nav-list.component.scss',\n})\nexport class NavListComponent {\n  /**\n   * Nav list title\n   */\n  @Input() title: string = 'List title';\n\n  /**\n   * Nav list items\n   */\n  @Input() items: MenuItem[] = [];\n\n  /**\n   * Emit the nav item meta data when it is clicked\n   */\n  @Output() clickEvent = new EventEmitter<MenuItem>();\n\n  clickHandler(item: MenuItem) {\n    setActivatedItemName(item.title);\n    this.clickEvent.emit(item);\n  }\n\n  isActiveListItem(item: MenuItem) {\n    return getActivatedItemName() == item.title;\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatListModule } from '@angular/material/list';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport { MenuItem } from '../common/types';\r\nimport { RouterModule } from '@angular/router';\r\nimport { getActivatedItemName, setActivatedItemName } from '../common';\r\n\r\n@Component({\r\n  selector: 'wt-nav-list',\r\n  standalone: true,\r\n  imports: [\r\n    CommonModule,\r\n    RouterModule,\r\n    MatListModule,\r\n    MatIconModule,\r\n    MatBadgeModule,\r\n  ],\r\n  templateUrl: './nav-list.component.html',\r\n  styleUrl: './nav-list.component.scss',\r\n})\r\nexport class NavListComponent {\r\n  /**\r\n   * Nav list title\r\n   */\r\n  @Input() title: string = 'List title';\r\n\r\n  /**\r\n   * Nav list items\r\n   */\r\n  @Input() items: MenuItem[] = [];\r\n\r\n  /**\r\n   * Emit the nav item meta data when it is clicked\r\n   */\r\n  @Output() clickEvent = new EventEmitter<MenuItem>();\r\n\r\n  clickHandler(item: MenuItem) {\r\n    setActivatedItemName(item.title);\r\n    this.clickEvent.emit(item);\r\n  }\r\n\r\n  isActiveListItem(item: MenuItem) {\r\n    return getActivatedItemName() == item.title;\r\n  }\r\n}\r\n",
             "styleUrl": "./nav-list.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<h1>\n  <strong>\n    {{ title }}\n  </strong>\n</h1>\n\n<mat-nav-list #navList>\n  @for(item of items ; track item){\n  <mat-list-item\n    #menuItem\n    [activated]=\"isActiveListItem(item)\"\n    [routerLink]=\"[item.route]\"\n    (click)=\"clickHandler(item)\"\n  >\n    <span matListItemTitle>{{ item.title }}</span>\n\n    <span matListItemIcon>\n      <mat-icon\n        [matBadge]=\"item.badge\"\n        [matBadgeColor]=\"item.badgeColor\"\n        [color]=\"item.iconColor\"\n        aria-hidden=\"false\"\n        class=\"fill\"\n      >\n        {{ item.icon }}\n      </mat-icon>\n    </span>\n    <!-- <span matListItemMeta>{{ item.meta }}</span> -->\n  </mat-list-item>\n  }\n</mat-nav-list>\n"
+            "templateData": "<h1>\r\n  <strong>\r\n    {{ title }}\r\n  </strong>\r\n</h1>\r\n\r\n<mat-nav-list #navList>\r\n  @for(item of items ; track item){\r\n  <mat-list-item\r\n    #menuItem\r\n    [activated]=\"isActiveListItem(item)\"\r\n    [routerLink]=\"[item.route]\"\r\n    (click)=\"clickHandler(item)\"\r\n    [attr.data-testid]=\"item.title\"\r\n  >\r\n    <span matListItemTitle>{{ item.title }}</span>\r\n\r\n    <span matListItemIcon>\r\n      <mat-icon\r\n        [matBadge]=\"item.badge\"\r\n        [matBadgeColor]=\"item.badgeColor\"\r\n        [color]=\"item.iconColor\"\r\n        aria-hidden=\"false\"\r\n        class=\"fill\"\r\n      >\r\n        {{ item.icon }}\r\n      </mat-icon>\r\n    </span>\r\n    <!-- <span matListItemMeta>{{ item.meta }}</span> -->\r\n  </mat-list-item>\r\n  }\r\n</mat-nav-list>\r\n"
         },
         {
             "name": "TemplateOutletComponent",
-            "id": "component-TemplateOutletComponent-8042ad53e08303cb836f7e4782ec0c3c239efafdf3729b26689a4a7460d6a61c00253485314508eed5188fdd41e32756603d447f3284af864306eb35914c965e",
+            "id": "component-TemplateOutletComponent-dafc5e4cb4979766fa8e4b39d86ddbaa004ad915ef95c68170f3d77b8cfa37800314b8f4a57a8a67221c3611a151e9c482181f4e26c0e86e21692a9e6da76e58",
             "file": "libs/material/layout/src/common/template-outlet/template-outlet.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -24799,17 +25077,17 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, QueryList } from '@angular/core';\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\n\nimport { ITemplateRef } from '../types';\n\n@Component({\n  selector: 'wt-template-outlet',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './template-outlet.component.html',\n  styleUrl: './template-outlet.component.scss',\n})\nexport class TemplateOutletComponent {\n  @Input() testing = false;\n  @Input() testName?: string;\n  @Input() items?: QueryList<ITemplateRef<NgTemplateOutlet>>;\n}\n",
+            "sourceCode": "import { Component, Input, QueryList } from '@angular/core';\r\nimport { CommonModule, NgTemplateOutlet } from '@angular/common';\r\n\r\nimport { ITemplateRef } from '../types';\r\n\r\n@Component({\r\n  selector: 'wt-template-outlet',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './template-outlet.component.html',\r\n  styleUrl: './template-outlet.component.scss',\r\n})\r\nexport class TemplateOutletComponent {\r\n  @Input() testing = false;\r\n  @Input() testName?: string;\r\n  @Input() items?: QueryList<ITemplateRef<NgTemplateOutlet>>;\r\n}\r\n",
             "styleUrl": "./template-outlet.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<span *ngIf=\"testing === true\">{{ testName }}</span>\n\n@if(items){ @for(item of items; track item){\n<ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\n} }\n"
+            "templateData": "<span *ngIf=\"testing === true\">{{ testName }}</span>\r\n\r\n@if(items){ @for(item of items; track item){\r\n<ng-container *ngTemplateOutlet=\"item.templateRef\"></ng-container>\r\n} }\r\n"
         },
         {
             "name": "WebLayoutComponent",
-            "id": "component-WebLayoutComponent-ea35878f5a825c1408165275386d17b3bc5cc2a19f67d61dbc121a2ad481af3171f29760dc1dde02fa48eb777d296c68c3ad71c64413e5ec0b5a4b8396ac86d1",
+            "id": "component-WebLayoutComponent-16b99e9793059bd76fc0bee4d71978dbea56a0ba1378353dcbd32d398110c05f9b3ec6f541c9cb38efd5ecb84d2b433a1f34af4fbee6c52281b5ae7ec37e604a",
             "file": "libs/material/layout/src/web-layout/web-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -25105,7 +25383,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSidenavModule } from '@angular/material/sidenav';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatToolbarModule } from '@angular/material/toolbar';\nimport {\n  AppLogoDirective,\n  BaseLayoutComponent,\n  FloatingContainerComponent,\n  FullscreenDirective,\n  LayoutDirectives,\n  TemplateOutletComponent,\n  ViewportDirective,\n} from '../common';\n\nexport const __WebLayoutModules = [\n  CommonModule,\n  MatSidenavModule,\n  MatToolbarModule,\n  TemplateOutletComponent,\n  FloatingContainerComponent,\n  MatButtonModule,\n  MatIconModule,\n  ViewportDirective,\n  FullscreenDirective,\n  ...LayoutDirectives,\n];\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [...__WebLayoutModules],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent extends BaseLayoutComponent {\n  @Input() testing = false;\n}\n\n@NgModule({\n  imports: [\n    WebLayoutComponent,\n    ...LayoutDirectives,\n    AppLogoDirective,\n    ViewportDirective,\n    FullscreenDirective,\n  ],\n  exports: [\n    WebLayoutComponent,\n    ...LayoutDirectives,\n    AppLogoDirective,\n    ViewportDirective,\n    FullscreenDirective,\n  ],\n})\nexport class WebLayoutModule {}\n",
+            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport {\r\n  AppLogoDirective,\r\n  BaseLayoutComponent,\r\n  FloatingContainerComponent,\r\n  FullscreenDirective,\r\n  LayoutDirectives,\r\n  TemplateOutletComponent,\r\n  ViewportDirective,\r\n} from '../common';\r\n\r\nexport const __WebLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  ...LayoutDirectives,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-web-layout',\r\n  standalone: true,\r\n  imports: [...__WebLayoutModules],\r\n  templateUrl: './web-layout.component.html',\r\n  styleUrl: './web-layout.component.scss',\r\n})\r\nexport class WebLayoutComponent extends BaseLayoutComponent {\r\n  @Input() testing = false;\r\n}\r\n\r\n@NgModule({\r\n  imports: [\r\n    WebLayoutComponent,\r\n    ...LayoutDirectives,\r\n    AppLogoDirective,\r\n    ViewportDirective,\r\n    FullscreenDirective,\r\n  ],\r\n  exports: [\r\n    WebLayoutComponent,\r\n    ...LayoutDirectives,\r\n    AppLogoDirective,\r\n    ViewportDirective,\r\n    FullscreenDirective,\r\n  ],\r\n})\r\nexport class WebLayoutModule {}\r\n",
             "styleUrl": "./web-layout.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -25113,11 +25391,11 @@
             "extends": [
                 "BaseLayoutComponent"
             ],
-            "templateData": "<ng-template\n  #rowContainerTemplate\n  let-left=\"left\"\n  let-right=\"right\"\n  let-testName=\"testName\"\n>\n  <div class=\"row-container\">\n    <div class=\"row-container\">\n      <wt-template-outlet\n        [items]=\"left\"\n        [testing]=\"testing\"\n        testName=\"left\"\n      ></wt-template-outlet>\n    </div>\n    <div class=\"row-container-right\">\n      <wt-template-outlet\n        [items]=\"right\"\n        [testing]=\"testing\"\n        testName=\"right\"\n      ></wt-template-outlet>\n    </div>\n  </div>\n</ng-template>\n\n<div #viewport=\"wtViewport\" wtViewport class=\"main-container column-container\">\n  <mat-toolbar class=\"toolbar\" color=\"primary\">\n    <!-- Toolbar Items -->\n    <ng-container\n      *ngTemplateOutlet=\"\n        rowContainerTemplate;\n        context: {\n          left: toolbarLeft,\n          right: toolbarRight,\n          testName: 'toolbar'\n        }\n      \"\n    ></ng-container>\n  </mat-toolbar>\n\n  <div class=\"content-container row-container\">\n    <!-- Left content  -->\n    <div\n      class=\"content-container-left row-container-left\"\n      *ngIf=\"viewport.isNotHandset\"\n    >\n      <wt-template-outlet\n        [items]=\"contentLeft\"\n        [testing]=\"testing\"\n        testName=\"Left content\"\n      ></wt-template-outlet>\n    </div>\n\n    <!-- Main Content -->\n    <div class=\"content-container-main row-container\">\n      <wt-template-outlet\n        [items]=\"mainContent\"\n        [testing]=\"testing\"\n        testName=\"main content\"\n      ></wt-template-outlet>\n    </div>\n\n    <!-- Right content -->\n    <div\n      class=\"content-container-right row-container-right\"\n      *ngIf=\"viewport.isNotHandset\"\n    >\n      <wt-template-outlet\n        [items]=\"contentRight\"\n        [testing]=\"testing\"\n        testName=\"Right content\"\n      ></wt-template-outlet>\n    </div>\n  </div>\n\n  <wt-floating-container\n    [items]=\"floatingItems\"\n    [testing]=\"testing\"\n  ></wt-floating-container>\n\n  <!-- Footer -->\n  <mat-toolbar class=\"footer-toolbar\" color=\"accent\">\n    <ng-container\n      *ngTemplateOutlet=\"\n        rowContainerTemplate;\n        context: {\n          left: footerLeft,\n          right: footerRight,\n          testName: 'footer'\n        }\n      \"\n    ></ng-container>\n  </mat-toolbar>\n</div>\n"
+            "templateData": "<ng-template\r\n  #rowContainerTemplate\r\n  let-left=\"left\"\r\n  let-right=\"right\"\r\n  let-testName=\"testName\"\r\n>\r\n  <div class=\"row-container\">\r\n    <div class=\"row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"left\"\r\n        [testing]=\"testing\"\r\n        testName=\"left\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n    <div class=\"row-container-right\">\r\n      <wt-template-outlet\r\n        [items]=\"right\"\r\n        [testing]=\"testing\"\r\n        testName=\"right\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n\r\n<div #viewport=\"wtViewport\" wtViewport class=\"main-container column-container\">\r\n  <mat-toolbar class=\"toolbar\" color=\"primary\">\r\n    <!-- Toolbar Items -->\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        rowContainerTemplate;\r\n        context: {\r\n          left: toolbarLeft,\r\n          right: toolbarRight,\r\n          testName: 'toolbar'\r\n        }\r\n      \"\r\n    ></ng-container>\r\n  </mat-toolbar>\r\n\r\n  <div class=\"content-container row-container\">\r\n    <!-- Left content  -->\r\n    <div\r\n      class=\"content-container-left row-container-left\"\r\n      *ngIf=\"viewport.isNotHandset()\"\r\n    >\r\n      <wt-template-outlet\r\n        [items]=\"contentLeft\"\r\n        [testing]=\"testing\"\r\n        testName=\"Left content\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n\r\n    <!-- Main Content -->\r\n    <div class=\"content-container-main row-container\">\r\n      <wt-template-outlet\r\n        [items]=\"mainContent\"\r\n        [testing]=\"testing\"\r\n        testName=\"main content\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n\r\n    <!-- Right content -->\r\n    <div\r\n      class=\"content-container-right row-container-right\"\r\n      *ngIf=\"viewport.isNotHandset\"\r\n    >\r\n      <wt-template-outlet\r\n        [items]=\"contentRight\"\r\n        [testing]=\"testing\"\r\n        testName=\"Right content\"\r\n      ></wt-template-outlet>\r\n    </div>\r\n  </div>\r\n\r\n  <wt-floating-container\r\n    [items]=\"floatingItems\"\r\n    [testing]=\"testing\"\r\n  ></wt-floating-container>\r\n\r\n  <!-- Footer -->\r\n  <mat-toolbar class=\"footer-toolbar\" color=\"accent\">\r\n    <ng-container\r\n      *ngTemplateOutlet=\"\r\n        rowContainerTemplate;\r\n        context: {\r\n          left: footerLeft,\r\n          right: footerRight,\r\n          testName: 'footer'\r\n        }\r\n      \"\r\n    ></ng-container>\r\n  </mat-toolbar>\r\n</div>\r\n"
         },
         {
             "name": "WebSampleComponent",
-            "id": "component-WebSampleComponent-dd7966ad72d70cf9d148ac992d2096a35faeb4c6c4fbe66e1cceeff19113938adec6383d1878e882716d556976dff80b3e41f0fcef82f560f32dd6675f723b81",
+            "id": "component-WebSampleComponent-0d66352386a555eb7bbe363e8f2c6c7f7c1c584c5ffa935eb0fe773b6f070532367f5566925b94c3322d68ffe710ce3bbd52fc3a471894bc6e3719dc05e3a72a",
             "file": "libs/material/layout/src/web-sample/web-sample.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -25154,25 +25432,25 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { WebLayoutComponent } from '../web-layout/web-layout.component';\n\n@Component({\n  selector: 'wt-web-sample',\n  standalone: true,\n  imports: [CommonModule, WebLayoutComponent],\n  templateUrl: './web-sample.component.html',\n  styleUrl: './web-sample.component.scss',\n})\nexport class WebSampleComponent {}\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { WebLayoutComponent } from '../web-layout/web-layout.component';\r\n\r\n@Component({\r\n  selector: 'wt-web-sample',\r\n  standalone: true,\r\n  imports: [CommonModule, WebLayoutComponent],\r\n  templateUrl: './web-sample.component.html',\r\n  styleUrl: './web-sample.component.scss',\r\n})\r\nexport class WebSampleComponent {}\r\n",
             "styleUrl": "./web-sample.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<p>web-sample works!</p>\n"
+            "templateData": "<p>web-sample works!</p>\r\n"
         }
     ],
     "modules": [
         {
             "name": "AppLayoutModule",
-            "id": "module-AppLayoutModule-644767045ef99cc1a65205e0d3c0e40f09c7da5ad49863dfe1f0d0bc11a218d319d460e73a0c814a97308ac2d1c1bbe6054e4a8efafe0a55ef1519588acda6cd",
+            "id": "module-AppLayoutModule-b1b13844d5f2469f93efed6f0812f3366b9890d5fb365c5ea84a98d20578bdb04700c7bd91b6370c576ddbdb4b132f179c7d1c3f8a411471d4a26a45bb31a811",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "libs/material/layout/src/app-layout/app-layout.component.ts",
             "methods": [],
-            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport { MatTooltipModule } from '@angular/material/tooltip';\r\nimport {\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  BaseLayoutComponent,\r\n  FloatingContainerComponent,\r\n  LayoutDirectives,\r\n} from '../common/';\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...LayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n})\r\nexport class AppLayoutComponent extends BaseLayoutComponent {\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon = 'settings';\r\n}\r\n\r\n@NgModule({\r\n  imports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n  exports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n})\r\nexport class AppLayoutModule {}\r\n",
+            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatBadgeModule } from '@angular/material/badge';\r\nimport { MatTooltipModule } from '@angular/material/tooltip';\r\nimport {\r\n  ViewportDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  BaseLayoutComponent,\r\n  FloatingContainerComponent,\r\n  LayoutDirectives,\r\n  FullscreenModule,\r\n  Icon,\r\n} from '../common/';\r\n\r\nexport const AppLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenModule,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-app-layout',\r\n  standalone: true,\r\n  imports: [...AppLayoutModules, ...LayoutDirectives],\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrl: './app-layout.component.scss',\r\n})\r\nexport class AppLayoutComponent extends BaseLayoutComponent {\r\n  /**\r\n   * Test the app layout without pushing the content\r\n   */\r\n  @Input() testing = false;\r\n\r\n  @Input() rightSidenavToggleIcon: Icon = 'apps';\r\n\r\n  @Input() leftSidenavToggleLabel?: string = 'Toggle left sidenav';\r\n  @Input() rightSidenavToggleLabel?: string = 'Toggle right sidenav';\r\n}\r\n\r\n@NgModule({\r\n  imports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n  exports: [AppLayoutComponent, ...AppLayoutModules, ...LayoutDirectives],\r\n})\r\nexport class AppLayoutModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -25210,7 +25488,7 @@
                             "name": "FooterRightDirective"
                         },
                         {
-                            "name": "FullscreenDirective"
+                            "name": "FullscreenModule"
                         },
                         {
                             "name": "MainContentDirective"
@@ -25269,7 +25547,7 @@
                             "name": "FooterRightDirective"
                         },
                         {
-                            "name": "FullscreenDirective"
+                            "name": "FullscreenModule"
                         },
                         {
                             "name": "MainContentDirective"
@@ -25311,14 +25589,64 @@
             ]
         },
         {
+            "name": "FullscreenModule",
+            "id": "module-FullscreenModule-cc430a211715611c095dc4fc71ed98efa1adfdec572bf3913b2b9a13d58c6e51b5b700f3c01f3561f8790e0445042a6e716accf2662f1296d5e1eb916508db1d",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "libs/material/layout/src/common/directives/fullscreen.directive.ts",
+            "methods": [],
+            "sourceCode": "import { Directive, HostListener, Input, NgModule } from '@angular/core';\r\nimport { IToggle, IToggleValue } from '../types';\r\n\r\n@Directive({\r\n  selector: '[wtFullscreenToggleButton]',\r\n  standalone: true,\r\n})\r\nexport class FullscreenToggleDirective implements IToggle {\r\n  @Input() targetElement?: HTMLElement;\r\n\r\n  @HostListener('click')\r\n  fullscreenButtonClick() {\r\n    if (this.targetElement) {\r\n      this.toggle(this.targetElement);\r\n    } else {\r\n      console.warn('targetElement is not provided to the fullscreen directive');\r\n    }\r\n  }\r\n\r\n  private open(element: HTMLElement) {\r\n    FullscreenDirective.isFullscreen = true;\r\n    element.requestFullscreen();\r\n  }\r\n\r\n  private close() {\r\n    FullscreenDirective.isFullscreen = false;\r\n    document.exitFullscreen();\r\n  }\r\n\r\n  /**\r\n   * Toggle fullscreen\r\n   * @param element\r\n   */\r\n  toggle(element: HTMLElement): void {\r\n    if (FullscreenDirective.isFullscreen) {\r\n      this.close();\r\n    } else {\r\n      this.open(element);\r\n    }\r\n  }\r\n}\r\n\r\n// Access the fullscreen information accross the application\r\n// And toggle values based on it.\r\n@Directive({\r\n  selector: '[wtFullscreen]',\r\n  standalone: true,\r\n  exportAs: 'wtFullscreen',\r\n})\r\nexport class FullscreenDirective implements IToggleValue {\r\n  static isFullscreen = false;\r\n\r\n  toggleValue<T>(actualValue: T, conditionalValue: T): T {\r\n    return FullscreenDirective.isFullscreen ? conditionalValue : actualValue;\r\n  }\r\n\r\n  isFullscreen() {\r\n    return FullscreenDirective.isFullscreen;\r\n  }\r\n}\r\n\r\n@NgModule({\r\n  imports: [FullscreenDirective, FullscreenToggleDirective],\r\n  exports: [FullscreenDirective, FullscreenToggleDirective],\r\n})\r\nexport class FullscreenModule {}\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "FullscreenDirective"
+                        },
+                        {
+                            "name": "FullscreenToggleDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "FullscreenDirective"
+                        },
+                        {
+                            "name": "FullscreenToggleDirective"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
             "name": "WebLayoutModule",
-            "id": "module-WebLayoutModule-ea35878f5a825c1408165275386d17b3bc5cc2a19f67d61dbc121a2ad481af3171f29760dc1dde02fa48eb777d296c68c3ad71c64413e5ec0b5a4b8396ac86d1",
+            "id": "module-WebLayoutModule-16b99e9793059bd76fc0bee4d71978dbea56a0ba1378353dcbd32d398110c05f9b3ec6f541c9cb38efd5ecb84d2b433a1f34af4fbee6c52281b5ae7ec37e604a",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "libs/material/layout/src/web-layout/web-layout.component.ts",
             "methods": [],
-            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatSidenavModule } from '@angular/material/sidenav';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatToolbarModule } from '@angular/material/toolbar';\nimport {\n  AppLogoDirective,\n  BaseLayoutComponent,\n  FloatingContainerComponent,\n  FullscreenDirective,\n  LayoutDirectives,\n  TemplateOutletComponent,\n  ViewportDirective,\n} from '../common';\n\nexport const __WebLayoutModules = [\n  CommonModule,\n  MatSidenavModule,\n  MatToolbarModule,\n  TemplateOutletComponent,\n  FloatingContainerComponent,\n  MatButtonModule,\n  MatIconModule,\n  ViewportDirective,\n  FullscreenDirective,\n  ...LayoutDirectives,\n];\n\n@Component({\n  selector: 'wt-web-layout',\n  standalone: true,\n  imports: [...__WebLayoutModules],\n  templateUrl: './web-layout.component.html',\n  styleUrl: './web-layout.component.scss',\n})\nexport class WebLayoutComponent extends BaseLayoutComponent {\n  @Input() testing = false;\n}\n\n@NgModule({\n  imports: [\n    WebLayoutComponent,\n    ...LayoutDirectives,\n    AppLogoDirective,\n    ViewportDirective,\n    FullscreenDirective,\n  ],\n  exports: [\n    WebLayoutComponent,\n    ...LayoutDirectives,\n    AppLogoDirective,\n    ViewportDirective,\n    FullscreenDirective,\n  ],\n})\nexport class WebLayoutModule {}\n",
+            "sourceCode": "import { Component, Input, NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { MatSidenavModule } from '@angular/material/sidenav';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport {\r\n  AppLogoDirective,\r\n  BaseLayoutComponent,\r\n  FloatingContainerComponent,\r\n  FullscreenDirective,\r\n  LayoutDirectives,\r\n  TemplateOutletComponent,\r\n  ViewportDirective,\r\n} from '../common';\r\n\r\nexport const __WebLayoutModules = [\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  ...LayoutDirectives,\r\n];\r\n\r\n@Component({\r\n  selector: 'wt-web-layout',\r\n  standalone: true,\r\n  imports: [...__WebLayoutModules],\r\n  templateUrl: './web-layout.component.html',\r\n  styleUrl: './web-layout.component.scss',\r\n})\r\nexport class WebLayoutComponent extends BaseLayoutComponent {\r\n  @Input() testing = false;\r\n}\r\n\r\n@NgModule({\r\n  imports: [\r\n    WebLayoutComponent,\r\n    ...LayoutDirectives,\r\n    AppLogoDirective,\r\n    ViewportDirective,\r\n    FullscreenDirective,\r\n  ],\r\n  exports: [\r\n    WebLayoutComponent,\r\n    ...LayoutDirectives,\r\n    AppLogoDirective,\r\n    ViewportDirective,\r\n    FullscreenDirective,\r\n  ],\r\n})\r\nexport class WebLayoutModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -25448,6 +25776,16 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "___Material_Version__",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/src/index.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'0.0.1'"
+            },
+            {
                 "name": "__WebLayoutModules",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -25455,7 +25793,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  CommonModule,\n  MatSidenavModule,\n  MatToolbarModule,\n  TemplateOutletComponent,\n  FloatingContainerComponent,\n  MatButtonModule,\n  MatIconModule,\n  ViewportDirective,\n  FullscreenDirective,\n  ...LayoutDirectives,\n]"
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  ...LayoutDirectives,\r\n]"
             },
             {
                 "name": "AppLayoutModules",
@@ -25465,7 +25803,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n]"
+                "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenModule,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n]"
             },
             {
                 "name": "AutocompleteList",
@@ -25505,7 +25843,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n\n    const logo = canvas.queryByAltText('App Logo');\n    expect(logo).toBeTruthy();\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\n    expect(fullscreen).toBeTruthy();\n\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\n    expect(toggleLeftSidenav).toBeTruthy();\n\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\n    expect(toggleRightSidenav).toBeTruthy();\n\n    const delay = 400;\n\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n  },\n}"
+                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -25515,7 +25853,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -25525,7 +25863,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/icons works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/icons works!/gi)).toBeTruthy();\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -25535,7 +25873,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -25545,7 +25883,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -25555,7 +25893,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/web-sample works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/web-sample works!/gi)).toBeTruthy();\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/material-editor works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/material-forms works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -25565,7 +25933,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    testing: false,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/floating-container works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/floating-container works!/gi)).toBeTruthy();\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -25575,7 +25943,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/template-outlet works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n    testName: '',\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/template-outlet works!/gi)).toBeTruthy();\r\n  },\r\n}"
             },
             {
                 "name": "IconList",
@@ -25635,7 +26003,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppLayoutComponent>",
-                "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -25645,7 +26013,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppSampleComponent>",
-                "defaultValue": "{\n  component: AppSampleComponent,\n  title: 'AppSampleComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                "defaultValue": "{\r\n  component: AppSampleComponent,\r\n  title: 'AppSampleComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -25655,7 +26023,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<IconsComponent>",
-                "defaultValue": "{\n  component: IconsComponent,\n  title: 'IconsComponent',\n}"
+                "defaultValue": "{\r\n  component: IconsComponent,\r\n  title: 'IconsComponent',\r\n}"
             },
             {
                 "name": "meta",
@@ -25665,7 +26033,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<NavListComponent>",
-                "defaultValue": "{\n  component: NavListComponent,\n  title: 'NavListComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                "defaultValue": "{\r\n  component: NavListComponent,\r\n  title: 'NavListComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -25675,7 +26043,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<WebLayoutComponent>",
-                "defaultValue": "{\n  component: WebLayoutComponent,\n  title: 'WebLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                "defaultValue": "{\r\n  component: WebLayoutComponent,\r\n  title: 'WebLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -25685,7 +26053,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<WebSampleComponent>",
-                "defaultValue": "{\n  component: WebSampleComponent,\n  title: 'WebSampleComponent',\n}"
+                "defaultValue": "{\r\n  component: WebSampleComponent,\r\n  title: 'WebSampleComponent',\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<EditorComponent>",
+                "defaultValue": "{\n  component: EditorComponent,\n  title: 'EditorComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MaterialEditorComponent>",
+                "defaultValue": "{\n  component: MaterialEditorComponent,\n  title: 'MaterialEditorComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MaterialFormsComponent>",
+                "defaultValue": "{\n  component: MaterialFormsComponent,\n  title: 'MaterialFormsComponent',\n}"
             },
             {
                 "name": "meta",
@@ -25695,7 +26093,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FloatingContainerComponent>",
-                "defaultValue": "{\n  component: FloatingContainerComponent,\n  title: 'FloatingContainerComponent',\n}"
+                "defaultValue": "{\r\n  component: FloatingContainerComponent,\r\n  title: 'FloatingContainerComponent',\r\n}"
             },
             {
                 "name": "meta",
@@ -25705,7 +26103,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<TemplateOutletComponent>",
-                "defaultValue": "{\n  component: TemplateOutletComponent,\n  title: 'TemplateOutletComponent',\n}"
+                "defaultValue": "{\r\n  component: TemplateOutletComponent,\r\n  title: 'TemplateOutletComponent',\r\n}"
             },
             {
                 "name": "Primary",
@@ -25715,7 +26113,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    testing: true,\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -25725,7 +26123,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n}"
+                "defaultValue": "{\r\n  args: {},\r\n}"
             },
             {
                 "name": "Primary",
@@ -25735,7 +26133,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n}"
+                "defaultValue": "{\r\n  args: {},\r\n}"
             },
             {
                 "name": "Primary",
@@ -25745,7 +26143,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    items: [\n      {\n        id: 1,\n        title: 'First title',\n        subtitle: 'First subtitle',\n        icon: 'info',\n        iconColor: 'accent',\n        badge: '100',\n        badgeColor: 'accent',\n        meta: 'First meta',\n        route: '',\n      },\n      {\n        id: 2,\n        title: 'First title',\n        subtitle: 'First subtitle',\n        icon: 'info',\n        iconColor: 'accent',\n        badge: '100',\n        badgeColor: 'accent',\n        meta: 'First meta',\n        route: 'some',\n      },\n    ],\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      {\r\n        id: 1,\r\n        title: 'First title',\r\n        subtitle: 'First subtitle',\r\n        icon: 'info',\r\n        iconColor: 'accent',\r\n        badge: '100',\r\n        badgeColor: 'accent',\r\n        meta: 'First meta',\r\n        route: '',\r\n      },\r\n      {\r\n        id: 2,\r\n        title: 'First title',\r\n        subtitle: 'First subtitle',\r\n        icon: 'info',\r\n        iconColor: 'accent',\r\n        badge: '100',\r\n        badgeColor: 'accent',\r\n        meta: 'First meta',\r\n        route: 'some',\r\n      },\r\n    ],\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -25755,13 +26153,43 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    testing: true,\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "libs/material/layout/src/web-sample/web-sample.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -25775,7 +26203,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    testing: false,\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -25785,7 +26213,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n    testName: '',\r\n  },\r\n}"
             }
         ],
         "functions": [
@@ -25965,6 +26393,39 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<EditorComponent>",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MaterialEditorComponent>",
+                "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MaterialFormsComponent>",
+                "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<FloatingContainerComponent>",
                 "file": "libs/material/layout/src/common/floating-container/floating-container.component.stories.ts",
                 "deprecated": false,
@@ -26004,6 +26465,18 @@
             }
         ],
         "groupedVariables": {
+            "libs/material/src/index.ts": [
+                {
+                    "name": "___Material_Version__",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/src/index.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'0.0.1'"
+                }
+            ],
             "libs/material/layout/src/web-layout/web-layout.component.ts": [
                 {
                     "name": "__WebLayoutModules",
@@ -26013,7 +26486,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  CommonModule,\n  MatSidenavModule,\n  MatToolbarModule,\n  TemplateOutletComponent,\n  FloatingContainerComponent,\n  MatButtonModule,\n  MatIconModule,\n  ViewportDirective,\n  FullscreenDirective,\n  ...LayoutDirectives,\n]"
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  ...LayoutDirectives,\r\n]"
                 }
             ],
             "libs/material/layout/src/app-layout/app-layout.component.ts": [
@@ -26025,7 +26498,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenDirective,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n]"
+                    "defaultValue": "[\r\n  CommonModule,\r\n  MatSidenavModule,\r\n  MatToolbarModule,\r\n  MatButtonModule,\r\n  MatIconModule,\r\n  ViewportDirective,\r\n  FullscreenModule,\r\n  AppLogoDirective,\r\n  TemplateOutletComponent,\r\n  FloatingContainerComponent,\r\n  MatBadgeModule,\r\n  MatTooltipModule,\r\n]"
                 }
             ],
             "libs/material/layout/src/common/types/autocomplete.ts": [
@@ -26071,7 +26544,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n\n    const logo = canvas.queryByAltText('App Logo');\n    expect(logo).toBeTruthy();\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\n    expect(fullscreen).toBeTruthy();\n\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\n    expect(toggleLeftSidenav).toBeTruthy();\n\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\n    expect(toggleRightSidenav).toBeTruthy();\n\n    const delay = 400;\n\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n    await userEvent.click(toggleLeftSidenav!, { delay });\n\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n    await userEvent.click(toggleRightSidenav!, { delay });\n  },\n}"
+                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26081,7 +26554,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AppLayoutComponent>",
-                    "defaultValue": "{\n  component: AppLayoutComponent,\n  title: 'AppLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                    "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -26091,7 +26564,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    testing: true,\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
                 }
             ],
             "libs/material/layout/src/app-sample/app-sample.component.stories.ts": [
@@ -26103,7 +26576,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26113,7 +26586,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AppSampleComponent>",
-                    "defaultValue": "{\n  component: AppSampleComponent,\n  title: 'AppSampleComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                    "defaultValue": "{\r\n  component: AppSampleComponent,\r\n  title: 'AppSampleComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -26123,7 +26596,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n}"
+                    "defaultValue": "{\r\n  args: {},\r\n}"
                 }
             ],
             "libs/material/layout/src/icons/icons.component.stories.ts": [
@@ -26135,7 +26608,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/icons works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/icons works!/gi)).toBeTruthy();\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26145,7 +26618,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<IconsComponent>",
-                    "defaultValue": "{\n  component: IconsComponent,\n  title: 'IconsComponent',\n}"
+                    "defaultValue": "{\r\n  component: IconsComponent,\r\n  title: 'IconsComponent',\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -26155,7 +26628,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n}"
+                    "defaultValue": "{\r\n  args: {},\r\n}"
                 }
             ],
             "libs/material/layout/src/nav-list/nav-list.component.stories.ts": [
@@ -26167,7 +26640,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: Primary.args,\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26177,7 +26650,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<NavListComponent>",
-                    "defaultValue": "{\n  component: NavListComponent,\n  title: 'NavListComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                    "defaultValue": "{\r\n  component: NavListComponent,\r\n  title: 'NavListComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -26187,7 +26660,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    items: [\n      {\n        id: 1,\n        title: 'First title',\n        subtitle: 'First subtitle',\n        icon: 'info',\n        iconColor: 'accent',\n        badge: '100',\n        badgeColor: 'accent',\n        meta: 'First meta',\n        route: '',\n      },\n      {\n        id: 2,\n        title: 'First title',\n        subtitle: 'First subtitle',\n        icon: 'info',\n        iconColor: 'accent',\n        badge: '100',\n        badgeColor: 'accent',\n        meta: 'First meta',\n        route: 'some',\n      },\n    ],\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    items: [\r\n      {\r\n        id: 1,\r\n        title: 'First title',\r\n        subtitle: 'First subtitle',\r\n        icon: 'info',\r\n        iconColor: 'accent',\r\n        badge: '100',\r\n        badgeColor: 'accent',\r\n        meta: 'First meta',\r\n        route: '',\r\n      },\r\n      {\r\n        id: 2,\r\n        title: 'First title',\r\n        subtitle: 'First subtitle',\r\n        icon: 'info',\r\n        iconColor: 'accent',\r\n        badge: '100',\r\n        badgeColor: 'accent',\r\n        meta: 'First meta',\r\n        route: 'some',\r\n      },\r\n    ],\r\n  },\r\n}"
                 }
             ],
             "libs/material/layout/src/web-layout/web-layout.component.stories.ts": [
@@ -26199,7 +26672,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26209,7 +26682,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<WebLayoutComponent>",
-                    "defaultValue": "{\n  component: WebLayoutComponent,\n  title: 'WebLayoutComponent',\n  decorators: [\n    applicationConfig({\n      providers: [...commonProviders],\n    }),\n  ],\n}"
+                    "defaultValue": "{\r\n  component: WebLayoutComponent,\r\n  title: 'WebLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -26219,7 +26692,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    testing: true,\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
                 }
             ],
             "libs/material/layout/src/web-sample/web-sample.component.stories.ts": [
@@ -26231,7 +26704,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/web-sample works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/web-sample works!/gi)).toBeTruthy();\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26241,13 +26714,109 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<WebSampleComponent>",
-                    "defaultValue": "{\n  component: WebSampleComponent,\n  title: 'WebSampleComponent',\n}"
+                    "defaultValue": "{\r\n  component: WebSampleComponent,\r\n  title: 'WebSampleComponent',\r\n}"
                 },
                 {
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "libs/material/layout/src/web-sample/web-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
+            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<EditorComponent>",
+                    "defaultValue": "{\n  component: EditorComponent,\n  title: 'EditorComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/material-editor works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MaterialEditorComponent>",
+                    "defaultValue": "{\n  component: MaterialEditorComponent,\n  title: 'MaterialEditorComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/material-forms works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MaterialFormsComponent>",
+                    "defaultValue": "{\n  component: MaterialFormsComponent,\n  title: 'MaterialFormsComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -26263,7 +26832,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    testing: false,\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/floating-container works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/floating-container works!/gi)).toBeTruthy();\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26273,7 +26842,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FloatingContainerComponent>",
-                    "defaultValue": "{\n  component: FloatingContainerComponent,\n  title: 'FloatingContainerComponent',\n}"
+                    "defaultValue": "{\r\n  component: FloatingContainerComponent,\r\n  title: 'FloatingContainerComponent',\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -26283,7 +26852,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    testing: false,\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n  },\r\n}"
                 }
             ],
             "libs/material/layout/src/common/template-outlet/template-outlet.component.stories.ts": [
@@ -26295,7 +26864,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/template-outlet works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n    testName: '',\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/template-outlet works!/gi)).toBeTruthy();\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -26305,7 +26874,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<TemplateOutletComponent>",
-                    "defaultValue": "{\n  component: TemplateOutletComponent,\n  title: 'TemplateOutletComponent',\n}"
+                    "defaultValue": "{\r\n  component: TemplateOutletComponent,\r\n  title: 'TemplateOutletComponent',\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -26315,7 +26884,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    testing: false,\n    testName: '',\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    testing: false,\r\n    testName: '',\r\n  },\r\n}"
                 }
             ],
             "libs/material/layout/src/common/types/icons.ts": [
@@ -26595,6 +27164,45 @@
                     "kind": 183
                 }
             ],
+            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<EditorComponent>",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MaterialEditorComponent>",
+                    "file": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MaterialFormsComponent>",
+                    "file": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/material/layout/src/common/floating-container/floating-container.component.stories.ts": [
                 {
                     "name": "Story",
@@ -26628,6 +27236,141 @@
         "count": 1,
         "status": "low",
         "files": [
+            {
+                "filePath": "libs/material/chart/src/lib/chart/chart.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ChartComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/chart/src/lib/material-chart/material-chart.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MaterialChartComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/editor/editor.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "EditorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/material-editor/material-editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/editor/src/lib/material-editor/material-editor.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MaterialEditorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/material-forms/material-forms.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/material-forms/material-forms.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MaterialFormsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
             {
                 "filePath": "libs/material/layout/src/_story/common-providers.ts",
                 "type": "variable",
@@ -26673,8 +27416,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AppLayoutComponent",
-                "coveragePercent": 6,
-                "coverageCount": "1/15",
+                "coveragePercent": 5,
+                "coverageCount": "1/17",
                 "status": "low"
             },
             {
@@ -26740,8 +27483,17 @@
                 "type": "directive",
                 "linktype": "directive",
                 "name": "FullscreenDirective",
-                "coveragePercent": 10,
-                "coverageCount": "1/10",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/layout/src/common/directives/fullscreen.directive.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "FullscreenToggleDirective",
+                "coveragePercent": 14,
+                "coverageCount": "1/7",
                 "status": "low"
             },
             {
@@ -26749,8 +27501,8 @@
                 "type": "directive",
                 "linktype": "directive",
                 "name": "ViewportDirective",
-                "coveragePercent": 0,
-                "coverageCount": "0/10",
+                "coveragePercent": 9,
+                "coverageCount": "1/11",
                 "status": "low"
             },
             {
@@ -27263,6 +28015,16 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "WebSampleComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/src/index.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "___Material_Version__",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

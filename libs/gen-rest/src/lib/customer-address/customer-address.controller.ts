@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,10 @@ import {
   UpdateCustomerAddressDto,
   CreateCustomerAddressDto,
 } from '@webpackages/gen-entity';
-import { CustomerAddressService } from './customer-address.service';
+import {
+  CustomerAddressService,
+  CustomerAddressViewService,
+} from './customer-address.service';
 
 const Paths = getApiPaths(CustomerAddress.name);
 
@@ -36,16 +40,20 @@ const Paths = getApiPaths(CustomerAddress.name);
 export class CustomerAddressController {
   constructor(
     protected readonly service: CustomerAddressService,
-    @InjectRepository(CustomerAddressView)
-    protected readonly viewService: Repository<CustomerAddressView>
+    protected readonly viewService: CustomerAddressViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryCustomerAddressDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

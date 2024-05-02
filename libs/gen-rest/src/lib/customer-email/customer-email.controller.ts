@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,10 @@ import {
   UpdateCustomerEmailDto,
   CreateCustomerEmailDto,
 } from '@webpackages/gen-entity';
-import { CustomerEmailService } from './customer-email.service';
+import {
+  CustomerEmailService,
+  CustomerEmailViewService,
+} from './customer-email.service';
 
 const Paths = getApiPaths(CustomerEmail.name);
 
@@ -36,16 +40,20 @@ const Paths = getApiPaths(CustomerEmail.name);
 export class CustomerEmailController {
   constructor(
     protected readonly service: CustomerEmailService,
-    @InjectRepository(CustomerEmailView)
-    protected readonly viewService: Repository<CustomerEmailView>
+    protected readonly viewService: CustomerEmailViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryCustomerEmailDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

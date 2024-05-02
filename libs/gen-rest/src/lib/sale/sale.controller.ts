@@ -17,6 +17,7 @@ import {
   RemoveRelation,
   InjectRepository,
   Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
@@ -26,7 +27,7 @@ import {
   UpdateSaleDto,
   CreateSaleDto,
 } from '@webpackages/gen-entity';
-import { SaleService } from './sale.service';
+import { SaleService, SaleViewService } from './sale.service';
 
 const Paths = getApiPaths(Sale.name);
 
@@ -36,16 +37,20 @@ const Paths = getApiPaths(Sale.name);
 export class SaleController {
   constructor(
     protected readonly service: SaleService,
-    @InjectRepository(SaleView)
-    protected readonly viewService: Repository<SaleView>
+    protected readonly viewService: SaleViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QuerySaleDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });

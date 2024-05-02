@@ -15,18 +15,16 @@ import {
   UnsetRelationDto,
   AddRelation,
   RemoveRelation,
-  InjectRepository,
-  Repository,
+  Meta,
 } from '@webpackages/core';
 import { getApiPaths } from '@webpackages/utils';
 import {
   Category,
-  CategoryView,
   QueryCategoryDto,
   UpdateCategoryDto,
   CreateCategoryDto,
 } from '@webpackages/gen-entity';
-import { CategoryService } from './category.service';
+import { CategoryService, CategoryViewService } from './category.service';
 
 const Paths = getApiPaths(Category.name);
 
@@ -36,16 +34,20 @@ const Paths = getApiPaths(Category.name);
 export class CategoryController {
   constructor(
     protected readonly service: CategoryService,
-    @InjectRepository(CategoryView)
-    protected readonly viewService: Repository<CategoryView>
+    protected readonly viewService: CategoryViewService
   ) {}
+
+  @Get({ path: Paths.METADATA })
+  async metadata(@Meta() meta: string) {
+    return await this.service.getMetadata(meta);
+  }
 
   @Get({ path: Paths.PLURAL_PATH })
   async findAll(
     @Query() paginator: PaginatorDto,
     @Query() queryDto: QueryCategoryDto
   ) {
-    return await this.viewService.find({
+    return await this.viewService.queryAll({
       ...paginator,
       where: { ...queryDto },
     });
