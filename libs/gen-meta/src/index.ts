@@ -1,1 +1,1 @@
-export * from './lib/gen-meta';
+export * from './lib';

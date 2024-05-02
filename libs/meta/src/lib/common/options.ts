@@ -30,6 +30,9 @@ export type __PropertyOptions<T extends __PrimitiveType> = {
   day?: number;
   monthdays?: number[];
   inputType?: string;
+  autocomplete?: HTMLInputElement['autocomplete'];
+  icon?: string;
+  label?: string;
   searchable?: boolean;
   excludeFromView?: boolean;
 };

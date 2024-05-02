@@ -11,4 +11,7 @@ export class CreateProductDto implements ICreateProductDto {
   })
   name!: string;
   @Property({ type: 'string', maxLength: 600 }) description?: string;
+  @Property({ type: 'object', objectType: IDDto, isArray: true })
+  category?: IDDto[];
+  @Property({ type: 'object', objectType: IDDto }) department?: IDDto;
 }

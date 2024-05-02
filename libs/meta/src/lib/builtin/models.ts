@@ -19,7 +19,3 @@ export function NameAndDescriptionModel(modelName: string): Model {
     },
   };
 }
-
-
-
-
