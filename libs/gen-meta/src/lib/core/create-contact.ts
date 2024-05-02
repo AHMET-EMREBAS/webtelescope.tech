@@ -3,7 +3,7 @@ import { Model, OwnerRelation, ShortTextProperty } from './core';
 
 export function CreateAddressFor(model: Model): Model {
   return {
-    modelName: `${model.modelName}Contact`,
+    modelName: `${model.modelName}Address`,
     properties: {
       state: ShortTextProperty({
         icon: 'state',
@@ -38,7 +38,7 @@ export function CreatePhoneModelFor(model: Model): Model {
   return {
     modelName: `${model.modelName}Phone`,
     properties: {
-      email: ShortTextProperty({ format: 'email', autocomplete: 'email' }),
+      phone: ShortTextProperty({ format: 'phone', autocomplete: 'tel' }),
     },
     relations: {
       [names(model.modelName).propertyName]: OwnerRelation(model),

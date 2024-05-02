@@ -7,10 +7,15 @@ export type ColumnOptions = {
   description?: string;
 };
 
-export function Column({ type, unique }: ColumnOptions) {
+export function Column({ type, unique, description }: ColumnOptions) {
   const columnType: ColumnType =
     type === 'boolean' ? 'boolean' : type == 'number' ? 'numeric' : 'varchar';
-  return Col({ type: columnType, nullable: true, unique });
+  return Col({
+    type: columnType,
+    nullable: true,
+    unique,
+    comment: description ?? 'Please add some comments here!',
+  });
 }
 
 export function ViewColumn() {
