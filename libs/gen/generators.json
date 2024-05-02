@@ -24,6 +24,11 @@
       "factory": "./src/generators/model/generator",
       "schema": "./src/generators/model/schema.json",
       "description": "model generator"
+    },
+    "resource": {
+      "factory": "./src/generators/resource/generator",
+      "schema": "./src/generators/resource/schema.json",
+      "description": "resource generator"
     }
   }
 }

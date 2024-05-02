@@ -1,20 +1,56 @@
 import { plural } from './plural';
 
 export type ApiPaths = {
+  /**
+   * id
+   */
   ID_KEY: string;
+  /**
+   * relationId
+   */
   RELATION_ID_KEY: string;
+  /**
+   * relationName
+   */
   RELATION_NAME_KEY: string;
+  /**
+   * singular
+   */
   SINGULAR_PATH: string;
+  /**
+   * plurals
+   */
   PLURAL_PATH: string;
+  /**
+   * source/:id
+   */
   BY_ID_PATH: string;
+  /**
+   * source/:id/:relationName
+   */
   RELATION_NAME_PATH: string;
+  /**
+   * source/:id/:relationName/:relationId
+   */
   RELATION_NAME_AND_ID_PATH: string;
 };
 
 export enum ApiPathKeys {
+  /**
+   * 'authToken'
+   * */
   AUTH_TOKEN = 'authToken',
+  /**
+   * 'id'
+   * */
   ID_KEY = 'id',
+  /**
+   * 'relationId'
+   * */
   RELATION_ID_KEY = 'relationId',
+  /**
+   * 'relationName'
+   * */
   RELATION_NAME_KEY = 'relationName',
 }
 /**

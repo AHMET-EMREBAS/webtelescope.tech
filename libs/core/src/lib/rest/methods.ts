@@ -12,6 +12,7 @@ import {
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
@@ -72,5 +73,53 @@ export function Delete(options: MethodOptions) {
 
   if (security) decorators.push(getSecurityDecorator(security));
 
+  return applyDecorators(NestDelete(path ?? ''), ...decorators);
+}
+
+export function SetRelation(options: MethodOptions) {
+  const { path, security } = options;
+  const decorators: MethodDecorator[] = [
+    ApiOperation({ summary: 'Set relation to the entity' }),
+    ApiOkResponse({ description: 'Success' }),
+    ApiNotFoundResponse({ description: 'Not found' }),
+    ApiInternalServerErrorResponse({ description: 'Internal server error!' }),
+  ];
+  if (security) decorators.push(getSecurityDecorator(security));
+  return applyDecorators(NestPost(path ?? ''), ...decorators);
+}
+
+export function UnsetRelation(options: MethodOptions) {
+  const { path, security } = options;
+  const decorators: MethodDecorator[] = [
+    ApiOperation({ summary: 'Unset relation to the entity' }),
+    ApiOkResponse({ description: 'Success' }),
+    ApiNotFoundResponse({ description: 'Not found' }),
+    ApiInternalServerErrorResponse({ description: 'Internal server error!' }),
+  ];
+  if (security) decorators.push(getSecurityDecorator(security));
+  return applyDecorators(NestDelete(path ?? ''), ...decorators);
+}
+
+export function AddRelation(options: MethodOptions) {
+  const { path, security } = options;
+  const decorators: MethodDecorator[] = [
+    ApiOperation({ summary: 'Add relation to the entity' }),
+    ApiOkResponse({ description: 'Success' }),
+    ApiNotFoundResponse({ description: 'Not found' }),
+    ApiInternalServerErrorResponse({ description: 'Internal server error!' }),
+  ];
+  if (security) decorators.push(getSecurityDecorator(security));
+  return applyDecorators(NestPost(path ?? ''), ...decorators);
+}
+
+export function RemoveRelation(options: MethodOptions) {
+  const { path, security } = options;
+  const decorators: MethodDecorator[] = [
+    ApiOperation({ summary: 'Remove the relation from the entity' }),
+    ApiOkResponse({ description: 'Success' }),
+    ApiNotFoundResponse({ description: 'Not found' }),
+    ApiInternalServerErrorResponse({ description: 'Internal server error!' }),
+  ];
+  if (security) decorators.push(getSecurityDecorator(security));
   return applyDecorators(NestDelete(path ?? ''), ...decorators);
 }
