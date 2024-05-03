@@ -3,19 +3,28 @@
   <mat-form-field appearance="outline">
     <mat-label>{{ options.label | labelcase }}</mat-label>
     <input
+      #input="matInput"
+      [errorStateMatcher]="errorStateMatcher"
       type="text"
       matInput
       [formControl]="formControl"
       [wtSetAttribute]="options"
       (input)="typingChecker.next(true)"
     />
-    <mat-icon matPrefix class="fill" color="primary">
+    <mat-icon
+      matPrefix
+      class="fill"
+      [color]="input.errorState ? 'warn' : 'primary'"
+    >
       {{ options.icon ?? 'info' }}
     </mat-icon>
 
     @if($isTyping | async ){
     <mat-spinner matSuffix [diameter]="20"></mat-spinner>
+    } @else if(formControl.valid){
+    <mat-icon style="color: green" matSuffix> check</mat-icon>
     }
+
     <mat-error>{{ errorMessage() }}</mat-error>
   </mat-form-field>
 </ng-template>
@@ -25,6 +34,7 @@
   <mat-form-field appearance="outline">
     <mat-label>{{ options.label | labelcase }}</mat-label>
     <input
+      [errorStateMatcher]="errorStateMatcher"
       type="number"
       matInput
       [formControl]="formControl"

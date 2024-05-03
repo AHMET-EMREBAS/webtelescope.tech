@@ -1,6 +1,13 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroupDirective,
+  FormsModule,
+  NgForm,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +16,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TempValue } from '@webpackages/utils';
 import { LabelcasePipe } from '../pipes';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+export class DefaultErrorStateMatcher extends ErrorStateMatcher {
+  override isErrorState(control: AbstractControl<any, any> | null): boolean {
+    if (control) {
+      return control?.touched && control.invalid;
+    }
+    return false;
+  }
+}
+
 export interface InputOptions {
   type: string;
   inputName: string;
@@ -16,8 +34,8 @@ export interface InputOptions {
   required?: boolean;
   minLength?: number;
   maxLength?: number;
-  minimum?: number;
-  maximum?: number;
+  min?: number;
+  max?: number;
   icon?: string;
 }
 @Component({
@@ -39,6 +57,7 @@ export interface InputOptions {
 })
 export class InputComponent {
   ref = InputComponent;
+  errorStateMatcher = new DefaultErrorStateMatcher();
   @Input() options!: InputOptions;
   @Input() formControl!: FormControl;
 
