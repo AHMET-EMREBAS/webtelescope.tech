@@ -3,10 +3,9 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideEntityData, withEffects } from '@ngrx/data';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { SampleService } from './services';
-import { APP_INTERCEPTORS } from './common';
-import { CategoryService } from '@webpackages/material/services';
 
+import { APP_INTERCEPTORS } from './common';
+import { CategoryService } from '@webpackages/gen-crud';
 
 const COLLECTION_SERVICES: Type<unknown>[] = [CategoryService];
 
@@ -18,7 +17,7 @@ export const NGRX_CONFIG: ApplicationConfig = {
     provideEntityData(
       {
         entityMetadata: { Category: {} },
-        pluralNames: { Category: 'Categorys' },
+        pluralNames: { Category: 'Categories' },
       },
       withEffects()
     ),

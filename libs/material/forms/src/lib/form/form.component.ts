@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   EventEmitter,
@@ -35,7 +37,7 @@ import { TempValue } from '@webpackages/utils';
   styleUrl: './form.component.scss',
   providers: [InputDirective],
 })
-export class FormComponent implements AfterViewInit {
+export class FormComponent<T = any> implements AfterViewInit {
   componentRef = InputComponent;
 
   @ContentChildren(InputComponent)
@@ -66,28 +68,28 @@ export class FormComponent implements AfterViewInit {
     for (const input of this.componentReferances) {
       input.formControl = new FormControl('', []);
 
-      const { required, minLength, maxLength, min, max } = input.options;
+      const { required, minLength, maxLength, minimum, maximum } =
+        input.options;
 
-      if (required != undefined)
-        input.formControl.addValidators(Validators.required);
       if (required != undefined)
         input.formControl.addValidators(Validators.required);
       if (minLength != undefined)
         input.formControl.addValidators(Validators.minLength(minLength));
       if (maxLength != undefined)
         input.formControl.addValidators(Validators.maxLength(maxLength));
-      if (min != undefined)
-        input.formControl.addValidators(Validators.min(min));
-      if (max != undefined)
-        input.formControl.addValidators(Validators.max(max));
+      if (minimum != undefined)
+        input.formControl.addValidators(Validators.min(minimum));
+      if (maximum != undefined)
+        input.formControl.addValidators(Validators.max(maximum));
 
       this.formGroup.setControl(input.options.inputName, input.formControl);
     }
   }
 
-  submitForm(formValue?: any) {
+  submitForm(formValue?: T) {
     this.submitted.next(true);
     this.submitEvent.emit(formValue ?? this.formGroup.value);
+    this.resetForm();
   }
 
   resetForm() {

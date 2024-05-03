@@ -1,21 +1,24 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService } from '@webpackages/material/services';
-
+import { CategoryService, CategoryComponent } from '@webpackages/gen-crud';
+import { MatCardModule } from '@angular/material/card';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'wt-sample',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule, CategoryComponent],
   templateUrl: './sample.component.html',
   styleUrl: './sample.component.scss',
 })
-export class SampleComponent implements AfterViewInit {
+export class SampleComponent implements AfterViewInit, OnDestroy {
   count$ = this.category.allCount$;
+  sub!: Subscription;
   constructor(protected readonly category: CategoryService) {}
   ngAfterViewInit(): void {
-    this.category.entities$.subscribe(console.log);
+    this.sub = this.category.entities$.subscribe(console.log);
+  }
 
-    console.log('IS working? ');
-    this.category.add({ id: 1, name: 'New Category  1' });
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputOptions } from '../input/input.component';
 import { FormComponent, FormModule } from '../form';
+import { InputOption } from '@webpackages/client-common'
 
 @Component({
   selector: 'wt-basic-form',
@@ -11,5 +11,5 @@ import { FormComponent, FormModule } from '../form';
   styleUrl: './basic-form.component.scss',
 })
 export class BasicFormComponent extends FormComponent {
-  @Input() inputs!: InputOptions[];
+  @Input() inputs!: InputOption[];
 }

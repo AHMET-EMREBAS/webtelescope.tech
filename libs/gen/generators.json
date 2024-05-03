@@ -34,6 +34,16 @@
       "factory": "./src/generators/ngrx/generator",
       "schema": "./src/generators/ngrx/schema.json",
       "description": "ngrx generator"
+    },
+    "forms": {
+      "factory": "./src/generators/forms/generator",
+      "schema": "./src/generators/forms/schema.json",
+      "description": "forms generator"
+    },
+    "crud": {
+      "factory": "./src/generators/crud/generator",
+      "schema": "./src/generators/crud/schema.json",
+      "description": "crud generator"
     }
   }
 }

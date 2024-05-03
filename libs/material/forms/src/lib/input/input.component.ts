@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   AbstractControl,
@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TempValue, names } from '@webpackages/utils';
 import { LabelcasePipe } from '../pipes';
 import { ErrorStateMatcher } from '@angular/material/core';
-
+import { InputOption } from '@webpackages/client-common';
 export class DefaultErrorStateMatcher extends ErrorStateMatcher {
   override isErrorState(control: AbstractControl<any, any> | null): boolean {
     if (control) {
@@ -25,17 +25,17 @@ export class DefaultErrorStateMatcher extends ErrorStateMatcher {
   }
 }
 
-export interface InputOptions {
-  type: string;
-  inputName: string;
-  label?: string;
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  min?: number;
-  max?: number;
-  icon?: string;
-}
+// export interface InputOptions {
+//   type: string;
+//   inputName: string;
+//   label?: string;
+//   required?: boolean;
+//   minLength?: number;
+//   maxLength?: number;
+//   min?: number;
+//   max?: number;
+//   icon?: string;
+// }
 @Component({
   selector: 'wt-input',
   standalone: true,
@@ -56,10 +56,10 @@ export interface InputOptions {
 export class InputComponent {
   ref = InputComponent;
   errorStateMatcher = new DefaultErrorStateMatcher();
-  @Input() options!: InputOptions;
+  @Input() options!: InputOption;
   @Input() formControl!: FormControl;
 
-  typingChecker = new TempValue(400);
+  typingChecker = new TempValue<boolean>(400);
 
   $isTyping = this.typingChecker.$value;
 
