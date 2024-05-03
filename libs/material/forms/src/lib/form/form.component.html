@@ -1,4 +1,4 @@
-<form novalidate>
+<form [formGroup]="formGroup" novalidate>
   @for(c of inputs; track c){
   <ng-container
     [ngComponentOutlet]="c.ref"

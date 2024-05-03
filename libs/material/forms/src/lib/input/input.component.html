@@ -1,7 +1,7 @@
 <!-- Text input -->
 <ng-template #text>
   <mat-form-field appearance="outline">
-    <mat-label>{{ options.label }}</mat-label>
+    <mat-label>{{ options.label | labelcase }}</mat-label>
     <input
       type="text"
       matInput
@@ -23,7 +23,7 @@
 <!-- Number input -->
 <ng-template #number>
   <mat-form-field appearance="outline">
-    <mat-label>{{ options.label }}</mat-label>
+    <mat-label>{{ options.label | labelcase }}</mat-label>
     <input
       type="number"
       matInput

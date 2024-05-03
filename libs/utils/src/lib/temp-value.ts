@@ -1,7 +1,8 @@
 import { debounceTime, Subject, Subscription, tap } from 'rxjs';
 
 /**
- * Temporarily hold the value for miliseconds (default 400ms), then set undefiend after the time passed,
+ * Temporarily hold the value for miliseconds (default 400ms), 
+ * then set undefiend after the time passed,
  * You do not need to deal with subscription and unsubscription.
  */
 export class TempValue<T = string> {

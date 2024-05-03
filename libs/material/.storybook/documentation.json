@@ -59,6 +59,102 @@
             "extends": []
         },
         {
+            "name": "InputOptions",
+            "id": "interface-InputOptions-fa199a2c0f92e0db511725efeecc624e8b1b96fe35eb7a489ee0e9b9decfc2baed51e5d3384e10c0436f1be19aec99b9ad862b0ffed13870d3f28bd9f8344b35",
+            "file": "libs/material/forms/src/lib/input/input.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { AfterViewInit, Component, Input, OnInit } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\n\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { SetAttributeDirective } from '../directives';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\nimport { TempValue } from '@webpackages/utils';\nexport interface InputOptions {\n  type: string;\n  inputName: string;\n  label: string;\n  required?: boolean;\n  minLength?: number;\n  maxLength?: number;\n  minimum?: number;\n  maximum?: number;\n  icon?: string;\n}\n@Component({\n  selector: 'wt-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatInputModule,\n    MatFormFieldModule,\n    MatIconModule,\n    SetAttributeDirective,\n    MatProgressSpinnerModule,\n  ],\n  templateUrl: './input.component.html',\n  styleUrl: './input.component.scss',\n})\nexport class InputComponent {\n  ref = InputComponent;\n  @Input() options!: InputOptions;\n  @Input() formControl!: FormControl;\n\n  typingChecker = new TempValue(400);\n\n  $isTyping = this.typingChecker.$value;\n\n  errorMessage() {\n    if (this.formControl?.errors?.['required']) {\n      return `${this.options?.inputName} is required!`;\n    } else if (this.formControl?.errors?.['minLength']) {\n      return `${this.options?.inputName} should contain at least ${this.options?.minLength} characters!`;\n    }\n\n    return 'Field is not valid!';\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "inputName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "maximum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "maxLength",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "minimum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "minLength",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "required",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": true,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "ITemplateRef",
             "id": "interface-ITemplateRef-4e3d17c38f71b0e19a21ce45d10211ffc3d5d8634d4fb43dbd4c134597aa3f098f6281dd19e8b1debbe85432105af982387eb0d1184412447a0d20134986be30",
             "file": "libs/material/layout/src/common/types/template-ref.ts",
@@ -28501,7 +28597,7 @@
         },
         {
             "name": "FormComponent",
-            "id": "component-FormComponent-6fe6bb9c36262e098bb0df0abf8c2200e379031c2e166f62859b1adb737ecaf77eac8769edb95c7bca8af6681d697b4d6a221cb4cdbca751c75a2145e1533dbf",
+            "id": "component-FormComponent-87866ece4217b8765d8c037b957870f163f61da23ad63cf18fbe346a533c3017192dbf52a8297e495b4cb6d5fae89f2de2b768bce91889f819dc7057b5ac2ab8",
             "file": "libs/material/forms/src/lib/form/form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -28521,8 +28617,27 @@
             ],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "formSubmitLabel",
+                    "defaultValue": "'Submit'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "formSubmit",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "componentRef",
@@ -28532,7 +28647,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 31
+                    "line": 30
                 },
                 {
                     "name": "formGroup",
@@ -28542,7 +28657,10 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 34
+                    "line": 37,
+                    "modifierKind": [
+                        148
+                    ]
                 },
                 {
                     "name": "inputs",
@@ -28551,7 +28669,7 @@
                     "type": "QueryList<InputComponent>",
                     "optional": false,
                     "description": "",
-                    "line": 32,
+                    "line": 31,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -28570,7 +28688,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 48,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -28580,7 +28698,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 42,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCheck the required inputs\n",
@@ -28613,7 +28731,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  AfterContentChecked,\n  AfterContentInit,\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  NgModule,\n  OnInit,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormBuilder,\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [CommonModule, InputDirective, FormsModule, ReactiveFormsModule],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [InputDirective],\n})\nexport class FormComponent implements AfterViewInit {\n  componentRef = InputComponent;\n  @ContentChildren(InputComponent) inputs!: QueryList<InputComponent>;\n\n  formGroup = new FormGroup({});\n\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    for (const input of this.inputs) {\n      if (!input.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n      if (!input.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n    for (const input of this.inputs) {\n      input.formControl.setParent(this.formGroup);\n      input.formControl.setValue('Default value');\n      this.formGroup.addControl(input.inputName, input.formControl);\n      input.formControl.enable({ emitEvent: true });\n    }\n\n \n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
+            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  EventEmitter,\n  Input,\n  NgModule,\n  Output,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [CommonModule, InputDirective, FormsModule, ReactiveFormsModule],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [InputDirective],\n})\nexport class FormComponent implements AfterViewInit {\n  componentRef = InputComponent;\n  @ContentChildren(InputComponent) inputs!: QueryList<InputComponent>;\n\n  @Input() formSubmitLabel = 'Submit';\n\n  @Output() formSubmit = new EventEmitter();\n\n  readonly formGroup = new FormGroup({});\n\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    for (const input of this.inputs) {\n      if (!input.options.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n      if (!input.options.label)\n        throw new Error('Input label is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n    for (const input of this.inputs) {\n      input.formControl = new FormControl('', []);\n      this.formGroup.setControl(input.options.inputName, input.formControl);\n    }\n\n    this.formGroup.valueChanges.subscribe(console.log);\n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
             "styleUrl": "./form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -28622,7 +28740,7 @@
             "implements": [
                 "AfterViewInit"
             ],
-            "templateData": "{{ formGroup.value | json }}\n<form novalidate >\n  @for(c of inputs; track c){\n  <ng-container\n    [ngComponentOutlet]=\"c.ref\"\n    [ngComponentOutletInputs]=\"{\n      inputName: c.inputName,\n      label: c.label,\n      icon: c.icon\n    }\"\n  ></ng-container>\n  }\n</form>\n"
+            "templateData": "<form [formGroup]=\"formGroup\" novalidate>\n  @for(c of inputs; track c){\n  <ng-container\n    [ngComponentOutlet]=\"c.ref\"\n    [ngComponentOutletInputs]=\"{\n      options: c.options,\n      formControl: c.formControl\n    }\"\n  ></ng-container>\n  }\n</form>\n"
         },
         {
             "name": "IconsComponent",
@@ -28844,7 +28962,7 @@
         },
         {
             "name": "InputComponent",
-            "id": "component-InputComponent-4f29d3f3fd962bd93a2b35b5fdd7d2824c1efa5e04bdb856a04a82c622e93ba4d397c8680ec7075b11790c7ec453c29e014232fd1fa50c9c89a8eec3a673380d",
+            "id": "component-InputComponent-fa199a2c0f92e0db511725efeecc624e8b1b96fe35eb7a489ee0e9b9decfc2baed51e5d3384e10c0436f1be19aec99b9ad862b0ffed13870d3f28bd9f8344b35",
             "file": "libs/material/forms/src/lib/input/input.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -28861,46 +28979,33 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "icon",
-                    "defaultValue": "''",
+                    "name": "formControl",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
-                    "type": "string",
+                    "line": 41,
+                    "type": "FormControl",
                     "decorators": []
                 },
                 {
-                    "name": "inputName",
-                    "defaultValue": "''",
+                    "name": "options",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\nInput name is required for the parent .\n",
-                    "description": "<p>Input name is required for the parent .</p>\n",
-                    "line": 34,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 35,
-                    "type": "string",
+                    "line": 40,
+                    "type": "InputOptions",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "formControl",
-                    "defaultValue": "new FormControl('', [])",
+                    "name": "$isTyping",
+                    "defaultValue": "this.typingChecker.$value",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 29
+                    "line": 45
                 },
                 {
                     "name": "ref",
@@ -28910,17 +29015,27 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 39
+                },
+                {
+                    "name": "typingChecker",
+                    "defaultValue": "new TempValue(400)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 43
                 }
             ],
             "methodsClass": [
                 {
-                    "name": "ngAfterViewInit",
+                    "name": "errorMessage",
                     "args": [],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "string",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -28952,23 +29067,28 @@
                     "type": "module"
                 },
                 {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
                     "name": "SetAttributeDirective",
                     "type": "directive"
+                },
+                {
+                    "name": "MatProgressSpinnerModule",
+                    "type": "module"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  AfterViewInit,\n  ChangeDetectionStrategy,\n  Component,\n  Input,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\n\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { SetAttributeDirective } from '../directives';\n@Component({\n  selector: 'wt-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatInputModule,\n    MatFormFieldModule,\n    SetAttributeDirective,\n  ],\n  templateUrl: './input.component.html',\n  styleUrl: './input.component.scss',\n})\nexport class InputComponent implements AfterViewInit {\n  ref = InputComponent;\n  formControl = new FormControl('', []);\n\n  /**\n   * Input name is required for the parent .\n   */\n  @Input() inputName = '';\n  @Input() label = '';\n  @Input() icon = '';\n\n  ngAfterViewInit(): void {}\n}\n",
+            "sourceCode": "import { AfterViewInit, Component, Input, OnInit } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\n\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { SetAttributeDirective } from '../directives';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\nimport { TempValue } from '@webpackages/utils';\nexport interface InputOptions {\n  type: string;\n  inputName: string;\n  label: string;\n  required?: boolean;\n  minLength?: number;\n  maxLength?: number;\n  minimum?: number;\n  maximum?: number;\n  icon?: string;\n}\n@Component({\n  selector: 'wt-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatInputModule,\n    MatFormFieldModule,\n    MatIconModule,\n    SetAttributeDirective,\n    MatProgressSpinnerModule,\n  ],\n  templateUrl: './input.component.html',\n  styleUrl: './input.component.scss',\n})\nexport class InputComponent {\n  ref = InputComponent;\n  @Input() options!: InputOptions;\n  @Input() formControl!: FormControl;\n\n  typingChecker = new TempValue(400);\n\n  $isTyping = this.typingChecker.$value;\n\n  errorMessage() {\n    if (this.formControl?.errors?.['required']) {\n      return `${this.options?.inputName} is required!`;\n    } else if (this.formControl?.errors?.['minLength']) {\n      return `${this.options?.inputName} should contain at least ${this.options?.minLength} characters!`;\n    }\n\n    return 'Field is not valid!';\n  }\n}\n",
             "styleUrl": "./input.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "implements": [
-                "AfterViewInit"
-            ],
-            "templateData": "<mat-form-field appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input type=\"text\" matInput [formControl]=\"formControl\" />\n</mat-form-field>\n"
+            "templateData": "<!-- Text input -->\n<ng-template #text>\n  <mat-form-field appearance=\"outline\">\n    <mat-label>{{ options.label }}</mat-label>\n    <input\n      type=\"text\"\n      matInput\n      [formControl]=\"formControl\"\n      [wtSetAttribute]=\"options\"\n      (input)=\"typingChecker.next(true)\"\n    />\n    <mat-icon matPrefix class=\"fill\" color=\"primary\">\n      {{ options.icon ?? 'info' }}\n    </mat-icon>\n\n    @if($isTyping | async ){\n    <mat-spinner matSuffix [diameter]=\"20\"></mat-spinner>\n    }\n    <mat-error>{{ errorMessage() }}</mat-error>\n  </mat-form-field>\n</ng-template>\n\n<!-- Number input -->\n<ng-template #number>\n  <mat-form-field appearance=\"outline\">\n    <mat-label>{{ options.label }}</mat-label>\n    <input\n      type=\"number\"\n      matInput\n      [formControl]=\"formControl\"\n      [wtSetAttribute]=\"options\"\n      (input)=\"typingChecker.next(true)\"\n    />\n    <mat-icon matPrefix class=\"fill\" color=\"primary\">\n      {{ options.icon ?? 'info' }}\n    </mat-icon>\n    <mat-error>{{ errorMessage() }}</mat-error>\n  </mat-form-field>\n</ng-template>\n\n@if(formControl) {\n<!-- Text input -->\n@if(options.type ==='text'){\n\n<ng-container *ngTemplateOutlet=\"text\"></ng-container>\n\n<!-- Number input -->\n} @else if(options.type ==='number') {\n\n<ng-container *ngTemplateOutlet=\"number\"></ng-container>\n} }\n"
         },
         {
             "name": "MaterialChartComponent",
@@ -29208,7 +29328,7 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<wt-form>\n  <wt-input inputName=\"firstName\" label=\"First\"></wt-input>\n  <wt-input inputName=\"lastName\" label=\"Second\"></wt-input>\n  <wt-input inputName=\"email\" label=\"THird\"></wt-input>\n</wt-form>\n"
+            "templateData": "<wt-form>\n  <wt-input [options]=\"{inputName:'firstName', type:'text', label:'firstName'}\"></wt-input>\n  <wt-input [options]=\"{inputName:'lastName', type:'text', label:'lastName'}\"></wt-input>\n  <wt-input [options]=\"{inputName:'email', type:'text', label:'email'}\"></wt-input>\n</wt-form>\n"
         },
         {
             "name": "TemplateOutletComponent",
@@ -29784,13 +29904,13 @@
         },
         {
             "name": "FormModule",
-            "id": "module-FormModule-6fe6bb9c36262e098bb0df0abf8c2200e379031c2e166f62859b1adb737ecaf77eac8769edb95c7bca8af6681d697b4d6a221cb4cdbca751c75a2145e1533dbf",
+            "id": "module-FormModule-87866ece4217b8765d8c037b957870f163f61da23ad63cf18fbe346a533c3017192dbf52a8297e495b4cb6d5fae89f2de2b768bce91889f819dc7057b5ac2ab8",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "libs/material/forms/src/lib/form/form.component.ts",
             "methods": [],
-            "sourceCode": "import {\n  AfterContentChecked,\n  AfterContentInit,\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  NgModule,\n  OnInit,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormBuilder,\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [CommonModule, InputDirective, FormsModule, ReactiveFormsModule],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [InputDirective],\n})\nexport class FormComponent implements AfterViewInit {\n  componentRef = InputComponent;\n  @ContentChildren(InputComponent) inputs!: QueryList<InputComponent>;\n\n  formGroup = new FormGroup({});\n\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    for (const input of this.inputs) {\n      if (!input.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n      if (!input.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n    for (const input of this.inputs) {\n      input.formControl.setParent(this.formGroup);\n      input.formControl.setValue('Default value');\n      this.formGroup.addControl(input.inputName, input.formControl);\n      input.formControl.enable({ emitEvent: true });\n    }\n\n \n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
+            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  EventEmitter,\n  Input,\n  NgModule,\n  Output,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n} from '@angular/forms';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [CommonModule, InputDirective, FormsModule, ReactiveFormsModule],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [InputDirective],\n})\nexport class FormComponent implements AfterViewInit {\n  componentRef = InputComponent;\n  @ContentChildren(InputComponent) inputs!: QueryList<InputComponent>;\n\n  @Input() formSubmitLabel = 'Submit';\n\n  @Output() formSubmit = new EventEmitter();\n\n  readonly formGroup = new FormGroup({});\n\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    for (const input of this.inputs) {\n      if (!input.options.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n      if (!input.options.label)\n        throw new Error('Input label is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n    for (const input of this.inputs) {\n      input.formControl = new FormControl('', []);\n      this.formGroup.setControl(input.options.inputName, input.formControl);\n    }\n\n    this.formGroup.valueChanges.subscribe(console.log);\n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -30089,21 +30209,21 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -30169,16 +30289,6 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30204,6 +30314,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -30279,21 +30399,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<AppLayoutComponent>",
-                "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppSampleComponent>",
                 "defaultValue": "{\r\n  component: AppSampleComponent,\r\n  title: 'AppSampleComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AppLayoutComponent>",
+                "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -30359,16 +30479,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<EditorComponent>",
-                "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30399,6 +30509,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<EditorComponent>",
+                "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/layout/src/common/floating-container/floating-container.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30419,21 +30539,21 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -30499,16 +30619,6 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30534,6 +30644,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
             },
             {
                 "name": "Primary",
@@ -30667,8 +30787,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AppLayoutComponent>",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "rawtype": "StoryObj<AppSampleComponent>",
+                "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -30678,8 +30798,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AppSampleComponent>",
-                "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
+                "rawtype": "StoryObj<AppLayoutComponent>",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -30755,17 +30875,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<EditorComponent>",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<FormComponent>",
                 "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
                 "deprecated": false,
@@ -30790,6 +30899,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<SampleFormComponent>",
                 "file": "libs/material/forms/src/lib/sample-form/sample-form.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<EditorComponent>",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -30908,38 +31028,6 @@
                     "defaultValue": "[\r\n  importProvidersFrom([BrowserAnimationsModule, RouterTestingModule]),\r\n]"
                 }
             ],
-            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<AppLayoutComponent>",
-                    "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
-                }
-            ],
             "libs/material/layout/src/app-sample/app-sample.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -30970,6 +31058,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
+            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AppLayoutComponent>",
+                    "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
                 }
             ],
             "libs/material/layout/src/icons/icons.component.stories.ts": [
@@ -31164,38 +31284,6 @@
                     "defaultValue": "{\r\n  args: {},\r\n}"
                 }
             ],
-            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<EditorComponent>",
-                    "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n}"
-                }
-            ],
             "libs/material/forms/src/lib/form/form.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -31290,6 +31378,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<EditorComponent>",
+                    "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n}"
                 }
             ],
             "libs/material/layout/src/common/floating-container/floating-container.component.stories.ts": [
@@ -31555,19 +31675,6 @@
                     "kind": 187
                 }
             ],
-            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<AppLayoutComponent>",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "libs/material/layout/src/app-sample/app-sample.component.stories.ts": [
                 {
                     "name": "Story",
@@ -31575,6 +31682,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<AppSampleComponent>",
                     "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AppLayoutComponent>",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -31659,19 +31779,6 @@
                     "kind": 183
                 }
             ],
-            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<EditorComponent>",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "libs/material/forms/src/lib/form/form.component.stories.ts": [
                 {
                     "name": "Story",
@@ -31711,6 +31818,19 @@
                     "kind": 183
                 }
             ],
+            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<EditorComponent>",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/material/layout/src/common/floating-container/floating-container.component.stories.ts": [
                 {
                     "name": "Story",
@@ -31741,7 +31861,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 1,
+        "count": 0,
         "status": "low",
         "files": [
             {
@@ -31923,8 +32043,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "FormComponent",
-                "coveragePercent": 16,
-                "coverageCount": "1/6",
+                "coveragePercent": 12,
+                "coverageCount": "1/8",
                 "status": "low"
             },
             {
@@ -31962,8 +32082,17 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "InputComponent",
-                "coveragePercent": 14,
-                "coverageCount": "1/7",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/input/input.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "InputOptions",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {

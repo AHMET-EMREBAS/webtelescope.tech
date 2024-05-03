@@ -60,12 +60,20 @@ function __fileName(name: string) {
     .join('-');
 }
 
+function __titleName(name: string) {
+  return splitByUppercase(name)
+    .split('_')
+    .map((e) => uppercaseFirst(e))
+    .join(' ');
+}
+
 export function names(name: string) {
   return {
     className: __className(name),
     fileName: __fileName(name),
     propertyName: __propertyName(name),
     constName: __constName(name),
+    titleName: __titleName(name),
   };
 }
 

@@ -8,6 +8,7 @@ import { SetAttributeDirective } from '../directives';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TempValue } from '@webpackages/utils';
+import { LabelcasePipe } from '../pipes';
 export interface InputOptions {
   type: string;
   inputName: string;
@@ -31,11 +32,12 @@ export interface InputOptions {
     MatIconModule,
     SetAttributeDirective,
     MatProgressSpinnerModule,
+    LabelcasePipe,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
 })
-export class InputComponent implements AfterViewInit {
+export class InputComponent {
   ref = InputComponent;
   @Input() options!: InputOptions;
   @Input() formControl!: FormControl;
@@ -44,13 +46,13 @@ export class InputComponent implements AfterViewInit {
 
   $isTyping = this.typingChecker.$value;
 
-  ngAfterViewInit(): void {}
-
   errorMessage() {
     if (this.formControl?.errors?.['required']) {
       return `${this.options?.inputName} is required!`;
     } else if (this.formControl?.errors?.['minLength']) {
       return `${this.options?.inputName} should contain at least ${this.options?.minLength} characters!`;
+    } else if (this.formControl?.errors?.['maxLength']) {
+      return `${this.options?.inputName} should contain at most ${this.options?.maxLength} characters!`;
     }
 
     return 'Field is not valid!';

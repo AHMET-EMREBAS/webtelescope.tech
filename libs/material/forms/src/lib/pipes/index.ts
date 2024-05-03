@@ -1,0 +1,1 @@
+export * from './labelcase.pipe';
