@@ -7,4 +7,12 @@ describe('Exclude undefined', () => {
     expect(keys.length).toBe(1);
     expect(keys[0]).toBe('b');
   });
+
+  it('should work', () => {
+    const obj = { a: 1, b: 2 };
+
+    for (const key in obj) {
+      console.log(key);
+    }
+  });
 });

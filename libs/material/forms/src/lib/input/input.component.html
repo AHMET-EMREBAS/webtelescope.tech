@@ -1,0 +1,51 @@
+<!-- Text input -->
+<ng-template #text>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ options.label }}</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="formControl"
+      [wtSetAttribute]="options"
+      (input)="typingChecker.next(true)"
+    />
+    <mat-icon matPrefix class="fill" color="primary">
+      {{ options.icon ?? 'info' }}
+    </mat-icon>
+
+    @if($isTyping | async ){
+    <mat-spinner matSuffix [diameter]="20"></mat-spinner>
+    }
+    <mat-error>{{ errorMessage() }}</mat-error>
+  </mat-form-field>
+</ng-template>
+
+<!-- Number input -->
+<ng-template #number>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ options.label }}</mat-label>
+    <input
+      type="number"
+      matInput
+      [formControl]="formControl"
+      [wtSetAttribute]="options"
+      (input)="typingChecker.next(true)"
+    />
+    <mat-icon matPrefix class="fill" color="primary">
+      {{ options.icon ?? 'info' }}
+    </mat-icon>
+    <mat-error>{{ errorMessage() }}</mat-error>
+  </mat-form-field>
+</ng-template>
+
+@if(formControl) {
+<!-- Text input -->
+@if(options.type ==='text'){
+
+<ng-container *ngTemplateOutlet="text"></ng-container>
+
+<!-- Number input -->
+} @else if(options.type ==='number') {
+
+<ng-container *ngTemplateOutlet="number"></ng-container>
+} }

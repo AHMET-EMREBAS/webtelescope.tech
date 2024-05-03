@@ -1,54 +1,66 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  NgModule,
+  Output,
+  QueryList,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { InputDirective } from '../directives';
+import { InputComponent } from '../input/input.component';
 import {
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { Observable, map, startWith } from 'rxjs';
+
 @Component({
   selector: 'wt-form',
   standalone: true,
-  imports: [
-    CommonModule,
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-  ],
+  imports: [CommonModule, InputDirective, FormsModule, ReactiveFormsModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
+  providers: [InputDirective],
 })
-export class FormComponent {
-  @Output() submitEvent = new EventEmitter();
+export class FormComponent implements AfterViewInit {
+  componentRef = InputComponent;
+  @ContentChildren(InputComponent) inputs!: QueryList<InputComponent>;
 
-  formGroup = new FormGroup({
-    firstName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    lastName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    autocomplete: new FormControl('', [Validators.required]),
-  });
+  @Input() formSubmitLabel = 'Submit';
 
-  submitForm() {
-    this.submitEvent.emit(this.formGroup.value);
+  @Output() formSubmit = new EventEmitter();
+
+  readonly formGroup = new FormGroup({});
+
+  /**
+   * Check the required inputs
+   */
+  validateInputOptions() {
+    for (const input of this.inputs) {
+      if (!input.options.inputName)
+        throw new Error('Input name is required from FormComponent. ');
+      if (!input.options.label)
+        throw new Error('Input label is required from FormComponent. ');
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.validateInputOptions();
+    for (const input of this.inputs) {
+      input.formControl = new FormControl('', []);
+      this.formGroup.setControl(input.options.inputName, input.formControl);
+    }
+
+    this.formGroup.valueChanges.subscribe(console.log);
   }
 }
+
+@NgModule({
+  imports: [CommonModule, FormComponent, InputDirective, InputComponent],
+  exports: [FormComponent, InputDirective, InputComponent],
+})
+export class FormModule {}
