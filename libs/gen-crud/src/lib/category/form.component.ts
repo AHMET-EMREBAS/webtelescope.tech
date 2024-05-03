@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CategoryService } from './service';
+import { CategoryService } from './ngrx.service';
 
 import { BasicFormComponent } from '@webpackages/material/forms';
-import { ICategory, ICreateCategoryDto } from '@webpackages/gen-model';
+import { ICategory } from '@webpackages/gen-model';
 import { BaseFormComponent } from '@webpackages/client-common';
 
 @Component({
@@ -24,13 +24,12 @@ import { BaseFormComponent } from '@webpackages/client-common';
   ></wt-basic-form>`,
   standalone: true,
 })
-export class CategoryComponent extends BaseFormComponent<ICategory> {
+export class CategoryFormComponent extends BaseFormComponent<ICategory> {
   constructor(service: CategoryService) {
     super(service);
   }
 
-  submitForm(formValue: ICreateCategoryDto) {
-    console.log('Creating category ... ', formValue);
-    this.service.add({ id: 1, ...formValue });
+  submitForm(formValue: ICategory) {
+    this.service.createEntity({ ...formValue });
   }
 }

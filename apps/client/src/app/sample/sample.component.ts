@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService, CategoryComponent } from '@webpackages/gen-crud';
+import { CategoryService, CategoryFormComponent } from '@webpackages/gen-crud';
 import { MatCardModule } from '@angular/material/card';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'wt-sample',
   standalone: true,
-  imports: [CommonModule, MatCardModule, CategoryComponent],
+  imports: [CommonModule, MatCardModule, CategoryFormComponent],
   templateUrl: './sample.component.html',
   styleUrl: './sample.component.scss',
 })

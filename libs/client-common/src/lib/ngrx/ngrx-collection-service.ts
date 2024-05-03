@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
-import {  IPaginatorDto } from '@webpackages/common';
+import { IPaginatorDto } from '@webpackages/common';
 
 import { names, plural } from '@webpackages/utils';
 
@@ -13,9 +14,9 @@ import { names, plural } from '@webpackages/utils';
  */
 export abstract class NgrxCollectionService<
   T,
-  CT extends Partial<T> = T,
+  CT extends Partial<T> = Partial<T>,
   UD = Partial<CT>,
-  QD = {}
+  QD = any
 > extends EntityCollectionServiceBase<T> {
   allCount$ = inject(HttpClient).get(
     `${plural(names(this.entityName).fileName)}/count`

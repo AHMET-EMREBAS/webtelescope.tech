@@ -77,6 +77,18 @@ export class AppComponent implements OnInit {
     {
       title: Messages.HOME,
       icon: 'home',
+      route: '',
+    },
+
+    {
+      title: 'Categories',
+      icon: 'table_bar',
+      route: 'categories',
+    },
+    {
+      title: 'New Category',
+      icon: 'create',
+      route: 'category',
     },
   ];
   rightNavList: MenuItem[] = [
