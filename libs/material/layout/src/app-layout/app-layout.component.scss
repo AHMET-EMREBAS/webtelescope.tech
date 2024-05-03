@@ -45,9 +45,8 @@ mat-sidenav-content {
 
 .main-content-container {
   overflow: hidden;
-  overflow-y: auto;
   max-height: 78%;
-  padding: 1em;
+  padding: 1e;
 }
 
 wt-template-outlet {

@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
     `
       :host {
         height: 100%;
-        border: 1px solid orange;
       }
     `,
   ],
@@ -31,6 +30,8 @@ export class CategoryTableComponent extends BaseResourceTableComponent<ICategory
   constructor(service: CategoryService) {
     super(service);
 
-    // this.service.createEntity({ name: "some'" });
+    for (let i = 1; i < 50; i++) {
+      this.service.addOneToCache({ id: i, name: `some ${i}` } as any);
+    }
   }
 }
