@@ -23,6 +23,7 @@
       "@webpackages/db": ["libs/db/src/index.ts"],
       "@webpackages/gen": ["libs/gen/src/index.ts"],
       "@webpackages/gen-entity": ["libs/gen-entity/src/index.ts"],
+      "@webpackages/gen-form": ["libs/gen-form/src/index.ts"],
       "@webpackages/gen-meta": ["libs/gen-meta/src/index.ts"],
       "@webpackages/gen-model": ["libs/gen-model/src/index.ts"],
       "@webpackages/gen-rest": ["libs/gen-rest/src/index.ts"],

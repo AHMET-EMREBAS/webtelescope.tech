@@ -28493,6 +28493,112 @@
             "templateData": "<div class=\"fixed-right-container\" #screen=\"wtFullscreen\" wtFullscreen>\r\n  <div class=\"floating-content\" *ngIf=\"!screen.isFullscreen()\">\r\n    <wt-template-outlet\r\n      [items]=\"items\"\r\n      [testing]=\"testing\"\r\n      testName=\"Floating Buttons\"\r\n    ></wt-template-outlet>\r\n  </div>\r\n</div>\r\n"
         },
         {
+            "name": "FormComponent",
+            "id": "component-FormComponent-0545e4cca0fd858cdd9ea3419e06a76d1cfbb81ebf7825875a831770fc94eda64d0ace88322b8d14a0edbc1437a2031140574a5f761ec16fc9b8bc67d9dc561c",
+            "file": "libs/material/forms/src/lib/form/form.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-form",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./form.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "submitEvent",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "formGroup",
+                    "defaultValue": "new FormGroup({\n    firstName: new FormControl('', [\n      Validators.required,\n      Validators.minLength(3),\n    ]),\n    lastName: new FormControl('', [\n      Validators.required,\n      Validators.minLength(3),\n    ]),\n    email: new FormControl('', [Validators.required, Validators.email]),\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "submitForm",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReactiveFormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatProgressSpinnerModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatButtonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatButtonModule } from '@angular/material/button';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n    CommonModule,\n    MatFormFieldModule,\n    MatInputModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatProgressSpinnerModule,\n    MatButtonModule,\n  ],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n})\nexport class FormComponent {\n  @Output() submitEvent = new EventEmitter();\n\n  formGroup = new FormGroup({\n    firstName: new FormControl('', [\n      Validators.required,\n      Validators.minLength(3),\n    ]),\n    lastName: new FormControl('', [\n      Validators.required,\n      Validators.minLength(3),\n    ]),\n    email: new FormControl('', [Validators.required, Validators.email]),\n  });\n\n  submitForm() {\n    this.submitEvent.emit(this.formGroup.value);\n  }\n}\n",
+            "styleUrl": "./form.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<form [formGroup]=\"formGroup\">\n  <mat-form-field appearance=\"outline\">\n    <mat-label>Firstname</mat-label>\n    <input matInput formControlName=\"firstName\" type=\"text\" />\n    <mat-error>Field is required!</mat-error>\n  </mat-form-field>\n\n  <mat-form-field appearance=\"outline\">\n    <mat-label>Lastname</mat-label>\n    <input matInput formControlName=\"lastName\" type=\"text\" />\n    <mat-error>Field is required too</mat-error>\n  </mat-form-field>\n\n  <mat-form-field appearance=\"outline\">\n    <mat-label>Email</mat-label>\n    <input matInput formControlName=\"email\" type=\"email\" autocomplete=\"off\" />\n    <mat-error>Email is required</mat-error>\n  </mat-form-field>\n\n  <button\n    type=\"submit\"\n    mat-raised-button\n    color=\"primary\"\n    [disabled]=\"formGroup.invalid\"\n  >\n    Save User\n  </button>\n</form>\n"
+        },
+        {
             "name": "IconsComponent",
             "id": "component-IconsComponent-6c7eda8c88b4db65bf018e5c37618151fb83d7e3d8f4f6a3e679460e112e3c18b9667567fa69c3c4862090b1127f49214301ce57d66cc9a6b4447a4c19ea6794",
             "file": "libs/material/layout/src/icons/icons.component.ts",
@@ -29275,7 +29381,7 @@
         },
         {
             "name": "TextComponent",
-            "id": "component-TextComponent-4fcefd87881db44699722a8ebf36f42fb4dce4c312a4bfb69b4e98d4f035d3589e62d177942910657678b05dbd730ab595000d2cf82d24684f7fb7d52cb9e555",
+            "id": "component-TextComponent-8c90f32197d8d7badd9b0d767f254c9b8bdbe8f38a009a305f319d46002c8e7eb6046e4008f6b0925530d13750f771dae87059973a2965a819375aca667dd750",
             "file": "libs/material/forms/src/lib/text/text.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -29285,72 +29391,25 @@
             "selector": "wt-text",
             "styleUrls": [],
             "styles": [],
-            "templateUrl": [
-                "./text.component.html"
-            ],
+            "template": "<mat-form-field class=\"on-focus\" appearance=\"outline\">\n  <mat-label>Input Label</mat-label>\n  <input\n    matInput\n    type=\"text\"\n    required=\"required\"\n    minlength=\"3\"\n    maxlength=\"30\"\n    autocomplete=\"off\"\n  />\n  <mat-icon matPrefix>info</mat-icon>\n</mat-form-field>\n",
+            "templateUrl": [],
             "viewProviders": [],
             "hostDirectives": [],
-            "inputsClass": [
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
                 {
-                    "name": "label",
-                    "defaultValue": "'Label'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 21,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "prefixIcon",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 22,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "required",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 24,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "suffixIcon",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 23,
-                    "type": "string",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "changeEvent",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 26,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [
-                {
-                    "name": "formControl",
-                    "defaultValue": "new FormControl('', [])",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
+                    "name": "ngAfterViewInit",
+                    "args": [],
                     "optional": false,
-                    "description": "",
-                    "line": 20
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": ""
                 }
             ],
-            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -29376,18 +29435,27 @@
                 {
                     "name": "ReactiveFormsModule",
                     "type": "module"
+                },
+                {
+                    "name": "MatIconModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatProgressSpinnerModule",
+                    "type": "module"
                 }
             ],
             "description": "",
-            "rawdescription": "\n",
+            "rawdescription": "\n\n\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\n@Component({\n  selector: 'wt-text',\n  standalone: true,\n  imports: [\n    CommonModule,\n    MatFormFieldModule,\n    MatInputModule,\n    FormsModule,\n    ReactiveFormsModule,\n  ],\n  templateUrl: './text.component.html',\n  styleUrl: './text.component.scss',\n})\nexport class TextComponent {\n  formControl = new FormControl('', []);\n  @Input() label = 'Label';\n  @Input() prefixIcon = '';\n  @Input() suffixIcon = '';\n  @Input() required = false;\n\n  @Output() changeEvent = new EventEmitter();\n}\n",
-            "styleUrl": "./text.component.scss",
+            "sourceCode": "import { AfterViewInit, Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\n\n/**\n * \n */\n@Component({\n  selector: 'wt-text',\n  standalone: true,\n  imports: [\n    CommonModule,\n    MatFormFieldModule,\n    MatInputModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatIconModule,\n    MatProgressSpinnerModule,\n  ],\n  template: `\n    <mat-form-field class=\"on-focus\" appearance=\"outline\">\n      <mat-label>Input Label</mat-label>\n      <input\n        matInput\n        type=\"text\"\n        required=\"required\"\n        minlength=\"3\"\n        maxlength=\"30\"\n        autocomplete=\"off\"\n      />\n      <mat-icon matPrefix>info</mat-icon>\n    </mat-form-field>\n  `,\n})\nexport class TextComponent implements AfterViewInit {\n  ngAfterViewInit(): void {\n    console.log(this);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "{{ formControl.valueChanges | async }}\n\n<mat-form-field appearance=\"outline\">\n  <mat-label>{{ label }}</mat-label>\n  <input type=\"text\" matInput [formControl]=\"formControl\" />\n  <mat-icon class=\"material-icons\" matSuffix>star</mat-icon>\n  <mat-icon class=\"material-icons\" matPrefix>home</mat-icon>\n</mat-form-field>\n"
+            "implements": [
+                "AfterViewInit"
+            ]
         },
         {
             "name": "UsernameComponent",
@@ -30186,21 +30254,21 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
-            },
-            {
-                "name": "Heading",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
             },
             {
                 "name": "Heading",
@@ -30316,6 +30384,16 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/form works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/forms/src/lib/list-select/list-select.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30390,7 +30468,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/text works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    // expect(canvas.getByText(/text works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -30476,21 +30554,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<AppLayoutComponent>",
-                "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AppSampleComponent>",
                 "defaultValue": "{\r\n  component: AppSampleComponent,\r\n  title: 'AppSampleComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AppLayoutComponent>",
+                "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -30606,6 +30684,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FormComponent>",
+                "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/forms/src/lib/list-select/list-select.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30716,21 +30804,21 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -30837,6 +30925,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "libs/material/forms/src/lib/email/email.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -31064,8 +31162,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AppLayoutComponent>",
-                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                "rawtype": "StoryObj<AppSampleComponent>",
+                "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -31075,8 +31173,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AppSampleComponent>",
-                "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
+                "rawtype": "StoryObj<AppLayoutComponent>",
+                "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -31198,6 +31296,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<EmailComponent>",
                 "file": "libs/material/forms/src/lib/email/email.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FormComponent>",
+                "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -31415,38 +31524,6 @@
                     "defaultValue": "[\r\n  importProvidersFrom([BrowserAnimationsModule, RouterTestingModule]),\r\n]"
                 }
             ],
-            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
-                {
-                    "name": "Heading",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<AppLayoutComponent>",
-                    "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
-                }
-            ],
             "libs/material/layout/src/app-sample/app-sample.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -31477,6 +31554,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
+            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: Primary.args,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n\r\n    const logo = canvas.queryByAltText('App Logo');\r\n    expect(logo).toBeTruthy();\r\n    const fullscreen = canvas.queryByLabelText('Toggle Fullscreen');\r\n    expect(fullscreen).toBeTruthy();\r\n\r\n    const toggleLeftSidenav = canvas.queryByLabelText('Toggle Left Sidenav');\r\n    expect(toggleLeftSidenav).toBeTruthy();\r\n\r\n    const toggleRightSidenav = canvas.queryByLabelText('Toggle Right Sidenav');\r\n    expect(toggleRightSidenav).toBeTruthy();\r\n\r\n    const delay = 400;\r\n\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n    await userEvent.click(toggleLeftSidenav!, { delay });\r\n\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n    await userEvent.click(toggleRightSidenav!, { delay });\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AppLayoutComponent>",
+                    "defaultValue": "{\r\n  component: AppLayoutComponent,\r\n  title: 'AppLayoutComponent',\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [...commonProviders],\r\n    }),\r\n  ],\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    testing: true,\r\n  },\r\n}"
                 }
             ],
             "libs/material/layout/src/icons/icons.component.stories.ts": [
@@ -31831,6 +31940,38 @@
                     "defaultValue": "{\n  args: {},\n}"
                 }
             ],
+            "libs/material/forms/src/lib/form/form.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/form works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FormComponent>",
+                    "defaultValue": "{\n  component: FormComponent,\n  title: 'FormComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
             "libs/material/forms/src/lib/list-select/list-select.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -32064,7 +32205,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/text works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    // expect(canvas.getByText(/text works!/gi)).toBeTruthy();\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -32382,19 +32523,6 @@
                     "kind": 187
                 }
             ],
-            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<AppLayoutComponent>",
-                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "libs/material/layout/src/app-sample/app-sample.component.stories.ts": [
                 {
                     "name": "Story",
@@ -32402,6 +32530,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<AppSampleComponent>",
                     "file": "libs/material/layout/src/app-sample/app-sample.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/layout/src/app-layout/app-layout.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AppLayoutComponent>",
+                    "file": "libs/material/layout/src/app-layout/app-layout.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -32545,6 +32686,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<EmailComponent>",
                     "file": "libs/material/forms/src/lib/email/email.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/forms/src/lib/form/form.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FormComponent>",
+                    "file": "libs/material/forms/src/lib/form/form.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -32975,6 +33129,45 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/form/form.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/forms/src/lib/form/form.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FormComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/material/forms/src/lib/list-select/list-select.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -33283,7 +33476,7 @@
                 "linktype": "component",
                 "name": "TextComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
