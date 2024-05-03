@@ -1,0 +1,6 @@
+<wt-form (submitEvent)="submitForm($event)">
+  @for(input of inputs; track input){
+
+  <wt-input [options]="input"></wt-input>
+  }
+</wt-form>

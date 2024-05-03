@@ -19,6 +19,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { TempValue } from '@webpackages/utils';
 
 @Component({
   selector: 'wt-form',
@@ -37,7 +38,8 @@ import { MatButtonModule } from '@angular/material/button';
 export class FormComponent implements AfterViewInit {
   componentRef = InputComponent;
 
-  @ContentChildren(InputComponent) inputs!: QueryList<InputComponent>;
+  @ContentChildren(InputComponent)
+  componentReferances!: QueryList<InputComponent>;
 
   @Input() submitLabel = 'Submit';
   @Input() resetLabel = 'Reset';
@@ -45,31 +47,31 @@ export class FormComponent implements AfterViewInit {
 
   readonly formGroup = new FormGroup({});
 
+  submitted = new TempValue<boolean>(3000);
+  isf = this.submitted.$value;
   /**
    * Check the required inputs
    */
   validateInputOptions() {
-    for (const input of this.inputs) {
+    for (const input of this.componentReferances) {
+      if (!input.options.type)
+        throw new Error('Input type is required from FormComponent. ');
       if (!input.options.inputName)
         throw new Error('Input name is required from FormComponent. ');
-      if (!input.options.label)
-        throw new Error('Input label is required from FormComponent. ');
     }
   }
 
   ngAfterViewInit(): void {
     this.validateInputOptions();
-    for (const input of this.inputs) {
+    for (const input of this.componentReferances) {
       input.formControl = new FormControl('', []);
 
       const { required, minLength, maxLength, min, max } = input.options;
 
       if (required != undefined)
         input.formControl.addValidators(Validators.required);
-
       if (required != undefined)
         input.formControl.addValidators(Validators.required);
-
       if (minLength != undefined)
         input.formControl.addValidators(Validators.minLength(minLength));
       if (maxLength != undefined)
@@ -81,13 +83,13 @@ export class FormComponent implements AfterViewInit {
 
       this.formGroup.setControl(input.options.inputName, input.formControl);
     }
-
-    this.formGroup.valueChanges.subscribe(console.log);
   }
 
-  submitForm() {
-    this.submitEvent.emit(this.formGroup.value);
+  submitForm(formValue?: any) {
+    this.submitted.next(true);
+    this.submitEvent.emit(formValue ?? this.formGroup.value);
   }
+
   resetForm() {
     this.formGroup.reset();
   }

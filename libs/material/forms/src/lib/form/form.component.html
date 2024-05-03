@@ -1,5 +1,5 @@
-<form [formGroup]="formGroup" novalidate (ngSubmit)="submitForm($value)">
-  @for(c of inputs; track c){
+<form [formGroup]="formGroup" novalidate>
+  @for(c of componentReferances; track c){
   <ng-container
     [ngComponentOutlet]="c.ref"
     [ngComponentOutletInputs]="{
@@ -11,10 +11,13 @@
 
   <div class="form-actions">
     <button
-      type="submit"
+      type="button"
       mat-raised-button
       color="primary"
-      [disabled]="!formGroup.valid || !formGroup.dirty"
+      [disabled]="
+        (submitted.$value | async) || !formGroup.valid || !formGroup.dirty
+      "
+      (click)="submitForm()"
     >
       {{ submitLabel }}
     </button>

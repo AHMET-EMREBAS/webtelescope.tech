@@ -1,7 +1,7 @@
 <!-- Text input -->
 <ng-template #text>
   <mat-form-field appearance="outline">
-    <mat-label>{{ options.label | labelcase }}</mat-label>
+    <mat-label>{{ options.label ?? options.inputName | labelcase }}</mat-label>
     <input
       #input="matInput"
       [errorStateMatcher]="errorStateMatcher"
@@ -21,7 +21,7 @@
 
     @if($isTyping | async ){
     <mat-spinner matSuffix [diameter]="20"></mat-spinner>
-    } @else if(formControl.valid){
+    } @else if(formControl.touched && formControl.valid){
     <mat-icon style="color: green" matSuffix> check</mat-icon>
     }
 
@@ -32,7 +32,7 @@
 <!-- Number input -->
 <ng-template #number>
   <mat-form-field appearance="outline">
-    <mat-label>{{ options.label | labelcase }}</mat-label>
+    <mat-label>{{ options.label ?? options.inputName | labelcase }}</mat-label>
     <input
       [errorStateMatcher]="errorStateMatcher"
       type="number"
@@ -40,10 +40,18 @@
       [formControl]="formControl"
       [wtSetAttribute]="options"
       (input)="typingChecker.next(true)"
+      autocomplete="off"
     />
     <mat-icon matPrefix class="fill" color="primary">
       {{ options.icon ?? 'info' }}
     </mat-icon>
+
+    @if($isTyping | async ){
+    <mat-spinner matSuffix [diameter]="20"></mat-spinner>
+    } @else if(formControl.touched && formControl.valid){
+    <mat-icon style="color: green" matSuffix> check</mat-icon>
+    }
+
     <mat-error>{{ errorMessage() }}</mat-error>
   </mat-form-field>
 </ng-template>
