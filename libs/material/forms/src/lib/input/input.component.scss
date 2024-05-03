@@ -2,7 +2,11 @@ mat-form-field {
   width: 100%;
 }
 
+mat-spinner {
+  margin-right: 1em;
+}
 
-mat-spinner{ 
-    margin-right: 1em;
+mat-form-field,
+mat-form-field * {
+  transition: color ease-in-out 1000ms !important;
 }

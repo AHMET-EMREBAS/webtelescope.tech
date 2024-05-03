@@ -1,11 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  AbstractControl,
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,28 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TempValue, names } from '@webpackages/utils';
 import { LabelcasePipe } from '../pipes';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { InputOption } from '@webpackages/client-common';
-export class DefaultErrorStateMatcher extends ErrorStateMatcher {
-  override isErrorState(control: AbstractControl<any, any> | null): boolean {
-    if (control) {
-      return control?.dirty && control.invalid;
-    }
-    return false;
-  }
-}
+import {
+  DefaultErrorStateMatcher,
+  InputOption,
+} from '@webpackages/client-common';
 
-// export interface InputOptions {
-//   type: string;
-//   inputName: string;
-//   label?: string;
-//   required?: boolean;
-//   minLength?: number;
-//   maxLength?: number;
-//   min?: number;
-//   max?: number;
-//   icon?: string;
-// }
 @Component({
   selector: 'wt-input',
   standalone: true,
@@ -55,11 +33,13 @@ export class DefaultErrorStateMatcher extends ErrorStateMatcher {
 })
 export class InputComponent {
   ref = InputComponent;
-  errorStateMatcher = new DefaultErrorStateMatcher();
+
   @Input() options!: InputOption;
   @Input() formControl!: FormControl;
 
-  typingChecker = new TempValue<boolean>(400);
+  typingChecker = new TempValue<boolean>(400, (value) => {
+    console.log('Marking the input as peristine!');
+  });
 
   $isTyping = this.typingChecker.$value;
 

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   EventEmitter,
@@ -22,6 +21,8 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TempValue } from '@webpackages/utils';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { DefaultErrorStateMatcher } from '@webpackages/client-common';
 
 @Component({
   selector: 'wt-form',
@@ -35,7 +36,13 @@ import { TempValue } from '@webpackages/utils';
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
-  providers: [InputDirective],
+  providers: [
+    InputDirective,
+    {
+      provide: ErrorStateMatcher,
+      useClass: DefaultErrorStateMatcher,
+    },
+  ],
 })
 export class FormComponent<T = any> implements AfterViewInit {
   componentRef = InputComponent;
@@ -94,6 +101,9 @@ export class FormComponent<T = any> implements AfterViewInit {
 
   resetForm() {
     this.formGroup.reset();
+    this.formGroup.clearValidators();
+    this.formGroup.clearAsyncValidators();
+    this.formGroup.enable({ emitEvent: true });
   }
 }
 

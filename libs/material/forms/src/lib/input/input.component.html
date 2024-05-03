@@ -4,7 +4,6 @@
     <mat-label>{{ options.label ?? options.inputName | labelcase }}</mat-label>
     <input
       #input="matInput"
-      [errorStateMatcher]="errorStateMatcher"
       type="text"
       matInput
       [formControl]="formControl"
@@ -34,7 +33,6 @@
   <mat-form-field appearance="outline">
     <mat-label>{{ options.label ?? options.inputName | labelcase }}</mat-label>
     <input
-      [errorStateMatcher]="errorStateMatcher"
       type="number"
       matInput
       [formControl]="formControl"

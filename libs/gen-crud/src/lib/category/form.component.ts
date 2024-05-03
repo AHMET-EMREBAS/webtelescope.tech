@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CategoryService } from './category.service';
+import { CategoryService } from './service';
 
 import { BasicFormComponent } from '@webpackages/material/forms';
 import { ICategory, ICreateCategoryDto } from '@webpackages/gen-model';
@@ -11,7 +11,15 @@ import { BaseFormComponent } from '@webpackages/client-common';
   template: `<wt-basic-form
     submitLabel="Create Category"
     resetLabel="Clear Form"
-    [inputs]="[{ type: 'text', inputName: 'name' }]"
+    [inputs]="[
+      {
+        type: 'text',
+        inputName: 'name',
+        required: true,
+        minLength: 3,
+        maxLength: 30
+      }
+    ]"
     (submitEvent)="submitForm($event)"
   ></wt-basic-form>`,
   standalone: true,
