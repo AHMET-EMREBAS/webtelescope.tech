@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LabelcasePipe } from '@webpackages/material/forms';
 import { BaseTableComponent } from '@webpackages/client-common';
-
+import { MatMenuModule } from '@angular/material/menu';
 @Component({
   selector: 'wt-table',
   standalone: true,
@@ -23,6 +23,7 @@ import { BaseTableComponent } from '@webpackages/client-common';
     MatInputModule,
     MatFormFieldModule,
     LabelcasePipe,
+    MatMenuModule,
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',

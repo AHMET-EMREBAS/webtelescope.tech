@@ -36,17 +36,20 @@ mat-sidenav-container > * {
 mat-sidenav-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0px;
   padding-left: 1em;
   padding-right: 1em;
   overflow: hidden;
+  min-height: 100vh;
+  border: 3px solid blue;
+  flex-grow: 1;
 }
 
 .main-content-container {
   overflow: hidden;
-  max-height: 78%;
-  padding: 1e;
+  min-height: 78vh;
+  border: 1px solid red;
 }
 
 wt-template-outlet {
