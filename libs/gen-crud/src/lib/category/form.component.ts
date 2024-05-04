@@ -4,19 +4,21 @@ import { BasicFormComponent } from '@webpackages/material/forms';
 import { ICategory } from '@webpackages/gen-model';
 import { BaseFormComponent } from '@webpackages/client-common';
 import { categoryModelManager } from './model-manager';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'wt-category-form',
-  imports: [BasicFormComponent],
+  imports: [CommonModule, BasicFormComponent],
   template: `<wt-basic-form
     submitLabel="Create Category"
     resetLabel="Clear Form"
-    [inputs]="categoryModelManager."
+    [inputs]="inputOptionsList"
     (submitEvent)="submitForm($event)"
   ></wt-basic-form>`,
   standalone: true,
 })
 export class CategoryFormComponent extends BaseFormComponent<ICategory> {
+  inputOptionsList = categoryModelManager.propertiesList();
   constructor(service: CategoryService) {
     super(service);
   }

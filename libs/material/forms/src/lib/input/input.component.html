@@ -1,73 +1,62 @@
-<!-- Text input -->
+<ng-container *ngIf="formControl">
+  <!-- Generic form field -->
+  <ng-template #formField let-type="type">
+    <mat-form-field appearance="outline">
+      <mat-label>{{
+        options.label ?? options.name ?? 'NOT SET' | labelcase
+      }}</mat-label>
+      <input
+        #input="matInput"
+        [type]="type"
+        matInput
+        [formControl]="formControl"
+        [wtSetAttribute]="options"
+        (input)="typingChecker.next(true)"
+        autocomplete="off"
+      />
+      <mat-icon
+        matPrefix
+        class="fill"
+        [color]="input.errorState ? 'warn' : 'primary'"
+      >
+        {{ options.icon ?? 'info' }}
+      </mat-icon>
 
-<ng-template #text>
-  <mat-form-field appearance="outline">
-    <mat-label>{{
-      options.label ?? options.inputName ?? 'NOT SET' | labelcase
-    }}</mat-label>
-    <input
-      #input="matInput"
-      type="text"
-      matInput
-      [formControl]="formControl"
-      [wtSetAttribute]="options"
-      (input)="typingChecker.next(true)"
-      autocomplete="off"
-    />
-    <mat-icon
-      matPrefix
-      class="fill"
-      [color]="input.errorState ? 'warn' : 'primary'"
-    >
-      {{ options.icon ?? 'info' }}
-    </mat-icon>
+      @if($isTyping | async ){
+      <mat-spinner matSuffix [diameter]="20"></mat-spinner>
+      } @else if(formControl.touched && formControl.valid){
+      <mat-icon style="color: green" matSuffix> check</mat-icon>
+      }
 
-    @if($isTyping | async ){
-    <mat-spinner matSuffix [diameter]="20"></mat-spinner>
-    } @else if(formControl.touched && formControl.valid){
-    <mat-icon style="color: green" matSuffix> check</mat-icon>
-    }
+      <mat-error>{{ errorMessage() }}</mat-error>
+    </mat-form-field>
+  </ng-template>
 
-    <mat-error>{{ errorMessage() }}</mat-error>
-  </mat-form-field>
-</ng-template>
+  <!-- text field -->
+  <ng-template #text>
+    <ng-container
+      *ngTemplateOutlet="formField; context: { type: 'text' }"
+    ></ng-container>
+  </ng-template>
 
-<!-- Number input -->
-<ng-template #number>
-  <mat-form-field appearance="outline">
-    <mat-label>{{
-      options.label ?? options.inputName ?? 'NOT SET' | labelcase
-    }}</mat-label>
-    <input
-      type="number"
-      matInput
-      [formControl]="formControl"
-      [wtSetAttribute]="options"
-      (input)="typingChecker.next(true)"
-      autocomplete="off"
-    />
-    <mat-icon matPrefix class="fill" color="primary">
-      {{ options.icon ?? 'info' }}
-    </mat-icon>
+  <!-- Number field -->
+  <ng-template #number>
+    <ng-container
+      *ngTemplateOutlet="formField; context: { type: 'number' }"
+    ></ng-container>
+  </ng-template>
 
-    @if($isTyping | async ){
-    <mat-spinner matSuffix [diameter]="20"></mat-spinner>
-    } @else if(formControl.touched && formControl.valid){
-    <mat-icon style="color: green" matSuffix> check</mat-icon>
-    }
+  @if(formControl) {
+  <!-- Text input -->
+  @if(options.inputType ==='text'){
+  <ng-container *ngTemplateOutlet="text"></ng-container>
+  <!-- Number input -->
+  } @else if(options.inputType ==='number') {
 
-    <mat-error>{{ errorMessage() }}</mat-error>
-  </mat-form-field>
-</ng-template>
+  <ng-container *ngTemplateOutlet="number"></ng-container>
+  } } @else {
 
-@if(formControl) {
-<!-- Text input -->
-@if(options.type ==='text'){
+  <ng-container *ngTemplateOutlet="text"></ng-container>
 
-<ng-container *ngTemplateOutlet="text"></ng-container>
-
-<!-- Number input -->
-} @else if(options.type ==='number') {
-
-<ng-container *ngTemplateOutlet="number"></ng-container>
-} }
+  }
+</ng-container>

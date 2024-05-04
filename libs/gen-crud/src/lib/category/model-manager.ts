@@ -4,4 +4,3 @@ import { ModelManager } from '@webpackages/meta';
 export const categoryModelManager = new ModelManager(CategoryModel);
 
 
-categoryModelManager.list

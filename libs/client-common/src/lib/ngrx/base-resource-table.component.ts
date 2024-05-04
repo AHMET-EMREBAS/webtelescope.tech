@@ -13,6 +13,6 @@ export class BaseResourceTableComponent<T> implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.service.getAll();
+    this.service.getAll()
   }
 }

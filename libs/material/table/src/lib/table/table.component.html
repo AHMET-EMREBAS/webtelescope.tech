@@ -9,19 +9,19 @@
     />
   </mat-form-field>
   <div class="inner-table-container">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource!" matSort>
       @for(col of displayedColumns; track col){
 
-      <ng-container [matColumnDef]="col">
+      <ng-container [matColumnDef]="col.name!">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ col | labelcase }}
+          {{ col.label ?? col.name! | labelcase }}
         </th>
-        <td mat-cell *matCellDef="let row">{{ row[col] }}</td>
+        <td mat-cell *matCellDef="let row">{{ row[col.name!] }}</td>
       </ng-container>
       }
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
 
       <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
@@ -34,21 +34,27 @@
 
   <div class="paginator-container">
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle (click)="setPageSize(5)">5</mat-button-toggle>
-      <mat-button-toggle (click)="setPageSize(10)">10</mat-button-toggle>
-      <mat-button-toggle (click)="setPageSize(25)">25</mat-button-toggle>
-      <mat-button-toggle (click)="setPageSize(100)">100</mat-button-toggle>
+      @for(size of pageOptions; track size){
+      <mat-button-toggle
+        [disabled]="size * (pageIndex + 1) > (count ?? 1)"
+        (click)="setPageSize(size)"
+        >{{ size }}</mat-button-toggle
+      >
+      }
     </mat-button-toggle-group>
+
     <mat-button-toggle-group>
       <mat-button-toggle (click)="previousPage()">
         <mat-icon>arrow_left</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle disabled>{{ getPageIndex() + 1 }}</mat-button-toggle>
+      <mat-button-toggle disabled>
+        {{ pageIndex * pageSize }} - {{ (pageIndex + 1) * pageSize }} [{{
+          count
+        }}]
+      </mat-button-toggle>
       <mat-button-toggle (click)="nextPage()">
         <mat-icon>arrow_right</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
-    <mat-paginator style="opacity: 0; position: absolute; z-index: -1">
-    </mat-paginator>
   </div>
 </div>

@@ -3,14 +3,15 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { IPaginatorDto } from '@webpackages/common';
+import { InputOptions } from '@webpackages/meta';
 
 export type SearchEventPayload = {
   paginator: IPaginatorDto;
@@ -18,64 +19,58 @@ export type SearchEventPayload = {
 };
 
 @Component({ template: '' })
-export class BaseTableComponent<T> implements AfterViewInit {
-  @Input() displayedColumns: string[] = ['id'];
-  dataSource!: MatTableDataSource<T>;
-  searchControl = new FormControl<string>('');
-  @Output() searchEvent = new EventEmitter<SearchEventPayload>();
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @Input() data: T[] | null = [];
+export class BaseTableComponent<T> implements AfterViewInit, OnInit {
+  @Input() displayedColumns: InputOptions[] = [];
+  columns: string[] = [];
 
-  @Input() pageSize = 0;
+  @Input() dataSource!: MatTableDataSource<T> | null;
+  searchControl = new FormControl<string>('');
+
+  @Output() searchEvent = new EventEmitter<SearchEventPayload>();
+  @ViewChild(MatSort) sort!: MatSort;
+  @Input() count: number | null = 0;
+
+  @Input() pageIndex = 0;
+  @Input() pageSize = 5;
+
+  @Input() pageOptions = [5, 10, 25, 100];
+
+  ngOnInit(): void {
+    this.columns = this.displayedColumns.map((e) => e.name) as string[];
+  }
 
   ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource(this.data ?? []);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource!.sort = this.sort;
   }
 
   search() {
     this.searchEvent.emit({
       paginator: {
-        take: this.paginator.pageSize,
-        skip: this.paginator.pageIndex * this.paginator.pageSize,
+        take: this.pageSize,
+        skip: this.pageIndex * this.pageSize,
       },
       query: this.displayedColumns
         .map((e) => {
-          return { [e]: this.searchControl.value! };
+          return { [e.name!]: this.searchControl.value! };
         })
         .reduce((p, c) => ({ ...p, ...c })),
     });
   }
 
-  getPageIndex() {
-    return this.paginator?.pageIndex;
-  }
-
-  getPageSize() {
-    return this.paginator?.pageSize;
-  }
-
   nextPage() {
-    this.paginator.nextPage();
+    if (this.pageIndex * this.pageSize < (this.count ?? 1)) {
+      this.pageIndex++;
+    }
   }
 
   previousPage() {
-    this.paginator.previousPage();
+    if (this.pageIndex > 0) {
+      this.pageIndex--;
+      return;
+    }
   }
 
   setPageSize(pageSize: number) {
-    if (pageSize > this.paginator.length) {
-      this.paginator.pageSize = this.paginator.length-1;
-    } else {
-      this.paginator.pageSize = pageSize;
-    }
-
-    if (this.paginator.hasNextPage()) {
-      this.paginator.nextPage();
-    }
-
-    this.paginator.firstPage();
+    this.pageSize = pageSize;
   }
 }

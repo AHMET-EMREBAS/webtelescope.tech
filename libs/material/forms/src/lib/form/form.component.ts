@@ -6,6 +6,7 @@ import {
   EventEmitter,
   Input,
   NgModule,
+  OnInit,
   Output,
   QueryList,
 } from '@angular/core';
@@ -44,7 +45,7 @@ import { DefaultErrorStateMatcher } from '@webpackages/client-common';
     },
   ],
 })
-export class FormComponent<T = any> implements AfterViewInit {
+export class FormComponent<T = any> implements AfterViewInit, OnInit {
   componentRef = InputComponent;
 
   @ContentChildren(InputComponent)
@@ -57,24 +58,29 @@ export class FormComponent<T = any> implements AfterViewInit {
   readonly formGroup = new FormGroup({});
 
   submitted = new TempValue<boolean>(3000);
-  isf = this.submitted.$value;
+
+  ready = false;
+
+  ngOnInit(): void {
+    console.log('Form Component Init');
+  }
   /**
    * Check the required inputs
    */
   validateInputOptions() {
+    console.log('Validating form input options ');
     for (const input of this.componentReferances) {
       if (!input.options.type)
         throw new Error('Input type is required from FormComponent. ');
-      if (!input.options.inputName)
+      if (!input.options.name)
         throw new Error('Input name is required from FormComponent. ');
     }
   }
 
   ngAfterViewInit(): void {
     this.validateInputOptions();
+
     for (const input of this.componentReferances) {
-      if (!input.options.inputName) throw new Error('input name is required!');
-      
       input.formControl = new FormControl('', []);
 
       const { required, minLength, maxLength, minimum, maximum } =
@@ -91,8 +97,13 @@ export class FormComponent<T = any> implements AfterViewInit {
       if (maximum != undefined)
         input.formControl.addValidators(Validators.max(maximum));
 
-      this.formGroup.setControl(input.options.inputName, input.formControl);
+      console.log(`Creating ${input.options.name}`);
+      if (!input.options.name)
+        throw new Error('form control name is requried!');
+      this.formGroup.setControl(input.options.name, input.formControl);
     }
+
+    this.ready = true;
   }
 
   submitForm(formValue?: T) {

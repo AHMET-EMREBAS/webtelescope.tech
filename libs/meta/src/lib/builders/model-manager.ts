@@ -25,16 +25,6 @@ export class ModelManager {
   }
 
   /**
-   * Generate options as form input options
-   */
-  inputsList() {
-    return [
-      this.propertiesList().map((e) => e),
-      this.relationsList().map((e) => e),
-    ];
-  }
-
-  /**
    * To list of properties
    */
   propertiesList(): AsList<PropertyOptions> {

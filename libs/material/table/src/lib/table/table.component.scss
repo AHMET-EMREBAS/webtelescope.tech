@@ -24,6 +24,8 @@ mat-button-toggle {
 }
 
 .paginator-container {
+  position: sticky;
+  bottom: 0px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -33,8 +35,6 @@ mat-button-toggle {
   max-width: 50%;
   margin: auto;
   overflow: hidden;
-  position: absolute;
-  bottom: 0px;
   margin-left: 50%;
   transform: translateX(-50%);
 }

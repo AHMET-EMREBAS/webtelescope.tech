@@ -3,6 +3,7 @@ import { PropertyOptions } from '../common-imp';
 
 export type CommonPropertyOptions = Pick<
   PropertyOptions,
+  | 'name'
   | 'required'
   | 'unique'
   | 'description'
@@ -59,6 +60,8 @@ export function UniqueNameProperty(
     unique: true,
     required: true,
     description: 'Required unique short text',
+    inputType: 'text',
+    name: 'name',
     ...options,
   });
 }

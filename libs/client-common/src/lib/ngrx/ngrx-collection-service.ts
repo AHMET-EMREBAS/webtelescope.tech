@@ -18,7 +18,7 @@ export abstract class NgrxCollectionService<
   UD = Partial<CT>,
   QD = any
 > extends EntityCollectionServiceBase<T> {
-  allCount$ = inject(HttpClient).get(
+  allCount$ = inject(HttpClient).get<number>(
     `${plural(names(this.entityName).fileName)}/count`
   );
   constructor(

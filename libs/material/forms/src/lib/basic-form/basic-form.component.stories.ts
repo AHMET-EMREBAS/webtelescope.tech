@@ -26,7 +26,7 @@ export const Primary: Story = {
     inputs: [
       {
         type: 'text',
-        inputName: 'firstName',
+        name: 'firstName',
         required: true,
         minLength: 3,
         maxLength: 30,
@@ -34,14 +34,14 @@ export const Primary: Story = {
       {
         type: 'text',
         required: true,
-        inputName: 'lastName',
+        name: 'lastName',
         minLength: 3,
         maxLength: 30,
       },
       {
         type: 'text',
         required: true,
-        inputName: 'email',
+        name: 'email',
         minLength: 3,
         maxLength: 30,
       },

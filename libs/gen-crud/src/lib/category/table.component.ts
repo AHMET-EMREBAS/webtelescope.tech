@@ -1,37 +1,43 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { BaseResourceTableComponent } from '@webpackages/client-common';
 import { ICategory } from '@webpackages/gen-model';
 import { TableComponent } from '@webpackages/material/table';
 import { CategoryService } from './ngrx.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { categoryModelManager } from './model-manager';
+import { MatTableDataSource } from '@angular/material/table';
+
 @Component({
   selector: 'wt-category-table',
   standalone: true,
   imports: [CommonModule, TableComponent],
   template: `
+    {{ columns | json }}
     <wt-table
       [displayedColumns]="columns"
-      [data]="entities$ | async"
+      [dataSource]="entities$ | async"
+      [count]="count$ | async"
     ></wt-table>
   `,
-  styles: [
-    `
-      :host {
-        height: 100%;
-      }
-    `,
-  ],
 })
 export class CategoryTableComponent extends BaseResourceTableComponent<ICategory> {
-  columns = ['id', 'name', 'createdAt', 'updatedAt', 'deletedAt'];
+  entities$: Observable<MatTableDataSource<ICategory>> =
+    this.service.entities$.pipe(
+      map((data) => {
+        return new MatTableDataSource<ICategory>(data);
+      })
+    );
+  columns = categoryModelManager.propertiesList();
+  count$: Observable<number> = this.service.allCount$.pipe(
+    map((v) => {
+      console.log('COUNT : ', v);
+      return v ?? 100;
+    })
+  );
 
-  entities$: Observable<ICategory[]> = this.service.entities$;
   constructor(service: CategoryService) {
     super(service);
-
-    for (let i = 1; i < 50; i++) {
-      this.service.addOneToCache({ id: i, name: `some ${i}` } as any);
-    }
   }
 }
