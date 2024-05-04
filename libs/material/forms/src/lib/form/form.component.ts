@@ -73,6 +73,8 @@ export class FormComponent<T = any> implements AfterViewInit {
   ngAfterViewInit(): void {
     this.validateInputOptions();
     for (const input of this.componentReferances) {
+      if (!input.options.inputName) throw new Error('input name is required!');
+      
       input.formControl = new FormControl('', []);
 
       const { required, minLength, maxLength, minimum, maximum } =

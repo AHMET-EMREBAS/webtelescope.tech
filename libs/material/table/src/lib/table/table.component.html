@@ -32,22 +32,14 @@
     </table>
   </div>
 
-  <div
-    style="
-      max-width: 50%;
-      margin: auto;
-      overflow: hidden;
-      position: absolute;
-      bottom: 0px;
-      margin-left: 50%;
-      transform: translateX(-50%);
-    "
-  >
+  <div class="paginator-container">
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
       <mat-button-toggle (click)="setPageSize(5)">5</mat-button-toggle>
       <mat-button-toggle (click)="setPageSize(10)">10</mat-button-toggle>
       <mat-button-toggle (click)="setPageSize(25)">25</mat-button-toggle>
       <mat-button-toggle (click)="setPageSize(100)">100</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-button-toggle-group>
       <mat-button-toggle (click)="previousPage()">
         <mat-icon>arrow_left</mat-icon>
       </mat-button-toggle>
@@ -56,7 +48,7 @@
         <mat-icon>arrow_right</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
-    <mat-paginator style="opacity: 0; position: absolute; z-index: 0">
+    <mat-paginator style="opacity: 0; position: absolute; z-index: -1">
     </mat-paginator>
   </div>
 </div>

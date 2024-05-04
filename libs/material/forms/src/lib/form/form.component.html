@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" novalidate>
+<form [formGroup]="formGroup" novalidate  autocomplete="off">
   @for(c of componentReferances; track c){
   <ng-container
     [ngComponentOutlet]="c.ref"

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,10 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TempValue, names } from '@webpackages/utils';
 import { LabelcasePipe } from '../pipes';
-import {
-  DefaultErrorStateMatcher,
-  InputOption,
-} from '@webpackages/client-common';
+import { InputOptions } from '@webpackages/meta';
 
 @Component({
   selector: 'wt-input',
@@ -34,16 +31,16 @@ import {
 export class InputComponent {
   ref = InputComponent;
 
-  @Input() options!: InputOption;
+  @Input() options!: InputOptions;
   @Input() formControl!: FormControl;
 
-  typingChecker = new TempValue<boolean>(400, (value) => {
-    console.log('Marking the input as peristine!');
-  });
+  typingChecker = new TempValue<boolean>(400);
 
   $isTyping = this.typingChecker.$value;
 
   errorMessage() {
+    if (!this.options.inputName) throw new Error('Input name is required');
+
     const inputName = names(this.options.inputName).titleName;
 
     if (this.formControl?.errors?.['required']) {
