@@ -8,8 +8,13 @@
       #input
     />
   </mat-form-field>
-  <div class="inner-table-container">
-    <table mat-table [dataSource]="dataSource!" matSort>
+  <div class="inner-table-container" *ngIf="data">
+    <table
+      mat-table
+      [dataSource]="data"
+      matSort
+      (matSortChange)="sortTable($event)"
+    >
       @for(col of displayedColumns; track col){
 
       <ng-container [matColumnDef]="col.name!">
@@ -33,6 +38,12 @@
   </div>
 
   <div class="paginator-container">
+    <mat-paginator
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="pageOptions"
+      style="opacity: 0; z-index: -1; position: absolute"
+    ></mat-paginator>
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
       @for(size of pageOptions; track size){
       <mat-button-toggle
@@ -44,7 +55,7 @@
     </mat-button-toggle-group>
 
     <mat-button-toggle-group>
-      <mat-button-toggle (click)="previousPage()">
+      <mat-button-toggle (click)="previousPage()" [disabled]="pageIndex === 0">
         <mat-icon>arrow_left</mat-icon>
       </mat-button-toggle>
       <mat-button-toggle disabled>
@@ -52,7 +63,7 @@
           count
         }}]
       </mat-button-toggle>
-      <mat-button-toggle (click)="nextPage()">
+      <mat-button-toggle (click)="nextPage()" [disabled]="!hasNextPage()">
         <mat-icon>arrow_right</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>

@@ -9,10 +9,11 @@ export class BaseResourceTableComponent<T> implements AfterViewInit {
   constructor(protected readonly service: NgrxCollectionService<T>) {}
 
   search(query: SearchEventPayload) {
+   
     this.service.queryEntity(query.paginator, query.query);
   }
 
   ngAfterViewInit(): void {
-    this.service.getAll()
+    this.service.getAll();
   }
 }

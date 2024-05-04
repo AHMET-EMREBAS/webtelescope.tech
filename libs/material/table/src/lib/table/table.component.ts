@@ -41,6 +41,4 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
   styleUrl: './table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent<T = any>
-  extends BaseTableComponent<T>
-  implements AfterViewInit {}
+export class TableComponent<T = any> extends BaseTableComponent<T> {}

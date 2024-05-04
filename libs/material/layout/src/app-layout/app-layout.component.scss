@@ -42,14 +42,13 @@ mat-sidenav-content {
   padding-right: 1em;
   overflow: hidden;
   min-height: 100vh;
-  border: 3px solid blue;
+
   flex-grow: 1;
 }
 
 .main-content-container {
   overflow: hidden;
   min-height: 78vh;
-  border: 1px solid red;
 }
 
 wt-template-outlet {

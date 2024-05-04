@@ -11,4 +11,5 @@ export interface IPaginatorDto {
    * Skip the number of items (offset)
    */
   skip: number;
+  order: string;
 }

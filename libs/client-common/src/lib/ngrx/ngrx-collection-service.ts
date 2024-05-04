@@ -4,6 +4,7 @@ import { inject } from '@angular/core';
 import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
+  MergeStrategy,
 } from '@ngrx/data';
 import { IPaginatorDto } from '@webpackages/common';
 
@@ -29,7 +30,11 @@ export abstract class NgrxCollectionService<
   }
 
   queryEntity(paginator: IPaginatorDto, query: QD) {
-    return this.getWithQuery({ ...paginator, ...query });
+    this.clearCache();
+    return this.getWithQuery(
+      { ...paginator, ...query },
+      { mergeStrategy: MergeStrategy.OverwriteChanges }
+    );
   }
 
   createEntity(entity: CT): void {
