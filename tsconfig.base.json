@@ -33,6 +33,9 @@
       "@webpackages/material": ["libs/material/src/index.ts"],
       "@webpackages/material/chart": ["libs/material/chart/src/index.ts"],
       "@webpackages/material/editor": ["libs/material/editor/src/index.ts"],
+      "@webpackages/material/file-upload": [
+        "libs/material/file-upload/src/index.ts"
+      ],
       "@webpackages/material/forms": ["libs/material/forms/src/index.ts"],
       "@webpackages/material/layout": ["libs/material/layout/src/index.ts"],
       "@webpackages/material/list": ["libs/material/list/src/index.ts"],

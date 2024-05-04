@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService, CategoryFormComponent } from '@webpackages/gen-crud';
+import { CategoryFormComponent } from '@webpackages/gen-crud';
 import { MatCardModule } from '@angular/material/card';
-import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'wt-sample',
   standalone: true,
@@ -10,15 +11,22 @@ import { Subscription } from 'rxjs';
   templateUrl: './sample.component.html',
   styleUrl: './sample.component.scss',
 })
-export class SampleComponent implements AfterViewInit, OnDestroy {
-  count$ = this.category.allCount$;
-  sub!: Subscription;
-  constructor(protected readonly category: CategoryService) {}
-  ngAfterViewInit(): void {
-    this.sub = this.category.entities$.subscribe(console.log);
+export class SampleComponent {
+  selectedFile!: File;
+
+  constructor(private http: HttpClient) {}
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+  onUpload(): void {
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.http.post('api/upload', formData).subscribe(
+      (response) => console.log('Upload successful', response),
+      (error) => console.log('Error uploading file', error)
+    );
   }
 }

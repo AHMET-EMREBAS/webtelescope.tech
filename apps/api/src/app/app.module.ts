@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@webpackages/config';
 import * as Modules from '@webpackages/gen-rest';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -17,5 +18,6 @@ import * as Modules from '@webpackages/gen-rest';
     }),
     ...Object.values(Modules).filter((e) => e.name.endsWith('Module')),
   ],
+  controllers: [AppController],
 })
 export class AppModule {}

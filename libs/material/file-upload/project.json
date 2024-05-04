@@ -1,0 +1,44 @@
+{
+  "name": "material-file-upload",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/material/file-upload/src",
+  "prefix": "wt",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/material/file-upload/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/material/file-upload/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/material/file-upload/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/material/file-upload/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/material/file-upload/**/*.ts",
+          "libs/material/file-upload/**/*.html",
+          "libs/material/file-upload/package.json"
+        ]
+      }
+    }
+  }
+}

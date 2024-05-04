@@ -28325,7 +28325,7 @@
         },
         {
             "name": "BasicFormComponent",
-            "id": "component-BasicFormComponent-2bd9874700b17c4e1f2e01d26dd05c7fb0850a724a50e13f72d1e450a7d3a890b533c2fff16f8e1df39fa86f22934d83e6989b17401318c277df096dceb9fd5c",
+            "id": "component-BasicFormComponent-e800335392ab314983389f136f933bf9bf2daa61ee435d57bd0bd114f2d2ca85ae0e3787ad7cf7836be023c89d35d53a7d1bad48e981fd6e93d7d1d5a6d7b603",
             "file": "libs/material/forms/src/lib/basic-form/basic-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -28346,7 +28346,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 14,
-                    "type": "InputOptions[]",
+                    "type": "PropertyOptions[]",
                     "decorators": []
                 },
                 {
@@ -28354,7 +28354,7 @@
                     "defaultValue": "'Reset'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 54,
+                    "line": 55,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -28366,7 +28366,7 @@
                     "defaultValue": "'Submit'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 53,
+                    "line": 54,
                     "type": "string",
                     "decorators": [],
                     "inheritance": {
@@ -28380,7 +28380,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 55,
+                    "line": 56,
                     "type": "EventEmitter",
                     "inheritance": {
                         "file": "FormComponent"
@@ -28396,7 +28396,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 48,
+                    "line": 49,
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -28408,7 +28408,7 @@
                     "type": "QueryList<InputComponent>",
                     "optional": false,
                     "description": "",
-                    "line": 51,
+                    "line": 52,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -28430,7 +28430,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 57,
+                    "line": 58,
                     "modifierKind": [
                         148
                     ],
@@ -28439,14 +28439,14 @@
                     }
                 },
                 {
-                    "name": "isf",
-                    "defaultValue": "this.submitted.$value",
+                    "name": "ready",
+                    "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 60,
+                    "line": 62,
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -28459,7 +28459,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 59,
+                    "line": 60,
                     "inheritance": {
                         "file": "FormComponent"
                     }
@@ -28472,7 +28472,20 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 73,
+                    "line": 80,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "FormComponent"
+                    }
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -28485,7 +28498,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 104,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "inheritance": {
@@ -28506,7 +28519,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 98,
+                    "line": 109,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -28531,7 +28544,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 64,
+                    "line": 70,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCheck the required inputs\n",
@@ -28559,7 +28572,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormComponent, FormModule } from '../form';\nimport { InputOptions } from '@webpackages/meta';\n\n@Component({\n  selector: 'wt-basic-form',\n  standalone: true,\n  imports: [CommonModule, FormModule],\n  templateUrl: './basic-form.component.html',\n  styleUrl: './basic-form.component.scss',\n})\nexport class BasicFormComponent extends FormComponent {\n  @Input() inputs!: InputOptions[];\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormComponent, FormModule } from '../form';\nimport { PropertyOptions } from '@webpackages/meta';\n\n@Component({\n  selector: 'wt-basic-form',\n  standalone: true,\n  imports: [CommonModule, FormModule],\n  templateUrl: './basic-form.component.html',\n  styleUrl: './basic-form.component.scss',\n})\nexport class BasicFormComponent extends FormComponent {\n  @Input() inputs!: PropertyOptions[];\n}\n",
             "styleUrl": "./basic-form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -28567,7 +28580,7 @@
             "extends": [
                 "FormComponent"
             ],
-            "templateData": "<wt-form\n  (submitEvent)=\"submitForm($event)\"\n  [submitLabel]=\"submitLabel\"\n  [resetLabel]=\"resetLabel\"\n>\n  @for(input of inputs; track input){\n  <wt-input [options]=\"input\"></wt-input>\n  }\n</wt-form>\n"
+            "templateData": "<wt-form\n  (submitEvent)=\"submitForm($event)\"\n  [submitLabel]=\"submitLabel\"\n  [resetLabel]=\"resetLabel\"\n>\n  @for(input of inputs; track input){\n\n  <wt-input [options]=\"input\"></wt-input>\n  }\n</wt-form>\n"
         },
         {
             "name": "ChartComponent",
@@ -28722,6 +28735,114 @@
             "templateData": "\r\n<div #editor>\r\n  <h2>Demo content</h2>\r\n  <p>Some other content <code>show</code></p>\r\n</div>\r\n"
         },
         {
+            "name": "FileUploadComponent",
+            "id": "component-FileUploadComponent-b4e51712d550ab492d8f8ce44e34be74e1f061de284dec7fd5f34d8b2198d4919d7b77f1cd56ac66c9c0a6f361b3e86a2c5ec27ec32a2cc2ef5f20626a444769",
+            "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-file-upload",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./file-upload.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "selectEvent",
+                    "defaultValue": "new EventEmitter<FormData>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "fileName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "selectedFile",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "File",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onFileSelected",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatFormFieldModule",
+                    "type": "module"
+                },
+                {
+                    "name": "MatInputModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\n@Component({\n  selector: 'wt-file-upload',\n  standalone: true,\n  imports: [CommonModule, MatFormFieldModule, MatInputModule],\n  templateUrl: './file-upload.component.html',\n  styleUrl: './file-upload.component.scss',\n})\nexport class FileUploadComponent {\n  selectedFile!: File;\n\n  fileName!: string;\n  @Output() selectEvent = new EventEmitter<FormData>();\n\n  onFileSelected(event: any): void {\n    this.selectedFile = event.target.files[0];\n    this.fileName = this.selectedFile.name;\n\n    const formData = new FormData();\n    formData.append('file', this.selectedFile);\n    this.selectEvent.emit(formData);\n  }\n}\n",
+            "styleUrl": "./file-upload.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<mat-form-field appearance=\"outline\">\n  <input type=\"file\" (change)=\"onFileSelected($event)\" />\n</mat-form-field>\n"
+        },
+        {
             "name": "FloatingContainerComponent",
             "id": "component-FloatingContainerComponent-a690a3f09be52e6fa7f35fa15e263834e17193dd74e9726b06bf2bfb563fedafba6f47eea24dcc5a54218e196a4dba95ad3dce8f9e31d14d97808ff97b1db915",
             "file": "libs/material/layout/src/common/floating-container/floating-container.component.ts",
@@ -28792,7 +28913,7 @@
         },
         {
             "name": "FormComponent",
-            "id": "component-FormComponent-fdef7b26d3165f9d47990cb7c7788560f3ad5f6e3cd73f9ae06cc7a8b737335558e8e5133ef5a4761477303669fe817fe6e749cd2ac393c282c016ee42568f48",
+            "id": "component-FormComponent-07c848764ecf23b07ac042bfc536c6a4913e79ec2ca88d197311715dd6668b4cc96b4a02c1c15deeaee600b8086354aa206f7374525fdb816655ca580e82d031",
             "file": "libs/material/forms/src/lib/form/form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -28821,7 +28942,7 @@
                     "defaultValue": "'Reset'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 54,
+                    "line": 55,
                     "type": "string",
                     "decorators": []
                 },
@@ -28830,7 +28951,7 @@
                     "defaultValue": "'Submit'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 53,
+                    "line": 54,
                     "type": "string",
                     "decorators": []
                 }
@@ -28841,7 +28962,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 55,
+                    "line": 56,
                     "type": "EventEmitter"
                 }
             ],
@@ -28854,7 +28975,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 48
+                    "line": 49
                 },
                 {
                     "name": "componentReferances",
@@ -28863,7 +28984,7 @@
                     "type": "QueryList<InputComponent>",
                     "optional": false,
                     "description": "",
-                    "line": 51,
+                    "line": 52,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -28882,20 +29003,20 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 57,
+                    "line": 58,
                     "modifierKind": [
                         148
                     ]
                 },
                 {
-                    "name": "isf",
-                    "defaultValue": "this.submitted.$value",
+                    "name": "ready",
+                    "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 60
+                    "line": 62
                 },
                 {
                     "name": "submitted",
@@ -28905,7 +29026,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 59
+                    "line": 60
                 }
             ],
             "methodsClass": [
@@ -28915,7 +29036,17 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 73,
+                    "line": 80,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -28925,7 +29056,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 104,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -28943,7 +29074,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 98,
+                    "line": 109,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -28965,7 +29096,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 64,
+                    "line": 70,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCheck the required inputs\n",
@@ -29002,14 +29133,15 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  EventEmitter,\n  Input,\n  NgModule,\n  Output,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { TempValue } from '@webpackages/utils';\nimport { ErrorStateMatcher } from '@angular/material/core';\nimport { DefaultErrorStateMatcher } from '@webpackages/client-common';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n    InputDirective,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n  ],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [\n    InputDirective,\n    {\n      provide: ErrorStateMatcher,\n      useClass: DefaultErrorStateMatcher,\n    },\n  ],\n})\nexport class FormComponent<T = any> implements AfterViewInit {\n  componentRef = InputComponent;\n\n  @ContentChildren(InputComponent)\n  componentReferances!: QueryList<InputComponent>;\n\n  @Input() submitLabel = 'Submit';\n  @Input() resetLabel = 'Reset';\n  @Output() submitEvent = new EventEmitter();\n\n  readonly formGroup = new FormGroup({});\n\n  submitted = new TempValue<boolean>(3000);\n  isf = this.submitted.$value;\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    for (const input of this.componentReferances) {\n      if (!input.options.type)\n        throw new Error('Input type is required from FormComponent. ');\n      if (!input.options.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n    for (const input of this.componentReferances) {\n      if (!input.options.inputName) throw new Error('input name is required!');\n      \n      input.formControl = new FormControl('', []);\n\n      const { required, minLength, maxLength, minimum, maximum } =\n        input.options;\n\n      if (required != undefined)\n        input.formControl.addValidators(Validators.required);\n      if (minLength != undefined)\n        input.formControl.addValidators(Validators.minLength(minLength));\n      if (maxLength != undefined)\n        input.formControl.addValidators(Validators.maxLength(maxLength));\n      if (minimum != undefined)\n        input.formControl.addValidators(Validators.min(minimum));\n      if (maximum != undefined)\n        input.formControl.addValidators(Validators.max(maximum));\n\n      this.formGroup.setControl(input.options.inputName, input.formControl);\n    }\n  }\n\n  submitForm(formValue?: T) {\n    this.submitted.next(true);\n    this.submitEvent.emit(formValue ?? this.formGroup.value);\n    this.resetForm();\n  }\n\n  resetForm() {\n    this.formGroup.reset();\n    this.formGroup.clearValidators();\n    this.formGroup.clearAsyncValidators();\n    this.formGroup.enable({ emitEvent: true });\n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
+            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  EventEmitter,\n  Input,\n  NgModule,\n  OnInit,\n  Output,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { TempValue } from '@webpackages/utils';\nimport { ErrorStateMatcher } from '@angular/material/core';\nimport { DefaultErrorStateMatcher } from '@webpackages/client-common';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n    InputDirective,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n  ],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [\n    InputDirective,\n    {\n      provide: ErrorStateMatcher,\n      useClass: DefaultErrorStateMatcher,\n    },\n  ],\n})\nexport class FormComponent<T = any> implements AfterViewInit, OnInit {\n  componentRef = InputComponent;\n\n  @ContentChildren(InputComponent)\n  componentReferances!: QueryList<InputComponent>;\n\n  @Input() submitLabel = 'Submit';\n  @Input() resetLabel = 'Reset';\n  @Output() submitEvent = new EventEmitter();\n\n  readonly formGroup = new FormGroup({});\n\n  submitted = new TempValue<boolean>(3000);\n\n  ready = false;\n\n  ngOnInit(): void {\n    console.log('Form Component Init');\n  }\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    console.log('Validating form input options ');\n    for (const input of this.componentReferances) {\n      if (!input.options.type)\n        throw new Error('Input type is required from FormComponent. ');\n      if (!input.options.name)\n        throw new Error('Input name is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n\n    for (const input of this.componentReferances) {\n      input.formControl = new FormControl('', []);\n\n      const { required, minLength, maxLength, minimum, maximum } =\n        input.options;\n\n      if (required != undefined)\n        input.formControl.addValidators(Validators.required);\n      if (minLength != undefined)\n        input.formControl.addValidators(Validators.minLength(minLength));\n      if (maxLength != undefined)\n        input.formControl.addValidators(Validators.maxLength(maxLength));\n      if (minimum != undefined)\n        input.formControl.addValidators(Validators.min(minimum));\n      if (maximum != undefined)\n        input.formControl.addValidators(Validators.max(maximum));\n\n      console.log(`Creating ${input.options.name}`);\n      if (!input.options.name)\n        throw new Error('form control name is requried!');\n      this.formGroup.setControl(input.options.name, input.formControl);\n    }\n\n    this.ready = true;\n  }\n\n  submitForm(formValue?: T) {\n    this.submitted.next(true);\n    this.submitEvent.emit(formValue ?? this.formGroup.value);\n    this.resetForm();\n  }\n\n  resetForm() {\n    this.formGroup.reset();\n    this.formGroup.clearValidators();\n    this.formGroup.clearAsyncValidators();\n    this.formGroup.enable({ emitEvent: true });\n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
             "styleUrl": "./form.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
             "implements": [
-                "AfterViewInit"
+                "AfterViewInit",
+                "OnInit"
             ],
             "templateData": "<form [formGroup]=\"formGroup\" novalidate  autocomplete=\"off\">\n  @for(c of componentReferances; track c){\n  <ng-container\n    [ngComponentOutlet]=\"c.ref\"\n    [ngComponentOutletInputs]=\"{\n      options: c.options,\n      formControl: c.formControl\n    }\"\n  ></ng-container>\n  }\n\n  <div class=\"form-actions\">\n    <button\n      type=\"button\"\n      mat-raised-button\n      color=\"primary\"\n      [disabled]=\"\n        (submitted.$value | async) || !formGroup.valid || !formGroup.dirty\n      \"\n      (click)=\"submitForm()\"\n    >\n      {{ submitLabel }}\n    </button>\n    <button type=\"reset\" mat-raised-button color=\"warn\" (click)=\"resetForm()\">\n      {{ resetLabel }}\n    </button>\n  </div>\n</form>\n"
         },
@@ -29233,7 +29365,7 @@
         },
         {
             "name": "InputComponent",
-            "id": "component-InputComponent-7bf05fe1f7ddc9d2f2bb36a4087cf4025abbc2a19384994e4a1cb3a9f4ec8e571b9822103e86e07803e4e1a7ada071e680e35ab50b270905e59af72af60b89cb",
+            "id": "component-InputComponent-80fc603f4fe654681f8e3af5ac653ace46c2abd4814cd10701d40552d828a9c463f1094f0963259ecc51eeb6fb73fb836fe53df2575de10d4c25593e9c0f70a4",
             "file": "libs/material/forms/src/lib/input/input.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -29262,7 +29394,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 34,
-                    "type": "InputOptions",
+                    "type": "PropertyOptions",
                     "decorators": []
                 }
             ],
@@ -29305,6 +29437,16 @@
                     "args": [],
                     "optional": false,
                     "returnType": "string",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
                     "typeParameters": [],
                     "line": 41,
                     "deprecated": false,
@@ -29357,13 +29499,16 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\n\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { SetAttributeDirective } from '../directives';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\nimport { TempValue, names } from '@webpackages/utils';\nimport { LabelcasePipe } from '../pipes';\nimport { InputOptions } from '@webpackages/meta';\n\n@Component({\n  selector: 'wt-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatInputModule,\n    MatFormFieldModule,\n    MatIconModule,\n    SetAttributeDirective,\n    MatProgressSpinnerModule,\n    LabelcasePipe,\n  ],\n  templateUrl: './input.component.html',\n  styleUrl: './input.component.scss',\n})\nexport class InputComponent {\n  ref = InputComponent;\n\n  @Input() options!: InputOptions;\n  @Input() formControl!: FormControl;\n\n  typingChecker = new TempValue<boolean>(400);\n\n  $isTyping = this.typingChecker.$value;\n\n  errorMessage() {\n    if (!this.options.inputName) throw new Error('Input name is required');\n\n    const inputName = names(this.options.inputName).titleName;\n\n    if (this.formControl?.errors?.['required']) {\n      return `${inputName} is required!`;\n    } else if (this.formControl?.errors?.['minLength']) {\n      return `${inputName} should contain at least ${this.options?.minLength} characters!`;\n    } else if (this.formControl?.errors?.['maxLength']) {\n      return `${inputName} should contain at most ${this.options?.maxLength} characters!`;\n    } else {\n      return null;\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';\n\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { SetAttributeDirective } from '../directives';\nimport { MatIconModule } from '@angular/material/icon';\nimport { MatProgressSpinnerModule } from '@angular/material/progress-spinner';\nimport { TempValue, names } from '@webpackages/utils';\nimport { LabelcasePipe } from '../pipes';\nimport { PropertyOptions } from '@webpackages/meta';\n\n@Component({\n  selector: 'wt-input',\n  standalone: true,\n  imports: [\n    CommonModule,\n    FormsModule,\n    ReactiveFormsModule,\n    MatInputModule,\n    MatFormFieldModule,\n    MatIconModule,\n    SetAttributeDirective,\n    MatProgressSpinnerModule,\n    LabelcasePipe,\n  ],\n  templateUrl: './input.component.html',\n  styleUrl: './input.component.scss',\n})\nexport class InputComponent implements OnInit {\n  ref = InputComponent;\n\n  @Input() options!: PropertyOptions;\n  @Input() formControl!: FormControl;\n\n  typingChecker = new TempValue<boolean>(400);\n\n  $isTyping = this.typingChecker.$value;\n\n  ngOnInit(): void {\n    if (!this.options.name) throw new Error('Input name is required!');\n    if (!this.options.type) throw new Error('Input type is required!');\n    // if (!this.formControl) throw new Error('Form control is required!');\n  }\n  errorMessage() {\n    if (!this.options.name) throw new Error('Input name is required');\n\n    const inputName = names(this.options.name).titleName;\n\n    if (this.formControl?.errors?.['required']) {\n      return `${inputName} is required!`;\n    } else if (this.formControl?.errors?.['minLength']) {\n      return `${inputName} should contain at least ${this.options?.minLength} characters!`;\n    } else if (this.formControl?.errors?.['maxLength']) {\n      return `${inputName} should contain at most ${this.options?.maxLength} characters!`;\n    } else {\n      return null;\n    }\n  }\n}\n",
             "styleUrl": "./input.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<!-- Text input -->\n\n<ng-template #text>\n  <mat-form-field appearance=\"outline\">\n    <mat-label>{{\n      options.label ?? options.inputName ?? 'NOT SET' | labelcase\n    }}</mat-label>\n    <input\n      #input=\"matInput\"\n      type=\"text\"\n      matInput\n      [formControl]=\"formControl\"\n      [wtSetAttribute]=\"options\"\n      (input)=\"typingChecker.next(true)\"\n      autocomplete=\"off\"\n    />\n    <mat-icon\n      matPrefix\n      class=\"fill\"\n      [color]=\"input.errorState ? 'warn' : 'primary'\"\n    >\n      {{ options.icon ?? 'info' }}\n    </mat-icon>\n\n    @if($isTyping | async ){\n    <mat-spinner matSuffix [diameter]=\"20\"></mat-spinner>\n    } @else if(formControl.touched && formControl.valid){\n    <mat-icon style=\"color: green\" matSuffix> check</mat-icon>\n    }\n\n    <mat-error>{{ errorMessage() }}</mat-error>\n  </mat-form-field>\n</ng-template>\n\n<!-- Number input -->\n<ng-template #number>\n  <mat-form-field appearance=\"outline\">\n    <mat-label>{{\n      options.label ?? options.inputName ?? 'NOT SET' | labelcase\n    }}</mat-label>\n    <input\n      type=\"number\"\n      matInput\n      [formControl]=\"formControl\"\n      [wtSetAttribute]=\"options\"\n      (input)=\"typingChecker.next(true)\"\n      autocomplete=\"off\"\n    />\n    <mat-icon matPrefix class=\"fill\" color=\"primary\">\n      {{ options.icon ?? 'info' }}\n    </mat-icon>\n\n    @if($isTyping | async ){\n    <mat-spinner matSuffix [diameter]=\"20\"></mat-spinner>\n    } @else if(formControl.touched && formControl.valid){\n    <mat-icon style=\"color: green\" matSuffix> check</mat-icon>\n    }\n\n    <mat-error>{{ errorMessage() }}</mat-error>\n  </mat-form-field>\n</ng-template>\n\n@if(formControl) {\n<!-- Text input -->\n@if(options.type ==='text'){\n\n<ng-container *ngTemplateOutlet=\"text\"></ng-container>\n\n<!-- Number input -->\n} @else if(options.type ==='number') {\n\n<ng-container *ngTemplateOutlet=\"number\"></ng-container>\n} }\n"
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<ng-container *ngIf=\"formControl\">\n  <!-- Generic form field -->\n  <ng-template #formField let-type=\"type\">\n    <mat-form-field appearance=\"outline\">\n      <mat-label>{{\n        options.label ?? options.name ?? 'NOT SET' | labelcase\n      }}</mat-label>\n      <input\n        #input=\"matInput\"\n        [type]=\"type\"\n        matInput\n        [formControl]=\"formControl\"\n        [wtSetAttribute]=\"options\"\n        (input)=\"typingChecker.next(true)\"\n        autocomplete=\"off\"\n      />\n      <mat-icon\n        matPrefix\n        class=\"fill\"\n        [color]=\"input.errorState ? 'warn' : 'primary'\"\n      >\n        {{ options.icon ?? 'info' }}\n      </mat-icon>\n\n      @if($isTyping | async ){\n      <mat-spinner matSuffix [diameter]=\"20\"></mat-spinner>\n      } @else if(formControl.touched && formControl.valid){\n      <mat-icon style=\"color: green\" matSuffix> check</mat-icon>\n      }\n\n      <mat-error>{{ errorMessage() }}</mat-error>\n    </mat-form-field>\n  </ng-template>\n\n  <!-- text field -->\n  <ng-template #text>\n    <ng-container\n      *ngTemplateOutlet=\"formField; context: { type: 'text' }\"\n    ></ng-container>\n  </ng-template>\n\n  <!-- Number field -->\n  <ng-template #number>\n    <ng-container\n      *ngTemplateOutlet=\"formField; context: { type: 'number' }\"\n    ></ng-container>\n  </ng-template>\n\n  @if(formControl) {\n  <!-- Text input -->\n  @if(options.inputType ==='text'){\n  <ng-container *ngTemplateOutlet=\"text\"></ng-container>\n  <!-- Number input -->\n  } @else if(options.inputType ==='number') {\n\n  <ng-container *ngTemplateOutlet=\"number\"></ng-container>\n  } } @else {\n\n  <ng-container *ngTemplateOutlet=\"text\"></ng-container>\n\n  }\n</ng-container>\n"
         },
         {
             "name": "MaterialChartComponent",
@@ -29407,6 +29552,49 @@
             "stylesData": "",
             "extends": [],
             "templateData": "<p>material-chart works!</p>\r\n"
+        },
+        {
+            "name": "MaterialFileUploadComponent",
+            "id": "component-MaterialFileUploadComponent-d34713287ffd7d645e5a7568ed8123ade8c7ae1ff579733dba66310a0932c5de2831b0da8908fac5050784c4b2e4265441ea66d59ec5cbc161d0d1ad7fc8416a",
+            "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "wt-material-file-upload",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./material-file-upload.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'wt-material-file-upload',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './material-file-upload.component.html',\n  styleUrl: './material-file-upload.component.css',\n})\nexport class MaterialFileUploadComponent {}\n",
+            "styleUrl": "./material-file-upload.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<p>material-file-upload works!</p>\n"
         },
         {
             "name": "NavListComponent",
@@ -29603,12 +29791,13 @@
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<wt-form>\n  <wt-input\n    [options]=\"{\n      required: true,\n      minLength: 3,\n      inputName: 'firstName',\n      type: 'text',\n      label: 'firstName'\n    }\"\n  ></wt-input>\n  <wt-input\n    [options]=\"{\n      required: true,\n      minLength: 3,\n      inputName: 'lastName',\n      type: 'text',\n      label: 'lastName'\n    }\"\n  ></wt-input>\n  <wt-input\n    [options]=\"{\n      required: true,\n      minLength: 3,\n      inputName: 'email',\n      type: 'text',\n      label: 'email'\n    }\"\n  ></wt-input>\n</wt-form>\n"
+            "templateData": "<wt-form>\n  <wt-input\n    [options]=\"{\n      required: true,\n      minLength: 3,\n      name: 'firstName',\n      type: 'text',\n      label: 'firstName'\n    }\"\n  ></wt-input>\n  <wt-input\n    [options]=\"{\n      required: true,\n      minLength: 3,\n      name: 'lastName',\n      type: 'text',\n      label: 'lastName'\n    }\"\n  ></wt-input>\n  <wt-input\n    [options]=\"{\n      required: true,\n      minLength: 3,\n      name: 'email',\n      type: 'text',\n      label: 'email'\n    }\"\n  ></wt-input>\n</wt-form>\n"
         },
         {
             "name": "TableComponent",
-            "id": "component-TableComponent-fca0cf70a9ed030ff47bd3b1c51a15505d8980a6a267a208c0577c3453c2af644a8444aa3b37764e7f746715ceba04561282ded5fbc7018bf91a0d36204d9b8f",
+            "id": "component-TableComponent-518474d704c726ab09ad34f03ce2e7725166bd823e4f098672d548147d36a8c6fc90c8cba367c7705417bb812f7fcba9a513e593863f7f81a1ad38840eec5eee",
             "file": "libs/material/table/src/lib/table/table.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -29688,7 +29877,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { AfterViewInit, Component } from '@angular/core';\r\nimport { MatPaginatorModule } from '@angular/material/paginator';\r\nimport { MatSortModule } from '@angular/material/sort';\r\nimport { MatTableModule } from '@angular/material/table';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { LabelcasePipe } from '@webpackages/material/forms';\r\nimport { BaseTableComponent } from '@webpackages/client-common';\r\nimport { MatMenuModule } from '@angular/material/menu';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\nimport { MatButtonToggleModule } from '@angular/material/button-toggle';\r\n\r\n@Component({\r\n  selector: 'wt-table',\r\n  standalone: true,\r\n  imports: [\r\n    CommonModule,\r\n    MatPaginatorModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatSortModule,\r\n    MatTableModule,\r\n    MatInputModule,\r\n    MatFormFieldModule,\r\n    LabelcasePipe,\r\n    MatMenuModule,\r\n    MatButtonModule,\r\n    MatIconModule,\r\n    MatButtonToggleModule,\r\n  ],\r\n  templateUrl: './table.component.html',\r\n  styleUrl: './table.component.scss',\r\n})\r\nexport class TableComponent<T = any>\r\n  extends BaseTableComponent<T>\r\n  implements AfterViewInit {}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport {\r\n  AfterViewInit,\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n} from '@angular/core';\r\nimport { MatPaginatorModule } from '@angular/material/paginator';\r\nimport { MatSortModule } from '@angular/material/sort';\r\nimport { MatTableModule } from '@angular/material/table';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { LabelcasePipe } from '@webpackages/material/forms';\r\nimport { BaseTableComponent } from '@webpackages/client-common';\r\nimport { MatMenuModule } from '@angular/material/menu';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatIconModule } from '@angular/material/icon';\r\n\r\nimport { MatButtonToggleModule } from '@angular/material/button-toggle';\r\n\r\n@Component({\r\n  selector: 'wt-table',\r\n  standalone: true,\r\n  imports: [\r\n    CommonModule,\r\n    MatPaginatorModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    MatSortModule,\r\n    MatTableModule,\r\n    MatInputModule,\r\n    MatFormFieldModule,\r\n    LabelcasePipe,\r\n    MatMenuModule,\r\n    MatButtonModule,\r\n    MatIconModule,\r\n    MatButtonToggleModule,\r\n  ],\r\n  templateUrl: './table.component.html',\r\n  styleUrl: './table.component.scss',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class TableComponent<T = any> extends BaseTableComponent<T> {}\r\n",
             "styleUrl": "./table.component.scss",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -29696,10 +29885,7 @@
             "extends": [
                 "BaseTableComponent"
             ],
-            "implements": [
-                "AfterViewInit"
-            ],
-            "templateData": "<div class=\"table-container\">\r\n  <mat-form-field appearance=\"outline\">\r\n    <mat-label>Filter</mat-label>\r\n    <input\r\n      matInput\r\n      [formControl]=\"searchControl\"\r\n      placeholder=\"Ex. Mia\"\r\n      #input\r\n    />\r\n  </mat-form-field>\r\n  <div class=\"inner-table-container\">\r\n    <table mat-table [dataSource]=\"dataSource\" matSort>\r\n      @for(col of displayedColumns; track col){\r\n\r\n      <ng-container [matColumnDef]=\"col\">\r\n        <th mat-header-cell *matHeaderCellDef mat-sort-header>\r\n          {{ col | labelcase }}\r\n        </th>\r\n        <td mat-cell *matCellDef=\"let row\">{{ row[col] }}</td>\r\n      </ng-container>\r\n      }\r\n\r\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns; sticky: true\"></tr>\r\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns\"></tr>\r\n\r\n      <!-- Row shown when there is no matching data. -->\r\n      <tr class=\"mat-row\" *matNoDataRow>\r\n        <td class=\"mat-cell\" colspan=\"4\">\r\n          No data matching the filter \"{{ input.value }}\"\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n\r\n  <div class=\"paginator-container\">\r\n    <mat-button-toggle-group name=\"fontStyle\" aria-label=\"Font Style\">\r\n      <mat-button-toggle (click)=\"setPageSize(5)\">5</mat-button-toggle>\r\n      <mat-button-toggle (click)=\"setPageSize(10)\">10</mat-button-toggle>\r\n      <mat-button-toggle (click)=\"setPageSize(25)\">25</mat-button-toggle>\r\n      <mat-button-toggle (click)=\"setPageSize(100)\">100</mat-button-toggle>\r\n    </mat-button-toggle-group>\r\n    <mat-button-toggle-group>\r\n      <mat-button-toggle (click)=\"previousPage()\">\r\n        <mat-icon>arrow_left</mat-icon>\r\n      </mat-button-toggle>\r\n      <mat-button-toggle disabled>{{ getPageIndex() + 1 }}</mat-button-toggle>\r\n      <mat-button-toggle (click)=\"nextPage()\">\r\n        <mat-icon>arrow_right</mat-icon>\r\n      </mat-button-toggle>\r\n    </mat-button-toggle-group>\r\n    <mat-paginator style=\"opacity: 0; position: absolute; z-index: -1\">\r\n    </mat-paginator>\r\n  </div>\r\n</div>\r\n"
+            "templateData": "<div class=\"table-container\">\r\n  <mat-form-field appearance=\"outline\">\r\n    <mat-label>Filter</mat-label>\r\n    <input\r\n      matInput\r\n      [formControl]=\"searchControl\"\r\n      placeholder=\"Ex. Mia\"\r\n      #input\r\n    />\r\n  </mat-form-field>\r\n  <div class=\"inner-table-container\" *ngIf=\"data\">\r\n    <table\r\n      mat-table\r\n      [dataSource]=\"data\"\r\n      matSort\r\n      (matSortChange)=\"sortTable($event)\"\r\n    >\r\n      @for(col of displayedColumns; track col){\r\n\r\n      <ng-container [matColumnDef]=\"col.name!\">\r\n        <th mat-header-cell *matHeaderCellDef mat-sort-header>\r\n          {{ col.label ?? col.name! | labelcase }}\r\n        </th>\r\n        <td mat-cell *matCellDef=\"let row\">{{ row[col.name!] }}</td>\r\n      </ng-container>\r\n      }\r\n\r\n      <tr mat-header-row *matHeaderRowDef=\"columns; sticky: true\"></tr>\r\n      <tr mat-row *matRowDef=\"let row; columns: columns\"></tr>\r\n\r\n      <!-- Row shown when there is no matching data. -->\r\n      <tr class=\"mat-row\" *matNoDataRow>\r\n        <td class=\"mat-cell\" colspan=\"4\">\r\n          No data matching the filter \"{{ input.value }}\"\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </div>\r\n\r\n  <div class=\"paginator-container\">\r\n    <mat-paginator\r\n      [pageSize]=\"pageSize\"\r\n      [pageIndex]=\"pageIndex\"\r\n      [pageSizeOptions]=\"pageOptions\"\r\n      style=\"opacity: 0; z-index: -1; position: absolute\"\r\n    ></mat-paginator>\r\n    <mat-button-toggle-group name=\"fontStyle\" aria-label=\"Font Style\">\r\n      @for(size of pageOptions; track size){\r\n      <mat-button-toggle\r\n        [disabled]=\"size * (pageIndex + 1) > (count ?? 1)\"\r\n        (click)=\"setPageSize(size)\"\r\n        >{{ size }}</mat-button-toggle\r\n      >\r\n      }\r\n    </mat-button-toggle-group>\r\n\r\n    <mat-button-toggle-group>\r\n      <mat-button-toggle (click)=\"previousPage()\" [disabled]=\"pageIndex === 0\">\r\n        <mat-icon>arrow_left</mat-icon>\r\n      </mat-button-toggle>\r\n      <mat-button-toggle disabled>\r\n        {{ pageIndex * pageSize }} - {{ (pageIndex + 1) * pageSize }} [{{\r\n          count\r\n        }}]\r\n      </mat-button-toggle>\r\n      <mat-button-toggle (click)=\"nextPage()\" [disabled]=\"!hasNextPage()\">\r\n        <mat-icon>arrow_right</mat-icon>\r\n      </mat-button-toggle>\r\n    </mat-button-toggle-group>\r\n  </div>\r\n</div>\r\n"
         },
         {
             "name": "TemplateOutletComponent",
@@ -30275,13 +30461,13 @@
         },
         {
             "name": "FormModule",
-            "id": "module-FormModule-fdef7b26d3165f9d47990cb7c7788560f3ad5f6e3cd73f9ae06cc7a8b737335558e8e5133ef5a4761477303669fe817fe6e749cd2ac393c282c016ee42568f48",
+            "id": "module-FormModule-07c848764ecf23b07ac042bfc536c6a4913e79ec2ca88d197311715dd6668b4cc96b4a02c1c15deeaee600b8086354aa206f7374525fdb816655ca580e82d031",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "libs/material/forms/src/lib/form/form.component.ts",
             "methods": [],
-            "sourceCode": "/* eslint-disable @typescript-eslint/no-explicit-any */\nimport {\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  EventEmitter,\n  Input,\n  NgModule,\n  Output,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { TempValue } from '@webpackages/utils';\nimport { ErrorStateMatcher } from '@angular/material/core';\nimport { DefaultErrorStateMatcher } from '@webpackages/client-common';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n    InputDirective,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n  ],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [\n    InputDirective,\n    {\n      provide: ErrorStateMatcher,\n      useClass: DefaultErrorStateMatcher,\n    },\n  ],\n})\nexport class FormComponent<T = any> implements AfterViewInit {\n  componentRef = InputComponent;\n\n  @ContentChildren(InputComponent)\n  componentReferances!: QueryList<InputComponent>;\n\n  @Input() submitLabel = 'Submit';\n  @Input() resetLabel = 'Reset';\n  @Output() submitEvent = new EventEmitter();\n\n  readonly formGroup = new FormGroup({});\n\n  submitted = new TempValue<boolean>(3000);\n  isf = this.submitted.$value;\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    for (const input of this.componentReferances) {\n      if (!input.options.type)\n        throw new Error('Input type is required from FormComponent. ');\n      if (!input.options.inputName)\n        throw new Error('Input name is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n    for (const input of this.componentReferances) {\n      if (!input.options.inputName) throw new Error('input name is required!');\n      \n      input.formControl = new FormControl('', []);\n\n      const { required, minLength, maxLength, minimum, maximum } =\n        input.options;\n\n      if (required != undefined)\n        input.formControl.addValidators(Validators.required);\n      if (minLength != undefined)\n        input.formControl.addValidators(Validators.minLength(minLength));\n      if (maxLength != undefined)\n        input.formControl.addValidators(Validators.maxLength(maxLength));\n      if (minimum != undefined)\n        input.formControl.addValidators(Validators.min(minimum));\n      if (maximum != undefined)\n        input.formControl.addValidators(Validators.max(maximum));\n\n      this.formGroup.setControl(input.options.inputName, input.formControl);\n    }\n  }\n\n  submitForm(formValue?: T) {\n    this.submitted.next(true);\n    this.submitEvent.emit(formValue ?? this.formGroup.value);\n    this.resetForm();\n  }\n\n  resetForm() {\n    this.formGroup.reset();\n    this.formGroup.clearValidators();\n    this.formGroup.clearAsyncValidators();\n    this.formGroup.enable({ emitEvent: true });\n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
+            "sourceCode": "/* eslint-disable @typescript-eslint/no-explicit-any */\nimport {\n  AfterViewInit,\n  Component,\n  ContentChildren,\n  EventEmitter,\n  Input,\n  NgModule,\n  OnInit,\n  Output,\n  QueryList,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputDirective } from '../directives';\nimport { InputComponent } from '../input/input.component';\nimport {\n  FormControl,\n  FormGroup,\n  FormsModule,\n  ReactiveFormsModule,\n  Validators,\n} from '@angular/forms';\nimport { MatButtonModule } from '@angular/material/button';\nimport { TempValue } from '@webpackages/utils';\nimport { ErrorStateMatcher } from '@angular/material/core';\nimport { DefaultErrorStateMatcher } from '@webpackages/client-common';\n\n@Component({\n  selector: 'wt-form',\n  standalone: true,\n  imports: [\n    CommonModule,\n    InputDirective,\n    FormsModule,\n    ReactiveFormsModule,\n    MatButtonModule,\n  ],\n  templateUrl: './form.component.html',\n  styleUrl: './form.component.scss',\n  providers: [\n    InputDirective,\n    {\n      provide: ErrorStateMatcher,\n      useClass: DefaultErrorStateMatcher,\n    },\n  ],\n})\nexport class FormComponent<T = any> implements AfterViewInit, OnInit {\n  componentRef = InputComponent;\n\n  @ContentChildren(InputComponent)\n  componentReferances!: QueryList<InputComponent>;\n\n  @Input() submitLabel = 'Submit';\n  @Input() resetLabel = 'Reset';\n  @Output() submitEvent = new EventEmitter();\n\n  readonly formGroup = new FormGroup({});\n\n  submitted = new TempValue<boolean>(3000);\n\n  ready = false;\n\n  ngOnInit(): void {\n    console.log('Form Component Init');\n  }\n  /**\n   * Check the required inputs\n   */\n  validateInputOptions() {\n    console.log('Validating form input options ');\n    for (const input of this.componentReferances) {\n      if (!input.options.type)\n        throw new Error('Input type is required from FormComponent. ');\n      if (!input.options.name)\n        throw new Error('Input name is required from FormComponent. ');\n    }\n  }\n\n  ngAfterViewInit(): void {\n    this.validateInputOptions();\n\n    for (const input of this.componentReferances) {\n      input.formControl = new FormControl('', []);\n\n      const { required, minLength, maxLength, minimum, maximum } =\n        input.options;\n\n      if (required != undefined)\n        input.formControl.addValidators(Validators.required);\n      if (minLength != undefined)\n        input.formControl.addValidators(Validators.minLength(minLength));\n      if (maxLength != undefined)\n        input.formControl.addValidators(Validators.maxLength(maxLength));\n      if (minimum != undefined)\n        input.formControl.addValidators(Validators.min(minimum));\n      if (maximum != undefined)\n        input.formControl.addValidators(Validators.max(maximum));\n\n      console.log(`Creating ${input.options.name}`);\n      if (!input.options.name)\n        throw new Error('form control name is requried!');\n      this.formGroup.setControl(input.options.name, input.formControl);\n    }\n\n    this.ready = true;\n  }\n\n  submitForm(formValue?: T) {\n    this.submitted.next(true);\n    this.submitEvent.emit(formValue ?? this.formGroup.value);\n    this.resetForm();\n  }\n\n  resetForm() {\n    this.formGroup.reset();\n    this.formGroup.clearValidators();\n    this.formGroup.clearAsyncValidators();\n    this.formGroup.enable({ emitEvent: true });\n  }\n}\n\n@NgModule({\n  imports: [CommonModule, FormComponent, InputDirective, InputComponent],\n  exports: [FormComponent, InputDirective, InputComponent],\n})\nexport class FormModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -30640,6 +30826,16 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/chart/src/lib/chart/chart.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30660,11 +30856,21 @@
                 "name": "Heading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/file-upload works!/gi)).toBeTruthy();\n  },\n}"
+            },
+            {
+                "name": "Heading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/material-file-upload works!/gi)).toBeTruthy();\n  },\n}"
             },
             {
                 "name": "Heading",
@@ -30734,7 +30940,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/table works!/gi)).toBeTruthy();\n  },\n}"
+                "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
             },
             {
                 "name": "IconList",
@@ -30850,6 +31056,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<EditorComponent>",
+                "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/chart/src/lib/chart/chart.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -30870,11 +31086,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<EditorComponent>",
-                "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
+                "type": "Meta<FileUploadComponent>",
+                "defaultValue": "{\n  component: FileUploadComponent,\n  title: 'FileUploadComponent',\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MaterialFileUploadComponent>",
+                "defaultValue": "{\n  component: MaterialFileUploadComponent,\n  title: 'MaterialFileUploadComponent',\n}"
             },
             {
                 "name": "meta",
@@ -30944,7 +31170,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<TableComponent>",
-                "defaultValue": "{\n  component: TableComponent,\n  title: 'TableComponent',\n}"
+                "defaultValue": "{\n  component: TableComponent,\n  title: 'TableComponent',\n  decorators: [\n    applicationConfig({\n      providers: [provideAnimations()],\n    }),\n  ],\n}"
             },
             {
                 "name": "Primary",
@@ -31010,6 +31236,16 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/material/chart/src/lib/chart/chart.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -31030,11 +31266,21 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n}"
+                "defaultValue": "{\n  args: {},\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {},\n}"
             },
             {
                 "name": "Primary",
@@ -31044,7 +31290,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    inputs: [\n      {\n        type: 'text',\n        inputName: 'firstName',\n        required: true,\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        inputName: 'lastName',\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        inputName: 'email',\n        minLength: 3,\n        maxLength: 30,\n      },\n    ],\n  },\n}"
+                "defaultValue": "{\n  args: {\n    inputs: [\n      {\n        type: 'text',\n        name: 'firstName',\n        required: true,\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        name: 'lastName',\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        name: 'email',\n        minLength: 3,\n        maxLength: 30,\n      },\n    ],\n  },\n}"
             },
             {
                 "name": "Primary",
@@ -31284,6 +31530,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<EditorComponent>",
+                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<ChartComponent>",
                 "file": "libs/material/chart/src/lib/chart/chart.component.stories.ts",
                 "deprecated": false,
@@ -31306,8 +31563,19 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<EditorComponent>",
-                "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                "rawtype": "StoryObj<FileUploadComponent>",
+                "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MaterialFileUploadComponent>",
+                "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -31673,6 +31941,38 @@
                     "defaultValue": "{\r\n  args: {},\r\n}"
                 }
             ],
+            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<EditorComponent>",
+                    "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
             "libs/material/chart/src/lib/chart/chart.component.stories.ts": [
                 {
                     "name": "Heading",
@@ -31737,36 +32037,68 @@
                     "defaultValue": "{\r\n  args: {},\r\n}"
                 }
             ],
-            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+            "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts": [
                 {
                     "name": "Heading",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    expect(canvas.getByText(/editor works!/gi)).toBeTruthy();\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/file-upload works!/gi)).toBeTruthy();\n  },\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<EditorComponent>",
-                    "defaultValue": "{\r\n  component: EditorComponent,\r\n  title: 'EditorComponent',\r\n}"
+                    "type": "Meta<FileUploadComponent>",
+                    "defaultValue": "{\n  component: FileUploadComponent,\n  title: 'FileUploadComponent',\n}"
                 },
                 {
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n}"
+                    "defaultValue": "{\n  args: {},\n}"
+                }
+            ],
+            "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts": [
+                {
+                    "name": "Heading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/material-file-upload works!/gi)).toBeTruthy();\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MaterialFileUploadComponent>",
+                    "defaultValue": "{\n  component: MaterialFileUploadComponent,\n  title: 'MaterialFileUploadComponent',\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {},\n}"
                 }
             ],
             "libs/material/forms/src/lib/basic-form/basic-form.component.stories.ts": [
@@ -31798,7 +32130,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    inputs: [\n      {\n        type: 'text',\n        inputName: 'firstName',\n        required: true,\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        inputName: 'lastName',\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        inputName: 'email',\n        minLength: 3,\n        maxLength: 30,\n      },\n    ],\n  },\n}"
+                    "defaultValue": "{\n  args: {\n    inputs: [\n      {\n        type: 'text',\n        name: 'firstName',\n        required: true,\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        name: 'lastName',\n        minLength: 3,\n        maxLength: 30,\n      },\n      {\n        type: 'text',\n        required: true,\n        name: 'email',\n        minLength: 3,\n        maxLength: 30,\n      },\n    ],\n  },\n}"
                 }
             ],
             "libs/material/forms/src/lib/form/form.component.stories.ts": [
@@ -31970,7 +32302,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    expect(canvas.getByText(/table works!/gi)).toBeTruthy();\n  },\n}"
+                    "defaultValue": "{\n  args: {},\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -31980,7 +32312,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<TableComponent>",
-                    "defaultValue": "{\n  component: TableComponent,\n  title: 'TableComponent',\n}"
+                    "defaultValue": "{\n  component: TableComponent,\n  title: 'TableComponent',\n  decorators: [\n    applicationConfig({\n      providers: [provideAnimations()],\n    }),\n  ],\n}"
                 },
                 {
                     "name": "Primary",
@@ -32270,6 +32602,19 @@
                     "kind": 183
                 }
             ],
+            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<EditorComponent>",
+                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/material/chart/src/lib/chart/chart.component.stories.ts": [
                 {
                     "name": "Story",
@@ -32296,13 +32641,26 @@
                     "kind": 183
                 }
             ],
-            "libs/material/editor/src/lib/editor/editor.component.stories.ts": [
+            "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<EditorComponent>",
-                    "file": "libs/material/editor/src/lib/editor/editor.component.stories.ts",
+                    "rawtype": "StoryObj<FileUploadComponent>",
+                    "file": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MaterialFileUploadComponent>",
+                    "file": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -32525,6 +32883,84 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/file-upload/src/lib/file-upload/file-upload.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/file-upload/src/lib/file-upload/file-upload.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FileUploadComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/material/file-upload/src/lib/material-file-upload/material-file-upload.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MaterialFileUploadComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/material/forms/src/lib/basic-form/basic-form.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -32559,8 +32995,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "BasicFormComponent",
-                "coveragePercent": 7,
-                "coverageCount": "1/14",
+                "coveragePercent": 6,
+                "coverageCount": "1/15",
                 "status": "low"
             },
             {
@@ -32626,7 +33062,7 @@
                 "linktype": "component",
                 "name": "FormComponent",
                 "coveragePercent": 7,
-                "coverageCount": "1/13",
+                "coverageCount": "1/14",
                 "status": "low"
             },
             {
@@ -32665,7 +33101,7 @@
                 "linktype": "component",
                 "name": "InputComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {

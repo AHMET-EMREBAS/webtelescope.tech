@@ -1,0 +1,23 @@
+<form enctype="multipart/form-data">
+  <input
+    #input
+    type="file"
+    id="fileInput"
+    name="fileInput"
+    (change)="onFileSelected($event)"
+  />
+  <button
+    mat-fab
+    extended
+    type="button"
+    color="primary"
+    (click)="input.click()"
+  >
+    <mat-icon>{{ icon }}</mat-icon>
+    {{ label }}
+  </button>
+  <span class="file-name">{{ fileName ?? errorMessage }}</span>
+  <span class="file-name">{{ fileSize() }}</span>
+
+  <span class="file-name">{{ selectedFile?.lastModified }} </span>
+</form>
