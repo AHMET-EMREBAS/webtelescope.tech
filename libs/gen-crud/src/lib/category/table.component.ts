@@ -14,7 +14,6 @@ import { MatTableDataSource } from '@angular/material/table';
   standalone: true,
   imports: [CommonModule, TableComponent],
   template: `
-    {{ columns | json }}
     <wt-table
       [displayedColumns]="columns"
       [dataSource]="entities$ | async"

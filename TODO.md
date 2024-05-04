@@ -9,3 +9,7 @@
 - Design the work flow of product creation
 - Establish a good strategy for relational data creation.
 
+## Problems
+
+- Do not use nestted components, they are not getting data.
+
