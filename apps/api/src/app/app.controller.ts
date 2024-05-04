@@ -3,6 +3,8 @@ import { Post } from '@webpackages/core';
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import 'multer';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class FileSizeValidationPipe implements PipeTransform {
@@ -20,5 +22,7 @@ export class AppController {
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
+
+    writeFileSync(join(__dirname, 'assets', file.originalname), file.buffer);
   }
 }
