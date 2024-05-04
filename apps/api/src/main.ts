@@ -14,6 +14,7 @@ export type SwaggerOptions = {
   title: string;
   prefix?: string;
 };
+
 export function configureSwagger(
   app: INestApplication,
   options: SwaggerOptions
