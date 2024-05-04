@@ -10,8 +10,9 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow: auto;
-  flex-grow: 1;
+  max-height: 79vh;
+  overflow-y: auto;
+  padding-bottom: 3em;
 }
 
 .page-sizes {
@@ -22,19 +23,13 @@
 mat-button-toggle {
   min-width: 50px;
 }
-
 .paginator-container {
-  position: sticky;
+  position: absolute;
   bottom: 0px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 0.1em;
-  max-width: 50%;
-  margin: auto;
-  overflow: hidden;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  gap: 0.2em;
+  width: 100%;
 }

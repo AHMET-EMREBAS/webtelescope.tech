@@ -28,7 +28,7 @@ export class CategoryTableComponent extends BaseResourceTableComponent<ICategory
         return new MatTableDataSource<ICategory>(data);
       })
     );
-  columns = categoryModelManager.propertiesList();
+  columns = categoryModelManager.uiTablePropetiesList();
   count$: Observable<number> = this.service.allCount$.pipe(
     map((v) => {
       console.log('COUNT : ', v);

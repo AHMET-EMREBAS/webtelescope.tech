@@ -39,6 +39,10 @@ export class ModelManager {
     });
   }
 
+  uiTablePropetiesList() {
+    return [{ name: 'id' }, ...this.propertiesList()];
+  }
+
   viewProperties(): AsList<PropertyOptions> {
     return this.propertiesList()
       .filter((e) => e.searchable != false)
