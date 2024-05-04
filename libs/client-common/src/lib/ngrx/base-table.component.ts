@@ -48,4 +48,34 @@ export class BaseTableComponent<T> implements AfterViewInit {
         .reduce((p, c) => ({ ...p, ...c })),
     });
   }
+
+  getPageIndex() {
+    return this.paginator?.pageIndex;
+  }
+
+  getPageSize() {
+    return this.paginator?.pageSize;
+  }
+
+  nextPage() {
+    this.paginator.nextPage();
+  }
+
+  previousPage() {
+    this.paginator.previousPage();
+  }
+
+  setPageSize(pageSize: number) {
+    if (pageSize > this.paginator.length) {
+      this.paginator.pageSize = this.paginator.length-1;
+    } else {
+      this.paginator.pageSize = pageSize;
+    }
+
+    if (this.paginator.hasNextPage()) {
+      this.paginator.nextPage();
+    }
+
+    this.paginator.firstPage();
+  }
 }

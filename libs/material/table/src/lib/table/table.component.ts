@@ -10,6 +10,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LabelcasePipe } from '@webpackages/material/forms';
 import { BaseTableComponent } from '@webpackages/client-common';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 @Component({
   selector: 'wt-table',
   standalone: true,
@@ -24,6 +29,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatFormFieldModule,
     LabelcasePipe,
     MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatButtonToggleModule,
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
