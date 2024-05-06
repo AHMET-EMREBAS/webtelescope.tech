@@ -34,7 +34,10 @@ export class PropertyDecoratorBuilder implements ICoverAllClassTypes<IPrint> {
   Query(): IPrint {
     return new DecoratorPrinter({
       name: DecoratorName.Property,
-      options: { description: this.optionsManager.toCreate().description },
+      options: {
+        type: 'string',
+        description: this.optionsManager.toCreate().description,
+      },
     });
   }
 

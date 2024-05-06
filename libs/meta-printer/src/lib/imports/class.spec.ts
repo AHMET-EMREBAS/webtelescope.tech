@@ -3,6 +3,7 @@ import {
   ClassNameBuilder,
   DecoratorListProvider,
   DecoratorNameProvider,
+  FileNameBuilder,
   PackageNameProvider,
 } from '../common-imp';
 import { ClassImportBuilder } from './class';
@@ -13,6 +14,7 @@ describe('ClassImportBuilder', () => {
       new ModelManager(NameModel('Category')),
       new PackageNameProvider(),
       new ClassNameBuilder('Sample'),
+      new FileNameBuilder('Sample'),
       new DecoratorListProvider(new DecoratorNameProvider())
     );
 
