@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CategoryService } from './ngrx.service';
+import { CategoryService } from './category.service';
 import { BasicFormComponent } from '@webpackages/material/forms';
 import { ICategory } from '@webpackages/gen-model';
 import { BaseFormComponent } from '@webpackages/client-common';
-import { categoryModelManager } from './model-manager';
+import { categoryModelManager } from './category-model-manager';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
     (submitEvent)="submitForm($event)"
   ></wt-basic-form>`,
   standalone: true,
+  providers: [CategoryService],
 })
 export class CategoryFormComponent extends BaseFormComponent<ICategory> {
   inputOptionsList = categoryModelManager.propertiesList();

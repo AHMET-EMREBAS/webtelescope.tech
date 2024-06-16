@@ -32,6 +32,7 @@
       "@webpackages/gen-rest": ["libs/gen-rest/src/index.ts"],
       "@webpackages/material": ["libs/material/src/index.ts"],
       "@webpackages/material/chart": ["libs/material/chart/src/index.ts"],
+      "@webpackages/material/common": ["libs/material/common/src/index.ts"],
       "@webpackages/material/editor": ["libs/material/editor/src/index.ts"],
       "@webpackages/material/file-upload": [
         "libs/material/file-upload/src/index.ts"

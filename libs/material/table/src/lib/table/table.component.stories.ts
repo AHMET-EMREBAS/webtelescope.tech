@@ -20,12 +20,27 @@ const meta: Meta<TableComponent> = {
 export default meta;
 type Story = StoryObj<TableComponent>;
 
+let i = 1;
+const data = ' '
+  .repeat(100)
+  .split('')
+  .map((e) => {
+    i = i + 1;
+    return {
+      id: i,
+      name: `Data ${i}`,
+    };
+  });
 export const Primary: Story = {
-  args: {},
+  args: {
+    data,
+    displayedColumns: [{ name: 'id' }, { name: 'name' }],
+    count: data.length,
+  },
 };
 
 export const Heading: Story = {
-  args: {},
+  ...Primary,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
   },

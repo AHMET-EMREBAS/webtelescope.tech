@@ -43,6 +43,7 @@ export class InputComponent implements OnInit {
     if (!this.options.type) throw new Error('Input type is required!');
     // if (!this.formControl) throw new Error('Form control is required!');
   }
+  
   errorMessage() {
     if (!this.options.name) throw new Error('Input name is required');
 

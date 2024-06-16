@@ -3,6 +3,7 @@ import { ICart } from '@webpackages/gen-model';
 import { Customer } from '../customer/customer.entity';
 import { User } from '../user/user.entity';
 import { Store } from '../store/store.entity';
+
 @Entity()
 export class Cart extends BaseEntity implements ICart<Customer, User, Store> {
   @Column({ type: 'string' }) description?: string;

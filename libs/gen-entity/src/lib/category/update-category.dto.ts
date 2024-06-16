@@ -1,5 +1,6 @@
 import { Dto, Property, IDDto } from '@webpackages/core';
 import { IUpdateCategoryDto } from '@webpackages/gen-model';
+
 @Dto()
 export class UpdateCategoryDto implements IUpdateCategoryDto {
   /**
